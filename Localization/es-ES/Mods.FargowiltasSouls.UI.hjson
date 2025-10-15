@@ -1,4 +1,5 @@
-// SoulTogglerButton: Open Effect Toggler
+// SoulToggler: "[i:FargowiltasSouls/EffectTogglerItem] Effect Toggles"
+// ActiveSkillMenu: "[i:FargowiltasSouls/ActiveSkillMenuItem] Active Skills"
 // Standard: Standard Mode
 // Eternity: Eternity Mode
 // Masochist: Masochist Mode
@@ -10,6 +11,13 @@
 // HoldShift: Hold Shift to read more
 // Close: Close
 // OpenKeybinds: Open Keybinds
+// ActiveSkillMenuButton: Open Active Skills
+
+TitleLinks: {
+	// Patreon: Patreon
+	// Github: Github
+}
+
 /* ExpandedStandard:
 	'''
 	Disables Eternity or Masochist Mode.
@@ -45,7 +53,8 @@
 	-Enables Master Mode drops
 	-New Eternity-exclusive item drops
 	-Deviantt provides a starter pack and progress-based advice
-	-Improves base stats and caps player DR at 75%
+	-Improves base stats
+	-Player damage reduction is now scaled to emulate multiplicative scaling: every additional 15% DR reduces damage by 15% compared to the previous value, instead of being additive
 	-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 	-Changes the functionality and strength of certain items
 	''' */
@@ -57,9 +66,7 @@
 // SomeEffectsPreset: Some effects preset
 // MinimalEffectsPreset: Minimal effects preset
 // CustomPreset: Custom preset {0} (right click to save)
-// Reload button is currently removed
-// ReloadToggles: Reload Toggles (right click to reset)
-// NoToggles: No togglable effects equipped!
+// NoToggles: No toggleable effects equipped!
 // DisplayAll: Display All
 // DisplayEquipped: Display Equipped
 // SearchText: Search...

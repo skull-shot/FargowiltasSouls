@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -9,27 +10,21 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class DevisCurse : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Deviantt's Curse");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 7));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemNoGravity[Item.type] = true;
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
         }
-
-        /*public override bool Autoload(ref string name)
-        {
-            return false;
-        }*/
-
         public override void SetDefaults()
         {
             Item.width = 20;
             Item.height = 20;
             Item.rare = ItemRarityID.LightRed;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useAnimation = 30;
             Item.useTime = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;

@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
             Projectile.scale = 1.5f;
             Projectile.hide = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.tileCollide = false;
         }
 

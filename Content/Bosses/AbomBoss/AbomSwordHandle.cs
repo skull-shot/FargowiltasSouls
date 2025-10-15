@@ -1,10 +1,12 @@
 ﻿
 
+using System;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -13,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
     public class AbomSwordHandle : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
         public AbomSwordHandle() : base(150) { }
         public int counter;
 
@@ -139,13 +141,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             //Projectile.NewProjectile(target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<AbomBlast>(), 0, 0f, Projectile.owner);
 
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 300);
-                target.AddBuff(BuffID.Burning, 180);
-            }
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
 
         public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2;

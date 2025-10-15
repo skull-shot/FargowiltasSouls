@@ -11,18 +11,16 @@ RodofDiscord: 混乱状态会降低你40%的伤害、防御和伤害减免
 ChaosState: 伤害、防御和伤害减免降低40%
 RodofHarmony: 在打败突变体后才能获取
 Split: 降低分裂频率
-ChlorophyteBullet: 速度减慢，存在时间降低
 WaterBolt: 在骷髅王被击败前无法使用
 SpaceGun: 在任意邪恶Boss被击败前无法使用
 DemonScythe: 任意邪恶Boss被击败前伤害和攻速会降低40%
-HolyDodge: 神圣防护激活后，一段时间内你的攻击速度会降低
-FrozenTurtleShell: 冰盾会略微降低你的攻击伤害
-BrainOfConfusion: 躲避几率减半
+// HolyDodge: Dodge cooldown increased to 45 seconds
 ZenithNone: 无削弱
 ZenithHitRate: 造成伤害的频率大幅降低，通过击败下列Boss可提高其输出能力：
 VampireKnives: 生命值高于33%时削弱吸血能力
 Zapinator: 无法堆叠弹幕伤害
 CoinGun: 铂金币和金币的伤害大幅降低，银币的伤害略微降低，铜币的伤害增加
+// OOAWaves: Reworked event wave progression
 OOASet: 当你使用其他职业的武器攻击时，抵消部分召唤伤害降低惩罚
 MiningHelmet: 提高不死矿工的刷新率
 MoonsDrops: Boss和迷你Boss在{0}波前不会掉落物品
@@ -35,7 +33,7 @@ ViolentPrefix: 词缀效果调整：不再增加近战攻速，但增加全职�
 ManaPots: 魔力疾病期间无法使用，但是恢复速度提升50%
 MinionStack: 同时召唤超过3个相同召唤物时，它们的伤害会降低（超过12个后不再降低）
 SummonMulticlass: 当你使用其他职业的武器攻击时，召唤伤害降低（在撒旦军队中除外）
-ShadowDodge: 永恒模式：闪避会降低你的攻击速度
+// ShadowDodge: Eternity Mode: Dodge cooldown increased to 45 seconds
 IceBarrier: 永恒模式：你造成的伤害减少10%
 SwordRework: 重做阔剑挥舞动画
 SpearRework: 重做长矛挥舞动画
@@ -49,14 +47,31 @@ CrossNecklaceNerf: 连续受击不会触发延长无敌时间的效果
 IceBladeFrostburn: 射弹击中敌人造成霜冻减益
 JungleRose: 增加抓人草类敌怪掉落世纪之果的几率
 WeatherPain: 伤害频率和最大穿透次数增加
-HoundiusShootius: 提高火球速度
 SniperRifle: 距离敌怪越远伤害越高，最高可翻倍
 ChlorophyteSaber: 弹幕速度更快，但命中后会减速
 JackOLanternLauncher: 增加50%弹幕速度
 GolemFist: 根据拳头伸长距离造成至多三倍伤害
 Gladius: 提高命中频率以和挥舞速度一致
 FlowerPow: 花瓣发射频率增加200%
-PiranhaGun: 弹幕伤害会动态更新
-ProximityMineLauncher: 弹幕伤害会动态更新
+// DynamicUpdating: Projectile damage updates dynamically
 PygmyStaff: 长矛可以穿透一次
 MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
+// AerialBane: Damage against airborne enemies decreased to 1.15x
+// ChlorophyteBullet: Homing range reduced to 0.5x
+// SporeSac: Improved projectile immunity frames
+// AvengerEmblem: Damage bonus increased by 3%
+// AmethystStaff: Bolt is faster and bounces towards enemies
+// TopazStaff: Critical strikes cause an explosion, increased base critical strike chance
+// SapphireStaff: Rapidly fires bolts in a spread
+// EmeraldStaff: Fires a large bolt with strong knockback and pierce
+// AmberStaff: Bolt boomerangs back
+// RubyStaff: Bolt splits in half after a duration
+// MeleeDamageBugFix: Fixed projectiles not dealing melee damage
+// VortexSet: Stealth lasts up to 10 seconds before going on cooldown
+// PossessedHatchet: Projectiles bounce off and between enemies
+// BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
+// ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
+// BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
+// AntiSpam: Held projectiles have increased hitrate
+// Tipsy: Tipsy buff additionally reduces defense by 2
+// Trimarang: Doubled projectile speed

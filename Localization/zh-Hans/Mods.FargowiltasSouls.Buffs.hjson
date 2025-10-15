@@ -43,11 +43,6 @@ NibbleBuff: {
 	Description: 只需轻轻一咬
 }
 
-MonkBuff: {
-	DisplayName: 冥想
-	Description: 你的武僧冲刺已就绪
-}
-
 ObsidianLavaWetBuff: {
 	DisplayName: 熔岩之润
 	Description: 你的身上滴着熔岩
@@ -153,9 +148,9 @@ MutantPresenceBuff: {
 	Description: 减少防御力、伤害减免和生命恢复速度，减小擦弹范围，关闭部分饰品效果
 }
 
-HellFireBuff: {
-	DisplayName: 地狱烈焰
-	Description: Mods.FargowiltasSouls.BuffDescription.HellFireBuff
+BlackInfernoBuff: {
+	// DisplayName: Black Inferno
+	// Description: Mods.FargowiltasSouls.BuffDescription.BlackInfernoBuff
 }
 
 MagicalCleanseCDBuff: {
@@ -203,11 +198,6 @@ BloodthirstyBuff: {
 	Description: 极大提高刷怪速率
 }
 
-BrainOfConfusionBuff: {
-	DisplayName: 理智崩溃
-	Description: 造成的伤害降低30%
-}
-
 ClippedWingsBuff: {
 	DisplayName: 折翼
 	Description: 无法飞行或使用火箭靴
@@ -226,11 +216,6 @@ DefenselessBuff: {
 FlamesoftheUniverseBuff: {
 	DisplayName: 宇宙之焰
 	Description: 来自诸天的亲自审判
-}
-
-FlippedBuff: {
-	DisplayName: 翻转
-	Description: 你的重力被颠倒了
 }
 
 HallowIlluminatedBuff: {
@@ -256,24 +241,9 @@ GodEaterBuff: {
 	Description: 你的灵魂被神明的忿怒所诅咒
 }
 
-GuiltyBuff: {
-	DisplayName: 内疚
-	Description: 杀害无辜动物产生的内疚使你的武器变得迟钝
-}
-
 HexedBuff: {
 	DisplayName: 着魔
 	Description: 你的攻击会治愈敌人
-}
-
-HolyPriceBuff: {
-	DisplayName: 神圣代价
-	Description: 减少30%攻击速度
-}
-
-HypothermiaBuff: {
-	DisplayName: 恐寒症
-	Description: 友方弹幕速度会减慢，你会承受更多来自冷系攻击的伤害
 }
 
 InfestedBuff: {
@@ -308,21 +278,6 @@ LihzahrdBlessingBuff: {
 	Message: 丛林蜥蜴祭坛发出的光芒照耀在你身上！
 }
 
-LivingWastelandBuff: {
-	DisplayName: 人形废土
-	Description: 你周围的每个人都开始腐烂
-}
-
-LoosePocketsBuff: {
-	DisplayName: 晃动衣袋
-	Description: 你身上的一件物品也许会被拿走
-}
-
-LovestruckBuff: {
-	DisplayName: 热恋
-	Description: 坠入爱河！
-}
-
 LowGroundBuff: {
 	DisplayName: 下陷
 	Description: 钩爪被禁止，不能站在平台或液体上
@@ -343,24 +298,20 @@ MidasBuff: {
 	Description: 受击时掉落钱币
 }
 
-MutantNibbleBuff: {
-	DisplayName: 突变啃啄
-	Description: 无法恢复生命
-}
-
-NanoInjectionBuff: {
-	DisplayName: 纳米灌注
-	Description: 降低生命恢复速度和综合属性
-}
-
 NeurotoxinBuff: {
 	DisplayName: 神经毒素
 	Description: 你的身体正在停歇关闭
 }
 
-NullificationCurseBuff: {
+PoweroftheCosmosBuff: {
 	DisplayName: 无效诅咒
 	Description: 月亮领主正在循环他的伤害免疫类型！
+	// CombatText: 1.75x {0} damage!
+	// Melee: melee
+	// Ranged: ranged
+	// Magic: magic
+	// Summon: summon
+	// All: all
 }
 
 OceanicMaulBuff: {
@@ -383,11 +334,6 @@ OiledBuff: {
 PungentGazeBuff: {
 	DisplayName: 尖刻注视
 	Description: Mods.FargowiltasSouls.BuffDescription.PungentGazeBuff
-}
-
-PurgedBuff: {
-	DisplayName: 涤荡
-	Description: 闪避效果不会生效
 }
 
 RefreshedBuff: {
@@ -521,9 +467,9 @@ TrueEyesBuff: {
 	Description: 克苏鲁的几只眼睛将会保护你
 }
 
-TwinsEXBuff: {
-	DisplayName: 双子EX
-	Description: 真正的双子魔眼将为你而战
+OmniscienceBuff: {
+	// DisplayName: Omniscience
+	// Description: The real Twins will fight for you
 }
 
 MutantRebirthBuff: {
@@ -536,7 +482,7 @@ BabyLifelightBuff: {
 	Description: 看哪，那天使的圣光
 }
 
-BrokenShellBuff: {
+ShellSmashBuff: {
 	DisplayName: 破损龟壳
 	Description: 暂时无法缩壳
 }
@@ -576,19 +522,14 @@ HallowCooldownBuff: {
 	Description: 你的护盾现在无法反弹弹幕
 }
 
-HuntressBleedBuff: {
-	DisplayName: 女猎人冷却
-	Description: Mods.FargowiltasSouls.BuffDescription.HuntressBleedBuff
-}
-
-HuntressCDBuff: {
-	DisplayName: 箭雨冷却
-	Description: 你现在无法触发另一次箭雨
-}
-
 LeadPoisonBuff: {
 	DisplayName: 铅中毒
 	Description: Mods.FargowiltasSouls.BuffDescription.LeadPoisonBuff
+}
+
+LeadPoisonSpreadBuff: {
+	DisplayName: 铅中毒
+	Description: Mods.FargowiltasSouls.Buffs.LeadPoisonSpreadBuff.Description
 }
 
 MoltenAmplifyBuff: {
@@ -599,16 +540,6 @@ MoltenAmplifyBuff: {
 OriPoisonBuff: {
 	DisplayName: 山铜中毒
 	Description: Mods.FargowiltasSouls.BuffDescription.OriPoisonBuff
-}
-
-ShellHideBuff: {
-	DisplayName: 缩壳
-	Description: 阻挡弹幕
-}
-
-SnowstormCDBuff: {
-	DisplayName: 暴雪冷却
-	Description: 你现在不能冻结一切
 }
 
 SolarFlareBuff: {
@@ -639,11 +570,6 @@ TimeStopCDBuff: {
 TitaniumCDBuff: {
 	DisplayName: 钛金护盾冷却
 	Description: 你正在为钛金护盾蓄力
-}
-
-VortexCDBuff: {
-	DisplayName: 星旋冷却
-	Description: 你现在不能生成另一个星旋旋涡
 }
 
 SuperchargedBuff: {
@@ -723,34 +649,14 @@ MagicalCurseBuff: {
 	Description: Mods.FargowiltasSouls.Buffs.MagicalCurseBuff.Description
 }
 
-MoonFangBuff: {
-	DisplayName: 月之毒牙
-	Description: 无法恢复生命
-}
-
 WitheredForceBuff: {
 	DisplayName: 凋零的力级增益
 	Description: Mods.FargowiltasSouls.Buffs.WitheredForceBuff.Description
 }
 
-TimberBleedBuff: {
-	DisplayName: 木材流血增益
-	Description: Mods.FargowiltasSouls.Buffs.TimberBleedBuff.Description
-}
-
 EarthPoison: {
 	DisplayName: 大地腐蚀
 	Description: Mods.FargowiltasSouls.Buffs.EarthPoison.Description
-}
-
-WitheredBuff: {
-	DisplayName: 凋零
-	Description: Mods.FargowiltasSouls.Buffs.WitheredBuff.Description
-}
-
-WitheredWizardBuff: {
-	DisplayName: 凋零（巫师）
-	Description: Mods.FargowiltasSouls.Buffs.WitheredWizardBuff.Description
 }
 
 MushroomPowerBuff: {
@@ -795,10 +701,35 @@ TouhouHoardBuff: {
 
 BleedingOut: {
 	// DisplayName: Bleeding Out
-	// Description: Mods.FargowiltasSouls.Buffs.BleedingOut.Description
+	// Description: You're bleeding quickly!
 }
 
 SilverBuff: {
 	// DisplayName: Parry Boost
 	// Description: 100% increased damage
+}
+
+GrabbedHarmlessBuff: {
+	// DisplayName: Grabbed
+	// Description: Mash movement keys to escape!
+}
+
+DaybrokenBuff: {
+	// DisplayName: Daybroken
+	// Description: Incinerated by solar rays
+}
+
+VortexStealthCDBuff: {
+	// DisplayName: Vortex Stealth Cooldown
+	// Description: Cannot be stealthy again yet
+}
+
+ExpixiveBuff: {
+	// DisplayName: Expixive Buff
+	// Description: The lesser fairies will fight to the end for you
+}
+
+QuicksandBuff: {
+	// DisplayName: Quicksand Buff
+	// Description: Mods.FargowiltasSouls.Buffs.QuicksandBuff.Description
 }

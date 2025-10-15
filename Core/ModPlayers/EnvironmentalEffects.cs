@@ -1,22 +1,25 @@
-﻿using FargowiltasSouls.Core.Systems;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria.ID;
-using Terraria;
-using Terraria.ModLoader;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using Microsoft.Xna.Framework;
-using Terraria.Audio;
-using Terraria.DataStructures;
-using Terraria.Localization;
 using Fargowiltas.Content.Buffs;
-using Terraria.GameContent.Events;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using Fargowiltas.Content.Projectiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Systems;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.Audio;
+using Terraria.Chat;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using Terraria.UI;
+using Terraria.UI.Chat;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -41,163 +44,231 @@ namespace FargowiltasSouls.Core.ModPlayers
                 return;
 
             FargoSoulsPlayer fargoSoulsPlayer = Player.FargoSouls();
-            bool waterEffectImmune = fargoSoulsPlayer.BaronsBurden || Player.trident;
 
             Tile currentTile = getPlayerTile();
 
-            if (!NPC.downedBoss3 && Player.ZoneDungeon && !NPC.AnyNPCs(NPCID.DungeonGuardian) && !Main.drunkWorld && !Main.zenithWorld)
+            if (!NPC.downedBoss3 && Player.ZoneDungeon && !NPC.AnyNPCs(NPCID.DungeonGuardian) && !Main.drunkWorld)
             {
                 NPC.SpawnOnPlayer(Player.whoAmI, NPCID.DungeonGuardian);
             }
 
-
-            
-            //water biome effects
-            if (WaterWet && !waterEffectImmune)
+            if (WorldUpdatingSystem.CorruptWaterTimer > 0 && WorldUpdatingSystem.CorruptWaterTimer % 5 == 0) //dust interval
             {
-                if (!(Player.GetJumpState(ExtraJump.Flipper).Enabled || Player.gills || fargoSoulsPlayer.MutantAntibodies))
-                    Player.AddBuff(ModContent.BuffType<LethargicBuff>(), 2);
+                EvilWaterDust(DustID.CursedTorch);
+            }
 
+            if (WorldUpdatingSystem.CrimsonWaterTimer > 0 && WorldUpdatingSystem.CrimsonWaterTimer % 5 == 0) //dust interval
+            {
+                EvilWaterDust(DustID.IchorTorch);
+            }
+
+            //water biome effects
+            if (WaterWet)
+            {
                 //quicksand alpha, theres literally no water in ug... unless?
-                //if (Player.ZoneUndergroundDesert)
-                //{
+                if (Player.ZoneUndergroundDesert)
+                {
                 //    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Shimmer, 2);
-                //}
-
-                if (Player.ZoneSnow)
-                {
-                    if (Player.chilled)
-                    {
-                        Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
-
-                        /*
-                        MasomodeFreezeTimer++;
-                        if (MasomodeFreezeTimer >= 600)
-                        {
-                            FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 120);
-                            MasomodeFreezeTimer = -300;
-                        }
-                        */
-                    }
-                    else
-                    {
-                        MasomodeFreezeTimer = 0;
-                    }
                 }
 
-                if (Player.ZoneJungle)
-                {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Poisoned, 2);
-                }
-
-                if (Player.ZoneCrimson)
+                //make ichor proj do this?
+                if (Player.ZoneCrimson && WorldUpdatingSystem.CrimsonWaterTimer > 0)
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Ichor, 300);
                 }
 
-                if (Player.ZoneCorrupt)
+                //make eater fireballs do this
+                if (Player.ZoneCorrupt && WorldUpdatingSystem.CorruptWaterTimer > 0)
                 {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 2);
-                }
-
-                if (Player.ZoneHallow)
-                {
-                    Player.AddBuff(ModContent.BuffType<SmiteBuff>(), 120);
+                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.CursedInferno, 60);
                 }
             }
-
 
             // Pure Heart-affected biome debuffs
-            if (!fargoSoulsPlayer.PureHeart) 
+            if (Player.ZoneDesert && !fargoSoulsPlayer.PureHeart)
             {
-                if (Player.ZoneDesert)
-                {
-                    DesertDebuffs(currentTile);
-                }
-
-                if (currentTile.TileType == TileID.Cactus)
-                {
-                    CactusDamage(currentTile, fargoSoulsPlayer);
-                }
-
-                if (Player.ZoneSnow)
-                {
-                    //if (!Main.dayTime && Framing.GetTileSafely(Player.Center).WallType == WallID.None)
-                    //    Player.AddBuff(BuffID.Chilled, Main.expertMode && Main.expertDebuffTime > 1 ? 1 : 2);
-                }
-
-                if (Player.ZoneJungle)
-                {
-                    JungleStorming(); 
-                }
-
-                if (Player.ZoneCorrupt)
-                {
-                    FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Darkness, 2);
-                }
-
-                if (Player.ZoneHallow)
-                {
-                    HallowedIlluminated();
-                }
-
-                // spider biome
-                if (currentTile.WallType == WallID.SpiderUnsafe)
-                {
-                    SpiderWebbed();
-                }
-
-                if (Player.ZoneMarble)
-                {
-                    //Main.NewText("ech");
-                }
-
-                if (Player.ZoneGranite)
-                {
-                    //Main.NewText("ech");
-                }
-
-                if (Player.ZoneUnderworldHeight)
-                {
-                    UnderworldFire();
-                }
-
-                if (Player.ZoneSkyHeight)
-                {
-                    SpaceBreathMeter();
-                }
-
-                if (Main.raining)
-                {
-                    RainLightning(currentTile);
-                }
-
-                if (Main.bloodMoon)
-                {
-                    Player.AddBuff(BuffID.WaterCandle, 2);
-                }
-                    
-                //boss environs??
-                //deerclops
-                if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses())
-                {
-                    DeerclopsHands();
-                }
-
-                // hallow lifelight sparks
-                if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight] && Player.ZoneHallow && Player.ZoneRockLayerHeight && !LumUtils.AnyBosses())
-                {
-                    LifelightSparkles();
-                }
+                //DesertDebuffs(currentTile);
             }
 
-            //other stuff that does not get disabled by pure heart
+            if (Player.ZoneSnow && (Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight))
+            {
+                SpawnIcicles(); //pheart makes deal no dmg
+            }
+
+            if (Player.ZoneJungle && !fargoSoulsPlayer.PureHeart)
+            {
+                JungleStorming(); 
+
+                //reduce max storm
+                //while storming ... spawn rates up
+                //certain enemies go crazy
+            }
+
+            if (Player.ZoneCorrupt && !fargoSoulsPlayer.PureHeart)
+            {
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Darkness, 2);
+            }
+
+            if (Player.ZoneHallow)
+            {
+                HallowedIlluminated(); //pheart prevents dr reduction
+            }
+
+            if (Player.ZoneUnderworldHeight && !fargoSoulsPlayer.PureHeart)
+            {
+                UnderworldFire();
+            }
+
+            if (Player.Center.ToTileCoordinates().Y <= (Main.worldSurface * 0.25) && !fargoSoulsPlayer.PureHeart)
+            {
+                SpaceBreathMeter();
+            }
+
+            if (Main.raining)
+            {
+                RainLightning(currentTile); //pheart makes deal no dmg
+            }
+
+            if (Main.bloodMoon && !fargoSoulsPlayer.PureHeart)
+            {
+                Player.AddBuff(BuffID.WaterCandle, 2);
+            }
+                    
+            //boss environs
+            //deerclops
+            if (!NPC.downedDeerclops && Player.ZoneRockLayerHeight && Player.ZoneSnow && !LumUtils.AnyBosses() && !fargoSoulsPlayer.PureHeart)
+            {
+                //DeerclopsHands();
+            }
+
+            // hallow lifelight sparks
+            if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight] && Player.ZoneHallow && Player.ZoneRockLayerHeight && !LumUtils.AnyBosses() && !fargoSoulsPlayer.PureHeart)
+            {
+                LifelightSparkles();
+            }
+
+            //other stuff not prevent by pure heart
             if (Player.ZoneMeteor)
             {
                 MeteorFallenStars();
             }
+        }
 
+        private void EvilWaterDust(int dustId)
+        {
+            //search around player for water, add dust
+            Vector2 playerPos = Player.Center;
+            int radius = 1000;
 
+            for (int x = -radius; x <= radius; x += 2)
+            {
+                for (int y = -radius; y <= radius; y += 2)
+                {
+                    int xPosition = (int)(x + playerPos.X / 16.0f);
+                    int yPosition = (int)(y + playerPos.Y / 16.0f);
+
+                    if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
+                        continue;
+
+                    Tile tile = Main.tile[xPosition, yPosition];
+
+                    // Circle
+                    if (x * x + y * y <= radius)
+                    {
+                        if (tile.LiquidAmount > 0 && tile.LiquidType == LiquidID.Water)
+                        {
+                            Vector2 dustPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
+
+                            Dust.NewDust(dustPos, 22, 22, dustId, 0.0f, 0.0f, 120);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SpawnIcicles()
+        {
+            if (!FargoSoulsUtil.HostCheck)
+                return;
+
+            if (Player.townNPCs >= 2f)
+                return;
+
+            int maxIcicles = 25;
+            int spawningRange = 60;
+            int airNeeded = 5;
+            int icicleDamage = 20;
+
+            //icicle spawning 
+            if (Main.rand.NextBool(30) && LumUtils.CountProjectiles([ModContent.ProjectileType<FallingIcicle>()]) < maxIcicles)
+            {
+
+                Vector2 playerPos = Player.Center;
+                bool icicleSpawned = false;
+
+                while (!icicleSpawned)
+                {
+                    int x = Main.rand.Next(4, spawningRange) * (Main.rand.NextBool() ? 1 : -1);
+                    int y = Main.rand.Next(4, spawningRange) * (Main.rand.NextBool() ? 1 : -1);
+
+                    int xPosition = (int)(x + playerPos.X / 16.0f);
+                    int yPosition = (int)(y + playerPos.Y / 16.0f);
+
+                    if (xPosition < 0 || xPosition >= Main.maxTilesX || yPosition < 0 || yPosition >= Main.maxTilesY)
+                        continue;
+
+                    Tile tile = Main.tile[xPosition, yPosition];
+
+                    if (tile == null)
+                        continue;
+
+                    if ((tile.TileType == TileID.IceBlock || tile.TileType == TileID.BreakableIce || tile.TileType == TileID.SnowBlock) && tile.BlockType == BlockType.Solid)
+                    {
+                        //check if tile has open air beneath it 
+                        bool fail = false;
+
+                        for (int i = 1; i <= airNeeded; i++)
+                        {
+                            int yPosition2 = (int)(y + i + playerPos.Y / 16.0f);
+                            Tile tile2 = Main.tile[xPosition, yPosition2];
+
+                            if (tile2.TileType != 0)
+                            {
+                                fail = true;
+                                break;
+                            }
+                        }
+
+                        if (fail)
+                        {
+                            continue; ;
+                        }
+
+                        //spawn the icicle
+                        yPosition = (int)(y + 1 + playerPos.Y / 16.0f);
+                        Vector2 spawnPos = new Vector2(xPosition, yPosition).ToWorldCoordinates();
+                        //fiddle to line up to tile
+                        spawnPos.X -= 0f;
+                        spawnPos.Y += 5f;
+
+                        bool icicleNearby = false;
+                        foreach (Projectile p in Main.ActiveProjectiles)
+                        {
+                            if (p.type == ModContent.ProjectileType<FallingIcicle>() && p.position.Distance(spawnPos) < 16 * 3)
+                            {
+                                icicleNearby = true;
+                                break;
+                            }
+                        }
+
+                        if (!icicleNearby)
+                        {
+                            Projectile icicle = FargoSoulsUtil.NewProjectileDirectSafe(Player.GetSource_NaturalSpawn(), spawnPos, Vector2.Zero, ModContent.ProjectileType<FallingIcicle>(), icicleDamage, 1, Main.myPlayer);
+                            icicleSpawned = true;
+                        }
+                    }
+                }
+            }
         }
 
         private void FallDamageDebuff()
@@ -278,6 +349,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                         WorldUpdatingSystem.rainCD = 43200;// 1/2 day cooldown
                     }
                 }
+
+                if (Main.maxRaining == 0.9f)
+                {
+                    //rain full power
+                }
             }
         }
 
@@ -285,8 +361,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             //5x star rate
             Star.starfallBoost = 5;
+
             //manually spawn day stars during day
-            if (Main.dayTime)
+            if (Main.dayTime && FargoSoulsUtil.HostCheck)
             {
                 int starProj = ModContent.ProjectileType<FallenStarDay>();
 
@@ -325,6 +402,14 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void DesertDebuffs(Tile currentTile)
         {
+
+           // Main.NewText("hi " + Player.ZoneDirtLayerHeight + " " + Player.ZoneRockLayerHeight);
+
+            if ((Player.ZoneDirtLayerHeight || Player.ZoneRockLayerHeight) && Player.wet)
+            {
+                Player.AddBuff(ModContent.BuffType<QuicksandBuff>(), 60);
+            }
+
             /*
             if (Player.ZoneOverworldHeight && currentTile.WallType == WallID.None)
             {
@@ -344,38 +429,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
             */
-        }
-
-        private void CactusDamage(Tile currentTile, FargoSoulsPlayer fargoSoulsPlayer)
-        {
-            if (currentTile.HasUnactuatedTile && !fargoSoulsPlayer.CactusImmune && !Player.cactusThorns)
-            {
-                int damage = 10;
-                if (WorldSavingSystem.MasochistModeReal)
-                {
-                    if (Player.ZoneCorrupt)
-                    {
-                        damage *= 2;
-                        Player.AddBuff(BuffID.CursedInferno, 150);
-                    }
-                    if (Player.ZoneCrimson)
-                    {
-                        damage *= 2;
-                        Player.AddBuff(BuffID.Ichor, 150);
-                    }
-                    if (Player.ZoneHallow)
-                    {
-                        damage *= 2;
-                        Player.AddBuff(BuffID.Confused, 150);
-                    }
-                }
-
-                if (Main.hardMode)
-                    damage *= 2;
-
-                if (Player.hurtCooldowns[0] <= 0) //same i-frames as spike tiles
-                    Player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.Cactus", Player.name)), damage, 0, false, false, 0, false);
-            }
         }
 
         private void HallowedIlluminated()
@@ -415,15 +468,16 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void RainLightning(Tile currentTile)
         {
+            if (!FargoSoulsUtil.HostCheck)
+                return;
+
             if (Player.ZoneOverworldHeight
                 && !hasUmbrella() && currentTile.WallType == WallID.None)
             {
-                if (Player.ZoneSnow)
-                    Player.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 2);
-                else
-                    Player.AddBuff(BuffID.Wet, 2);
+                Player.AddBuff(BuffID.Wet, 2);
 
-                LightningCounter++;
+                if (Main.IsItStorming && !Player.ZoneSnow && !Player.ZoneSandstorm)
+                    LightningCounter++;
 
                 int lighntningMinSeconds = WorldSavingSystem.MasochistModeReal ? 10 : 17;
                 if (LightningCounter >= LumUtils.SecondsToFrames(lighntningMinSeconds))
@@ -474,23 +528,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                         LightningCounter = 0;
                         int projType = ModContent.ProjectileType<RainLightning>();
                         Vector2 pos = new(tileCoordinates.X * 16 + 8, tileCoordinates.Y * 16 + 17 - 900);
-                        if (Main.netMode == NetmodeID.MultiplayerClient)
-                        {
-                            if (Player.whoAmI == Main.myPlayer)
-                            {
-                                var netMessage = Mod.GetPacket();
-                                netMessage.Write((byte)FargowiltasSouls.PacketID.RequestEnvironmentalProjectile);
-                                netMessage.Write(projType);
-                                netMessage.WriteVector2(pos);
-                                netMessage.Write(ai1);
-                                netMessage.Send();
-                            }
-                        }
-                        else
-                        {
-                            int damage = (Main.hardMode ? 120 : 60) / 4;
-                            Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, projType, damage, 2f, Main.myPlayer, Vector2.UnitY.ToRotation(), ai1);
-                        }
+
+                        int damage = (Main.hardMode ? 120 : 60) / 4;
+                        Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, projType, damage, 2f, Main.myPlayer, Vector2.UnitY.ToRotation(), ai1);
                     }
                 }
             }
@@ -511,14 +551,14 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!Player.buffImmune[BuffID.Suffocation] && Player.whoAmI == Main.myPlayer)
             {
                 bool immunity = !Player.armor[0].IsAir && (Player.armor[0].type == ItemID.FishBowl || Player.armor[0].type == ItemID.GoldGoldfishBowl);
-                if (Player.accDivingHelm)
+                if (Player.accDivingHelm || Player.spaceGun)
                     immunity = true;
 
                 bool inLiquid = Collision.DrownCollision(Player.position, Player.width, Player.height, Player.gravDir);
                 if (!inLiquid && !immunity)
                 {
                     Player.breath -= 3;
-                    if (++MasomodeSpaceBreathTimer > 10)
+                    if (++MasomodeSpaceBreathTimer > 20)
                     {
                         MasomodeSpaceBreathTimer = 0;
                         Player.breath--;
@@ -536,28 +576,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
-        private void SpiderWebbed()
-        {
-            if (!Player.buffImmune[BuffID.Webbed] && Player.stickyBreak > 0)
-            {
-                Player.AddBuff(BuffID.Webbed, 30);
-                Player.AddBuff(BuffID.Slow, 90);
-                Player.stickyBreak = 0;
-
-                Vector2 vector = Collision.StickyTiles(Player.position, Player.velocity, Player.width, Player.height);
-                if (vector.X != -1 && vector.Y != -1)
-                {
-                    int num3 = (int)vector.X;
-                    int num4 = (int)vector.Y;
-                    WorldGen.KillTile(num3, num4, false, false, false);
-                    if (Main.netMode == NetmodeID.MultiplayerClient && !Main.tile[num3, num4].HasTile)
-                        NetMessage.SendData(MessageID.TileManipulation, -1, -1, null, 0, num3, num4, 0f, 0, 0, 0);
-                }
-            }
-        }
-
         private void DeerclopsHands()
         {
+            if (!FargoSoulsUtil.HostCheck)
+                return;
+
             if (Player.ZoneHallow)
                 return;
 
@@ -590,26 +613,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                     LightLevelCounter = 0;
 
                     int projType = ModContent.ProjectileType<DeerclopsDarknessHand>();
-                    if (Main.netMode == NetmodeID.MultiplayerClient)
+
+                    int damage = (Main.hardMode ? 120 : 60) / 4;
+                    int p = Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, projType, damage, 2f, Main.myPlayer);
+                    if (p.IsWithinBounds(Main.maxProjectiles))
                     {
-                        if (Player.whoAmI == Main.myPlayer)
-                        {
-                            var netMessage = Mod.GetPacket();
-                            netMessage.Write((byte)FargowiltasSouls.PacketID.RequestEnvironmentalProjectile);
-                            netMessage.Write(projType);
-                            netMessage.WriteVector2(pos);
-                            netMessage.Send();
-                        }
+                        Main.projectile[p].light = 1f;
                     }
-                    else
-                    {
-                        int damage = (Main.hardMode ? 120 : 60) / 4;
-                        int p = Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, projType, damage, 2f, Main.myPlayer);
-                        if (p.IsWithinBounds(Main.maxProjectiles))
-                        {
-                            Main.projectile[p].light = 1f;
-                        }
-                    }
+
                     Lighting.AddLight(pos, 1f, 1f, 1f);
                 }
             }
@@ -617,6 +628,9 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void LifelightSparkles()
         {
+            if (!FargoSoulsUtil.HostCheck)
+                return;
+
             if (Player.townNPCs >= 2f)
                 return;
 
@@ -632,22 +646,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 LightLevelCounter = 0;
                 Vector2 pos = Player.Center;
                 int projType = ModContent.ProjectileType<LifelightEnvironmentStar>();
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                {
-                    if (Player.whoAmI == Main.myPlayer)
-                    {
-                        var netMessage = Mod.GetPacket();
-                        netMessage.Write((byte)FargowiltasSouls.PacketID.RequestEnvironmentalProjectile);
-                        netMessage.Write(projType);
-                        netMessage.WriteVector2(pos);
-                        netMessage.Send();
-                    }
-                }
-                else
-                {
-                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                    Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, projType, damage, 2f, Main.myPlayer, -120);
-                }
+
+                int damage = (Main.hardMode ? 120 : 60) / 4;
+                Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, projType, damage, 2f, Main.myPlayer, -120);
             }
         }
 

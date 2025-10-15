@@ -1,5 +1,5 @@
-﻿//using FargowiltasSouls.Content.Buffs.Minions;
-using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria;
@@ -11,12 +11,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class BrainStaff : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mind Break");
-            // Tooltip.SetDefault("'An old foe beaten into submission..'");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "精神崩坏");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'一个被迫屈服的老对手..'");
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

@@ -1,5 +1,6 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -33,15 +34,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyPallaHead")
-            .AddIngredient(ItemID.PalladiumBreastplate)
-            .AddIngredient(ItemID.PalladiumLeggings)
-            .AddIngredient(ItemID.BatBat)
-            .AddIngredient(ItemID.SoulDrain)
-            .AddIngredient(ItemID.UndergroundReward)
+                .AddRecipeGroup("FargowiltasSouls:AnyPallaHead")
+                .AddIngredient(ItemID.PalladiumBreastplate)
+                .AddIngredient(ItemID.PalladiumLeggings)
+                .AddIngredient(ItemID.BatBat)
+                .AddIngredient(ItemID.SoulDrain)
+                .AddIngredient(ItemID.UndergroundReward)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return PalladiumEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class PalladiumHealing : AccessoryEffect
@@ -62,6 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<PalladiumEnchant>();
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, player.ForceEffect<PalladiumEffect>() ? 100 : 50);
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -75,9 +84,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.PalladCounter = 0;
                     if (player.whoAmI == Main.myPlayer && player.statLife < player.statLifeMax2)
                     {
-                        int damage = player.ForceEffect<PalladiumEffect>() ? 100 : 50;
                         Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<PalladiumEffect>()), player.Center, -Vector2.UnitY, ModContent.ProjectileType<PalladOrb>(),
-                            FargoSoulsUtil.HighestDamageTypeScaling(player, damage), 10f, player.whoAmI, -1);
+                            BaseDamage(player), 10f, player.whoAmI, -1);
                     }
                 }
             }

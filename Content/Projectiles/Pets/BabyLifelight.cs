@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
@@ -8,11 +9,12 @@ namespace FargowiltasSouls.Content.Projectiles.Pets
 {
     public class BabyLifelight : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Pets", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Petlight");
             Main.projFrames[Projectile.type] = 4;
             Main.projPet[Projectile.type] = true;
+            ProjectileID.Sets.LightPet[Projectile.type] = true;
         }
 
         public override void SetDefaults()

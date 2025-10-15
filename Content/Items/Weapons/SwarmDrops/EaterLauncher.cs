@@ -1,8 +1,11 @@
 ﻿using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
-using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -12,6 +15,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class EaterLauncher : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
+        private int delay;
+        private bool lastLMouse = false;
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -19,123 +25,55 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Item.damage = 190;
+            Item.damage = 135;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 24;
             Item.height = 24;
-            Item.useTime = 24;
-            Item.useAnimation = 24;
+            Item.useTime = 20;
+            Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 6f;
-            Item.UseSound = SoundID.Item62 with { Volume = 0.4f };
+            //Item.UseSound = SoundID.Item62 with { Volume = 0.4f };
             Item.useAmmo = AmmoID.Rocket;
             Item.value = Item.sellPrice(0, 10);
             Item.rare = ItemRarityID.Purple;
             Item.autoReuse = true;
-            Item.shoot = ModContent.ProjectileType<EaterRocket>();
-            Item.shootSpeed = 24f;
-            Item.scale = .7f;
-        }
-
-        //make them hold it different
-        public override Vector2? HoldoutOffset()
-        {
-            return new Vector2(-12, -2);
+            Item.shoot = ModContent.ProjectileType<RockeaterLauncherHeld>();
+            Item.channel = true;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
         }
         public const int BaseDistance = 600;
         public const int IncreasedDistance = 1200;
         //public int Cooldown = 0;
         public const int CooldownTime = 24 * 60;
-        public override bool AltFunctionUse(Player player) => true;
-        public override bool CanUseItem(Player player)
-        {
-            if (player.altFunctionUse == 2)
-            {
-                //if (Cooldown > 0)
-                //return false;
-
-                Item.useAnimation = 24 * 2;
-                Item.useTime = 24 * 2;
-                Item.UseSound = SoundID.Item117;
-            }
-            else
-            {
-                Item.useAnimation = 24;
-                Item.useTime = 24;
-                Item.UseSound = SoundID.Item62 with { Volume = 0.4f };
-            }
-            return base.CanUseItem(player);
-        }
+        public override bool AltFunctionUse(Player player) => false;
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            int aura = ModContent.ProjectileType<RockeaterAuraProj>();
-            if (player.ownedProjectileCounts[aura] <= 0)
-                Projectile.NewProjectile(source, player.Center, player.velocity, aura, 0, 0);
-
-            if (player.altFunctionUse == 2)
-            {
-                player.FargoSouls().RockeaterDistance = IncreasedDistance;
-                //Cooldown = CooldownTime;
-                return false;
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                Vector2 shotgunVelocity = velocity.RotatedByRandom(MathHelper.ToRadians(15));
-                shotgunVelocity *= Main.rand.NextFloat(0.9f, 1.1f);
-                Projectile.NewProjectile(source, position + Vector2.Normalize(velocity) * Item.width * 0.9f, shotgunVelocity, type, damage, knockback);
-            }
             return false;
         }
         public override void HoldItem(Player player)
         {
-            /*
-            if (player.itemTime > 0)
+            if (lastLMouse && !Main.mouseLeft && CanUseItem(player) && FargoSoulsUtil.ActuallyClickingInGameplay(player))
             {
-                
-                for (int i = 0; i < 10; i++)
-                {
-                    Vector2 offset = new();
-                    double angle = Main.rand.NextDouble() * 2d * Math.PI;
-                    offset.X += (float)(Math.Sin(angle) * 300);
-                    offset.Y += (float)(Math.Cos(angle) * 300);
-                    Dust dust = Main.dust[Dust.NewDust(
-                        player.Center + offset - new Vector2(4, 4), 0, 0,
-                        DustID.PurpleCrystalShard, 0, 0, 100, Color.White, 1f
-                        )];
-                    dust.velocity = player.velocity;
-                    if (Main.rand.NextBool(3))
-                        dust.velocity += Vector2.Normalize(offset) * 5f;
-                    dust.noGravity = true;
-                    dust.scale = 1f;
-
-                    Vector2 offset2 = new();
-                    double angle2 = Main.rand.NextDouble() * 2d * Math.PI;
-                    offset2.X += (float)(Math.Sin(angle2) * player.FargoSouls().RockeaterDistance);
-                    offset2.Y += (float)(Math.Cos(angle2) * player.FargoSouls().RockeaterDistance);
-                    Dust dust2 = Main.dust[Dust.NewDust(
-                        player.Center + offset2 - new Vector2(4, 4), 0, 0,
-                        DustID.PurpleCrystalShard, 0, 0, 100, Color.White, 1f
-                        )];
-                    dust2.velocity = player.velocity;
-                    if (Main.rand.NextBool(3))
-                        dust2.velocity += Vector2.Normalize(offset2) * -5f;
-                    dust2.noGravity = true;
-                    dust2.scale = 1f;
-                }
+                delay = (int)MathF.Ceiling(20f / player.FargoSouls().AttackSpeed);
             }
-            */
-        }
+            if (delay-- < 0)
+            {
+                delay = 0;
+            }
+            lastLMouse = Main.mouseLeft;
 
-
-        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-        {
-            type = ModContent.ProjectileType<EaterRocket>();
+            if (player.channel && player.ownedProjectileCounts[Item.shoot] < 1 && delay == 0)
+            {
+                Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, Item.shoot, (int)(player.ActualClassDamage(DamageClass.Ranged) * Item.damage), Item.knockBack, player.whoAmI);
+            }
         }
 
         public override bool CanConsumeAmmo(Item ammo, Player player)
         {
-            return Main.rand.NextBool();
+            return Main.rand.NextBool() && player.channel && player.ownedProjectileCounts[Item.shoot] > 0;
         }
 
         public override void AddRecipes()
@@ -146,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             .AddIngredient(ModContent.ItemType<EnergizerWorm>())
             .AddIngredient(ItemID.LunarBar, 10)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile(ModContent.TileType<CrucibleCosmosSheet>())
 
             .Register();
         }

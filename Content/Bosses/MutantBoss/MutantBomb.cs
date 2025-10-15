@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.timeLeft = 60;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
             Projectile.FargoSouls().GrazeCheck = projectile => { return false; };
@@ -115,14 +115,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 900);
         }
 
         public override Color? GetAlpha(Color lightColor)

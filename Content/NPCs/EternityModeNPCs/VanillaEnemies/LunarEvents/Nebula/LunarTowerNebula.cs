@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -23,8 +23,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 
         public LunarTowerNebula() : base(ModContent.BuffType<ReverseManaFlowBuff>(), 58) { }
 
-        public override int MaxHP => 46000;
-        public override int Damage => 80;
+        public override int MaxHP => 45000;
+        public override int Damage => 110;
         public enum Attacks
         {
             Idle,

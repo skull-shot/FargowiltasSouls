@@ -13,14 +13,6 @@ namespace FargowiltasSouls.Content.Patreon.Duck
     public class RailgunBlast : MutantSpecialDeathray
     {
         public RailgunBlast() : base(20, 1.25f) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Railgun Blast");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

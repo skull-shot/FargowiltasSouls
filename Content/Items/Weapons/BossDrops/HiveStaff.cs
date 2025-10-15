@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -9,28 +10,23 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class HiveStaff : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
             ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<TheSmallSting>();
-            /*
-            DisplayName.SetDefault("Hive Staff");
-            Tooltip.SetDefault("'The enslaved minions of a defeated foe..'");
-            DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "蜂巢法杖");
-            Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'战败敌人的仆从..'");
-            */
         }
 
         public override void SetDefaults()
         {
-            Item.damage = 15;
+            Item.damage = 10;
             Item.mana = 10;
             Item.knockBack = 0.25f;
             Item.DamageType = DamageClass.Summon;
             Item.sentry = true;
             Item.width = 24;
             Item.height = 24;
-            Item.useTime = 15;
-            Item.useAnimation = 15;
+            Item.useTime = 30;
+            Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.Swing;
             Item.noMelee = true;
             Item.UseSound = SoundID.Item78;

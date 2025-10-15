@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -21,24 +23,18 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         public float VisualScale = 0f;
 
         public AbomRitual() : base(realRotation, 1400f, ModContent.NPCType<AbomBoss>(), 87, visualCount: 64) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Abominationn Seal");
-        }
         public override void SetDefaults()
         {
             base.SetDefaults();
             Projectile.hide = true;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         protected override void Movement(NPC npc)
         {
-            if (npc.ai[0] < 9)
+            if (npc.ai[0] < 9 && npc.ai[0] != -3 && npc.ai[0] != 5)
             {
                 Projectile.velocity = npc.Center - Projectile.Center;
-                if (npc.ai[0] != 8) //snaps directly to abom when preparing for p2 attack
-                    Projectile.velocity /= 40f;
+                Projectile.velocity /= npc.ai[0] == 8 ? 10f : 40f; //snaps to abom faster when preparing for p2 attack
 
                 rotationPerTick = realRotation;
             }
@@ -68,15 +64,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                     float distance = player.Distance(Projectile.Center);
                     if (distance > threshold && distance < threshold * 1.4f)
                     {
+                        player.AddBuff(BuffID.Bleeding, 240);
                         if (WorldSavingSystem.EternityMode)
-                        {
-                            player.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 70);
-                            //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                            //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
-                        }
-                        player.buffImmune[BuffID.Burning] = false;
-                        player.AddBuff(BuffID.Bleeding, 70);
-                        player.AddBuff(BuffID.Burning, 70);
+                            player.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
                     }
                     else
                     {
@@ -93,13 +83,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
         {
             base.OnHitPlayer(target, info);
 
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
-            }
-            target.AddBuff(BuffID.Bleeding, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
         public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
         {
@@ -118,7 +104,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             var target = Main.LocalPlayer;
              
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
 
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;

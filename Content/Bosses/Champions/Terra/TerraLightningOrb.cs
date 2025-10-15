@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             Projectile.timeLeft = 600;
             Projectile.penetrate = -1;
             Projectile.scale = 0.5f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool? CanDamage()
@@ -104,7 +104,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }

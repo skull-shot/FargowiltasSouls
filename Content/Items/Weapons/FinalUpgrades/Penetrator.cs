@@ -1,25 +1,33 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.Prefixes;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     [LegacyName("HentaiSword")]
     public class Penetrator : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
+
+        public override int NumFrames => 10;
         public override void SetStaticDefaults()
         {
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3, 10));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
+
+            PrefixLegacy.ItemSets.ItemsThatCanHaveLegendary2[Type] = true;
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -37,15 +45,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             //Item.scale = 1.3f;
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = SoundID.Item1;
-            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
+            Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.Penetrator>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true;
             Item.noUseGraphic = true;
             Item.DamageType = DamageClass.Melee;
             Item.autoReuse = true;
         }
-
-        public override Color? GetAlpha(Color lightColor) => Color.White;
 
         public override bool AltFunctionUse(Player player) => true;
 
@@ -122,7 +128,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
                 }
                 else if (player.controlDown && player.controlUp)
                 {
-                    Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.Penetrator>();
+                    Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.Penetrator>();
                     Item.shootSpeed = 6f;
                 }
                 else

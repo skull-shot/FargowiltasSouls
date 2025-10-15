@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 {
     public class CoffinTossBuff : ModBuff
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Boss", Name);
         public override void SetStaticDefaults()
         {
             Main.debuff[Type] = true;
@@ -38,7 +39,8 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             if (Collision.SolidCollision(player.position + player.velocity, player.width, player.height))
             {
                 int damage = 35;
-                player.Hurt(PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.CoffinToss", player.name)), damage, 0, false, false, 0, false);
+                LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.CoffinToss");
+                player.Hurt(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(player.name)), damage, 0, false, false, 0, false);
                 player.DelBuff(buffIndex);
                 player.ClearBuff(ModContent.BuffType<StunnedBuff>());
                 SoundEngine.PlaySound(SoundID.NPCHit18, player.Center);

@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.Systems;
 using Terraria;
 using Terraria.Audio;
@@ -22,6 +22,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             AIType = ProjectileID.ShadowBeamHostile;
 
             Projectile.timeLeft = WorldSavingSystem.MasochistModeReal ? 1200 : 420;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

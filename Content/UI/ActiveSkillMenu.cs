@@ -1,13 +1,7 @@
-﻿using FargowiltasSouls.Assets.UI;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.UI;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.ModPlayers;
-using FargowiltasSouls.Core.Toggler;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -15,14 +9,9 @@ using ReLogic.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Terraria;
-using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
-using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.Localization;
-using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI
@@ -48,7 +37,10 @@ namespace FargowiltasSouls.Content.UI
         public static ActiveSkillBox MouseHeldElement = null;
         public static ActiveSkillBox MouseHoveredElement = null;
         public static bool ShouldRefresh;
-
+        public override void OnLoad()
+        {
+            CombinedUI.AddUI<ActiveSkillMenu>(Language.GetText("Mods.FargowiltasSouls.UI.ActiveSkillMenu"), 4);
+        }
         public override void UpdateUI()
         {
             if (Main.gameMenu || !Main.playerInventory)
@@ -70,21 +62,22 @@ namespace FargowiltasSouls.Content.UI
         public override void OnInitialize()
         {
             var config = ClientConfig.Instance;
-            if (config.SkillMenuX == 0f)
+            var baseOffset = CombinedUI.CenterRight;
+            if (config.ActiveSkillMenuX == 0f)
             {
-                config.SkillMenuX = -BackWidth - 300;
+                config.ActiveSkillMenuX = baseOffset.X;
                 config.OnChanged();
             }
-            if (config.SkillMenuY == 0f)
+            if (config.ActiveSkillMenuY == 0f)
             {
-                config.SkillMenuY = Main.screenHeight / 2f - 200;
+                config.ActiveSkillMenuY = baseOffset.Y - 72;
                 config.OnChanged();
             }
                 
-            Vector2 offset = new(config.SkillMenuX, config.SkillMenuY);
+            Vector2 offset = new(config.ActiveSkillMenuX, config.ActiveSkillMenuY);
 
             BackPanel = new UIPanel();
-            BackPanel.Left.Set(offset.X, 1f);
+            BackPanel.Left.Set(offset.X, 0f);
             BackPanel.Top.Set(offset.Y, 0);
             BackPanel.Width.Set(BackWidth, 0);
             BackPanel.Height.Set(BackHeight, 0);

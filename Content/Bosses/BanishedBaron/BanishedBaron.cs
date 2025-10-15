@@ -1,8 +1,10 @@
 ﻿
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
@@ -109,6 +111,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         public ref float AI2 => ref NPC.ai[2];
         public ref float AI3 => ref NPC.ai[3];
         public ref float AI4 => ref NPC.localAI[0];
+        private bool droppedSummon = false;
         #endregion
         #region Standard
         public override void SetStaticDefaults()
@@ -125,8 +128,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 BuffID.Confused,
                 BuffID.Chilled,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
             {
@@ -158,8 +160,8 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             NPC.DeathSound = new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Baron/BaronDeath");
             NPC.alpha = 255;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.DukeFishron;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.DukeFishron;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.value = Item.buyPrice(0, 2);
 
@@ -268,15 +270,11 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
         public override bool? CanFallThroughPlatforms() => true;
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.Bleeding, 60 * 10);
             if (!WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Rabies, 60 * 5);
                 return;
             }
-            target.AddBuff(BuffID.Rabies, 60 * 10);
-            target.FargoSouls().MaxLifeReduction += 30;
-            target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 60 * 12);
+            target.AddBuff(BuffID.Bleeding, 60 * 4);
         }
         public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
@@ -460,15 +458,18 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
         }
         public override void ModifyNPCLoot(NPCLoot npcLoot)
-        {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BanishedBaronBag>()));
-            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BaronTrophy>(), 10));
+        {   
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BaronRelic>()));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<BaronTrophy>(), 10));          
 
             LeadingConditionRule rule = new(new Conditions.NotExpert());
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BaronMask>(), 7));
+
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<RoseTintedVisor>(), ModContent.ItemType<NavalRustrifle>(), ModContent.ItemType<DecrepitAirstrikeRemote>()));
-            rule.OnSuccess(ItemDropRule.Common(5003, 1, 1, 5)); //seaside crate
             rule.OnSuccess(ItemDropRule.OneFromOptions(3, ItemID.Sextant, ItemID.WeatherRadio, ItemID.FishermansGuide));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishingBobber, 4, 1, 1));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishingPotion, 3, 2, 5));
@@ -476,8 +477,12 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             rule.OnSuccess(ItemDropRule.Common(ItemID.CratePotion, 5, 2, 5));
             rule.OnSuccess(ItemDropRule.Common(ItemID.GoldenBugNet, 50, 1, 1));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishHook, 50, 1, 1));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.GoldenFishingRod, 150, 1, 1));
+            rule.OnSuccess(ItemDropRule.Common(ItemID.GoldenFishingRod, 150, 1, 1));         
             npcLoot.Add(rule);
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BanishedBaronBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<BaronRelic>()));
         }
 
         #endregion
@@ -772,8 +777,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
                 {
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<GlowRing>(), 0, 0f, Main.myPlayer, NPC.whoAmI, -24);
                 }
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<MechLure>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<MechLure>(), WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron], ref droppedSummon, WorldSavingSystem.EternityMode);
             }
             if (Timer > 90)
             {
@@ -809,7 +813,7 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
 
                 HitPlayer = false;
                 LockVector1 = Vector2.UnitX * Math.Sign(player.Center.X - NPC.Center.X); //register for rotation animation
-                Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron2") : MusicID.Boss2;
+                /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron2") : MusicID.Boss2;*/
             }
             if (Timer == 45)
             {
@@ -922,6 +926,27 @@ namespace FargowiltasSouls.Content.Bosses.BanishedBaron
             }
             if (Collision.SolidCollision(NPC.position + NPC.velocity, NPC.width, NPC.height) || Timer > AnimTime)
             {
+                ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
+
+                int ExplosionDiameter = 500;
+                for (int i = 0; i < 200; i++)
+                {
+                    Vector2 pos = NPC.Center + new Vector2(0, Main.rand.NextFloat(ExplosionDiameter * 0.8f)).RotatedBy(Main.rand.NextFloat(MathHelper.TwoPi)); //circle with highest density in middle
+                    Vector2 vel = (pos - NPC.Center) / 500;
+                    Particle p = new ExpandingBloomParticle(pos, vel, Color.Lerp(Color.Yellow, Color.Red, pos.Distance(NPC.Center) / (ExplosionDiameter / 2f)), startScale: Vector2.One * 3, endScale: Vector2.One * 0, lifetime: 60);
+                    p.Velocity *= 2f;
+                    p.Spawn();
+                }
+
+                if (!Main.dedServ)
+                {
+                    float scaleFactor9 = 2;
+                    for (int j = 0; j < 20; j++)
+                    {
+                        Gore.NewGore(NPC.GetSource_FromThis(), NPC.Center, (Vector2.UnitX * 5).RotatedByRandom(MathHelper.TwoPi), Main.rand.Next(61, 64), scaleFactor9);
+                    }
+                }
+
                 SoundEngine.PlaySound(SoundID.Item62, NPC.Center);
                 NPC.StrikeInstantKill();
             }

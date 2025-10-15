@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +18,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Phantasmal Sphere");
             Main.projFrames[Projectile.type] = 2;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -35,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.alpha = 255;
             Projectile.hostile = true;
             Projectile.timeLeft = 360;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool CanHitPlayer(Player target)
@@ -82,13 +81,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
-            target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
+                target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
         }
 
         public override Color? GetAlpha(Color lightColor)

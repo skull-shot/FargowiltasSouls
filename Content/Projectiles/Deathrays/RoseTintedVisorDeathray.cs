@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 
 using Luminance.Core.Graphics;
@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
 	public class RoseTintedVisorDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public RoseTintedVisorDeathray() : base(30, drawDistance: 1000) { }
 
@@ -184,7 +184,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
             // Set shader parameters.
             shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.GenericStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.GenericStreak.Value);
             shader.TrySetParameter("stretchAmount", 3);
             shader.TrySetParameter("scrollSpeed", 1f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);

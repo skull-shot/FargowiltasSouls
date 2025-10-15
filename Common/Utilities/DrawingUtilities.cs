@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Reflection;
@@ -116,6 +117,6 @@ namespace FargowiltasSouls
                 Main.spriteBatch.ResetToDefault();
             }
         }
-        public static string EmptyTexture => "FargowiltasSouls/Content/Projectiles/Empty";
+        public static string EmptyTexture => FargoAssets.GetAssetString("Content/Projectiles", "Empty");
     }
 }

@@ -1,12 +1,15 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Forces
 {
@@ -16,6 +19,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             [AccessoryEffectLoader.GetEffect<SpiritTornadoEffect>()];
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<ForbiddenEnchant>(),
@@ -53,12 +57,31 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             recipe.AddTile<CrucibleCosmosSheet>();
             recipe.Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.MagicSummonHybrid;
+            tooltipColor = Color.Lerp(Color.Lerp(new(204, 45, 239), new(0, 80, 224), 0.5f), Color.LightGray, 0.3f);
+            scaling = null;
+            return SpiritTornadoEffect.BaseDamage(Main.LocalPlayer) * 2; //returns empowered storm damage
+        }
     }
     public class SpiritTornadoEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        public override int ToggleItemType => ModContent.ItemType<SpiritForce>();
+        public override int ToggleItemType => ModContent.ItemType<ForbiddenEnchant>();
         public override bool ActiveSkill => true;
+        public static int BaseDamage (Player player) => (int)(125f * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
+        public override void PostUpdateEquips(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.ForbiddenCD > 0 && !player.HasEffectEnchant<ForbiddenEffect>())
+            {
+                modPlayer.ForbiddenCD--;
+                if (Main.myPlayer == player.whoAmI)
+                    CooldownBarManager.Activate("ForbiddenTornadoCD", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ForbiddenEnchant").Value, new(231, 178, 28),
+                        () => (float)modPlayer.ForbiddenCD / (60 * 10), activeFunction: Main.LocalPlayer.HasEffect<SpiritTornadoEffect>, displayAtFull: false);
+            }
+        }
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (!stunned)
@@ -73,17 +96,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         }
         public static void CommandSpiritStorm(Player Player)
         {
+            if (Player.FargoSouls().ForbiddenCD > 0)
+                return;
             for (int i = 0; i < Main.maxProjectiles; i++)
             {
                 Projectile projectile = Main.projectile[i];
                 if (projectile.active && projectile.type == ModContent.ProjectileType<SpiritTornado>() && projectile.owner == Player.whoAmI)
                 {
+                    projectile.As<SpiritTornado>().Unleash();
                     return;
                 }
             }
-
-            int damage = (int)(125f * (1f + Player.GetDamage(DamageClass.Magic).Additive + Player.GetDamage(DamageClass.Summon).Additive - 2f));
-            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiritTornadoEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<SpiritTornado>(), damage, 0f, Main.myPlayer, 0f, 0f);
+            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiritTornadoEffect>(), Player.Center, Vector2.Zero, ModContent.ProjectileType<SpiritTornado>(), BaseDamage(Player), 0f, Main.myPlayer, 0f, 0f);
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {

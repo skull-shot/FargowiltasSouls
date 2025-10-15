@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -14,20 +14,15 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
 	public class MutantDeathraySmall : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayML";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayML");
         public MutantDeathraySmall() : base(30) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool? CanDamage()
         {
             return false;
+        }
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
         }
 
         public override void AI()
@@ -153,7 +148,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             // Set shader parameters. This one takes a fademap and a color.
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // The laser should fade to this in the middle.
             shader.TrySetParameter("mainColor", FargoSoulsUtil.AprilFools ? new Color(255, 255, 183, 100) : new Color(183, 252, 253, 100));
             shader.TrySetParameter("stretchAmount", 3);

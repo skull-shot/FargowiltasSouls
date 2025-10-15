@@ -13,6 +13,8 @@ using Fargowiltas.Content.Projectiles;
 using FargowiltasSouls.Content.NPCs;
 using Terraria.GameContent.Creative;
 using static Terraria.GameContent.Creative.CreativePowers;
+using Fargowiltas.Content.UI;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.UI.Elements
 {
@@ -125,7 +127,7 @@ namespace FargowiltasSouls.Content.UI.Elements
 
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
-            var texture = FargoUIManager.OncomingMutantntTexture.Value;
+            var texture = FargoAssets.UI.OncomingMutantnt.Value;
             Vector2 center = position + new Vector2(Width.Pixels / 2, Height.Pixels / 2) - scale * texture.Size() / 2;
             spriteBatch.Draw(texture, center, texture.Bounds, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
         }
@@ -190,7 +192,7 @@ namespace FargowiltasSouls.Content.UI.Elements
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
-            var texture = FargoUIManager.OncomingMutantTexture.Value;
+            var texture = FargoAssets.UI.OncomingMutantTexture.Value;
             Vector2 center = position + new Vector2(Width.Pixels / 2, Height.Pixels / 2) - scale * texture.Size() / 2;
             spriteBatch.Draw(texture, center, texture.Bounds, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
         }
@@ -258,10 +260,10 @@ namespace FargowiltasSouls.Content.UI.Elements
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
-            var texture = FargoUIManager.OncomingMutantTexture.Value;
+            var texture = FargoAssets.UI.OncomingMutantTexture.Value;
             Vector2 center = position + new Vector2(Width.Pixels / 2, Height.Pixels / 2) - scale * texture.Size() / 2;
             spriteBatch.Draw(texture, center, texture.Bounds, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
-            texture = FargoUIManager.OncomingMutantAuraTexture.Value;
+            texture = FargoAssets.UI.OncomingMutantAura.Value;
             center = position + new Vector2(Width.Pixels / 2, Height.Pixels / 2) - scale * texture.Size() / 2;
             spriteBatch.Draw(texture, center, texture.Bounds, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
         }

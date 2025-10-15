@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.BossBags;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class NavalRustrifle : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public static readonly SoundStyle PowerShotSound = new("FargowiltasSouls/Assets/Sounds/Weapons/Rustrifle_Powershot");
         public override void SetStaticDefaults()
         {
@@ -28,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 15;
             Item.value = Item.sellPrice(0, 5);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item40;
             Item.autoReuse = true;
             Item.shoot = ProjectileID.PurificationPowder; //guns just have this, don't ask

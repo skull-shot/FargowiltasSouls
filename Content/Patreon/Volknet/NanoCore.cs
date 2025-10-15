@@ -1,5 +1,8 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Patreon.Volknet.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -204,5 +207,40 @@ namespace FargowiltasSouls.Content.Patreon.Volknet
             //    modifiers.FinalDamage /= 2;
         }
     }
-}
 
+    public class NanoCoreArrowGlobalProjectile : GlobalProjectile
+    {
+        public override bool InstancePerEntity => true;
+
+        bool noGravArrow;
+
+        public override void OnSpawn(Projectile projectile, IEntitySource source)
+        {
+            if (projectile.aiStyle == ProjAIStyleID.Arrow && (projectile.arrow || projectile.type == ProjectileID.MoonlordArrowTrail))
+            {
+                if (source is EntitySource_ItemUse itemUse && itemUse.Item.ModItem is NanoCore)
+                {
+                    noGravArrow = true;
+                    projectile.extraUpdates += 1;
+                }
+                else if (source is EntitySource_Parent parent && parent.Entity is Projectile)
+                {
+                    Projectile sourceProj = parent.Entity as Projectile;
+                    if (sourceProj != null && sourceProj.GetGlobalProjectile<NanoCoreArrowGlobalProjectile>().noGravArrow)
+                    {
+                        noGravArrow = true;
+                        projectile.extraUpdates += 1;
+                    }
+                }
+            }
+        }
+
+        public override bool PreAI(Projectile projectile)
+        {
+            if (noGravArrow)
+                projectile.velocity.Y -= 0.1f;
+
+            return base.PreAI(projectile);
+        }
+    }
+}

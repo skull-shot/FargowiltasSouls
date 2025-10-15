@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -128,34 +128,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoo
 
             target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
             target.AddBuff(ModContent.BuffType<UnluckyBuff>(), 60 * 30);
-
-            //if (target.whoAmI == Main.myPlayer && target.HasBuff(ModContent.BuffType<LoosePockets>()))
-            //{
-            //    //try stealing mouse item, then selected item
-            //    bool stolen = EModeGlobalNPC.StealFromInventory(target, ref Main.mouseItem);
-            //    if (!stolen)
-            //        stolen = EModeGlobalNPC.StealFromInventory(target, ref target.inventory[target.selectedItem]);
-
-            //    for (int i = 0; i < 15; i++)
-            //    {
-            //        int toss = Main.rand.Next(3, 8 + target.extraAccessorySlots); //pick random accessory slot
-            //        if (Main.rand.NextBool(3) && target.armor[toss + 10].stack > 0) //chance to pick vanity slot if accessory is there
-            //            toss += 10;
-            //        if (EModeGlobalNPC.StealFromInventory(target, ref target.armor[toss]))
-            //        {
-            //            stolen = true;
-            //            break;
-            //        }
-            //    }
-
-            //    if (stolen)
-            //    {
-            //        string text = Language.GetTextValue($"Mods.{mod.Name}.Message.ItemStolen");
-            //        Main.NewText(text, new Color(255, 50, 50));
-            //        CombatText.NewText(target.Hitbox, new Color(255, 50, 50), text, true);
-            //    }
-            //}
-            //target.AddBuff(ModContent.BuffType<LoosePockets>(), 240);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,7 +12,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class DeerclopsDeathray : BaseDeathray
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathray");
         public DeerclopsDeathray() : base(300) { }
 
         public override void SetStaticDefaults()
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             base.SetDefaults();
 
             Projectile.MaxUpdates = 5;
-            if (WorldSavingSystem.MasochistModeReal)
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
                 Projectile.MaxUpdates *= 2;
         }
 
@@ -109,7 +110,6 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             target.AddBuff(BuffID.Frostburn, 90);
             if (WorldSavingSystem.MasochistModeReal)
                 target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 1200);
         }
     }
 }

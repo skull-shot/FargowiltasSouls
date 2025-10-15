@@ -1,5 +1,4 @@
-﻿
-
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.BanishedBaron;
 using System.Collections.Generic;
 using Terraria;
@@ -12,15 +11,12 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class MechLure : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
-            //DisplayName.SetDefault("Baron Summon");
-            //Tooltip.SetDefault("While underwater at the Ocean, summon the Banished Baron");
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 5;
         }
-
-        //public override bool IsLoadingEnabled(Mod mod) => false; //prevent appearing
 
         public override void SetDefaults()
         {
@@ -31,7 +27,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.useStyle = ItemUseStyleID.Rapier;
             Item.rare = ItemRarityID.Orange;
             Item.consumable = true;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.noUseGraphic = true;
             Item.shoot = ProjectileType<MechLureProjectile>();
             Item.shootSpeed = 10f;

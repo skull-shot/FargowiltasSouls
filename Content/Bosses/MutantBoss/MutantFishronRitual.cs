@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using System;
@@ -10,15 +11,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
     public class MutantFishronRitual : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/DukeFishron/FishronRitual";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/DukeFishron", "FishronRitual");
 
         private const int safeRange = 150;
-
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Fish Nuke");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 320;
@@ -115,14 +110,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 900);
         }
 
         public override Color? GetAlpha(Color lightColor)

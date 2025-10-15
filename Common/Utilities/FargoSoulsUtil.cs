@@ -1,25 +1,29 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using Terraria;
 using Terraria.Audio;
 using Terraria.Chat;
 using Terraria.DataStructures;
+using Terraria.GameContent.Achievements;
 using Terraria.GameContent.Creative;
 using Terraria.GameContent.ItemDropRules;
+using Terraria.Graphics.Capture;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using Terraria.Graphics.Capture;
-using Terraria.GameContent.Achievements;
-using FargowiltasSouls.Content.Items.Misc;
 
 namespace FargowiltasSouls //lets everything access it without using
 {
@@ -33,6 +37,7 @@ namespace FargowiltasSouls //lets everything access it without using
         public static bool WorldIsMaster() => Main.masterMode || (Main.GameModeInfo.IsJourneyMode && CreativePowerManager.Instance.GetPower<CreativePowers.DifficultySliderPower>().StrengthMultiplierToGiveNPCs >= 3);
 
         public static bool HostCheck => Main.netMode != NetmodeID.MultiplayerClient;
+
 
         public static bool ActuallyClickingInGameplay(Player player) => !player.mouseInterface && !CaptureManager.Instance.Active;
 
@@ -212,6 +217,11 @@ namespace FargowiltasSouls //lets everything access it without using
             return false;
         }
 
+        public static bool AnyBossAlive()
+        {
+            return Main.npc.Any(npc => npc.active && (npc.boss || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.DD2Betsy));
+        }
+
         public static bool BossIsAlive(ref int bossID, int bossType)
         {
             if (bossID != -1)
@@ -315,7 +325,7 @@ namespace FargowiltasSouls //lets everything access it without using
 
         public static void PrintAI(Projectile projectile)
         {
-            Main.NewText($"{projectile.whoAmI} ai: {projectile.ai[0]} {projectile.ai[1]} {projectile.ai[2]}, local: {projectile.localAI[0]} {projectile.localAI[1]}");
+            Main.NewText($"{projectile.whoAmI} ai: {projectile.ai[0]} {projectile.ai[1]} {projectile.ai[2]}, local: {projectile.localAI[0]} {projectile.localAI[1]} {projectile.localAI[2]}");
         }
 
         public static void GrossVanillaDodgeDust(Entity entity)
@@ -460,6 +470,133 @@ namespace FargowiltasSouls //lets everything access it without using
             return ClosestPointInHitbox(entity.Hitbox, desiredLocation);
         }
 
+        /// <summary>
+        /// Returns the closest distance between two rectangles.<br></br>
+        /// Returns 0f if they are intersecting.<br></br>
+        /// :HmsXEgqUogkQOnL5LP_FdPit9Z909R:
+        /// </summary>
+        /// <param name="Hitbox1"></param>
+        /// <param name="Hitbox2"></param>
+        /// <returns></returns>
+        public static float Distance(Rectangle Hitbox1, Rectangle Hitbox2, bool SquareRoot)
+        {
+            if (Hitbox1.Intersects(Hitbox2))
+                return 0f;
+            var TL1 = Hitbox1.TopLeft();
+            var TR1 = Hitbox1.TopRight();
+            var BL1 = Hitbox1.BottomLeft();
+            var BR1 = Hitbox1.BottomRight();
+
+            var TL2 = Hitbox2.TopLeft();
+            var TR2 = Hitbox2.TopRight();
+            var BL2 = Hitbox2.BottomLeft();
+            var BR2 = Hitbox2.BottomRight();
+
+            List<float> List1 =
+            [
+                TL1.DistanceSQ(TL2),
+                TL1.DistanceSQ(TR2),
+                TL1.DistanceSQ(BL2),
+                TL1.DistanceSQ(BR2)
+            ];
+            List<float> List2 =
+            [
+                TR1.DistanceSQ(TL2),
+                TR1.DistanceSQ(TR2),
+                TR1.DistanceSQ(BL2),
+                TR1.DistanceSQ(BR2)
+            ];
+            List<float> List3 =
+            [
+                BL1.DistanceSQ(TL2),
+                BL1.DistanceSQ(TR2),
+                BL1.DistanceSQ(BL2),
+                BL1.DistanceSQ(BR2)
+            ];
+            List<float> List4 =
+            [
+                BR1.DistanceSQ(TL2),
+                BR1.DistanceSQ(TR2),
+                BR1.DistanceSQ(BL2),
+                BR1.DistanceSQ(BR2)
+            ];
+            var min1 = List1.Min();
+            var min2 = List2.Min();
+            var min3 = List3.Min();
+            var min4 = List4.Min();
+            List<float> List9 = [min1, min2, min3, min4];
+            var result1 = List9.Min();
+
+            if (result1 == min1)
+                result1 = Hitbox2.ClosestPointInRect(TL1).DistanceSQ(TL1);
+            else if (result1 == min2)
+                result1 = Hitbox2.ClosestPointInRect(TR1).DistanceSQ(TR1);
+            else if (result1 == min3)
+                result1 = Hitbox2.ClosestPointInRect(BL1).DistanceSQ(BL1);
+            else if (result1 == min4)
+                result1 = Hitbox2.ClosestPointInRect(TR1).DistanceSQ(TR1);
+
+            List<float> List5 =
+            [
+                TL2.DistanceSQ(TL1),
+                TL2.DistanceSQ(TR1),
+                TL2.DistanceSQ(BL1),
+                TL2.DistanceSQ(BR1)
+            ];
+            List<float> List6 =
+            [
+                TR2.DistanceSQ(TL1),
+                TR2.DistanceSQ(TR1),
+                TR2.DistanceSQ(BL1),
+                TR2.DistanceSQ(BR1)
+            ];
+            List<float> List7 =
+            [
+                BL2.DistanceSQ(TL1),
+                BL2.DistanceSQ(TR1),
+                BL2.DistanceSQ(BL1),
+                BL2.DistanceSQ(BR1)
+            ];
+            List<float> List8 =
+            [
+                BR2.DistanceSQ(TL1),
+                BR2.DistanceSQ(TR1),
+                BR2.DistanceSQ(BL1),
+                BR2.DistanceSQ(BR1)
+            ];
+            var min5 = List5.Min();
+            var min6 = List6.Min();
+            var min7 = List7.Min();
+            var min8 = List8.Min();
+            List<float> List10 = [min5, min6, min7, min8];
+            var result2 = List10.Min();
+
+            if (result2 == min5)
+                result2 = Hitbox1.ClosestPointInRect(TL2).DistanceSQ(TL2);
+            else if (result2 == min6)
+                result2 = Hitbox1.ClosestPointInRect(TR2).DistanceSQ(TR2);
+            else if (result2 == min7)
+                result2 = Hitbox1.ClosestPointInRect(BL2).DistanceSQ(BL2);
+            else if (result2 == min8)
+                result2 = Hitbox1.ClosestPointInRect(TR2).DistanceSQ(TR2);
+
+            var result = Math.Min(result1, result2);
+            if (SquareRoot)
+                result = (float)Math.Sqrt(result);
+            return result;
+        }
+
+        /// <summary>
+        /// Returns the closest distance between two entity hitboxes.
+        /// Returns 0f if they are intersecting.<br></br>
+        /// </summary>
+        /// <param name="Entity1"></param>
+        /// <param name="Entity2"></param>
+        /// <returns></returns>
+        public static float Distance(Entity Entity1, Entity Entity2, bool SquareRoot)
+        {
+            return Distance(Entity1.Hitbox, Entity2.Hitbox, SquareRoot);
+        }
         public static float RotationDifference(Vector2 from, Vector2 to) => (float)Math.Atan2(to.Y * from.X - to.X * from.Y, from.X * to.X + from.Y * to.Y);
         public static Vector2 PredictiveAim(Vector2 startingPosition, Vector2 targetPosition, Vector2 targetVelocity, float shootSpeed, int iterations = 4)
         {
@@ -510,11 +647,11 @@ namespace FargowiltasSouls //lets everything access it without using
             int n = NPC.NewNPC(source, (int)spawnPos.X, (int)spawnPos.Y, type, start, ai0, ai1, ai2, ai3, target);
             if (n != Main.maxNPCs)
             {
+                Main.npc[n].FargoSouls().CanHordeSplit = false;
                 if (velocity != default)
                 {
                     Main.npc[n].velocity = velocity;
                 }
-
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, n);
             }
@@ -660,9 +797,32 @@ namespace FargowiltasSouls //lets everything access it without using
             }
         }
 
+        /// <summary>
+        /// Useful for defining the SourceItemType of a player projectile using its source.
+        /// Additionally defines the parent source projectile when applicable.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="source"></param>
+        /// <param name="sourceProjOut"></param>
+        public static void GetOrigin(Projectile projectile, IEntitySource source, out Projectile? sourceProjOut)
+        {
+            sourceProjOut = null;
+            if (source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
+            {
+                sourceProjOut = sourceProj;
+                if (sourceProj.FargoSouls().SourceItemType != 0)
+                    projectile.FargoSouls().SourceItemType = sourceProj.FargoSouls().SourceItemType;
+            }
+
+            if (source is EntitySource_ItemUse itemUse && itemUse.Item != null)
+            {
+                projectile.FargoSouls().SourceItemType = itemUse.Item.type;
+            }
+        }
+
         public static bool IsProjSourceItemUseReal(Projectile proj, IEntitySource source)
         {
-            return source is EntitySource_ItemUse parent && parent.Item.type == Main.player[proj.owner].HeldItem.type;
+            return source is EntitySource_ItemUse_WithAmmo parent && parent.Item != null && (parent.Item.type == Main.player[proj.owner].HeldItem.type || parent.Item.type == FargoSoulsPlayer.ApprenticeSupportItem?.type);
         }
 
         public static bool AprilFools => DateTime.Today.Month == 4 && DateTime.Today.Day <= 1;
@@ -813,6 +973,15 @@ namespace FargowiltasSouls //lets everything access it without using
             return true;
         }
 
+        public static bool LockJungleMimicDrops(NPCLoot npcLoot, IItemDropRule rule)
+        {
+            LockOutsideofCelebSeed lockCondition = new();
+            IItemDropRule conditionalRule = new LeadingConditionRule(lockCondition);
+            conditionalRule.OnSuccess(rule);
+            npcLoot.Add(conditionalRule);
+            return true;
+        }
+
         public static void AddEarlyBirdDrop(NPCLoot npcLoot, IItemDropRule rule)
         {
             EModeEarlyBirdRewardDropCondition dropCondition = new();
@@ -826,6 +995,11 @@ namespace FargowiltasSouls //lets everything access it without using
             EModeDropCondition dropCondition = new();
             IItemDropRule conditionalRule = new LeadingConditionRule(dropCondition);
             conditionalRule.OnSuccess(rule);
+            npcLoot.Add(conditionalRule);
+        }
+        public static void DropBasedOnEmode(NPCLoot npcLoot, IItemDropRule ruleForEMode, IItemDropRule ruleForDefault)
+        {
+            var conditionalRule = new DropBasedOnEMode(ruleForEMode, ruleForDefault);
             npcLoot.Add(conditionalRule);
         }
 

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.scale = 0.5f;
             Projectile.alpha = 0;
             Projectile.penetrate = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             return target.hurtCooldowns[1] == 0;
         }
-
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             if (Projectile.localAI[0] == 0)
@@ -67,13 +67,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
         }
 
         public override void OnKill(int timeleft)
@@ -101,7 +97,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Vector2 gloworigin2 = glowrectangle.Size() / 2f;
             Color glowcolor = Color.Lerp(FargoSoulsUtil.AprilFools ? Color.Red : new Color(255, 255, 255, 0), Color.Transparent, 0.85f);
 
-            if (WorldSavingSystem.MasochistModeReal && !Main.getGoodWorld)
+            if (WorldSavingSystem.MasochistModeReal && (Variant != 0 || !Main.getGoodWorld))
             {
                 Asset<Texture2D> line = TextureAssets.Extra[178];
                 float opacity = 1f;

@@ -1,7 +1,10 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             base.SetDefaults();
 
             Item.rare = ItemRarityID.Blue;
-            Item.value = 100000;
+            Item.value = 30000;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -42,11 +45,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CopperChainmail)
                 .AddIngredient(ItemID.CopperGreaves)
                 .AddIngredient(ItemID.CopperShortsword)
-                .AddIngredient(ItemID.WandofSparking)
                 .AddIngredient(ItemID.ThunderStaff)
+                .AddIngredient(ItemID.WandofSparking)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            scaling = null;
+            return CopperEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class CopperEffect : AccessoryEffect
@@ -60,7 +70,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.CopperProcCD > 0)
                 modPlayer.CopperProcCD--;
-            CooldownBarManager.Activate("CopperEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/CopperEnchant").Value, new(213, 102, 23),
+            CooldownBarManager.Activate("CopperEnchantCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "CopperEnchant").Value, new(213, 102, 23),
                 () => Main.LocalPlayer.FargoSouls().CopperProcCD / (60f * 4), true, activeFunction: player.HasEffect<CopperEffect>);
         }
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
@@ -74,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.CopperProcCD -= 2;
             }
         }
-
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<CopperEffect>() ? 150 : 40) * player.ActualClassDamage(DamageClass.Ranged));
         public static void CopperProc(Player player, NPC target)
         {
             if (!player.HasEffectEnchant<CopperEffect>())
@@ -85,17 +95,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool forceEffect = modPlayer.ForceEffect<CopperEnchant>();
                 target.AddBuff(BuffID.Electrified, 180);
 
-                int dmg = 40;
                 int arcs = 5;
                 int cdLength = 60 * 5;
 
                 if (forceEffect)
                 {
-                    dmg = 150;
                     arcs = 8;
                 }
 
-                int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
+                int damage = BaseDamage(player);
 
                 Projectile.NewProjectile(player.GetSource_EffectItem<CopperEffect>(), player.Center, player.DirectionTo(target.Center) * 20, ModContent.ProjectileType<CopperLightning>(), 
                     damage, 0f, modPlayer.Player.whoAmI, player.DirectionTo(target.Center).ToRotation(), damage, ai2: arcs);

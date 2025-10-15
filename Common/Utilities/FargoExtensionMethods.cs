@@ -1,13 +1,18 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -128,6 +133,8 @@ namespace FargowiltasSouls //lets everything access it without using
             => npc.GetGlobalNPC<FargoSoulsGlobalNPC>();
         public static EModeGlobalNPC Eternity(this NPC npc)
             => npc.GetGlobalNPC<EModeGlobalNPC>();
+        public static EModeDD2GlobalNPC EModeDD2(this NPC npc)
+            => npc.GetGlobalNPC<EModeDD2GlobalNPC>();
         public static FargoSoulsGlobalProjectile FargoSouls(this Projectile projectile)
             => projectile.GetGlobalProjectile<FargoSoulsGlobalProjectile>();
         public static EModeGlobalProjectile Eternity(this Projectile projectile)
@@ -153,6 +160,100 @@ namespace FargowiltasSouls //lets everything access it without using
         public static bool TypeAlive<T>(this Projectile projectile) where T : ModProjectile => projectile.Alive() && projectile.type == ModContent.ProjectileType<T>();
         public static bool TypeAlive(this NPC npc, int type) => npc.Alive() && npc.type == type;
         public static bool TypeAlive<T>(this NPC npc) where T : ModNPC => npc.Alive() && npc.type == ModContent.NPCType<T>();
+
+        public static Texture2D GetTexture(this NPC npc) => TextureAssets.Npc[npc.type].Value;
+        public static Texture2D GetTexture(this Projectile projectile) => TextureAssets.Projectile[projectile.type].Value;
+        public static Vector2 GetDrawPosition(this NPC npc) => npc.Center - Main.screenPosition + Vector2.UnitY * npc.gfxOffY;
+        public static Vector2 GetDrawPosition(this Projectile projectile) => projectile.Center - Main.screenPosition + Vector2.UnitY * projectile.gfxOffY;
+        public static Rectangle GetDefaultFrame(this Projectile projectile)
+        {
+            Texture2D texture = projectile.GetTexture();
+            int sizeY = texture.Height / Main.projFrames[projectile.type]; //ypos of lower right corner of sprite to draw
+            int frameY = projectile.frame * sizeY;
+            return new(0, frameY, texture.Width, sizeY);
+        }
+
+        /// <summary>
+        /// Spawns a projectie from this source NPC. <br></br>
+        /// This assumes that the projectile is spawned in AI code, and should be spawned on the server. <br></br>
+        /// Use this for spawning enemy/boss projectiles.
+        /// </summary>
+        public static int SpawnProjectile(this NPC npc, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = -1, float ai0 = 0, float ai1 = 0, float ai2 = 0, float localAI0 = 0, float localAI1 = 0, float localAI2 = 0, SoundStyle? spawnSoundEffect = null)
+        {
+            if (spawnSoundEffect.HasValue)
+                SoundEngine.PlaySound(spawnSoundEffect, position);
+            if (FargoSoulsUtil.HostCheck)
+            {
+                int p = Projectile.NewProjectile(npc.GetSource_FromAI(), position, velocity, Type, Damage, KnockBack, Owner, ai0, ai1, ai2);
+                if (p.IsWithinBounds(Main.maxProjectiles))
+                {
+                    if (localAI0 != 0)
+                        Main.projectile[p].localAI[0] = localAI0;
+                    if (localAI1 != 0)
+                        Main.projectile[p].localAI[0] = localAI1;
+                    if (localAI2 != 0)
+                        Main.projectile[p].localAI[0] = localAI2;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.SyncProjectile, number: p);
+                }
+                return p;
+            }
+            return -1;
+        }
+        /// <summary>
+        /// Spawns a projectie from this source projectile. <br></br>
+        /// This assumes that the projectile is spawned in AI code, and should be spawned on the server. <br></br>
+        /// Use this for enemy/boss projectiles spawning other projectiles.
+        /// </summary>
+        public static int SpawnProjectile(this Projectile projectile, Vector2 position, Vector2 velocity, int Type, int Damage, float KnockBack, int Owner = -1, float ai0 = 0, float ai1 = 0, float ai2 = 0, float localAI0 = 0, float localAI1 = 0, float localAI2 = 0, SoundStyle? spawnSoundEffect = null)
+        {
+            if (spawnSoundEffect.HasValue)
+                SoundEngine.PlaySound(spawnSoundEffect, position);
+            if (FargoSoulsUtil.HostCheck)
+            {
+                int p = Projectile.NewProjectile(projectile.GetSource_FromAI(), position, velocity, Type, Damage, KnockBack, Owner, ai0, ai1, ai2);
+                if (p.IsWithinBounds(Main.maxProjectiles))
+                {
+                    if (localAI0 != 0)
+                        Main.projectile[p].localAI[0] = localAI0;
+                    if (localAI1 != 0)
+                        Main.projectile[p].localAI[0] = localAI1;
+                    if (localAI2 != 0)
+                        Main.projectile[p].localAI[0] = localAI2;
+                    if (Main.netMode == NetmodeID.Server)
+                        NetMessage.SendData(MessageID.SyncProjectile, number: p);
+                }
+                return p;
+            }
+            return -1;
+        }
+        public static Item FindAmmo(this Player player, List <int> ammoID)
+        {
+            Item ammo = new();
+            bool gotammo = false;
+            if (ammoID.Contains(AmmoID.None))
+                return ammo;
+            for (int i = 54; i < 58; i++)
+            {
+                if (ammoID.Contains(player.inventory[i].ammo) && player.inventory[i].stack > 0)
+                {
+                    ammo = player.inventory[i];
+                    return ammo;
+                }
+            }
+            if (!gotammo)
+            {
+                for (int j = 0; j < 54; j++)
+                {
+                    if (ammoID.Contains(player.inventory[j].ammo) && player.inventory[j].stack > 0)
+                    {
+                        ammo = player.inventory[j];
+                        return ammo;
+                    }
+                }
+            }
+            return ammo;
+        }
         public static NPC GetSourceNPC(this Projectile projectile)
             => projectile.GetGlobalProjectile<A_SourceNPCGlobalProjectile>().sourceNPC;
 
@@ -194,6 +295,21 @@ namespace FargowiltasSouls //lets everything access it without using
             => (damageClass == DamageClass.Summon || damageClass == DamageClass.SummonMeleeSpeed) && !(player.FargoSouls().MinionCrits)
             ? 0
             : player.GetTotalCritChance(damageClass);
+
+        private static readonly FieldInfo? _critOverrideField =
+            typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags);
+        /// <summary>
+        /// Allows tweaking _critOverride directly to get around its restrictions.
+        /// True forces a crit, false forces non-crit, null disables forced crit/non-crit behaviour.
+        /// Null by default.
+        /// </summary>
+        /// <param name="modifiers"></param>
+        public static void SetCritOverride(ref this NPC.HitModifiers modifiers, bool? _critOverride = null)
+        {
+            object? unboxedModifiers = modifiers;
+            _critOverrideField?.SetValue(unboxedModifiers, _critOverride);
+            modifiers = (NPC.HitModifiers)unboxedModifiers;
+        }
 
         public static bool FeralGloveReuse(this Player player, Item item)
             => player.autoReuseGlove && (item.CountsAsClass(DamageClass.Melee) || item.CountsAsClass(DamageClass.SummonMeleeSpeed));
@@ -267,5 +383,60 @@ namespace FargowiltasSouls //lets everything access it without using
         public static Rectangle ToWorldCoords(this Rectangle rectangle) => new(rectangle.X * 16, rectangle.Y * 16, rectangle.Width * 16, rectangle.Height * 16);
 
         public static Rectangle ToTileCoords(this Rectangle rectangle) => new(rectangle.X / 16, rectangle.Y / 16, rectangle.Width / 16, rectangle.Height / 16);
+
+        /// <summary>
+        /// Checks ProjectileID.Sets.CultistIsResistantTo[projectile.type] for homing.
+        /// Additionally, allows manual checking specific projectile behaviours dynamically for homing.
+        /// </summary>
+        /// <param name="projectile"></param>
+        /// <param name="player"></param>
+        /// <param name="Dynamic"></param>
+        /// <returns></returns>
+        public static bool IsHoming(this Projectile projectile, Player? player = null, IEntitySource? source = null, bool Dynamic = true)
+        {
+            switch (projectile.type)
+            {
+                case ProjectileID.Celeb2Rocket:
+                case ProjectileID.Celeb2RocketExplosive:
+                case ProjectileID.Celeb2RocketLarge:
+                case ProjectileID.Celeb2RocketExplosiveLarge:
+                    if (Dynamic && projectile.FargoSouls().SourceItemType == ItemID.Celeb2 && projectile.ai[0] == 3f)
+                        return true;
+                    break;
+
+                case ProjectileID.FinalFractal: // Zenith // could probably use source null check here and use source first to speed things up but oh well I'll do it later
+                    if (Dynamic && player is not null && projectile.FargoSouls().SourceItemType == ItemID.Zenith)
+                    {
+                        Item heldItem = player.HeldItem;
+                        bool noApprentice = false;
+                        if (FargoSoulsPlayer.ApprenticeSupportItem is null)
+                            noApprentice = true;
+
+                        if (noApprentice && heldItem is not null && player.GetSource_ItemUse_WithPotentialAmmo(heldItem, 0) is EntitySource_ItemUse_WithAmmo)
+                        {
+                            if (player.itemAnimation <= (int)((float)heldItem.useAnimation * 2f / 3f))
+                            {
+                                return true;
+                            }
+                        }
+#pragma warning disable CS8604
+                        else if (!noApprentice && heldItem is not null && player.GetSource_ItemUse_WithPotentialAmmo(FargoSoulsPlayer.ApprenticeSupportItem, 0) is EntitySource_ItemUse_WithAmmo)
+#pragma warning restore CS8604
+                        {
+                            if (player.itemAnimation <= (int)((float)FargoSoulsPlayer.ApprenticeSupportItem.useAnimation * 2f / 3f))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    break;
+
+                default:
+                    if (ProjectileID.Sets.CultistIsResistantTo[projectile.type])
+                        return true;
+                    break;
+            }
+            return false;
+        }
     }
 }

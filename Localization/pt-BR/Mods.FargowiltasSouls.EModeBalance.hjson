@@ -8,21 +8,19 @@ Speed: Velocidade reduzida em {0}%
 // Scale: Reduced size by {0}%
 // ScalePositive: Increased size by {0}%
 RodofDiscord: Durante batalhas contra chefes, cada uso leva vida
-// ChaosState: Reduced damage, defense and damage reduction by 40%
+// ChaosState: Eternity Mode: Reduced damage, defense and damage reduction by 40%
 // RodofHarmony: Can only be obtained after defeating the Mutant
 Split: Frequência de divisão reduzida
-ChlorophyteBullet: Velocidade e duração reduzidos
 WaterBolt: Não pode ser usado até que Esqueletron seja derrotado
 // SpaceGun: Cannot be used until an evil boss is defeated
 // DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-HolyDodge: A ativação da Esquiva Divina reduzirá temporariamente a sua velocidade do ataque
-FrozenTurtleShell: A barreira congelada reduz levemente o seu dano causado
-BrainOfConfusion: Reduz o seu dano ao efetuar uma esquiva
+// HolyDodge: Dodge cooldown increased to 45 seconds
 ZenithNone: Nenhum enfraquecimento em vigor
 ZenithHitRate: "Taxa de acerto consideravelmente reduzida, melhora ao derrotar: "
 VampireKnives: Reduz a taxa de roubo de vida quando acima de 33% de vida
 Zapinator: Não pode acumular multiplicadores de dano
 // CoinGun: Damage of Platinum and Gold Coins heavily reduced, damage of Silver Coins slightly reduced, and damage of Copper Coins increased
+// OOAWaves: Reworked event wave progression
 OOASet: O bônus de conjunto aumenta o dano de invocação mínimo quando você ataca usando outras classes
 MiningHelmet: Aumenta a taxa de criação do Minerador Zumbi
 MoonsDrops: Os chefes e minichefes não deixam cair itens até ondas tardias
@@ -35,7 +33,7 @@ WhipStack: Efeitos e efeitos negativos de chicote não podem acumular
 // ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 MinionStack: O dano dos lacaios diminui ao invocar mais de 3 cópias (o limite do efeito é 12)
 SummonMulticlass: O dano por lacaios diminui quando você ataca usando outras classes (exceto no EdA)
-ShadowDodge: Modo Eternidade: Esquivar reduzirá sua velocidade de ataque
+// ShadowDodge: Eternity Mode: Dodge cooldown increased to 45 seconds
 IceBarrier: Modo Eternidade: 10% de redução nos danos
 // SwordRework: Reworked broadsword swing animation
 // SpearRework: Reworked spear swing animation
@@ -47,16 +45,33 @@ IceBarrier: Modo Eternidade: 10% de redução nos danos
 // WarmthPotionNerf: Halved damage reduction effect and now applies post-mitigation
 // CrossNecklaceNerf: Longer invincibility doesn't trigger on rapid successive hits
 // IceBladeFrostburn: Projectile inflicts Frostburn on-hit
-// JungleRose: Increases Plantera's Fruit drop rate from Snatcher-type enemies
+// JungleRose: The favorite food of all Snatcher-type enemies
 // WeatherPain: Increased hit frequency and pierce
-// HoundiusShootius: Increased fireball velocity
 // SniperRifle: Deals up to double damage to enemies the further away they are
 // ChlorophyteSaber: Faster projectiles that slow down on hit
 // JackOLanternLauncher: Increased projectile speed by 50%
 // GolemFist: Deals up to triple damage to enemies the further out the fist is extended
 // Gladius: Hit rate increased to match swing speed
 // FlowerPow: Tripled petal firerate
-// PiranhaGun: Projectile damage updates dynamically
-// ProximityMineLauncher: Projectile damage updates dynamically
+// DynamicUpdating: Projectile damage updates dynamically
 // PygmyStaff: Spears can now pierce once
 // MedusaHead: Deals up to 2.25x damage the fewer enemies are hit
+// AerialBane: Damage against airborne enemies decreased to 1.15x
+// ChlorophyteBullet: Homing range reduced to 0.5x
+// SporeSac: Improved projectile immunity frames
+// AvengerEmblem: Damage bonus increased by 3%
+// AmethystStaff: Bolt is faster and bounces towards enemies
+// TopazStaff: Critical strikes cause an explosion, increased base critical strike chance
+// SapphireStaff: Rapidly fires bolts in a spread
+// EmeraldStaff: Fires a large bolt with strong knockback and pierce
+// AmberStaff: Bolt boomerangs back
+// RubyStaff: Bolt splits in half after a duration
+// MeleeDamageBugFix: Fixed projectiles not dealing melee damage
+// VortexSet: Stealth lasts up to 10 seconds before going on cooldown
+// PossessedHatchet: Projectiles bounce off and between enemies
+// BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
+// ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
+// BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
+// AntiSpam: Held projectiles have increased hitrate
+// Tipsy: Tipsy buff additionally reduces defense by 2
+// Trimarang: Doubled projectile speed

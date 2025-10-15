@@ -1,5 +1,9 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -30,6 +34,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<SpiderEffect>(Item);
+            player.GetCritChance(DamageClass.Generic) += 8;
+            if (player.FargoSouls().ForceEffect<SpiderEnchant>())
+                player.GetCritChance(DamageClass.Generic) += 7;
         }
 
         public override void AddRecipes()
@@ -38,16 +45,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SpiderMask)
             .AddIngredient(ItemID.SpiderBreastplate)
             .AddIngredient(ItemID.SpiderGreaves)
-            .AddIngredient(ItemID.SpiderStaff)
             .AddIngredient(ItemID.QueenSpiderStaff)
+            .AddIngredient(ItemID.SpiderStaff)
             .AddIngredient(ItemID.WebSlinger)
             //web rope coil
             //rainbow string
             //fried egg
             //.AddIngredient(ItemID.SpiderEgg);
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return SpiderEnchantSpiderling.SpiderDamage(Main.LocalPlayer);
         }
     }
 
@@ -55,17 +69,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
         public override int ToggleItemType => ModContent.ItemType<SpiderEnchant>();
-        public override bool MutantsPresenceAffects => true;
+        public override bool MutantsPresenceAffects => false;
         //public override bool MinionEffect => true;
 
         public override void PostUpdateEquips(Player player)
         {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.SpiderCD > 0)
+                modPlayer.SpiderCD--;
             //minion crits
-            if (HasEffectEnchant(player))
-                player.FargoSouls().MinionCrits = true;
-            player.GetCritChance(DamageClass.Generic) += 10;
-            if (player.FargoSouls().ForceEffect(ModContent.ItemType<SpiderEnchant>()))
-                player.GetCritChance(DamageClass.Generic) += 15;
+            if (player.HasEffectEnchant<SpiderEffect>())
+                modPlayer.MinionCrits = true;
         }
     }
 }

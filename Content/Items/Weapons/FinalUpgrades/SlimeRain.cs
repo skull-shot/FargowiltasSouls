@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -12,13 +13,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     public class SlimeRain : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("Slime Rain");
-            // Tooltip.SetDefault("'The King's innards spread across the land..'");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "史莱姆雨");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "史莱姆王的内腑撒得遍地都是..");
         }
 
         public override void SetDefaults()
@@ -38,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             Item.shootSpeed = 16f;
 
             Item.useTime = 4;
-            Item.useAnimation = 12;
+            Item.useAnimation = 40;
             Item.reuseDelay = 0;
         }
 

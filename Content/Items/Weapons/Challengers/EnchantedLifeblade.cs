@@ -1,5 +1,6 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -9,11 +10,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class EnchantedLifeblade : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
+
+        public override int NumFrames => 5;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Enchanted Lifeblade");
-            // Tooltip.SetDefault("A living blade that will attack your mouse position");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 5));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
@@ -33,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.noMelee = true;
             //Item.channel = true;
 
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.value = Item.sellPrice(0, 10, 0, 0);
             Item.shoot = ModContent.ProjectileType<EnchantedLifebladeProjectile>();
             Item.shootSpeed = 30f;

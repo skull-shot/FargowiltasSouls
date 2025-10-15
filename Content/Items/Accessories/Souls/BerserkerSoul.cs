@@ -2,6 +2,7 @@
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,12 +14,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 15));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
 
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.defense = 4;
+            //Item.defense = 4;
         }
         public static readonly Color ItemColor = new(255, 111, 6);
         protected override Color? nameColor => ItemColor;
@@ -41,17 +44,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.yoyoGlove = true;
             player.yoyoString = true;
 
-            //celestial shell
-            player.wolfAcc = true;
-            player.accMerman = true;
-
-            if (hideVisual)
-            {
-                player.hideMerman = true;
-                player.hideWolf = true;
-            }
-
-            player.lifeRegen += 2;
         }
 
         public override void AddRecipes()
@@ -59,21 +51,32 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             CreateRecipe()
 
             .AddIngredient(ItemID.WarriorEmblem)
-            .AddIngredient(ItemID.StingerNecklace)
-            .AddIngredient(ItemID.YoyoBag)
             .AddIngredient(ItemID.FireGauntlet)
-            .AddIngredient(ItemID.BerserkerGlove)
-            .AddIngredient(ItemID.CelestialShell)
-
-            .AddIngredient(ItemID.KOCannon)
-            .AddIngredient(ItemID.IceSickle)
+            .AddIngredient(ItemID.YoyoBag)
+            //prehm weps
+            .AddIngredient(ItemID.Trimarang)
+            .AddRecipeGroup("FargowiltasSouls:BallOHurtOrTheRottedFork")
+            .AddRecipeGroup("FargowiltasSouls:AnyPhaseblade")
+            .AddIngredient(ItemID.HiveFive)
+            .AddIngredient(ItemID.DarkLance)
+            //hm weps
             .AddIngredient(ItemID.DripplerFlail)
-            .AddIngredient(ItemID.ScourgeoftheCorruptor)
-            .AddIngredient(ItemID.Kraken)
+            .AddIngredient(ItemID.LightDisc)
+            .AddRecipeGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives")
+            .AddIngredient(ItemID.Keybrand)
+            .AddIngredient(ItemID.TheEyeOfCthulhu)
             .AddIngredient(ItemID.Flairon)
-            .AddIngredient(ItemID.MonkStaffT3)
-            .AddIngredient(ItemID.NorthPole)
-            .AddIngredient(ItemID.Zenith)
+
+            //old recipe
+            //.AddIngredient(ItemID.KOCannon)
+            //.AddIngredient(ItemID.IceSickle)
+            //.AddIngredient(ItemID.DripplerFlail)
+            //.AddIngredient(ItemID.ScourgeoftheCorruptor)
+            //.AddIngredient(ItemID.Kraken)
+            //.AddIngredient(ItemID.Flairon)
+            //.AddIngredient(ItemID.MonkStaffT3)
+            //.AddIngredient(ItemID.NorthPole)
+            //.AddIngredient(ItemID.Zenith)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();

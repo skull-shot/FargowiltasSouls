@@ -29,7 +29,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
+            Projectile.scale = 1.5f;
         }
 
         public override bool CanHitPlayer(Player target)
@@ -134,7 +135,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             transparency /= 6; //so it takes longer to reach full brightness
             glowcolor *= Math.Min(1f, transparency);
 
-            Vector2 drawCenter = Projectile.Center - Projectile.velocity.SafeNormalize(Vector2.UnitX) * 18;
+            Vector2 drawCenter = Projectile.Center - Projectile.velocity.SafeNormalize(Vector2.UnitX) * 18 * Projectile.scale;
 
             float scale = Projectile.scale;
             scale *= (Main.mouseTextColor / 200f - 0.35f) * 0.2f + 0.95f;

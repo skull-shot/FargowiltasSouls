@@ -1,8 +1,10 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -13,6 +15,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
@@ -47,16 +50,39 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.TungstenChainmail)
                 .AddIngredient(ItemID.TungstenGreaves)
                 .AddIngredient(ItemID.TungstenBroadsword)
-                .AddIngredient(ItemID.Ruler)
                 .AddIngredient(ItemID.Katana)
+                .AddIngredient(ItemID.Ruler)
 
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(player.HeldItem.DamageType)) / 2;
+            if (scaling < 30)
+                scaling = 30;
+
+            int falloffMin = 200;
+            if (scaling > falloffMin)
+            {
+                scaling -= falloffMin;
+                scaling = (int)(scaling * MathF.Exp((float)(-scaling / falloffMin)));
+                scaling += falloffMin;
+            }
+            int dmg = 50;
+            if (scaling <= 30)
+            {
+                scaling = null;
+                dmg = 30;
+            }
+            damageClass = DamageClass.Default;
+            tooltipColor = null;
+            return dmg;
         }
     }
     public class TungstenShockwaveEffect : AccessoryEffect
     {
-
         public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
         public override int ToggleItemType => ModContent.ItemType<TungstenEnchant>();
         public override bool ExtraAttackEffect => true;
@@ -79,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.TungstenCD == 0 && weaponAttack)
             {
-                int damage = baseDamage;
+                int damage = baseDamage / 2;
                 if (damage < 30)
                     damage = 30;
                 int falloffMin = 200;
@@ -89,10 +115,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     damage = (int)(damage * MathF.Exp(-damage / falloffMin));
                     damage += falloffMin;
                 }
-                float ai1 = player.ForceEffect<TungstenShockwaveEffect>() ? 1 : 0;
-                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, player.DirectionTo(target.Center), ModContent.ProjectileType<TungstenShockwave>(), damage, 3f, player.whoAmI, target.whoAmI, ai1);
+                float ai0 = player.ForceEffect<TungstenShockwaveEffect>() ? 1 : 0;
+                Projectile.NewProjectile(GetSource_EffectItem(player), target.Center, player.DirectionTo(target.Center), ModContent.ProjectileType<TungstenShockwave>(), damage, 3f, player.whoAmI, ai0);
                 modPlayer.TungstenCD = LumUtils.SecondsToFrames(2.5f);
-                if (ai1 == 1)
+                if (ai0 == 1)
                     modPlayer.TungstenCD /= 3;
             }
         }
@@ -102,20 +128,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override Header ToggleHeader => Header.GetHeader<TerraHeader>();
         public override int ToggleItemType => ModContent.ItemType<TungstenEnchant>();
-        public override void ModifyHitNPCWithItem(Player player, Item item, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if ((player.FargoSouls().ForceEffect<TungstenEnchant>() || item.shoot == ProjectileID.None))
-            {
-                TungstenModifyDamage(player, ref modifiers);
-            }
-        }
-        public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (proj.FargoSouls().TungstenScale != 1)
-            {
-                TungstenModifyDamage(player, ref modifiers);
-            }
-        }
         public override void PostUpdateMiscEffects(Player player)
         {
             player.whipRangeMultiplier += 0.2f;
@@ -147,7 +159,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static List<int> TungstenAlwaysAffectProjStyle =
         [
             ProjAIStyleID.Spear,
-            ProjAIStyleID.Yoyo,
             ProjAIStyleID.ShortSword,
             ProjAIStyleID.Flail,
             ProjAIStyleID.SleepyOctopod,
@@ -156,8 +167,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         ];
         public static List<int> TungstenNerfedProjType = 
         [
+            //ProjectileID.PiercingStarlight,
             ModContent.ProjectileType<SlimeKingSlasherProj>(),
-            ModContent.ProjectileType<SlimeSlingingSlasherProj>()
+            ModContent.ProjectileType<SlimeSlingingSlasherProj>(),
+            ModContent.ProjectileType<PrismaRegaliaProj>()
         ];
         public static bool TungstenAlwaysAffectProj(Projectile projectile)
         {
@@ -167,9 +180,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static List<int> TungstenNeverAffectProjType =
         [
-            ModContent.ProjectileType<FishStickProjTornado>(),
-            ModContent.ProjectileType<FishStickWhirlpool>(),
-            ModContent.ProjectileType<ReleasedMechFlail>(),
+            ModContent.ProjectileType<ReleasedLeashofCthulhu>(),
             ProjectileID.ButchersChainsaw,
         ];
         public static List<int> TungstenNeverAffectProjStyle = 
@@ -185,30 +196,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static float TungstenIncreaseProjSize(Projectile projectile, FargoSoulsPlayer modPlayer, IEntitySource source)
         {
-            bool terraForce = !modPlayer.Player.HasEffectEnchant<TungstenEffect>();
-            //if (terraForce)
-            //modPlayer.TungstenCD = 40; // effectively just removes the CD effect
-
-            if (TungstenNeverAffectsProj(projectile))
-            {
+            if (TungstenNeverAffectsProj(projectile) || !projectile.DamageType.CountsAsClass(DamageClass.Melee))
                 return 0f;
-            }
             bool canAffect = false;
-            bool hasCD = true;
             if (TungstenAlwaysAffectProj(projectile) || projectile.FargoSouls().IsAHeldProj)
-            {
                 canAffect = true;
-                hasCD = false;
-            }
             else if (FargoSoulsUtil.OnSpawnEnchCanAffectProjectile(projectile, false))
             {
                 if (source != null && source is EntitySource_Parent parent && parent.Entity is Projectile sourceProj)
                 {
                     if (sourceProj.GetGlobalProjectile<FargoSoulsGlobalProjectile>().TungstenScale != 1)
-                    {
                         canAffect = true;
-                        hasCD = false;
-                    }
                 }
             }
             //Main.NewText(projectile.Name + " " + canAffect + " " + FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source) + modPlayer.TungstenCD);
@@ -221,11 +219,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return scaleIncrease;
             }
             return 0f;
-        }
-
-        public static void TungstenModifyDamage(Player player, ref NPC.HitModifiers modifiers)
-        {
-            return;
         }
     }
 }

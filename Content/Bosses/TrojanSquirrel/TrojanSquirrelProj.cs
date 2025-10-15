@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -48,12 +48,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             fallThrough = false;
 
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 120);
         }
 
         public override void OnKill(int timeLeft)

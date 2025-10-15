@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -31,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

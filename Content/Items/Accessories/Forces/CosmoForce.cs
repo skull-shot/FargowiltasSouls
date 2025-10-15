@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -14,10 +14,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     public class CosmoForce : BaseForce
     {
         public override List<AccessoryEffect> ActiveSkillTooltips =>
-            [AccessoryEffectLoader.GetEffect<StardustEffect>()];
+            [AccessoryEffectLoader.GetEffect<CosmosMoonEffect>()]; //doing it like this solely so the tooltip displays the decreased cooldown
         
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<MeteorEnchant>(),
@@ -69,13 +70,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             recipe.AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"));
             recipe.Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return CosmosMoonEffect.BaseDamage(Main.LocalPlayer);
+        }
     }
     public class CosmosMoonEffect : AccessoryEffect
     {
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<CosmoForce>();
         public override bool ExtraAttackEffect => true;
-        
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 1200);
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -87,7 +95,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                     modPlayer.CosmosMoonTimer += 2;
                     if (modPlayer.CosmosMoonTimer >= LumUtils.SecondsToFrames(3) && player.whoAmI == Main.myPlayer)
                     {
-                        int moonDamage = FargoSoulsUtil.HighestDamageTypeScaling(player, 1200);
 
                         NPC result = null;
                         float range = 1200;
@@ -106,7 +113,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                         }
                         int npcid = result != null ? result.whoAmI : -1;
 
-                        Projectile.NewProjectileDirect(player.GetSource_EffectItem<CosmosMoonEffect>(), player.Center, player.DirectionTo(Main.MouseWorld) * 7, ModContent.ProjectileType<TerrariaSoulMoon>(), moonDamage, 1, player.whoAmI, MathHelper.Pi, ai1: npcid, ai2: modPlayer.CosmosMoonCycle);
+                        Projectile.NewProjectileDirect(player.GetSource_EffectItem<CosmosMoonEffect>(), player.Center, player.DirectionTo(Main.MouseWorld) * 7, ModContent.ProjectileType<TerrariaSoulMoon>(), BaseDamage(player), 1, player.whoAmI, MathHelper.Pi, ai1: npcid, ai2: modPlayer.CosmosMoonCycle);
                         modPlayer.CosmosMoonTimer = 0;
                         modPlayer.CosmosMoonCycle++;
                         modPlayer.CosmosMoonCycle %= 4;
@@ -121,7 +128,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 int moonCount = player.ownedProjectileCounts[ModContent.ProjectileType<CosmosForceMoon>()];
                 if (modPlayer.CosmosMoonTimer >= LumUtils.SecondsToFrames(3) && player.whoAmI == Main.myPlayer && moonCount < 4)
                 {
-                    int moonDamage = FargoSoulsUtil.HighestDamageTypeScaling(player, 1200);
+                    int moonDamage = FargoSoulsUtil.HighestDamageTypeScaling(player, 850);
 
                     Projectile.NewProjectileDirect(player.GetSource_EffectItem<CosmosMoonEffect>(), player.Center, Vector2.Zero, ModContent.ProjectileType<CosmosForceMoon>(), moonDamage, 1, player.whoAmI, MathHelper.Pi, ai2: modPlayer.CosmosMoonCycle);
                     modPlayer.CosmosMoonTimer = 0;

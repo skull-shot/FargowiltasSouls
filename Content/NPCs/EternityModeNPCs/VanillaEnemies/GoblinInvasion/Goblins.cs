@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.GoblinInvasion;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.GoblinInvasion;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -72,34 +72,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.GoblinIn
             if (npc.type == NPCID.GoblinThief)
             {
                 target.AddBuff(ModContent.BuffType<MidasBuff>(), 600);
-
-                //if (target.whoAmI == Main.myPlayer && target.HasBuff(ModContent.BuffType<LoosePockets>()))
-                //{
-                //    //try stealing mouse item, then selected item
-                //    bool stolen = EModeGlobalNPC.StealFromInventory(target, ref Main.mouseItem);
-                //    if (!stolen)
-                //        stolen = EModeGlobalNPC.StealFromInventory(target, ref target.inventory[target.selectedItem]);
-
-                //    if (stolen)
-                //    {
-                //        string text = Language.GetTextValue($"Mods.{mod.Name}.Message.ItemStolen");
-                //        Main.NewText(text, new Color(255, 50, 50));
-                //        CombatText.NewText(target.Hitbox, new Color(255, 50, 50), text, true);
-                //    }
-
-                //    /*byte extraTries = 30;
-                //    for (int i = 0; i < 3; i++)
-                //    {
-                //        bool successfulSteal = StealFromInventory(target, ref target.inventory[Main.rand.Next(target.inventory.Length)]);
-
-                //        if (!successfulSteal && extraTries > 0)
-                //        {
-                //            extraTries--;
-                //            i--;
-                //        }
-                //    }*/
-                //}
-                //target.AddBuff(ModContent.BuffType<LoosePockets>(), 240);
             }
         }
 

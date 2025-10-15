@@ -167,8 +167,8 @@ namespace FargowiltasSouls.Content.NPCs
                 }
             }
 
-            //wake up on her own if it becomes nighttime
-            if (Main.dayTime == false)
+            //wake up on her own if it becomes nighttime or left alone long enough
+            if (Main.dayTime == false || NPC.timeLeft < 60)
             {
                 if (Main.netMode != NetmodeID.SinglePlayer)
                 {

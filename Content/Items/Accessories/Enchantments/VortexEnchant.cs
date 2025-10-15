@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -50,8 +52,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //electrosphere launcher
             .AddIngredient(ItemID.SDMG)
 
-            .AddTile(TileID.LunarCraftingStation)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass,  out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            scaling = null;
+            return VortexEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class VortexProjGravity : AccessoryEffect
@@ -85,24 +94,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<VortexEnchant>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<VortexEffect>() ? 5400 : 3000) * player.ActualClassDamage(DamageClass.Ranged));
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.VortexCD <= 0 && player.Distance(target.Hitbox.ClosestPointInRect(player.Center)) > 450)
             {
                 bool force = modPlayer.ForceEffect<VortexEnchant>();
-                int dmg = 9750;
-                if (force)
-                    dmg = 18000;
-                dmg /= 2;
                 Vector2 velocity = player.DirectionTo(target.Center);
-                int damage = (int)(dmg * player.ActualClassDamage(DamageClass.Ranged));
-                FargoSoulsUtil.NewProjectileDirectSafe(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), damage, 0f, modPlayer.Player.whoAmI, 1f);
+                FargoSoulsUtil.NewProjectileDirectSafe(GetSource_EffectItem(player), player.Center, velocity, ModContent.ProjectileType<VortexLaser>(), BaseDamage(player), 0f, modPlayer.Player.whoAmI, 1f);
                 float cd = 10;
                 modPlayer.VortexCD = LumUtils.SecondsToFrames(cd);
 
                 if (player.whoAmI == Main.myPlayer)
-                    CooldownBarManager.Activate("VortexEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/VortexEnchant").Value, new(0, 242, 170), 
+                    CooldownBarManager.Activate("VortexEnchantCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "VortexEnchant").Value, new(0, 242, 170), 
                         () => 1f - Main.LocalPlayer.FargoSouls().VortexCD / (float)LumUtils.SecondsToFrames(cd), activeFunction: player.HasEffect<VortexEffect>);
             }
         }

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -46,13 +47,27 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //shroomite digging
             //hammush
             .AddIngredient(ItemID.MushroomSpear)
-            .AddIngredient(ItemID.Uzi)
+            .AddIngredient(ItemID.PulseBow)
             //venus magnum
             .AddIngredient(ItemID.TacticalShotgun)
             //.AddIngredient(ItemID.StrangeGlowingMushroom);
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(DamageClass.Ranged) / (player.ForceEffect<ShroomiteShroomEffect>() ? 2.5 : 4));
+            if (scaling < 0)
+                scaling = 0;
+
+            if (scaling > 75)
+                scaling = (150 + scaling) / 3;
+
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return player.ForceEffect<ShroomiteShroomEffect>() ? 40 : 25;
         }
     }
     public class ShroomiteHealEffect : AccessoryEffect
@@ -90,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ShroomiteCD > 0)
                 return;
 
-            if (projectile != null && (projectile.penetrate > 1 || projectile.penetrate < 0) && projectile.maxPenetrate == projectile.penetrate && projectile.type != ModContent.ProjectileType<ShroomiteShroom>())
+            if (projectile != null && ((projectile.penetrate > 1 || projectile.penetrate < 0) && (projectile.maxPenetrate == projectile.penetrate) || projectile.type == ProjectileID.JackOLantern) && projectile.type != ModContent.ProjectileType<ShroomiteShroom>())
             {
                 SpawnShrooms(player, target, hitInfo, baseDamage);
             }

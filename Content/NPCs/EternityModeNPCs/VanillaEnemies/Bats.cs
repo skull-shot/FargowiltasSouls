@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -34,39 +34,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            switch (npc.type)
-            {
-                case NPCID.CaveBat:
-                    target.AddBuff(BuffID.Bleeding, 300);
-                    break;
-
-                case NPCID.Hellbat:
-                    target.AddBuff(BuffID.OnFire, 240);
-                    break;
-
-                case NPCID.JungleBat:
-                    target.AddBuff(BuffID.Poisoned, 240);
-                    break;
-
-                case NPCID.IceBat:
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 600);
-                    break;
-
-                case NPCID.Lavabat:
-                    target.AddBuff(BuffID.Burning, 240);
-                    break;
-
-                case NPCID.GiantBat:
-                    target.AddBuff(BuffID.Confused, 240);
-                    break;
-
-                case NPCID.GiantFlyingFox:
-                    target.AddBuff(ModContent.BuffType<BloodthirstyBuff>(), 300);
-                    break;
-
-                default:
-                    break;
-            }
+            target.AddBuff(BuffID.Bleeding, 300);
         }
     }
 }

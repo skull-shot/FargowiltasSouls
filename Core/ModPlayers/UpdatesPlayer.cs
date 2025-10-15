@@ -1,19 +1,21 @@
 ﻿using Fargowiltas.Content.Items.Explosives;
 using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Styx;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -24,6 +26,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -41,6 +44,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                     DevianttIntroduction = false;
                 }
             }
+
+            EaterofWorlds.CheckReset();
 
             if (Player.CCed)
             {
@@ -170,12 +175,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 //regular OnRespawn() doesnt account for lifeforce, and is lowered by dying with oceanic maul
             }
 
-            if (SquireEnchantActive && BaseMountType != -1)
+            if (SquireEnchantItem != null && BaseMountType != -1)
             {
                 SquireEnchant.ResetMountStats(this);
             }
 
             ConcentratedRainbowMatterTryAutoHeal();
+
         }
 
 
@@ -195,6 +201,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.gravControl = false;
                 Player.gravControl2 = false;
             }
+
+            if (Quicksanding)
+            {
+
+            }
         }
         public override void PostUpdateEquips()
         {
@@ -203,8 +214,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (!BossAliveLastFrame)
                 {
                     BossAliveLastFrame = true;
-                    TinEffect.TinHurt(Player, true);
+                    TinCrit = TinEffect.TinFloor(Player);
                     EbonwoodCharge = 0;
+                    HuntressStage = 0;
                     NekomiMeter = 0;
 
                     Beetles = 0;
@@ -249,9 +261,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (NoMomentum && !Player.mount.Active)
             {
-                if (Player.vortexStealthActive && Math.Abs(Player.velocity.X) > 6)
-                    Player.vortexStealthActive = false;
-
                 Player.runAcceleration *= 5f;
                 Player.runSlowdown *= 5f;
 
@@ -259,7 +268,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     Player.runSlowdown += 7f;
             }
 
-            if (DarkenedHeartItem != null)
+            if (RottingHeartItem != null)
             {
                 if (!IsStillHoldingInSameDirectionAsMovement)
                     Player.runSlowdown += 0.2f;
@@ -269,6 +278,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 FreezeTime = false;
 
             UpdateShield();
+
+            if (!Player.HasEffect<TimsInspectEffect>())
+                Player.FargoSouls().TimsInspect = false;
+            if (Player.FargoSouls().TimsInspectCD > 0)
+                Player.FargoSouls().TimsInspectCD--;
 
             Player.wingTimeMax = (int)(Player.wingTimeMax * WingTimeModifier);
 
@@ -314,15 +328,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (AbomWandItem != null)
                 AbomWandUpdate();
 
-            if (Flipped && !Player.gravControl)
-            {
-                Player.gravControl = true;
-                Player.controlUp = false;
-                Player.gravDir = -1f;
-                //Player.fallStart = (int)(Player.position.Y / 16f);
-                //Player.jump = 0;
-            }
-
             if (DevianttHeartItem != null)
             {
                 if (DevianttHeartsCD > 0)
@@ -340,15 +345,25 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.AddBuff(ModContent.BuffType<StunnedBuff>(), stunDuration);
             }
 
-            if (BetsysHeartItem != null || QueenStingerItem != null)
+            if (BetsysHeartItem != null || QueenStingerItem != null || Player.HasEffect<SupremeDashEffect>())
             {
                 if (SpecialDashCD > 0)
                     SpecialDashCD--;
                 if (SpecialDashCD == 1)
                 {
                     SoundEngine.PlaySound(SoundID.Item9, Player.Center);
-
-                    for (int i = 0; i < 30; i++)
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Color color = Color.Yellow;
+                        if (Player.HasEffect<BetsyDashEffect>())
+                            color = Color.OrangeRed;
+                        else if (Player.HasEffect<SupremeDashEffect>())
+                            color = Color.Lerp(Color.GhostWhite, Color.Transparent, 0.5f);
+                        Vector2 vel = Vector2.UnitX.RotatedBy(MathHelper.TwoPi * i / 10).RotatedByRandom(MathHelper.Pi / 10) * Main.rand.NextFloat(3, 8);
+                        Particle p = new SparkParticle(Player.Center, vel, color, 1, 30);
+                        p.Spawn();
+                    }
+                    /*for (int i = 0; i < 30; i++)
                     {
                         int dust = DustID.GemTopaz;
                         if (Player.HasEffect<SupremeDashEffect>())
@@ -356,7 +371,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         int d = Dust.NewDust(Player.position, Player.width, Player.height, dust, 0, 0, 0, default, 2.5f);
                         Main.dust[d].noGravity = true;
                         Main.dust[d].velocity *= 4f;
-                    }
+                    }*/
                 }
             }
             else
@@ -365,13 +380,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                     SpecialDashCD++;
             }
 
-
-            if (Player.velocity.Y == 0) //practically, if on the ground or hooked or similar
-            {
-                CanSummonForbiddenStorm = true;
-            }
-
-            if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null || GelicWingsItem != null)
+            if (SlimyShieldItem != null || LihzahrdTreasureBoxItem != null)
                 OnLandingEffects();
 
             if (noDodge)
@@ -390,12 +399,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (PrecisionSealNoDashNoJump)
             {
                 Player.dashType = 0;
-                Player.GetJumpState(ExtraJump.CloudInABottle).Disable();
+                /*Player.GetJumpState(ExtraJump.CloudInABottle).Disable();
                 Player.GetJumpState(ExtraJump.SandstormInABottle).Disable();
                 Player.GetJumpState(ExtraJump.BlizzardInABottle).Disable();
                 Player.GetJumpState(ExtraJump.FartInAJar).Disable();
                 Player.GetJumpState(ExtraJump.TsunamiInABottle).Disable();
-                Player.GetJumpState(ExtraJump.UnicornMount).Disable();
+                Player.GetJumpState(ExtraJump.UnicornMount).Disable();*/
+                Player.ConsumeAllExtraJumps();
                 JungleJumping = false;
                 CanJungleJump = false;
                 DashCD = 2;
@@ -445,18 +455,23 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.fullRotation = 0f;
                 NecromanticBrewRotation = 0f;
             }
+            if (Player.FargoSouls().Toggler_ExtraJumpsDisabled && Player.wingTime > 0)
+                Player.ConsumeAllExtraJumps();
         }
         public override void UpdateLifeRegen()
         {
             if (UsingAnkh)
                 Player.lifeRegen += 3;
             if (Ambrosia)
-                Player.lifeRegen += 5;
+                Player.lifeRegen += 4;
         }
         public override void UpdateBadLifeRegen()
         {
             if (Player.electrified && Player.wet)
                 Player.lifeRegen -= 16;
+
+            if (GrabDamage)
+                Player.lifeRegen -= WorldSavingSystem.MasochistModeReal ? 30 : 20;
 
             void DamageOverTime(int badLifeRegen, bool affectLifeRegenCount = false)
             {
@@ -470,11 +485,11 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.lifeRegen -= badLifeRegen;
             }
 
-            if (NanoInjection)
-                DamageOverTime(10);
-
             if (Shadowflame)
-                DamageOverTime(10);
+                DamageOverTime(16);
+
+            if (Daybroken)
+                DamageOverTime(30);
 
             if (GodEater)
             {
@@ -482,9 +497,6 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 Player.lifeRegenCount -= 70;
             }
-
-            if (MutantNibble)
-                DamageOverTime(0, true);
 
             if (Infested)
                 DamageOverTime(InfestedExtraDot());
@@ -495,44 +507,49 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (CurseoftheMoon)
                 DamageOverTime(20);
 
-            if (Oiled && Player.lifeRegen < 0)
-            {
-                Player.lifeRegen *= 2;
-            }
-
             if (MutantPresence)
             {
-                if (Player.lifeRegen > 5)
-                    Player.lifeRegen = 5;
+                //if (Player.lifeRegen > 5)
+                //    Player.lifeRegen = 5;
             }
 
             if (FlamesoftheUniverse)
-                DamageOverTime((30 + 50 + 48 + 30) / 2, true);
+                DamageOverTime(79, true);
 
             if (IvyVenom && !Player.venom)
                 DamageOverTime(16, true);
-
-            if (Smite)
-                DamageOverTime(0, true);
 
             if (Anticoagulation)
                 DamageOverTime(4, true);
 
             if (BleedingOut)
-                DamageOverTime(80, true);
+                DamageOverTime(Main.hardMode ? 80 : 20, true);
 
-            if (Player.onFire && Player.HasEffect<AshWoodEffect>())
+            if (Player.HasEffect<AshWoodEffect>() || Oiled) //i dont think theres a better way to do this
             {
-                Player.lifeRegen += 8;
-                if (Player.lifeRegen > 0)
-                    Player.lifeRegen = 0;
-            }
+                int regen = 0;
+                if (Player.onFire) regen += 8;
+                if (Player.onFire3) regen += 8;
+                if (Player.onFrostBurn) regen += 16;
+                if (Player.onFrostBurn2) regen += 16;
+                if (Player.onFire2) regen += 24;
+                if (Player.burned) regen += 60;
 
-            if (Player.burned && Player.HasEffect<AshWoodEffect>())
-            {
-                Player.lifeRegen += 60;
-                if (Player.lifeRegen > 0)
-                    Player.lifeRegen = 0;
+                if (Shadowflame) regen += 16;
+                if (Daybroken) regen += 30;
+                if (FlamesoftheUniverse) regen += 79;
+
+                if (regen > 0)
+                {
+                    if (Player.HasEffect<AshWoodEffect>())
+                    {
+                        Player.lifeRegen += regen;
+                        if (Player.lifeRegen > 0)
+                            Player.lifeRegen = 0;
+                    }
+                    else if (Oiled)
+                        Player.lifeRegen -= regen;
+                }
             }
 
             if (Player.lifeRegen < 0)
@@ -553,18 +570,35 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             TimeSinceHurt++;
 
+            if (MinionSlotsNonstack > 0)
+                Player.maxMinions += MinionSlotsNonstack;
+            if (SentrySlotsNonstack > 0)
+                Player.maxTurrets += SentrySlotsNonstack;
+
             if (MoonChalice || MasochistHeart) // remove regular minion toggle once galactic toggle is available
                 Toggler_MinionsDisabled = false;
 
             if (GalacticMinionsDeactivated)
             {
-                int minioncount = DeactivatedMinionEffectCount;
-                minioncount += Player.maxMinions - (int)Player.slotsMinions;
+                int accessoryminioncount = DeactivatedMinionEffectCount;
+                int minioncount = Player.maxMinions - (int)Player.slotsMinions;
                 if (DeactivatedMinionEffectCount > 0)
-                    Player.GetDamage(DamageClass.Generic) += minioncount * 0.01f; // 1% each
+                    Player.GetDamage(DamageClass.Generic) += accessoryminioncount * 0.04f; // 4% each
+                if (minioncount > 0)
+                    Player.GetDamage(DamageClass.Generic) += minioncount * 0.02f; // 2% each
             }
 
-            if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
+            if (Player.miscCounter % 150 == 0)
+            {
+                for (int i = OldPositionBig.Length - 1; i > 0; i--)
+                {
+                    OldPositionBig[i] = OldPositionBig[i - 1];
+                }
+                OldPositionBig[0] = Player.position;
+            }
+
+
+            /*if (Fused && Math.Abs(Player.velocity.X) < 0.5f)
             {
                 FusedStandStillTime++;
                 if (FusedStandStillTime >= 60)
@@ -573,7 +607,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 }
             }
             else
-                FusedStandStillTime = 0;
+                FusedStandStillTime = 0;*/
 
             if (ToggleRebuildCooldown > 0)
                 ToggleRebuildCooldown--;
@@ -608,9 +642,9 @@ namespace FargowiltasSouls.Core.ModPlayers
                 MythrilSoundCooldown--;
 
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
-                TinCrit--;
+                TinCrit = 0;
 
-            if (!Player.HasEffect<BeetleEffect>())
+            if (!Player.HasEffectEnchant<BeetleEffect>())
             {
                 Beetles = 0;
                 BeetleCharge = 0;
@@ -623,6 +657,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (HuntressStage > 0 && !Player.HasEffect<HuntressEffect>())
                 HuntressStage--;
+            if (HuntressStage < 0)
+                HuntressStage = 0;
 
             if (EbonwoodCharge > 0 && !Player.HasEffect<EbonwoodEffect>())
                 EbonwoodCharge = 0;
@@ -648,7 +684,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.setMonkT3 = true;*/
 
 
-            if (Player.channel && WeaponUseTimer < 2)
+            if (Player.channel && WeaponUseTimer < 2 && (Player.controlUseItem || Player.controlUseTile))
                 WeaponUseTimer = 2;
             if (--WeaponUseTimer < 0)
                 WeaponUseTimer = 0;
@@ -679,7 +715,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (LockedMana > 0)
             {
                 float previousLockedMana = LockedMana;
-                LockedMana -= 0.3f;
+                if (Player.manaRegenDelay <= 0)
+                    LockedMana -= 1;
                 Player.statManaMax2 -= (int)Player.FargoSouls().LockedMana;
                 if ((int)LockedMana != (int)previousLockedMana)
                 {
@@ -796,7 +833,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             {
                 //slowed effect
                 Player.moveSpeed *= .75f;
-                Player.jump /= 2;
+                Player.jump = (int)Math.Round(Player.jump * 0.75);
             }
 
             if (GodEater)
@@ -805,25 +842,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.endurance = 0;
             }
 
-            if (MutantNibble) //disables lifesteal, mostly
-            {
-                if (Player.statLife > 0 && StatLifePrevious > 0 && Player.statLife > StatLifePrevious)
-                    Player.statLife = StatLifePrevious;
-            }
-
             if (Defenseless)
             {
-                Player.statDefense -= 30;
-                Player.endurance = 0;
-                Player.longInvince = false;
-                //Player.noKnockback = false;
+                Player.endurance /= 2;
             }
 
             if (Asocial)
             {
                 KillPets();
-                Player.maxMinions /= 2;
-                Player.maxTurrets /= 2;
+                Player.maxMinions = (int)(Player.maxMinions / 1.5);
+                Player.maxTurrets = (int)(Player.maxTurrets / 1.5);
             }
             else if (WasAsocial) //should only occur when above debuffs end
             {
@@ -853,60 +881,20 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Eternity)
                 Player.statManaMax2 = 999;
             else if (UniverseSoul)
-                Player.statManaMax2 += 300;
+                Player.statManaMax2 += 200;
 
             if (Player.HasEffect<CelestialRuneAttacks>() && AdditionalAttacksTimer > 0)
                 AdditionalAttacksTimer--;
 
             if (Player.HasEffect<SpookyEffect>() && SpookyCD > 0)
+            {
                 SpookyCD--;
+                if (SpookyCD == 1)
+                    SoundEngine.PlaySound(SoundID.DD2_WitherBeastDeath with {Volume = 2f}, Player.Center);
+            }
 
             if (Player.HasEffect<RemoteLightningEffect>() && RemoteCD > 0)
                 RemoteCD--;
-
-            /* TODO: Mutant's Presence toggle visual
-            if (PresenceTogglerTimer == 5)
-            {
-                Main.playerInventory = false;
-                FargoUIManager.CloseSoulToggler();
-                SoundEngine.PlaySound(SoundID.MenuClose);
-                PresenceTogglerTimer = 0;
-            }
-            if (PresenceTogglerTimer > 5)
-            {
-                Main.playerInventory = true;
-                FargoUIManager.OpenToggler();
-            }
-            if (PresenceTogglerTimer > 0)
-            {
-                PresenceTogglerTimer--;
-            }
-                
-            
-            if (MutantPresence && !HadMutantPresence && !MutantFang)
-            {
-                PresenceTogglerTimer = 100;
-                Main.playerInventory = true;
-                FargoUIManager.OpenToggler();
-                SoundEngine.PlaySound(SoundID.MenuOpen);
-            }
-            */
-
-            if (MutantPresence)
-            {
-                Player.statDefense /= 2;
-                Player.endurance /= 2;
-                Player.shinyStone = false;
-            }
-
-            if (RockeaterDistance > EaterLauncher.BaseDistance)
-            {
-                RockeaterDistance -= (int)((EaterLauncher.IncreasedDistance - EaterLauncher.BaseDistance) / (EaterLauncher.CooldownTime / 3f));
-            }
-            else
-            {
-                RockeaterDistance = EaterLauncher.BaseDistance;
-            }
 
             StatLifePrevious = Player.statLife;
         }

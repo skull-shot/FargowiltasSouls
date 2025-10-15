@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,14 +35,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.alpha = 200;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override bool CanHitPlayer(Player target)
         {
             return target.hurtCooldowns[1] == 0;
         }
-
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             //dust!
@@ -53,18 +53,28 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Projectile.velocity.Y * 0.2f, 100, default(Color), .5f);
             Main.dust[dustId3].noGravity = true;*/
 
-            if (Projectile.ai[0] > -1 && Projectile.ai[0] < Main.maxPlayers)
+            if (Variant == 0)
             {
-                const int aislotHomingCooldown = 1;
-                const int homingDelay = 20;
-                const float desiredFlySpeedInPixelsPerFrame = 5;
-                const float amountOfFramesToLerpBy = 20; // minimum of 1, please keep in full numbers even though it's a float!
-                if (++Projectile.ai[aislotHomingCooldown] > homingDelay)
+                if (Projectile.ai[0] > -1 && Projectile.ai[0] < Main.maxPlayers)
                 {
-                    int foundTarget = (int)Projectile.ai[0];
-                    Player p = Main.player[foundTarget];
-                    Vector2 desiredVelocity = Projectile.SafeDirectionTo(p.Center) * desiredFlySpeedInPixelsPerFrame;
-                    Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                    const int aislotHomingCooldown = 1;
+                    const int homingDelay = 20;
+                    const float desiredFlySpeedInPixelsPerFrame = 5;
+                    const float amountOfFramesToLerpBy = 20; // minimum of 1, please keep in full numbers even though it's a float!
+                    if (++Projectile.ai[aislotHomingCooldown] > homingDelay)
+                    {
+                        int foundTarget = (int)Projectile.ai[0];
+                        Player p = Main.player[foundTarget];
+                        Vector2 desiredVelocity = Projectile.SafeDirectionTo(p.Center) * desiredFlySpeedInPixelsPerFrame;
+                        Projectile.velocity = Vector2.Lerp(Projectile.velocity, desiredVelocity, 1f / amountOfFramesToLerpBy);
+                    }
+                }
+            }
+            else
+            {
+                if (Projectile.velocity.LengthSquared() < 24 * 24)
+                {
+                    Projectile.velocity *= WorldSavingSystem.MasochistModeReal ? 1.06f : 1.04f;
                 }
             }
 
@@ -86,13 +96,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
         }
 
         public override void OnKill(int timeleft)

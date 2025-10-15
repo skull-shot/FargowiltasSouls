@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Expert;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -23,9 +24,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            player.AddEffect<JumpsDisabled>(item);
-            //if (player.AddEffect<JumpsDisabled>(item))
-                //modPlayer.JumpsDisabled = modPlayer.JumpsDisabledBuffer = true;
 
             modPlayer.FlightMasterySoul = true;
             player.wingTimeMax = 999999;
@@ -36,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FlightMasteryGravity>(item);
 
             //hover
-            if (player.controlDown && player.controlJump && !player.mount.Active)
+            if (player.wingTime > 0 && player.controlDown && player.controlJump && !player.mount.Active)
             {
                 player.position.Y -= player.velocity.Y;
                 if (player.velocity.Y > 0.1f)
@@ -49,27 +47,35 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.EmpressFlightBooster) //soaring insignia
-
-            .AddIngredient(ItemID.BatWings) //bat wings
-            .AddIngredient(ItemID.CreativeWings) //fledgling wings
-            .AddIngredient(ItemID.FairyWings)
-            .AddIngredient(ItemID.HarpyWings)
-            .AddIngredient(ItemID.BoneWings)
-            .AddIngredient(ItemID.FrozenWings)
-            .AddIngredient(ItemID.FlameWings)
-            .AddIngredient(ItemID.TatteredFairyWings)
-            .AddIngredient(ItemID.FestiveWings)
-            .AddIngredient(ItemID.BetsyWings)
-            .AddIngredient(ItemID.FishronWings)
-            .AddIngredient(ItemID.RainbowWings) //empress wings
-            .AddIngredient(ItemID.LongRainbowTrailWings) //celestial starboard
-
+            .AddIngredient(ItemID.EmpressFlightBooster) // Soaring Insignia
             .AddIngredient(ItemID.GravityGlobe)
+            .AddIngredient(ItemID.CreativeWings) // Fledgling Wings
+            .AddRecipeGroup("FargowiltasSouls:AnySoulWings") // Angel or Demon wings
+            .AddRecipeGroup("FargowiltasSouls:AnyElementWings") // Flame or Frost Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyHolidayWings") // Festive, Spooky Wings or Tattered Fairy Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyBossWings") // Betsy, Fishron or Empress Wings
+            .AddRecipeGroup("FargowiltasSouls:AnyLunarWings") // Solar, Vortex, Nebula, or Stardust Wings
+            .AddIngredient(ItemID.LongRainbowTrailWings) // Celestial Starboard
+
+            // old recipe
+
+            //.AddIngredient(ItemID.EmpressFlightBooster) //soaring insignia
+            //.AddIngredient(ItemID.BatWings) //bat wings
+            //.AddIngredient(ItemID.CreativeWings) //fledgling wings
+            //.AddIngredient(ItemID.FairyWings)
+            //.AddIngredient(ItemID.HarpyWings)
+            //.AddIngredient(ItemID.BoneWings)
+            //.AddIngredient(ItemID.FrozenWings)
+            //.AddIngredient(ItemID.FlameWings)
+            //.AddIngredient(ItemID.TatteredFairyWings)
+            //.AddIngredient(ItemID.FestiveWings)
+            //.AddIngredient(ItemID.BetsyWings)
+            //.AddIngredient(ItemID.FishronWings)
+            //.AddIngredient(ItemID.RainbowWings) //empress wings
+            //.AddIngredient(ItemID.LongRainbowTrailWings) //celestial starboard
+            //.AddIngredient(ItemID.GravityGlobe)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
-
-
             .Register();
         }
     }
@@ -91,15 +97,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void PostUpdateEquips(Player player)
         {
             player.gravity = Player.defaultGravity * 1.5f;
-        }
-    }
-    public class JumpsDisabled : AccessoryEffect
-    {
-        public override Header ToggleHeader => Header.GetHeader<FlightMasteryHeader>();
-        public override int ToggleItemType => ModContent.ItemType<FlightMasterySoul>();
-        public override void PostUpdateEquips(Player player)
-        {
-            player.ConsumeAllExtraJumps();
         }
     }
 }

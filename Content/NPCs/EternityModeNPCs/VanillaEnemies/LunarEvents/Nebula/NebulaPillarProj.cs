@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -12,11 +13,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
 {
     public class NebulaPillarProj : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialPillar";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/LunaticCultist", "CelestialPillar");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Pillar");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

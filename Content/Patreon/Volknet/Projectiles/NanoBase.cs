@@ -9,7 +9,8 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
 {
     public class NanoBase : ModProjectile
     {
-        public int AtkTimer = 0;
+        public float AtkTimer = 0;
+        public int SubAtkTimer = 0;
         //public float MeleeDamageModifier = 1;                   //may helpful with modifying damage
         //public float RangedDamageModifier = 1;
         //public float MagicDamageModifier = 1;
@@ -23,6 +24,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
         {
             Projectile.width = 4;
             Projectile.height = 4;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
             Projectile.hide = true;
             Projectile.friendly = false;
             Projectile.hostile = false;
@@ -66,7 +68,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
 
         public override bool? CanDamage() => false;
 
-        public override void AI()
+        public override bool PreAI()
         {
             if (Main.player[Projectile.owner].active)
             {
@@ -125,11 +127,10 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
 
                     if (owner.GetModPlayer<NanoPlayer>().NanoCoreMode == 1)            //bow
                     {
-                        if (AtkTimer > 0) AtkTimer--;
+                        if (AtkTimer > 0) AtkTimer -= owner.FargoSouls().AttackSpeed;
                         if (AllSet(owner))
                         {
-
-                            if (AtkTimer == 0)
+                            if (AtkTimer <= 0)
                             {
                                 AtkTimer = 6;
 
@@ -146,7 +147,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                                         damage = (int)(damage * 2f);
                                         speed = 3;
                                     }
-                                    damage = (int)(damage / 1.75);
+                                    damage = (int)(damage / 1.5);
                                     //damage = (int)(damage * RangedDamageModifier);
                                     if (cs)
                                     {
@@ -172,7 +173,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                                 {
                                     owner.channel = false;
                                     AtkTimer = 180;
-                                    return;
+                                    return false;
                                 }
                                 owner.manaRegenDelay = 10;
                                 if (!NPCUtils.AnyProj(ModContent.ProjectileType<PlasmaDeathRay>(), owner.whoAmI))
@@ -195,8 +196,8 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
 
                                 }
 
-                                if (AtkTimer > 0) AtkTimer--;
-                                if (AtkTimer == 0)
+                                if (AtkTimer > 0) AtkTimer -= owner.FargoSouls().AttackSpeed;
+                                if (AtkTimer <= 0)
                                 {
                                     AtkTimer = 180;
 
@@ -235,19 +236,24 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                             {
                                 owner.channel = false;
                                 AtkTimer = 0;
-                                return;
+                                return false;
                             }
                             owner.manaRegenDelay = 10;
 
-                            AtkTimer = (AtkTimer + 1) % 30;
-                            if (AtkTimer % 5 == 3)
+                            AtkTimer += owner.FargoSouls().AttackSpeed;
+                            if (AtkTimer > 5)
                             {
+                                AtkTimer = 0;
+                                if (++SubAtkTimer >= 6)
+                                {
+                                    SubAtkTimer = 0;
+                                }
                                 foreach (Projectile proj in Main.projectile)
                                 {
                                     if (proj.active && proj.type == ModContent.ProjectileType<NanoProbe>() && proj.owner == owner.whoAmI
                                         && proj.ai[1] != 0)
                                     {
-                                        if (proj.ai[0] == AtkTimer / 5 || proj.ai[0] == AtkTimer / 5 + 1 || proj.ai[0] == 6)
+                                        if (proj.ai[0] == SubAtkTimer || proj.ai[0] == SubAtkTimer + 1 || proj.ai[0] == 6)
                                         {
                                             SoundEngine.PlaySound(SoundID.Item91, proj.Center);
                                             int dmg = (int)(Projectile.damage * 1.05 / 2.0 * 1.2);
@@ -261,6 +267,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                         else
                         {
                             AtkTimer = 0;
+                            SubAtkTimer = 0;
                         }
                     }
 
@@ -274,6 +281,7 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
             {
                 Projectile.Kill();
             }
+            return false;
         }
 
 

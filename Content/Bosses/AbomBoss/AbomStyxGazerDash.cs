@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,11 +13,20 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
     public class AbomStyxGazerDash : AbomStyxGazer
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/StyxGazer";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "StyxGazer");
         public override void SetDefaults()
         {
             base.SetDefaults();
             Projectile.timeLeft = maxTime;
+        }
+        public override bool PreAI()
+        {
+            if (Projectile.ai[2] != 0)
+            {
+                Projectile.timeLeft = maxTime = (int)Projectile.ai[2];
+                Projectile.ai[2] = 0;
+            }
+            return base.PreAI();
         }
         public override void AI()
         {

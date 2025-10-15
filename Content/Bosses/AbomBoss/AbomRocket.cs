@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,7 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.alpha = 0;
             Projectile.timeLeft = 600;
             Projectile.tileCollide = false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -55,7 +56,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             {
                 if (Projectile.ai[0] >= 0 && Projectile.ai[0] < Main.maxPlayers) //have target
                 {
-                    if (--Projectile.ai[1] > -45) //only home for a bit
+                    float whenToStop = Projectile.ai[2] == 0 ? 45 : 20;
+                    if (--Projectile.ai[1] > -whenToStop) //only home for a bit
                     {
                         double num4 = (Main.player[(int)Projectile.ai[0]].Center - Projectile.Center).ToRotation() - (double)Projectile.velocity.ToRotation();
                         if (num4 > Math.PI)
@@ -104,13 +106,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //target.AddBuff(ModContent.BuffType<Defenseless>(), 300);
-                //target.AddBuff(BuffID.Confused, 180);
-            }
-            target.AddBuff(BuffID.BrokenArmor, 300);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
             Projectile.timeLeft = 0;
         }
 

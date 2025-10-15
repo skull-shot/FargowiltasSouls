@@ -1,0 +1,137 @@
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Weapons.BossDrops;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil;
+using System;
+using System.Collections.Generic;
+using System.Security.Policy;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
+
+namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
+{
+    public class RockeaterLauncherHeld : ModProjectile
+    {
+
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", "EaterLauncher");
+        public override void SetDefaults()
+        {
+            Projectile.width = 102;
+            Projectile.height = 62;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.tileCollide = false;
+            Projectile.FargoSouls().CanSplit = false;
+            Projectile.DamageType = DamageClass.Ranged;
+            Projectile.aiStyle = ProjAIStyleID.HeldProjectile;
+            Projectile.hide = true;
+            Projectile.ignoreWater = true;
+        }
+        public float ShootTimer;
+        public override bool? CanDamage() => false;
+        bool canShoot = true;
+        public override void AI()
+        {
+            Player player = Main.player[Projectile.owner];
+
+            if (player.dead || !player.active || !player.channel)
+                Projectile.Kill();
+
+            Vector2 center = player.RotatedRelativePoint(player.MountedCenter, true);
+
+            if (Main.myPlayer == Projectile.owner)
+            {
+                Projectile.direction = player.HorizontalDirectionTo(Main.MouseWorld).NonZeroSign();
+                Projectile.velocity = center.DirectionTo(Main.MouseWorld);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi;
+                    Vector2 position = Projectile.Center + new Vector2(12, Projectile.direction > 0 ? 22 : -22).RotatedBy(Projectile.rotation);
+                    Projectile.velocity = position.DirectionTo(Main.MouseWorld);
+                }
+            }
+
+            //Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
+            //Vector2 centerPos = new Vector2(Projectile.direction == 1 ? 4 : -5, 0) + Projectile.rotation.ToRotationVector2();
+            //Projectile.velocity = Vector2.Lerp(Vector2.Normalize(Projectile.velocity), Vector2.Normalize(Projectile.DirectionTo(centerPos)), 0.12f);
+
+
+            if (player.channel && !player.noItems && !player.CCed)
+            {
+                Projectile.timeLeft = 60;
+                player.SetDummyItemTime(20);
+                player.heldProj = Projectile.whoAmI;
+
+                Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.Pi;
+
+                //Projectile.direction = Projectile.spriteDirection = Math.Sign(Projectile.velocity.X);
+
+                player.ChangeDir(Projectile.direction);
+                player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.velocity.ToRotation() - MathHelper.PiOver2);
+
+                int aura = ModContent.ProjectileType<RockeaterAuraProj>();
+                if (player.ownedProjectileCounts[aura] <= 0)
+                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), player.Center, player.velocity, aura, 0, 0);
+
+                Vector2 velocity = Projectile.velocity * 24f;
+                Vector2 position = Projectile.Center + new Vector2(12, player.direction > 0 ? 22 : -22).RotatedBy(Projectile.rotation) + Vector2.Normalize(velocity) * Projectile.width * 0.9f;
+
+                if (FargoSoulsUtil.HostCheck)
+                {
+                    ShootTimer += player.FargoSouls().AttackSpeed;
+                    if (ShootTimer > 5 && canShoot)
+                    {
+                        canShoot = false;
+                        SoundEngine.PlaySound(SoundID.Item156 with { Volume = 0.4f }, Projectile.Center);
+                        Projectile.velocity += new Vector2(6, 0).RotatedBy(Projectile.rotation);
+                        Item item = player.HeldItem;
+                        Dictionary<int, Item> Dict = ContentSamples.ItemsByType;
+                        if (player.PickAmmo(item, out int type, out _, out _, out _, out int usedAmmo) && Dict[usedAmmo].consumable && !player.IsAmmoFreeThisShot(item, Dict[usedAmmo], type))
+                        {
+                            Item ammo = player.FindAmmo([usedAmmo]);
+                            CombinedHooks.OnConsumeAmmo(player, item, ammo);
+                            if (ammo.stack-- <= 0)
+                            {
+                                ammo.active = false;
+                                ammo.TurnToAir();
+                            }
+                        }
+                        for (int i = 0; i < 3; i++)
+                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), position, velocity.RotatedByRandom(MathHelper.ToRadians(18)) * Main.rand.NextFloat(0.9f, 1.1f), ModContent.ProjectileType<EaterRocket>(), Projectile.damage, 6f);
+                    }
+
+                    if (ShootTimer >= 20)
+                    {
+                        canShoot = true;
+                        ShootTimer = 0;
+                    }
+                }
+                
+            }
+            else
+            {
+                Projectile.Kill();
+            }
+        }
+        public override bool PreDraw(ref Color lightColor)
+        {
+            Player player = Main.player[Projectile.owner];
+            Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+            Vector2 drawPos = Projectile.Center - Main.screenPosition + Vector2.UnitY * player.gfxOffY;
+            float rot = Projectile.rotation + MathHelper.Pi;
+            int direction = Main.player[Projectile.owner].direction;
+            Rectangle frame = new(0, 0, texture.Width, texture.Height);
+            SpriteEffects flip = direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically;
+            if (player.channel)
+                Main.EntitySpriteDraw(texture, drawPos, null, lightColor, rot, new Vector2(12, player.direction > 0 ? 48 : 12), Projectile.scale, flip);
+            return false;
+        }
+    }
+}

@@ -1,6 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-
-
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,13 +24,14 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.CloneDefaults(ProjectileID.LostSoulHostile);
             AIType = ProjectileID.LostSoulHostile;
             Projectile.timeLeft = 300;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.HexedBuff>(), 240);
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.ReverseManaFlowBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 240);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
+            //target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor)
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }

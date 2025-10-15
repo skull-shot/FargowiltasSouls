@@ -80,7 +80,6 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
                 dust.velocity = Vector2.Normalize(dust.position - Projectile.Center) * Main.rand.Next(20);
                 dust.noGravity = true;
             }
-            target.AddBuff(BuffID.WitheredArmor, 600);
             target.AddBuff(BuffID.Confused, 600);
         }
     }

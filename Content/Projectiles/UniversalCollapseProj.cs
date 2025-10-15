@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -11,9 +12,10 @@ namespace FargowiltasSouls.Content.Projectiles
     {
         public int countdown = 4;
 
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
+
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Nuke");
             Main.projFrames[Projectile.type] = 4;
         }
 

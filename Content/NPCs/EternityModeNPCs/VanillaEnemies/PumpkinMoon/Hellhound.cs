@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -23,7 +23,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinM
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Rabies, 3600);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 600);
         }
     }
 }

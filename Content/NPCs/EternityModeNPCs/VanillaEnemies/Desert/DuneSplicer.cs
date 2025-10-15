@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -15,21 +15,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
             NPCID.DuneSplicerTail
         );
 
-        public override void SetDefaults(NPC npc)
-        {
-            base.SetDefaults(npc);
-
-            if (Main.hardMode)
-            {
-                npc.lifeMax *= 3;
-            }
-            else
-            {
-                npc.defense /= 2;
-                npc.damage /= 2;
-            }
-        }
-
         public override bool SafePreAI(NPC npc)
         {
             int p = npc.HasPlayerTarget ? npc.target : npc.FindClosestPlayer();
@@ -44,15 +29,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
-        }
-
-        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
-        {
-            base.ModifyNPCLoot(npc, npcLoot);
-
-
+            target.FargoSouls().AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
         }
     }
 }

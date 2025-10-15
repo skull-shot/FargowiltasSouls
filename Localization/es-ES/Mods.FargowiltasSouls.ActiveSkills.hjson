@@ -12,12 +12,21 @@ SpecialDashEffect: {
 
 BetsyDashEffect: {
 	// DisplayName: Fireball Dash
-	// Tooltip: Perform a short invincible fireball dash towards your cursor
+	/* Tooltip:
+		'''
+		Perform a short invincible fireball dash towards your cursor
+		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and decreases your dash cooldown
+		''' */
 }
 
 SupremeDashEffect: {
-	// DisplayName: Supreme Dash
-	// Tooltip: Perform a short fist dash towards your cursor
+	// DisplayName: Berserk Dash
+	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/QueenStinger] Perform a short skeletal punch dash towards your cursor
+		[i:FargowiltasSouls/NecromanticBrew] Punch deals high knockback and rebounds you on hit
+		[i:FargowiltasSouls/AgitatingLens] Punching an enemy berserks you, temporarily increasing attack speed but making movement uncontrollable
+		''' */
 }
 
 DiveEffect: {
@@ -25,7 +34,7 @@ DiveEffect: {
 	/* Tooltip:
 		'''
 		Activate in the air to fastfall
-		Fastfalling onto ground creates a massive flaming eruption that deals melee damage
+		Fastfalling onto ground creates a massive flaming eruption
 		Defaults to Double Tap DOWN if no key is bound to skill slot
 		''' */
 }
@@ -44,8 +53,18 @@ ParryEffect: {
 	// DisplayName: Guard Parry
 	/* Tooltip:
 		'''
-		Hold to guard, increasing defense
-		Guard shortly before being hit to parry, nullifying damage
+		Hold to guard, increasing defense by 20
+		Guard shortly before being hit to parry, nullifying damage taken
+		Defaults to Right Click if no key is bound to skill slot
+		''' */
+}
+
+DreadShellEffect: {
+	// DisplayName: Counter Parry
+	/* Tooltip:
+		'''
+		Hold to guard, defense and damage reduction are decreased while and shortly after guarding
+		Guard shortly before being hit to cause a massive counterattack, nullifying damage taken
 		Defaults to Right Click if no key is bound to skill slot
 		''' */
 }
@@ -54,8 +73,19 @@ StardustEffect: {
 	// DisplayName: Stardust Stasis
 	/* Tooltip:
 		'''
-		Freezes time for a few seconds
+		Freezes time for 6 seconds
 		While time is frozen, your minions will continue to attack
+		90 second cooldown
+		''' */
+}
+
+CosmosMoonEffect: {
+	// DisplayName: Stardust Stasis
+	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/StardustEnchant] Freezes time for 6 seconds
+		While time is frozen, your minions will continue to attack
+		75 second cooldown
 		''' */
 }
 
@@ -68,17 +98,24 @@ RemoteLightningEffect: {
 	// DisplayName: Lightning Strike
 	/* Tooltip:
 		'''
-		Rain lightning on the cursor, dealing massive ranged damage to enemies and players
+		Rain lightning on the cursor, dealing massive damage to enemies and players
 		12 second cooldown
 		''' */
 }
 
-FrigidGemstoneKeyEffect: {
+FrigidGraspKeyEffect: {
 	// DisplayName: Frigid Spell
+	// Tooltip: Summons an ice block to your cursor
+}
+
+IceShieldEffect: {
+	// DisplayName: Ice Shield
 	/* Tooltip:
 		'''
-		Summons an ice block to your cursor
-		Inflicts Frostburn in Hardmode
+		Hold to spawn an ice shield aimed towards your cursor
+		After the shield gets hit, it shatters, dealing massive damage in a cone
+		Release the skill button before the shield breaks to shatter it manually, dealing increased damage
+		10 second cooldown
 		''' */
 }
 
@@ -96,23 +133,23 @@ BulbKeyEffect: {
 	/* Tooltip:
 		'''
 		Instantly cures yourself of all debuffs
-		Amplifies debuff damage on enemies by 5x for a brief period of time
+		Curses enemies, causing them to take 500% more damage from debuffs for 5 seconds
 		40 second cooldown, depletes faster while not attacking
 		''' */
 }
 
 AmmoCycleEffect: {
 	// DisplayName: Cycle Ammo
-	// Tooltip: Cycle your ammos (works from inventory and vanity)
+	// Tooltip: Cycle between ammo slots
 }
 
 GladiatorBanner: {
 	// DisplayName: Gladiator Banner
 	/* Tooltip:
 		'''
-		Place an empowering banner that lasts 15 seconds
-		Being close to the banner grants knockback immunity, +5% damage reduction and +5% damage
-		Banner can only be resummoned after it runs out
+		Place an empowering banner on the ground
+		Being close to the banner grants knockback immunity and +8% damage reduction
+		Banner can only be resummoned once every 15 seconds
 		''' */
 }
 
@@ -125,7 +162,7 @@ SpookyEffect: {
 	// DisplayName: Deathhunt Scythe
 	/* Tooltip:
 		'''
-		Spin a large lifestealing scythe around you, dealing melee and summon damage
+		Spin a large lifestealing scythe around yourself
 		Hitting an enemy inflicts Marked for Death for 6 seconds, causing them to take 1.15x damage
 		Hitting your summons causes them to fire a scythe at the closest enemy
 		12 second cooldown
@@ -136,10 +173,12 @@ ForbiddenEffect: {
 	// DisplayName: Forbidden Storm
 	/* Tooltip:
 		'''
-		Call an ancient storm to the cursor location, which deals magic and summon damage
-		Any projectiles shot through your storm deal 1.15x damage
-		Touch it yourself to add back missing wing time
-		Storm can be resummoned after touching the ground
+		Call an ancient storm to the cursor location
+		Projectiles shot through the storm empower it
+		When at full power, the storm is unleashed on the nearest enemy
+		Recast this skill to unleash the storm early
+		Touch the storm yourself to refresh your flight time
+		18 second cooldown
 		''' */
 }
 
@@ -147,8 +186,21 @@ SpiritTornadoEffect: {
 	// DisplayName: Spirit Tornado
 	/* Tooltip:
 		'''
-		Call an ancient tornado which deals magic and summon damage
-		Any projectiles shot through the tornado deal 1.4x damage
-		The tornado tracks your mouse slightly
+		[i:FargowiltasSouls/ForbiddenEnchant] Call an ancient tornado to the cursor location
+		[i:FargowiltasSouls/AncientHallowEnchant] The tornado tracks your mouse slightly
+		Any projectiles shot through your tornado empower it
+		When at full power, the tornado is unleashed on the nearest enemy
+		Recast this skill to unleash the tornado early
+		10 second cooldown
 		''' */
+}
+
+SoulLanternEffect: {
+	// DisplayName: Soul Prison
+	// Tooltip: Use on an enemy to capture a part of their soul in the lantern
+}
+
+TimsInspectEffect: {
+	// DisplayName: Potion Sense
+	// Tooltip: Grants an aura that reveals potions dropped by nearby enemies
 }

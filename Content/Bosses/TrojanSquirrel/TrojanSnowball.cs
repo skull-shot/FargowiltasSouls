@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Chilled, 60);
+            //target.AddBuff(BuffID.Chilled, 60);
         }
 
         public override void OnKill(int timeLeft)

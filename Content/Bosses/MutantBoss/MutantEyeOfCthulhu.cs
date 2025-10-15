@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -17,11 +17,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantEyeOfCthulhu_April" :
-            "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_4";
+            "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_4";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Eye of Cthulhu");
             Main.projFrames[Projectile.type] = Main.npcFrameCount[NPCID.EyeofCthulhu];
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -36,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.timeLeft = 216;
 
@@ -235,15 +234,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(BuffID.Obstructed, 15);
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
-                target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
-                target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
         }
 
         public override void OnKill(int timeLeft)

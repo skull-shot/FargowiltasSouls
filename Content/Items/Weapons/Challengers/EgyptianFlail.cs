@@ -3,13 +3,15 @@ using Terraria.ID;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
 using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class EgyptianFlail : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetDefaults()
         {
             Item.DefaultToWhip(ModContent.ProjectileType<EgyptianFlailProjectile>(), 10, 2, 4, 40);

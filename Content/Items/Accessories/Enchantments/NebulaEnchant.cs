@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.UI.Elements;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -34,19 +36,32 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.NebulaHelmet)
-            .AddIngredient(ItemID.NebulaBreastplate)
-            .AddIngredient(ItemID.NebulaLeggings)
-            //.AddIngredient(ItemID.WingsNebula);
-            .AddIngredient(ItemID.NebulaArcanum)
-            .AddIngredient(ItemID.NebulaBlaze)
-            //LeafBlower
-            //bubble gun
-            //chaarged blaster cannon
-            .AddIngredient(ItemID.LunarFlareBook)
+                .AddIngredient(ItemID.NebulaHelmet)
+                .AddIngredient(ItemID.NebulaBreastplate)
+                .AddIngredient(ItemID.NebulaLeggings)
+                //.AddIngredient(ItemID.WingsNebula);
+                .AddIngredient(ItemID.NebulaArcanum)
+                .AddIngredient(ItemID.NebulaBlaze)
+                //LeafBlower
+                //bubble gun
+                //chaarged blaster cannon
+                .AddIngredient(ItemID.LastPrism)
 
-            .AddTile(TileID.LunarCraftingStation)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage;
+
+            scaling = (int)(MathHelper.Clamp((float)scaling, 1200, 3000) * player.ActualClassDamage(DamageClass.Magic));
+            if (player.FargoSouls().ForceEffect<NebulaEnchant>())
+                scaling = (int)(scaling * 1.66667f);
+
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            return 100;
         }
     }
 
@@ -55,7 +70,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<NebulaEnchant>();
         public override bool ExtraAttackEffect => true;
-
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -66,7 +80,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             
             int max = 3 * 60;
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("NebulaEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/NebulaEnchant").Value, NebulaEnchant.NameColor, 
+                CooldownBarManager.Activate("NebulaEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "NebulaEnchant").Value, NebulaEnchant.NameColor, 
                     () => (float)(max - Main.LocalPlayer.FargoSouls().NebulaEnchCD) / max, activeFunction: () => player.HasEffect<NebulaEffect>());
 
             if (player.setNebula)

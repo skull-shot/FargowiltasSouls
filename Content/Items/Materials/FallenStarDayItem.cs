@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 namespace FargowiltasSouls.Content.Items.Materials
 {
     public class FallenStarDayItem : ModItem
-    {
+    {   
         public override string Texture => "Terraria/Images/Item_75";
 
         public override void SetDefaults()

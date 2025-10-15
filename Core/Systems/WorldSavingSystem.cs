@@ -35,25 +35,25 @@ namespace FargowiltasSouls.Core.Systems
         public const int MaxCountPreHM = 560;
         public const int MaxCountHM = 240;
 
-        internal static bool swarmActive;
-        internal static bool downedBetsy;
-        internal static bool shouldBeEternityMode;
-        internal static bool masochistModeReal;
-        internal static bool canPlayMaso = true;
-        internal static bool downedFishronEX;
+        private static bool swarmActive;
+        private static bool downedBetsy;
+        private static bool shouldBeEternityMode;
+        private static bool masochistModeReal;
+        private static bool canPlayMaso = true;
+        private static bool downedFishronEX;
         internal static bool downedDevi;
         internal static bool downedAbom;
         internal static bool downedMutant;
-        internal static bool angryMutant;
-        internal static bool haveForcedAbomFromGoblins;
-        internal static int skipMutantP1;
-        internal static bool receivedTerraStorage;
-        internal static bool spawnedDevi;
-        internal static bool downedAnyBoss;
-        internal static bool[] downedBoss = new bool[Enum.GetValues(typeof(Downed)).Length];
-        internal static bool wOFDroppedDeviGift2;
-        internal static bool shiftingSandEvent;
-        internal static bool haveForcedMutantFromKS;
+        private static bool angryMutant;
+        private static bool haveForcedAbomFromGoblins;
+        private static int skipMutantP1;
+        private static bool receivedTerraStorage;
+        private static bool spawnedDevi;
+        private static bool downedAnyBoss;
+        private static bool[] downedBoss = new bool[Enum.GetValues(typeof(Downed)).Length];
+        private static bool wOFDroppedDeviGift2;
+        private static bool shiftingSandEvent;
+        private static bool haveForcedMutantFromKS;
 
         public static bool EternityMode { get; set; }
 
@@ -99,6 +99,8 @@ namespace FargowiltasSouls.Core.Systems
 
         public static bool PlacedMutantStatue;
 
+        public static string DungeonBrickType = "B";
+
         public static Point CoffinArenaCenter { get; set; }
 
         public override void Unload() => DownedBoss = null;
@@ -129,6 +131,7 @@ namespace FargowiltasSouls.Core.Systems
             for (int i = 0; i < DownedBoss.Length; i++)
                 DownedBoss[i] = false;
 
+            DungeonBrickType = "B";
             DownedAnyBoss = false;
             WOFDroppedDeviGift2 = false;
             ShiftingSandEvent = false;
@@ -204,12 +207,14 @@ namespace FargowiltasSouls.Core.Systems
                     downed.Add("downedBoss" + i.ToString());
             }
 
+            tag.Add("dungeonColor", DungeonBrickType);
             tag.Add("downed", downed);
             tag.Add("mutantP1", SkipMutantP1);
             tag.Add("CoffinArenaCenterX", CoffinArenaCenter.X);
             tag.Add("CoffinArenaCenterY", CoffinArenaCenter.Y);
             tag.Add("IceGolemTimer", WorldUpdatingSystem.IceGolemTimer);
             tag.Add("SandElementalTimer", WorldUpdatingSystem.SandElementalTimer);
+            tag.Add("WyvernTimer", WorldUpdatingSystem.WyvernTimer);
         }
 
         public override void LoadWorldData(TagCompound tag)
@@ -248,10 +253,15 @@ namespace FargowiltasSouls.Core.Systems
                 coffinY = tag.GetAsInt("CoffinArenaCenterY");
             CoffinArena.SetArenaPosition(new(coffinX, coffinY));
 
+            if (tag.ContainsKey("dungeonColor"))
+                DungeonBrickType = tag.GetString("dungeonColor");
+
             if (tag.ContainsKey("IceGolemTimer"))
                 WorldUpdatingSystem.IceGolemTimer = tag.GetAsInt("IceGolemTimer");
             if (tag.ContainsKey("SandElementalTimer"))
                 WorldUpdatingSystem.SandElementalTimer = tag.GetAsInt("SandElementalTimer");
+            if (tag.ContainsKey("WyvernTimer"))
+                WorldUpdatingSystem.WyvernTimer = tag.GetAsInt("WyvernTimer");
         }
 
         public override void NetReceive(BinaryReader reader)
@@ -290,6 +300,7 @@ namespace FargowiltasSouls.Core.Systems
 
             EternityVanillaBehaviour = reader.ReadBoolean();
 
+            DungeonBrickType = reader.ReadString();
             CoffinArenaCenter = reader.ReadVector2().ToPoint();
             ShiftingSandEvent = reader.ReadBoolean();
             HaveForcedMutantFromKS = reader.ReadBoolean();
@@ -346,6 +357,7 @@ namespace FargowiltasSouls.Core.Systems
 
             writer.Write(EternityVanillaBehaviour);
 
+            writer.Write(DungeonBrickType);
             writer.WriteVector2(CoffinArenaCenter.ToVector2());
             writer.Write(ShiftingSandEvent);
             writer.Write(HaveForcedMutantFromKS);
@@ -353,6 +365,21 @@ namespace FargowiltasSouls.Core.Systems
             writer.Write(CoffinArena.Rectangle.Y);
             writer.Write(CoffinArena.Rectangle.Width);
             writer.Write(CoffinArena.Rectangle.Height);
+        }
+
+        public static void SetDeviDowned()
+        {
+            NPC.SetEventFlagCleared(ref downedDevi, -1);
+        }
+
+        public static void SetAbomDowned()
+        {
+            NPC.SetEventFlagCleared(ref downedAbom, -1);
+        }
+        
+        public static void SetMutantDowned()
+        {
+            NPC.SetEventFlagCleared(ref downedMutant, -1);
         }
     }
 }

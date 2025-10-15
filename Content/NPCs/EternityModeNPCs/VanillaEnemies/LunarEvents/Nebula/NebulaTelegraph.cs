@@ -1,17 +1,18 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEvents.Nebula
 {
     public class NebulaTelegraph : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialPillar";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/LunaticCultist", "CelestialPillar");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Pillar");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -25,7 +26,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }

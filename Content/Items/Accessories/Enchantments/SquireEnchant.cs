@@ -1,4 +1,5 @@
 ﻿using Fargowiltas.Common.Configs;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddEffect<SquireMountSpeed>(item);
             player.AddEffect<SquireMountJump>(item);
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            modPlayer.SquireEnchantActive = true;
+            modPlayer.SquireEnchantItem = item;
 
             //player.buffImmune[BuffID.BallistaPanic] = true;
 
@@ -261,11 +262,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SquireGreatHelm)
             .AddIngredient(ItemID.SquirePlating)
             .AddIngredient(ItemID.SquireGreaves)
-            .AddIngredient(ItemID.DD2BallistraTowerT2Popper)
-            .AddIngredient(ItemID.MajesticHorseSaddle)
             .AddIngredient(ItemID.JoustingLance)
+            .AddIngredient(ItemID.HamBat)
+            .AddIngredient(ItemID.MajesticHorseSaddle)
 
-            .AddTile(TileID.CrystalBall)
+            .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

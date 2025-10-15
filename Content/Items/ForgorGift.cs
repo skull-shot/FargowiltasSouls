@@ -59,7 +59,6 @@ i forgor"); */
                 modPlayer.DeerSinew = false;
                 modPlayer.ConcentratedRainbowMatter = false;
                 modPlayer.OrdinaryCarrot = false;
-                modPlayer.HasClickedWrench = false;
             }
             else
             {

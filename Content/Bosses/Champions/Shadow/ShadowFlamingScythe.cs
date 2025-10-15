@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
             Projectile.hostile = true;
             Projectile.timeLeft = 180;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.light = 0.25f;
             Projectile.tileCollide = false;
             Projectile.hide = true;
@@ -103,7 +103,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                 target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
                 target.AddBuff(BuffID.Blackout, 300);
                 target.AddBuff(BuffID.OnFire, 900);
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 900);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Ocean;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Ocean;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;

@@ -1,5 +1,4 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -38,10 +37,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
         public override void AI(NPC npc)
         {
             base.AI(npc);
+
             //suck in nearby players
             foreach (Player p in Main.player.Where(x => x.active && !x.dead))
             {
-                if (BittenPlayer == -1 && BiteTimer >= 0 && p.velocity.Y == 0 && npc.Distance(p.Center) < 120 && npc.Center.Y > p.Center.Y && !p.immune)
+                if (BittenPlayer == -1 && BiteTimer >= 0 && p.velocity.Y == 0 && npc.Distance(p.Center) < 120 && npc.Center.Y >= p.Center.Y-32 && !p.immune)
                 {
                     VacuumTimer++;
                     if (VacuumTimer > 120)
@@ -52,8 +52,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
                     int dust = Dust.NewDust(p.position, p.width, p.height, DustID.Sand, 15f*-npc.direction, 1, 0, default, 1);
                     Main.dust[dust].noGravity = true;
                 }
-                else
-                    VacuumTimer = 0;
+                else VacuumTimer = 0;
             }
 
             //bite
@@ -131,10 +130,20 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
             //never fire sand balls from vanilla
             npc.ai[0] = 10;
         }
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (BittenPlayer != -1)
+                return false;
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
+        }
         public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
         {
             base.ModifyHitPlayer(npc, target, ref modifiers);
-            target.longInvince = true;
+            if (BittenPlayer == -1 && BiteTimer == 0)
+            {
+                target.longInvince = true;
+                modifiers.FinalDamage *= 0.25f;
+            }
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {

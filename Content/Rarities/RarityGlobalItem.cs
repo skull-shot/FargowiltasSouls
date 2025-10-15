@@ -20,6 +20,11 @@ namespace FargowiltasSouls.Content.Rarities
                     EternitySoulRarity.RenderTooltip(line);
                     return false;
                 }
+                if (item.rare == ModContent.RarityType<AbominableRarity>())
+                {
+                    AbominableRarity.RenderTooltip(line);
+                    return false;
+                }
             }
             
                 

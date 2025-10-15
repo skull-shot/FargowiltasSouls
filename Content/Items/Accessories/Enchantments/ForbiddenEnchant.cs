@@ -1,5 +1,8 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -46,21 +49,28 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.AncientBattleArmorHat)
-            .AddIngredient(ItemID.AncientBattleArmorShirt)
-            .AddIngredient(ItemID.AncientBattleArmorPants)
-            //sun mask/moon mask
-            .AddIngredient(ItemID.DjinnsCurse)
-            .AddIngredient(ItemID.SpiritFlame)
-            .AddIngredient(ItemID.SkyFracture)
-            //sky fracture
-            //.AddIngredient(ItemID.RainbowRod);
+                .AddIngredient(ItemID.AncientBattleArmorHat)
+                .AddIngredient(ItemID.AncientBattleArmorShirt)
+                .AddIngredient(ItemID.AncientBattleArmorPants)
+                //sun mask/moon mask
+                .AddIngredient(ItemID.DjinnsCurse)
+                .AddIngredient(ItemID.SpiritFlame)
+                .AddIngredient(ItemID.PirateStaff)
+                //sky fracture
+                //.AddIngredient(ItemID.RainbowRod);
 
-            //recipe.AddRecipeGroup("FargowiltasSouls:AnyScorpion");
-            //fennec fox pet
+                //recipe.AddRecipeGroup("FargowiltasSouls:AnyScorpion");
+                //fennec fox pet
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.MagicSummonHybrid;
+            tooltipColor = Color.Lerp(Color.Lerp(new(204, 45, 239), new(0, 80, 224), 0.5f), Color.LightGray, 0.3f);
+            scaling = null;
+            return ForbiddenEffect.BaseDamage(Main.LocalPlayer) * 2; //returns empowered storm damage
         }
     }
     public class ForbiddenEffect : AccessoryEffect
@@ -69,6 +79,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override int ToggleItemType => ModContent.ItemType<ForbiddenEnchant>();
         public override bool ActiveSkill => true;
         public override bool MutantsPresenceAffects => true;
+        public static int Cooldown(Player player) => player.ForceEffect<ForbiddenEffect>() ? 60 * 10 : 60 * 18;
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<ForbiddenEffect>() ? 30 : 20) * (1f + player.GetDamage(DamageClass.Magic).Additive + player.GetDamage(DamageClass.Summon).Additive - 2f));
+        public override void PostUpdateEquips(Player player)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+            if (modPlayer.ForbiddenCD > 0)
+            {
+                modPlayer.ForbiddenCD--;
+                if (Main.myPlayer == player.whoAmI)
+                    CooldownBarManager.Activate("ForbiddenTornadoCD", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ForbiddenEnchant").Value, new(231, 178, 28),
+                        () => (float)modPlayer.ForbiddenCD / Cooldown(Main.LocalPlayer), activeFunction: Main.LocalPlayer.HasEffectEnchant<ForbiddenEffect>, displayAtFull: false);
+            }
+                
+        }
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             if (!stunned)
@@ -78,17 +102,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.HasEffect<ForbiddenEffect>() && player.HasEffectEnchant<ForbiddenEffect>())
             {
-                FargoSoulsPlayer modPlayer = player.FargoSouls();
-                if (modPlayer.CanSummonForbiddenStorm)
-                {
-                    CommandForbiddenStorm(player);
-                    modPlayer.CanSummonForbiddenStorm = false;
-                }
+                CommandForbiddenStorm(player);
             }
         }
         public static void CommandForbiddenStorm(Player Player)
         {
             if (!Player.HasEffectEnchant<ForbiddenEffect>())
+                return;
+            if (Player.FargoSouls().ForbiddenCD > 0)
                 return;
             List<int> list = [];
             for (int i = 0; i < Main.maxProjectiles; i++)
@@ -98,6 +119,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     list.Add(i);
                 }
+            }
+
+            if (list.Count > 0)
+            {
+                Main.projectile[list[0]].As<ForbiddenTornado>().Unleash();
+                return;
             }
 
             Vector2 center = Player.Center;
@@ -182,13 +209,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     projectile2.netUpdate = true;
                 }
             }
-
-            int damage = (int)(20f * (1f + Player.GetDamage(DamageClass.Magic).Additive + Player.GetDamage(DamageClass.Summon).Additive - 2f));
-            Projectile.NewProjectile(Player.GetSource_EffectItem<ForbiddenEffect>(), mouse, Vector2.Zero, ModContent.ProjectileType<ForbiddenTornado>(), damage, 0f, Main.myPlayer, 0f, 0f);
+            Projectile.NewProjectile(Player.GetSource_EffectItem<ForbiddenEffect>(), mouse, Vector2.Zero, ModContent.ProjectileType<ForbiddenTornado>(), BaseDamage(Player), 0f, Main.myPlayer, 0f, 0f);
         }
         public override void DrawEffects(Player player, PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
-            if (drawInfo.shadow == 0f)
+            if (drawInfo.shadow == 0f && !player.setForbidden)
             {
                 Color color12 = player.GetImmuneAlphaPure(Lighting.GetColor((int)(drawInfo.Position.X + player.width * 0.5) / 16, (int)(drawInfo.Position.Y + player.height * 0.5) / 16, Color.White), drawInfo.shadow);
                 Color color21 = Color.Lerp(color12, value2: Color.White, 0.7f);
@@ -208,7 +233,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
                 Vector2 vector4 = new Vector2((int)(drawInfo.Position.X - Main.screenPosition.X - (player.bodyFrame.Width / 2) + (player.width / 2)), (int)(drawInfo.Position.Y - Main.screenPosition.Y + player.height - player.bodyFrame.Height + 4f)) + player.bodyPosition + new Vector2(player.bodyFrame.Width / 2, player.bodyFrame.Height / 2);
                 vector4 += new Vector2((float)(-(float)player.direction * 10), (float)(-20 + num52));
-                DrawData value = new(texture2D2, vector4, null, color21, player.bodyRotation, texture2D2.Size() / 2f, 1f, drawInfo.playerEffect, 0);
+                SpriteEffects effects = player.direction != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+                DrawData value = new(texture2D2, vector4, null, color21, player.bodyRotation, texture2D2.Size() / 2f, 1f, effects, 0);
 
                 int num6 = 0;
                 if (player.dye[1] != null)
@@ -219,7 +245,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 drawInfo.DrawDataCache.Add(value);
                 for (float num54 = 0f; num54 < 4f; num54 += 1f)
                 {
-                    value = new DrawData(texture, vector4 + (num54 * 1.57079637f).ToRotationVector2() * num53, null, color22, player.bodyRotation, texture2D2.Size() / 2f, 1f, drawInfo.playerEffect, 0);
+                    value = new DrawData(texture, vector4 + (num54 * 1.57079637f).ToRotationVector2() * num53, null, color22, player.bodyRotation, texture2D2.Size() / 2f, 1f, effects, 0);
                     drawInfo.DrawDataCache.Add(value);
                 }
             }

@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Core.Systems;
@@ -16,6 +16,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class RetinazerDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
         public RetinazerDeathray() : base(240/*, sheeting: TextureSheeting.Vertical*/) { }
 
         public override void SetStaticDefaults()
@@ -135,7 +136,6 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Burning, 150);
             target.AddBuff(BuffID.OnFire, 300);
             target.AddBuff(BuffID.Ichor, 300);
         }
@@ -147,7 +147,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.masochistModeReal ? 0.5f : 1.5f);
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 0.5f : 1.5f);
 
         public static Color ColorFunction(float _)
         {
@@ -173,14 +173,14 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 
             // Set shader parameters.
             shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviInnerStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviInnerStreak.Value);
             shader.TrySetParameter("stretchAmount", 0.5);
             shader.TrySetParameter("scrollSpeed", 4f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);
             shader.TrySetParameter("useFadeIn", true);
             //shader.SetTexture(FargosTextureRegistry.Techno1Noise.Value, 1, SamplerState.LinearWrap);
 
-            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.masochistModeReal ? 40 : 20);
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.MasochistModeReal ? 40 : 20);
         }
     }
 }

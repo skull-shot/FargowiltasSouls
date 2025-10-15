@@ -1,26 +1,159 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
-using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
-    public class DD2LightningBug : Shooters
+    public class DD2LightningBug : EModeNPCBehaviour
     {
-        public DD2LightningBug() : base(240, ModContent.ProjectileType<LightningVortexHostile>(), 0.5f, 1, DustID.Vortex) { }
 
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.DD2LightningBugT3);
 
-        public int Counter;
+        public int State = 0;
+        public int Target = -1;
+        public int Timer = 0;
+
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+            npc.knockBackResist = 0f;
+        }
+
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write7BitEncodedInt(State);
+            binaryWriter.Write7BitEncodedInt(Target);
+            binaryWriter.Write7BitEncodedInt(Timer);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            State = binaryReader.Read7BitEncodedInt();
+            Target = binaryReader.Read7BitEncodedInt();
+            Timer = binaryReader.Read7BitEncodedInt();
+        }
+
+        public override bool SafePreAI(NPC npc)
+        {
+            Timer++;
+            if (Timer < 60)
+            {
+                return base.SafePreAI(npc);
+            }
+
+            npc.spriteDirection = npc.direction;
+            Projectile sentry;
+            switch (State)
+            {
+                case 0: // Looking for target
+                    Target = FindClosestDD2Sentry(npc.Center);
+                    if (Target != -1)
+                    {
+                        State = 1;
+                    }
+                    else
+                        return base.SafePreAI(npc);
+                    return false;
+                case 1: // Approaching Target
+                    sentry = Main.projectile[Target];
+                    if (!sentry.active || sentry.Eternity().Jammed)
+                    {
+                        State = 0;
+                        Target = -1;
+                        return base.SafePreAI(npc);
+                    }
+                    Vector2 targetPos = sentry.Center - 60 * Vector2.UnitY;
+                    npc.velocity += 0.05f * Vector2.UnitX.RotatedBy((targetPos - npc.Center).ToRotation());
+                    npc.direction = (int)npc.HorizontalDirectionTo(targetPos);
+                    float dist = npc.Distance(targetPos);
+                    if (dist < 40f)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item94, npc.Center);
+                        npc.velocity *= 0f;
+                        State = 2;
+                        return false;
+                    }
+                    break;
+                case 2: // Jamming Target
+                    sentry = Main.projectile[Target];
+                    if (!sentry.active)
+                    {
+                        State = 0;
+                        Target = -1;
+                        return base.SafePreAI(npc);
+                    }
+                    npc.Center = sentry.Center - 60 * Vector2.UnitY;
+                    sentry.Eternity().Jammed = true;
+                    // particles!!
+                    if (Main.rand.NextBool(4))
+                    {
+                        Vector2 tailPos = npc.Bottom + new Vector2(npc.direction * -20,0);
+                        float rot = Main.rand.NextFloat((sentry.TopLeft - tailPos).ToRotation(), (sentry.BottomRight - tailPos).ToRotation());
+                        new ElectricSpark(tailPos, 3 * Vector2.UnitX.RotatedBy(rot), Color.Pink, 0.5f, 25).Spawn();
+                    }
+                    return false;
+            }
+
+            float speedCap = 3f;
+            if (npc.velocity.Length() > speedCap)
+            {
+                npc.velocity.Normalize();
+                npc.velocity *= speedCap;
+            }
+
+            return false;
+        }
+
+        public int FindClosestDD2Sentry(Vector2 position)
+        {
+            int n = -1;
+            float dist = -1;
+            for (int i = 0; i < Main.projectile.Length; i++)
+            {
+                Projectile p = Main.projectile[i];
+                if (!p.active || !ProjectileID.Sets.IsADD2Turret[p.type] || p.Eternity().Jammed)
+                    continue;
+
+                float projDist = (p.Center - position).Length();
+                if (dist == -1 || projDist < dist)
+                {
+                    dist = projDist;
+                    n = i;
+                }
+            }
+
+            return n;
+        }
 
         public override void AI(NPC npc)
         {
             base.AI(npc);
 
-            EModeGlobalNPC.Aura(npc, 400, ModContent.BuffType<LightningRodBuff>(), false, DustID.Vortex);
+            //EModeGlobalNPC.Aura(npc, 400, ModContent.BuffType<LightningRodBuff>(), false, DustID.Vortex);
+        }
+
+        public override void OnKill(NPC npc)
+        {
+            if (Target != -1 && Main.projectile[Target].active)
+                Main.projectile[Target].Eternity().Jammed = false;
+            base.OnKill(npc);
+        }
+
+        public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            if (projectile.Eternity().isADD2Proj)
+            {
+                modifiers.FinalDamage *= 0.1f;
+            }
+            base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

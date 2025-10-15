@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -43,11 +44,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.FossilHelm)
                 .AddIngredient(ItemID.FossilShirt)
                 .AddIngredient(ItemID.FossilPants)
-                .AddIngredient(ItemID.BoneDagger, 120)
                 .AddIngredient(ItemID.AmberStaff)
+                .AddIngredient(ItemID.BoneDagger, 90)
                 .AddIngredient(ItemID.AntlionClaw)
 
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }
@@ -57,6 +58,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => null;
         public static void FossilRevive(Player player)
         {
+            if (player.HasEffect<SpectreEffect>())
+                return;
+
             static Projectile[] XWay(int num, IEntitySource spawnSource, Vector2 pos, int type, float speed, int damage, float knockback, int player)
             {
                 Projectile[] projs = new Projectile[num];
@@ -67,7 +71,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             }
 
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            bool spiritForce = modPlayer.ForceEffects.Contains(ModContent.ItemType<SpiritForce>());
 
             void Revive(int healAmount, int reviveCooldown)
             {
@@ -123,6 +126,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public int damageCopy;
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
+            if (player.HasEffect<SpectreEffect>())
+                return;
             //spawn bones
             damageCopy += info.Damage;
             for (int i = 0; i < 2; i++)

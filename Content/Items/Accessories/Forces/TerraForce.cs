@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -18,6 +19,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     [AccessoryEffectLoader.GetEffect<ParryEffect>()];
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<CopperEnchant>(),
@@ -28,6 +30,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 ModContent.ItemType<TungstenEnchant>(),
                 ModContent.ItemType<ObsidianEnchant>()
             ];
+
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationRectangularV(6, 5, 10));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
 
         public override void UpdateInventory(Player player)
@@ -44,6 +49,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         {
             SetActive(player);
 
+            player.AddEffect<TerraEffect>(Item);
             player.AddEffect<TerraLightningEffect>(Item);
             // tin
             player.AddEffect<TinEffect>(Item);
@@ -70,12 +76,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             recipe.AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"));
             recipe.Register();
         }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return TerraLightningEffect.BaseDamage(Main.LocalPlayer);
+        }
+    }
+    public class TerraEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => null;
     }
     public class TerraLightningEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
-        //public override int ToggleItemType => ModContent.ItemType<TerraForce>();
-        
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 900);
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -96,8 +112,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.TerraProcCD == 0 && player.HasEffect<CopperEffect>())
             {
-
-                int dmg = (int)(1150 * damageMultiplier);
                 int cdLength = 300;
 
                 // cooldown scaling from 2x to 1x depending on how recently you got hurt
@@ -113,20 +127,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 Vector2 ai = target.Center - player.Center;
                 Vector2 velocity = Vector2.Normalize(ai) * 20;
 
-                int damage = FargoSoulsUtil.HighestDamageTypeScaling(modPlayer.Player, dmg);
-                FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), damage, 0f, modPlayer.Player.whoAmI, ai.ToRotation());
+                FargoSoulsUtil.NewProjectileDirectSafe(player.GetSource_EffectItem<TerraLightningEffect>(), player.Center, velocity, ModContent.ProjectileType<TerraLightning>(), (int)(BaseDamage(player) * damageMultiplier), 0f, modPlayer.Player.whoAmI, ai.ToRotation());
                 float modifier = 1f;
-                if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
+                /*if (player.HasEffect<TinEffect>() && !modPlayer.Eternity)
                 {
-                    modPlayer.TinCrit += 25;
+                    modPlayer.TinCrit += 5;
                     if (modPlayer.TinCrit > modPlayer.TinCritMax)
                         modPlayer.TinCrit = modPlayer.TinCritMax;
                     else
-                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 25));
+                        CombatText.NewText(modPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.TinEnchant.CritUp", 5));
 
-                    if (modPlayer.TinCrit >= 100)
+                    if (modPlayer.TinCrit >= 25)
                         modifier -= 0.4f;
-                }
+                }*/
                 modPlayer.TerraProcCD = (int)(cdLength * modifier);
             }
         }

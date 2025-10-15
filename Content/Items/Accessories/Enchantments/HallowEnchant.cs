@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -43,11 +44,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddRecipeGroup("FargowiltasSouls:AnyHallowHead")
                 .AddIngredient(ItemID.HallowedPlateMail)
                 .AddIngredient(ItemID.HallowedGreaves)
-                .AddIngredient(ItemID.FairyBell)
                 .AddIngredient(ItemID.HallowJoustingLance)
-                .AddIngredient(ItemID.BouncingShield)
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddIngredient(ItemID.Gungnir)
+                .AddIngredient(ItemID.HolyWater, 50)
+
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class HallowEffect : AccessoryEffect

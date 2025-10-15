@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class SquirrelCoatofArms : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 3;
@@ -19,7 +21,7 @@ namespace FargowiltasSouls.Content.Items.Summons
             Item.width = 30;
             Item.height = 34;
             Item.rare = ItemRarityID.Blue;
-            Item.maxStack = 20;
+            Item.maxStack = Item.CommonMaxStack;
             Item.useAnimation = 30;
             Item.UseSound = FargosSoundRegistry.TrojanSummon;
             Item.useTime = 30;

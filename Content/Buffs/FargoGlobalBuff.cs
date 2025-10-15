@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
@@ -24,13 +25,16 @@ namespace FargowiltasSouls.Content.Buffs
                 switch (type)
                 {
                     case BuffID.ShadowDodge:
-                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
-                        break;
-                    case BuffID.IceBarrier:
-                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.IceBarrier");
+                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.HallowedPlateMail))
+                        {
+                            tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
+                        }
                         break;
                     case BuffID.ChaosState:
-                        tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
+                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.RodofDiscord))
+                        {
+                            tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
+                        }
                         break;
                 }
             }
@@ -59,11 +63,6 @@ namespace FargowiltasSouls.Content.Buffs
                         player.FargoSouls().Slimed = true;
                     break;
 
-                //case BuffID.BrainOfConfusionBuff:
-                    //if (WorldSavingSystem.EternityMode)
-                        //player.AddBuff(ModContent.BuffType<BrainOfConfusionBuff>(), player.buffTime[buffIndex] * 2);
-                    //break;
-
                 case BuffID.OnFire:
                     if (WorldSavingSystem.EternityMode && Main.raining && player.position.Y < Main.worldSurface * 16
                         && Framing.GetTileSafely(player.Center).WallType == WallID.None && player.buffTime[buffIndex] > 2)
@@ -78,6 +77,11 @@ namespace FargowiltasSouls.Content.Buffs
                 case BuffID.Dazed:
                     if (player.whoAmI == Main.myPlayer && player.buffTime[buffIndex] % 60 == 55)
                         SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Debuffs/DizzyBird"));
+                    break;
+
+                case BuffID.Tipsy:
+                    if (player.whoAmI == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.Ale))
+                        player.statDefense -= 2;
                     break;
 
                 default:
@@ -145,6 +149,10 @@ namespace FargowiltasSouls.Content.Buffs
                         }
 
                     }
+                    break;
+
+                case BuffID.Cursed:
+                    npc.FargoSouls().Cursed = true;
                     break;
 
                 case BuffID.Electrified:

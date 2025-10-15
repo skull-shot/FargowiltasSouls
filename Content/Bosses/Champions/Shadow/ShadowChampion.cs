@@ -1,9 +1,10 @@
 ﻿using FargowiltasSouls.Content.BossBars;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Champions;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Champions;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -41,8 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                 BuffID.Chilled,
                 BuffID.OnFire,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
             NPC.height = 110;
             NPC.damage = 130;
             NPC.defense = 60;
-            NPC.lifeMax = 330000;
+            NPC.lifeMax = 270000;
             NPC.HitSound = SoundID.NPCHit5;
             NPC.DeathSound = SoundID.NPCDeath7;
             NPC.noGravity = true;
@@ -80,9 +80,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
             NPC.value = Item.buyPrice(6);
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.dontTakeDamage = true;
 
@@ -97,7 +97,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
 
         /*public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }*/
 
@@ -148,7 +148,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
             Player player = Main.player[NPC.target];
             Vector2 targetPos;
 
-            if (NPC.HasValidTarget && NPC.Distance(player.Center) < 2500 && !Main.dayTime)
+            if (NPC.HasValidTarget && NPC.Distance(player.Center) < 2500)
                 NPC.timeLeft = 600;
 
             NPC.direction = NPC.spriteDirection = NPC.Center.X < player.Center.X ? 1 : -1;
@@ -319,7 +319,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     break;
 
                 case 0: //float over player
-                    if (!player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f || Main.dayTime) //despawn code
+                    if (!player.active || player.dead || Vector2.Distance(NPC.Center, player.Center) > 2500f) //despawn code
                     {
                         NPC.TargetClosest(false);
                         if (NPC.timeLeft > 30)
@@ -337,8 +337,10 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                         if (NPC.Distance(targetPos) > 50)
                             Movement(targetPos, 0.2f, 24f);
                     }
+                    int idleTime = WorldSavingSystem.MasochistModeReal ? 20 : 60;
 
-                    if (++NPC.ai[1] > 60)
+
+                    if (++NPC.ai[1] > idleTime)
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -357,7 +359,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     //warning dust
                     Main.dust[Dust.NewDust(NPC.Center, 0, 0, DustID.Torch, 0f, 0f, 0, default, 2f)].velocity *= 7f;
 
-                    if (NPC.ai[1] == 90 && FargoSoulsUtil.HostCheck) //telegraph
+                    int startTime = WorldSavingSystem.MasochistModeReal ? 30 : 90;
+
+                    if (NPC.ai[1] == startTime && FargoSoulsUtil.HostCheck) //telegraph
                     {
                         for (int i = -1; i <= 1; i++) //on both sides
                         {
@@ -383,7 +387,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                         }
                     }
 
-                    if (++NPC.ai[2] > 5 && NPC.ai[1] > 120)
+                    if (++NPC.ai[2] > 5 && NPC.ai[1] > startTime + 30)
                     {
                         NPC.ai[2] = 0;
 
@@ -420,12 +424,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                             }
                         }
                     }
+                    int endTime = startTime + (WorldSavingSystem.MasochistModeReal ? 110 : 210);
 
-                    if (++NPC.ai[1] == 120)
+                    if (++NPC.ai[1] == startTime + 30)
                     {
                         SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
                     }
-                    else if (NPC.ai[1] > 300)
+                    else if (NPC.ai[1] > endTime)
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -444,7 +449,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                     if (NPC.Distance(targetPos) > 50)
                         Movement(targetPos, 0.1f, 24f);
 
-                    if (NPC.localAI[3] == 2) //faster in p2 only
+                    if (NPC.localAI[3] == 2 || WorldSavingSystem.MasochistModeReal) //faster in p2 only
                         NPC.ai[2] += 0.5f;
 
                     if (++NPC.ai[2] > 60)
@@ -518,6 +523,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                         Movement(targetPos, 0.3f, 24f);
 
                     int threshold = (NPC.localAI[3] > 1 ? 90 : 120);
+                    if (WorldSavingSystem.MasochistModeReal)
+                        threshold -= 15;
                     int endAttack = (NPC.localAI[3] == 3 ? 450 : 420);
                     Vector2 shotVel = (player.Center - NPC.Center) / 30;
 
@@ -617,7 +624,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                         NPC.ai[2] = 0;
                     }
 
-                    if (++NPC.ai[1] > 330)
+                    int dashEndTime = WorldSavingSystem.MasochistModeReal ? 240 : 330;
+
+                    if (++NPC.ai[1] > dashEndTime)
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -633,6 +642,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
 
                 case 9: //shadow clones
                     targetPos = player.Center + NPC.DirectionFrom(player.Center) * 400f;
+                    int windup = WorldSavingSystem.MasochistModeReal ? 45 : 60;
                     if (NPC.Distance(targetPos) > 50)
                         Movement(targetPos, 0.3f, 24f);
 
@@ -647,16 +657,17 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
                                     continue;
                                 for (int j = 0; j < (NPC.localAI[3] == 3 ? 2 : 1); j++) //do twice as many in p3
                                 {
+
                                     Vector2 spawnPos = player.Center + Main.rand.NextFloat(500, 700) * Vector2.UnitX.RotatedBy(Main.rand.NextDouble() * 2 * Math.PI);
                                     Vector2 vel = NPC.velocity.RotatedBy(Main.rand.NextDouble() * Math.PI * 2);
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), spawnPos, vel, ModContent.ProjectileType<ShadowClone>(),
-                                        FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, 60 + 30 * i);
+                                        FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.target, windup + 30 * i);
                                 }
                             }
                         }
                     }
 
-                    if (++NPC.ai[1] > 360)
+                    if (++NPC.ai[1] > 300 + windup)
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -762,9 +773,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Shadow
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<ShadowForce>()));
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<DeathMask>(), 7));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<ShadowChampionRelic>()));
+            npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<DeathForce>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<DeathChampionRelic>()));
             npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ModContent.ItemType<PortableFogMachine>(), 4));
         }
 

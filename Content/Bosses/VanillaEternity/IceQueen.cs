@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.FrostMoon;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.FrostMoon;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -34,8 +34,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
-
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
         }
 
         public override void AI(NPC npc)
@@ -109,7 +107,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 600);
             target.AddBuff(BuffID.Frostburn, 180);
             target.FargoSouls().AddBuffNoStack(BuffID.Frozen, 30);
         }

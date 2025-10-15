@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;

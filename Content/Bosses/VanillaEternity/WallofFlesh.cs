@@ -1,13 +1,13 @@
 using Fargowiltas.Common.Configs;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.WallOfFlesh;
+using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.WallOfFlesh;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -25,6 +25,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Color = Microsoft.Xna.Framework.Color;
+using System.Linq;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -48,7 +49,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public Vector2 AuraCenter = Vector2.Zero;
 
-
+        internal const float HealthMultiplier = 1.8f;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -80,11 +81,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.2f);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * HealthMultiplier);
             if (Main.masterMode) //master mode is already long enough
                 npc.lifeMax = (int)Math.Round(npc.lifeMax * 0.9f);
             npc.defense = 0;
             npc.HitSound = SoundID.NPCHit41;
+
+            npc.dontTakeDamage = true;
         }
 
         public override void OnFirstTick(NPC npc)
@@ -167,6 +170,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else if (WorldEvilAttackCycleTimer < 240) //special attacks
                 {
+                    npc.dontTakeDamage = false;
                     if (UseCorruptAttack) //cursed inferno attack
                     {
                         if (WorldEvilAttackCycleTimer == 10 && FargoSoulsUtil.HostCheck)
@@ -217,12 +221,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                     distance.Y *= flip;
 
                                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center + Vector2.UnitX * Math.Sign(npc.velocity.X) * 32f, distance,
-                                        ModContent.ProjectileType<GoldenShowerWOF>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.75f), 0f, Main.myPlayer, time, 0f, flip);
+                                        ModContent.ProjectileType<GoldenShowerWOF>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.75f), 0f, Main.myPlayer, time, 2f, flip);
                                 }
                             }
                         }
                     }
                 }
+                else
+                    npc.dontTakeDamage = true;
             }
             else if (npc.life < npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.9 : .75)) //enter phase 2
             {
@@ -408,7 +414,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(BuffID.Burning, 300);
+            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 300);
         }
 
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
@@ -432,14 +438,30 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             Vector2 auraPosition = npc.Center;
             DrawAura(npc, spriteBatch, auraPosition);
+            if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+
+                ArmorShaderData shader = GameShaders.Armor.GetShaderFromItemId(ItemID.PhaseDye);
+                shader.Apply(npc, new Terraria.DataStructures.DrawData?());
+            }
             return true;
+        }
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
+            {
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            }
         }
         public void DrawAura(NPC npc, SpriteBatch spriteBatch, Vector2 position)
         {
             Vector2 auraPos = npc.Center;
             float radius = 2000;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return;
             var maxOpacity = npc.Opacity;
@@ -504,7 +526,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 2.2);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * WallofFlesh.HealthMultiplier);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -513,7 +535,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.buffImmune[BuffID.OnFire] = true;
             npc.buffImmune[BuffID.OnFire3] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             npc.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
         }
 
@@ -623,7 +644,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (ai_State >= 0f)
             {
                 //npc.alpha = (int)MathHelper.Lerp(npc.alpha, 175, 0.1f);
-                npc.dontTakeDamage = true;
+                //npc.dontTakeDamage = true;
 
                 if (ai_Timer <= 90) //still firing laser rn
                 {
@@ -645,7 +666,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
             {
                 //npc.alpha = (int)MathHelper.Lerp(npc.alpha, 0, 0.1f);
-                npc.dontTakeDamage = false;
+                //npc.dontTakeDamage = false;
 
                 if (ai_Timer == maxTime - 3 * 5 && FargoSoulsUtil.HostCheck)
                 {
@@ -745,6 +766,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            /*
             if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
             {
                 spriteBatch.End();
@@ -752,17 +774,20 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 ArmorShaderData shader = GameShaders.Armor.GetShaderFromItemId(ItemID.PhaseDye);
                 shader.Apply(npc, new Terraria.DataStructures.DrawData?());
-            }           
+            }    
+            */
             return true;
         }
 
         public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            /*
             if (npc.dontTakeDamage && !npc.IsABestiaryIconDummy)
             {
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
             }
+            */
         }
 
         public override void LoadSprites(NPC npc, bool recolor)
@@ -777,16 +802,104 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.TheHungry, NPCID.TheHungryII);
 
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+
+            npc.lifeMax = (int)Math.Round(npc.lifeMax / WallofFlesh.HealthMultiplier);
+        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
 
             npc.buffImmune[BuffID.OnFire] = true;
         }
+        public int timer = 0;
+        public int attachEye = -1;
+        public override bool SafePreAI(NPC npc)
+        {
+            if (npc.type == NPCID.TheHungryII) // detatched
+            {
+                npc.dontTakeDamage = true;
+                npc.knockBackResist = 0f;
+                npc.noTileCollide = true;
+                NPC mouth = Main.npc.FirstOrDefault(n => n.TypeAlive(NPCID.WallofFlesh));
+                if (mouth != null)
+                {
+                    npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, mouth.Center, npc.velocity, 1f, 1f);
+                    if (npc.Distance(mouth.Center) < mouth.width / 2)
+                    {
+                        npc.active = false;
+                        return false;
+                    }
+                        
+                }
+                else
+                {
+                    npc.active = false;
+                    return false;
+                }
+            }
+            else // attached
+            {
+                timer++;
+                NPC eye = Main.npc.FirstOrDefault(n => n.TypeAlive(NPCID.WallofFleshEye) && n.ai[2] == -1); //Main.npc[attachEye];
+                if (eye == null)
+                {
+                    if (attachEye.IsWithinBounds(Main.maxNPCs) && Main.npc[attachEye].TypeAlive(NPCID.WallofFleshEye))
+                        eye = Main.npc[attachEye];
+                        
+                }
+                if (eye != null)
+                {
+                    attachEye = eye.whoAmI;
+                    Vector2 dir = Vector2.UnitX.RotatedBy(eye.rotation);
+                    int myIndex = 0;
+                    bool found = false;
+                    int hungries = 0;
+                    foreach (var n in Main.npc.Where(n => n.TypeAlive(npc.type)))
+                    {
+                        if (n.whoAmI == npc.whoAmI)
+                            found = true;
+                        if (!found)
+                            myIndex++;
+                        hungries++;
+                    }
+                    float factor = (myIndex - hungries / 2) * 0.5f;
+                    Vector2 desiredPos = eye.Center - dir.RotatedBy(MathHelper.PiOver2 * 0.35f * MathF.Sin(MathF.Tau * (timer + 70 * factor) / 137)) * (200 + 80 * MathF.Sin(MathF.Tau * (timer + 30 * factor) / 97));
+                    npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, 1f, 1f);
 
+                    float desiredai0 = LumUtils.InverseLerp(Main.wofDrawAreaTop, Main.wofDrawAreaBottom, eye.Center.Y + factor * 50);
+                    npc.ai[0] = MathHelper.Lerp(npc.ai[0], desiredai0, 0.025f);
+                }
+
+                /*
+                if (attachEye == -1)
+                {
+                    //NPC eye = Main.npc.FirstOrDefault(n => n.TypeAlive(NPCID.WallofFleshEye) && n.ai[2] == -1);
+                    //if (eye != null)
+                    //    attachEye = eye.whoAmI;
+                }
+                else
+                {
+
+                    //if (!eye.TypeAlive(NPCID.WallofFleshEye) || eye.ai[2] != -1)
+                    //{
+                    //    npc.StrikeInstantKill();
+                    //    return false;
+                    //}
+                    
+                }
+                */
+            }
+            return base.SafePreAI(npc);
+        }
         public override void AI(NPC npc)
         {
             base.AI(npc);
+
+
+
 
             NPC wall = FargoSoulsUtil.NPCExists(EModeGlobalNPC.wallBoss, NPCID.WallofFlesh);
             if (npc.HasValidTarget && npc.Distance(Main.player[npc.target].Center) < 200 && wall != null

@@ -1,6 +1,7 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,10 +12,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class DecrepitAirstrikeRemote : SoulsItem
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 15;
             Item.value = Item.sellPrice(0, 5);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.Item66;
             Item.autoReuse = false;
             Item.shoot = ModContent.ProjectileType<DecrepitAirstrike>();

@@ -1,5 +1,5 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantGuardian_April" :
-            "FargowiltasSouls/Assets/ExtraTextures/Resprites/NPC_127";
+            "FargowiltasSouls/Assets/Textures/EModeResprites/NPC_127";
 
         public override void SetStaticDefaults()
         {
@@ -32,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.timeLeft = 240;
             Projectile.hide = true;
@@ -68,19 +68,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
-                if (WorldSavingSystem.MasochistModeReal)
-                {
-                    target.AddBuff(ModContent.BuffType<GodEaterBuff>(), 420);
-                }
-                //target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 420);
-                target.AddBuff(ModContent.BuffType<MarkedforDeathBuff>(), 420);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 480);
         }
 
         public override void OnKill(int timeLeft)

@@ -1,6 +1,6 @@
 using System.IO;
 using Terraria.ModLoader.IO;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
@@ -9,7 +9,7 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
@@ -19,7 +19,10 @@ using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Terraria.DataStructures;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Skeletron;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Skeletron;
+using Microsoft.Xna.Framework.Graphics;
+using FargowiltasSouls.Core;
+using System.Transactions;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -324,6 +327,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 */
             }
 
+            if (BabyGuardianTimer <= 28 && BabyGuardianTimer != 0)
+                frameCounter++;
+            else
+            {
+                currentFrame = 0;
+                frameCounter = 0;
+            }
+                
             EModeUtils.DropSummon(npc, "SuspiciousSkull", NPC.downedBoss3, ref DroppedSummon);
 
             return result;
@@ -471,7 +482,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public override bool CheckDead(NPC npc)
         {
-            if (npc.ai[1] != 2f)
+            if (npc.ai[1] != 2f && WorldSavingSystem.MasochistModeReal)
             {
                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
 
@@ -518,6 +529,31 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             LoadProjectile(recolor, ProjectileID.Skull);
 
             LoadSpecial(recolor, ref TextureAssets.BoneArm, ref FargowiltasSouls.TextureBuffer.BoneArm, "Arm_Bone");
+        }
+
+        public int frameCounter;
+        public int currentFrame = 0;
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D texture = TextureAssets.Npc[npc.type].Value;
+            if (!SoulConfig.Instance.BossRecolors)
+            {
+                return true;
+            }
+            int maxFrame = 7;
+            Rectangle rect = new(0, (texture.Height / maxFrame) * currentFrame, texture.Width, texture.Height / maxFrame);
+
+            if (frameCounter > 4)
+            {
+                frameCounter = 0;
+                currentFrame++;
+                if (currentFrame >= maxFrame)
+                    currentFrame = maxFrame - 1;
+            }
+
+            spriteBatch.Draw(texture, npc.Center - screenPos, new Rectangle?(rect), drawColor, npc.rotation, rect.Size() / 2f, npc.scale, SpriteEffects.None, 1);
+            return false;
         }
     }
 
@@ -837,6 +873,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     }
                     if (Timer > LungeWindup + 10 && Timer <= LungeWindup + 30)
                     {
+                        if (Timer < LungeWindup + 22)
+                            storedVel = storedVel.RotateTowards(npc.SafeDirectionTo(player.Center).ToRotation(), 0.05f);
                         storedVel *= 0.95f;
                     }
                     if (Timer > LungeWindup + 30)
@@ -937,10 +975,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             
             //not while spinning outside maso
-            if (!HeadSpinning(npc) || WorldSavingSystem.MasochistModeReal)
-            {
-                target.AddBuff(BuffID.Dazed, 60);
-            }
+            //if (!HeadSpinning(npc) || WorldSavingSystem.MasochistModeReal)
+            //{
+            //    target.AddBuff(BuffID.Dazed, 60);
+            //}
             
         }
         public static bool HeadSpinning(NPC npc)

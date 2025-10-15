@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Patreon.Sasha
             Inertia = 20f;
             ShootSpeed = 20f;
             ShootCool = 45;
-            ViewDist = 600;
+            ViewDist = 900;
         }
 
         public override void CheckActive()

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Bosses.Champions.Earth;
 using FargowiltasSouls.Content.Bosses.Champions.Life;
@@ -19,13 +20,9 @@ namespace FargowiltasSouls.Content.Items.Summons
 {
     public class SigilOfChampions : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Summons", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Sigil of Champions");
-            /* Tooltip.SetDefault(@"Summons the Champions
-Summons vary depending on time and biome
-Right click to check for possible summons
-Not consumed on use"); */
             ItemID.Sets.SortingPriorityBossSpawns[Type] = 12;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

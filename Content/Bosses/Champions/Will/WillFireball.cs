@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -33,9 +34,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             Projectile.timeLeft = 600;
             Projectile.alpha = 60;
             Projectile.ignoreWater = true;
-            //CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            base.OnSpawn(source);
+            if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC && sourceNPC.type is NPCID.DD2Betsy)
+                CooldownSlot = -1;
+        }
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI / 2;
@@ -93,11 +100,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Will
             {
                 if (WorldSavingSystem.EternityMode)
                 {
-                    //target.AddBuff(BuffID.OnFire, 600);
-                    //target.AddBuff(BuffID.Ichor, 600);
-                    target.AddBuff(BuffID.WitheredArmor, Main.rand.Next(60, 300));
-                    target.AddBuff(BuffID.WitheredWeapon, Main.rand.Next(60, 300));
-                    target.AddBuff(BuffID.Burning, 300);
+                    target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                 }
             }
             Projectile.timeLeft = 0;

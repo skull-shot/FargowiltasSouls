@@ -10,10 +10,6 @@ Nekomi:
 	'''
 Gaia:
 	'''
-	10% increased melee speed
-	Reduces mana usage by 10% and increases max mana by 30
-	10% chance to not consume ammo
-	Increases max number of minions by 4
 	Double tap {0} to toggle offensive mode, which has the following effects:
 	30% increased damage and 15% increased critical strike chance for your current weapon class
 	Increases armor penetration by 20
@@ -35,7 +31,7 @@ EridanusOn:
 	30% increased critical strike chance for the empowered class
 	30% increased attack speed for the empowered class
 	Increases your max number of minions by 3
-	Your summon weapons can crit with summoner empowerment
+	Your summon weapons can critically strike for 1.25x damage during summoner empowerment
 	Double tap {0} to deactivate Eridanus' blessing
 	'''
 Styx:
@@ -43,7 +39,7 @@ Styx:
 	20% increased damage for your current weapon class
 	Attack enemies to charge energy
 	Reduces damage taken at the cost of some energy
-	Double tap {0} to release energy as homing shots
+	Double tap {0} to release energy as homing scythes
 	Brandish a blade of infernal magic when fully charged
 	'''
 Mutant:

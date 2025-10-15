@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;

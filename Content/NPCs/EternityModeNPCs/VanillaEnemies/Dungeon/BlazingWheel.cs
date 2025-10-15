@@ -20,6 +20,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
             npc.dontTakeDamage = false;
             npc.lifeMax = 75;
             npc.defense = 25;
+
+            npc.value = 450;
+            npc.HitSound = SoundID.LiquidsWaterLava;
+            npc.DeathSound = SoundID.NPCDeath55;
+            npc.lavaImmune = true;
         }
 
         private int directionCounter = 600;
@@ -39,7 +44,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
             base.AI(npc);
 
             //spawn smokescreen
-            if ((npc.collideX || npc.collideY) && ++Counter >= 10)
+            /*if ((npc.collideX || npc.collideY) && ++Counter >= 10)
             {
                 Counter = 0;
 
@@ -55,36 +60,27 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Dungeon
                     Main.dust[num153].velocity.Y -= 0.4f + (float)Main.rand.Next(-3, 14) * 0.15f;
                     Main.dust[num153].fadeIn = 1.25f + (float)Main.rand.Next(20) * 0.15f;
                 }
-            }
+            }*/
 
             if (--directionCounter <= 0)
             {
                 npc.direction = -npc.direction;
                 directionCounter = Main.rand.Next(300, 900);
             }
-
-               
-
-
-            //other enemies it passes through
-            //for (int i = 0; i < Main.maxNPCs; i++)
-            //{
-            //    NPC otherNPC = Main.npc[i];
-
-            //    if (otherNPC.active && !otherNPC.friendly)
-            //    {
-                
-            //    }
-            //}
-
-
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             target.AddBuff(BuffID.OnFire, 300);
-            if (OutsideDungeon)
-                target.AddBuff(BuffID.Burning, 300);
+        }
+
+        public override void OnKill(NPC npc)
+        {
+            for (int i = 0; i < 40; i++)
+            {
+                int d = Dust.NewDust(npc.position, npc.width, npc.height, DustID.InfernoFork, Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1));
+                Main.dust[d].noGravity = true;
+            }
         }
     }
 }

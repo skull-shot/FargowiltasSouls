@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,7 +26,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.extraUpdates = 2;
             Projectile.ignoreWater = true;
             Projectile.alpha = 255;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.scale = 2f;
         }
@@ -55,12 +56,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
             //Lighting.AddLight(Projectile.Center, 0.525f, 0f, 0.75f);
             Projectile.rotation = Projectile.velocity.ToRotation();
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.GuiltyBuff>(), 300);
         }
 
         public override Color? GetAlpha(Color lightColor)

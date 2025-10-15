@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             target.AddBuff(BuffID.OnFire, 300);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                 target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
         }

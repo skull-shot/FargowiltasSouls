@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class BoneZone : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         private int counter = 1;
 
         public override void SetStaticDefaults()

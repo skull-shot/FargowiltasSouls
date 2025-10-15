@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 {
     public abstract class BaseSoul : SoulsItem
     {
+        public override string Texture => $"{Mod.Name}/Assets/Textures/Content/Items/Accessories/Souls/{Name}";
         protected virtual Color? nameColor => null;
 
         public override void SetStaticDefaults()
@@ -37,6 +39,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.rare = ItemRarityID.Purple;
         }
 
-        public override Color? GetAlpha(Color lightColor) => Color.White;
+        //public override Color? GetAlpha(Color lightColor) => Color.White;
     }
 }

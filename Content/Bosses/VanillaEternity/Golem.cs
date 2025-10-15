@@ -1,15 +1,16 @@
 using System.IO;
 using Terraria.ModLoader.IO;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Common.Utilities;
@@ -20,8 +21,9 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System.Collections.Generic;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.Golem;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Golem;
 using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
 
 namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
@@ -42,9 +44,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.trapImmune = true;
 
-            npc.damage = (int)Math.Round(npc.damage * 1.1);
+            npc.damage = (int)Math.Round(npc.damage * 1.25);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.6);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.75);
         }
 
         public override void OnFirstTick(NPC npc)
@@ -54,7 +56,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[BuffID.Ichor] = true;
             npc.buffImmune[BuffID.Poisoned] = true;
             npc.buffImmune[BuffID.Suffocation] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             npc.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = true;
         }
 
@@ -83,13 +84,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 600);
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 5);
         }
-
-        public static string DungeonVariant => 
-            GenVars.crackedType == TileID.CrackedBlueDungeonBrick ? "B" : 
-            GenVars.crackedType == TileID.CrackedGreenDungeonBrick ? "G" : 
-            "P";
 
         public static void LoadGolemSpriteBuffered(bool recolor, int type, Asset<Texture2D>[] vanillaTexture, Dictionary<int, Asset<Texture2D>> fargoBuffer, string texturePrefix)
         {
@@ -98,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (!fargoBuffer.ContainsKey(type))
                 {
                     fargoBuffer[type] = vanillaTexture[type];
-                    vanillaTexture[type] = LoadSprite($"{texturePrefix}{type}{DungeonVariant}") ?? vanillaTexture[type];
+                    vanillaTexture[type] = LoadSprite($"{texturePrefix}{type}{WorldSavingSystem.DungeonBrickType}") ?? vanillaTexture[type];
                 }
             }
             else
@@ -109,6 +105,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     fargoBuffer.Remove(type);
                 }
             }
+            //Main.NewText(WorldSavingSystem.DungeonBrickType);
         }
         public override void LoadSprites(NPC npc, bool recolor)
         {
@@ -503,14 +500,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             npc.lifeMax *= 2;
             npc.damage = (int)(npc.damage * 1.3);
+            NPCID.Sets.ImmuneToAllBuffs[npc.type] = true;
 
             //npc.scale += 0.5f;
+        }
+
+        public override bool? CanBeHitByItem(NPC npc, Player player, Item item)
+        {
+            if (SwordGlobalItem.CountsAsBroadsword(item)) // fix issue with true melee hit cooldown for Golem Fist
+                return false;
+            return base.CanBeHitByItem(npc, player, item);
         }
 
         public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
         {
             if (ProjectileID.Sets.IsAWhip[projectile.type])
                 return false;
+            if (projectile.aiStyle == ProjAIStyleID.NightsEdge)
+                return false; // fix issue with true melee hit cooldown for Golem Fist
 
             return base.CanBeHitByProjectile(npc, projectile);
         }
@@ -565,13 +572,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
         {
             modifiers.Null();
-        }
-        public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
-        {
-            base.SafeOnHitByProjectile(npc, projectile, hit, damageDone);
-
-            if (WorldSavingSystem.MasochistModeReal && projectile.maxPenetrate != 1 && FargoSoulsUtil.CanDeleteProjectile(projectile))
-                projectile.timeLeft = 0;
         }
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
         {

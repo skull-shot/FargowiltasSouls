@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Corruption;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Corruption;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Luminance.Common.Utilities;
@@ -112,9 +112,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corrupti
             Origin += Vector2.UnitX.RotatedBy((npc.rotation + JawRot));
             Origin -= Vector2.UnitY.RotatedBy((npc.rotation + JawRot) - 2);
 
-            spriteBatch.Draw(Eater, npc.Center - Main.screenPosition, npc.frame, Color.White, npc.rotation, npc.frame.Size() / 2, npc.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Jaw, position, null, Color.White, JawRot + npc.rotation, Origin , npc.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Jaw, position, null, Color.White, -JawRot + npc.rotation, Origin, npc.scale, SpriteEffects.FlipHorizontally, 0f);
+            spriteBatch.Draw(Eater, npc.Center - Main.screenPosition, npc.frame, drawColor, npc.rotation, npc.frame.Size() / 2, npc.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Jaw, position, null, drawColor, JawRot + npc.rotation, Origin , npc.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Jaw, position, null, drawColor, -JawRot + npc.rotation, Origin, npc.scale, SpriteEffects.FlipHorizontally, 0f);
             return false;
         }
 

@@ -1,12 +1,19 @@
-﻿using FargowiltasSouls.Content.UI.Elements;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern;
+using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.Localization;
+using Terraria.Map;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -40,9 +47,20 @@ namespace FargowiltasSouls.Content.Items
         }
 
         /// <summary>
+        /// Return a number greater than 0 to make the item auto-generate a tooltip that shows its damage value. Meant for accessories.
+        /// </summary>
+        public virtual int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return 0;
+        }
+
+        /// <summary>
         /// The location of the item's glowmask texture, defaults to the item's internal texture name with _glow
         /// </summary>
-        public virtual string Glowmaskstring => Texture + "_glow";
+        public virtual string GlowmaskTexture => Texture + "_glow";
 
         /// <summary>
         /// The amount of frames in the item's animation. <br />
@@ -59,21 +77,20 @@ namespace FargowiltasSouls.Content.Items
         /// Allows you to draw things in front of this item. This method is called even if PreDrawInWorld returns false. <br />
         /// Runs directly after the code for PostDrawInWorld in SoulsItem.
         /// </summary>
-        public virtual void SafePostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) { }
+        public virtual void SafePostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) 
+        { 
+        }
 
         public sealed override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
-        {
-            if (Mod.RequestAssetIfExists(Glowmaskstring, out Asset<Texture2D> _))
+        {   
+            if (ModContent.RequestIfExists(GlowmaskTexture, out Asset<Texture2D> asset, AssetRequestMode.ImmediateLoad))
             {
-                Item item = Main.item[whoAmI];
-                Texture2D texture = ModContent.Request<Texture2D>(Glowmaskstring, AssetRequestMode.ImmediateLoad).Value;
-                int height = texture.Height / NumFrames;
-                int width = texture.Width;
-                int frame = NumFrames > 1 ? height * Main.itemFrame[whoAmI] : 0;
-                SpriteEffects flipdirection = item.direction < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-                Rectangle Origin = new(0, frame, width, height);
-                Vector2 DrawCenter = new(item.Center.X, item.position.Y + item.height - height / 2);
-                Main.EntitySpriteDraw(texture, DrawCenter - Main.screenPosition, Origin, Color.White, rotation, Origin.Size() / 2, scale, flipdirection, 0);
+                Texture2D texture = asset.Value;
+                Rectangle frame = NumFrames > 1 ? Main.itemAnimations[Item.type].GetFrame(texture, Main.itemFrameCounter[whoAmI]) : texture.Frame();
+                Vector2 origin = frame.Size() / 2f;
+                Vector2 DrawCenter = Item.Bottom - Main.screenPosition - new Vector2(0, origin.Y);
+
+                Main.EntitySpriteDraw(texture, DrawCenter, frame, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
             }
             SafePostDrawInWorld(spriteBatch, lightColor, alphaColor, rotation, scale, whoAmI);
         }
@@ -112,8 +129,55 @@ namespace FargowiltasSouls.Content.Items
                 string text = $"[i:{ModContent.ItemType<TogglerIconItem>()}] [c/BC5252:{Language.GetTextValue($"Mods.FargowiltasSouls.Items.Extra.DisabledEffects")}]";
                 tooltips.Add(new TooltipLine(Mod, $"{Mod.Name}:DisabledEffects", text));
             }
+            int damage = DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling);
+            if (damage > 0 && IsNotRuminating(Item))
+            {
+                int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                if (firstTooltip > 0)
+                {
+                    string tip = "";
+                    if (scaling != null)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.Scaling");
+                    }
+                    if (damageClass == DamageClass.Generic)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.HighestClass");
+                    }
+                    else if (damageClass == DamageClass.MagicSummonHybrid)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.MagicSummonHybrid");
+                    }
+                    else if (damageClass == DamageClass.SummonMeleeSpeed)
+                    {
+                        tip += " " + Language.GetTextValue("Mods.FargowiltasSouls.Items.Extra.MeleeSummonHybrid");
+                    }
+                    else if (damageClass != null)
+                    {
+                        bool addLeadingSpace = damageClass is not VanillaDamageClass;
+                        tip += addLeadingSpace ? " " : "" + damageClass.DisplayName;
+                    }
+                    else
+                    {
+                        tip += Lang.tip[55].Value; // No damage class
+                    }
+                    string damageText = damage.ToString();
+                    if (scaling != null)
+                        damageText += "%";
+                    string text = damageText + tip;
+                    if (scaling != null && Main.LocalPlayer.HeldItem.IsWeapon())
+                        text += $" ({scaling})";
+                    var damageTooltip = new TooltipLine(Mod, $"{Mod.Name}:DamageTooltip", text);
+                    if (tooltipColor.HasValue)
+                        damageTooltip.OverrideColor = tooltipColor;
+                    else if (damageClass != null)
+                        damageTooltip.OverrideColor = DamageClassColor(damageClass);
+                    tooltips.Insert(firstTooltip, damageTooltip);
+                }
+            }
             int activeSkills = ActiveSkillTooltips.Count;
-            if (activeSkills > 0)
+
+            if (activeSkills > 0 && IsNotRuminating(Item))
             {
                 int firstTooltip = tooltips.FindIndex(line => line.Name == "Tooltip0");
                 if (firstTooltip >= 0)
@@ -142,7 +206,7 @@ namespace FargowiltasSouls.Content.Items
                     string boundText = "";
                     if (activeSkills == 1)
                     {
-                        boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound");
+                        boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.Unbound") + " ";
                         var boundSkills = Main.LocalPlayer.FargoSouls().ActiveSkills;
                         for (int i = 0; i < boundSkills.Length; i++)
                         {
@@ -150,13 +214,13 @@ namespace FargowiltasSouls.Content.Items
                             {
                                 var skillKeys = FargowiltasSouls.ActiveSkillKeys[i].GetAssignedKeys();
                                 if (skillKeys.Count > 0)
-                                    boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.BoundTo", skillKeys[0]);
+                                    boundText = Language.GetTextValue("Mods.FargowiltasSouls.ActiveSkills.BoundTo", skillKeys[0]) + " ";
                             }
                         }
                     }
 
                     var namesTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkills", nameText + " " + names);
-                    var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", boundText + " " + keybindMenuText);
+                    var bindTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillBind", boundText + keybindMenuText);
                     var descTooltip = new TooltipLine(Mod, $"{Mod.Name}:ActiveSkillTooltip", description);
 
                     Color color1 = Color.Lerp(Color.Blue, Color.LightBlue, 0.7f);
@@ -170,6 +234,25 @@ namespace FargowiltasSouls.Content.Items
                         tooltips.Insert(firstTooltip + 2, descTooltip);
                 }
             }
+        }
+
+        public static bool IsNotRuminating(Item item) => item.ModItem != null && Fargowiltas.Fargowiltas.SoulsMods.Contains(item.ModItem.Mod.Name) && !(Language.GetTextValue($"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip") != $"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip" && FargowiltasSouls.RuminateKey.Current && !FargoGlobalItem.NoRuminateText.Contains(item.type));
+
+        public static Color DamageClassColor(DamageClass damageClass)
+        {
+            Color color = Color.LightGray;
+            float lerp = 0.75f;
+            if (damageClass.CountsAsClass(DamageClass.Melee))
+                return Color.Lerp(new(225, 90, 90), color, lerp);
+            if (damageClass.CountsAsClass(DamageClass.Ranged))
+                return Color.Lerp(new(38, 168, 35), color, lerp);
+            if (damageClass.CountsAsClass(DamageClass.Magic))
+                return Color.Lerp(new(204, 45, 239), color, lerp);
+            if (damageClass.CountsAsClass(DamageClass.Summon))
+                return Color.Lerp(new(0, 80, 224), color, lerp);
+            if (damageClass.CountsAsClass(DamageClass.Default) || damageClass.CountsAsClass(DamageClass.Generic))
+                return color;
+            return Color.White;
         }
     }
 }

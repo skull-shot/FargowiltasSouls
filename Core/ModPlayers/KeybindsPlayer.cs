@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Terraria;
@@ -37,7 +38,10 @@ namespace FargowiltasSouls.Core.ModPlayers
             #region ignores stuns
 
             if (FargowiltasSouls.ActiveSkillMenuKey.JustPressed && Player.whoAmI == Main.myPlayer)
-                FargoUIManager.Toggle<ActiveSkillMenu>();
+                CombinedUI.ToggleUI<ActiveSkillMenu>();
+
+            if (FargowiltasSouls.SoulToggleKey.JustPressed && Player.whoAmI == Main.myPlayer)
+                CombinedUI.ToggleUI<SoulToggler>();
 
             if (Mash)
             {
@@ -46,12 +50,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[2] = 0;
                 Player.doubleTapCardinalTimer[3] = 0;
 
-                const int increment = 1;
+                float increment = 1;
+                increment += FramesSinceLastMash / 7f;
 
                 if (triggersSet.Up)
                 {
                     if (!MashPressed[0])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[0] = true;
                 }
                 else
@@ -60,7 +68,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (triggersSet.Left)
                 {
                     if (!MashPressed[1])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[1] = true;
                 }
                 else
@@ -69,7 +80,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (triggersSet.Right)
                 {
                     if (!MashPressed[2])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[2] = true;
                 }
                 else
@@ -78,11 +92,16 @@ namespace FargowiltasSouls.Core.ModPlayers
                 if (triggersSet.Down)
                 {
                     if (!MashPressed[3])
+                    {
                         MashCounter += increment;
+                        FramesSinceLastMash = 0;
+                    }
                     MashPressed[3] = true;
                 }
                 else
                     MashPressed[3] = false;
+                if (FramesSinceLastMash < 30)
+                    FramesSinceLastMash++;
             }
 
             if (PrecisionSeal)
@@ -104,9 +123,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.doubleTapCardinalTimer[3] = 0;
             }
 
-            if (FargowiltasSouls.SoulToggleKey.JustPressed)
-                FargoUIManager.Toggle<SoulToggler>();
-
             #endregion
 
             if (stunned)
@@ -119,7 +135,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             //if (FargowiltasSouls.SmokeBombKey.JustPressed && CrystalEnchantActive && SmokeBombCD == 0)
             //    CrystalAssassinEnchant.SmokeBombKey(this);
 
-            if (Player.HasEffect<FrigidGemstoneKeyEffect>())
+            if (Player.HasEffect<FrigidGraspKeyEffect>())
             {
                 if (FrigidGemstoneCD > 0)
                     FrigidGemstoneCD--;

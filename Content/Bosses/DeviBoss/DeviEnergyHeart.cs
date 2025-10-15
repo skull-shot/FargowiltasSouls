@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
@@ -14,7 +15,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     {
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Energy Heart");
+            Main.projFrames[Type] = 5;
         }
 
         public override void SetDefaults()
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.alpha = 150;
             Projectile.timeLeft = 80;
@@ -45,6 +46,14 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             {
                 Projectile.localAI[0] = 1;
                 SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Siblings/Deviantt/DeviHeartThrow" + Main.rand.Next(1,3)), Projectile.Center);
+            }
+
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frame++;
+                Projectile.frameCounter = 0;
+                if (Projectile.frame >= 5)
+                    Projectile.frame = 1;
             }
 
             // Fade into 50 alpha from 150
@@ -92,7 +101,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
         }
 
         public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity;

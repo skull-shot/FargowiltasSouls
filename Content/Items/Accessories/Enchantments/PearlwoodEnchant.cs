@@ -1,5 +1,6 @@
-﻿
+﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
@@ -34,20 +35,28 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.PearlwoodHelmet)
-            .AddIngredient(ItemID.PearlwoodBreastplate)
-            .AddIngredient(ItemID.PearlwoodGreaves)
-            .AddIngredient(ItemID.PearlwoodSword)
-            .AddIngredient(ItemID.LightningBug)
-            .AddIngredient(ItemID.Starfruit)
+                .AddIngredient(ItemID.PearlwoodHelmet)
+                .AddIngredient(ItemID.PearlwoodBreastplate)
+                .AddIngredient(ItemID.PearlwoodGreaves)
+                .AddIngredient(ItemID.PearlwoodSword)
+                .AddIngredient(ItemID.LightningBug)
+                .AddRecipeGroup("FargowiltasSouls:StarfruitOrDragonfruit")
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return PearlwoodEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class PearlwoodEffect : AccessoryEffect
     {
         public override Header ToggleHeader => null;
+        public static int BaseDamage(Player player) => (int)((player.FargoSouls().ForceEffect<PearlwoodEnchant>() ? 120 : 60) * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -74,53 +83,49 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (modPlayer.PearlwoodCritDuration <= 0)
                 return;
-
-            if (hitInfo.Crit)
-            {
-                //SoundEngine.PlaySound(SoundID.Item25, target.position);
-                for (int i = 0; i < 7; i++)
-                { //idk how to make dust look good (3)
-                    Color color = Main.rand.NextFromList(Color.Goldenrod, Color.Pink, Color.Cyan);
-                    Particle p = new SmallSparkle(
-                        worldPosition: Main.rand.NextVector2FromRectangle(target.Hitbox),
-                        velocity: (Main.rand.NextFloat(10, 25) * Vector2.UnitX).RotatedByRandom(MathHelper.TwoPi),
-                        drawColor: color,
-                        scale: 1f,
-                        lifetime: Main.rand.Next(10, 15),
-                        rotation: 0,
-                        rotationSpeed: Main.rand.NextFloat(-MathHelper.Pi / 8, MathHelper.Pi / 8)
-                        );
-                    p.Spawn();
-                }
-            }
         }
         public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            PearlwoodCritReroll(player, ref modifiers, proj.DamageType);
+            int critChance = (int)player.ActualClassCrit(proj.DamageType) + FargoSoulsGlobalProjectile.ninjaCritIncrease;
+            PearlwoodCritReroll(player, ref modifiers, critChance, target);
         }
         public override void ModifyHitNPCWithItem(Player player, Item item, NPC target, ref NPC.HitModifiers modifiers)
         {
-            PearlwoodCritReroll(player, ref modifiers, item.DamageType);
+            PearlwoodCritReroll(player, ref modifiers, (int)player.ActualClassCrit(item.DamageType), target);
         }
-        public static void PearlwoodCritReroll(Player player, ref NPC.HitModifiers modifiers, DamageClass damageClass)
+        public static void PearlwoodCritReroll(Player player, ref NPC.HitModifiers modifiers, int critChance, NPC target)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (modPlayer.PearlwoodCritDuration <= 0)
+            if (modPlayer.PearlwoodCritDuration <= 0 || critChance <= 0 || critChance >= 100)
                 return;
 
-            if (modifiers.DamageType.CountsAsClass(DamageClass.Summon) && !modPlayer.MinionCrits)
+            if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? is not null)
                 return;
 
             int rerolls = modPlayer.ForceEffect<PearlwoodEnchant>() ? 2 : 1;
             for (int i = 0; i < rerolls; i++)
             {
-                if (Main.rand.Next(0, 100) <= player.ActualClassCrit(damageClass))
+                if (Main.rand.Next(0, 100) < critChance)
                 {
                     modifiers.SetCrit();
+                    for (int j = 0; j < 7; j++)
+                    {
+                        Color color = Main.rand.NextFromList(Color.Goldenrod, Color.Pink, Color.Cyan);
+                        Particle p = new SmallSparkle(
+                            worldPosition: Main.rand.NextVector2FromRectangle(target.Hitbox),
+                            velocity: (Main.rand.NextFloat(10, 25) * Vector2.UnitX).RotatedByRandom(MathHelper.TwoPi),
+                            drawColor: color,
+                            scale: 1f,
+                            lifetime: Main.rand.Next(10, 15),
+                            rotation: 0,
+                            rotationSpeed: Main.rand.NextFloat(-MathHelper.Pi / 8, MathHelper.Pi / 8)
+                            );
+                        p.Spawn();
+                    }
+                    break; // no need for this to run twice
                 }
             }
-
         }
         public static void OnPickup(Player player)
         {
@@ -131,10 +136,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
             if (player.HasEffect<PearlwoodStarEffect>())
             {
-                int starDamage = 100;
-                if (modPlayer.ForceEffect<PearlwoodEnchant>())
-                    starDamage = 175;
-
                 SoundEngine.PlaySound(SoundID.Item105 with { Pitch = -0.3f }, player.Center);
                 Vector2 vel = -Vector2.UnitY * 7;
                 int nearestNPCID = FargoSoulsUtil.FindClosestHostileNPC(player.Center, 1000, true, true);
@@ -144,7 +145,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     if (nearestNPC.Alive())
                         vel = player.DirectionTo(nearestNPC.Center) * 7;
                 }
-                Projectile.NewProjectile(player.GetSource_Misc("Pearlwood"), player.Center.X, player.Center.Y, vel.X, vel.Y, ProjectileID.FairyQueenMagicItemShot, starDamage, 0, player.whoAmI, 0f, 0);
+                Projectile.NewProjectile(player.GetSource_Misc("Pearlwood"), player.Center.X, player.Center.Y, vel.X, vel.Y, ProjectileID.FairyQueenMagicItemShot, BaseDamage(player), 0, player.whoAmI, 0f, 0);
             }
         }
     }

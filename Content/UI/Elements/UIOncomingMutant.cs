@@ -1,14 +1,17 @@
-﻿using FargowiltasSouls.Content.Items;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace FargowiltasSouls.Content.UI.Elements
@@ -75,8 +78,8 @@ namespace FargowiltasSouls.Content.UI.Elements
 
             StayInBounds();
 
-            ClientConfig.Instance.OncomingMutantX = end.X;
-            ClientConfig.Instance.OncomingMutantY = end.Y;
+            ClientConfig.Instance.EternityMutantX = end.X;
+            ClientConfig.Instance.EternityMutantY = end.Y;
             ClientConfig.Instance.OnChanged();
         }
         public override void Update(GameTime gameTime)
@@ -120,8 +123,8 @@ namespace FargowiltasSouls.Content.UI.Elements
             }
             else
             {
-                Left.Set(ClientConfig.Instance.OncomingMutantX, 0);
-                Top.Set(ClientConfig.Instance.OncomingMutantY, 0);
+                Left.Set(ClientConfig.Instance.EternityMutantX, 0);
+                Top.Set(ClientConfig.Instance.EternityMutantY, 0);
                 Recalculate();
             }
 

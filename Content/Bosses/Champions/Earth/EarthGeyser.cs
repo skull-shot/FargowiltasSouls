@@ -1,5 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -55,8 +60,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                     Projectile.extraUpdates = 0;
                     Projectile.position.Y -= 16;
                     //make warning dusts
-                    int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, -8f);
-                    Main.dust[d].velocity *= 3f;
+                    //int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, -8f);
+                    //Main.dust[d].velocity *= 3f;
                 }
                 else //if in air, go up
                 {
@@ -64,8 +69,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                 }
             }
 
-            if (Projectile.timeLeft <= 120) //about to erupt, make more dust
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
+            //if (Projectile.timeLeft <= 120) //about to erupt, make more dust
+                //Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch);
 
             /*NPC golem = Main.npc[ai0];
             if (golem.GetGlobalNPC<NPCs.FargoSoulsGlobalNPC>().Counter == 2 && FargoSoulsUtil.HostCheck) //when golem does second stomp, erupt
@@ -79,7 +84,31 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
         public override void OnKill(int timeLeft)
         {
             if (FargoSoulsUtil.HostCheck)
-                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.UnitY * -8, ProjectileID.GeyserTrap, Projectile.damage, 0f, Main.myPlayer);
+            {
+                for (int i = 0; i < 4; i++)
+                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center - Vector2.UnitY * i * 180, Vector2.UnitY * -20, ProjectileID.GeyserTrap, Projectile.damage, 0f, Main.myPlayer);
+            }
+                
+        }
+
+        public override bool PreDraw(ref Color lightColor)
+        {
+            if (Projectile.ai[1] == 0)
+                return false;
+            Projectile.localAI[2]++;
+            Vector2 dir = -Vector2.UnitY;
+
+            Asset<Texture2D> line = TextureAssets.Extra[178];
+            float opacity = LumUtils.Saturate(Projectile.localAI[2] / 60f);
+            
+            Main.EntitySpriteDraw(line.Value, Projectile.Center + Vector2.UnitY * 8 - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, Color.OrangeRed * opacity, dir.ToRotation(), new Vector2(0, line.Height() * 0.5f), new Vector2(1.8f, Projectile.scale * 18), SpriteEffects.None);
+
+            return false;
+        }
+        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
+        {
+            if (Projectile.hide)
+                behindNPCsAndTiles.Add(index);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -61,8 +61,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
                 BuffID.Confused,
                 BuffID.Chilled,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
         }
         public override void SetDefaults()
@@ -70,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             NPC.aiStyle = -1;
             NPC.lifeMax = CursedCoffin.BaseHP;
             NPC.defense = 10;
-            NPC.damage = 35;
+            NPC.damage = 31;
             NPC.knockBackResist = 0f;
             NPC.width = 110;
             NPC.height = 110;
@@ -117,7 +116,10 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             if (SlowChargeStates.Contains(State))
+            {
+                modifiers.FinalDamage *= 0.25f;
                 target.longInvince = true;
+            }
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
@@ -154,7 +156,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         {
             if (NPC.Opacity < 1)
                 return false;
-            if (target.HasBuff<GrabbedBuff>())
+            if (target.HasBuff<GrabbedBuff>() || BittenPlayer != -1)
                 return false;
             Vector2 boxPos = target.position;
             Vector2 boxDim = target.Size;
@@ -239,11 +241,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
             }
 
             // share healthbar
-            if (FargoSoulsUtil.HostCheck)
-            {
-                NPC.lifeMax = owner.lifeMax = Math.Min(NPC.lifeMax, owner.lifeMax);
-                NPC.life = owner.life = Math.Min(NPC.life, owner.life);
-            }
+            NPC.realLife = owner.whoAmI;
 
             RotateToVelocity = true;
             NPC.dontTakeDamage = NPC.scale < 0.5f;

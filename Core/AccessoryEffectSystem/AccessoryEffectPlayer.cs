@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.UI;
+﻿using Fargowiltas.Content.UI;
+using FargowiltasSouls.Content.UI;
 using FargowiltasSouls.Core.ModPlayers;
 using Microsoft.Xna.Framework;
 using System;
@@ -220,7 +221,7 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         {
 
             //doing this so that damage-inheriting effects dont double dip or explode due to taking on crit boost
-            int GetBaseDamage()
+            /*int GetBaseDamage()
             {
                 // TODO: I guess? test this
                 int baseDamage = hitInfo.SourceDamage;
@@ -230,11 +231,11 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
                     baseDamage = Player.GetWeaponDamage(item);
                 return baseDamage;
             }
-            int baseDamage = GetBaseDamage();
+            int baseDamage = GetBaseDamage();*/
             foreach (AccessoryEffect effect in HookOnHitNPCEither)
             {
                 if (Active(effect))
-                    effect.OnHitNPCEither(Player, target, hitInfo, damageClass, baseDamage, projectile, item);
+                    effect.OnHitNPCEither(Player, target, hitInfo, damageClass, hitInfo.SourceDamage, projectile, item);
             }
         }
         private static List<AccessoryEffect> HookMeleeEffects = AddHook<Action<Player, Item, Rectangle>>(p => p.MeleeEffects);

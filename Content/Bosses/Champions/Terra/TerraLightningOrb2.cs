@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -35,7 +35,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             Projectile.timeLeft = 360;
             Projectile.penetrate = -1;
             Projectile.scale = 0.5f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.FargoSouls().DeletionImmuneRank = 1;
         }
@@ -120,6 +120,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
                     MakeDust();
                     SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
+
+                    if (WorldSavingSystem.MasochistModeReal)
+                        ShootLightning();
                 }
             }
             else
@@ -195,35 +198,38 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             }
         }
 
+        void ShootLightning()
+        {
+            if (!FargoSoulsUtil.HostCheck)
+                return;
+            if (!Main.dedServ)
+                ScreenShakeSystem.StartShake(5, shakeStrengthDissipationIncrement: 10f / 30);
+            if (!Main.dedServ)
+                SoundEngine.PlaySound(SoundID.Thunder with { Volume = 0.8f, Pitch = 0.5f }, Projectile.Center);
+            for (int i = 0; i < 8; i++)
+            {
+                Vector2 dir = Vector2.UnitX.RotatedBy(2 * (float)Math.PI / 8 * i + Projectile.rotation);
+                float ai1New = Main.rand.NextBool() ? 1 : -1; //randomize starting direction
+                Vector2 vel = Vector2.Normalize(dir) * 54f;
+                Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vel, ModContent.ProjectileType<HostileLightning>(),
+                    Projectile.damage, 0, Main.myPlayer, dir.ToRotation(), ai1New / 2);
+            }
+        }
+
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item92, Projectile.Center);
 
             MakeDust();
 
-            if (!Main.dedServ)
-                ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
-
-            if (Projectile.alpha == 0 && FargoSoulsUtil.HostCheck)
-            {
-                if (!Main.dedServ)
-                    SoundEngine.PlaySound(SoundID.Thunder with { Volume = 0.8f, Pitch = 0.5f }, Projectile.Center);
-                for (int i = 0; i < 8; i++)
-                {
-                    Vector2 dir = Vector2.UnitX.RotatedBy(2 * (float)Math.PI / 8 * i + Projectile.rotation);
-                    float ai1New = Main.rand.NextBool() ? 1 : -1; //randomize starting direction
-                    Vector2 vel = Vector2.Normalize(dir) * 54f;
-                    Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, vel, ModContent.ProjectileType<HostileLightning>(),
-                        Projectile.damage, 0, Main.myPlayer, dir.ToRotation(), ai1New / 2);
-                }
-            }
+            if (Projectile.alpha == 0)
+                ShootLightning();
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }

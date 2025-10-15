@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
@@ -9,11 +11,10 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
     public class DeviHeart : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/Cavern/FakeHeart";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/Cavern", "FakeHeart");
 
         public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Fake Heart");
+        { 
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.timeLeft = 600;
-            //CooldownSlot = 1;
+            //CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -41,7 +42,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
         }
 
         public override Color? GetAlpha(Color lightColor)

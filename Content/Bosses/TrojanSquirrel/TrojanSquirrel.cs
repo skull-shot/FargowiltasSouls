@@ -1,7 +1,10 @@
 using FargowiltasSouls.Assets.Particles;
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.BossBars;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Items.Placables.Trophies;
@@ -44,8 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.AddDebuffImmunities(
             [
                 BuffID.Confused,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
         }
 
@@ -267,9 +269,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.value = Item.buyPrice(silver: 75);
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/TrojanSquirrel") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.BossBar = ModContent.GetInstance<TrojanSquirrelBossBar>();
         }
@@ -473,8 +475,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 }
 
                 //drop summon
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<SquirrelCoatofArms>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<SquirrelCoatofArms>(),  WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel], ref spawned);
 
                 //start by jumping
                 NPC.ai[0] = 1f;
@@ -957,6 +958,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             Vector2 armsmokepos = NPC.Center + new Vector2(armsmokedir, -35);
 
+            float rotationOffset = -MathHelper.PiOver2 + Main.rand.NextFloatDirection() * 0.51f;
+
             int smokeAmount = 1;
 
             if (head == null)
@@ -976,13 +979,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             if (Main.rand.NextBool(smokeAmount) && head == null)
             {
-                Particle p = new SmokeParticle(headsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 1f, 0.05f);
+                Particle p = new SmokeParticle(headsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 1f, 0.05f, rotationOffset);
                 p.Spawn();
             }
 
             if (Main.rand.NextBool(3) && arms == null && head != null)
             {
-                Particle p = new SmokeParticle(armsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
+                Particle p = new SmokeParticle(armsmokepos, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f, rotationOffset);
                 p.Spawn();
                 //Particle p2 = new SmokeParticle(armsmokepos * -1, new Vector2(0, Main.rand.Next(-10, -5)), Color.Gray, 50, 0.5f, 0.05f);
                 //p2.Spawn();
@@ -1103,12 +1106,16 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
-            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<TrojanSquirrelBag>()));
+            // I have setup the loot placement in this way because 
+            // when registering loot for an npc, the bestiary checks for the order of loot registered.
+            // For parity with vanilla, the order is as follows: Trophy, Classic Loot, Expert Loot, Master loot.
+
             npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TrojanSquirrelTrophy>(), 10));
 
-            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<TrojanSquirrelRelic>()));
-
             LeadingConditionRule rule = new(new Conditions.NotExpert());
+
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<TrojanMask>(), 7));
+
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<TreeSword>(), ModContent.ItemType<MountedAcornGun>(), ModContent.ItemType<SnowballStaff>(), ModContent.ItemType<KamikazeSquirrelStaff>()));
             rule.OnSuccess(ItemDropRule.OneFromOptions(1,
                 ItemID.Squirrel,
@@ -1123,12 +1130,15 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             //ItemID.GemSquirrelTopaz
             ));
             rule.OnSuccess(ItemDropRule.Common(ItemID.SquirrelHook));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.WoodenCrate, 1, 1, 5));
-            rule.OnSuccess(ItemDropRule.Common(ItemID.HerbBag, 1, 1, 5));
             rule.OnSuccess(ItemDropRule.Common(ItemID.Acorn, 1, 100, 100));
+            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SquirrelCharm>()));
             rule.OnSuccess(ItemDropRule.Common(ModContent.Find<ModItem>("Fargowiltas", "LumberJaxe").Type, 10));
 
             npcLoot.Add(rule);
+
+            npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<TrojanSquirrelBag>()));
+
+            npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<TrojanSquirrelRelic>()));
         }
 
         public override void BossHeadSpriteEffects(ref SpriteEffects spriteEffects)

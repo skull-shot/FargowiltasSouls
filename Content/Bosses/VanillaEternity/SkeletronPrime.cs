@@ -1,9 +1,9 @@
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -38,6 +38,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public int limbTimer = 0; //1.4.4 used npc.ai[3] for managing mechdusa whoAmI, so this has to be moved to own variable
 
+        public bool Spinning;
+        public bool SpecialAttack;
+        public int AttackTimer = 0;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -49,6 +52,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             bitWriter.WriteBit(FullySpawnedLimbs);
             bitWriter.WriteBit(HaveShotGuardians);
             bitWriter.WriteBit(EndSpin);
+
+            bitWriter.WriteBit(Spinning);
+            bitWriter.WriteBit(SpecialAttack);
+            binaryWriter.Write7BitEncodedInt(AttackTimer);
         }
 
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
@@ -61,6 +68,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             FullySpawnedLimbs = bitReader.ReadBit();
             HaveShotGuardians = bitReader.ReadBit();
             EndSpin = bitReader.ReadBit();
+
+            Spinning = bitReader.ReadBit();
+            SpecialAttack = bitReader.ReadBit();
+            AttackTimer = binaryReader.Read7BitEncodedInt();
         }
 
         public override void SetDefaults(NPC npc)
@@ -87,6 +98,44 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 if (npc.timeLeft > 60)
                     npc.timeLeft = 60;
+            }
+
+            bool spinning = npc.ai[1] == 1f && npc.ai[2] > 2;
+            bool dgPhase = npc.ai[1] == 2f;
+
+            if (spinning)
+                Spinning = true;
+
+            if (!spinning & !dgPhase && Spinning)
+            {
+                Spinning = false;
+                SpecialAttack = true;
+            }
+
+            if (SpecialAttack && !dgPhase) // special dash
+            {
+                AttackTimer++;
+                Player player = Main.player[npc.target];
+                if (AttackTimer == 5)
+                    SoundEngine.PlaySound(SoundID.ForceRoarPitched, npc.Center);
+                if (AttackTimer < 60)
+                {
+                    npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, player.Center + player.DirectionTo(npc.Center) * 450, npc.velocity, 1f, 1f);
+                }
+                if (AttackTimer > 60 && AttackTimer < 90)
+                {
+                    npc.velocity += npc.DirectionTo(player.Center) * 0.8f;
+                }
+                if (AttackTimer > 90)
+                {
+                    npc.velocity *= 0.95f;
+                }
+                if (AttackTimer > 120)
+                {
+                    AttackTimer = 0;
+                    SpecialAttack = false;
+                }
+                return false;
             }
 
             if (npc.ai[1] == 0f)
@@ -349,7 +398,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.velocity += 0.1f * npc.SafeDirectionTo(Main.player[npc.target].Center);
             }
 
-            EModeUtils.DropSummon(npc, "MechSkull", NPC.downedMechBoss3, ref DroppedSummon, Main.hardMode);
+            EModeUtils.DropSummon(npc, ItemID.MechanicalSkull, NPC.downedMechBoss3, ref DroppedSummon, Main.hardMode);
 
             return result;
         }
@@ -374,12 +423,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 480);
-            target.AddBuff(ModContent.BuffType<NanoInjectionBuff>(), 360);
         }
 
         public override bool CheckDead(NPC npc)
         {
-            if (npc.ai[1] != 2f)
+            if (npc.ai[1] != 2f && WorldSavingSystem.MasochistModeReal)
             {
                 SoundEngine.PlaySound(SoundID.Roar, npc.Center);
                 npc.life = npc.lifeMax / 630;
@@ -452,7 +500,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public int DontActWhenSpawnedTimer = 180;
 
-
+        public float dir = 0;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -499,7 +547,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnFirstTick(npc);
 
             npc.buffImmune[BuffID.Suffocation] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
             npc.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
         }
 
@@ -531,6 +578,55 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (!head.HasValidTarget || head.ai[1] == 3) //return to default ai when death
                 return true;
 
+            var headEmode = head.GetGlobalNPC<SkeletronPrime>();
+            if (headEmode.SpecialAttack && !IsSwipeLimb)
+            {
+                if (headEmode.AttackTimer < 40)
+                {
+                    if (head.HasPlayerTarget)
+                        dir = head.DirectionTo(Main.player[head.target].Center).ToRotation();
+                }
+                else if (headEmode.AttackTimer < 90)
+                {
+                    if (head.HasPlayerTarget)
+                        dir = dir.ToRotationVector2().RotateTowards(head.DirectionTo(Main.player[head.target].Center).ToRotation(), 0.05f).ToRotation();
+                }
+                float offset = npc.type switch
+                {
+                    NPCID.PrimeCannon => -2,
+                    NPCID.PrimeLaser => -1,
+                    NPCID.PrimeSaw => 1,
+                    NPCID.PrimeVice => 2,
+                    _ => 0
+                };
+                float rot = dir + offset * MathHelper.PiOver2 * 0.2f;
+                Vector2 desiredPos = head.Center - rot.ToRotationVector2() * 340;
+                if (headEmode.AttackTimer == 1)
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<PrimeTrail>(), 0, 0f, Main.myPlayer, npc.whoAmI, 3, 90);
+                }
+                if (headEmode.AttackTimer < 60)
+                    npc.velocity = FargoSoulsUtil.SmartAccel(npc.Center, desiredPos, npc.velocity, 1f, 1f);
+                else if (head.HasPlayerTarget)
+                {
+                    Vector2 toPlayer = npc.DirectionTo(Main.player[head.target].Center);
+                    if (headEmode.AttackTimer == 60)
+                    {
+                        npc.velocity = toPlayer * 3;
+                    }
+                        
+                    if (headEmode.AttackTimer == 75)
+                        SoundEngine.PlaySound(SoundID.Item18 with { Volume = 1.25f }, npc.Center);
+                    if (headEmode.AttackTimer < 90)
+                        npc.velocity += toPlayer * 2f;
+                    else
+                        npc.velocity *= 0.95f;
+                    NoContactDamageTimer = 0;
+                }
+
+                return false;
+            }
 
             if (head.ai[0] != 2f) //head in phase 1
             {
@@ -619,7 +715,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.damage = (int)(head.defDamage * 1.25);
 
                 //only selfdestruct once prime is done spawning limbs
-                if (npc.life == 1 && head.GetGlobalNPC<SkeletronPrime>().FullySpawnedLimbs)
+                if (npc.life == 1 && headEmode.FullySpawnedLimbs)
                 {
                     npc.dontTakeDamage = false; //for client side so you can hit the limb and update this
                     if (FargoSoulsUtil.HostCheck)
@@ -1019,13 +1115,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
         {
             // share healthbar
-            NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronPrime);
+            /*NPC head = FargoSoulsUtil.NPCExists(npc.ai[1], NPCID.SkeletronPrime);
             if (FargoSoulsUtil.HostCheck && head != null)
             {
                 if (npc.lifeMax < head.lifeMax)
                     npc.life = npc.lifeMax = head.lifeMax;
                 npc.life = head.life = Math.Min(npc.life, head.life);
-            }
+            }*/
         }
         public override bool ModifyCollisionData(NPC npc, Rectangle victimHitbox, ref int immunityCooldownSlot, ref MultipliableFloat damageMultiplier, ref Rectangle npcHitbox)
         {
@@ -1038,12 +1134,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (NoContactDamageTimer > 0)
                 drawColor *= 0.5f;
             return base.GetAlpha(npc, drawColor);
-        }
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
-        {
-            base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(ModContent.BuffType<NanoInjectionBuff>(), 360);
         }
 
         public override bool CheckDead(NPC npc)

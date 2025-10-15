@@ -1,7 +1,8 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
@@ -15,14 +16,12 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class Lightslinger : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         const int ReqShots = 40;
         int ShotType = ModContent.ProjectileType<LightslingerShot>();
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Lightslinger");
-            // Tooltip.SetDefault("Converts bullets to hallowed shots of light\nAfter 40 shots, press Right Click to fire a lightbomb\n25% chance to not consume ammo");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -37,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 0.5f;
             Item.value = Item.sellPrice(0, 10);
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item12;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<LightslingerShot>();
@@ -86,7 +85,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
         {
             FargoSoulsPlayer soulsPlayer = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("LightslingerCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/ChallengerItems/LightslingerBomb").Value, Color.Pink, 
+                CooldownBarManager.Activate("LightslingerCharge", FargoAssets.GetTexture2D("Content/Bosses/Lifelight", "LifeNuke").Value, Color.Pink, 
                     () => (float)Main.LocalPlayer.FargoSouls().LightslingerHitShots / ReqShots, activeFunction: () => player.HeldItem != null && player.HeldItem.type == ModContent.ItemType<Lightslinger>());
             if (player.altFunctionUse == 2)
             {

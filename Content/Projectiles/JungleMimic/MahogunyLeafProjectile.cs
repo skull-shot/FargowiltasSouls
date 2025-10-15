@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Projectiles.JungleMimic
 {
     public class MahogunyLeafProjectile : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/JungleMimic", Name);
         public override void SetStaticDefaults()
         {
             Main.projFrames[Projectile.type] = 4;

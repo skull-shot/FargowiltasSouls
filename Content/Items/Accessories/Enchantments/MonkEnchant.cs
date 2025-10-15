@@ -1,6 +1,9 @@
-﻿using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -41,19 +44,26 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.MonkBrows)
-            .AddIngredient(ItemID.MonkShirt)
-            .AddIngredient(ItemID.MonkPants)
-            //.AddIngredient(ItemID.MonkBelt);
-            .AddIngredient(ItemID.DD2LightningAuraT2Popper)
-            //meatball
-            //blue moon
-            //valor
-            .AddIngredient(ItemID.DaoofPow)
-            .AddIngredient(ItemID.MonkStaffT2)
+                .AddIngredient(ItemID.MonkBrows)
+                .AddIngredient(ItemID.MonkShirt)
+                .AddIngredient(ItemID.MonkPants)
+                //.AddIngredient(ItemID.MonkBelt);
+                .AddIngredient(ItemID.MonkStaffT2)
+                //meatball
+                //blue moon
+                //valor
+                .AddIngredient(ItemID.DaoofPow)
+                .AddIngredient(ItemID.ChainGuillotines)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return MonkDashEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class MonkDashEffect : AccessoryEffect
@@ -81,6 +91,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 }
             }
         }
+        public static int BaseDamage(Player player)
+        {
+            bool monkForce = player.FargoSouls().ShinobiEnchantActive || player.FargoSouls().ForceEffect<MonkEnchant>();
+            bool shinobiForce = player.FargoSouls().ShinobiEnchantActive && player.FargoSouls().ForceEffect<ShinobiEnchant>();
+            int damage = monkForce ? (shinobiForce ? 800 : 500) : 200;
+            return (int)(damage * player.ActualClassDamage(DamageClass.Melee));
+        }
         public static void MonkDash(Player player, int direction)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -100,23 +117,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 player.hurtCooldowns[0] = Math.Max(player.hurtCooldowns[0], invul);
                 player.hurtCooldowns[1] = Math.Max(player.hurtCooldowns[1], invul);
             }
-            bool monkForce = modPlayer.ShinobiEnchantActive || modPlayer.ForceEffect<MonkEnchant>();
-            bool shinobiForce = modPlayer.ShinobiEnchantActive && modPlayer.ForceEffect<ShinobiEnchant>();
 
             Vector2 pos = player.Center;
-
-            int damage = monkForce ? (shinobiForce ? 800 : 500) : 200;
-            damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
-            Projectile.NewProjectile(player.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<MonkDashDamage>(), damage, 0);
-
+            Projectile.NewProjectile(player.GetSource_FromThis(), pos, Vector2.Zero, ModContent.ProjectileType<MonkDashDamage>(), BaseDamage(player), 0);
             modPlayer.DashCD = 100;
             player.dashDelay = 100;
 
             if (player.whoAmI == Main.myPlayer)
             {
+                Texture2D sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "MonkEnchant").Value;
+                Color color = new(146, 5, 32);
                 if (modPlayer.ShinobiEnchantActive)
-                    CooldownBarManager.Activate("MonkDash", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/ShinobiEnchant").Value, new(147, 91, 24), () => (float)modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
-                else CooldownBarManager.Activate("MonkDash", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MonkEnchant").Value, Color.Red, () => (float)modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
+                {
+                    sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "ShinobiEnchant").Value;
+                    color = new(147, 91, 24);
+                }
+                CooldownBarManager.Activate("MonkDash", sprite, color, () => modPlayer.DashCD / 100f, activeFunction: () => player.HasEffect<MonkDashEffect>());
             }
             if (player.FargoSouls().IsDashingTimer < 20)
                 player.FargoSouls().IsDashingTimer = 20;

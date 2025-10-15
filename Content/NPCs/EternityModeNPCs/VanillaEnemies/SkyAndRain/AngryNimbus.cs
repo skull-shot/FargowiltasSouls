@@ -1,8 +1,10 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRain
 {
@@ -15,15 +17,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
         public override void AI(NPC npc)
         {
             base.AI(npc);
-
-            if (++Counter >= 360)
+            if (npc.HasPlayerTarget)
             {
-                Counter = 0;
-
-                if (FargoSoulsUtil.HostCheck)
+                if (++Counter >= 360)
                 {
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), new Vector2(npc.Center.X + 100, npc.Center.Y), Vector2.Zero, ProjectileID.VortexVortexLightning, 0, 1, Main.myPlayer, 0, 1);
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), new Vector2(npc.Center.X - 100, npc.Center.Y), Vector2.Zero, ProjectileID.VortexVortexLightning, 0, 1, Main.myPlayer, 0, 1);
+                    Counter = 0;
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        Vector2 vel = 10 * npc.SafeDirectionTo(Main.player[npc.target].Center);
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), new Vector2(npc.Center.X + 100, npc.Center.Y), Vector2.Zero, ModContent.ProjectileType<LightningVortexHostile>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 1, Main.myPlayer);
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), new Vector2(npc.Center.X - 100, npc.Center.Y), Vector2.Zero, ModContent.ProjectileType<LightningVortexHostile>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 1, Main.myPlayer);
+                    }
                 }
             }
         }

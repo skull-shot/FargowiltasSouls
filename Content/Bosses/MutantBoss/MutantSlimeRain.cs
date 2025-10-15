@@ -1,4 +1,6 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,11 +15,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSlimeRain_April" :
-            "FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/SlimeRain";
+            FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "SlimeRain");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Slime Rain");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -31,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
 
@@ -40,11 +41,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void AI()
         {
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[0], ModContent.NPCType<MutantBoss>());
-            if (npc != null && (npc.ai[0] == 36 || npc.ai[0] == 48))
+            if (npc != null && (npc.ai[0] == 36 || npc.ai[0] == 12))
             {
                 Projectile.timeLeft = 2;
-                Projectile.Center = npc.Center;
-                Projectile.position.X += Projectile.width / 2 * npc.spriteDirection;
+                Projectile.Center = npc.Center; 
+                Projectile.position.X += 1.2f * Projectile.width / 2 * npc.spriteDirection;
+                Projectile.position.Y -= Projectile.height / 10;
                 Projectile.spriteDirection = npc.spriteDirection;
                 Projectile.rotation = (float)Math.PI / 4 * Projectile.spriteDirection;
             }
@@ -57,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Slimed, 300);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
         }

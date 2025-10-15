@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -45,7 +45,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             {
                 npc.knockBackResist = 0f;
 
-                EModeGlobalNPC.Aura(npc, 250, ModContent.BuffType<LovestruckBuff>(), true, DustID.PinkTorch);
+                EModeGlobalNPC.Aura(npc, 250, ModContent.BuffType<HexedBuff>(), true, DustID.PinkTorch);
 
                 if (--Counter < 0)
                 {
@@ -69,31 +69,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
-
-            //target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 240);
-
             npc.life += hurtInfo.Damage * 2;
             if (npc.life > npc.lifeMax)
                 npc.life = npc.lifeMax;
             CombatText.NewText(npc.Hitbox, CombatText.HealLife, hurtInfo.Damage * 2);
             npc.netUpdate = true;
         }
-
-        public override void ModifyHitByAnything(NPC npc, Player player, ref NPC.HitModifiers modifiers)
-        {
-            base.ModifyHitByAnything(npc, player, ref modifiers);
-
-            if (player.loveStruck)
-            {
-                modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
-                {
-                    Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
-                    float ai1 = 30 + Main.rand.Next(30);
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), player.Center, speed, ModContent.ProjectileType<HostileHealingHeart>(), hitInfo.Damage, 0f, Main.myPlayer, npc.whoAmI, ai1);
-                    hitInfo.Null();
-                };
-            }
-        }
-
     }
 }

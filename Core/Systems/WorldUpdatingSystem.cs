@@ -1,9 +1,10 @@
-﻿using FargowiltasSouls.Content.Bosses.CursedCoffin;
+﻿using System;
+using System.Linq;
+using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using FargowiltasSouls.Content.WorldGeneration;
+using FargowiltasSouls.Core.Globals;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
-using System;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.Events;
@@ -18,15 +19,21 @@ namespace FargowiltasSouls.Core.Systems
         public static int rainCD;
         public static int IceGolemTimer;
         public static int SandElementalTimer;
+        public static int WyvernTimer;
+        public static int RedDevilTimer;
         public static bool SeenIceGolemMessage;
         public static bool SeenSandElementalMessage;
+        public static bool SeenWyvernMessage;
+        public static bool SeenRedDevilMessage;
+        public static int CorruptWaterTimer;
+        public static int CrimsonWaterTimer;
 
         public override void PreUpdateNPCs() => SwarmActive = FargowiltasSouls.MutantMod is Mod fargo && (bool)fargo.Call("SwarmActive");
 
         public override void PostUpdateWorld()
         {
             //NPC.LunarShieldPowerMax = NPC.downedMoonlord ? 50 : 100;
-            if (!downedBoss[(int)Downed.CursedCoffin] && !Main.hardMode)
+            if (!DownedBoss[(int)Downed.CursedCoffin] && !Main.hardMode)
             {
                 bool noCoffin = !NPC.AnyNPCs(ModContent.NPCType<CursedCoffinInactive>()) && !NPC.AnyNPCs(ModContent.NPCType<CursedCoffin>());
 
@@ -176,11 +183,6 @@ namespace FargowiltasSouls.Core.Systems
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/DifficultyDeactivate"), Main.LocalPlayer.Center);
             }
 
-            if (rainCD > 0)
-            {
-                rainCD--;
-            }
-
             if (EternityMode)
                 PostUpdateWorld_Eternity();
 
@@ -303,21 +305,26 @@ namespace FargowiltasSouls.Core.Systems
 
         public void PostUpdateWorld_Eternity()
         {
-            // ice golem and sand elemental early spawn
-            if (!Main.hardMode && DownedAnyBoss && !LumUtils.AnyBosses())
+            // ice golem, sand elemental and wyvern early spawn
+            if (!Main.hardMode &&  !LumUtils.AnyBosses())
             {
                 int baseCooldown = LumUtils.SecondsToFrames(40);
                 int postSpawnCooldown = LumUtils.MinutesToFrames(5);
+
+                int hellBaseCooldown = NPC.downedBoss2 ? LumUtils.MinutesToFrames(10) : LumUtils.MinutesToFrames(2);
+                int hellPostSpawnCooldown = hellBaseCooldown * 2;
+
                 int messageDelay = LumUtils.SecondsToFrames(10);
+
+
                 bool sandstorm = Sandstorm.Happening;
                 bool blizzard = Main.IsItRaining;
-                Player desertPlayer = null;
-                Player snowPlayer = null;
-                if (sandstorm)
-                    desertPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneDesert, null);
-                if (blizzard)
-                    snowPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneSnow, null);
-                
+
+                Player? desertPlayer = sandstorm ? Main.player.FirstOrDefault(p => p.Alive() && p.statLifeMax2 >= 400 && p.ZoneDesert && p.ZoneOverworldHeight, null) : null;
+                Player? snowPlayer = blizzard ? Main.player.FirstOrDefault(p => p.Alive() && p.statLifeMax2 >= 400 && p.ZoneSnow && p.ZoneOverworldHeight, null) : null;
+                Player? skyPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.statLifeMax2 >= 400 && p.ZoneSkyHeight && (p.position.X / 16f < Main.maxTilesX * 0.45 || p.position.X / 16f > Main.maxTilesX * 0.55), null);
+                Player? hellPlayer = Main.player.FirstOrDefault(p => p.Alive() && p.ZoneUnderworldHeight && EModeGlobalNPC.DemonCondition(p), null);
+
                 if (sandstorm && desertPlayer != null)
                 {
                     SandElementalTimer++;
@@ -380,6 +387,90 @@ namespace FargowiltasSouls.Core.Systems
                             NetMessage.SendData(MessageID.WorldData);
                     }
                 }
+                if (skyPlayer != null)
+                {
+                    WyvernTimer++;
+                    if (WyvernTimer == (baseCooldown * 5) - messageDelay && !SeenWyvernMessage)
+                    {
+                        FargoSoulsUtil.PrintLocalization($"Mods.{Mod.Name}.Message.{Name}.MightyFoe", Color.LightCyan);
+                        SeenWyvernMessage = true;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                    if (WyvernTimer >= baseCooldown * 5)
+                    {
+                        Vector2 spawnpos = new(skyPlayer.Center.X + Main.rand.Next(-800, 801), skyPlayer.Center.Y - Main.rand.Next(640, 800));
+                        FargoSoulsUtil.NewNPCEasy(NPC.GetSource_NaturalSpawn(), spawnpos, NPCID.WyvernHead);
+                        WyvernTimer = -postSpawnCooldown * 2;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+                else
+                {
+                    if (WyvernTimer > 0)
+                        WyvernTimer--;
+                    if (WyvernTimer < 0)
+                        WyvernTimer++;
+                    if (WyvernTimer <= 0 && SeenWyvernMessage)
+                    {
+                        SeenWyvernMessage = false;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+                if (hellPlayer != null)
+                {
+                    RedDevilTimer++;
+                    if (RedDevilTimer == hellBaseCooldown - messageDelay && !SeenRedDevilMessage)
+                    {
+                        FargoSoulsUtil.PrintLocalization($"Mods.{Mod.Name}.Message.{Name}.MightyFoe", Color.DarkRed);
+                        SeenRedDevilMessage = true;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                    if (RedDevilTimer >= hellBaseCooldown)
+                    {
+                        NPC.SpawnOnPlayer(hellPlayer.whoAmI, NPCID.RedDevil);
+                        RedDevilTimer = -hellPostSpawnCooldown;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+                else
+                {
+                    if (RedDevilTimer > 0)
+                        RedDevilTimer--;
+                    if (RedDevilTimer < 0)
+                        RedDevilTimer++;
+                    if (RedDevilTimer <= 0 && SeenRedDevilMessage)
+                    {
+                        SeenRedDevilMessage = false;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+            }
+
+            if (rainCD > 0)
+            {
+                rainCD--;
+            }
+
+            if (CorruptWaterTimer > 0)
+            {
+                CorruptWaterTimer--;
+
+                //make water do stuff
+                //Main.SceneMetrics.ActiveFountainColor = 6;
+            }
+
+            if (CrimsonWaterTimer > 0)
+            {
+                CrimsonWaterTimer--;
+
+                //make water do stuff
+                //Main.SceneMetrics.ActiveFountainColor = 12;
             }
         }
         public static bool CanActuallyPlayMaso => (FargoSoulsUtil.WorldIsMaster() && CanPlayMaso) || Main.zenithWorld;

@@ -1,17 +1,21 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static FargowiltasSouls.Content.Projectiles.EffectVisual;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 {
     public class NatureIcicle : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/FrostIcicle";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/Souls", "FrostIcicle");
 
         public override void SetStaticDefaults()
         {
@@ -30,7 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
             Projectile.scale = 1.5f;
             Projectile.hide = true;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.tileCollide = false;
             Projectile.coldDamage = true;
         }
@@ -42,6 +46,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 Projectile.localAI[0] = Main.rand.NextBool() ? 1 : -1;
                 Projectile.rotation = Main.rand.NextFloat(0, (float)Math.PI * 2);
                 Projectile.hide = false;
+            }
+            if (Projectile.ai[2] == 0) // register telegraph time and rotation
+            {
+                Projectile.ai[2] = Projectile.ai[0];
+                float baseRot = WorldSavingSystem.MasochistModeReal ? 26 : 32;
+                float rotation = MathHelper.ToRadians(baseRot) + Main.rand.NextFloat(MathHelper.ToRadians(30));
+                if (Main.rand.NextBool())
+                    rotation *= -1;
+                Projectile.ai[1] = rotation;
             }
 
             if (--Projectile.ai[0] > 0)
@@ -57,13 +70,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                     Projectile.velocity = Projectile.SafeDirectionTo(Main.player[p].Center) * 30;
                     Projectile.netUpdate = true;
 
-                    if (Projectile.ai[1] > 0)
-                    {
-                        float rotation = MathHelper.ToRadians(20) + Main.rand.NextFloat(MathHelper.ToRadians(30));
-                        if (Main.rand.NextBool())
-                            rotation *= -1;
-                        Projectile.velocity = Projectile.velocity.RotatedBy(rotation);
-                    }
+                    Projectile.velocity = Projectile.velocity.RotatedBy(Projectile.ai[1]);
 
                     SoundEngine.PlaySound(SoundID.Item1, Projectile.Center);
                 }
@@ -110,32 +117,53 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return Color.White;
+            return lightColor * Projectile.Opacity;
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
-            int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
-            Vector2 origin2 = rectangle.Size() / 2f;
+            /*
+            float start = Projectile.ai[2];
+            float end = 0;
+            if (Projectile.ai[0] < start && Projectile.ai[0] > end)
+            {
+                int p = Player.FindClosest(Projectile.Center, 0, 0);
+                
+                if (p != -1)
+                {
+                    Vector2 dir = Projectile.SafeDirectionTo(Main.player[p].Center).RotatedBy(Projectile.ai[1]);
 
-            Color color26 = lightColor;
-            color26 = Projectile.GetAlpha(color26);
+                    Asset<Texture2D> line = TextureAssets.Extra[178];
+                    float opacity = LumUtils.InverseLerp(start, end, Projectile.ai[0]);
+                    Main.EntitySpriteDraw(line.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, Color.Lerp(Color.LightBlue, Color.Blue, 0.25f) * opacity, dir.ToRotation(), new Vector2(0, line.Height() * 0.5f), new Vector2(2f, Projectile.scale * 4), SpriteEffects.None);
+                }
+            }
+            */
 
-            SpriteEffects effects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Texture2D texture = Projectile.GetTexture();
+            Vector2 drawPos = Projectile.GetDrawPosition();
+            Rectangle frame = Projectile.GetDefaultFrame();
+            SpriteEffects spriteEffects = Projectile.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
             for (int i = 0; i < ProjectileID.Sets.TrailCacheLength[Projectile.type]; i++)
             {
-                Color color27 = Color.White * Projectile.Opacity * 0.75f * 0.5f;
-                color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
-                Vector2 value4 = Projectile.oldPos[i];
-                float num165 = Projectile.oldRot[i];
-                Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
+                Color trailColor = Projectile.GetAlpha(Color.LightSkyBlue) * 0.75f * 0.5f;
+                trailColor *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
+                Vector2 oldPos = Projectile.oldPos[i];
+                float oldRot = Projectile.oldRot[i];
+                Main.EntitySpriteDraw(texture, oldPos + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), frame, trailColor, oldRot, frame.Size() / 2, Projectile.scale, spriteEffects, 0);
             }
 
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 2f * Projectile.scale;
+                Color glowColor = Color.LightSkyBlue;
+
+                Main.EntitySpriteDraw(texture, drawPos + afterimageOffset, frame, Projectile.GetAlpha(glowColor), Projectile.rotation, frame.Size() / 2, Projectile.scale, spriteEffects);
+            }
+            Main.spriteBatch.ResetToDefault();
+            Main.EntitySpriteDraw(texture, drawPos, frame, Projectile.GetAlpha(Color.White), Projectile.rotation, frame.Size() / 2, Projectile.scale, spriteEffects);
             return false;
         }
     }

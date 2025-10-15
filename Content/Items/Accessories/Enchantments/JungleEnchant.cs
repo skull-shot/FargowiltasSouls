@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -31,17 +32,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.JungleHat)
-            .AddIngredient(ItemID.JungleShirt)
-            .AddIngredient(ItemID.JunglePants)
-            .AddIngredient(ItemID.ThornChakram)
-            .AddIngredient(ItemID.IvyWhip)
-            .AddIngredient(ItemID.JungleRose)
-            //.AddIngredient(ItemID.Buggy);
-            //panda pet
+                .AddIngredient(ItemID.JungleHat)
+                .AddIngredient(ItemID.JungleShirt)
+                .AddIngredient(ItemID.JunglePants)
+                .AddIngredient(ItemID.ThornChakram)
+                .AddIngredient(ItemID.IvyWhip)
+                .AddIngredient(ItemID.JungleRose)
+                //.AddIngredient(ItemID.Buggy);
+                //panda pet
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class JungleDashEffect : AccessoryEffect

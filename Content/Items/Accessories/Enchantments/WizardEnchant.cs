@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Fargowiltas.Content.Items.Tiles;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -73,17 +74,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             CreateRecipe()
 
             .AddIngredient(ItemID.WizardHat)
+            //.AddIngredient(ItemID.WizardsHat) // NOT funny
+            .AddRecipeGroup("FargowiltasSouls:AnyTier1Robe") // Amethyst / Topaz
+            .AddRecipeGroup("FargowiltasSouls:AnyTier2Robe") // Sapphire / Emerald / Ruby
+            .AddRecipeGroup("FargowiltasSouls:AnyTier3Robe") // Amber / Diamond
+            .AddIngredient(ItemID.GypsyRobe) // Magic Robe
+            .AddIngredient(ItemID.CrystalBall)
+
             //.AddIngredient(ItemID.AmethystRobe);
             //.AddIngredient(ItemID.TopazRobe);
-
-            .AddIngredient(ItemID.SapphireRobe)
-            .AddIngredient(ItemID.EmeraldRobe)
-            .AddIngredient(ItemID.RubyRobe)
-            .AddIngredient(ItemID.DiamondRobe)
+            //.AddIngredient(ItemID.SapphireRobe)
+            //.AddIngredient(ItemID.EmeraldRobe)
+            //.AddIngredient(ItemID.RubyRobe)
+            //.AddIngredient(ItemID.DiamondRobe)
             //amber robe
-            .AddIngredient(ItemID.RareEnchantment)
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }

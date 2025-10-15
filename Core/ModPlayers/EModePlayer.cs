@@ -1,9 +1,9 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoon;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinMoon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -23,11 +23,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 {
     public partial class EModePlayer : ModPlayer
     {
-        public bool ReduceMasomodeMinionNerf;
-        public const int MaxMasomodeMinionNerfTimer = 300;
         public const int MaxShorterDebuffsTimer = 60;
-        public int MasomodeCrystalTimer;
-        public int MasomodeMinionNerfTimer;
         public int TorchGodTimer;
         public int ShorterDebuffsTimer;
         public int MythrilHalberdTimer;
@@ -40,7 +36,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool WaterWet => Player.wet && !Player.lavaWet && !Player.honeyWet && !Player.shimmerWet && !Player.FargoSouls().MutantAntibodies;
         public override void ResetEffects()
         {
-            ReduceMasomodeMinionNerf = false;
 
             if (!LumUtils.AnyBosses())
                 Respawns = 0;
@@ -66,7 +61,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             ResetEffects();
 
-            MasomodeMinionNerfTimer = 0;
             ShorterDebuffsTimer = 0;
             if (PreventRespawn())
                 Player.respawnTimer = 60 * 5;
@@ -143,7 +137,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            Player.pickSpeed -= 0.25f;
+            //Player.pickSpeed -= 0.25f;
 
             Player.tileSpeed += 0.25f;
             Player.wallSpeed += 0.25f;
@@ -156,7 +150,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             Player.wellFed = true; //no longer expert half regen unless fed
 
-            if (Player.chaosState)
+            if (Player.chaosState && EmodeItemBalance.HasEmodeChange(Player, ItemID.RodofDiscord))
             {
                 Player.statDefense *= 0.6f;
                 Player.endurance -= 0.4f;
@@ -193,50 +187,24 @@ namespace FargowiltasSouls.Core.ModPlayers
                 CrossNecklaceTimer = 0;
             }
 
-            if (Player.iceBarrier && EmodeItemBalance.HasEmodeChange(Player, ItemID.FrozenTurtleShell))
-                Player.GetDamage(DamageClass.Generic) -= 0.10f;
-
-            if (Player.setSquireT2 || Player.setSquireT3 || Player.setMonkT2 || Player.setMonkT3 || Player.setHuntressT2 || Player.setHuntressT3 || Player.setApprenticeT2 || Player.setApprenticeT3 || Player.setForbidden)
-                ReduceMasomodeMinionNerf = true;
+            if (Player.vortexStealthActive && !Player.HasBuff(ModContent.BuffType<VortexStealthCDBuff>()))
+            {
+                Player.AddBuff(ModContent.BuffType<VortexStealthCDBuff>(), VortexStealthCDBuff.STEALTH_UPTIME + VortexStealthCDBuff.STEALTH_DOWNTIME);
+            }
         }
 
         private void HandleTimersAlways()
         {
-            if (MasomodeCrystalTimer > 0)
-                MasomodeCrystalTimer--;
-
-            //disable minion nerf during ooa
-            if (DD2Event.Ongoing && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.betsyBoss, NPCID.DD2Betsy))
-            {
-                int n = NPC.FindFirstNPC(NPCID.DD2EterniaCrystal);
-                if (n != -1 && n != Main.maxNPCs && Player.Distance(Main.npc[n].Center) < 3000)
-                {
-                    MasomodeMinionNerfTimer -= 2;
-                    if (MasomodeMinionNerfTimer < 0)
-                        MasomodeMinionNerfTimer = 0;
-                }
-            }
-
             if (WeaponUseTimer > 0)
                 ShorterDebuffsTimer += 1;
             else if (ShorterDebuffsTimer > 0)
                 ShorterDebuffsTimer -= 1;
-
-            if (WeaponUseTimer > 0 && Player.HeldItem.DamageType != DamageClass.Summon && Player.HeldItem.DamageType != DamageClass.SummonMeleeSpeed && Player.HeldItem.DamageType != DamageClass.Default)
-                MasomodeMinionNerfTimer += 1;
-            else if (MasomodeMinionNerfTimer > 0)
-                MasomodeMinionNerfTimer -= 1;
-
-            if (MasomodeMinionNerfTimer > MaxMasomodeMinionNerfTimer)
-                MasomodeMinionNerfTimer = MaxMasomodeMinionNerfTimer;
 
             if (ShorterDebuffsTimer > 60)
                 ShorterDebuffsTimer = 60;
 
             if (PalladiumHealTimer > 0)
                 PalladiumHealTimer--;
-
-            //Main.NewText($"{MasomodeWeaponUseTimer} {MasomodeMinionNerfTimer} {ReduceMasomodeMinionNerf}");
         }
 
         public override void PostUpdateMiscEffects()
@@ -267,30 +235,14 @@ namespace FargowiltasSouls.Core.ModPlayers
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-
-            //reduce minion damage in emode if using a weapon, scales as you use weapons
-            //if (FargoSoulsUtil.IsSummonDamage(proj, true, false) && MasomodeMinionNerfTimer > 0)
-            //{
-            //    double modifier = ReduceMasomodeMinionNerf ? 0.5 : 0.75;
-            //    modifier *= Math.Min((double)MasomodeMinionNerfTimer / MaxMasomodeMinionNerfTimer, 1.0);
-
-            //    damage = (int)(damage * (1.0 - modifier));
-            //}
         }
 
-        private void ShadowDodgeNerf()
-        {
-            if (Player.shadowDodge && EmodeItemBalance.HasEmodeChange(Player, ItemID.HallowedPlateMail)) //prehurt hook not called on titanium dodge
-                Player.AddBuff(ModContent.BuffType<HolyPriceBuff>(), 600);
-        }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            ShadowDodgeNerf();
-
-            if (Player.resistCold && npc.coldDamage) //warmth potion nerf
+            if (Player.resistCold && npc.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion)) //warmth potion nerf
             {
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30% 
                 modifiers.FinalDamage *= 0.85f;
@@ -301,33 +253,22 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            ShadowDodgeNerf();
-
-            if (Player.resistCold && proj.coldDamage) //warmth potion nerf
+            if (Player.resistCold && proj.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion)) //warmth potion nerf
             {
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30%
                 modifiers.FinalDamage *= 0.85f;
             }
-            /*
-            if (NPC.AnyNPCs(ModContent.NPCType<CosmosChampion>()))
-            {
-                Player.AddBuff(ModContent.BuffType<MoonFangBuff>(), LumUtils.SecondsToFrames(5));
-            }
-            */
         }
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-
-            //ShadowDodgeNerf();
         }
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
-            //ShadowDodgeNerf();
         }
         public override void ModifyHurt(ref Player.HurtModifiers modifiers)
         {
@@ -339,14 +280,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //because NO MODIFY/ONHITPLAYER HOOK WORKS
             if (modifiers.DamageSource.SourceProjectileType == ProjectileID.Explosives)
                 Player.FargoSouls().AddBuffNoStack(ModContent.BuffType<StunnedBuff>(), 60);
-
-            if (Player.brainOfConfusionItem != null && !Player.brainOfConfusionItem.IsAir)
-            {
-                if (Main.rand.NextBool(2)) // 50% chance to not work
-                {
-                    Player.brainOfConfusionItem = null;
-                }
-            }
 
 
             base.ModifyHurt(ref modifiers);

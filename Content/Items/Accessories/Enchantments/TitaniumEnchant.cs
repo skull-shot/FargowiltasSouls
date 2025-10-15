@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -43,8 +44,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CrystalStorm)
                 .AddIngredient(ItemID.CrystalVileShard)
 
-                .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return TitaniumEffect.BaseDamage(Main.LocalPlayer);
         }
     }
 
@@ -52,14 +60,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<TitaniumEnchant>();
-
-        public override float ContactDamageDR(Player player, NPC npc, ref Player.HurtModifiers modifiers)
+        public static int BaseDamage(Player player) => (int)(30 * player.ActualClassDamage(DamageClass.Melee));
+        public override void ModifyHitByNPC(Player player, NPC npc, ref Player.HurtModifiers modifiers)
         {
-            return TitaniumDR(player, npc);
+            float dr = TitaniumDR(player, npc);
+            modifiers.FinalDamage *= 1 - dr;
         }
-        public override float ProjectileDamageDR(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
+        public override void ModifyHitByProjectile(Player player, Projectile projectile, ref Player.HurtModifiers modifiers)
         {
-            return TitaniumDR(player, projectile);
+            float dr = TitaniumDR(player, projectile);
+            modifiers.FinalDamage *= 1 - dr;
         }
         public static float TitaniumDR(Player player, Entity attacker)
         {
@@ -100,10 +110,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             player.AddBuff(306, 600, true, false);
             if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] < 20 && player.titaniumStormCooldown == 0)
             {
-                int damage = 30;
-                damage = (int)(damage * player.ActualClassDamage(DamageClass.Melee));
-                int sh = Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard /*ModContent.ProjectileType<TitaniumShard>()*/, damage, 15f, player.whoAmI, 0f, 0f);
+                int sh = Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<TitaniumEffect>()), player.Center, Vector2.Zero, ProjectileID.TitaniumStormShard, BaseDamage(player), 15f, player.whoAmI, 0f, 0f);
                 Main.projectile[sh].DamageType = DamageClass.Melee;
+                Main.projectile[sh].noEnchantmentVisuals = true;
                 player.titaniumStormCooldown = 10;
             }
             else if (player.ownedProjectileCounts[ProjectileID.TitaniumStormShard] > 19)

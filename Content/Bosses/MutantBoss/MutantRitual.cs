@@ -1,6 +1,6 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Globals;
@@ -12,6 +12,7 @@ using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
@@ -34,6 +35,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Main.projFrames[Projectile.type] = 2;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = ImmunityCooldownID.Bosses;
+        }
         public override bool? CanDamage()
         {
             if (MutantDead)
@@ -58,7 +64,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
                 targetRotation = -realRotation / 2; //denote arena isn't moving
             }
-            else if (npc.ai[0] == 49) //golem
+            else if (npc.ai[0] == 16) //golem
             {
                 if (npc.HasValidTarget && npc.ai[1] < 30) //snap it to player at start
                 {
@@ -76,8 +82,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             else
             {
                 Projectile.velocity = npc.Center - Projectile.Center;
-                if (npc.ai[0] == 36)
-                    Projectile.velocity /= 20f; //much faster for slime rain
+                if (npc.ai[0] == 36 || npc.ai[0] == 43)
+                    Projectile.velocity /= 20f; //much faster for slime rain and twinplanteras
                 else if (npc.ai[0] == 22 || npc.ai[0] == 23 || npc.ai[0] == 25)
                     Projectile.velocity /= 40f; //move faster for direct dash, predictive throw
                 else
@@ -120,20 +126,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             base.OnHitPlayer(target, info);
 
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
 
-                if (WorldSavingSystem.MasochistModeReal && Main.npc[EModeGlobalNPC.mutantBoss].ai[0] == -5)
-                {
-                    if (!target.HasBuff(ModContent.BuffType<TimeFrozenBuff>()))
-                        SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), target.Center);
-                    target.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 300);
-                }
+            if (WorldSavingSystem.MasochistModeReal && Main.npc[EModeGlobalNPC.mutantBoss].ai[0] == -5)
+            {
+                if (!target.HasBuff(ModContent.BuffType<TimeFrozenBuff>()))
+                    SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Accessories/ZaWarudo"), target.Center);
+                target.AddBuff(ModContent.BuffType<TimeFrozenBuff>(), 300);
             }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor)
@@ -159,7 +161,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             var target = Main.LocalPlayer;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
 
             var maxOpacity = Projectile.Opacity;
             float scale = Projectile.scale * 0.5f;

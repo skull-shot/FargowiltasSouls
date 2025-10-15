@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Life
@@ -25,6 +26,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             Main.projFrames[Projectile.type] = 4;
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = ImmunityCooldownID.Bosses;
+        }
         protected override void Movement(NPC npc)
         {
             if (npc.ai[0] != 2f && npc.ai[0] != 8f)
@@ -67,7 +73,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
             var target = Main.LocalPlayer;
 
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
 
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;

@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,19 +12,20 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Utilities.Terraria.Utilities;
 
 namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
 	public class DeviBigDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/DeviDeathray";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "DeviDeathray");
 
         public static List<Asset<Texture2D>> RingTextures =>
         [
-            FargosTextureRegistry.DeviRingTexture,
-            FargosTextureRegistry.DeviRing2Texture,
-            FargosTextureRegistry.DeviRing3Texture,
-            FargosTextureRegistry.DeviRing4Texture,
+            FargoAssets.DeviRingTexture,
+            FargoAssets.DeviRing2Texture,
+            FargoAssets.DeviRing3Texture,
+            FargoAssets.DeviRing4Texture,
         ];
 
         public DeviBigDeathray() : base(180) { }
@@ -42,11 +43,27 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
 
+        float offsetFromDevi = 300;
+
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            //the laser is offset really far out in front of devi
+            //add another thinner hitbox to fix that
+            float num6 = 0f;
+            Vector2 startPoint = Projectile.Center - Projectile.velocity * offsetFromDevi;
+            float closeRangeHitboxWidthModifier = 0.5f;
+            if (Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), startPoint, startPoint + Projectile.velocity * Projectile.localAI[1], closeRangeHitboxWidthModifier * 22f * Projectile.scale * hitboxModifier, ref num6))
+            {
+                return true;
+            }
+
+            return base.Colliding(projHitbox, targetHitbox);
+        }
+
         public override void AI()
         {
             if (!Main.dedServ && Main.LocalPlayer.active)
                 FargoSoulsUtil.ScreenshakeRumble(6);
-
             Vector2? vector78 = null;
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {
@@ -55,7 +72,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<DeviBoss>());
             if (npc != null)
             {
-                Projectile.Center = npc.Center + Projectile.velocity * 300 + Main.rand.NextVector2Circular(20, 20);
+                Projectile.Center = npc.Center + Projectile.velocity * offsetFromDevi + Main.rand.NextVector2Circular(20, 20);
             }
             else
             {
@@ -151,12 +168,9 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             target.AddBuff(BuffID.Ichor, 2); //lots of defense down stack to make damage calc consistent
             target.AddBuff(BuffID.WitheredArmor, 2);
             target.AddBuff(BuffID.BrokenArmor, 2);
-            //target.AddBuff(ModContent.BuffType<Rotting>(), 2);
-            //target.AddBuff(ModContent.BuffType<MutantNibble>(), 2);
-            //target.AddBuff(ModContent.BuffType<Stunned>(), 2);
-            //target.AddBuff(ModContent.BuffType<CurseoftheMoon>(), 2);
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 1800);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
+            target.AddBuff(ModContent.BuffType<DefenselessBuff>(), 60 * 10);
 
             target.velocity.X = 0;
             target.velocity.Y = -0.4f;
@@ -212,21 +226,15 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             // Set shader parameters. This one takes two lots of fademaps and colors for two different overlayed textures.
             laser.TrySetParameter("mainColor", new Color(255, 180, 243, 100) * 2);
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviBackStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviBackStreak.Value);
 
             // Secondary fademap
-            FargoSoulsUtil.SetTexture2(FargosTextureRegistry.DeviInnerStreak.Value);
+            FargoSoulsUtil.SetTexture2(FargoAssets.DeviInnerStreak.Value);
             PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: laser), 50);
             #endregion
 
             // Draw the foreground rings.
             DrawRings(baseDrawPoints, false, ring);
-
-            // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
-            //Vector2 glowDrawPosition = Projectile.Center - Projectile.velocity * 320f;
-            //Main.EntitySpriteDraw(glowTexture, glowDrawPosition - Main.screenPosition, null, new Color(255, 180, 243), Projectile.rotation, glowTexture.Size() * 0.5f, Projectile.scale * 0.3f, SpriteEffects.None, 0);
-
         }
 
         public float RingWidthFunction(float trailInterpolant) => Projectile.scale * 4;

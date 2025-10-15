@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,11 +28,6 @@ namespace FargowiltasSouls.Content.Patreon.DemonKing
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             //if (target.defense > 0) damage += target.defense / 4;
-        }
-
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 900);
         }
     }
 }

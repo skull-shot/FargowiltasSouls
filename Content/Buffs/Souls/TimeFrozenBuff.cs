@@ -1,4 +1,5 @@
 ﻿
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core;
@@ -14,17 +15,14 @@ namespace FargowiltasSouls.Content.Buffs.Souls
 {
     public class TimeFrozenBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Souls", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Time Frozen");
-            // Description.SetDefault("You are stopped in time");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = false;
 
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "时间冻结");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "你停止了时间");
         }
 
         public override void Update(Player player, ref int buffIndex)
@@ -32,8 +30,6 @@ namespace FargowiltasSouls.Content.Buffs.Souls
             player.Incapacitate();
             player.velocity = player.oldVelocity;
             player.position = player.oldPosition;
-
-            player.FargoSouls().MutantNibble = true; //no heal
 
             FargowiltasSouls.ManageMusicTimestop(player.buffTime[buffIndex] < 5);
 

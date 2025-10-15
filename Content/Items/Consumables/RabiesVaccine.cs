@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using FargowiltasSouls.Assets.Textures;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -6,6 +7,7 @@ namespace FargowiltasSouls.Content.Items.Consumables
 {
     public class RabiesVaccine : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Consumables", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -37,17 +39,6 @@ namespace FargowiltasSouls.Content.Items.Consumables
             }
 
             return true;
-        }
-
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-
-            .AddIngredient(ModContent.ItemType<RabiesShot>(), 30)
-
-            .AddTile(TileID.Bottles)
-
-            .Register();
         }
     }
 }

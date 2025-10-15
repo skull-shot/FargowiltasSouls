@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -35,15 +37,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddRecipeGroup("FargowiltasSouls:AnyOriHead")
-            .AddIngredient(ItemID.OrichalcumBreastplate)
-            .AddIngredient(ItemID.OrichalcumLeggings)
-            .AddIngredient(ItemID.FlowerofFire)
-            .AddIngredient(ItemID.FlowerofFrost)
-            .AddIngredient(ItemID.CursedFlames)
+                .AddRecipeGroup("FargowiltasSouls:AnyOriHead")
+                .AddIngredient(ItemID.OrichalcumBreastplate)
+                .AddIngredient(ItemID.OrichalcumLeggings)
+                .AddIngredient(ItemID.CursedFlames)
+                .AddIngredient(ItemID.ShadowFlameBow)
+                .AddIngredient(ItemID.Toxikarp)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
 
@@ -72,9 +74,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             //player.onHitPetal = true;
         }
 
-        public override void OnHitNPCWithProj(Player player, Projectile proj, NPC target, NPC.HitInfo hit, int damageDone)
+        public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
-            target.AddBuff(ModContent.BuffType<Content.Buffs.Souls.OriPoisonBuff>(), 60);
+            target.AddBuff(ModContent.BuffType<OriPoisonBuff>(), 60);
         }
     }
 }

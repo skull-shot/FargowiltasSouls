@@ -1,5 +1,6 @@
-using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Assets.Particles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -15,11 +16,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
     public class CosmosMeteor : ModProjectile, IPixelatedPrimitiveRenderer
     {
         private bool spawned;
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Souls/MeteorEnchantMeatball";
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Cosmic Meteor");
-            //Main.projFrames[Projectile.type] = 3;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -27,22 +25,22 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void SetDefaults()
         {
             Projectile.CloneDefaults(ProjectileID.Meteor1);
-            AIType = 0; // ProjectileID.Meteor1;
-
             Projectile.DamageType = DamageClass.Default;
             Projectile.friendly = false;
             Projectile.hostile = true;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.timeLeft = 120 * Projectile.MaxUpdates;
             Projectile.tileCollide = false;
+            Projectile.ignoreWater = true;
 
-            Projectile.width = 80;
-            Projectile.height = 80;
-            Projectile.scale = (24f / 80);
+            Projectile.width = 24;
+            Projectile.height = 24;
+
+            Projectile.aiStyle = 0;
         }
-
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             if (!spawned)
@@ -50,7 +48,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 spawned = true;
                 //Projectile.frame = Main.rand.Next(3);
             }
-            Projectile.tileCollide = false;
 
             if (Projectile.localAI[1] == 0)
                 Projectile.localAI[1] = Main.rand.NextBool() ? 1 : -1;
@@ -71,18 +68,23 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, Projectile.velocity.X, Projectile.velocity.Y);
                 Main.dust[d].noGravity = true;
 
-                int d2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, Projectile.velocity.X, Projectile.velocity.Y);
-                Main.dust[d2].noGravity = true;
+
+                //int d2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Smoke, Projectile.velocity.X, Projectile.velocity.Y);
+                //Main.dust[d2].noGravity = true;
             }
 
-            if (Main.rand.NextBool(10))
+            if (Main.rand.NextBool(6))
             {
+                Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(Projectile.Hitbox), Projectile.velocity, Color.Gray, 50, 0.3f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                p.Spawn();
+                /*
                 float scaleFactor9 = 0.4f;
                 int i = Gore.NewGore(Projectile.GetSource_FromThis(), Projectile.position + Main.rand.NextVector2FromRectangle(new(0, 0, Projectile.width, Projectile.height)) * 0.75f, default, Main.rand.Next(61, 64));
                 Gore gore = Main.gore[i];
                 gore.position -= Projectile.velocity * 4;
                 gore.velocity *= scaleFactor9;
                 gore.velocity = -Projectile.velocity * Main.rand.NextFloat(0.5f, 0.9f);
+                */
             }
         }
 
@@ -112,7 +114,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                 }
             }
 
-            if (!Main.dedServ)
+            /*if (!Main.dedServ)
             {
                 int gores = 5;
                 for (int j = 0; j < gores; j++)
@@ -124,7 +126,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
                     if (!Main.dedServ)
                         Gore.NewGore(Projectile.GetSource_FromThis(), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"MeteorGore{type}").Type, Projectile.scale);
                 }
-            }
+            }*/
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
@@ -148,9 +150,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
         public float WidthFunction(float completionRatio)
         {
-            float baseWidth = Projectile.scale * Projectile.width * 5f;
+            float baseWidth = (Projectile.scale - 0.6f) * Projectile.width * 5f;
             float ratio = MathF.Pow(completionRatio, 1.5f);
-            return MathHelper.SmoothStep(baseWidth, 25f * Projectile.scale, ratio);
+            return MathHelper.SmoothStep(baseWidth, 7.7f, ratio);
         }
 
         public static Color ColorFunction(float completionRatio)
@@ -163,13 +165,13 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            MeteorEnchantMeatball.DrawMeteor(Projectile, Texture, false, ref lightColor);
+            MeteorEnchantMeatball.DrawMeteor(Projectile, Texture, false, ref lightColor, 0.5f);
             return false;
         }
     }

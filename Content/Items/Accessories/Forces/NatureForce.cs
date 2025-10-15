@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     {
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<CrimsonEnchant>(),
@@ -34,11 +35,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             // molten
             player.AddEffect<MoltenEffect>(Item);
             // rain
-            player.AddEffect<RainUmbrellaEffect>(Item);
+            //player.AddEffect<RainUmbrellaEffect>(Item);
             // frost
             player.AddEffect<FrostEffect>(Item);
             // chloro
-            player.AddEffect<ChloroMinion>(Item);
+            //player.AddEffect<ChloroMinion>(Item);
             // shroomite
             player.AddEffect<ShroomiteHealEffect>(Item);
             if (player.HasEffect<ShroomiteHealEffect>())

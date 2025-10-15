@@ -3,26 +3,29 @@ using Terraria.ID;
 using Terraria;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
 using FargowiltasSouls.Content.Items.Materials;
 using Fargowiltas.Content.Items.Summons.SwarmSummons.Energizers;
 using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
-using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Rarities;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class TheDestroyer : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public int Swings = 0;
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DestroyerGun2>();
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<DestructionCannon>();
         }
         public override void SetDefaults()
         {
             Item.DefaultToWhip(ModContent.ProjectileType<TheDestroyerProj>(), 1110, 20, 9, 60);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.value = Item.sellPrice(0, 25);
         }
 

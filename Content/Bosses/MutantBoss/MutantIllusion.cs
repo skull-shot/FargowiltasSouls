@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,8 +28,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 BuffID.OnFire,
                 BuffID.Suffocation,
                 ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>(),
-                ModContent.BuffType<MutantNibbleBuff>(),
                 ModContent.BuffType<OceanicMaulBuff>(),
                 ModContent.BuffType<LightningRodBuff>(),
                 ModContent.BuffType<SadismBuff>(),

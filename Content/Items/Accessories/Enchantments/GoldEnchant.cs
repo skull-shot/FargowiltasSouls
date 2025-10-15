@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -29,32 +30,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             Item.value = 150000;
         }
 
-        public override void UpdateInventory(Player player)
-        {
-            player.AddEffect<GoldToPiggy>(Item);
-        }
-        public override void UpdateVanity(Player player)
-        {
-            player.AddEffect<GoldToPiggy>(Item);
-        }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.AddEffect<GoldEffect>(Item);
             player.AddEffect<GoldKeyEffect>(Item);
-            player.AddEffect<GoldToPiggy>(Item);
         }
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.GoldHelmet)
-            .AddIngredient(ItemID.GoldChainmail)
-            .AddIngredient(ItemID.GoldGreaves)
-            .AddIngredient(ItemID.PharaohsMask)
-            .AddIngredient(ItemID.Goldfish)
-            .AddIngredient(ItemID.GoldenDelight)
+                .AddIngredient(ItemID.GoldHelmet)
+                .AddIngredient(ItemID.GoldChainmail)
+                .AddIngredient(ItemID.GoldGreaves)
+                .AddIngredient(ItemID.RubyStaff)
+                .AddIngredient(ItemID.GoldenDelight)
+                .AddIngredient(ItemID.Goldfish)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class GoldEffect : AccessoryEffect
@@ -76,21 +68,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void ActiveSkillJustPressed(Player player, bool stunned)
         {
             player.FargoSouls().GoldKey(stunned);
-        }
-    }
-    public class GoldToPiggy : AccessoryEffect
-    {
-
-        public override Header ToggleHeader => Header.GetHeader<WillHeader>();
-        public override int ToggleItemType => ModContent.ItemType<GoldEnchant>();
-        
-        public override void PostUpdateEquips(Player player)
-        {
-            for (int i = 50; i <= 53; i++) //detect coins in coin slots
-            {
-                if (!player.inventory[i].IsAir && player.inventory[i].IsACoin)
-                    player.FargoSouls().GoldEnchMoveCoins = true;
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,11 +13,10 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
     public class DeviSparklingLoveSmall : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/SparklingLove";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "SparklingLove");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Sparkling Love");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -38,6 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.FargoSouls().DeletionImmuneRank = 2;
 
             Projectile.hide = true;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -93,9 +94,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
-            //target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 240);
-            target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 240);
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
             target.AddBuff(ModContent.BuffType<RottingBuff>(), 240);
         }
 
@@ -129,7 +129,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             }
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, effects, 0);
-            Texture2D texture2D14 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/SparklingLove_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture2D14 = FargoAssets.GetTexture2D("Content/Items/Weapons/FinalUpgrades", "SparklingLove_glow").Value;
             Main.EntitySpriteDraw(texture2D14, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White * Projectile.Opacity, Projectile.rotation, origin2, Projectile.scale, effects, 0);
             return false;
         }

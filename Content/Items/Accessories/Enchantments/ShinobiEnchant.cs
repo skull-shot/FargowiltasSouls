@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -40,18 +41,25 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.MonkAltHead)
-            .AddIngredient(ItemID.MonkAltShirt)
-            .AddIngredient(ItemID.MonkAltPants)
-            .AddIngredient<MonkEnchant>()
-            .AddIngredient(ItemID.ChainGuillotines)
-            .AddIngredient(ItemID.PsychoKnife)
-            //code 2
-            //flower pow
-            //stynger
+                .AddIngredient(ItemID.MonkAltHead)
+                .AddIngredient(ItemID.MonkAltShirt)
+                .AddIngredient(ItemID.MonkAltPants)
+                .AddIngredient<MonkEnchant>()
+                .AddIngredient(ItemID.DD2LightningAuraT3Popper)
+                .AddIngredient(ItemID.PsychoKnife)
+                //code 2
+                //flower pow
+                //stynger
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return (int)((Main.LocalPlayer.FargoSouls().ForceEffect<ShinobiEnchant>() ? 800 : 500) * Main.LocalPlayer.ActualClassDamage(DamageClass.Melee));
         }
     }
     public class ShinobiDashEffect : AccessoryEffect

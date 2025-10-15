@@ -1,23 +1,27 @@
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
-using FargowiltasSouls.Content.Projectiles.Masomode.Accessories.PureHeart;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 
 //using FargowiltasSouls.Content.Buffs.Souls;
 //using FargowiltasSouls.Content.Projectiles.Critters;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.Map;
@@ -52,19 +56,12 @@ namespace FargowiltasSouls.Content.Items
 
         public override void GrabRange(Item item, Player player, ref int grabRange)
         {
-            FargoSoulsPlayer p = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer && player.HasEffect<IronEffect>())
             {
                 if (player.HasEffect<IronEquippedEffect>() || (item.type != ItemID.CopperCoin && item.type != ItemID.SilverCoin && item.type != ItemID.GoldCoin && item.type != ItemID.PlatinumCoin && item.type != ItemID.CandyApple && item.type != ItemID.SoulCake &&
                     item.type != ItemID.Star && item.type != ItemID.CandyCane && item.type != ItemID.SugarPlum && item.type != ItemID.Heart && item.type != ItemID.ManaCloakStar))
                 {
-                    int rangeBonus = 160;
-                    if (p.ForceEffect<IronEnchant>())
-                        rangeBonus = 320;
-                    if (p.TerrariaSoul)
-                        rangeBonus = 640;
-
-                    grabRange += rangeBonus;
+                    grabRange += IronEquippedEffect.GrabRangeBonus(player);
                 }
             }
         }
@@ -93,9 +90,6 @@ namespace FargowiltasSouls.Content.Items
 
         public override void PickAmmo(Item weapon, Item ammo, Player player, ref int type, ref float speed, ref StatModifier damage, ref float knockback)
         {
-            //if (weapon.CountsAsClass(DamageClass.Ranged) && player.FargoSouls().Jammed)
-                //type = ProjectileID.ConfettiGun;
-
             switch (ammo.type)
             {
                 case ItemID.GemTreeAmethystSeed:
@@ -147,7 +141,7 @@ namespace FargowiltasSouls.Content.Items
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (item.healLife > 0)
+            if (item.healLife > 0 && item.potion && player.HasBuff(BuffID.PotionSickness))
             {
                 if (player.HasEffect<ShroomiteHealEffect>())
                 {
@@ -161,7 +155,7 @@ namespace FargowiltasSouls.Content.Items
                     int hallowIndex = ModContent.GetInstance<HallowEffect>().Index;
                     // Hallow needs to disabled so it doesn't set GetHealLife to 0
                     player.AccessoryEffects().ActiveEffects[hallowIndex] = false;
-                    float mult = modPlayer.ForceEffect<HallowEnchant>() ? 1.7f : 1.4f;
+                    float mult = player.HasEffectEnchant<HallowEffect>() && player.ForceEffect<HallowEffect>() ? 1.7f : 1.4f;
                     modPlayer.HallowHealTotal = player.GetHealLife(item) * mult;
                     modPlayer.HallowHealTime = 600;
                     player.AccessoryEffects().ActiveEffects[hallowIndex] = true;
@@ -180,7 +174,7 @@ namespace FargowiltasSouls.Content.Items
             //    return false;
             //}
 
-            if (modPlayer.BuilderMode && (item.createTile > TileID.Dirt || item.createWall > 0))
+            if (modPlayer.BuilderMode && (item.createTile >= TileID.Dirt || item.createWall > 0) && item.stack >= 500)
                 return false;
 
             return base.ConsumeItem(item, player);
@@ -200,11 +194,23 @@ namespace FargowiltasSouls.Content.Items
             ModContent.ItemType<SlimeKingsSlasher>(),
             ItemID.TheAxe
         ];
+        public static List<int> NoRuminateText =
+        [
+            ModContent.ItemType<SupremeDeathbringerFairy>(),
+            ModContent.ItemType<BionomicCluster>(),
+            ModContent.ItemType<DubiousCircuitry>(),
+            ModContent.ItemType<PureHeart>(),
+            ModContent.ItemType<LithosphericCluster>(),
+            ModContent.ItemType<LithosphericClusterInactive>(),
+            ModContent.ItemType<VerdantDoomsayerMask>(),
+            ModContent.ItemType<HeartoftheMasochist>()
+        ];
+
         public override void ModifyItemScale(Item item, Player player, ref float scale)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (!item.IsAir && ((item.IsWeapon() && !item.noMelee) || TungstenAlwaysAffects.Contains(item.type)))
+            if (!item.IsAir && ((item.IsWeapon() && !item.noMelee) || TungstenAlwaysAffects.Contains(item.type)) && item.DamageType.CountsAsClass(DamageClass.Melee))
             {
                 if (player.HasEffect<TungstenEffect>())
                 {
@@ -213,7 +219,7 @@ namespace FargowiltasSouls.Content.Items
                         scale *= 2.5f;
                 }
                 if (modPlayer.Atrophied)
-                    scale *= 0.5f;
+                    scale *= 0.66f;
             }
         }
 
@@ -239,7 +245,7 @@ namespace FargowiltasSouls.Content.Items
             {
                 return true;
             }
-            if (modPlayer.BoxofGizmos)
+            if (modPlayer.SquirrelCharm != null)
             {
                 if (item.DamageType == DamageClass.Default && item.damage <= 0 && item.fishingPole <= 0)
                 {
@@ -307,10 +313,10 @@ namespace FargowiltasSouls.Content.Items
             }
 
             if (item.IsWeapon() && player.HasAmmo(item) && !(item.mana > 0 && player.statMana < item.mana) //non weapons and weapons with no ammo begone
-                && item.type != ItemID.ExplosiveBunny && item.type != ItemID.Cannonball
-                && item.useTime > 0 && item.createTile == -1 && item.createWall == -1 && item.ammo == AmmoID.None)
+                && item.shoot == ProjectileID.None && !item.noMelee && item.useTime > 0 && item.createTile == -1 && item.createWall == -1)
             {
-                modPlayer.TryAdditionalAttacks(item.damage, item.DamageType);
+                int dmg = (int)(item.damage * player.ActualClassDamage(item.DamageType));
+                modPlayer.TryAdditionalAttacks(dmg, item.DamageType);
                 player.AccessoryEffects().TryAdditionalAttacks(item.damage, item.DamageType);
             }
 
@@ -396,54 +402,66 @@ namespace FargowiltasSouls.Content.Items
             }
             return base.UseItem(item, player);
         }
+        public override bool Shoot(Item item, Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+
+            if (item.IsWeapon() && player.HasAmmo(item) && !(item.mana > 0 && player.statMana < item.mana) //non weapons and weapons with no ammo begone
+            && item.useTime > 0 && item.createTile == -1 && item.createWall == -1 && item.ammo == AmmoID.None)
+            {
+                modPlayer.TryAdditionalAttacks(damage, item.DamageType);
+                player.AccessoryEffects().TryAdditionalAttacks(damage, item.DamageType);
+            }
+            return base.Shoot(item, player, source, position, velocity, type, damage, knockback);
+        }
 
         //        public override bool AltFunctionUse(Item item, Player player)
         //        {
         //            FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-        //            if (modPlayer.WoodEnchant)
-        //            {
-        //                switch (item.type)
-        //                {
-        //                    case ItemID.Bunny:
-        //                    case ItemID.Bird:
-        //                    case ItemID.BlueJay:
-        //                    case ItemID.Cardinal:
-        //                        return true;
+            //            if (modPlayer.WoodEnchant)
+            //            {
+            //                switch (item.type)
+            //                {
+            //                    case ItemID.Bunny:
+            //                    case ItemID.Bird:
+            //                    case ItemID.BlueJay:
+            //                    case ItemID.Cardinal:
+            //                        return true;
 
-        //                }
-        //            }
+            //                }
+            //            }
 
 
 
-        //            return base.AltFunctionUse(item, player);
-        //        }
+            //            return base.AltFunctionUse(item, player);
+            //        }
 
-        //        public override bool NewPreReforge(Item item)
-        //        {
-        //            /*if (Main.player[item.owner].FargoSouls().SecurityWallet)
-        //            {
-        //                switch(item.prefix)
-        //                {
-        //                    case PrefixID.Warding:  if (SoulConfig.Instance.walletToggles.Warding)  return false; break;
-        //                    case PrefixID.Violent:  if (SoulConfig.Instance.walletToggles.Violent)  return false; break;
-        //                    case PrefixID.Quick:    if (SoulConfig.Instance.walletToggles.Quick)    return false; break;
-        //                    case PrefixID.Lucky:    if (SoulConfig.Instance.walletToggles.Lucky)    return false; break;
-        //                    case PrefixID.Menacing: if (SoulConfig.Instance.walletToggles.Menacing) return false; break;
-        //                    case PrefixID.Legendary:if (SoulConfig.Instance.walletToggles.Legendary)return false; break;
-        //                    case PrefixID.Unreal:   if (SoulConfig.Instance.walletToggles.Unreal)   return false; break;
-        //                    case PrefixID.Mythical: if (SoulConfig.Instance.walletToggles.Mythical) return false; break;
-        //                    case PrefixID.Godly:    if (SoulConfig.Instance.walletToggles.Godly)    return false; break;
-        //                    case PrefixID.Demonic:  if (SoulConfig.Instance.walletToggles.Demonic)  return false; break;
-        //                    case PrefixID.Ruthless: if (SoulConfig.Instance.walletToggles.Ruthless) return false; break;
-        //                    case PrefixID.Light:    if (SoulConfig.Instance.walletToggles.Light)    return false; break;
-        //                    case PrefixID.Deadly:   if (SoulConfig.Instance.walletToggles.Deadly)   return false; break;
-        //                    case PrefixID.Rapid:    if (SoulConfig.Instance.walletToggles.Rapid)    return false; break;
-        //                    default: break;
-        //                }
-        //            }*/
-        //            return true;
-        //        }
+            //        public override bool NewPreReforge(Item item)
+            //        {
+            //            /*if (Main.player[item.owner].FargoSouls().SecurityWallet)
+            //            {
+            //                switch(item.prefix)
+            //                {
+            //                    case PrefixID.Warding:  if (SoulConfig.Instance.walletToggles.Warding)  return false; break;
+            //                    case PrefixID.Violent:  if (SoulConfig.Instance.walletToggles.Violent)  return false; break;
+            //                    case PrefixID.Quick:    if (SoulConfig.Instance.walletToggles.Quick)    return false; break;
+            //                    case PrefixID.Lucky:    if (SoulConfig.Instance.walletToggles.Lucky)    return false; break;
+            //                    case PrefixID.Menacing: if (SoulConfig.Instance.walletToggles.Menacing) return false; break;
+            //                    case PrefixID.Legendary:if (SoulConfig.Instance.walletToggles.Legendary)return false; break;
+            //                    case PrefixID.Unreal:   if (SoulConfig.Instance.walletToggles.Unreal)   return false; break;
+            //                    case PrefixID.Mythical: if (SoulConfig.Instance.walletToggles.Mythical) return false; break;
+            //                    case PrefixID.Godly:    if (SoulConfig.Instance.walletToggles.Godly)    return false; break;
+            //                    case PrefixID.Demonic:  if (SoulConfig.Instance.walletToggles.Demonic)  return false; break;
+            //                    case PrefixID.Ruthless: if (SoulConfig.Instance.walletToggles.Ruthless) return false; break;
+            //                    case PrefixID.Light:    if (SoulConfig.Instance.walletToggles.Light)    return false; break;
+            //                    case PrefixID.Deadly:   if (SoulConfig.Instance.walletToggles.Deadly)   return false; break;
+            //                    case PrefixID.Rapid:    if (SoulConfig.Instance.walletToggles.Rapid)    return false; break;
+            //                    default: break;
+            //                }
+            //            }*/
+            //            return true;
+            //        }
 
         public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
@@ -456,8 +474,6 @@ namespace FargowiltasSouls.Content.Items
                 velocityMult += 0.5f;
             if (modPlayer.RangedSoul && item.CountsAsClass(DamageClass.Ranged))
                 velocityMult += 0.2f;
-            if (modPlayer.RangedEssence  && item.CountsAsClass(DamageClass.Ranged))
-                velocityMult += 0.1f;
             velocity *= velocityMult;
 
         }
@@ -531,7 +547,6 @@ namespace FargowiltasSouls.Content.Items
             {
                 if (modPlayer.GelicCD == 0)
                 {
-                    int dam = 25;
                     int angle = (int)player.velocity.Y * -10;
                     if (angle > 80)
                         angle = 80;
@@ -543,7 +558,7 @@ namespace FargowiltasSouls.Content.Items
                         for (int i = 0; i < max; i++)
                         {
                             Vector2 vel = Main.rand.NextFloat(5f, 10f) * j * baseVel.RotatedBy(-MathHelper.PiOver4 * 0.8f / max * i * j);
-                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dam), 5f, Main.myPlayer, 0, 0, ai2);
+                            Projectile.NewProjectile(player.GetSource_Accessory(player.EffectItem<GelicWingSpikes>()), player.Bottom - Vector2.UnitY * 8, vel, ModContent.ProjectileType<GelicWingSpike>(), GelicWingSpikes.BaseDamage(player), 5f, Main.myPlayer, ai2: ai2);
                         }
                     }
                     modPlayer.GelicCD = 22;
@@ -597,6 +612,65 @@ namespace FargowiltasSouls.Content.Items
                     }
                 }
             }
+
+            if (item.ModItem != null && Fargowiltas.Fargowiltas.SoulsMods.Contains(item.ModItem.Mod.Name))
+            {
+                string ruminateKey = $"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip";
+                string rumination = Language.GetTextValue(ruminateKey);
+                if (rumination != ruminateKey)
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                    {
+                        string unmodifiedTooltip = Language.GetTextValue($"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.Tooltip");
+                        foreach (var tooltip in tooltips)
+                        {
+                            if (tooltip.Name.StartsWith("Tooltip"))
+                            {
+                                //basically all of this is to account for things that modify TooltipX
+                                //e.g. "can be duped at enchanted tree"
+                                //and remove the original tooltip without removing externally added text
+
+                                List<string> lines = tooltip.Text.Split('\n').ToList();
+
+                                string reconstructedTooltip = "";
+                                if (tooltip.Name == "Tooltip0")
+                                    reconstructedTooltip = rumination; //stuff the entire new text into Tooltip0
+
+                                bool needToPrefixWithNewline = false;
+
+                                foreach (string line in lines)
+                                {
+                                    if (!unmodifiedTooltip.Contains(line))
+                                    {
+                                        if (needToPrefixWithNewline)
+                                            reconstructedTooltip += '\n';
+
+                                        reconstructedTooltip += line;
+
+                                        needToPrefixWithNewline = true;
+                                    }
+                                }
+
+                                tooltip.Text = reconstructedTooltip;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string key = "LeftShift";
+
+                        if (!NoRuminateText.Contains(item.type))
+                            tooltips.Add(new TooltipLine(Mod, "Ruminate", Language.GetTextValue("Mods.FargowiltasSouls.Items.Ruminate", key)));
+                        else
+                        {
+                            int i = tooltips.FindIndex(line => line.Name == "Tooltip0");
+                            if (i != -1)
+                                tooltips[i].Text = string.Format(tooltips[i].Text, key);
+                        }
+                    }
+                }
+            }
+
             /*if (Array.IndexOf(Summon, item.type) > -1)
             {
                 TooltipLine helperLine = new TooltipLine(mod, "help", "Right click to convert");

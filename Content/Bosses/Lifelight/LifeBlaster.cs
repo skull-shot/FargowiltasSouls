@@ -1,3 +1,5 @@
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,13 +10,12 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.Lifelight
 {
-
     public class LifeBlaster : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Bosses/Lifelight", Name);
         float glowIntensity = 1f;
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Blaster");
             Main.projFrames[Projectile.type] = 11;
         }
         public override void SetDefaults()
@@ -68,7 +69,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
                         //real deathray lol
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, rot,
-                            ModContent.ProjectileType<LifeChalBlasterDeathray>(), Projectile.damage, 0f, Main.myPlayer);
+                            ModContent.ProjectileType<LifelightBlasterDeathray>(), Projectile.damage, 0f, Main.myPlayer);
                     }
                 }
                 //damage projectiles
@@ -105,13 +106,13 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/Lifelight/LifeBlasterGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Assets/Textures/Content/Bosses/Lifelight/LifeBlasterGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);

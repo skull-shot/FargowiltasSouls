@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Content.Bosses.Lifelight;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Placables;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
 using Terraria.GameContent.ItemDropRules;
@@ -13,8 +14,9 @@ namespace FargowiltasSouls.Content.Items.BossBags
 
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifelightMask>(), 7));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<LifeRevitalizer>()));
-            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<LifeChallenger>()));
+            itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<Lifelight>()));
             itemLoot.Add(new OneFromOptionsDropRule(1, 1,
             [
                 ModContent.ItemType<EnchantedLifeblade>(),
@@ -22,7 +24,6 @@ namespace FargowiltasSouls.Content.Items.BossBags
                 ModContent.ItemType<CrystallineCongregation>(),
                 ModContent.ItemType<KamikazePixieStaff>()
             ]));
-            itemLoot.Add(ItemDropRule.Common(ItemID.HallowedFishingCrateHard, 1, 5, 5));
             itemLoot.Add(ItemDropRule.Common(ItemID.SoulofLight, 1, 3, 3));
             itemLoot.Add(ItemDropRule.Common(ItemID.PixieDust, 1, 25, 25));
         }

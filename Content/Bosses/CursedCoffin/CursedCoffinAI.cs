@@ -12,11 +12,12 @@ using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.WorldGeneration;
 using Luminance.Core.Graphics;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Luminance.Common.StateMachines;
 using FargowiltasSouls.Assets.Sounds;
 using Terraria.Chat;
 using Terraria.Localization;
+using FargowiltasSouls.Common.Utilities;
 
 namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 {
@@ -61,7 +62,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
         ];
 
         public Player Player => Main.player[NPC.target];
-
+        private bool droppedSummon = false;
         #endregion
         #region AI
         public override void OnSpawn(IEntitySource source)
@@ -217,8 +218,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 		{
             if (Timer == 2)
             {
-                if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin] && FargoSoulsUtil.HostCheck)
-                    Item.NewItem(NPC.GetSource_Loot(), Main.player[NPC.target].Hitbox, ModContent.ItemType<CoffinSummon>());
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<CoffinSummon>(), WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin], ref droppedSummon, WorldSavingSystem.EternityMode);
             }
 			if (Timer >= 0)
 			{
@@ -235,6 +235,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 						//dust explosion
 						ExtraTrail = false;
 						Timer = -60;
+						Phase = 1;
 						//shockwaves
 						if (FargoSoulsUtil.HostCheck)
 						{
@@ -245,14 +246,14 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 							}
 						}
 
-                        if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) && musicMod.Version >= Version.Parse("0.1.6"))
+                        /*if (ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) && musicMod.Version >= Version.Parse("0.1.6"))
                         {
                             Music = MusicLoader.GetMusicSlot(musicMod, "Assets/Music/ShiftingSands");
                             if (Main.musicFade[Music] < 0.5f)
                                 Main.musicFade[Music] = 0.5f;
                         }
                         else
-                            Music = MusicID.OtherworldlyBoss1;
+                            Music = MusicID.OtherworldlyBoss1;*/
                     }
 				}
 				if (NPC.Center.Y >= LockVector1.Y + 800) //only go so far

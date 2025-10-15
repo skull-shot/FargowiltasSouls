@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.Buffs.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -56,15 +57,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.RainHat)
-            .AddIngredient(ItemID.RainCoat)
-            .AddIngredient(ItemID.UmbrellaHat)
-            .AddIngredient(ItemID.FloatingTube) //inner tube
-            .AddIngredient(ItemID.Umbrella)
-            .AddIngredient(ItemID.WaterGun)
+                .AddIngredient(ItemID.RainHat)
+                .AddIngredient(ItemID.RainCoat)
+                .AddIngredient(ItemID.UmbrellaHat)
+                .AddIngredient(ItemID.FloatingTube) //inner tube
+                .AddIngredient(ItemID.Umbrella)
+                .AddIngredient(ItemID.WaterGun)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class RainUmbrellaEffect : AccessoryEffect

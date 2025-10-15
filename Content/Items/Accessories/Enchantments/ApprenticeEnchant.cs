@@ -1,10 +1,11 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles;
+﻿//using FargowiltasSouls.Content.Items.Accessories.Forces;
+//using FargowiltasSouls.Content.Projectiles;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Reflection;
 using Terraria;
 using Terraria.ID;
@@ -25,7 +26,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             base.SetDefaults();
 
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.value = 150000;
         }
 
@@ -38,22 +39,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.ApprenticeHat)
-            .AddIngredient(ItemID.ApprenticeRobe)
-            .AddIngredient(ItemID.ApprenticeTrousers)
-            .AddIngredient(ItemID.DD2FlameburstTowerT2Popper)
-            //magic missile
-            //ice rod
-            //golden shower
-            .AddIngredient(ItemID.BookStaff)
-            .AddIngredient(ItemID.ClingerStaff)
+                .AddIngredient(ItemID.ApprenticeHat)
+                .AddIngredient(ItemID.ApprenticeRobe)
+                .AddIngredient(ItemID.ApprenticeTrousers)
+                //magic missile
+                //ice rod
+                //golden shower
+                .AddIngredient(ItemID.BookStaff)
+                .AddIngredient(ItemID.GoldenShower)
+                .AddIngredient(ItemID.ClingerStaff)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
 
         
-        public static MethodInfo ApprenticeShootMethod
+        /*public static MethodInfo ApprenticeShootMethod
         {
             get;
             set;
@@ -66,8 +67,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             object[] args = new object[] { playerWhoAmI, item, weaponDamage };
             ApprenticeShootMethod.Invoke(player, args);
-;
-        }
+        }*/
         
     }
     public class ApprenticeSupport : AccessoryEffect
@@ -91,6 +91,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.ApprenticeItemCD > 0)
             {
                 modPlayer.ApprenticeItemCD--;
+                if (modPlayer.ApprenticeItemCD > 0)
+                    return; // if cooldown still not up, return early
             }
 
             if (player.controlUseItem)
@@ -127,32 +129,31 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                         if (item2 != null && item2.damage > 0 && item2.shoot > ProjectileID.None && item2.ammo <= 0 && item.type != item2.type && !item2.channel)
                         {
-                            if (!player.HasAmmo(item2) || (item2.mana > 0 && player.statMana < item2.mana) || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
-                                continue;
-
-                            weaponsUsed++;
-                            if (weaponsUsed > 1)
-                                break;
-
-                            int itemCD = modPlayer.ApprenticeItemCD;
-
-                            if (itemCD > 0)
+                            if (!player.HasAmmo(item2) || ContentSamples.ProjectilesByType[item2.shoot].minion || Blacklist.Contains(item2.type))
                                 continue;
 
                             if (!PlayerLoader.CanUseItem(player, item2) || !ItemLoader.CanUseItem(item2, player))
                                 continue;
 
-                            Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
-                            Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
-                            
-                            int projToShoot = item2.shoot;
-                            float speed = item2.shootSpeed;
+                            weaponsUsed++;
+                            if (weaponsUsed > 1)
+                                break;
+                            else if (item2.mana > 0 ? !player.CheckMana(item2.mana / 2) : false)
+                                continue;
+
+                            //Vector2 pos = new(player.Center.X + Main.rand.Next(-50, 50), player.Center.Y + Main.rand.Next(-50, 50));
+                            //Vector2 velocity = Vector2.Normalize(Main.MouseWorld - pos);
+
+                            //int projToShoot = item2.shoot;
+                            //float speed = item2.shootSpeed;
                             int damage = player.GetWeaponDamage(item2);
-                            float KnockBack = item2.knockBack;
+                            //float KnockBack = item2.knockBack;
 
                             int itemtime = player.itemTime;
                             int itemtimemax = player.itemTimeMax;
-                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]);
+                            FargoSoulsPlayer.ApprenticeSupportItem = item2; // capture the item being used as Apprentice Support
+                            shootMethod.Invoke(player, [player.whoAmI, item2, damage]); // all the OnSpawn stuff already runs here
+                            FargoSoulsPlayer.ApprenticeSupportItem = null; // clear just in case, as the captured item should have already marked each possible projectile as Support
 
                             player.itemTime = itemtime;
                             player.itemTimeMax = itemtimemax;
@@ -162,16 +163,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             //ApprenticeEnchant.ApprenticeShoot(player, player.whoAmI, item2, damage);
                             //FargoSoulsGlobalProjectile.ApprenticeDamageCap = 0;
 
-                            int divisor = 7;
-                            if (modPlayer.DarkArtistEnchantActive && forceEffect)
-                            {
-                                divisor = 3;
-                            }
-                            else if (modPlayer.DarkArtistEnchantActive || forceEffect)
-                            {
-                                divisor = 5;
-                            }
-
+                            int divisor = forceEffect ? 4 : 7;
                             if (!HasEffectEnchant(player))
                                 divisor = 10;
 

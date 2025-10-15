@@ -1,9 +1,12 @@
 ﻿using FargowiltasSouls.Core.Systems;
 using Luminance.Common.Utilities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent.Bestiary;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -58,7 +61,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 
@@ -130,6 +133,31 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Life
                     Main.dust[d].velocity *= 4f;
                 }
             }
+        }
+
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D texture = Terraria.GameContent.TextureAssets.Npc[Type].Value;
+
+            Color color26 = drawColor;
+            color26 = NPC.GetAlpha(color26);
+
+            SpriteEffects effects = NPC.spriteDirection > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            for (int j = 0; j < 12; j++)
+            {
+                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f;
+
+                DrawData data = new(texture, NPC.Center + afterimageOffset - Main.screenPosition + new Vector2(0f, NPC.gfxOffY), NPC.frame, color26, NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
+                GameShaders.Misc["LCWingShader"].UseColor(Color.DeepPink).UseSecondaryColor(Color.Pink);
+                GameShaders.Misc["LCWingShader"].Apply(data);
+                data.Draw(Main.spriteBatch);
+            }
+            Main.spriteBatch.ResetToDefault();
+
+            Main.EntitySpriteDraw(texture, NPC.Center - Main.screenPosition + new Vector2(0f, NPC.gfxOffY), NPC.frame, color26, NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
+            return false;
         }
     }
 }

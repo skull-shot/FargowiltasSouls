@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Bosses.CursedCoffin;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Bosses.CursedCoffin;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 {
     public class AccursedAnkh : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Expert", Name);
         public override void SetStaticDefaults()
         {
 

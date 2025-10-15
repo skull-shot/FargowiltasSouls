@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
@@ -14,6 +14,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 
 namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 {
@@ -36,8 +37,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                     BuffID.Chilled,
                     BuffID.OnFire,
                     BuffID.Suffocation,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -88,9 +88,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
             NPC.trapImmune = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.dontTakeDamage = true;
             NPC.alpha = 255;
@@ -290,7 +290,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                     else
                     {
                         targetPos = player.Center;
-                        for (int i = 0; i < 22; i++) //collision check above player's head
+                        for (int i = 0; i < 26; i++) //collision check above player's head
                         {
                             targetPos.Y -= 16;
                             Tile tile = Framing.GetTileSafely(targetPos); //if solid, stay below it
@@ -307,17 +307,20 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
                             NPC.position += (targetPos - NPC.Center) / 30;
                         }
 
-                        if (--NPC.ai[2] < 0)
+                        if (++NPC.ai[2] > 75 && NPC.ai[1] > 100)
                         {
-                            NPC.ai[2] = 75;
+                            NPC.ai[2] = 0;
                             SoundEngine.PlaySound(SoundID.NPCDeath13, NPC.Center);
-                            if (NPC.ai[1] > 10 && FargoSoulsUtil.HostCheck) //shoot spread of fireballs, but not the first time
+                            if (FargoSoulsUtil.HostCheck)
                             {
-                                for (int i = -1; i <= 1; i++)
+                                int max = 1;
+                                if (WorldSavingSystem.MasochistModeReal)
+                                    max = 2;
+                                for (int i = -max; i <= max; i++)
                                 {
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center + Vector2.UnitY * 60,
-                                        (NPC.localAI[2] == 1 ? 12 : 8) * NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(8 * i)),
-                                        ProjectileID.Fireball, FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                        (NPC.localAI[2] == 1 ? 12 : 8) * NPC.SafeDirectionTo(player.Center).RotatedBy(MathHelper.ToRadians(20 * i)),
+                                        ModContent.ProjectileType<EarthFireball>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, 1f);
                                 }
                             }
                         }
@@ -414,7 +417,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
             target.AddBuff(BuffID.OnFire, 300);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(BuffID.Burning, 300);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 300);
                 target.AddBuff(ModContent.BuffType<LethargicBuff>(), 300);
             }
         }
@@ -444,6 +447,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Earth
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<EarthMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<EarthForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<EarthChampionRelic>()));

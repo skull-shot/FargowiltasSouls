@@ -8,7 +8,13 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
     public class AbomFlocko3 : AbomFlocko
     {
-        public override string Texture => "Terraria/Images/NPC_352";
+        public override string Texture => "Terraria/Images/NPC_345";
+
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.projFrames[Projectile.type] = Main.npcFrameCount[NPCID.IceQueen];
+        }
 
         public override void AI()
         {
@@ -50,13 +56,8 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 }
             }
 
-            Projectile.rotation += Projectile.velocity.Length() / 12f * (Projectile.velocity.X > 0 ? -0.2f : 0.2f);
-            if (++Projectile.frameCounter > 3)
-            {
-                if (++Projectile.frame >= 6)
-                    Projectile.frame = 0;
-                Projectile.frameCounter = 0;
-            }
+            Projectile.rotation = System.Math.Min(MathHelper.PiOver2, Projectile.velocity.X / 16f);
+            Projectile.frame = 3;
         }
     }
 }

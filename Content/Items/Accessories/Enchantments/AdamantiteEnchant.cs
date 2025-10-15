@@ -1,3 +1,5 @@
+using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Weapons.BossDrops;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
@@ -48,10 +50,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddRecipeGroup("FargowiltasSouls:AnyAdamHead")
                 .AddIngredient(ItemID.AdamantiteBreastplate)
                 .AddIngredient(ItemID.AdamantiteLeggings)
-                .AddIngredient(ItemID.Boomstick)
+                .AddIngredient(ItemID.Gatligator)
                 .AddIngredient(ItemID.QuadBarrelShotgun)
-                .AddIngredient(ItemID.DarkLance)
-                .AddTile(TileID.CrystalBall)
+                .AddIngredient(ItemID.Shotgun)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }
@@ -87,14 +89,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!modPlayer.HeldItemAdamantiteValid)
                 return;
             float maxSpeed = player.ForceEffect<AdamantiteEffect>() ? 0.33f : 0.2f;
-            if (ProjectileID.Sets.CultistIsResistantTo[item.shoot])
+            bool[] homing = ProjectileID.Sets.CultistIsResistantTo;
+            if (item.useAmmo > AmmoID.None && player.PickAmmo(item, out int type, out _, out _, out _, out _, true) && type > 0 && homing[type])
+                maxSpeed /= 2;
+            else if (item.useAmmo == AmmoID.None && homing[item.shoot])
                 maxSpeed /= 2;
 
             float ratio = Math.Max((float)modPlayer.AdamantiteSpread / SpreadCap, 0);
             modPlayer.AttackSpeed += maxSpeed * ratio;
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("AdamantiteEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/AdamantiteEnchant").Value, new(221, 85, 125),
+                CooldownBarManager.Activate("AdamantiteEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "AdamantiteEnchant").Value, new(221, 85, 125),
                 () => (float)Main.LocalPlayer.FargoSouls().AdamantiteSpread / SpreadCap, activeFunction: player.HasEffectEnchant<AdamantiteEffect>, displayAtFull: true);
 
         }

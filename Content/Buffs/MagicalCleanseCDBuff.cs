@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -5,10 +6,9 @@ namespace FargowiltasSouls.Content.Buffs
 {
     public class MagicalCleanseCDBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Magical Cleanse Cooldown");
-            // Description.SetDefault("You cannot cleanse debuffs yet");
             Main.debuff[Type] = true;
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
         }

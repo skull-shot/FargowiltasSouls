@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile.netImportant = true;
 
-            CooldownSlot = 0;
+            CooldownSlot = ImmunityCooldownID.General;
 
             Projectile.FargoSouls().GrazeCheck =
                 projectile =>
@@ -69,7 +69,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public override bool CanHitPlayer(Player target)
         {
-            return targetPlayer == target.whoAmI && target.hurtCooldowns[CooldownSlot] == 0;
+            return targetPlayer == target.whoAmI;
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)

@@ -1,7 +1,6 @@
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -9,10 +8,9 @@ namespace FargowiltasSouls.Content.Buffs
 {
     public class SuperchargedBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Supercharged");
-            // Description.SetDefault("20% increased move speed, 10% increased attack speed, your attacks electrify");
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
             Terraria.ID.BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
@@ -20,9 +18,12 @@ namespace FargowiltasSouls.Content.Buffs
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.moveSpeed += 0.20f;
-            player.FargoSouls().AttackSpeed += 0.1f;
-            player.FargoSouls().Supercharged = true;
+            if (player.HasEffect<RemoteControlDR>())
+            {
+                player.moveSpeed += 0.20f;
+                player.FargoSouls().AttackSpeed += 0.1f;
+                player.FargoSouls().Supercharged = true;
+            }
         }
     }
 }

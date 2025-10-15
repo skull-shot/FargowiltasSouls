@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,18 +28,30 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             Projectile.hostile = true;
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
-            Projectile.timeLeft = 240;
+            Projectile.timeLeft = 300;
             Projectile.extraUpdates = 1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
         {
-            if (Projectile.localAI[0] == 0)
+            int rampupTime = WorldSavingSystem.MasochistModeReal ? 75 : 150;
+
+            if (Projectile.localAI[0]++ == 0)
             {
-                Projectile.localAI[0] = 1f;
+                if (Projectile.velocity != Vector2.Zero)
+                {
+                    Projectile.localAI[1] = Projectile.velocity.Length() / rampupTime;
+                    Projectile.velocity /= rampupTime;
+                }
                 SoundEngine.PlaySound(SoundID.Item20, Projectile.position);
             }
+
+            if (Projectile.localAI[0] < rampupTime)
+            {
+                Projectile.velocity = Projectile.velocity.SafeNormalize(Vector2.Zero) * (Projectile.velocity.Length() + Projectile.localAI[1]);
+            }
+
             for (int index1 = 0; index1 < 2; ++index1)
             {
                 int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch,
@@ -95,7 +107,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             target.AddBuff(BuffID.OnFire, 600);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }

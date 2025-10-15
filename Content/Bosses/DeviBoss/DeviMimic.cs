@@ -27,7 +27,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
+            Projectile.light = 1;
 
             Projectile.hide = true;
         }

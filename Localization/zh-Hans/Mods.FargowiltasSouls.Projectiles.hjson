@@ -49,7 +49,7 @@ FishNuke.DisplayName: 猪鲨核弹
 FishNukeExplosion.DisplayName: 猪鲨核弹
 FishStickProj.DisplayName: 鱼杖
 FishStickShark.DisplayName: 鲨鱼
-FleshLaser.DisplayName: 红色激光
+// RegurgitatorLaser.DisplayName: Regurgitator Laser
 GibExplosion.DisplayName: 爆炸
 GolemGib.DisplayName: 石巨人碎片
 GolemHeadProj.DisplayName: 石巨人头
@@ -73,10 +73,10 @@ PenetratorThrown.DisplayName: 洞察者
 PenetratorWand.DisplayName: 洞察者
 PenetratorSphereRing.DisplayName: 幻影球
 Hungry.DisplayName: 饿鬼
-Hungry2.DisplayName: 饿鬼
-LeashFlail.DisplayName: 眼睑黏连连枷
-MechEyeProjectile.DisplayName: 机械眼球
-MechFlail.DisplayName: 克苏鲁连枷
+// RegurgitatorHungry.DisplayName: Hungry
+// EyeleashFlail.DisplayName: Eyeleash Flail
+// LeashofCthulhuEyeProjectile.DisplayName: Leash of Cthulhu Eye
+// LeashofCthulhuFlail.DisplayName: Leash of Cthulhu Flail
 PhantasmalBlast.DisplayName: 幻象爆炸
 PhantasmalBolt.DisplayName: 幻影矢
 PhantasmalEyeBoundary.DisplayName: 幻影眼
@@ -87,7 +87,7 @@ PhantasmalSphere2.DisplayName: 幻影球
 PrimeDeathray.DisplayName: 烈焰死亡射线
 PrimeLaser.DisplayName: 机械激光
 RazorbladeTyphoonFriendly.DisplayName: 利刃台风
-RefractorBlaster2Held.DisplayName: 衍射闪电球炮
+// DiffractorBlasterHeld.DisplayName: Diffractor Blaster
 RetiDeathray.DisplayName: 烈焰死亡射线
 Retiglaive.DisplayName: 激光飞轮刃
 Retirang.DisplayName: 激光回旋镖
@@ -425,8 +425,7 @@ SaucerRocket.DisplayName: 火箭
 SeedPlanterasChild.DisplayName: 种子
 ShadowflamesFriendly.DisplayName: 暗影焰
 SilverSword.DisplayName: 银剑
-SkeletronArmL.DisplayName: 骷髅王之手
-SkeletronArmR.DisplayName: 骷髅王之手
+SkeletronArm.DisplayName: 骷髅王之手
 SpikyBallPlanterasChild.DisplayName: 刺球
 TrueEyeL.DisplayName: 克苏鲁真眼
 TrueEyeR.DisplayName: 克苏鲁真眼
@@ -580,7 +579,7 @@ AbomBlast.DisplayName: 幻象爆炸
 AbomFlocko2.DisplayName: 超级雪花怪
 AbomFlocko3.DisplayName: 超级雪花怪
 AbomLaser.DisplayName: 激光
-EyeProjectile.DisplayName: 眼球
+// EyeleashProjectile.DisplayName: Eyeleash Servant
 PenetratorDash.DisplayName: 洞察者
 CosmosFireball.DisplayName: 宇宙火球
 CosmosFireball2.DisplayName: 宇宙火球
@@ -604,7 +603,7 @@ BaronShrapnel.DisplayName: 遗爵空雷弹片
 ShadowOrbProjectile.DisplayName: 暗影珠
 WillDeathrayBig.DisplayName: 意志死亡射线
 DeviBossProjectile.DisplayName: 戴薇安
-JevilScar.DisplayName: 附魔光之剑
+// LifelightLifeblade.DisplayName: Enchanted Lightblade
 LifeBlaster.DisplayName: 生命湮灭炮
 LifeBomb.DisplayName: 生命空雷
 LifeTransitionBomb.DisplayName: 生命空雷
@@ -612,8 +611,8 @@ LifeBombExplosion.DisplayName: 生命空雷
 LifeCageExplosion.DisplayName: 囚笼爆炸
 LifeCageProjectile.DisplayName: 生命囚笼
 LifeCageTelegraph.DisplayName: 生命囚笼预警
-LifeChalBlasterDeathray.DisplayName: 神圣死亡射线
-LifeChalDeathray.DisplayName: 神圣死亡射线
+// LifelightBlasterDeathray.DisplayName: Holy Deathray
+// LifelightDeathray.DisplayName: Holy Deathray
 LifeCrosshair.DisplayName: 生命瞄准点
 LifeHomingProj.DisplayName: 小妖精
 LifeNeggravProj.DisplayName: 水晶十字
@@ -639,7 +638,6 @@ LightslingerBombshot.DisplayName: 曙光子弹
 LightslingerShot.DisplayName: 曙光子弹
 SpiritArrow.DisplayName: 心灵之箭
 SpiritArrowFlame.DisplayName: 心灵焰火
-CirnoBomb.DisplayName: 琪露诺炸弹
 RetinazerDeathray.DisplayName: 烈焰死亡射线
 MimicDagger.DisplayName: 魔法飞刀
 MimicHallowStar.DisplayName: 神圣之星
@@ -769,7 +767,7 @@ PungentAuraProj.DisplayName: 喷气弹幕
 RockeaterAuraProj.DisplayName: 吞噬者光环
 FallenStarDay.DisplayName: 陨星日
 LightningRodLightning.DisplayName: 避雷针闪电
-ReleasedMechFlail.DisplayName: 挣脱束缚的眼球
+// ReleasedLeashofCthulhu.DisplayName: Leash of Cthulhu
 Tome.DisplayName: 巨著
 TomeShot.DisplayName: 巨著书页
 TungstenShockwave.DisplayName: 钨冲击波
@@ -794,17 +792,86 @@ EmpressRitual.DisplayName: 女皇结界
 // PaladinHammer.DisplayName: Paladin Hammer
 // DungeonDebris.DisplayName: Dungeon Debris
 // PalmwoodShot.DisplayName: Palmwood Shot
-// BeetleEnchantBeetle.DisplayName: Beetle Enchant Beetle
-// SpookySpinScythe.DisplayName: Spooky Spin Scythe
+// BeetleEnchantBeetle.DisplayName: Beetle
+// SpookySpinScythe.DisplayName: Deathhunt Scythe
 // SnowMist.DisplayName: Snow Mist
 // IceShard.DisplayName: Ice Shard
-// DeviSniperTelegraph.DisplayName: Devi Sniper Telegraph
+// DeviSniperTelegraph.DisplayName: Sniper Rifle
 // SmallStingHitbox.DisplayName: Small Stinger
-// DeviShadowbeam.DisplayName: Devi Shadowbeam
+// DeviShadowbeam.DisplayName: Shadowbeam
 // SupremeDash.DisplayName: Supreme Dash
-// RemoteLightningExplosion.DisplayName: Remote Rain Explosion
-// RemoteLightning.DisplayName: Remote Rain Lightning
-// RemoteScanTelegraph.DisplayName: Remote Scan Telegraph
+// RemoteLightningExplosion.DisplayName: Lightning Explosion
+// RemoteLightning.DisplayName: Lightning
+// RemoteScanTelegraph.DisplayName: Scan
 // RemoteProbe.DisplayName: Remote Probe
-// CorruptionSludge.DisplayName: Corruption Sludge
-// WillDashTrail.DisplayName: Will Dash Trail
+// CorruptionSludge.DisplayName: Corrupted Sludge
+// WillDashTrail.DisplayName: Dash Trail
+// MechElectricOrbTelegraphed.DisplayName: Electric Orb
+// DiabolistExplosion.DisplayName: Diabolist Explosion
+// FireEffect.DisplayName: Fire Effect
+// PigronBubble.DisplayName: Pigron Bubble
+// NymphHeart.DisplayName: Nymph Heart
+// SpiderEnchantSpiderling.DisplayName: Spiderling
+// AbomFlamePillar.DisplayName: Flame Pillar
+// AbomFlamePillarMark.DisplayName: Flame Pillar Mark
+// DemonFireball.DisplayName: Demon Fireball
+// ImpFireOrb.DisplayName: Imp Fire Orb
+// BatExplosion.DisplayName: Bat Explosion
+// HallowRay.DisplayName: Hallow Ray
+// TrawlerFog.DisplayName: Trawler Fog
+// IceShield.DisplayName: Ice Shield
+// KingSlimeBallFriendly.DisplayName: Slime Ball
+// CultistFireballSpin.DisplayName: Fireball
+// CultistIceBall.DisplayName: Ice Sphere
+// CultistIceShard.DisplayName: Ice Shard
+// CosmosTelegraph.DisplayName: Punch Telegraph
+// NatureExplosionTelegraph.DisplayName: Explosion Telegraph
+// RockeaterLauncherHeld.DisplayName: Rockeater Launcher
+// MutantPenetratorNuke.DisplayName: Penetrator Nuke
+// MutantNukeBomb.DisplayName: Mutant Nuke Bomb
+// MutantSpikevine.DisplayName: Mutant Spikevine
+// TopazBoltExplosion.DisplayName: Topaz Bolt Explosion
+// MutantTwin.DisplayName: Mutant Twin
+// EarthFireball.DisplayName: Earth Fireball
+// GraniteBolt.DisplayName: Granite Bolt
+// GranitePebble.DisplayName: Granite Pebble
+// DarkRune.DisplayName: Dark Rune
+// DarkTomeHostile.DisplayName: Dark Tome
+// DarkBolt.DisplayName: Dark Bolt
+// TomeShotHostile.DisplayName: Tome Shot
+// AbomShip.DisplayName: Abom Ship
+// AbomCannonball.DisplayName: Abom Cannonball
+// AbomReticle2.DisplayName: Abom Reticle2
+// AbomBullet.DisplayName: Abom Bullet
+// FallingIcicle.DisplayName: Falling Icicle
+// AbomGhost.DisplayName: Abom Ghost
+// MutantSphereHelix.DisplayName: Mutant Sphere Helix
+// Pumpscare.DisplayName: Pumpscare
+// CosmosDeathray3.DisplayName: Cosmic Rift
+// MutantChain.DisplayName: Vein Chain
+// MutantWallOfFlesh.DisplayName: Wall Of Flesh
+// MutantWofDeathray.DisplayName: Divine Deathray
+// MutantWofPart.DisplayName: Wall of Flesh
+// MutantCursedFlame.DisplayName: Cursed Flames
+// MutantIchor.DisplayName: Golden Shower
+// ExplosionVisual.DisplayName: Explosion
+// OOAForcefield.DisplayName: O O A Forcefield
+// OOAForceFieldProj.DisplayName: O O A Force Field Proj
+// LithoFlame.DisplayName: Glooming Spirits
+// CactusBall.DisplayName: Cactus Ball
+// DarkBall.DisplayName: Dark Ball
+// RoseFruitTransform.DisplayName: Rose Fruit Transform
+// JavelinSpin.DisplayName: Spinning Javelin
+// WyvernClone.DisplayName: Wyvern Clone
+// StinkBomb.DisplayName: Stink Bomb
+// StinkBombProj.DisplayName: Lingering Stink Cloud
+// SnotBaseball.DisplayName: Spit Ball
+// SnotBaseballSplit.DisplayName: Spit Chunk
+// TwilightStar.DisplayName: Twilight Star
+// TwilightStarSpawn.DisplayName: Twilight Star Spawn
+// TimInspectProjectile.DisplayName: Tim Inspect Projectile
+// TimsInspectProjectile.DisplayName: Tims Inspect Projectile
+// LifeForceBugs.DisplayName: Life Force Bugs
+// LifeForceBeetle.DisplayName: Life Force Beetle
+// LifeForceSpider.DisplayName: Life Force Spider
+// LifeForceWasp.DisplayName: Life Force Wasp

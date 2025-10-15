@@ -17,13 +17,16 @@ namespace FargowiltasSouls.Core
         private const string ModName = "FargowiltasSouls";
 
         [DefaultValue(true)]
-        public bool HideTogglerWhenInventoryIsClosed;
+        public bool WikiNotification;
+
+        [DefaultValue(true)]
+        public bool MusicModNotification;
 
         [DefaultValue(true)]
         public bool ItemDisabledTooltip;
 
-        [DefaultValue(false)]
-        public bool ToggleSearchReset;
+        [DefaultValue(BalanceTooltipSetting.Reworks)]
+        public BalanceTooltipSetting ItemBalanceTooltip;
 
         private const float max4kX = 3840f;
 
@@ -43,15 +46,15 @@ namespace FargowiltasSouls.Core
         public float CooldownBarsY;
 
         [Increment(1f)]
-        [Range(-max4kX, 0)]
+        [Range(0, max4kX)]
         [DefaultValue(0f)] // Set in ActiveSkillMenu.cs
-        public float SkillMenuX; // From the right of the screen
+        public float ActiveSkillMenuX; // From the right of the screen
 
 
         [Increment(1f)]
         [Range(0f, max4kY)]
         [DefaultValue(0f)] // Set in ActiveSkillMenu.cs
-        public float SkillMenuY;
+        public float ActiveSkillMenuY;
 
         #region maso
 
@@ -68,14 +71,14 @@ namespace FargowiltasSouls.Core
 
         [Increment(1f)]
         [Range(0f, max4kX)]
-        [DefaultValue(610f)]
-        public float OncomingMutantX;
+        [DefaultValue(572f)]
+        public float EternityMutantX;
 
 
         [Increment(1f)]
         [Range(0f, max4kY)]
-        [DefaultValue(250f)]
-        public float OncomingMutantY;
+        [DefaultValue(244f)]
+        public float EternityMutantY;
 
         [DefaultValue(false)]
         public bool PhotosensitivityMode;
@@ -84,8 +87,8 @@ namespace FargowiltasSouls.Core
         [OnDeserialized]
         internal void OnDeserializedMethod(StreamingContext context)
         {
-            OncomingMutantX = Utils.Clamp(OncomingMutantX, 0, max4kX);
-            OncomingMutantY = Utils.Clamp(OncomingMutantY, 0, max4kY);
+            EternityMutantX = Utils.Clamp(EternityMutantX, 0, max4kX);
+            EternityMutantY = Utils.Clamp(EternityMutantY, 0, max4kY);
         }
     }
 }

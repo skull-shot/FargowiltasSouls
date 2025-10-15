@@ -1,6 +1,9 @@
-﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Common.Utilities;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,11 +17,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpear_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
+            FargoAssets.GetAssetString("Content/Projectiles/Weapons/FinalUpgrades", "Penetrator");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Penetrator");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -34,7 +36,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.ignoreWater = true;
             Projectile.alpha = 0;
             Projectile.timeLeft = 60;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
@@ -66,6 +68,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
          */
         public ref float VisualRotation => ref Projectile.ai[2];
         public ref float MaxTime => ref Projectile.localAI[2];
+        float spinTimer;
+        float spinFlip;
         public override void AI()
         {
             //basically: ai1 > 1 means predictive and blue glow, otherwise direct aim and green glow
@@ -73,6 +77,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             NPC mutant = Main.npc[(int)Projectile.ai[0]];
             if (mutant.active && mutant.type == ModContent.NPCType<MutantBoss>())
             {
+                if (spinFlip == 0)
+                    spinFlip = Main.rand.NextBool() ? -1 : 1;
+
                 Projectile.Center = mutant.Center;
 
                 if (Projectile.localAI[0] == 0) //ensure it faces the right way on tick 1
@@ -98,7 +105,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             {
                 Projectile.localAI[0] = 1;
 
-                if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
+                if (Projectile.ai[1] == -2) //dive tell
+                {
+                    Projectile.timeLeft += 30;
+                    Projectile.localAI[1] = -30;
+                }
+                else if (Projectile.ai[1] == -1) //extra long startup on p2 direct throw
                 {
                     Projectile.timeLeft += 120;
                     Projectile.localAI[1] = -120;
@@ -125,13 +137,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<MutantBombSmall>(), 0, 0f, Projectile.owner);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity;
@@ -203,12 +211,62 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Color glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 191, 51, 210) : new(51, 255, 191, 210);
                 if (Projectile.ai[1] > 1)
                     glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, 210) : new Color(0, 0, 255, 210);
-                //if (Projectile.ai[1] == 4) glowColor = new Color(255, 0, 0, 210);
+
+                float repeats = 1f - Projectile.timeLeft / MaxTime;
+                if (Projectile.ai[1] == -1) //extremely long startup, give it custom anim to stay fast and not look weird
+                    repeats = 1f - Projectile.timeLeft % 60 / 60f;
+                FancyFireballs(repeats, glowColor);
+
                 glowColor *= 1f - modifier;
                 float glowScale = Projectile.scale * 8f * modifier;
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(glow.Bounds), glowColor, 0, glow.Bounds.Size() / 2, glowScale, SpriteEffects.None, 0);
             }
             return false;
+        }
+
+        void FancyFireballs(float repeats, Color glowColor)
+        {
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+
+            AtlasTexture glow = AtlasManager.GetTexture("FargowiltasSouls.Bloom"); //ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
+            int rect1 = glow.Height;
+            int rect2 = rect1 * Projectile.frame;
+            Rectangle? glowrectangle = new(0, rect2, glow.Width, rect1);
+            Vector2 gloworigin2 = glowrectangle.Value.Size() / 2f;
+
+            const int max = 6;
+            const int trail = 12;
+            for (int i = 0; i < max; i++)
+            {
+                for (int j = 0; j < trail; j++)
+                {
+                    float modifier = repeats - j * 0.01f;
+
+                    float distance = 360 * (1f - modifier);
+                    float rotation = MathHelper.TwoPi * modifier * spinFlip;
+                    float lerp = MathF.Pow((float)j / trail, 0.5f);
+
+                    float frac = MathHelper.SmoothStep(1f, 0.7f, repeats);
+                    Color baseColor = Color.Lerp(Color.White, glowColor, frac + (1 - frac) * lerp);
+                    Color finalColor = baseColor * (float)Math.Sqrt(modifier);
+
+                    finalColor *= 1f - (float)j / trail;
+
+                    Vector2 offset = distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / max * i);
+                    Vector2 drawPos = Projectile.Center + offset;
+                    float scale = 1f * (1f - 0.9f * modifier);
+                    float drawRotation = offset.ToRotation();
+                    if (spinFlip > 0)
+                        drawRotation += MathHelper.Pi;
+                    float endRotation = drawRotation + MathHelper.PiOver2 * spinFlip;
+                    drawRotation = MathHelper.Lerp(drawRotation, endRotation, modifier);
+
+                    Utilities.Draw(Main.spriteBatch, glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor with { A = 255 }, drawRotation, null, Vector2.One * scale, SpriteEffects.None);
+                    //SpriteBatch.Draw(glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor, drawRotation, gloworigin2, scale, SpriteEffects.None, 0);
+                }
+            }
+
+            Main.spriteBatch.ResetToDefault();
         }
     }
 }

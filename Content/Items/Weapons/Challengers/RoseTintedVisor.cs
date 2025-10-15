@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
@@ -15,10 +16,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class RoseTintedVisor : SoulsItem
     {
-
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 
@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.HiddenAnimation;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 5);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
             //Item.UseSound = SoundID.Item40;
             Item.shoot = ModContent.ProjectileType<RoseTintedVisorDeathray>(); //guns just have this, don't ask
             Item.shootSpeed = 3f;
@@ -73,7 +73,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
                 Charges = 0;
             }
             if (Charges > 0 && player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("RoseTintedVisorCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/Challengers/RoseTintedVisor").Value, Color.Pink, () => (float)Charges / 6f, true, 60, () => Main.LocalPlayer.HeldItem == Item);
+                CooldownBarManager.Activate("RoseTintedVisorCharge", FargoAssets.GetTexture2D("Content/Items/Weapons/Challengers", "RoseTintedVisor").Value, Color.Pink, () => (float)Charges / 6f, true, 60, () => Main.LocalPlayer.HeldItem == Item);
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

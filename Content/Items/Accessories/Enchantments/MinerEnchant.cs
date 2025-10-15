@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -51,10 +52,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.UltrabrightHelmet)
                 .AddIngredient(ItemID.MiningShirt)
                 .AddIngredient(ItemID.MiningPants)
-                .AddIngredient(ItemID.AncientChisel)
-                .AddIngredient(ItemID.CopperPickaxe)
                 .AddIngredient(ItemID.GravediggerShovel)
-                .AddTile(TileID.DemonAltar)
+                .AddIngredient(ItemID.CopperPickaxe)
+                .AddIngredient(ItemID.MagicLantern)
+
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }

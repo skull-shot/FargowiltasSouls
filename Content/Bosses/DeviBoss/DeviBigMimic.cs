@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
+﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Systems;
 using Terraria;
 using Terraria.ID;

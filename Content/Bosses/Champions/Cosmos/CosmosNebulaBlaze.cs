@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
 
             Projectile.extraUpdates = 2;
             Projectile.scale = 1.5f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             if (WorldSavingSystem.MasochistModeReal)
                 Projectile.FargoSouls().GrazeCheck = Projectile => false;

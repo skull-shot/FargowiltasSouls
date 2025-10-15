@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -19,16 +19,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 	public class MutantTrueEyeDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
 
-        public override string Texture => $"FargowiltasSouls/Content/Projectiles/Deathrays/{(FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML")}";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", FargoSoulsUtil.AprilFools ? "PhantasmalDeathray" : "PhantasmalDeathrayML");
         public MutantTrueEyeDeathray() : base(90) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override bool CanHitPlayer(Player target)
         {
             return target.hurtCooldowns[1] == 0;
@@ -120,13 +112,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
         }
 
         public override bool PreDraw(ref Color lightColor) => false;
@@ -161,7 +149,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             // Set shader parameters. This one takes a fademap and a color.
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // The laser should fade to this in the middle.
             shader.TrySetParameter("mainColor", FargoSoulsUtil.AprilFools ? new Color(253, 252, 183, 100) : new Color(183, 252, 253, 100));
             shader.TrySetParameter("stretchAmount", 3);

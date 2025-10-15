@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles;
@@ -21,6 +22,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     {
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<CobaltEnchant>(),
@@ -84,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             FargoSoulsPlayer farg = player.FargoSouls();
             bool attacking =  farg.WeaponUseTimer > 0;
             int adamTime = 300;
-            float adamSpeed = 0.6f;
+            float adamSpeed = 0.3f;
 
             if (!attacking && farg.EarthTimer < EarthMaxCharge)
             {
@@ -103,7 +105,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             if (!attacking || farg.EarthTimer == 0)
                 farg.EarthAdamantiteCharge = 0;
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("EarthForceCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Forces/EarthForce").Value, MythrilEnchant.NameColor, 
+                CooldownBarManager.Activate("EarthForceCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Forces", "EarthForce").Value, MythrilEnchant.NameColor, 
                     () => (float)Main.LocalPlayer.FargoSouls().EarthTimer / EarthMaxCharge, true, activeFunction: () => player.HasEffect<EarthForceEffect>());
 
             float lerper = GetEarthForceLerpValue(player);
@@ -113,10 +115,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 farg.AttackSpeed *= MathHelper.Lerp(1, 2f, lerper);
 
             if (player.HasEffect<PalladiumHealing>())
-                player.lifeRegen += (int)MathHelper.Lerp(5, 25, lerper);
+                player.lifeRegen += (int)MathHelper.Lerp(2, 8, lerper);
 
             if (player.HasEffect<TitaniumEffect>())
-                player.endurance += MathHelper.Lerp(0.1f, 0.25f, lerper);
+                player.endurance += MathHelper.Lerp(0.05f, 0.2f, lerper);
 
             if (player.HasEffect<AdamantiteEffect>())
                 farg.AttackSpeed += adamSpeed * (float)farg.EarthAdamantiteCharge / adamTime;
@@ -155,6 +157,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 return;
             float lerper = GetEarthForceLerpValue(player);
             int debuffDamage = (int)(baseDamage * MathHelper.Lerp(1, 0.75f, lerper));
+            debuffDamage = (int)(debuffDamage * 0.5f);
             //divide by 2.3 because want to deal that damage over the course of ~6.6 seconds, deal a bit more than the actual missing damage to compensate for constant re-application of debuff without increasing the duration
             // Change damage to average of old and new damage to make it less affected by random extreme variation in damage
             target.FargoSouls().EarthDoTValue = (int)MathHelper.Lerp(target.FargoSouls().EarthDoTValue, debuffDamage / 2.3f, 0.5f);

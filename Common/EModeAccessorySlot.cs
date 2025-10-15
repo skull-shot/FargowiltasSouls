@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
 using FargowiltasSouls.Content.Patreon.ParadoxWolf;
@@ -47,7 +48,7 @@ namespace FargowiltasSouls.Common
         {
             return WorldSavingSystem.EternityMode && Player.FargoSouls().MutantsPactSlot;
         }
-        public override string FunctionalTexture => "FargowiltasSouls/Assets/UI/EnchantSlotIcon";
+        public override string FunctionalTexture => FargoAssets.GetAssetString("UI", "EnchantSlotIcon");
         //public override string FunctionalBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";
         //public override string VanityBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";
         //public override string DyeBackgroundTexture => "FargowiltasSouls/Assets/UI/EnchantSlotBackground";

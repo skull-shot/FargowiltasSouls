@@ -1,7 +1,8 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using System;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -29,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
             Projectile.timeLeft = 300;
             Projectile.aiStyle = -1;
             Projectile.extraUpdates = 1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -143,7 +144,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Cosmos
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(BuffID.Burning, 120);
+                target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 120);
             target.AddBuff(BuffID.OnFire, 300);
         }
 

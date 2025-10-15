@@ -5,7 +5,7 @@ using System.Linq;
 using Terraria.ID;
 using Terraria;
 using Terraria.ModLoader;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Boss;
 using System.IO;
 using FargowiltasSouls.Core.Systems;

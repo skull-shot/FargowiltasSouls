@@ -1,4 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,17 +14,16 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
     public class AbomStyxGazer : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/StyxGazer";
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", "StyxGazer");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Styx Gazer");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
 
         public static int TelegraphTime => WorldSavingSystem.MasochistModeReal ? 30 : 30;
-        public const int maxTime = 60;
+        public int maxTime = 60;
 
         public override void SetDefaults()
         {
@@ -40,7 +41,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             Projectile.hide = true;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
         public ref float TelegraphTimer => ref Projectile.ai[2];
         public ref float RotationTimer => ref Projectile.localAI[2];
@@ -147,14 +148,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                //target.AddBuff(ModContent.BuffType<MutantNibble>(), 300);
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //target.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
-            }
-            target.AddBuff(BuffID.Bleeding, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
 
         public override Color? GetAlpha(Color lightColor)
@@ -187,7 +183,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             }
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, Projectile.rotation, origin2, Projectile.scale, effects, 0);
-            Texture2D texture2D14 = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Weapons/FinalUpgrades/StyxGazer_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D texture2D14 = FargoAssets.GetTexture2D("Content/Items/Weapons/FinalUpgrades", "StyxGazer_glow").Value;
             Main.EntitySpriteDraw(texture2D14, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White * Projectile.Opacity, Projectile.rotation, origin2, Projectile.scale, effects, 0);
             return false;
         }

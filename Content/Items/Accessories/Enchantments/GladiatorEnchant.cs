@@ -1,7 +1,9 @@
-﻿using FargowiltasSouls.Content.Buffs;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ModPlayers;
@@ -50,12 +52,33 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.GladiatorHelmet)
                 .AddIngredient(ItemID.GladiatorBreastplate)
                 .AddIngredient(ItemID.GladiatorLeggings)
-                .AddIngredient(ItemID.Spear)
                 .AddIngredient(ItemID.Gladius)
-                .AddIngredient(ItemID.BoneJavelin, 300)
+                .AddIngredient(ItemID.Spear)
+                .AddIngredient(ItemID.Javelin, 300)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            bool wiz = player.ForceEffect<GladiatorSpears>();
+            bool buff = player.HasBuff<GladiatorBuff>();
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(DamageClass.Ranged)) / (buff ? 4 : 6);
+            if (scaling < 0)
+                scaling = 0;
+            if (wiz)
+                scaling *= 2;
+
+            int softcapMult = wiz ? 5 : 1;
+            if (scaling > (10 * softcapMult))
+                scaling = (int)((20 * softcapMult) + scaling) / 3;
+            scaling = (int)Math.Round((decimal)scaling, MidpointRounding.AwayFromZero);
+
+            int divisor = (buff ? 4 : 6) / (player.ForceEffect<GladiatorSpears>() ? 2 : 1);
+            damageClass = DamageClass.Ranged;
+            tooltipColor = null;
+            return 100 / divisor;
         }
     }
     public class GladiatorBanner : AccessoryEffect
@@ -80,10 +103,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 modPlayer.GladiatorStandardCD--;
             if (player.HasBuff<GladiatorBuff>())
             {
-                float stats = 0.05f;
+                float stats = 0.08f;
                 if (modPlayer.ForceEffect<GladiatorEnchant>())
-                    stats = 0.1f;
-                player.GetDamage(DamageClass.Generic) += stats;
+                    stats = 0.16f;
+                //player.GetDamage(DamageClass.Generic) += stats;
                 player.endurance += stats;
                 player.noKnockback = true;
             }
@@ -113,7 +136,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.GladiatorStandardCD = LumUtils.SecondsToFrames(15);
 
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("GladiatorStandardCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/GladiatorEnchant").Value, new(156, 146, 78), 
+                        CooldownBarManager.Activate("GladiatorStandardCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "GladiatorEnchant").Value, new(156, 146, 78), 
                             () => 1f - (float)Main.LocalPlayer.FargoSouls().GladiatorStandardCD / LumUtils.SecondsToFrames(15), activeFunction: () => player.HasEffect<GladiatorBanner>());
                 }
             }
@@ -149,12 +172,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
                 if ((int)spearDamage > 0)
                 {
-                    if (!modPlayer.TerrariaSoul)
-                    {
-                        float softcapMult = force ? 5f : 1f;
-                        if (spearDamage > (10f * softcapMult))
-                            spearDamage = ((20f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
-                    }
+                    float softcapMult = force ? 5f : 1f;
+                    if (spearDamage > (10f * softcapMult))
+                        spearDamage = ((20f * softcapMult) + spearDamage) / 3f; // refer to Boreal Wood Enchantment for new softcap
 
                     Item effectItem = EffectItem(player);
                     for (int i = 0; i < 3; i++)

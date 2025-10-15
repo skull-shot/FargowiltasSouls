@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -127,7 +127,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
         }
     }
 
@@ -153,7 +153,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

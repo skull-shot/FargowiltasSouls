@@ -1,26 +1,35 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles;
-using Microsoft.Xna.Framework;
-using System;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria;
-using FargowiltasSouls.Content.Items.Armor;
-using FargowiltasSouls.Core.Globals;
-using FargowiltasSouls.Content.Bosses.DeviBoss;
+﻿using System;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
+using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
-using Terraria.Audio;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Terraria.Localization;
-using Luminance.Core.Graphics;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Buffs.Souls;
+using FargowiltasSouls.Content.Items;
+using FargowiltasSouls.Content.Items.Accessories;
+using FargowiltasSouls.Content.Items.Accessories.Enchantments;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Masomode.Buffs;
+using FargowiltasSouls.Content.Items.Armor.Nekomi;
+using FargowiltasSouls.Content.Items.Armor.Styx;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Armor;
+using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Globals;
+using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
+using Mono.Cecil;
+using Terraria;
+using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
+using static FargowiltasSouls.FargowiltasSouls;
 
 namespace FargowiltasSouls.Core.ModPlayers
 {
@@ -31,7 +40,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (proj.hostile)
                 return;
 
-            if (MinionCrits && FargoSoulsUtil.IsSummonDamage(proj))
+            if (MinionCrits && proj.DamageType.CountsAsClass(DamageClass.Summon))
             {
                 if (Main.rand.Next(100) < Player.ActualClassCrit(DamageClass.Summon))
                     modifiers.SetCrit();
@@ -63,14 +72,37 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void ModifyHitNPCBoth(NPC target, ref NPC.HitModifiers modifiers, DamageClass damageClass)
         {
-            
-            
+            var critDisabled = typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool?;
+            if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && critDisabled != false)
+            {
+                float crit = 0f; // spider enchant crits don't deal extra damage, but summon spiderlings
+                /*if (EridanusSet || Player.HasEffect<LifeForceEffect>())
+                {
+                    crit = 0.25f; // crits deal 1.25x damage
+                    if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
+                        crit = 0.15f; // crits reduced to 1.15x
+                }*/
+
+                modifiers.CritDamage -= (modifiers.CritDamage.Additive - 1) * (1 - crit);
+            }
+
             modifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
             {
-                
+
                 if (hitInfo.Crit)
                 {
-                    if (UniverseCore) // cosmic core
+                    if (MinionCrits && Player.HasEffectEnchant<SpiderEffect>() && damageClass.CountsAsClass(DamageClass.Summon))
+                    {
+                        // summon spiderlings
+                        if (Player.whoAmI == Main.myPlayer && SpiderCD <= 0)
+                        {
+                            SpiderCD = 30;
+                            Vector2 spawnPos = Main.rand.NextVector2FromRectangle(Player.Hitbox);
+                            Vector2 vel = spawnPos.DirectionTo(target.Center) * 5f;
+                            Projectile.NewProjectile(Player.GetSource_EffectItem<SpiderEffect>(), spawnPos, vel, ModContent.ProjectileType<SpiderEnchantSpiderling>(), SpiderEnchantSpiderling.SpiderDamage(Player), 0.5f, Main.myPlayer, ai2: target.whoAmI);
+                        }
+                    }
+                    if (UniverseCore && !damageClass.CountsAsClass(DamageClass.Summon)) // cosmic core
                     {
                         float crit = Player.ActualClassCrit(damageClass) / 2;
                         if (Main.rand.NextFloat(100) < crit) //supercrit
@@ -80,38 +112,28 @@ namespace FargowiltasSouls.Core.ModPlayers
                             SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                         }
                     }
-                    if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon))
-                    {
-                        float critDamageMult = 0.75f; // 1f
-                        //if (Player.HasEffect<LifeForceEffect>() || TerrariaSoul)
-                            //critDamageMult *= 0.75f;
-                        if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
-                            critDamageMult *= 0.75f;
-                        if (!EridanusSet && !Ambrosia)
-                        {
-                            float damageCap = (hitInfo.Damage / 2) + 100;
-                            if (hitInfo.Damage * critDamageMult > damageCap)
-                            {
-                                critDamageMult = damageCap / hitInfo.Damage;
-                            }
-                        }
-                        if (critDamageMult != 1)
-                            hitInfo.Damage = (int)(hitInfo.Damage * critDamageMult);
-                    }
-                       
+
+
                 }
 
-                if (Hexed)
+                if (UniverseCore && damageClass.CountsAsClass(DamageClass.Summon) && critDisabled != false)
                 {
-                    target.life += hitInfo.Damage;
-                    target.HealEffect(hitInfo.Damage);
-                    if (target.life > target.lifeMax)
+                    float crit = Player.GetTotalCritChance(damageClass) / 2;
+                    if (Main.rand.NextFloat(100) < crit)
                     {
-                        target.life = target.lifeMax;
+                        hitInfo.Damage *= 2;
+                        target.AddBuff(ModContent.BuffType<FlamesoftheUniverseBuff>(), 240);
+                        SoundEngine.PlaySound(SoundID.Item147 with { Pitch = 1, Volume = 0.7f }, target.Center);
                     }
+                }
+
+                if (Hexed && HexedInflictor == target.whoAmI)
+                {
+                    Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
+                    float ai1 = 30 + Main.rand.Next(30);
+                    Projectile.NewProjectile(target.GetSource_FromThis(), Player.Center, speed, ModContent.ProjectileType<HostileHealingHeart>(), hitInfo.Damage / 5, 0f, Main.myPlayer, target.whoAmI, ai1);
                     hitInfo.Null();
                     return;
-
                 }
             };
 
@@ -120,9 +142,6 @@ namespace FargowiltasSouls.Core.ModPlayers
                 float ratio = Math.Min(Player.velocity.Length() / 20f, 1f);
                 modifiers.FinalDamage *= MathHelper.Lerp(1f, 0.85f, ratio);
             }
-
-            if (CerebralMindbreak)
-                modifiers.FinalDamage *= 0.7f;
 
             if (FirstStrike)
             {
@@ -151,8 +170,8 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (target.type == NPCID.TargetDummy || target.friendly)
                 return;
 
-          //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
-          //    TryAdditionalAttacks(proj.damage, proj.DamageType);
+            //if (proj.minion)// && proj.type != ModContent.ProjectileType<CelestialRuneAncientVision>() && proj.type != ModContent.ProjectileType<SpookyScythe>())
+            //    TryAdditionalAttacks(proj.damage, proj.DamageType);
 
             if (proj.FargoSouls().TagStackMultiplier != 1)
             {
@@ -196,7 +215,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (DevianttHeartItem != null && DevianttHeartsCD <= 0 && Player.HasEffect<DevianttHearts>()
                 && (projectile == null || (projectile.type != ModContent.ProjectileType<FriendRay>() && projectile.type != ModContent.ProjectileType<FriendHeart>())))
             {
-                DevianttHeartsCD = AbomWandItem == null ? 600 : 300;
+                DevianttHeartsCD = 600;
 
                 if (Main.myPlayer == Player.whoAmI)
                 {
@@ -250,38 +269,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             //                palladiumCD = 240;
             //            }*/
 
-            if (NymphsPerfume && NymphsPerfumeCD <= 0 && !target.immortal && !Player.moonLeech)
-            {
-                NymphsPerfumeCD = 600;
-
-                if (Main.netMode == NetmodeID.SinglePlayer)
-                {
-                    Item.NewItem(Player.GetSource_OnHit(target), target.Hitbox, ItemID.Heart);
-                }
-                else if (Main.netMode == NetmodeID.MultiplayerClient)
-                {
-                    var netMessage = Mod.GetPacket();
-                    netMessage.Write((byte)FargowiltasSouls.PacketID.RequestPerfumeHeart);
-                    netMessage.Write((byte)Player.whoAmI);
-                    netMessage.Write((byte)target.whoAmI);
-                    netMessage.Send();
-                }
-            }
-
-            if (MasochistSoul)
-            {
-                target.AddBuff(ModContent.BuffType<SadismBuff>(), 600);
-                //if (target.FindBuffIndex(ModContent.BuffType<Sadism>()) < 0 && target.aiStyle != 37)
-                //{
-                //    if (target.type != ModContent.NPCType<MutantBoss>())
-                //    {
-                //        target.DelBuff(4);
-                //        target.buffImmune[ModContent.BuffType<Sadism>()] = false;
-                //    }
-                //    target.AddBuff(ModContent.BuffType<Sadism>(), 600);
-                //}
-            }
-
             if (FusedLens)
             {
                 if (FusedLensCursed)
@@ -298,7 +285,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Player.HasEffect<IvyVenomEffect>())
             {
-                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 30);
+                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), 60);
             }
         }
 
@@ -311,14 +298,16 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         private void ApplyDR(Player player, float dr, ref Player.HurtModifiers modifiers)
         {
-            float DRCap = 0.75f;
             player.endurance += dr;
-            if (WorldSavingSystem.EternityMode)
+            if (WorldSavingSystem.EternityMode && FargowiltasSouls.CalamityMod == null)
             {
-                if (Player.endurance > DRCap)
-                {
-                    player.endurance = DRCap;
-                }
+                //Formula that emulates multiplicative DR scaling
+                //This formula essentially assumes each DR source is 15 %, and scales your DR so each additional 15 % reduces your damage taken by 15 % compared to the previous value
+                //The value of 15 % was chosen to make the scaling more lenient than a lower value would
+                // Only takes effect if your dr is larger than 0.15% (below this value the formula would scale UP your DR, actually)
+                float r = 0.15f;
+                if (player.endurance >= r)
+                    player.endurance = 1 - MathF.Pow(1 - r, player.endurance / r);
             }
         }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
@@ -334,11 +323,23 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Smite)
                 dr -= 0.2f;
 
-            if (npc.coldDamage && Hypothermia)
+            if (CurseoftheMoon)
                 dr -= 0.2f;
 
-            if (npc.FargoSouls().CurseoftheMoon)
-                dr += 0.2f;
+            if (Fused)
+                dr += 0.5f;
+
+            if (Illuminated && GelicWingsItem == null)
+            {
+                float maxDRReduction = 0.25f;
+
+                Color light = Lighting.GetColor(Player.Center.ToTileCoordinates());
+                float modifier = (light.R + light.G + light.B) / 700f;
+                modifier = MathHelper.Clamp(modifier, 0, 1);
+
+                modifier = maxDRReduction * modifier;
+                dr -= modifier;
+            }
 
             dr += Player.AccessoryEffects().ContactDamageDR(npc, ref modifiers);
 
@@ -352,7 +353,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Smite)
                 dr -= 0.2f;
 
-            if (proj.coldDamage && Hypothermia)
+            if (CurseoftheMoon)
                 dr -= 0.2f;
 
             if (Illuminated)
@@ -375,6 +376,32 @@ namespace FargowiltasSouls.Core.ModPlayers
         public override void OnHitByNPC(NPC npc, Player.HurtInfo hurtInfo)
         {
             OnHitByEither(npc, null);
+
+            if (Fused)
+            {
+                int fusedType = ModContent.BuffType<FusedBuff>();
+                npc.AddBuff(fusedType, Player.buffTime[Player.FindBuffIndex(fusedType)]);
+                Player.ClearBuff(fusedType);
+                Player.buffImmune[fusedType] = true; //avoid being debuffed by it again if you run into a fused inflicting enemy
+            }
+            else if (npc.FargoSouls().Fused)
+            {
+                int fusedType = ModContent.BuffType<FusedBuff>();
+                int fusedIndex = npc.FindBuffIndex(fusedType);
+                Player.AddBuff(fusedType, npc.buffTime[fusedIndex]);
+                if (Main.netMode == NetmodeID.MultiplayerClient)
+                {
+                    var netMessage = Instance.GetPacket(); // Broadcast item request to server
+                    netMessage.Write((byte)PacketID.ClearNPCBuffFromClient);
+                    netMessage.Write((byte)npc.whoAmI);
+                    netMessage.Write((byte)fusedType);
+                    netMessage.Send();
+                }
+                else
+                {
+                    npc.DelBuff(fusedIndex);
+                }
+            }
         }
 
         public override void OnHitByProjectile(Projectile proj, Player.HurtInfo hurtInfo)
@@ -464,12 +491,18 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             modifiers.ModifyHurtInfo += TryParryAttack;
 
+            if (Player.FargoSouls().ShellHide && !Player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
+            {
+                modifiers.DisableSound();
+                SoundEngine.PlaySound(SoundID.Item148 with { Volume = 2f }, Player.Center);
+            }
+
             if (StyxSet && !ImmuneToDamage && Player.ownedProjectileCounts[ModContent.ProjectileType<StyxArmorScythe>()] > 0)
             {
                 modifiers.ModifyHurtInfo += (ref Player.HurtInfo hurtInfo) =>
                 {
-                    if(hurtInfo.Damage <= 1) return;
-                    
+                    if (hurtInfo.Damage <= 1) return;
+
                     int scythesSacrificed = 0;
                     const int maxSacrifice = 4;
                     const double maxDR = 0.20;
@@ -489,14 +522,34 @@ namespace FargowiltasSouls.Core.ModPlayers
                     hurtInfo.Damage = (int)(hurtInfo.Damage * (1.0f - (float)maxDR / maxSacrifice * scythesSacrificed));
                 };
             }
-
-            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && (modifiers.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (modifiers.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[modifiers.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
-            {
-                DeerSinewFreezeCD = 120;
-                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 20);
-            }
         }
-
+        public override bool FreeDodge(Player.HurtInfo info)
+        {
+            if (SupersonicDodge && !noDodge)
+            {
+                if (Player.brainOfConfusionItem != null)
+                {
+                    Player.brainOfConfusionItem = null;
+                }
+                if (Player.blackBelt) // no stack, instead increase chance
+                {
+                    Player.blackBelt = false;
+                }
+                int denom = 6;
+                if (Main.rand.NextBool(denom))
+                {
+                    Player.SetImmuneTimeForAllTypes(Player.longInvince ? 120 : 80);
+                    if (Player.whoAmI == Main.myPlayer)
+                    {
+                        NetMessage.SendData(MessageID.Dodge, -1, -1, null, Player.whoAmI, 1f);
+                    }
+                    if (Player.HasEffect<HallowedPendantEffect>())
+                        HallowedPendantEffect.PendantRays(Player, FargoSoulsUtil.HighestDamageTypeScaling(Player, 800), 1200);
+                    return true;
+                }
+            }
+            return base.FreeDodge(info);
+        }
         public override void OnHurt(Player.HurtInfo info)
         {
             Player player = Main.player[Main.myPlayer];
@@ -513,7 +566,13 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.AddBuff(ModContent.BuffType<TitaniumCDBuff>(), LumUtils.SecondsToFrames(15));
             }
 
-            if (NekomiSet && NekomiHitCD <= 0)
+            if (DeerSinewNerf && DeerSinewFreezeCD <= 0 && info.Damage > 10 && (info.DamageSource.SourceNPCIndex.IsWithinBounds(Main.maxNPCs) || (info.DamageSource.SourceProjectileType.IsWithinBounds(Main.maxProjectiles) && Main.projectile[info.DamageSource.SourceProjectileType].aiStyle != ProjAIStyleID.FallingTile)))
+            {
+                DeerSinewFreezeCD = 240;
+                FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.Frozen, 10);
+            }
+
+            if (NekomiSet && NekomiHitCD <= 0 && info.Damage > 10)
             {
                 NekomiHitCD = 60;
 
@@ -531,22 +590,26 @@ namespace FargowiltasSouls.Core.ModPlayers
                     NekomiMeter = 0;
             }
 
-            if (ShellHide)
+            /*if ((player.HasEffectEnchant<TurtleSmashEffect>() || player.FargoSouls().ShellHide) && !player.HasBuff(ModContent.BuffType<ShellSmashBuff>()))
             {
-                int shelldmg = info.SourceDamage / (int)(player.ForceEffect<TurtleEffect>() ? 2 : 1);
-                TurtleShellHP -= shelldmg;
-                //some funny dust
-                /*const int max = 30;
-                for (int i = 0; i < max; i++)
+                int shelldmg = info.SourceDamage;
+                if (player.HasEffectEnchant<TurtleEffect>())
+                    TurtleShellHP -= shelldmg;
+                if (!Main.dedServ && player.FargoSouls().ShellHide)
                 {
-                    Vector2 vector6 = Vector2.UnitY * 5f;
-                    vector6 = vector6.RotatedBy((i - (max / 2 - 1)) * 6.28318548f / max) + Main.LocalPlayer.Center;
-                    Vector2 vector7 = vector6 - Main.LocalPlayer.Center;
-                    int d = Dust.NewDust(vector6 + vector7, 0, 0, DustID.GoldFlame, 0f, 0f, 0, default, 2f);
-                    Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity = vector7;
-                }*/
-            }
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if (shelldmg < 60)
+                            break;
+                        shelldmg -= 60;
+                        int i = j % 9;
+                        Vector2 pos = Main.rand.NextVector2FromRectangle(Player.Hitbox);
+                        Vector2 vel = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(4, 8);
+                        int type = i + 1;
+                        Gore.NewGore(player.GetSource_Accessory(player.EffectItem<TurtleEffect>()), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"TurtleFragment{type}").Type, Main.rand.NextFloat(0.7f, 1.3f));
+                    }
+                }
+            }*/
 
             if (Defenseless)
             {
@@ -562,8 +625,11 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (Midas && Main.myPlayer == Player.whoAmI)
                 Player.DropCoins();
 
-            DeviGrazeBonus = 0;
-            DeviGrazeCounter = 0;
+            if (info.Damage > 1)
+            {
+                DeviGrazeBonus = 0;
+                DeviGrazeCounter = 0;
+            }
 
             if (Main.myPlayer == Player.whoAmI)
             {
@@ -575,9 +641,12 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Rectangle rect = new Rectangle((int)Player.Center.X - 111, (int)Player.Center.Y, 222, 222);
                         for (int i = 0; i < The22Incident; i++)
                             CombatText.NewText(rect, Color.DarkOrange, The22Incident, true);
-                        if (The22Incident >= 22)
+                        //doing it this way to ensure we dont accidentally skip over the checks
+                        //but also so that it doesnt harass godmode testing forever
+                        LocalizedText DeathText = Language.GetText("Mods.FargowiltasSouls.DeathMessage.TwentyTwo");
+                        if (The22Incident == 22 || The22Incident == 23 || The22Incident == 24)
                         {
-                            Player.KillMe(Terraria.DataStructures.PlayerDeathReason.ByCustomReason(Language.GetTextValue("Mods.FargowiltasSouls.DeathMessage.TwentyTwo", Player.name)), 22222222, 0);
+                            Player.KillMe(PlayerDeathReason.ByCustomReason(DeathText.ToNetworkText(Player.name)), 22222222, 0);
                             Projectile.NewProjectile(Player.GetSource_Death(), Player.Center, Vector2.Zero, ModContent.ProjectileType<TwentyTwo>(), 0, 0f, Main.myPlayer);
                             ScreenShakeSystem.StartShake(10, shakeStrengthDissipationIncrement: 10f / 30);
                         }

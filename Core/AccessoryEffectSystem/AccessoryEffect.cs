@@ -52,6 +52,10 @@ namespace FargowiltasSouls.Core.AccessoryEffectSystem
         /// </summary>
         public virtual bool ExtraAttackEffect => false;
         /// <summary>
+        /// Whether the effect grants an extra jump.
+        /// </summary>
+        public virtual bool ExtraJumpEffect => false;
+        /// <summary>
         /// Whether Mutant's Presence disables the effect. Defaults to false.
         /// </summary>
         public virtual bool MutantsPresenceAffects => false;

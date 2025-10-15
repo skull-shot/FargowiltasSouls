@@ -1,7 +1,7 @@
-﻿
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,15 +15,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     public class StyxGazer : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
         public bool flip;
 
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-            // DisplayName.SetDefault("Styx Gazer");
-            /* Tooltip.SetDefault(@"Right click to wield a blade of infernal magic
-'The blazing scythe wand sword destruction ray of a defeated foe...'"); */
         }
 
         public override void SetDefaults()
@@ -56,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
         {
             if (player.altFunctionUse == 2)
             {
-                Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.StyxGazer>();
+                Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.StyxGazer>();
                 Item.useStyle = ItemUseStyleID.Shoot;
                 Item.DamageType = DamageClass.Magic;
                 Item.noUseGraphic = true;
@@ -92,8 +90,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
             }
             return true;
         }
-
-        public override string Texture => base.Texture;
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {

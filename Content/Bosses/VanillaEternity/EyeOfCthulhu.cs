@@ -1,7 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -11,6 +11,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -73,7 +74,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
         }
-
+        public override void SetDefaults(NPC npc)
+        {
+            base.SetDefaults(npc);
+            if (npc.damage < 28)
+                npc.damage = 28;
+        }
         public override bool SafePreAI(NPC npc)
         {
             ref float ai_Phase = ref npc.ai[0];
@@ -83,10 +89,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             void SpawnServants()
             {
-                if (npc.life <= npc.lifeMax * 0.65 && NPC.CountNPCS(NPCID.ServantofCthulhu) < 9 && FargoSoulsUtil.HostCheck)
+                if (npc.life <= npc.lifeMax * 0.65 && NPC.CountNPCS(NPCID.ServantofCthulhu) < 7 && FargoSoulsUtil.HostCheck)
                 {
                     Vector2 vel = new(3, 3);
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         int n = NPC.NewNPC(npc.GetSource_FromAI(), (int)npc.Center.X, (int)npc.Center.Y, NPCID.ServantofCthulhu);
                         if (n != Main.maxNPCs)
@@ -632,13 +638,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.alpha = 0;
             }
+            EModeUtils.DropSummon(npc, ItemID.SuspiciousLookingEye, NPC.downedBoss1, ref DroppedSummon);
 
-            // Drop summon
-            EModeUtils.DropSummon(npc, "SuspiciousEye", NPC.downedBoss1, ref DroppedSummon);
 
             return true;
         }
-
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {

@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -45,14 +46,30 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.AshWoodHelmet)
-            .AddIngredient(ItemID.AshWoodBreastplate)
-            .AddIngredient(ItemID.AshWoodGreaves)
-            .AddIngredient(ItemID.Fireblossom)
-            .AddIngredient(ItemID.SpicyPepper)
-            .AddIngredient(ItemID.Gel, 50)
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddIngredient(ItemID.AshWoodHelmet)
+                .AddIngredient(ItemID.AshWoodBreastplate)
+                .AddIngredient(ItemID.AshWoodGreaves)
+                .AddIngredient(ItemID.LavaBucket)
+                .AddIngredient(ItemID.Fireblossom)
+                .AddRecipeGroup("FargowiltasSouls:SpicyPepperOrPomegranate")
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(DamageClass.Magic)) / 2;
+            if (scaling < 0)
+                scaling = 0;
+
+            int softcapMult = (int)(player.ForceEffect<AshWoodFireballs>() ? 1.75 : 1);
+            if (scaling > 24 * softcapMult)
+                scaling = ((48 * softcapMult) + scaling) / 3;
+            scaling = (int)Math.Round((decimal)scaling, MidpointRounding.AwayFromZero);
+
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            return 100;
         }
     }
     public class AshWoodEffect : AccessoryEffect
@@ -62,7 +79,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void PostUpdateEquips(Player player)
         {
             AshWoodEnchant.PassiveEffect(player);
-            player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.ashWoodBonus = true;
         }
         public static bool TriggerFromDebuffs(Player player)
@@ -107,7 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 float fireballDamage = damage;
                 if (!modPlayer.TerrariaSoul && heldItem != null && heldItem.IsWeaponWithDamageClass())
                 {
-                    //fireballDamage *= player.ActualClassDamage(DamageClass.Magic);
+                    fireballDamage *= player.ActualClassDamage(DamageClass.Magic) / player.ActualClassDamage(heldItem.DamageType);
                     if (fireballDamage > 24f * softcapMult)
                         fireballDamage = (float)Math.Round(((48f * softcapMult) + fireballDamage) / 3f);
                 }
@@ -119,7 +136,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     int p = Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, vel, ProjectileID.BallofFire, (int)fireballDamage, 1, Main.myPlayer);
                     if (p != Main.maxProjectiles)
                     {
-                        Main.projectile[p].DamageType = DamageClass.Generic;
+                        Main.projectile[p].DamageType = DamageClass.Magic;
                     }
                 }
 

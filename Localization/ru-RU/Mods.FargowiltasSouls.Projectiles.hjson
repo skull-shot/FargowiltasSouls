@@ -1,24 +1,24 @@
-AbomDeathScythe.DisplayName: Коса Выродкка
-AbomDeathray.DisplayName: Луч смерти Выродкка
+AbomDeathScythe.DisplayName: Коса Отвратта
+AbomDeathray.DisplayName: Луч смерти Отвратта
 AbomDeathrayMark.DisplayName: Луч смерти
-AbomDeathraySmall.DisplayName: Луч смерти Выродкка
+AbomDeathraySmall.DisplayName: Луч смерти Отвратта
 AbomDeathraySmall2.DisplayName: Луч смерти
 AbomFlocko.DisplayName: Супер-флоко
 AbomFrostShard.DisplayName: Морозный осколок
 AbomFrostWave.DisplayName: Морозная волна
-AbomReticle.DisplayName: Сетка Выродкка
-AbomRitual.DisplayName: Печать Выродкка
-AbomRitual2.DisplayName: Печать Выродкка
-AbomRitualMaso.DisplayName: Печать Выродкка
+AbomReticle.DisplayName: Прицел Отвратта
+AbomRitual.DisplayName: Печать Отвратта
+AbomRitual2.DisplayName: Печать Отвратта
+AbomRitualMaso.DisplayName: Печать Отвратта
 AbomRocket.DisplayName: Ракета
-AbomScytheFlaming.DisplayName: Коса Выродкка
-AbomScytheSpin.DisplayName: Коса Выродкка
-AbomScytheSplit.DisplayName: Коса Выродкка
-AbomSickle.DisplayName: Серп Выродкка
-AbomSickle2.DisplayName: Серп Выродкка
-AbomSickle3.DisplayName: Серп Выродкка
-AbomSickleSplit1.DisplayName: Серп Выродкка
-AbomSickleSplit2.DisplayName: Серп Выродкка
+AbomScytheFlaming.DisplayName: Коса Отвратта
+AbomScytheSpin.DisplayName: Коса Отвратта
+AbomScytheSplit.DisplayName: Коса Отвратта
+AbomSickle.DisplayName: Серп Отвратта
+AbomSickle2.DisplayName: Серп Отвратта
+AbomSickle3.DisplayName: Серп Отвратта
+AbomSickleSplit1.DisplayName: Серп Отвратта
+AbomSickleSplit2.DisplayName: Серп Отвратта
 AbomStyxGazer.DisplayName: Созерцатель Стикс
 AbomSword.DisplayName: Лэватейнн
 AbomSwordHandle.DisplayName: Лэватейнн
@@ -49,7 +49,7 @@ FishNuke.DisplayName: Ядерыбная бомба
 FishNukeExplosion.DisplayName: Ядерыбная бомба
 FishStickProj.DisplayName: Рыбная палка
 FishStickShark.DisplayName: Акула
-FleshLaser.DisplayName: Красный лазер
+RegurgitatorLaser.DisplayName: Красный лазер
 GibExplosion.DisplayName: Взрыв
 GolemGib.DisplayName: Части тела Голема
 GolemHeadProj.DisplayName: Голова Голема
@@ -73,10 +73,10 @@ PenetratorThrown.DisplayName: Проникатель
 PenetratorWand.DisplayName: Проникатель
 PenetratorSphereRing.DisplayName: Фантазматическая сфера
 Hungry.DisplayName: Голодный
-Hungry2.DisplayName: Голодный
-LeashFlail.DisplayName: Булава-глаз
-MechEyeProjectile.DisplayName: МехГлазСнаряд
-MechFlail.DisplayName: Булава Ктулху
+RegurgitatorHungry.DisplayName: Голодный
+EyeleashFlail.DisplayName: Булава-глаз
+LeashofCthulhuEyeProjectile.DisplayName: Глаз привязи
+LeashofCthulhuFlail.DisplayName: Булава Ктулху
 PhantasmalBlast.DisplayName: Фантазматический взрыв
 PhantasmalBolt.DisplayName: Фантазматический снаряд
 PhantasmalEyeBoundary.DisplayName: Фантазматический глаз
@@ -87,7 +87,7 @@ PhantasmalSphere2.DisplayName: Фантазматическая сфера
 PrimeDeathray.DisplayName: Блестящий луч смерти
 PrimeLaser.DisplayName: Прайм лазер
 RazorbladeTyphoonFriendly.DisplayName: Бритвенный тайфун
-RefractorBlaster2Held.DisplayName: Преломляющий бластер
+DiffractorBlasterHeld.DisplayName: Преломляющий бластер
 RetiDeathray.DisplayName: Блестящий луч смерти
 Retiglaive.DisplayName: Ретиглевия
 Retirang.DisplayName: Ретиранг
@@ -128,8 +128,8 @@ CactusMine.DisplayName: Кактусовая мина
 ChampionBee.DisplayName: Пчела
 ChampionBeetle.DisplayName: Жук
 CosmosBolt.DisplayName: Космический заряд
-CosmosDeathray.DisplayName: Космический луч смерти
-CosmosDeathray2.DisplayName: Космический луч смерти
+CosmosDeathray.DisplayName: Космический разлом
+CosmosDeathray2.DisplayName: Космический разлом
 CosmosGlowything.DisplayName: Космический вторженец
 CosmosInvader.DisplayName: Космический вторженец
 CosmosInvaderTime.DisplayName: Космический вторженец
@@ -268,7 +268,7 @@ CelestialRuneFireball.DisplayName: Огненный шар
 CelestialRuneIceMist.DisplayName: Ледяной туман
 CelestialRuneIceSpike.DisplayName: Ледяной шип
 CelestialRuneLightningArc.DisplayName: Молния
-ClingerFlame.DisplayName: Проклятое пламя
+ClingerFlame.DisplayName: Проклятые огни
 ClownBomb.DisplayName: Бомба клоуна
 CrystalLeafShot.DisplayName: Кристальный лист
 CultistArrow.DisplayName: Стрела культиста
@@ -362,9 +362,9 @@ VultureFeather.DisplayName: Перо стервятника
 WOFBlast.DisplayName: Святой взрыв
 WOFChain.DisplayName: Голодный
 WOFReticle.DisplayName: Прицел Стены плоти
-AbomMinion.DisplayName: Выродокк
-AbomMinionScythe.DisplayName: Коса Выродкка
-AbomMinionSickle.DisplayName: Серп Выродкка
+AbomMinion.DisplayName: Отвратт
+AbomMinionScythe.DisplayName: Коса Отвратта
+AbomMinionSickle.DisplayName: Серп Отвратта
 BigBrainIllusion.DisplayName: Большой мозг
 BigBrainProj.DisplayName: Большой мозг
 BrainMinion.DisplayName: Мозг Снар
@@ -381,7 +381,7 @@ EaterBody.DisplayName: Тело пожирателя
 EaterHead.DisplayName: Голова пожирателя
 EaterTail.DisplayName: Хвост пожирателя
 EridanusBullet.DisplayName: Пуля Эридануса
-EridanusDeathray.DisplayName: Космический луч смерти
+EridanusDeathray.DisplayName: Космический разлом
 EridanusFist.DisplayName: Кулак Эридануса
 EridanusMinion.DisplayName: Эриданус
 EridanusRitual.DisplayName: Лунный ритуал
@@ -425,8 +425,7 @@ SaucerRocket.DisplayName: Ракета
 SeedPlanterasChild.DisplayName: Семя
 ShadowflamesFriendly.DisplayName: Теневое пламя
 SilverSword.DisplayName: СеребрМеч
-SkeletronArmL.DisplayName: Рука Скелетрона
-SkeletronArmR.DisplayName: Рука Скелетрона
+SkeletronArm.DisplayName: Рука Скелетрона
 SpikyBallPlanterasChild.DisplayName: Колючий шар
 TrueEyeL.DisplayName: Истинный глаз Ктулху
 TrueEyeR.DisplayName: Истинный глаз Ктулху
@@ -488,7 +487,7 @@ MutantTrueEyeS.DisplayName: Истинный глаз Мутанта
 MutantTrueEyeSphere.DisplayName: Призрачная сфера
 MutantTyphoon.DisplayName: Бритвенный тайфун
 AccursedSarcophagus.DisplayName: Проклятый Саркофаг
-BabyAbom.DisplayName: Малыш Вырод
+BabyAbom.DisplayName: Малыш Отвратикк
 BabySilhouette.DisplayName: Малыш силуэт
 BiteSizeBaron.DisplayName: Барон на зубок
 ChibiDevi.DisplayName: Чиби Деби
@@ -522,7 +521,7 @@ SuperBlood.DisplayName: Супер кровь
 TitaniumShard.DisplayName: Титановый осколок
 TurtleShield.DisplayName: Черепаший щит
 Void.DisplayName: Пустота
-AbomScytheFriendly.DisplayName: Уродливая коса
+AbomScytheFriendly.DisplayName: Отвратительная коса
 BetsyDash.DisplayName: Рывок
 CreeperHitbox.DisplayName: Ползун
 Explosion.DisplayName: Взрыв
@@ -540,7 +539,7 @@ LightningVortex.DisplayName: Вихрь
 LightningVortexHostile.DisplayName: Вихрь
 LihzahrdSpikyBallFriendly.DisplayName: Колючий шар
 PhantasmalSphere.DisplayName: Призрачная сфера
-SpectralAbominationn.DisplayName: Призрачный выродокк
+SpectralAbominationn.DisplayName: Призрачный Отвратт
 StyxArmorScythe.DisplayName: Коса Стикс
 StyxArmorScythe2.DisplayName: Коса Стикс
 StyxGazerArmor.DisplayName: Созерцатель Стикс
@@ -580,14 +579,14 @@ AbomBlast.DisplayName: Призрачный взрыв
 AbomFlocko2.DisplayName: Супер-флоко
 AbomFlocko3.DisplayName: Супер-флоко
 AbomLaser.DisplayName: Лазер
-EyeProjectile.DisplayName: ГлазСнаряд2
+EyeleashProjectile.DisplayName: Прислужник привязи
 PenetratorDash.DisplayName: Проникатель
 CosmosFireball.DisplayName: Космический огненный шар
 CosmosFireball2.DisplayName: Космический огненный шар
 ShadowFlameburst.DisplayName: Огнемёт
 ShadowFlamingScythe.DisplayName: Горящая коса
 DeviRitual2.DisplayName: Печать Девиантт
-CursedFireballHoming.DisplayName: Проклятое Ппамя
+CursedFireballHoming.DisplayName: Проклятое пламя
 CursedFlameHostile2.DisplayName: Проклятое пламя
 ElfCopterBulletExplosion.DisplayName: Разрывная пуля
 MoonLordVortexOld.DisplayName: Вихрь
@@ -595,7 +594,7 @@ RazorbladeTyphoon2.DisplayName: Бритвенный тайфун
 VenomSpit.DisplayName: Ядовитый плевок
 RainbowSlimeSpikeFriendly.DisplayName: Радужный слизневый шип
 PlasmaDeathRay.DisplayName: Плазменный луч смерти
-AbomBossProjectile.DisplayName: Выродокк
+AbomBossProjectile.DisplayName: Отвратт
 BaronMine.DisplayName: Мина Бранного Барона
 BaronNuke.DisplayName: Острая пищащая атомная торпеда смерти и разрушения Бранного Барона
 BaronRocket.DisplayName: Ракета Бранного Барона
@@ -604,7 +603,7 @@ BaronShrapnel.DisplayName: Шрапнель мины Бранного Барон
 ShadowOrbProjectile.DisplayName: Сфера Тени
 WillDeathrayBig.DisplayName: Луч смерти Воли
 DeviBossProjectile.DisplayName: Девиантт
-JevilScar.DisplayName: Зачарованный клинок Жизни
+LifelightLifeblade.DisplayName: Зачарованный клинок света
 LifeBlaster.DisplayName: Бластер Жизни
 LifeBomb.DisplayName: Мина Жизни
 LifeTransitionBomb.DisplayName: Мина Жизни
@@ -612,8 +611,8 @@ LifeBombExplosion.DisplayName: Бомба Жизни
 LifeCageExplosion.DisplayName: Взрыв клетки
 LifeCageProjectile.DisplayName: Клетка Жизни
 LifeCageTelegraph.DisplayName: Клетка Телеграф
-LifeChalBlasterDeathray.DisplayName: Святой луч смерти
-LifeChalDeathray.DisplayName: Святой луч смерти
+LifelightBlasterDeathray.DisplayName: Святой луч смерти
+LifelightDeathray.DisplayName: Святой луч смерти
 LifeCrosshair.DisplayName: Прицел
 LifeHomingProj.DisplayName: Малая фея
 LifeNeggravProj.DisplayName: Крест
@@ -639,7 +638,6 @@ LightslingerBombshot.DisplayName: Выстрел света
 LightslingerShot.DisplayName: Выстрел света
 SpiritArrow.DisplayName: Стрела духа
 SpiritArrowFlame.DisplayName: Пламя духа
-CirnoBomb.DisplayName: Чирно бомба
 RetinazerDeathray.DisplayName: Пламенный луч смерти
 MimicDagger.DisplayName: Магический кинжал
 MimicHallowStar.DisplayName: Святая звезда
@@ -717,7 +715,7 @@ FrostShardFriendly.DisplayName: Ледяной осколок друг
 PenetratorSword.DisplayName: Меч Мутанта
 PenetratorSwordBlast.DisplayName: Взрыв меча Мутанта
 PenetratorSphereOkuu.DisplayName: Сфера Окуу Мутанта
-AbomRitualFTW.DisplayName: Ритуал Выродкка
+AbomRitualFTW.DisplayName: Ритуал Отвратта
 FallingSandstone.DisplayName: Падающий песчанник
 CoffinPlayerSoul.DisplayName: Твоя душа
 GildedSceptreProj.DisplayName: Тенепламенный выстрел скипетра
@@ -764,12 +762,12 @@ TheDestroyerProj.DisplayName: Уничтожитель
 DestroyerBodyWhip.DisplayName: Тело уничтожителя
 DestroyerHeadWhip.DisplayName: Голова уничтожителя
 DestroyerTailWhip.DisplayName: Хвост уничтожителя
-DestroyerScanTelegraph.DisplayName: Скан уничтожителя телеграф
+DestroyerScanTelegraph.DisplayName: Скан уничтожителя
 PungentAuraProj.DisplayName: Едкая аура
 RockeaterAuraProj.DisplayName: Аура пожиракетомёта
 FallenStarDay.DisplayName: Упавшая дневная звезда
-LightningRodLightning.DisplayName: Молния громоотвода
-ReleasedMechFlail.DisplayName: Привязь Ктулху
+LightningRodLightning.DisplayName: Молния
+ReleasedLeashofCthulhu.DisplayName: Привязь Ктулху
 Tome.DisplayName: Том
 TomeShot.DisplayName: Выстрел из тома
 TungstenShockwave.DisplayName: Ударная волна вольфрама
@@ -782,7 +780,7 @@ WriggleMinion.DisplayName: Риггл миньон
 CirnoIceChunk.DisplayName: Ледяной кусок Чирно
 DaiyoLeaf.DisplayName: Листок Дайёсэй
 MystiaNote.DisplayName: Нота Мистии
-MystiaNote2.DisplayName: Нота Мистии 2
+MystiaNote2.DisplayName: Нота Мистии
 RumiaOrb.DisplayName: Сфера Румии
 EmpressRitual.DisplayName: Ритуал Императрицы
 BoneSpear.DisplayName: Костяное копьё
@@ -794,17 +792,86 @@ VikingHook.DisplayName: Крюк викинга
 PaladinHammer.DisplayName: Молот паладина
 DungeonDebris.DisplayName: Обломки темницы
 PalmwoodShot.DisplayName: Выстрел пальмы
-BeetleEnchantBeetle.DisplayName: Жук зачарования жука
-SpookySpinScythe.DisplayName: Крутящаяся коса жути
+BeetleEnchantBeetle.DisplayName: Жук
+SpookySpinScythe.DisplayName: Коса смертельной охоты
 SnowMist.DisplayName: Снежный туман
 IceShard.DisplayName: Ледяной осколок
-DeviSniperTelegraph.DisplayName: Деви снайпер телеграф
+DeviSniperTelegraph.DisplayName: Снайперская винтовка
 SmallStingHitbox.DisplayName: Маленькое жало
-DeviShadowbeam.DisplayName: Теневой луч Девиантт
+DeviShadowbeam.DisplayName: Теневой луч
 SupremeDash.DisplayName: Верховный рывок
-RemoteLightningExplosion.DisplayName: Взрыв молний дистанционного управления
-RemoteLightning.DisplayName: Молния дистанционного управления
-RemoteScanTelegraph.DisplayName: Ремоут скан телеграф
+RemoteLightningExplosion.DisplayName: Взрыв молний
+RemoteLightning.DisplayName: Молния
+RemoteScanTelegraph.DisplayName: Скан
 RemoteProbe.DisplayName: Зонд дистанционного управления
 CorruptionSludge.DisplayName: Порченная слизь
-// WillDashTrail.DisplayName: Will Dash Trail
+WillDashTrail.DisplayName: След от рывка
+MechElectricOrbTelegraphed.DisplayName: Электрическая сфера
+DiabolistExplosion.DisplayName: Взрыв сатаниста
+FireEffect.DisplayName: Эффект огня
+PigronBubble.DisplayName: Пузырь свинрона
+NymphHeart.DisplayName: Сердце Нимфы
+SpiderEnchantSpiderling.DisplayName: Паучок
+AbomFlamePillar.DisplayName: Огненный столп
+AbomFlamePillarMark.DisplayName: Метка огненного столпа
+DemonFireball.DisplayName: Огненный шар демона
+ImpFireOrb.DisplayName: Большой огненный шар
+BatExplosion.DisplayName: Взрыв
+HallowRay.DisplayName: Святой луч
+TrawlerFog.DisplayName: Ядовитый туман
+IceShield.DisplayName: Ледяной щит
+KingSlimeBallFriendly.DisplayName: Слизневый шар
+CultistFireballSpin.DisplayName: Огненный шар
+CultistIceBall.DisplayName: Ледяная сфера
+CultistIceShard.DisplayName: Ледяной осколок
+CosmosTelegraph.DisplayName: Телеграф удара
+NatureExplosionTelegraph.DisplayName: Телеграф взрыва
+RockeaterLauncherHeld.DisplayName: Пожиракетомёт
+MutantPenetratorNuke.DisplayName: Взрыв проникателя
+MutantNukeBomb.DisplayName: ХАЙДРОДЖЕН БОМБ
+MutantSpikevine.DisplayName: Шипастая лоза
+TopazBoltExplosion.DisplayName: Топазовый взрыв
+MutantTwin.DisplayName: Близнец
+EarthFireball.DisplayName: Огненный шар Земли
+GraniteBolt.DisplayName: Гранитный выстрел
+GranitePebble.DisplayName: Гранитный камушек
+DarkRune.DisplayName: Тёмная руна
+DarkTomeHostile.DisplayName: Тёмная книга
+DarkBolt.DisplayName: Тёмный снаряд
+TomeShotHostile.DisplayName: Выстрел из книги
+AbomShip.DisplayName: Корабль
+AbomCannonball.DisplayName: Ядро из пушки
+AbomReticle2.DisplayName: Прицел
+AbomBullet.DisplayName: Пуля
+FallingIcicle.DisplayName: Падающая сосулька
+AbomGhost.DisplayName: Призрак Отвратта
+MutantSphereHelix.DisplayName: Спиральная сфера Мутанта
+Pumpscare.DisplayName: Тыквоскример
+CosmosDeathray3.DisplayName: Космический разлом
+MutantChain.DisplayName: Вена-цепь
+MutantWallOfFlesh.DisplayName: Стена плоти
+MutantWofDeathray.DisplayName: Святой луч смерти
+MutantWofPart.DisplayName: Стена плоти
+MutantCursedFlame.DisplayName: Проклятые огни
+MutantIchor.DisplayName: Золотой дождь
+ExplosionVisual.DisplayName: Взрыв
+OOAForcefield.DisplayName: Силовое поле
+OOAForceFieldProj.DisplayName: Силовое поле
+LithoFlame.DisplayName: Мрачные духи
+CactusBall.DisplayName: Кактус
+DarkBall.DisplayName: Шар тьмы
+RoseFruitTransform.DisplayName: Трансформация
+JavelinSpin.DisplayName: Кружащееся копьё
+WyvernClone.DisplayName: Клон виверны
+StinkBomb.DisplayName: Вонючая бомба
+StinkBombProj.DisplayName: Висящее вонючее облако
+SnotBaseball.DisplayName: Шар слюней
+SnotBaseballSplit.DisplayName: Шарик слюней
+TwilightStar.DisplayName: Сумеречная звезда
+TwilightStarSpawn.DisplayName: Сумеречная звезда
+TimInspectProjectile.DisplayName: Tim Inspect Projectile
+TimsInspectProjectile.DisplayName: Tims Inspect Projectile
+// LifeForceBugs.DisplayName: Life Force Bugs
+// LifeForceBeetle.DisplayName: Life Force Beetle
+// LifeForceSpider.DisplayName: Life Force Spider
+// LifeForceWasp.DisplayName: Life Force Wasp

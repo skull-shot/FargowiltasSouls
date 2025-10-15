@@ -2,13 +2,13 @@ using Fargowiltas;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using FargowiltasSouls.Content.Projectiles.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -42,6 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public int RotationDirection = 1;
         public int LightshowSlowTimer;
 
+        public static bool Phase2HP(NPC npc) => npc.life < (int)(npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.95 : .75));
         public bool InPhase2;
         public bool IsCoiling;
         public bool PrepareToCoil;
@@ -188,10 +189,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     float ratio = (float)npc.life / npc.lifeMax;
                     if (WorldSavingSystem.MasochistModeReal)
                         ratio = 0;
-
-                    int max = (int)(14f - 10f * ratio);
+                    float max = 12f;
+                    float min = 4f;
+                    if (WorldSavingSystem.MasochistModeReal)
+                        max = 14f;
+                    max = MathHelper.Lerp(max, min, ratio);
+                    max = (int)max;
                     if (max % 2 != 0) //always shoot even number
                         max++;
+                    if (max <= 4) // minimum of 6
+                        max = 6;
 
                     for (int i = 0; i < max; i++)
                     {
@@ -751,7 +758,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     ProbeLasers(1);
                 }
-                if (npc.life < (int)(npc.lifeMax * (WorldSavingSystem.MasochistModeReal ? 0.95 : .75)))
+                if (Phase2HP(npc))
                 {
                     InPhase2 = true;
                     AttackModeTimer = P2_COIL_BEGIN_TIME;
@@ -792,7 +799,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            EModeUtils.DropSummon(npc, "MechWorm", NPC.downedMechBoss1, ref DroppedSummon, Main.hardMode);
+            EModeUtils.DropSummon(npc, ItemID.MechanicalWorm, NPC.downedMechBoss1, ref DroppedSummon, Main.hardMode);
 
             return true;
         }
@@ -810,36 +817,25 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.4f;
+                    modifiers.FinalDamage *= 0.6f;
                 }
             }
             else if (npc.life < npc.lifeMax / 10)
             {
                 modifiers.FinalDamage *= 0.1f;
             }
-            else if (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120)
+            else if (Phase2HP(npc) && (PrepareToCoil || AttackModeTimer >= P2_COIL_BEGIN_TIME - 120))
             {
-                modifiers.FinalDamage *= 0.4f;
+                modifiers.FinalDamage *= 0.6f;
             }
         }
 
-        public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
-
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile))
-                modifiers.FinalDamage *= 2.0f / 3.0f + 1.0f / 3.0f * 1f / projectile.numHits;
-            if (projectile.type == ProjectileID.RainFriendly)
-                modifiers.FinalDamage /= 2;
-            if (projectile.type == ProjectileID.SoulDrain)
-                modifiers.FinalDamage *= 0.75f;
-        }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Electrified, 60);
-            target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
         }
 
 
@@ -1061,12 +1057,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    modifiers.FinalDamage *= 0.1f;
+                    modifiers.FinalDamage *= 0.6f;
                 }
             }
-            else if (destroyerEmode.PrepareToCoil || destroyerEmode.AttackModeTimer >= Destroyer.P2_COIL_BEGIN_TIME - 120 || destroyer.life < destroyer.lifeMax / 10)
+            else if (destroyer.life < destroyer.lifeMax / 10)
             {
                 modifiers.FinalDamage *= 0.1f;
+            }
+            else if (Destroyer.Phase2HP(npc) && (destroyerEmode.PrepareToCoil || destroyerEmode.AttackModeTimer >= Destroyer.P2_COIL_BEGIN_TIME - 120 || destroyer.life < destroyer.lifeMax / 10))
+            {
+                modifiers.FinalDamage *= 0.6f;
             }
 
             if (Main.npc.Count(n => n.active && n.type == npc.type && n.Distance(npc.Center) < npc.width * 0.75) > 4)
@@ -1082,16 +1082,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (projectile.type == ProjectileID.RainFriendly)
                 modifiers.FinalDamage /= 2;
-            if (projectile.type == ProjectileID.SoulDrain)
-                modifiers.FinalDamage *= 0.75f;
-            if (projectile.type == ModContent.ProjectileType<DecrepitAirstrikeNuke>() || projectile.type == ModContent.ProjectileType<DecrepitAirstrikeNukeSplinter>())
-                modifiers.FinalDamage *= 0.7f;
 
             if (projectile.type == ProjectileID.MonkStaffT1 || projectile.type == ProjectileID.MonkStaffT1Explosion) // sleepy
                 modifiers.FinalDamage *= 0.3f;
-
-            if (projectile.FargoSouls().IsAHeldProj)
-                modifiers.FinalDamage *= 0.7f;
 
             if (WorldSavingSystem.SwarmActive)
                 if (projectile.type == ModContent.ProjectileType<StyxGazer>() || projectile.type == ModContent.ProjectileType<StyxSickle>())
@@ -1103,15 +1096,28 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             modifiers.FinalDamage *= 0.7f;
         }
+        private static readonly int[] PierceResistImmuneAiStyles =
+        [
+            ProjAIStyleID.Yoyo,
+            ProjAIStyleID.Spear,
+            ProjAIStyleID.ShortSword,
+            ProjAIStyleID.Drill,
+            ProjAIStyleID.HeldProjectile,
+            ProjAIStyleID.NightsEdge, // all fancy sword swings
+            ProjAIStyleID.CursedFlameWall, // clinger staff
+            ProjAIStyleID.Rainbow, // rainbow gun
+            ProjAIStyleID.MechanicalPiranha,
+            ProjAIStyleID.SleepyOctopod
+        ];
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type])
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && !PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
                 modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
-        }
-        public override void SafeOnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
-        {
-            //if (!FargoSoulsUtil.IsSummonDamage(projectile) && !projectile.FargoSouls().IsAHeldProj && projectile.damage > 5)
-            //    projectile.damage = (int)Math.Min(projectile.damage - 1, projectile.damage * 0.75);
+
+            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
+            { //only affects projs of the type that are effectively infinite pierce
+                modifiers.FinalDamage *= 0.7f;
+            }
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
@@ -1119,7 +1125,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(BuffID.Electrified, 60);
-            target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
+            //target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
         }
 
         public override void LoadSprites(NPC npc, bool recolor)

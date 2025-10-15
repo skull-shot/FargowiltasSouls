@@ -1,16 +1,17 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Audio;
 using System;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class SlimeKingsSlasher : SoulsItem
     {
-        int Timer = 0;
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -37,23 +38,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
             Item.channel = true;
             Item.shoot = ModContent.ProjectileType<SlimeKingSlasherProj>();
             Item.shootSpeed = 1f;
-        }
-        public override void HoldItem(Player player)
-        {
-            
-        }
-        public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
-        {
-            if (target.onFire || target.onFire2 || target.onFire3)
-            {
-                modifiers.FinalDamage *= 1.2f;
-            }
-                
-        }
-
-        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
-        {
-            
         }
     }
 }

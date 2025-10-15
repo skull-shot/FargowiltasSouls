@@ -1,14 +1,11 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Projectiles.Souls;
-using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using FargowiltasSouls.Core.ModPlayers;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
@@ -60,10 +57,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CrystalNinjaChestplate)
                 .AddIngredient(ItemID.CrystalNinjaLeggings)
                 .AddIngredient(ItemID.FlyingKnife)
-                .AddIngredient(ItemID.UnicornonaStick)
+                .AddIngredient(ItemID.BlessedApple)
                 .AddIngredient(ItemID.SmokeBomb, 50)
 
-                .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }
@@ -71,7 +68,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<CrystalAssassinEnchant>();
-        public override bool MutantsPresenceAffects => true;
         public static void AddDash(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -159,6 +155,5 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<CrystalAssassinEnchant>();
-        public override bool MutantsPresenceAffects => true;
     }
 }

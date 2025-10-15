@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -42,15 +44,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.HuntressWig)
-            .AddIngredient(ItemID.HuntressJerkin)
-            .AddIngredient(ItemID.HuntressPants)
-            .AddIngredient(ItemID.IceBow)
-            .AddIngredient(ItemID.ShadowFlameBow)
-            .AddIngredient(ItemID.DD2PhoenixBow)
+                .AddIngredient(ItemID.HuntressWig)
+                .AddIngredient(ItemID.HuntressJerkin)
+                .AddIngredient(ItemID.HuntressPants)
+                .AddIngredient(ItemID.DD2PhoenixBow)
+                .AddIngredient(ItemID.Marrow)
+                .AddIngredient(ItemID.BloodRainBow)
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class HuntressEffect : AccessoryEffect
@@ -97,8 +99,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     modPlayer.HuntressCD = 30;
 
                     if (player.whoAmI == Main.myPlayer)
-                        CooldownBarManager.Activate("HuntressBuildup", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/HuntressEnchant").Value, new(122, 192, 76),
-                            () => modPlayer.HuntressStage / 10f, true, activeFunction: () => player.HasEffect<HuntressEffect>());
+                    {
+                        Texture2D sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "HuntressEnchant").Value;
+                        Color color = new(122, 192, 76);
+                        if (player.HasEffect<RedRidingHuntressEffect>())
+                        {
+                            sprite = FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "RedRidingEnchant").Value;
+                            color = new(192, 27, 60);
+                        }
+                        CooldownBarManager.Activate("HuntressBuildup", sprite, color, () => modPlayer.HuntressStage / 10f, true, activeFunction: () => player.HasEffect<HuntressEffect>());
+                    }
                 }
                 int bonus = modPlayer.ForceEffect<HuntressEnchant>() || redRiding ? 5 : 3;
                 if (player.HasBuff<GladiatorSpiritBuff>())

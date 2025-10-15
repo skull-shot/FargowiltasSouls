@@ -1,6 +1,8 @@
 ﻿using System;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -11,13 +13,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class KamikazePixieStaff : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Expixive Staff");
-            // Tooltip.SetDefault("Summons friendly pixies that fire shots for 3 seconds, then charge into enemies and explode");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "神风松鼠杖");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "召唤出友善的松鼠，拥抱你的敌人\n右键点击让松鼠爆炸");
 
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
@@ -33,7 +31,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 2;
             Item.value = Item.sellPrice(0, 10);
-            Item.rare = ItemRarityID.Pink;
+            Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item44;
             Item.autoReuse = true;
             Item.shoot = ModContent.ProjectileType<KamikazePixie>();
@@ -44,6 +42,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
+            player.AddBuff(ModContent.BuffType<ExpixiveBuff>(), 2);
             velocity = velocity.RotatedBy(Math.PI / 2) * 10;
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback, default, velocity);
             player.SpawnMinionOnCursor(source, player.whoAmI, type, Item.damage, knockback, default, -velocity);

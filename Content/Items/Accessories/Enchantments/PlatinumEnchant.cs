@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Fargowiltas.Content.Items.Tiles;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 
@@ -33,12 +34,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.PlatinumHelmet)
                 .AddIngredient(ItemID.PlatinumChainmail)
                 .AddIngredient(ItemID.PlatinumGreaves)
-                .AddIngredient(ItemID.GardenGnome)
+                .AddIngredient(ItemID.DiamondStaff)
+                .AddIngredient(ItemID.PlatinumCoin)
                 .AddIngredient(ItemID.GemSquirrelDiamond)
-                .AddIngredient(ItemID.LadyBug)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
 }

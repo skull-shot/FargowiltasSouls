@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.Systems;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core.Systems;
 using Luminance.Core.MenuInfoUI;
 using System.Collections.Generic;
 using Terraria.ModLoader;
@@ -44,8 +45,8 @@ namespace FargowiltasSouls.Common
                 byte.MinValue);
         }
 
-        internal static string EternityIconPath => "FargowiltasSouls/Assets/UI/OncomingMutant";
-        internal static string MasochistIconPath => "FargowiltasSouls/Assets/UI/OncomingMutantWithAura";
+        internal static string EternityIconPath => FargoAssets.GetAssetString("UI", "OncomingMutant");
+        internal static string MasochistIconPath => FargoAssets.GetAssetString("UI", "OncomingMutantWithAura");
         
     }
 

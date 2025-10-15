@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEvents.Vortex;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.Systems;
@@ -85,7 +85,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 npc.ai[1] = 1000; //disable first tick vanilla constellation spawn
             }
             npc.buffImmune[BuffID.Suffocation] = true;
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
         }
         public bool AnyPlayerWithin(NPC npc, int range)
         {
@@ -128,10 +127,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     return;
                 npc.lifeMax = npc.life = MaxHP;
                 npc.damage = Damage;
-                int extra = npc.type == NPCID.LunarTowerVortex ? 20 : 150;
-                npc.damage += 150;
-                npc.defDamage += 150;
-                npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
                 npc.netUpdate = true;
             }
             //fix the funny where solar pillar rockets down when killed mid-dive attack
@@ -270,6 +265,12 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     }
                 }
             }
+        }
+
+        public override bool CanHitPlayer(NPC npc, Player target, ref int cooldownSlot)
+        {
+            if (!npc.dontTakeDamage) return false; //disable contact damage while shield is up
+            return base.CanHitPlayer(npc, target, ref cooldownSlot);
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using System;
@@ -24,8 +24,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             new NPCMatcher().MatchType(NPCID.LunarTowerVortex);
 
         public LunarTowerVortex() : base(ModContent.BuffType<JammedBuff>(), DustID.Vortex) { }
-        public override int MaxHP => 46000;
-        public override int Damage => 80;
+        public override int MaxHP => 45000;
+        public override int Damage => 120;
         public enum Attacks
         {
             Idle,
@@ -33,7 +33,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             LightningBall,
             SkyLightning,
             LightningElderHu,
-            VortexShield
+            //VortexShield
 
         }
         public override List<int> RandomAttacks =>
@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             (int)Attacks.LightningBall,
             (int)Attacks.SkyLightning,
             (int)Attacks.LightningElderHu,
-            (int)Attacks.VortexShield
+            //(int)Attacks.VortexShield
 
         ];
         public override void ShieldsDownAI(NPC npc)
@@ -65,9 +65,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                     case (int)Attacks.LightningElderHu:
                         LightningElderHu(npc, target);
                         break;
-                    case (int)Attacks.VortexShield:
-                        VortexShield(npc, target);
-                        break;
+                    //case (int)Attacks.VortexShield:
+                        //VortexShield(npc, target);
+                        //break;
                     case (int)Attacks.Idle:
                         Idle(npc, target);
                         break;

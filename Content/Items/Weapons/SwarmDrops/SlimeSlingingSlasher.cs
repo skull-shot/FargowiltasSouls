@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -10,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class SlimeSlingingSlasher : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -45,16 +48,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
         }
         public override void ModifyHitNPC(Player player, NPC target, ref NPC.HitModifiers modifiers)
         {
-            if (target.onFire || target.onFire2 || target.onFire3)
-            {
-                modifiers.FinalDamage *= 1.2f;
-            }
+            
         }
         public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.Slimed, 240);
-            SoundEngine.PlaySound(SoundID.Item17);
-            Projectile.NewProjectile(player.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<Slimesplosion>(), damageDone, 1f, Item.whoAmI, 1, 1, 1);
+            
         }
 
         public override void AddRecipes()

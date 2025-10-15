@@ -1,7 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -251,15 +251,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.active = false;
             }
 
-            EModeUtils.DropSummon(npc, "BetsyEgg", WorldSavingSystem.DownedBetsy, ref DroppedSummon, NPC.downedGolemBoss);
-
+            if (DD2Event.Ongoing)
+            {
+                EModeUtils.DropSummon(npc, "BetsyEgg", WorldSavingSystem.DownedBetsy, ref DroppedSummon, NPC.downedGolemBoss);
+            }
             return true;
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 600);
+
         }
 
         public override bool SpecialOnKill(NPC npc)

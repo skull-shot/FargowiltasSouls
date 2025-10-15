@@ -15,7 +15,7 @@ AncientCobaltEnchant: {
 	/* Tooltip:
 		'''
 		Grants an explosion jump with greatly increased jump height and speed
-		Explosion inflicts Slimed and deals melee damage
+		Explosion inflicts Slimed, increasing fire debuff damage
 		Hold down to fall faster
 		'Ancient Kobold'
 		''' */
@@ -25,7 +25,7 @@ AncientHallowEnchant: {
 	// DisplayName: Ancient Hallowed Enchantment
 	/* Tooltip:
 		'''
-		Summons a Terraprisma familiar that scales with minion damage and takes a minion slot
+		Summons a Terraprisma familiar that takes a minion slot
 		The sword follows the direction of your mouse
 		Press Right Click to slash with the sword
 		Slashing enemy projectiles reflects them back at the enemy
@@ -39,9 +39,9 @@ AncientShadowEnchant: {
 	/* Tooltip:
 		'''
 		Your attacks may inflict Darkness on enemies
-		Darkened enemies occasionally fire shadowflame tentacles at other enemies, dealing magic damage
-		Three magic Shadow Orbs will orbit around you
-		'Archaic, yet functional'
+		Darkened enemies fire shadowflame tentacles at other enemies, dealing damage based on their own damage
+		Three Shadow Orbs will orbit around you
+		'But what if it could get darker than dark?'
 		''' */
 }
 
@@ -50,8 +50,7 @@ ApprenticeEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/7 as often as they would normally
-		Only works on hotbar weapons
+		The support weapon will fire 1/7 as often as it would normally
 		Consumables are consumed, mana is spent, and ammo is selected
 		'A long way to perfection'
 		''' */
@@ -61,9 +60,8 @@ AshWoodEnchant: {
 	// DisplayName: Ash Wood Enchantment
 	/* Tooltip:
 		'''
-		Fire debuffs don't damage you
-		While afflicted with a debuff, attacks are accompanied by balls of fire that deal magic damage
-		Grants immunity to Oiled
+		Fire debuffs deal no damage
+		While afflicted with a debuff, attacks are occasionally accompanied by fireballs
 		Reduces damage from touching lava
 		'You're telling me this isn't wood?'
 		''' */
@@ -74,8 +72,8 @@ BeeEnchant: {
 	/* Tooltip:
 		'''
 		Allows flight and slow fall
-		While flying, leave behind flowers that take 4 seconds to form petals
-		Touching fully formed flowers gives you the Honey buff and creates a swarm of bees
+		While flying, your wings plant flowers that form petals over time
+		Touching fully formed flowers covers you in honey and creates a swarm of bees
 		Enemies touching the flowers also trigger the bee swarm
 		[i:HiveBackpack] Effects of Hive Pack
 		'According to all known laws of aviation, there is no way a bee should be able to fly'
@@ -87,8 +85,8 @@ BeetleEnchant: {
 	/* Tooltip:
 		'''
 		Hitting enemies generates up to 6 beetles
-		Beetles grant 2.5% damage reduction each and attack nearby enemies, dealing melee damage
-		2 beetles die when taking damage, once per 3 seconds
+		Beetles grant 2.5% damage reduction each and attack nearby enemies
+		3 beetles die when taking damage
 		'The unseen life of dung courses through your veins'
 		''' */
 }
@@ -97,7 +95,7 @@ BorealWoodEnchant: {
 	// DisplayName: Boreal Wood Enchantment
 	/* Tooltip:
 		'''
-		Attacks will periodically be accompanied by several snowballs, dealing ranged damage
+		Attacks will periodically be accompanied by 3 snowballs
 		'The cooler wood'
 		''' */
 }
@@ -106,12 +104,12 @@ CactusEnchant: {
 	// DisplayName: Cactus Enchantment
 	/* Tooltip:
 		'''
-		While attacking you release a spray of needles
+		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Grants immunity to cactus damage in Eternity Mode (Works from inventory and vanity)
+		Passive cactuses become harmless (works from inventory or vanity slots)
 		'It's the quenchiest!'
 		''' */
-	// VanityTooltip: Grants immunity to cactus damage in Eternity Mode
+	// VanityTooltip: Passive cactuses become harmless
 }
 
 ChlorophyteEnchant: {
@@ -131,7 +129,7 @@ CobaltEnchant: {
 	/* Tooltip:
 		'''
 		Grants an explosion jump with greatly increased jump height and speed
-		Explosion jump inflicts Oiled and deals melee damage
+		Explosion jump inflicts Oiled
 		Your double jumps are stronger and cause explosions
 		Hold down to fall faster
 		'I can't believe it's not Palladium'
@@ -142,9 +140,9 @@ CopperEnchant: {
 	// DisplayName: Copper Enchantment
 	/* Tooltip:
 		'''
-		Critical strikes can shock enemies with chain lightning that arcs between 5 enemies, dealing ranged damage
+		Critical strikes can shock enemies with chain lightning that arcs between 5 enemies
 		Wet enemies can be shocked without a critical strike
-		5 second cooldown, reduced by critical strikes and hits on wet enemies
+		5 second cooldown, decreasing faster on critical strikes or hits on wet enemies
 		'And his music was electric'
 		''' */
 }
@@ -155,7 +153,7 @@ CrimsonEnchant: {
 		'''
 		After taking a hit, if you avoid getting hit for 7 seconds, you get 50% of the health back
 		If you take another hit before you heal, the heal is cancelled
-		This does not affect hits dealing less than 10 damage
+		Does not affect hits dealing less than 10 damage
 		'The blood of your enemy is your rebirth'
 		''' */
 }
@@ -166,7 +164,7 @@ CrystalAssassinEnchant: {
 		'''
 		Allows the ability to dash
 		Dash cancels vertical movement and can be angled diagonally
-		Jump while dashing into ground to get a speed boost and gain the First Strike buff
+		Jump while dashing on the ground to get a speed boost and gain the First Strike buff
 		First Strike causes your next attack to guarantee a critical strike
 		'Reach for the summit'
 		''' */
@@ -177,9 +175,8 @@ DarkArtistEnchant: {
 	/* Tooltip:
 		'''
 		While attacking, fire your next closest weapon's projectile as support
-		The support weapon will fire 1/5 as often as they would normally
-		Only works on hotbar weapons
-		Summons a Flameburst minion that will also fire while you attack
+		The support weapon will fire 1/7 as often as it would normally
+		Summons a Flameburst that will also fire homing flamebursts while you attack
 		'The shadows hold more than they seem'
 		''' */
 }
@@ -190,7 +187,7 @@ EbonwoodEnchant: {
 		'''
 		You are surrounded by an aura of corruption
 		Having enemies in the aura builds up Corruption
-		Corruption grants you up to 4 flat damage and 4% damage reduction
+		Corruption causes attacks to deal up to 3 flat extra damage and grants up to 4% damage reduction
 		'Untapped potential'
 		''' */
 }
@@ -204,9 +201,9 @@ FossilEnchant: {
 	// DisplayName: Fossil Enchantment
 	/* Tooltip:
 		'''
-		If you reach zero HP you will revive with 50 HP, self-cleanse debuffs, and spawn several bones
-		You will also spawn a few bones on every hit
-		Collect the bones to heal for 15 HP each
+		Upon taking enough damage, bones will drop as collectibles
+		Collecting bones heals 15 health each
+		Upon reaching zero health, you will revive with 50 health and spawn several bones
 		'Beyond a forgotten age'
 		''' */
 }
@@ -216,8 +213,7 @@ FrostEnchant: {
 	/* Tooltip:
 		'''
 		Your attacks briefly inflict Frostburn
-		Icicles will start to appear around you
-		Attacking will launch them towards the cursor, dealing magic damage
+		Icicles will start to appear around you, attacking will launch them towards the cursor
 		When they hit an enemy they are inflicted with Frostbite and frozen solid
 		'Let's coat the world in a deep freeze'
 		''' */
@@ -227,8 +223,7 @@ GladiatorEnchant: {
 	// DisplayName: Gladiator Enchantment
 	/* Tooltip:
 		'''
-		Spears will rain down on struck enemies, dealing ranged damage
-		Spears ignore 5 enemy defense
+		3 spears will rain down on struck enemies
 		Spear rain is stronger while close to the Gladiator Banner
 		'Are you not entertained?'
 		''' */
@@ -239,7 +234,6 @@ GoldEnchant: {
 	/* Tooltip:
 		'''
 		Your attacks inflict Midas
-		Automatically sends coins to your piggy bank when picked up (works in inventory and vanity)
 		'Gold makes the world go round'
 		''' */
 }
@@ -259,11 +253,10 @@ HuntressEnchant: {
 	// DisplayName: Huntress Enchantment
 	/* Tooltip:
 		'''
-		Attacks deal 3 flat extra damage
-		Each successive attack deals an additional 3 flat damage
-		This stacks up to 10 times
-		Missing any attack will halve your stacks
-		Homing and minion attacks do not increase these bonuses
+		Projectiles shot by weapons deal 3 flat extra damage
+		Landing a shot grants stacks, granting an additional 3 flat damage per stack, up to 10 stacks
+		Missing a shot subtracts 5 stacks
+		Homing and minion shots do not benefit from stacks
 		'Accuracy brings power'
 		''' */
 }
@@ -272,7 +265,7 @@ IronEnchant: {
 	// DisplayName: Iron Enchantment
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots:
+		Works from inventory or vanity slots:
 		Your reforges always grant a great prefix for +50% cost
 		Increases item grab range
 		Works when equipped:
@@ -302,7 +295,7 @@ LeadEnchant: {
 	// DisplayName: Lead Enchantment
 	/* Tooltip:
 		'''
-		You take 40% less from damage over time
+		You take 30% less from damage over time
 		Attacks inflict enemies with Lead Poisoning
 		Lead Poisoning deals damage over time and spreads to nearby enemies
 		'Not recommended for eating'
@@ -313,9 +306,9 @@ MeteorEnchant: {
 	// DisplayName: Meteor Enchantment
 	/* Tooltip:
 		'''
-		Greatly increases your movement speed and acceleration, and decreases your momentum
-		Hitting an enemy occasionally drops a meteor on them, dealing magic damage
-		Meteor cooldown is decreased faster the more you move around
+		Hitting an enemy occasionally drops a gigantic meteor on them
+		10 second cooldown, decreasing faster the more you move around
+		[i:Magiluminescence] Effects of Magiluminescence
 		'Drop a draco on 'em'
 		''' */
 }
@@ -348,7 +341,7 @@ MonkEnchant: {
 		'''
 		Allows the ability to dash
 		Double tap a direction
-		Dash through an enemy to receive brief invulnerability and deal massive melee damage
+		Dash through an enemy to receive brief invulnerability and deal massive damage
 		Dash cooldown is longer than normal dashes
 		'Return to Monk'
 		''' */
@@ -368,9 +361,9 @@ NebulaEnchant: {
 	// DisplayName: Nebula Enchantment
 	/* Tooltip:
 		'''
-		Once every 3 seconds a projectile will be replaced with a nebula shot that deals magic damage
-		Nebula shots chase after enemies and spawn a nebula booster
+		Occasionally replaces a projectile with a nebula shot that spawns a nebula booster
 		Buff booster stacking capped at 2 and does not spawn mana boosters
+		3 second cooldown
 		'The pillars of creation have shined upon you'
 		''' */
 }
@@ -379,10 +372,10 @@ NecroEnchant: {
 	// DisplayName: Necro Enchantment
 	/* Tooltip:
 		'''
-		Slain enemies may drop a pile of bones
-		Touch a pile of bones to spawn a friendly Dungeon Guardian
-		Damage scales solely with the defeated enemy's max HP and is capped at 10000
-		Bosses will drop bones every 10% of their HP lost
+		Slain enemies drop a pile of bones
+		Touch a bone pile to spawn a friendly Dungeon Guardian
+		Dungeon Guardian deals 25% of the slain enemies' max health, up to 10000 damage
+		Bosses will drop a bone pile every 10% of their health lost, dealing 2.5% of the bosses max health
 		'Welcome to the bone zone'
 		''' */
 }
@@ -392,7 +385,7 @@ NinjaEnchant: {
 	/* Tooltip:
 		'''
 		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
-		Drastically increases projectile speed while you're moving slowly
+		Drastically increases projectile speed and knockback while you're moving slowly
 		'Wait for when the moment is right'
 		''' */
 }
@@ -401,11 +394,9 @@ ObsidianEnchant: {
 	// DisplayName: Obsidian Enchantment
 	/* Tooltip:
 		'''
-		Grants immunity to lava
+		Lava and fire debuffs deal no damage
 		You have normal movement and can swim in lava, granting the lava wet buff
-		While afflicted with a debuff or lava wet, your attacks spawn explosions
-		Fire debuffs don't damage you
-		Grants immunity to Oiled
+		While afflicted with a debuff or lava wet, your attacks spawn fire explosions
 		'The earth calls'
 		''' */
 }
@@ -414,7 +405,7 @@ OrichalcumEnchant: {
 	// DisplayName: Orichalcum Enchantment
 	/* Tooltip:
 		'''
-		Your damaging debuffs deal 1.75x damage
+		Your damaging debuffs deal 75% more damage
 		Your attacks inflict Orichalcum Poison for a short duration
 		'Nature blesses you'
 		''' */
@@ -440,7 +431,7 @@ PearlwoodEnchant: {
 	/* Tooltip:
 		'''
 		Retreiving any pickup fires a star at a nearby enemy and empowers you for 5 seconds
-		While empowered, your critical strikes reroll favorably and you have a harmless rainbow trail
+		While empowered, your critical strikes reroll favorably
 		Your attacks occasionally spawn mana stars on-hit
 		'Too little, too late…'
 		''' */
@@ -450,7 +441,7 @@ PlatinumEnchant: {
 	// DisplayName: Platinum Enchantment
 	/* Tooltip:
 		'''
-		20% chance for enemies to drop 5x loot
+		20% chance for enemies to drop loot 4 more times when defeated by you
 		'Its value is immeasurable'
 		''' */
 }
@@ -473,7 +464,7 @@ RainEnchant: {
 		Spawns an umbrella that reflects projectiles from above and slows falling speed
 		It will break after blocking 200 damage
 		Grants immunity to Wet and all attacks inflict Wet
-		Grants immunity to lightning strikes in Eternity Mode (Works from inventory and vanity)
+		Grants immunity to lightning strikes in Eternity Mode (works from inventory or vanity slots)
 		[i:FloatingTube] Effects of Inner Tube
 		'Come again some other day'
 		''' */
@@ -484,12 +475,13 @@ RedRidingEnchant: {
 	// DisplayName: Red Riding Enchantment
 	/* Tooltip:
 		'''
-		Attacks deal 5 flat extra damage
-		Each successive attack deals an additional 5 flat damage
-		Upon reaching 10 stacks, spawn a rain of arrows, dealing ranged damage
-		The arrow type defaults to Venom or whatever is first in your inventory
-		Missing any attack will halve your stacks
-		Homing and minion attacks do not increase these bonuses
+		Projectiles shot by weapons deal 5 flat extra damage
+		Landing a shot grant a stack, granting an additional 5 flat damage per stack up to 10 stacks
+		Reaching 10 stacks creates an arrow storm to be rained from the sky onto foes
+		Arrow storm takes from your ammo slots, dealing damage based on arrow damage
+		Arrow type defaults to Venom if no arrows are present
+		Missing a shot subtracts 3 stacks
+		Homing and minion shots do not benefit from stacks
 		'Big Bad Red Riding Hood'
 		''' */
 }
@@ -510,7 +502,7 @@ ShadewoodEnchant: {
 	/* Tooltip:
 		'''
 		You have an aura of Bleeding
-		Enemies struck while Bleeding spew damaging blood, dealing melee damage
+		Enemies struck while Bleeding spew damaging blood
 		'Surprisingly clean'
 		''' */
 }
@@ -520,7 +512,7 @@ ShadowEnchant: {
 	/* Tooltip:
 		'''
 		Two Shadow Orbs will orbit around you
-		Attacking a Shadow Orb will cause it to release a burst of homing shadow energy, dealing magic damage
+		Attacking a Shadow Orb will cause it to release a burst of homing shadow energy
 		'You feel your body slip into the deepest of shadows'
 		''' */
 }
@@ -531,7 +523,7 @@ ShinobiEnchant: {
 		'''
 		Allows the ability to teleport dash
 		Double tap a direction
-		Teleport dashing through an enemy deals massive melee damage
+		Teleport dashing through an enemy deals massive damage
 		Teleport dashing grants brief invulnerability, but dash cooldown is longer than normal dashes
 		Dashing into any wall teleports you to the next opening
 		'Village Hidden in the Wall'
@@ -542,9 +534,9 @@ ShroomiteEnchant: {
 	// DisplayName: Shroomite Enchantment
 	/* Tooltip:
 		'''
+		Piercing projectiles spawn a cloud of mushrooms on their first hit
 		Mushrooms heal 50 HP and consuming them grants Mushroom Power for 20 seconds
 		Mushroom Power grants +12% damage and critical strike chance
-		Piercing projectiles spawn a cloud of mushrooms on their first hit, dealing ranged damage
 		'Made with real shrooms!'
 		''' */
 	// AndMushroomPower: and grants the Mushroom Power buff
@@ -565,8 +557,7 @@ SnowEnchant: {
 	/* Tooltip:
 		'''
 		Your attacks briefly inflict Frostburn
-		Snowballs will start to appear around you
-		Attacking will launch them towards the cursor, dealing magic damage
+		Snowballs will start to appear around you, attacking will launch them towards the cursor
 		'It's Burning Cold Outside'
 		''' */
 }
@@ -578,7 +569,7 @@ SolarEnchant: {
 		Build up solar charge while attacking
 		Gain damage reduction the more charge is stored, up to 20%
 		Stop attacking when fully charged to release a large solar burst
-		Solar bursts inflict the Solar Flare debuff and deal melee damage
+		Solar bursts inflict the Solar Flare debuff
 		'Too hot to handle'
 		''' */
 }
@@ -587,10 +578,10 @@ SpectreEnchant: {
 	// DisplayName: Spectre Enchantment
 	/* Tooltip:
 		'''
-		If you reach zero HP you will revive as a ghost with 100 HP, self-cleanse debuffs, and spawn several spirits
-		As a ghost you are immune, faster, have infinite wing time and can't attack, lasting for 5 seconds
-		You will also spawn a few spirits on every hit
-		Collect the spirits to heal for 16 HP each and send them towards the nearest enemy, dealing magic damage
+		Upon taking enough damage, spirits will drop as collectibles
+		Collecting spirits heals 15 health each and sends them to attack the nearest enemy
+		Upon reaching zero health, you will revive as a ghost with 100 health and spawn several spirits
+		As a ghost you are immune, faster, have infinite flight time and can't attack, lasting for 5 seconds
 		'Their lifeforce will be their undoing'
 		''' */
 }
@@ -599,10 +590,9 @@ SpiderEnchant: {
 	// DisplayName: Spider Enchantment
 	/* Tooltip:
 		'''
-		Your summon weapons can crit for 1.5x damage
-		Summon crits deal reduced damage if you're holding a non-Summoner weapon
-		Extra base damage from summon crits is capped at 100
-		+10% critical strike chance
+		8% increased critical strike chance
+		Your summon weapons can critically strike
+		Instead of dealing extra damage, summon weapon crits spawn spiderlings, which can crit
 		'Arachnophobia is punishable by arachnid induced death'
 		''' */
 }
@@ -627,7 +617,6 @@ StardustEnchant: {
 	// DisplayName: Stardust Enchantment
 	/* Tooltip:
 		'''
-		Stardust Stasis lasts for 6 seconds and has a 90 second cooldown
 		A stardust guardian will protect you from nearby enemies
 		'The power of the Stand is yours'
 		''' */
@@ -649,9 +638,9 @@ TinEnchant: {
 	// DisplayName: Tin Enchantment
 	/* Tooltip:
 		'''
-		Sets your critical strike chance to 5%
-		Every crit will increase it by 5% up to double your original critical strike chance or 15%
-		Getting hit reduces your crit by half, to a minimum of 5%
+		Increased critical strike chance by 5%
+		Critical strikes increase this bonus by 5%, up to 25%
+		Getting hit resets this bonus back to 5%
 		'Return of the Crit'
 		''' */
 	// CritUp: +{0}% crit
@@ -662,8 +651,8 @@ TitaniumEnchant: {
 	// DisplayName: Titanium Enchantment
 	/* Tooltip:
 		'''
-		Attacking generates a defensive barrier of up to 20 titanium shards that deal melee damage
-		When you reach the maximum amount, you gain resistance to most debuffs on hit and 10-30% damage reduction
+		Attacking generates a defensive barrier of up to 20 titanium shards
+		When you reach the maximum amount, you gain resistance to most debuffs on hit and reduce damage taken by 10-30%
 		Damage reduction increases the closer to the enemy you are when hit
 		Resistance effects remain for a few seconds after initial hit
 		This has a cooldown of 15 seconds, during which you cannot gain shards
@@ -687,9 +676,11 @@ TurtleEnchant: {
 	/* Tooltip:
 		'''
 		Grants immunity to knockback
-		When standing still, you will enter a shell, reducing damage taken by 80%
-		Taking damage in the shell decreases damage reduction to a minimum of 40%, slowly recovers while not shelled
-		While shelled, resist most debuffs on hit and all projectiles and contact damage are reflected for 500% damage
+		Taking enough damage grants the Shell Smash buff
+		Damage that is blocked, defended, dodged or absorbed also counts towards Smell Smash
+		Shell Smash increases attack speed by 20% and greatly increases movement speed and acceleration
+		When standing still you will enter a shell, reducing all damage taken by 66% and preventing debuffs on hit
+		While shelled, projectiles and contact damage are reflected for 500% damage
 		'You suddenly have the urge to hide in a shell'
 		''' */
 }
@@ -709,7 +700,7 @@ VortexEnchant: {
 	// DisplayName: Vortex Enchantment
 	/* Tooltip:
 		'''
-		Your attacks against very distant enemies fire a piercing laser that deals ranged damage
+		Your attacks against very distant enemies fire a piercing laser
 		10 second cooldown
 		'Tear into reality'
 		''' */
@@ -730,19 +721,18 @@ WoodEnchant: {
 	/* Tooltip:
 		'''
 		Bestiary and banner entries complete twice as fast
-		You gain a shop discount based on bestiary completion
-		Discount effect works from inventory and vanity slots
+		You gain a shop discount based on bestiary completion (works from inventory or vanity slots)
 		Current discount: {0}%
 		'Shopkeepers hate this trick'
 		Humble beginnings…
 		''' */
 }
 
-BoxofGizmos: {
-	// DisplayName: Box of Gizmos
+SquirrelCharm: {
+	// DisplayName: Squirrel Charm
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
+		Works from inventory or vanity slots
 		Stand still to expose nearby treasure and enemies
 		Enemies emit light at night
 		Grants autofire to non-weapon items
@@ -755,13 +745,31 @@ BoxofGizmos: {
 		''' */
 }
 
+BoxofGizmos: {
+	// DisplayName: Box of Gizmos
+	/* Tooltip:
+		'''
+		Use with right click to box up accessories with passive effects in your inventory
+		Boxed accessories continue to grant their passive effects
+		Boxed accessories can be unboxed with left click
+		''' */
+	/* VanityTooltip:
+		'''
+		Stand still to expose nearby treasure and enemies
+		Enemies emit light at night
+		Grants autofire to non-weapon items
+		''' */
+	// Contains: "[c/00FFFF:Contains:]"
+	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
+}
+
 UniverseCore: {
 	// DisplayName: Cosmic Core
 	/* Tooltip:
 		'''
 		Your critical strikes can critically strike
-		The chance of this is equal to 1/3 of your critical strike chance (only counts up to 100%)
-		These supercrits deal 4x damage and inflict Flames of the Cosmos
+		The chance of this is equal to 1/2 of your critical strike chance (only counts up to 100%)
+		These supercrits deal double damage and inflict Flames of the Cosmos
 		'Bursting with ultra-high-energy cosmic rays'
 		''' */
 }
@@ -773,9 +781,8 @@ CosmoForce: {
 		[i:FargowiltasSouls/SolarEnchant] Attacking generates up to 4 moons that orbit around you 
 		[i:FargowiltasSouls/VortexEnchant] Stop attacking to launch them towards your cursor, exploding into Lunar Boosters
 		[i:FargowiltasSouls/NebulaEnchant] Picking up Lunar Boosters increases your damage, crit, life regen or damage reduction
-		[i:FargowiltasSouls/StardustEnchant] Stardust Stasis lasts for 6 seconds and has a 75 second cooldown
-		[i:FargowiltasSouls/MeteorEnchant] Increases your movement speed and acceleration, and decreases your momentum
 		[i:FargowiltasSouls/WizardEnchant] Upgrades the effects of all your Enchantments
+		[i:FargowiltasSouls/MeteorEnchant] Effects of Magiluminescence
 		'Been around since the Big Bang'
 		''' */
 }
@@ -784,11 +791,18 @@ EarthForce: {
 	// DisplayName: Force of Earth
 	/* Tooltip:
 		'''
+		[i:FargowiltasSouls/MythrilEnchant][i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant][i:FargowiltasSouls/AdamantiteEnchant][i:FargowiltasSouls/OrichalcumEnchant] Not attacking builds up charge, granting large ramping offensive and defensive buffs; attacking consumes charge
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
+		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
+		'Gaia's blessing shines upon you'
+		''' */
+	/* RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/MythrilEnchant] Not attacking builds up charge; attack to consume charge, increasing attack speed
-		[i:FargowiltasSouls/PalladiumEnchant] [i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
+		[i:FargowiltasSouls/PalladiumEnchant][i:FargowiltasSouls/TitaniumEnchant] Increased life regeneration and damage reduction, increased the more charge is stored
 		[i:FargowiltasSouls/AdamantiteEnchant] You also attack faster the longer you continuously attack while consuming charge
 		[i:FargowiltasSouls/OrichalcumEnchant] While charged up you also inflict Earth Poison, which does a percentage of the hit's damage
-		[i:FargowiltasSouls/OrichalcumEnchant] Enemies take 2.5x damage from debuffs
+		[i:FargowiltasSouls/OrichalcumEnchant] Your damaging debuffs deal 100% more damage
 		[i:FargowiltasSouls/CobaltEnchant] Increased jump height and speed, hold down to fall faster
 		'Gaia's blessing shines upon you'
 		''' */
@@ -798,22 +812,37 @@ LifeForce: {
 	// DisplayName: Force of Life
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
-		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers heal you, spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
-		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
-		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +30% damage, melee speed, +20% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/SpiderEnchant] The Ambrosia buff also makes your summon damage able to crit
-		[i:FargowiltasSouls/SpiderEnchant] +15% critical strike chance
-		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage
-		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings and effects of Hive Pack
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/SpiderEnchant][i:FargowiltasSouls/CactusEnchant][i:FargowiltasSouls/BeetleEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		'Rare is a living thing that dare disobey your will'
 		''' */
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings that plant flowers while flying
+		[i:FargowiltasSouls/SpiderEnchant] Various bugs will accumulate onto blooming flowers, and target nearby enemies when provoked
+		[i:FargowiltasSouls/PumpkinEnchant] When touched by you the flowers grant the Ambrosia buff and refresh your flight time
+		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
+		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place with the wings to enter a shell and resist damage for one hit
+		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
+		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
+		'Rare is a living thing that dare disobey your will'
+		''' */
+	// VanityTooltip: Passive cactuses become harmless
 }
 
 NatureForce: {
 	// DisplayName: Force of Nature
 	/* Tooltip:
+		'''
+		[i:FargowiltasSouls/CrimsonEnchant][i:FargowiltasSouls/MoltenEnchant][i:FargowiltasSouls/ChlorophyteEnchant][i:FargowiltasSouls/ShroomiteEnchant] You have an aura that siphons life from nearby enemies, increases damage taken, and auto-attacks them
+		[i:FargowiltasSouls/ShroomiteEnchant] Mushrooms heal 50 HP and buff your offenses for 20 seconds
+		[i:FargowiltasSouls/FrostEnchant] Your attacks briefly inflict Frostburn and Frostbite
+		[i:FargowiltasSouls/RainEnchant] Spawns an umbrella that deflects up to 200 damage from above
+		'Tapped into every secret of the wilds'
+		''' */
+	/* RuminateTooltip:
 		'''
 		[i:FargowiltasSouls/CrimsonEnchant] You have an aura that siphons life from nearby enemies
 		[i:FargowiltasSouls/CrimsonEnchant] Life siphon is stronger if you haven't taken damage recently
@@ -828,19 +857,27 @@ NatureForce: {
 		''' */
 }
 
-ShadowForce: {
+DeathForce: {
 	// DisplayName: Force of Death
 	/* Tooltip:
 		'''
+		[i:FargowiltasSouls/CrystalAssassinEnchant][i:FargowiltasSouls/ShinobiEnchant][i:FargowiltasSouls/AncientShadowEnchant] Grants an empowered invincible shadow dash that can be angled diagonally, with long cooldown
+		[i:FargowiltasSouls/SpookyEnchant] Dashing into enemies heals you and inflicts them with Marked for Death
+		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed, stronger when not moving
+		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
+		'Dark, Darker, Yet Darker'
+		''' */
+	/* RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/CrystalAssassinEnchant] Grants a shadow dash that cancels vertical movement and can be angled diagonally
 		[i:FargowiltasSouls/ShinobiEnchant] Every 4 seconds, your next dash will envelop you in shade, making you invincible during the dash
-		[i:FargowiltasSouls/ShinobiEnchant] Dashing through an enemy with the shade dash damages them and inflicts Marked for Death 
+		[i:FargowiltasSouls/SpookyEnchant] Shade dashes swing a scythe around you, healing you on hit and inflicting Marked for Death
 		[i:FargowiltasSouls/AncientShadowEnchant] Dashing fires a burst of shadowflame projectiles around you
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile crit based on projectile speed
 		[i:FargowiltasSouls/NinjaEnchant] Increases projectile speed while moving slowly
 		[i:FargowiltasSouls/NecroEnchant] Slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/DarkArtistEnchant] While attacking, fire your next closest weapon's projectiles as support
-		[i:FargowiltasSouls/SpookyEnchant] All of your minions gain an extra scythe attack
 		'Dark, Darker, Yet Darker'
 		''' */
 }
@@ -850,7 +887,7 @@ SpiritForce: {
 	/* Tooltip:
 		'''
 		[i:FargowiltasSouls/HallowEnchant] Healing potions restore more health but take effect over time
-		[i:FargowiltasSouls/SpectreEnchant] If you reach zero HP you will revive with 200 HP and self-cleanse debuffs
+		[i:FargowiltasSouls/SpectreEnchant] Upon reaching zero health, you will revive with 200 health
 		[i:FargowiltasSouls/TikiEnchant] Increased whip range, whips scale with any class, and empower your projectiles they hit
 		'Ascend from this mortal realm'
 		''' */
@@ -860,13 +897,12 @@ TerraForce: {
 	// DisplayName: Force of Terra
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/CopperEnchant] [i:FargowiltasSouls/ObsidianEnchant] [i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
-		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage, successful parries instantly fire a lightning bolt
-		[i:FargowiltasSouls/TinEnchant] Sets Tin crit chance to 75%, increasing by 25% up to 100% whenever a lightning bolt is fired
-		[i:FargowiltasSouls/LeadEnchant] You take 60% less damage over time
+		[i:FargowiltasSouls/CopperEnchant][i:FargowiltasSouls/ObsidianEnchant][i:FargowiltasSouls/LeadEnchant] Critical strikes sometimes fire a lightning bolt that explodes on hit and inflicts a stronger Lead Poisoning
+		[i:FargowiltasSouls/SilverEnchant] Parry negates up to 200 damage
+		[i:FargowiltasSouls/TinEnchant] Successful parries instantly increase critical strike chance by 25%, resetting when you take damage
+		[i:FargowiltasSouls/LeadEnchant] You take 50% less damage over time from debuffs
 		[i:FargowiltasSouls/TungstenEnchant] Increases melee weapon size by 50% and whip range by 20%
 		[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range (works in inventory and vanity)
-		[i:FargowiltasSouls/IronEnchant] Picking up an item or pickup increases damage reduction by 20% for 5 seconds
 		'The land lends its strength'
 		''' */
 	// VanityTooltip: "[i:FargowiltasSouls/IronEnchant] Your reforges always grant a great prefix for +50% cost, increases item grab range"
@@ -876,11 +912,19 @@ TimberForce: {
 	// DisplayName: Force of Timber
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/EbonwoodEnchant] [i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
-		[i:FargowiltasSouls/BorealWoodEnchant] [i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
-		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
-		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
+		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant][i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] You have an aura that debuffs and auto-attacks nearby enemies
 		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
+		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
+		[i:FargowiltasSouls/RichMahoganyEnchant][i:FargowiltasSouls/WoodEnchant] Grants grappling hook, bestiary, banner, and shop buffs
+		'Extremely rigid'
+		''' */
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/EbonwoodEnchant][i:FargowiltasSouls/ShadewoodEnchant] You have an aura of Corruption and Bleeding
+		[i:FargowiltasSouls/BorealWoodEnchant][i:FargowiltasSouls/PalmWoodEnchant] Fire snowballs and acorns on enemies in this aura on hit
+		[i:FargowiltasSouls/RichMahoganyEnchant] All grappling hooks shoot, pull, and retract 2x as fast
+		[i:FargowiltasSouls/PearlwoodEnchant] Your attacks occasionally spawn mana stars on-hit
+		[i:FargowiltasSouls/PearlwoodEnchant] Retreiving pickups empowers you, making your crits reroll favorably for 5 seconds
 		[i:FargowiltasSouls/WoodEnchant] Bestiary and banner entries complete faster
 		[i:FargowiltasSouls/WoodEnchant] You gain a shop discount based on bestiary completion (works in inventory and vanity)
 		'Extremely rigid'
@@ -893,13 +937,12 @@ WillForce: {
 		'''
 		[i:FargowiltasSouls/GladiatorEnchant] You are followed by a gladiator spirit with a banner that empowers you while close
 		[i:FargowiltasSouls/RedRidingEnchant] Successive attacks gain bonus damage, increased when empowered by the banner
-		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 25%
+		[i:FargowiltasSouls/ValhallaKnightEnchant] Increases the effectiveness of healing sources by 15%
 		[i:FargowiltasSouls/ValhallaKnightEnchant] Greatly improves mounts, mounts have a horizontal and vertical dash
-		[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up (works in inventory and vanity), your attacks inflict Midas
-		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop 5x loot
+		[i:FargowiltasSouls/GoldEnchant] Your attacks inflict Midas
+		[i:FargowiltasSouls/PlatinumEnchant] 33% chance for enemies to drop loot 4 more times
 		'A mind of unbreakable determination'
 		''' */
-	// VanityTooltip: "[i:FargowiltasSouls/GoldEnchant] Automatically sends coins to your piggy bank when picked up"
 }
 
 AbominableWand: {
@@ -907,7 +950,7 @@ AbominableWand: {
 	/* Tooltip:
 		'''
 		Grants immunity to Abominable Fang and Abominable Presence
-		Sparkling Adoration graze builds twice as fast, and halves heart cooldown
+		Sparkling Adoration graze builds twice as fast
 		20% increased graze bonus damage cap
 		Spectral Abominationn periodically manifests to support your critical hits
 		With Styx armor, charges energy when grazing
@@ -938,7 +981,7 @@ AgitatingLens: {
 	/* Tooltip:
 		'''
 		Grants immunity to non-self inflicted Berserked
-		While dashing or running quickly you will create a trail of demon scythes, dealing magic damage
+		While dashing or running quickly you will create a trail of demon scythes
 		Debuff Install berserks you, massively increasing movement and attack speed, massively lowering defenses, and you cannot stop attacking or moving
 		Berserk state lasts for 8 seconds and you are stunned for 2 seconds afterwards
 		'The irritable remnant of a defeated foe'
@@ -950,7 +993,6 @@ BetsysHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Oozed, Withered Weapon, and Withered Armor
-		Hitting enemies with Fireball Dash inflicts 20 seconds of Betsy's Curse and decreases your dash cooldown
 		'Lightly roasted, medium rare'
 		''' */
 }
@@ -959,79 +1001,63 @@ BionomicCluster: {
 	// DisplayName: Bionomic Cluster
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
-		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
+		Grants immunity to various enviornmental debuffs (hold [c/FF3399:{0}] to view all)
+		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
 		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
+		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
-		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
+		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster (works from inventory or vanity slots)
 		'The amalgamate born of a thousand common enemies'
 		''' */
-	/* VanityTooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		''' */
-}
-
-BionomicClusterInactive: {
-	// DisplayName: Bionomic Cluster (Inactive)
-	/* Tooltip:
-		'''
-		Grants immunity to [i:FargowiltasSouls/SqueakyToy] Squeaky Toy, [i:FargowiltasSouls/NymphsPerfume] Lovestruck, Stinky, and Hexed
-		[i:FargowiltasSouls/NymphsPerfume] Your attacks sometimes produce hearts on hit
-		[i:FargowiltasSouls/SqueakyToy] Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
-		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
-		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
-		    Grants immunity to [i:FargowiltasSouls/FrigidGemstone] Frostburn, Chilled, [i:FargowiltasSouls/SandsofTime] Mighty Wind, cactus damage, [i:FargowiltasSouls/SqueakyToy] and Guilty
-		    [i:FargowiltasSouls/NymphsPerfume] You respawn with more life [i:FargowiltasSouls/SandsofTime] and when no boss is alive, respawn faster
-		'The amalgamate born of a thousand common enemies'
-		''' */
+	// VanityTooltip: "[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster"
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
 }
 
 LithosphericCluster: {
-	// DisplayName: Lithospheric Cluster
+	// DisplayName: Lithospheric Lantern
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Summons a glooming lantern that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
-		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/DreadShell] Counterattack negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects also work passively from inventory or vanity slots (right click to disable in inventory):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
+		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		''' */
 	/* VanityTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		[i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
+		[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
+		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 LithosphericClusterInactive: {
-	// DisplayName: Lithospheric Cluster (Inactive)
+	// DisplayName: Lithospheric Lantern (Inactive)
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/WretchedPouch] Shadowflame, [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/SkullCharm] Dazed, Webbed, and [i:FargowiltasSouls/DreadShell] Anticoagulation
-		[i:FargowiltasSouls/SkullCharm] Enemies are less likely to target you
-		[i:FargowiltasSouls/SkullCharm] Grants a skull minion that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
+		Grants immunity to various stunning and life-sapping debuffs (hold [c/FF3399:{0}] to view all)
+		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
+		[i:FargowiltasSouls/CrystalSkull] Summons a glooming lantern that charges shadow energy as you attack, stop attacking to release energy as a barrage of spirits
 		[i:FargowiltasSouls/WretchedPouch] Fires a concentrated beam of shadowflame if fully charged
-		[i:FargowiltasSouls/DreadShell] Parry negates up to 200 damage and curses enemies
+		[i:FargowiltasSouls/DreadShell] Counterattack negates up to 200 damage and curses enemies
 		[i:FargowiltasSouls/WyvernFeather] Cursed enemies drop orbs on hit that refill shadow energy and flight time
 		[c/00FFFF:Following effects are currently disabled in inventory (right click to enable):]
 		    Grants immunity to [i:FargowiltasSouls/MysticSkull] Suffocation and [i:FargowiltasSouls/SecurityWallet] Midas
-		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids, [i:FargowiltasSouls/SecurityWallet] and reduces reforge cost by 50%
-		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed and increases pickup range for mana stars
+		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
+		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
+		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'The amalgamate born of a thousand common enemies'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
 
 CelestialRune: {
@@ -1039,24 +1065,24 @@ CelestialRune: {
 	/* Tooltip:
 		'''
 		Grants immunity to Marked for Death
-		You may periodically fire additional attacks depending on weapon type
+		Attacks are accompanied by additional projectiles, depending on current weapon class 
 		'A fallen enemy's spells, repurposed'
 		''' */
 }
 
-ChaliceoftheMoon: {
+VerdantDoomsayerMask: {
 	// DisplayName: Verdant Doomsayer Mask
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/ChaliceoftheMoon] Grants immunity to Swarming, Atrophied, Jammed, Reverse Mana Flow, and Antisocial
-		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Burning, Fused, Lihzahrd Curse, Low Ground, [i:FargowiltasSouls/CelestialRune] and Marked for Death
-		[i:FargowiltasSouls/MagicalBulb] Press the Magical Cleanse key to cure yourself of most debuffs and amplify damage over time effects for nearby enemies by 2x for a duration
+		Grants immunity to knockback, Celestial Pillar debuffs and various arcane debuffs (hold [c/FF3399:{0}] to view all)
+		[i:FargowiltasSouls/CelestialRune] You fire additional projectiles depending on current weapon class
 		[i:FargowiltasSouls/MagicalBulb] Increases life regeneration based on how much light you receive
-		[i:FargowiltasSouls/LihzahrdTreasureBox] Fastfall creates an explosion on landing after falling a certain distance
-		[i:FargowiltasSouls/CelestialRune] You fire additional attacks depending on weapon type
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/MagicalBulb] a plant to fight at your side
 		'Always watching'
+		''' */
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/VerdantDoomsayerMask] Atrophied, Jammed, Reverse Mana Flow, and Antisocial
+		Grants immunity to [i:FargowiltasSouls/MagicalBulb] Venom, Ivy Venom, [i:FargowiltasSouls/LihzahrdTreasureBox] Daybroken, Fused, and [i:FargowiltasSouls/CelestialRune] Marked for Death
 		''' */
 }
 
@@ -1071,12 +1097,12 @@ ConcentratedRainbowMatter: {
 		''' */
 }
 
-DarkenedHeart: {
-	// DisplayName: Darkened Heart
+RottingHeart: {
+	// DisplayName: Rotting Heart
 	/* Tooltip:
 		'''
 		Grants immunity to Rotting
-		Increased movement speed and increased turnaround traction
+		Increased movement speed and turnaround traction
 		Mini eaters emerge from nearby terrain while attacking, seeking out nearby enemies and inflicting Rotting
 		'Flies refuse to approach it'
 		''' */
@@ -1088,7 +1114,7 @@ Deerclawps: {
 		'''
 		Grants immunity to Slow and Frozen
 		Dashing leaves a trail of ice spikes, pointed towards the closest enemy if airborne
-		Reduces damage taken by 15% while dashing
+		Reduces damage taken by 20% while dashing
 		'The trimmed nails of a defeated foe'
 		''' */
 }
@@ -1098,10 +1124,8 @@ DreadShell: {
 	/* Tooltip:
 		'''
 		Grants immunity to knockback and Anticoagulation
-		Defense and damage reduction are decreased shortly after guarding
-		Parry negates up to 200 damage and causes a massive counterattack
-		Counterattack inflicts Anticoagulation, causing enemies to drop blood clots when hit
-		Absorbing blood clots increases your damage by 15%
+		Counterattack negates up to 200 damage and inflicts Anticoagulation, causing enemies to drop blood clots when hit
+		Absorbing blood clots temporarily increases your damage by 25%
 		'It was a mistake to chum here'
 		''' */
 }
@@ -1110,13 +1134,14 @@ DubiousCircuitry: {
 	// DisplayName: Dubious Circuitry
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/GroundStick] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, Defenseless, and Nano Injection
-		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor
-		[i:FargowiltasSouls/FusedLens] While debuffed, gain 15% attack speed, 15% crit chance, and inflict Ichor and Cursed Inferno yourself
-		[i:FargowiltasSouls/GroundStick] Electric attacks charge you, increasing movement and attack speed and spawning 3 probes
-		[i:FargowiltasSouls/ReinforcedPlating] Reduces damage taken by 4%, increases defense and damage reduction while debuffed
+		Grants immunity to knockback and various mechanical debuffs (hold [c/FF3399:{0}] to view all)
+		[i:FargowiltasSouls/FusedLens] Taking damage over time increases attack speed, having defense reduced increases critical strike chance
+		[i:FargowiltasSouls/FusedLens] Debuff Install inflicts yourself with Cursed Inferno and Ichor 
+		[i:FargowiltasSouls/RemoteControl] Electric attacks charge you, increasing movement and attack speed
+		[i:FargowiltasSouls/ReinforcedPlating] Increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 }
 
 EurusSock: {
@@ -1124,14 +1149,13 @@ EurusSock: {
 	// Tooltip: The wearer can run kinda fast
 }
 
-FrigidGemstone: {
+FrigidGrasp: {
 	// DisplayName: Frigid Grasp
 	/* Tooltip:
 		'''
-		Grants immunity to Frostburn and Chilled (works from inventory and vanity)
+		Grants immunity to Frostburn and Chilled
 		'A torn off limb composed of ancient ice'
 		''' */
-	// VanityTooltip: Grants immunity to Frostburn and Chilled
 }
 
 FusedLens: {
@@ -1146,24 +1170,30 @@ FusedLens: {
 		''' */
 }
 
-GalacticGlobe: {
+ChaliceofTheMoon: {
 	// DisplayName: Chalice of the Moon
 	/* Tooltip:
 		'''
-		Grants immunity to Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
-		Grants most standard potion and station buffs (works from inventory and vanity)
-		Summons the true eyes of Cthulhu to protect you
-		Increases flight time by 100%
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory or vanity slots)
+		Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
 		'Consume it'
 		''' */
 	// VanityTooltip: Grants most standard potion and station buffs
-	// HoldShift: "[c/ADD8E6:Hold Left Shift to view potion buffs]"
-	/* ExpandedTooltip:
+	/* RuminateTooltip:
 		'''
+		Grants immunity to Curse of the Moon
+		Power of the Cosmos benefits you regardless of class
+		Grants most standard potion and station buffs (works from inventory or vanity slots)
+		Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
+		Otherwise, summons the True Eyes of Cthulhu to protect you
+		'Consume it'
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable, Honey]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
 		''' */
 }
 
@@ -1171,15 +1201,15 @@ GelicWings: {
 	// DisplayName: Gelic Wings
 	/* Tooltip:
 		'''
+		Grants immunity to Illuminated
 		Allows flight and slow fall
 		While flying, crystal spikes are emitted from your wings
 		Allows the wearer to double jump, spawning more crystal spikes
-		Grants immunity to Illuminated caused by the Underground Hallow
 		'Are you watching, Heaven!?'
 		''' */
 }
 
-GroundStick: {
+RemoteControl: {
 	// DisplayName: Remote Control
 	/* Tooltip:
 		'''
@@ -1195,11 +1225,10 @@ GuttedHeart: {
 	/* Tooltip:
 		'''
 		Grants immunity to Bloodthirsty
-		10% increased max life
+		Increases max life by 10%
 		Creepers hover around you blocking some damage
-		A new Creeper appears every 25-15 seconds (faster the lower your health is), and 3 can exist at once
-		Creeper respawn speed increases when not moving
-		Creepers inflict Ichor on-hit
+		Creepers respawn faster the lower your health or while not moving, and 3 can exist at once
+		Creepers briefly inflict Ichor on-hit
 		'Once beating in the mind of a defeated foe'
 		''' */
 }
@@ -1208,32 +1237,29 @@ HeartoftheMasochist: {
 	// DisplayName: Heart of the Master
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/PumpkingsCape] Living Wasteland, [i:FargowiltasSouls/IceQueensCrown] Hypothermia, Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
-		[i:FargowiltasSouls/MutantAntibodies] Wet, Feral Bite, Mutant Nibble, Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, [i:FargowiltasSouls/GalacticGlobe] Nullification Curse, Flipped, Illuminated, Unstable, and Curse of the Moon
-		[i:FargowiltasSouls/PumpkingsCape] [i:FargowiltasSouls/MutantAntibodies] [i:FargowiltasSouls/IceQueensCrown] Increases damage and crit chance by 10%, and damage reduction by 5%
-		[i:FargowiltasSouls/PumpkingsCape] Parry negates up to 200 damage and heals based on damage
-		[i:FargowiltasSouls/PumpkingsCape] While guarding, gain an aura of Rotting
-		[i:FargowiltasSouls/IceQueensCrown] Graze attacks to charge up Graze Bomb
-		[i:FargowiltasSouls/BetsysHeart] FIreball Dash inflicts Betsy's Curse
-		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water refreshes your flight time, and gives improved speed and max flight time
-		[i:FargowiltasSouls/MutantAntibodies] Riding Cute Fishron gives you the Wet debuff
-		[i:FargowiltasSouls/PrecisionSeal] Hold Precision Seal key to disable dashes and double jumps, and show your hurtbox
-		[i:FargowiltasSouls/PrecisionSeal] Decreases hurtbox for projectiles, even when it isn't shown and [i:FargowiltasSouls/GalacticGlobe] grants increased flight time
-		[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion buffs (works from inventory and vanity)
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/GalacticGlobe] mini True Eyes of Cthulhu and [i:FargowiltasSouls/SaucerControlConsole] a friendly Mini Saucer which slows enemies it hits
+		Grants immunity to various debuffs (hold [c/FF3399:{0}] to view all)
+		Increases [i:FargowiltasSouls/MutantAntibodies] damage and [i:FargowiltasSouls/PumpkingsCape] critical strike chance by 8% and [i:FargowiltasSouls/IceQueensShield] damage reduction by 4%
+		[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs (works from inventory or vanity slots)
+		[i:FargowiltasSouls/PrecisionSeal] Reduces your hurtbox size for projectiles, hold the Precision Seal key to disable dashes and double jumps
+		[i:FargowiltasSouls/MutantAntibodies] Submerging yourself in water improves mobility and refreshes flight time
+		[i:FargowiltasSouls/ChaliceofTheMoon] Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
+		Otherwise, summons [i:FargowiltasSouls/SaucerControlConsole] a Mini Saucer that attacks with ammo and [i:FargowiltasSouls/ChaliceofTheMoon] True Eyes of Cthulhu
 		'Warm, beating, and no body needed'
 		''' */
-	// VanityTooltip: "[i:FargowiltasSouls/SaucerControlConsole] Press Ammo Cycle key to cycle ammos and [i:FargowiltasSouls/GalacticGlobe] grants most standard potion buffs"
+	// VanityTooltip: "[i:FargowiltasSouls/ChaliceofTheMoon] Grants most standard potion buffs"
+	/* RuminateTooltip:
+		'''
+		Grants immunity to [i:FargowiltasSouls/IceQueensShield] Frozen, [i:FargowiltasSouls/SaucerControlConsole] Distorted, Unstable, [i:FargowiltasSouls/BetsysHeart] Oozed, Withered Weapon, Withered Armor,
+		[i:FargowiltasSouls/MutantAntibodies] Oceanic Maul, water debuffs, [i:FargowiltasSouls/PrecisionSeal] Smite, and [i:FargowiltasSouls/ChaliceofTheMoon] Curse of the Moon
+		''' */
 }
 
-IceQueensCrown: {
-	// DisplayName: Ice Queen's Crown
+IceQueensShield: {
+	// DisplayName: Ice Queen's Shield
 	/* Tooltip:
 		'''
-		Grants immunity to Hypothermia and Frozen
+		Grants immunity to Frozen
 		Increases damage reduction by 5%
-		Graze attacks to charge up Graze Bomb
 		'The royal symbol of a defeated foe'
 		''' */
 }
@@ -1242,7 +1268,7 @@ LihzahrdTreasureBox: {
 	// DisplayName: Lihzahrd Treasure Box
 	/* Tooltip:
 		'''
-		Grants immunity to knockback, Burning, and Fused
+		Grants immunity to knockback, Daybroken, and Fused
 		'Filled with various trinkets of pain and torment'
 		''' */
 }
@@ -1251,7 +1277,7 @@ MagicalBulb: {
 	// DisplayName: Magical Bulb
 	/* Tooltip:
 		'''
-		Grants immunity to Acid Venom, Ivy Venom, and Swarming
+		Grants immunity to Acid Venom and Ivy Venom
 		Increases life regeneration based on how much light you receive
 		Attacks inflict enemies with Ivy Venom briefly
 		Ivy Venom deals significantly more damage the longer it's applied to an enemy
@@ -1263,11 +1289,10 @@ MutantAntibodies: {
 	// DisplayName: Mutant Antibodies
 	/* Tooltip:
 		'''
-		Grants immunity to Wet, Feral Bite, Mutant Nibble, and Oceanic Maul
-		Grants immunity to most debuffs caused by entering water
-		Grants effects of Wet debuff while riding Cute Fishron
+		Grants immunity to Oceanic Maul and debuffs caused by entering water
 		Increases damage for your current weapon class by 20%, but decreases life regeneration
 		Submerging in water refreshes flight time and gives you improved speed and increased max flight time
+		Grants effects of Wet debuff while riding Cute Fishron
 		'Healthy drug recommended by 0 out of 10 doctors'
 		''' */
 }
@@ -1288,32 +1313,29 @@ MutantEye: {
 }
 
 MysticSkull: {
-	// DisplayName: Mystic Skull
+	// DisplayName: Runic Candle
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
+		Works from inventory or vanity slots
 		Right click to disable
 		Grants immunity to Suffocation
 		Automatically use mana potions when needed
-		Increases pickup range for mana stars
 		'The quietly muttering head of a defeated foe'
 		''' */
 	/* VanityTooltip:
 		'''
 		Grants immunity to Suffocation
 		Automatically use mana potions when needed
-		Increases pickup range for mana stars
 		''' */
 }
 
 MysticSkullInactive: {
-	// DisplayName: Mystic Skull (Inactive)
+	// DisplayName: Runic Candle (Inactive)
 	/* Tooltip:
 		'''
 		Currently inactive, Right click to activate
 		Grants immunity to Suffocation
 		Automatically use mana potions when needed
-		Increases pickup range for mana stars
 		'The quietly muttering head of a defeated foe'
 		''' */
 }
@@ -1333,9 +1355,9 @@ NymphsPerfume: {
 	// DisplayName: Nymph's Perfume
 	/* Tooltip:
 		'''
-		Grants immunity to Lovestruck, Stinky, and Hexed
-		You respawn with more life (works from inventory and vanity)
-		Your attacks occasionally produce hearts
+		Grants immunity to Hexed
+		You respawn with more life (works from inventory or vanity slots)
+		Attacks produce lifestealing hearts occasionally
 		'The scent is somewhat overpowering'
 		''' */
 	// VanityTooltip: You respawn with more life
@@ -1362,9 +1384,8 @@ PumpkingsCape: {
 	// DisplayName: Pumpking's Cape
 	/* Tooltip:
 		'''
-		Grants immunity to Living Wasteland
-		Increases damage and critical strike chance by 5%
-		You have an aura of Rotting while guarding
+		Increases critical strike chance by 10%
+		Massively increases life regeneration while guarding
 		Parry negates up to 200 damage and steals life based on the blocked damage
 		'Somehow, it's the right size'
 		''' */
@@ -1386,21 +1407,22 @@ PureHeart: {
 	// DisplayName: Pure Heart
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/PureHeart] Grants immunity to biome debuffs, [i:FargowiltasSouls/DarkenedHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
-		Increases [i:FargowiltasSouls/GelicWings] wing time by 30%, [i:FargowiltasSouls/DarkenedHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
+		Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects and various impure debuffs (hold [c/FF3399:{0}] to view debuffs)
+		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/RottingHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
 		[i:FargowiltasSouls/PungentEyeball] Your cursor inflicts Sublimation on enemies, dealing damage over time and reducing defense, building up the longer enemies are tracked
-		[i:FargowiltasSouls/GuttedHeart] [i:FargowiltasSouls/DarkenedHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
+		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/RottingHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
 		[i:FargowiltasSouls/GelicWings] Flying emits crystal spikes
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It pulses with vitality'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
 
 QueenStinger: {
 	// DisplayName: The Queen's Stinger
 	/* Tooltip:
 		'''
-		Grants immunity to Infested
+		Grants immunity to Infested and Swarming
 		Honey buff increases your armor penetration by 7
 		Bees and weak Hornets become friendly
 		'Ripped right off of a defeated foe'
@@ -1411,7 +1433,7 @@ ReinforcedPlating: {
 	// DisplayName: Reinforced Plating
 	/* Tooltip:
 		'''
-		Grants immunity to knockback, Defenseless, and Nano Injection
+		Grants immunity to knockback and Exposed
 		Reduces damage taken by 4%
 		Further increases defense and damage reduction while afflicted with a debuff
 		'The sturdiest piece of a defeated foe'
@@ -1423,17 +1445,17 @@ SandsofTime: {
 	/* Tooltip:
 		'''
 		4% increased damage when equipped
-		Works from inventory and vanity slots:
-		Grants immunity to Mighty Wind and cactus damage
+		Works from inventory or vanity slots:
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
-		Use to teleport to your last death point
+		Use to teleport to where you were 1 minute before you last died
 		'Whatever you do, don't drop it'
 		''' */
 	/* VanityTooltip:
 		'''
-		Grants immunity to Mighty Wind and cactus damage
+		Grants immunity to Mighty Wind
 		You respawn twice as fast when no boss is alive
-		Use to teleport to your last death point
+		Use to teleport to where you were 1 minute before you last died
 		''' */
 }
 
@@ -1441,9 +1463,10 @@ SaucerControlConsole: {
 	// DisplayName: Saucer Control Console
 	/* Tooltip:
 		'''
-		Grants immunity to Distorted
-		Summons a friendly Mini Saucer
-		The saucer's tractor beam slows enemies hit by it
+		Grants immunity to Distorted and Unstable
+		Summons a friendly Mini Saucer that shoots enemies struck by you
+		Mini Saucer fires bullets, arrows, or rockets from your inventory
+		66% chance to not consume ammo
 		Reduced damage before Golem is defeated
 		'Just keep it in airplane mode'
 		''' */
@@ -1454,9 +1477,10 @@ SecurityWallet: {
 	// DisplayName: Security Wallet
 	/* Tooltip:
 		'''
-		Works from inventory and vanity slots
+		Works from inventory or vanity slots
 		Grants immunity to Midas
 		Reduces reforge cost by 50%
+		Automatically sends coins to your piggy bank when picked up
 		'Not secure against being looted off of one's corpse'
 		''' */
 	/* VanityTooltip:
@@ -1472,13 +1496,13 @@ SinisterIcon: {
 		'''
 		Grants immunity to Unlucky and Stunned
 		Increases spawn rate
-		Enemies and bosses will drop doubled loot
+		Enemies and bosses will drop loot one additional time when defeated by you
 		Only affects bosses if this was equipped for the full fight
 		'Most definitely not alive'
 		''' */
 }
 
-SkullCharm: {
+CrystalSkull: {
 	// DisplayName: Crystal Skull
 	/* Tooltip:
 		'''
@@ -1497,7 +1521,7 @@ SlimyShield: {
 		Grants immunity to Slimed
 		Increases fall speed
 		Hold down to fall through platforms
-		When you land after a jump, slime will fall from the sky over your cursor
+		When you land after a jump, slime will spout upwards from your body
 		Slime inflicts Slimed, increasing fire debuff damage
 		'Torn from the innards of a defeated foe'
 		''' */
@@ -1507,10 +1531,12 @@ SparklingAdoration: {
 	// DisplayName: Sparkling Adoration
 	/* Tooltip:
 		'''
-		Grants immunity to Lovestruck and Fake Hearts
-		Graze attacks to gain up to x1.25 increased damage
-		Damage bonus decreases over time and is fully lost on hit
-		Your attacks periodically summon life-draining hearts, dealing magic damage
+		Grants immunity to Fake Hearts
+		Creates a graze ring around you
+		Enemy projectiles that touch the graze ring increase charge
+		Charge increases your damage by up to 1.25x
+		Charge decreases over time and is fully lost on hit
+		Your attacks periodically summon life-draining hearts
 		'With all of your emotion!'
 		''' */
 }
@@ -1519,7 +1545,7 @@ SqueakyToy: {
 	// DisplayName: Squeaky Toy
 	/* Tooltip:
 		'''
-		Grants immunity to Squeaky Toy and Guilty
+		Grants immunity to Squeaky Toy
 		Enemy attacks have a 10% chance to squeak and only deal 1 damage to you
 		'The beloved toy of a defeated foe...?'
 		''' */
@@ -1529,21 +1555,21 @@ SupremeDeathbringerFairy: {
 	// DisplayName: Supreme Deathbringer Fairy
 	/* Tooltip:
 		'''
-		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, [i:FargowiltasSouls/NecromanticBrew] Lethargic, [i:FargowiltasSouls/Deerclawps] Slow, and Frozen
+		Grants immunity to various earlygame enemy debuffs (hold [c/FF3399:{0}] to view all)
 		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
-		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] While moving, you will create a trail of blood scythes
-		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 15% damage reduction
-		[i:FargowiltasSouls/QueenStinger] [i:FargowiltasSouls/NecromanticBrew] Press the Special Dash key to perform a fast skeletron punch with high knockback
-		[i:FargowiltasSouls/AgitatingLens] Hitting enemies with this punch berserks you, greatly increasing attack speed
+		[i:FargowiltasSouls/SlimyShield][i:FargowiltasSouls/AgitatingLens] While moving, create a trail of bloody slime
+		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
 		'Supremacy not necessarily guaranteed'
 		''' */
+	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, Swarming, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 }
 
 TimsConcoction: {
 	// DisplayName: Tim's Concoction
 	/* Tooltip:
 		'''
-		Certain enemies will drop potions when defeated
+		Most enemies have a chance to drop potions when defeated
+		Potion type depends on enemy type
 		'Smells funny'
 		''' */
 }
@@ -1554,7 +1580,7 @@ WretchedPouch: {
 		'''
 		Grants immunity to Shadowflame
 		While attacking, builds up shadowflame charge but reduces damage reduction by up to 10%
-		Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles that deal magic damage
+		Stop attacking to consume shadowflame charge, releasing a burst of shadowflame tentacles
 		'The accursed incendiary powder of a defeated foe'
 		''' */
 }
@@ -1564,8 +1590,8 @@ WyvernFeather: {
 	/* Tooltip:
 		'''
 		Grants immunity to Clipped Wings
-		You periodically shed light orbs, touch them to refresh your flight time
-		Stabilizes gravity in space and liquids (works from inventory and vanity)
+		While airborne, you periodically shed light orbs that refresh flight time and double jumps on pickup
+		Stabilizes gravity in space and liquids (works from inventory or vanity slots)
 		'Warm to the touch'
 		''' */
 	// VanityTooltip: Stabilizes gravity in space and in liquids
@@ -1576,6 +1602,7 @@ ZephyrBoots: {
 	/* Tooltip:
 		'''
 		Allows flight, super fast running, and extra mobility on ice
+		Having wings equipped disables all of your double jumps (toggleable)
 		8% increased movement speed
 		Provides the ability to walk on water, honey and lava
 		Grants immunity to fire blocks and 7 seconds of immunity to lava
@@ -1590,11 +1617,10 @@ ArchWizardsSoul: {
 	// DisplayName: Arch Wizard's Soul
 	/* Tooltip:
 		'''
-		22% increased magic damage
+		22% increased magic damage and 10% increased magic critical strike chance
 		20% reduced mana cost
-		10% increased magic critical strike chance
-		Increases your maximum mana by 200
-		Effects of Celestial Cuffs and Mana Flower
+		[i:1595] Increases your maximum mana by 100 and restores mana when damaged
+		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
 		'Arcane to the core'
 		''' */
 }
@@ -1603,11 +1629,10 @@ BerserkerSoul: {
 	// DisplayName: Berserker's Soul
 	/* Tooltip:
 		'''
-		22% increased melee damage
+		22% increased melee damage and 10% increased melee critical strike chance
 		20% increased melee speed
-		10% increased melee crit chance
-		Increased melee knockback
-		Effects of the Fire Gauntlet, Yoyo Bag, and Celestial Shell
+		[i:1343] Enables auto swing for and increases the size and knockback of melee weapons
+		[i:3366] Gives the user master yoyo skills
 		'None shall live to tell the tale'
 		''' */
 }
@@ -1616,11 +1641,10 @@ ColossusSoul: {
 	// DisplayName: Colossus Soul
 	/* Tooltip:
 		'''
-		+100 max health, +10% damage reduction, increases life regeneration by 5
-		Grants immunity to knockback, several debuffs, Shimmering, and fall damage
-		Enemies are more likely to target you
-		Effects of Brain of Confusion, Star Veil, Charm of Myths and Bee Cloak
-		Effects of Shiny Stone, Paladin's Shield, and Frozen Turtle Shell
+		Increases max life by 50, [i:CharmofMyths][i:ShinyStone] life regeneration, and [i:WormScarf][i:FargowiltasSouls/Devilshield] reduces damage taken by 20%
+		[i:AnkhShield] Grants immunity to knockback and several debuffs
+		[i:CharmofMyths] Reduces the cooldown of healing potions by 25%
+		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
 		'Nothing can stop you'
 		''' */
 }
@@ -1631,8 +1655,8 @@ ConjuristsSoul: {
 		'''
 		22% increased summon damage
 		15% increased whip range
-		Increases your max number of minions by 3
-		Increases your max number of sentries by 1
+		Increases your max number of minions by 3, doesn't stack
+		Increases your max number of sentries by 1, doesn't stack
 		Increased minion knockback
 		'An army at your disposal'
 		''' */
@@ -1642,20 +1666,24 @@ DimensionSoul: {
 	// DisplayName: Soul of Dimensions
 	/* Tooltip:
 		'''
-		+300 max health, +20% damage reduction, increases life regeneration by 8
-		Grants immunity to knockback and several debuffs
-		Enemies are more likely to target you
-		Allows Supersonic running and infinite flight, [c/BC5252:and disables all of your jumps (togglable)]
-		Increases fishing skill substantially, All fishing rods will have 10 extra lures
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach, Mining speed tripled
-		Shine, Spelunker, Hunter, and Dangersense effects
-		Auto paint and actuator effect
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
+		Allows Supersonic mobility
+		Drastically enhances mining, building, and fishing capabilities
 		Grants the ability to enable Builder Mode
-		Effects of the Brain of Confusion, Star Veil, Sweetheart Necklace, Bee Cloak, Spore Sac, and Shiny Stone
-		Effects of Paladin's Shield, Frozen Turtle Shell, Arctic Diving Gear, Frog Legs, and Flying Carpet
-		Effects of Lava Waders, Angler Tackle Bag, Glowing Fishing Bobber, Paint Sprayer, Presserator, Cell Phone, and Gravity Globe
-		Effects of Shield of Cthulhu and Master Ninja Gear
+		[i:FargowiltasSouls/ColossusSoul][i:FargowiltasSouls/SupersonicSoul][i:FargowiltasSouls/FlightMasterySoul][i:FargowiltasSouls/TrawlerSoul][i:FargowiltasSouls/WorldShaperSoul] Grants effects of all components
+		'The dimensions of Terraria at your fingertips'
+		''' */
+	/* RuminateTooltip:
+		'''
+		+100 max life, +20% damage reduction, increases life regeneration, reduces healing cooldown by 25%
+		Grants immunity to knockback, several debuffs, Shimmering, lava, fall damage, and mining explosives
+		Allows Supersonic running, flying, dashing, climbing, swimming, and waterwalking
+		[i:FargowiltasSouls/Devilshield] Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		[i:PanicNecklace] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage, [i:BrainOfConfusion] you have a chance to dodge attacks and [i:FargowiltasSouls/HallowedPendant] retaliate
+		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency, [i:FargowiltasSouls/MinerEnchant] mining and [i:HandOfCreation] placement speed and range, and [i:FargowiltasSouls/AnglerEnchant] your rods have 10 extra lures
+		[i:RoyalGel] Slimes become friendly, [i:FargowiltasSouls/AeolusBoots] flowers grow on the grass you walk on, and [i:VolatileGelatin][i:SporeSac][i:BoneHelm] you release damaging fog at nearby enemies
+		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
+		Grants the ability to enable Builder Mode, [i:FargowiltasSouls/MinerEnchant] provides light and reveals nearby enemies, traps and treasures
 		'The dimensions of Terraria at your fingertips'
 		''' */
 }
@@ -1698,7 +1726,7 @@ EternitySoul: {
 		// Tooltips which start the with the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
 		// StartsWithFilter: "'"
 		// Tooltips which contain the text in filter won't be included in the SoE tooltip, filters are seperated with "|"
-		// ContainsFilter: Following effects|Grants togglable
+		// ContainsFilter: Following effects|Grants toggleable
 		// Flavor: "'Mortal or Immortal, all things acknowledge your claim to divinity.'"
 	}
 }
@@ -1711,7 +1739,7 @@ FlightMasterySoul: {
 		Hold DOWN and JUMP to hover
 		Hold UP to boost faster
 		Increases gravity
-		[c/BC5252:Disables all of your jumps (togglable)]
+		Disables all of your double jumps (toggleable)
 		'Pierce the heavens'
 		''' */
 }
@@ -1720,31 +1748,41 @@ MasochistSoul: {
 	// DisplayName: Soul of the Master
 	/* Tooltip:
 		'''
-		[i:FargowiltasSouls/GalacticGlobe] Increases wing time by 200%, [i:FargowiltasSouls/QueenStinger] armor penetration by 50, [i:FargowiltasSouls/GalacticGlobe] and movement speed by 20%
-		[i:FargowiltasSouls/GuttedHeart] Increases max life by 100%, [i:FargowiltasSouls/MagicalBulb] life regen, [i:FargowiltasSouls/MutantAntibodies][i:FargowiltasSouls/SkullCharm][i:FargowiltasSouls/PumpkingsCape] damage for your current weapon class by 50%, and [i:FargowiltasSouls/ReinforcedPlating] damage reduction by 10%
-		[i:FargowiltasSouls/PungentEyeball] Increases spawn chance of rare enemies massively, [i:FargowiltasSouls/SinisterIcon] doubles spawnrates, makes non-boss enemies drop doubled loot, and [i:FargowiltasSouls/TimsConcoction] causes certain enemies to drop potions 
-		Grants [i:FargowiltasSouls/SlimyShield] fastfall, [i:FargowiltasSouls/ReinforcedPlating] knockback immunity, [i:FargowiltasSouls/PureHeart] immunity to biome debuffs, [i:FargowiltasSouls/GalacticGlobe] most standard potion and station buffs (works from inventory and vanity), immunity to almost all Eternity Mode debuffs, and more
-		[i:FargowiltasSouls/PrecisionSeal] Press the Precision Seal key to prevent dashes and double jumps
-		[i:FargowiltasSouls/PrecisionSeal] Reduces hurtbox size, [i:FargowiltasSouls/NecromanticBrew] increases dash distance, and [i:FargowiltasSouls/PungentEyeball] causes enemies near your cursor to take up to 1.15x damage
-		[i:FargowiltasSouls/NymphsPerfume] Increases respawn hp, [i:FargowiltasSouls/SecurityWallet] Reduces reforge cost by 50% and [i:FargowiltasSouls/SandsofTime] respawn time, as well as using [i:FargowiltasSouls/MysticSkull] mana potions as needed
-		When hit, [i:FargowiltasSouls/SqueakyToy] you have a 5% chance to only take 1 damage, and [i:FargowiltasSouls/NecromanticBrew] you reflect damage while dashing
-		Your attacks [i:FargowiltasSouls/NymphsPerfume] produce hearts and inflict a cocktail of Eternity Mode debuffs
-		[c/BC5252:Converts all of your accessory minion effects and empty minion slots into +1% damage for each (toggleable)]
-		Otherwise, summons [i:FargowiltasSouls/NecromanticBrew] Skeletron arms, [i:FargowiltasSouls/GuttedHeart] creepers, [i:FargowiltasSouls/GroundStick] two friendly probes, [i:FargowiltasSouls/SkullCharm] an eyeball minion, [i:FargowiltasSouls/SaucerControlConsole] a mini saucer, [i:FargowiltasSouls/MagicalBulb] a plant, [i:FargowiltasSouls/CelestialRune] a cultist, [i:FargowiltasSouls/GalacticGlobe] and True Eyes of Cthulhu by your side
-		[i:FargowiltasSouls/SandsofTime] Use to teleport to your last death point
+		Grants immunity to almost all debuffs
+		[i:FargowiltasSouls/SupremeDeathbringerFairy][i:FargowiltasSouls/BionomicCluster][i:FargowiltasSouls/DubiousCircuitry][i:FargowiltasSouls/PureHeart][i:FargowiltasSouls/LithosphericCluster][i:FargowiltasSouls/VerdantDoomsayerMask][i:FargowiltasSouls/HeartoftheMasochist][i:FargowiltasSouls/SinisterIcon] Grants enhanced effects of all components
 		'Embrace mastery, embrace eternity'
 		''' */
-	// VanityTooltip: "[i:FargowiltasSouls/GalacticGlobe] Grants most standard potion and station buffs"
+	/* RuminateTooltip:
+		'''
+		[i:FargowiltasSouls/SinisterIcon] Enemies and bosses drop twice as much loot, increases spawn rate
+		[i:FargowiltasSouls/SupremeDeathbringerFairy] Greatly increases dashing and falling speed, reduces damage taken while dashing and quick movement creates trails of blood
+		[i:FargowiltasSouls/BionomicCluster] Attacks occasionally produce lifestealing hearts, enemy attacks have a chance to squeak and enemies drop potions
+		[i:FargowiltasSouls/BionomicCluster] Use to teleport to where you last died, you respawn faster and with more life
+		[i:FargowiltasSouls/DubiousCircuitry] While debuffed, increases attack speed, critical strike chance, defense, and damage reduction
+		[i:FargowiltasSouls/PureHeart] Enemies near your cursor have reduced defense and take damage over time, increases flight time by 50% and movement speed and max life by 10%
+		[i:FargowiltasSouls/LithosphericCluster] Stabilizes gravity, reduces reforge cost, automatically sends money to piggy bank and uses mana potions when needed
+		[i:FargowiltasSouls/VerdantDoomsayerMask] Increases life regeneration based on how much light you receive, immunity to knockback
+		[i:FargowiltasSouls/HeartoftheMasochist] Increases damage and critical strike chance for your current weapon class by 12% and damage reduction by 5%
+		[i:FargowiltasSouls/HeartoftheMasochist] Reduces hurtbox size for projectiles, grants most standard potion and station buffs, touching water greatly improves mobility
+		[i:FargowiltasSouls/HeartoftheMasochist] Converts all of your accessory minion effects into +4% damage each and empty minion slots into +2% damage each (toggleable)
+		Otherwise, summons a [i:FargowiltasSouls/LithosphericCluster] Glooming Lantern that empowers itself on parries, [i:FargowiltasSouls/PureHeart] creepers to block damage, [i:FargowiltasSouls/HeartoftheMasochist] an ammo-shooting saucer and the True Eyes of Cthulhu
+		'Embrace mastery, embrace eternity'
+		''' */
+	/* VanityTooltip:
+		'''
+		[i:FargowiltasSouls/BionomicCluster] You respawn faster and with more life
+		[i:FargowiltasSouls/LithosphericCluster] Stabilizes gravity, reduces reforge cost, automatically sends money to piggy bank and uses mana potions when needed
+		[i:FargowiltasSouls/HeartoftheMasochist] Grants most standard potion and station buffs
+		''' */
 }
 
 SnipersSoul: {
 	// DisplayName: Sniper's Soul
 	/* Tooltip:
 		'''
-		22% increased ranged damage
-		20% increased ranged projectile velocity
-		10% increased ranged critical chance
-		Effects of Sniper Scope and Magic Quiver
+		22% increased ranged damage and 10% increased ranged critical chance
+		20% increased ranged projectile velocity and increases armor penetration by 5
+		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		'Ready, aim, fire'
 		''' */
 }
@@ -1753,15 +1791,13 @@ SupersonicSoul: {
 	// DisplayName: Supersonic Soul
 	/* Tooltip:
 		'''
-		Allows Supersonic running, flight, and extra mobility on ice
-		Allows the holder to quintuple jump if no wings are equipped
-		Increases jump height, jump speed, and allows auto-jump
-		Flowers grow on the grass you walk on
-		Grants the ability to swim and greatly extends underwater breathing
-		Provides the ability to walk on water and lava
-		Grants immunity to lava and fall damage
-		Effects of Flying Carpet, Shield of Cthulhu and Master Ninja Gear
-		Effects of Sweetheart Necklace and Amber Horseshoe Balloon
+		Allows Supersonic running, dashing, hovering, and extra mobility on ice
+		Resets horizontal momentum while not moving, and having wings equipped disables all of your double jumps (toggleable)
+		Allows the holder to quintuple jump if no wings are equipped, increases jump height, jump speed, and allows auto-jump
+		[i:1290] Increases movement speed and [i:FargowiltasSouls/HallowedPendant] length of invincibility after taking damage
+		[i:3223] You have a chance to dodge attacks, [i:FargowiltasSouls/HallowedPendant] firing rays of light at nearby enemies
+		[i:FargowiltasSouls/AeolusBoots] Grants water and lava walking and [i:984] wall climbing
+		[i:FargowiltasSouls/AeolusBoots] Grants immunity to lava and fall damage, and flowers grow on the grass you walk on
 		'I am speed'
 		''' */
 }
@@ -1770,22 +1806,27 @@ TerrariaSoul: {
 	// DisplayName: Soul of Terraria
 	/* Tooltip:
 		'''
+		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Grants effects of all Forces
+		'A true master of Terraria'
+		''' */
+	/* RuminateTooltip:
+		'''
 		[i:FargowiltasSouls/TimberForce] Gain an aura that fires projectiles, improved hooks, and occasional mana stars on hit
 		[i:FargowiltasSouls/TimberForce] Gain crit rerolls when retreiving pickups, bestiary completion and discount
 		[i:FargowiltasSouls/TerraForce] Critical strikes and parries fire powerful lightning, you take less debuff damage and your melee weapons are larger
-		[i:FargowiltasSouls/TerraForce] 75% set critical strike chance, increased when lightning bolts fire, further item grab range, pickups grant damage reduction
+		[i:FargowiltasSouls/TerraForce] Critical strike chance increased when lightning bolts fire, further item grab range, pickups grant damage reduction
 		[i:FargowiltasSouls/EarthForce] You gain defensive bonuses while not attacking and offensive bonuses while attacking
-		[i:FargowiltasSouls/EarthForce] 4x debuff damage and you explode on hit while not attacking
+		[i:FargowiltasSouls/EarthForce] Debuffs deal 100% more damage and you explode on hit while not attacking
 		[i:FargowiltasSouls/NatureForce] You have an aura that siphons life, increases damage dealt, and you fire leaf shots at nearby enemies
 		[i:FargowiltasSouls/NatureForce] Mushroom healing is improved and grants buffs, your attacks inflict several debuffs, and you have an umbrella
 		[i:FargowiltasSouls/LifeForce] Leave behind powerful flowers while flying that grant large bonuses when touched
-		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, effects of Hive Pack
+		[i:FargowiltasSouls/LifeForce] Hover in place to enter a shell and resist damage, your minions can crit for 1.25x damage, effects of Hive Pack
 		[i:FargowiltasSouls/SpiritForce] Double tap down to call an ancient tornado, healing potions restore more over time, and your whips are improved
-		[i:FargowiltasSouls/SpiritForce] If you reach zero HP you will revive with 300 HP and self-cleanse debuffs
-		[i:FargowiltasSouls/ShadowForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
-		[i:FargowiltasSouls/ShadowForce] You fire an additional weapon as support, your minions get a scythe attack, and slain enemies may drop a pile of bones
+		[i:FargowiltasSouls/SpiritForce] Upon reaching zero health, you will revive with 300 health
+		[i:FargowiltasSouls/DeathForce] Grants a shadow dash, and an invincible shade dash every 4 seconds, increased projectile stats based on speed
+		[i:FargowiltasSouls/DeathForce] You fire an additional weapon as support, and slain enemies may drop a pile of bones
 		[i:FargowiltasSouls/WillForce] Summons a gladiator spirit, increases your healing and mount stats, and successive attacks gain bonus damage
-		[i:FargowiltasSouls/WillForce] Automatically sends coins to your piggy bank when picked up (works from vanity and inventory), enemies may drop extra loot
+		[i:FargowiltasSouls/WillForce] Enemies may drop extra loot
 		[i:FargowiltasSouls/CosmoForce] Attacking occasionally launches moons at enemies that explode into Lunar Boosters
 		[i:FargowiltasSouls/CosmoForce] Increases your movement speed and acceleration and decreases your momentum, Stardust Stasis has a 60 second cooldown
 		'A true master of Terraria'
@@ -1796,12 +1837,11 @@ TrawlerSoul: {
 	// DisplayName: Trawler Soul
 	/* Tooltip:
 		'''
-		Increases fishing skill substantially
-		All fishing rods will have 10 extra lures
-		You catch fish almost instantly
-		Permanent Sonar and Crate Buffs
-		Effects of Angler Tackle Bag, Glowing Fishing Bobber, Volatile Gel, and Spore Sac 
-		Effects of Pink Horseshoe Balloon and Arctic Diving Gear
+		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
+		[i:3110] Turns the holder into a werewolf at night and into a merfolk when entering water
+		[i:1861] Increases your ice and water mobility and underwater breathing
+		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
+		[i:4987][i:3336][i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		''' */
 }
@@ -1810,16 +1850,22 @@ UniverseSoul: {
 	// DisplayName: Soul of the Universe
 	/* Tooltip:
 		'''
-		50% increased damage for your current weapon class
-		25% increased critical chance for your current weapon class
-		25% increased attack speed
-		50% increased shoot velocity
-		All weapons have double knockback
-		Increases your maximum mana by 300
-		Increases your max number of minions by 2
-		Increases your max number of sentries by 1
-		Effects of the Fire Gauntlet, Yoyo Bag, and Celestial Shell
-		Effects of Sniper Scope, Celestial Cuffs and Mana Flower
+		+50% damage and +25% critical strike chance for your current weapon class
+		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		[i:FargowiltasSouls/BerserkerSoul][i:FargowiltasSouls/SnipersSoul][i:FargowiltasSouls/ArchWizardsSoul][i:FargowiltasSouls/ConjuristsSoul] Grants all additional effects of components
+		'The heavens themselves bow to you'
+
+		''' */
+	/* RuminateTooltip:
+		'''
+		+50% damage and +25% critical strike chance for your current weapon class
+		+25% attack speed, +50% projectile velocity, +100% knockback
+		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
+		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
+		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 
+		[i:4000] Automatically use mana potions when needed and increases pickup range for mana stars
 		'The heavens themselves bow to you'
 		''' */
 }
@@ -1828,19 +1874,13 @@ WorldShaperSoul: {
 	// DisplayName: World Shaper Soul
 	/* Tooltip:
 		'''
-		Grants immunity to mining explosives
-		Increased block and wall placement speed by 50%
-		Near infinite block placement and mining reach
-		Mining speed tripled, plus effect of Ancient Chisel
-		Shows the location of enemies, traps, and treasures
-		Auto paint and actuator effect
-		Provides light and allows gravity control
+		[i:FargowiltasSouls/MinerEnchant] Grants immunity to mining explosives
+		[i:FargowiltasSouls/MinerEnchant] Greatly increased mining and [i:HandOfCreation] placement speed and range
+		[i:FargowiltasSouls/MinerEnchant] Provides light and reveals nearby enemies, traps and treasures
+		[i:3624] Automatically places actuators, [i:HandOfCreation] paints or coats placed objects
 		Grants toggleable Builder Mode:
-		    Tiles and walls will not be consumed
-		    Increased placement speed and range
-		Effect can be disabled in Effect Toggles menu
-		Effects of the Royal Gel and Treasure Magnet
-		Summons a pet Magic Lantern
+		    Tiles and walls will not be consumed at 500 stack or above
+		    Further increased placement speed and range
 		'Living in a world of cardboard'
 		''' */
 }
@@ -1872,8 +1912,7 @@ EridanusBattleplate: {
 		'''
 		5% increased damage
 		10% increased critical strike chance
-		Reduces damage taken by 10%
-		Grants life regeneration
+		4% increased damage reduction
 		''' */
 }
 
@@ -1904,8 +1943,8 @@ GaiaGreaves: {
 	/* Tooltip:
 		'''
 		10% increased damage for your current weapon class
-		5% increased critical strike chance
-		10% increased movement speed
+		6% increased critical strike chance
+		15% increased movement, melee, and whip speed
 		''' */
 }
 
@@ -1913,9 +1952,9 @@ GaiaHelmet: {
 	// DisplayName: Gaia Helmet
 	/* Tooltip:
 		'''
-		10% increased damage
-		5% increased critical strike chance
-		Increases max number of minions by 1
+		10% increased damage for your current weapon class
+		6% increased critical strike chance
+		Reduces mana and ammo usage by 10% and increases max mana by 50
 		''' */
 }
 
@@ -1923,14 +1962,14 @@ GaiaPlate: {
 	// DisplayName: Gaia Plate
 	/* Tooltip:
 		'''
-		10% increased damage
-		5% increased critical strike chance
-		Reduces damage taken by 10%
-		Increases your life regeneration
+		10% increased damage for your current weapon class
+		6% increased critical strike chance
+		Increases your max number of minions by 2
+		Reduces damage taken by 4%
 		''' */
 }
 
-MutantBody: {
+EternalCore: {
 	// DisplayName: Eternal Core
 	/* Tooltip:
 		'''
@@ -1941,7 +1980,7 @@ MutantBody: {
 		''' */
 }
 
-MutantMask: {
+EternalFlame: {
 	// DisplayName: Eternal Flame
 	/* Tooltip:
 		'''
@@ -1952,7 +1991,7 @@ MutantMask: {
 		''' */
 }
 
-MutantPants: {
+EternalLeggings: {
 	// DisplayName: Eternal Leggings
 	/* Tooltip:
 		'''
@@ -1971,12 +2010,8 @@ NekomiHood: {
 }
 
 NekomiHoodie: {
-	// DisplayName: Nekomi Hoodie
-	/* Tooltip:
-		'''
-		Slightly increases your life regeneration
-		Reduces damage taken by 5%
-		''' */
+	// DisplayName: Nekomi Dress
+	// Tooltip: Reduces damage taken by 4%
 }
 
 StyxChestplate: {
@@ -1985,8 +2020,7 @@ StyxChestplate: {
 		'''
 		15% increased damage
 		10% increased critical strike chance
-		Reduces damage taken by 10%
-		Increases your life regeneration
+		4% increased damage reduction
 		''' */
 }
 
@@ -2093,11 +2127,6 @@ OrdinaryCarrot: {
 		''' */
 }
 
-RabiesShot: {
-	// DisplayName: Rabies Shot
-	// Tooltip: Cures Feral Bite
-}
-
 RabiesVaccine: {
 	// DisplayName: Rabies Vaccine
 	/* Tooltip:
@@ -2156,7 +2185,7 @@ EternalEnergy: {
 		''' */
 }
 
-BrokenSpearHead: {
+BrokenSpearhead: {
 	// DisplayName: Broken Spearhead
 	// Tooltip: ""
 }
@@ -2382,7 +2411,7 @@ NatureChampionRelic: {
 	// Tooltip: ""
 }
 
-ShadowChampionRelic: {
+DeathChampionRelic: {
 	// DisplayName: Death Champion Relic
 	// Tooltip: ""
 }
@@ -2591,7 +2620,7 @@ FleshHand: {
 	// Tooltip: "'The enslaved minions of a defeated foe...'"
 }
 
-LeashOfCthulhu: {
+Eyeleash: {
 	// DisplayName: Eyeleash
 	/* Tooltip:
 		'''
@@ -2791,7 +2820,7 @@ Blender: {
 	// Tooltip: "'The reward for a mighty rematch...'"
 }
 
-DestroyerGun2: {
+DestructionCannon: {
 	// DisplayName: Destruction Cannon
 	/* Tooltip:
 		'''
@@ -2800,12 +2829,13 @@ DestroyerGun2: {
 		''' */
 }
 
-DragonBreath2: {
+DragonsDemise: {
 	// DisplayName: Dragon's Demise
 	/* Tooltip:
 		'''
 		Uses gel for ammo
 		66% chance to not consume ammo
+		Ignores a large amount of enemy defense
 		'The reward for a mighty rematch...'
 		''' */
 }
@@ -2816,15 +2846,13 @@ EaterLauncher: {
 		'''
 		Uses rockets for ammo
 		Fires a spread of rockeaters
-		Increased damage to enemies in the given range
-		Press Right Click to increase this range
-		The range then gradually decreases to normal
+		Increased damage to enemies outside the given radius
 		50% chance to not consume ammo
 		'The reward for a mighty rematch...'
 		''' */
 }
 
-FleshCannon: {
+Regurgitator: {
 	// DisplayName: The Regurgitator
 	/* Tooltip:
 		'''
@@ -2845,7 +2873,7 @@ GeminiGlaives: {
 		''' */
 }
 
-GolemTome2: {
+Landslide: {
 	// DisplayName: The Landslide
 	/* Tooltip:
 		'''
@@ -2866,14 +2894,14 @@ HellZone: {
 		'''
 		Uses bones for ammo
 		80% chance to not consume ammo
-		Left click attack inflicts Hellfire
+		Left click attack inflicts Black Inferno
 		Right click to fire a skull that marks enemies
-		Marked enemies take 5x damage over time from Hellfire
+		Marked enemies take 5x damage over time from Black Inferno
 		'The reward for a mighty rematch...'
 		''' */
 }
 
-MechanicalLeashOfCthulhu: {
+LeashofCthulhu: {
 	// DisplayName: Leash of Cthulhu
 	/* Tooltip:
 		'''
@@ -2893,7 +2921,7 @@ NukeFishron: {
 		''' */
 }
 
-OpticStaffEX: {
+OmniscienceStaff: {
 	// DisplayName: Omniscience Staff
 	/* Tooltip:
 		'''
@@ -2903,7 +2931,7 @@ OpticStaffEX: {
 		''' */
 }
 
-RefractorBlaster2: {
+DiffractorBlaster: {
 	// DisplayName: Diffractor Blaster
 	// Tooltip: "'The reward for a mighty rematch...'"
 }
@@ -2949,7 +2977,8 @@ Masochist: {
 		-Enables Master Mode drops
 		-New Eternity-exclusive item drops
 		-Deviantt provides a starter pack and progress-based advice
-		-Improves base stats and caps player DR at 75%
+		-Improves base stats
+		-Player damage reduction is now scaled to emulate multiplicative scaling: every additional 15% DR reduces damage by 15% compared to the previous value, instead of being additive
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
 		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)
@@ -2977,7 +3006,7 @@ MasochistReal: {
 
 MedallionoftheFallenKing: {
 	// DisplayName: Medallion of the Fallen King
-	// Tooltip: Spawns a King Slime Minion that scales with summon damage
+	// Tooltip: Spawns a King Slime Minion
 }
 
 ComputationOrb: {
@@ -3050,7 +3079,7 @@ ParadoxWolfSoul: {
 	/* Tooltip:
 		'''
 		Double tap to dash through and damage enemies
-		There is a cooldown of 3 seconds between uses
+		3 second cooldown
 		''' */
 }
 
@@ -3106,7 +3135,7 @@ NanoCore: {
 }
 
 NekomiLeggings: {
-	// DisplayName: Nekomi Leggings
+	// DisplayName: Nekomi Skirt
 	/* Tooltip:
 		'''
 		7% increased critical strike chance
@@ -3118,9 +3147,9 @@ AnglerEnchant: {
 	// DisplayName: Angler Enchantment
 	/* Tooltip:
 		'''
-		Increases fishing power
-		You catch fish almost instantly
-		Effects of [i:LavaproofTackleBag] Lavaproof Tackle Bag and [i:FishingBobberGlowingStar] Glowing Fishing Bobber
+		Increases fishing power and you catch fish almost instantly
+		Fishing line will never break and decreases chance of bait consumption
+		Increases fishing power by 20, allows fishing in lava
 		'As long as they aren't all shoes, you can go home happily'
 		''' */
 }
@@ -3179,7 +3208,7 @@ LifelightTrophy: {
 	// Tooltip: ""
 }
 
-FragilePixieLamp: {
+CrystallineEffigy: {
 	// DisplayName: Crystalline Effigy
 	// Tooltip: While in the Hallow during day, hold out to break, angering the pixies' master
 }
@@ -3213,8 +3242,6 @@ Lightslinger: {
 		''' */
 }
 
-// MostlyOrdinaryrock.Tooltip: Mods.FargowiltasSouls.ItemTooltip.MostlyOrdinaryrock
-
 WiresPainting: {
 	// DisplayName: Wires Painting
 	// Tooltip: Look inside
@@ -3224,9 +3251,10 @@ PrismaRegalia: {
 	// DisplayName: Prisma Regalia
 	/* Tooltip:
 		'''
-		Hitting with the tip of the spear releases homing stars
-		Hold to charge for more damage
-		While fully charged, all hits release additional stars
+		Hold to charge
+		Deals extra damage based on how much the spear is extended on hit
+		Right Click to rapidly stab with the spear
+		Reduced size benefit from Tungsten Enchantment
 		'The radiant power of a foe's pure essence...'
 		''' */
 }
@@ -3345,7 +3373,7 @@ EaterLauncherJr: {
 		Attempting to fire also loads a Rotten Chunk if necessary
 		Each Rotten Chunk provides 100 rounds, up to 1000
 		Fires a chunk of rotted flesh
-		Increased damage to enemies in the given range
+		Increased damage to enemies outside the given radius
 		'The rotting remains of a defeated foe...'
 		''' */
 }
@@ -3384,9 +3412,13 @@ Extra: {
 	// EternityItem: Eternity
 	// DisabledEffects: Has effects disabled by the Effect Toggles menu
 	// PatreonItem: >> Patreon Item <<
-	// CactusImmunity: Grants immunity to cactus damage in Eternity Mode
 	// stealing items texts are currently not displayed
 	// ItemStolen: An item was stolen from you!
+	// Scaling: scaling
+	// HighestClass: strongest class damage
+	// MagicSummonHybrid: magic and summon damage
+	// MeleeSummonHybrid: melee and summon damage
+	// SpaceBreathImmunity: Grants immunity to suffocation in space on Eternity Mode
 }
 
 GravityTestItem: {
@@ -3410,7 +3442,7 @@ RazorContainer: {
 	/* Tooltip:
 		'''
 		Spawns a razor blade that hovers around your cursor
-		Hit it with a standard broadsword to send it flying
+		Hit it with a melee weapon to send it flying
 		While flying it always critically strikes and has increased armor penetration
 		'Some yellow fur is still stuck at the bottom' 
 		''' */
@@ -3419,8 +3451,8 @@ RazorContainer: {
 NebulaBooster: {
 	// DisplayName: Nebula Booster
 	// Tooltip: ""
-	// Activate: +{0} life regen
-	// Deactivate: -{0} life regen
+	// Activate: +{0} regen
+	// Deactivate: -{0} regen
 }
 
 SolarBooster: {
@@ -3440,71 +3472,8 @@ StardustBooster: {
 VortexBooster: {
 	// DisplayName: Vortex Booster
 	// Tooltip: ""
-	// Activate: +{0}% crit chance
-	// Deactivate: -{0}% crit chance
-}
-
-CosmosBooster: {
-	// DisplayName: Cosmos Booster
-	// Tooltip: ""
-	// Activate: +{0}% crit damage
-	// Deactivate: -{0}% crit damage
-}
-
-DeathBooster: {
-	// DisplayName: Death Booster
-	// Tooltip: ""
-	// Activate: +{0} armor pen
-	// Deactivate: -{0} armor pen
-}
-
-EarthBooster: {
-	// DisplayName: Earth Booster
-	// Tooltip: ""
-	// Activate: +{0}% DR
-	// Deactivate: -{0}% DR
-}
-
-LifeBooster: {
-	// DisplayName: Life Booster
-	// Tooltip: ""
-	// Activate: +{0} life regen
-	// Deactivate: -{0} life regen
-}
-
-NatureBooster: {
-	// DisplayName: Nature Booster
-	// Tooltip: ""
-	// Activate: +{0} defense
-	// Deactivate: -{0} defense
-}
-
-SpiritBooster: {
-	// DisplayName: Spirit Booster
-	// Tooltip: ""
-	// Activate: +{0} mana regen
-	// Deactivate: -{0} mana regen
-}
-
-TerraBooster: {
-	// DisplayName: Terra Booster
-	// Tooltip: ""
-	// Activate: +{0}% crit chance
-	// Deactivate: -{0}% crit chance
-}
-
-TimberBooster: {
-	// DisplayName: Timber Booster
-	// Tooltip: ""
-	// Activate: +{0}% damage
-	// Deactivate: -{0}% damage
-}
-
-WillBooster: {
-	// DisplayName: Will Booster
-	// Tooltip: ""
-	// Activate: +{0} flat damage
-	// Deactivate: -{0} flat damage
+	// Activate: +{0}% crit
+	// Deactivate: -{0}% crit
 }
 
 CoffinRoominator: {
@@ -3580,9 +3549,8 @@ UmbraRegalia: {
 	// DisplayName: Umbra Regalia
 	/* Tooltip:
 		'''
-		Left Click to rapidly stab with the spear
-		Hold Right Click to charge a spear toss
-		Becomes stronger when fully charged
+		Hold Left Click to charge a spear toss
+		Right Click to rapidly stab with the spear and steal life
 		Can continue to gain damage for a while after full charge
 		'The reward for a mighty rematch...'
 		''' */
@@ -3737,7 +3705,78 @@ WillMask: {
 	// Tooltip: ""
 }
 
-BrokenSpearhead: {
-	// DisplayName: Broken Spearhead
+HallowedPendant: {
+	// DisplayName: Hallowed Pendant
+	/* Tooltip:
+		'''
+		Increases length of invincibility after taking damage
+		After taking damage, fires a ray of light at up to 4 nearby enemies
+		Ray damage scales with damage taken, up to 1.6x
+		''' */
+}
+
+Devilshield: {
+	// DisplayName: Devilshield
+	/* Tooltip:
+		'''
+		Grants immunity to knockback
+		Reduces damage taken by 20% when at full life, or below 50% life
+		Absorbs 25% of damage done to players on your team when above 25% life, and enemies are more likely to target you
+		''' */
+}
+
+Devilstone: {
+	// DisplayName: Devilstone
 	// Tooltip: ""
+}
+
+MainframePainting: {
+	// DisplayName: Mainframe Painting
+	// Tooltip: "'Gonk'"
+}
+
+CactusMimicBanner: {
+	// DisplayName: Cactus Mimic Banner
+	// Tooltip: ""
+}
+
+CactusStaff: {
+	// DisplayName: Rolling Cactus Staff
+	/* Tooltip:
+		'''
+		Launches a bouncing cactus ball
+		'They see me rollin'...'
+		''' */
+}
+
+// Ruminate: "[c/FF3399:Hold {0} for more details]"
+
+ActiveSkillMenuItem: {
+	// DisplayName: Active Skills
+	// Tooltip: Use to open the Active Skill menu
+}
+
+EffectTogglerItem: {
+	// DisplayName: Effect Toggler
+	// Tooltip: Use to open the Effect Toggles menu
+}
+
+TwilightTome: {
+	// DisplayName: Twilight Compendium
+	/* Tooltip:
+		'''
+		Hold button to summon up to 3 twilight stars at your cursor
+		Releasing button causes the stars to conjure a starstorm
+		The storm of stars will launch towards your cursor
+		'The reward for a mighty rematch...'
+		''' */
+}
+
+SoulLantern: {
+	// DisplayName: Soul Lantern
+	/* Tooltip:
+		'''
+		Increases spawn rate for the enemy type in the lantern by 3x
+		Current enemy: {0}
+		''' */
 }

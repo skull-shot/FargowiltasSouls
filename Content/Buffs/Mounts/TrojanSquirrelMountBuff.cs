@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Mounts;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Mounts;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -6,10 +7,9 @@ namespace FargowiltasSouls.Content.Buffs.Mounts
 {
     public class TrojanSquirrelMountBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Mounts", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Trojan Squirrel");
-            // Description.SetDefault("You are riding a squirrel mech");
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;
         }

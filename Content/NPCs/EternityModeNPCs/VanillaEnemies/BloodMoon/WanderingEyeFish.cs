@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EyeOfCthulhu;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -37,7 +37,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
+            //target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 120);
             target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
         }
     }

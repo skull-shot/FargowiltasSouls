@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent;
@@ -8,15 +9,11 @@ namespace FargowiltasSouls.Content.Items.BossBags
 {
     public abstract class BossBag : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/BossBags", Name);
         protected abstract bool IsPreHMBag { get; }
 
         public sealed override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Treasure Bag");
-            // Tooltip.SetDefault("Right Click to open");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "宝藏袋");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "右键点击可打开");
 
             ItemID.Sets.BossBag[Item.type] = true;
             if (IsPreHMBag)
@@ -27,7 +24,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
 
         public sealed override void SetDefaults()
         {
-            Item.maxStack = 999;
+            Item.maxStack = Item.CommonMaxStack;
             Item.consumable = true;
             Item.width = 24;
             Item.height = 24;

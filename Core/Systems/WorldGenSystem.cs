@@ -1,8 +1,10 @@
 ﻿using FargowiltasSouls.Content.Tiles;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace FargowiltasSouls.Core.Systems
 {
@@ -97,6 +99,25 @@ namespace FargowiltasSouls.Core.Systems
                     break;
             }
 
+        }
+
+
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
+        {
+            base.ModifyWorldGenTasks(tasks, ref totalWeight);
+        }
+
+        public void addWaterToUGDesert()
+        {
+            Rectangle undergroundDesertLocation = GenVars.UndergroundDesertLocation;
+            int x15 = undergroundDesertLocation.Center.X;
+            int j4 = undergroundDesertLocation.Top - 10;
+
+
+
+
+
+            //    WorldGen.Pyramid(x15, j4);
         }
     }
 }

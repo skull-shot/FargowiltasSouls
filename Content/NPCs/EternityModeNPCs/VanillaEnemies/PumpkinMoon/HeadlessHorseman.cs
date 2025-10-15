@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.PumpkinMoon;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.PumpkinMoon;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -38,7 +38,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinM
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.FargoSouls().AddBuffNoStack(BuffID.Cursed, 30);
-            target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
         }
     }
 }

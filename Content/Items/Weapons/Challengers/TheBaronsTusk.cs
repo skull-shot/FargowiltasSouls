@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class TheBaronsTusk : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
 
             ItemID.Sets.BonusAttackSpeedMultiplier[Type] = 0.25f;
@@ -33,7 +34,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 6;
             Item.value = Item.sellPrice(0, 4, 0);
-            Item.rare = ItemRarityID.LightRed;
+            Item.rare = ItemRarityID.Pink;
             Item.shootsEveryUse = true;
             Item.UseSound = SoundID.Item1;
             Item.autoReuse = true;

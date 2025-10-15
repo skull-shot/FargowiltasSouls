@@ -1,5 +1,6 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Microsoft.Xna.Framework;
 using System;
 using Terraria;
@@ -12,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class SpiritLongbow : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         private int delay = 0;
         private bool lastLMouse = false;
 
@@ -19,9 +21,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
         public static readonly SoundStyle ReleaseSound = new SoundStyle($"FargowiltasSouls/Assets/Sounds/Weapons/BowRelease") with { Volume = 1f };
         public override void SetStaticDefaults()
         {
-            //DisplayName.SetDefault("Spirit Longbow");
-            //Tooltip.SetDefault("Converts arrows to Spirit Arrows that release spirit energy behind them\nHold button to charge shots for more damage and higher speed");
-
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }
 

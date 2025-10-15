@@ -1,5 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -10,13 +12,14 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class GeminiGlaives : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         private int lastThrown = 0;
 
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<OpticStaffEX>();
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<OmniscienceStaff>();
         }
 
         public override void SetDefaults()
@@ -32,7 +35,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.useStyle = ItemUseStyleID.Swing;
             Item.knockBack = 3;
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
             Item.shootSpeed = 20;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.UseSound = null;

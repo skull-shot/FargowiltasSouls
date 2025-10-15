@@ -6,7 +6,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.GoblinIn
 {
     public class GoblinScout : Shooters
     {
-        public GoblinScout() : base(250, ProjectileID.ThrowingKnife, 20f, 2, DustID.Grass, 1000, 30, true) { }
+        public GoblinScout() : base(250, ProjectileID.ThrowingKnife, 14f, 1.25f, DustID.Grass, 1000, 30, true) { }
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.GoblinScout);
         public override void SetDefaults(NPC npc)
         {

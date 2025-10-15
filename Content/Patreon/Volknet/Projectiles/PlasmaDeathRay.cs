@@ -116,7 +116,6 @@ namespace FargowiltasSouls.Content.Patreon.Volknet.Projectiles
         
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            target.AddBuff(BuffID.WitheredArmor, 1800);
             target.AddBuff(BuffID.Frostburn, 1800);
             target.AddBuff(BuffID.CursedInferno, 1800);
             target.AddBuff(BuffID.Ichor, 1800);

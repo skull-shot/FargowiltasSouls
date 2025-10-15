@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -116,27 +116,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             base.OnHitPlayer(npc, target, hurtInfo);
 
             target.AddBuff(ModContent.BuffType<RottingBuff>(), 300);
-
-            switch (npc.type)
-            {
-                case NPCID.ZombieMushroom:
-                case NPCID.ZombieMushroomHat:
-                    target.AddBuff(ModContent.BuffType<InfestedBuff>(), 300);
-                    break;
-
-                case NPCID.ZombieEskimo:
-                case NPCID.ArmedZombieEskimo:
-                    target.AddBuff(ModContent.BuffType<HypothermiaBuff>(), 300);
-                    break;
-
-                case NPCID.ZombieElf:
-                case NPCID.ZombieElfBeard:
-                case NPCID.ZombieElfGirl:
-                    target.AddBuff(ModContent.BuffType<RottingBuff>(), 900);
-                    break;
-
-                default: break;
-            }
         }
 
         public override void OnHitNPC(NPC npc, NPC target, NPC.HitInfo hit)

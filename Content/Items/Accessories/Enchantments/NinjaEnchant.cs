@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -42,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.Shuriken, 100)
                 .AddIngredient(ItemID.ThrowingKnife, 100)
 
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }
@@ -50,6 +51,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<ShadowHeader>();
         public override int ToggleItemType => ModContent.ItemType<NinjaEnchant>();
+        public static bool PlayerCanHaveBuff(Player player)
+        {
+            int maxSpeedToAllow = player.ForceEffect<NinjaEffect>() ? 7 : 4;
+            return player.velocity.Length() < maxSpeedToAllow;
+        }
     }
     public class NinjaDamageEffect : AccessoryEffect
     {

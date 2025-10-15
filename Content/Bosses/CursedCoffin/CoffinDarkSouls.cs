@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -103,7 +103,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
         {
 
-            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 4);
+            target.AddBuff(ModContent.BuffType<ShadowflameBuff>(), 60 * 2);
 
         }
 

@@ -201,7 +201,7 @@ MutantBoss: {
 		// Random39: YOU WILL BECOME NAUGHT BUT MEMORIES!
 		// Random40: I WILL MAKE SURE THERE IS NOTHING LEFT TO BURY!
 		// Random41: THE VERY FIRES OF HELL CANNOT COMPARE!
-		// Random42: I think your cells are a bit too far apart. How \'bout I fix that for you?
+		// Random42: I think your cells are a bit too far apart. How 'bout I fix that for you?
 		// Random43: I will tear apart your very atoms.
 		// Random44: You are like a child, braying before an eternal god.
 		// Random45: I'll stain those souls with your blood.
@@ -251,7 +251,7 @@ MutantBoss: {
 		// Quote19: If you don't dodge this, you deserve it.
 		// Quote20: Why am I using this?
 		// Quote21: Can you keep up?
-		// Quote22: No matter how many times you fight this battle, you will never win! I am a cruel god of eternity. I wield the branches of Yggdrasil and Ragnorak, the swirling brimstone of Calamity, the ceaseless shadows of Sacred Tools, the blue-tinted Magicks, the hallowed Spirits of arcane lands, the soaring power of ascended Avalon, the all-powerful blessing of the Ultraseer's Nova, the awakened essence of lost Ancients, the all-searing light and shade of the radiant universal Split, the world warping machines and city shaping tools of Lui, and the cosmic convergence that harkens the Old God's Hunt!
+		// Quote22: No matter how many times you fight this battle, you will never win! I am a cruel god of eternity. I wield the branches of Yggdrasil and Ragnarok, the swirling brimstone of Calamity, the ceaseless shadows of Sacred Tools, the blue-tinted Magicks, the hallowed Spirits of arcane lands, the soaring power of ascended Avalon, the all-powerful blessing of the Ultraseer's Nova, the awakened essence of lost Ancients, the all-searing light and shade of the radiant universal Split, the world warping machines and city shaping tools of Lui, and the cosmic convergence that harkens the Old God's Hunt!
 		// Quote23: Nature unites against you.
 		// Quote24: The Empress' Excel Assault!
 		// Quote25: You thought I was done?
@@ -259,7 +259,7 @@ MutantBoss: {
 		// Quote27: DIE, FOOLISH TERRARIAN! THEY SAID THERE WAS 3 END BRINGERS, BUT I AM THE FOURTH, A BREAKER OF REALITY! HELL DOESN'T ACCEPT SCUM LIKE YOU, SO SUFFER FOREVER IN MY ENDLESS ONSLAUGHT OF INFINITE POWER, THE POTENTIAL OF ETERNITIES STRETCHED TO THE ABSOLUTE MAXIMUM APOTHEOSES! YOUR UNHOLY SOUL SHALL BE CONSUMED BY DEPTHS LOWER THAN THE DEEPEST REACHES OF HELL!
 		// Quote28: I CONTROL THE POWER THAT HAS REACHED FROM THE FAR ENDS OF THE UNIVERSE, UNITING DIMENSIONS, MANIPULATING TERRARIA, SLAYING MASOCHISTS, AND JUDGING HEAVENS! FOR CENTURIES I HAVE TRAINED FOR ONE GOAL ONLY: PURGE THE WORLD OF THE UNWORTHY, SLAY THE WEAK, AND BRING FORTH TRUE POWER. IN THE HIGHEST REACHES OF HEAVEN, MY BROTHER RULES OVER THE SKY! SOON, ALL OF TERRARIA WILL BE PURGED OF THE UNWORTH AND A NEW AGE WILL START! A NEW AGE OF AWESOME! A GOLDEN AGE WHERE ONLY ABSOLUTE BEINGS EXIST!DEATH, INFERNO, TIDE; I AM THE OMEGA AND THE ALPHA, THE BEGINNING AND THE END! ALMIGHTY POWER; REVELATIONS.ABSOLUTE BEING, ABSOLUTE PURITY.
 		// Quote29: WITHIN THE FOOLISH BANTERINGS OF THE MORTAL WORLD I HAVE ACHIEVED POWER THAT WAS ONCE BANISHED TO THE EDGE OF THE GALAXY! I BRING FORTH CALAMITIES, CATASTROPHES, AND CATACLYSM; ELDRITCH POWERS DERIVED FROM THE ABSOLUTE WORD OF FATE. FEEL MY UBIQUITOUS WRATH DRIVE YOU INTO THE GROUND AS A WORLD SHAPER DRIVES HIS WORLD INTO REALITY!
-		// Quote30: THE SHARPSHOOTER'S EYE PALES IN COMPARISON OF MY PERCEPTION OF REALITY! BERSERKERS RAGE NAUGHT BUT A BUNNIES! OLYMPIANS A MINOR GOD, ARCH WIZARDS A POSER! A MASTERY OF FLIGHT, THE IRON WILL OF A COLOSSUS; BOTH ELEMENTARY CONCEPTS! A CONJUROR BUT A PEDDLING MAGICIAN, A TRAWLER, A SLIVER COMPARED TO MY LIFE MASTERY? SUPERSONIC SPEED, LIGHTSPEED TIME! GLORIOUS LIGHT SHALL ELIMINATE YOU, YOU FOOLISH BUFFOON!!
+		// Quote30: THE SHARPSHOOTER'S EYE PALES IN COMPARISON OF MY PERCEPTION OF REALITY! BERSERKER'S RAGE IS NAUGHT BUT A BUNNIES! VAGABOND'S A MINOR GOD, ARCH WIZARD'S A POSER! A MASTERY OF FLIGHT, THE IRON WILL OF A COLOSSUS; BOTH ELEMENTARY CONCEPTS! A CONJUROR BUT A PEDDLING MAGICIAN, A TRAWLER, A SLIVER COMPARED TO MY LIFE MASTERY? SUPERSONIC SPEED, LIGHTSPEED TIME! GLORIOUS LIGHT SHALL ELIMINATE YOU, YOU FOOLISH BUFFOON!!
 		// Quote31: AAAAAAAAAAAAAAAAAAAAAAAAAA
 		// Quote32: I have not a single regret in my existence!
 		// Quote33: Oh, right... my revive...
@@ -291,17 +291,18 @@ DeviBoss: {
 		// Reject1: Show you're tough enough and I won't mind, but not a second before!
 		// Reject2: Here, you can have this back.
 		// Reject3: Let's get this show back on the road!
+		// Maso: Nah, who am I kidding? Get outta here!
 	}
 }
 
 // ShadowOrbNPC.DisplayName: Shadow Orb
 
-LifeChallenger: {
+Lifelight: {
 	// DisplayName: Lifelight
 
 	BossChecklistIntegration: {
-		// EntryName: "{$Mods.FargowiltasSouls.NPCs.LifeChallenger.DisplayName}"
-		// SpawnInfo: Spawn by using [i:FargowiltasSouls/FragilePixieLamp] in the Hallow at day.
+		// EntryName: "{$Mods.FargowiltasSouls.NPCs.Lifelight.DisplayName}"
+		// SpawnInfo: Spawn by using [i:FargowiltasSouls/CrystallineEffigy] in the Hallow at day.
 		// DespawnMessage: Lifelight fades away...
 	}
 
@@ -392,3 +393,8 @@ ReleasedMutant: {
 	// TalkToHim: Who are you?
 	// Introduction: You've already heard of me. But who are you? No, not your name, I don't really care. I'm asking how much money you're willing to spend on my wares.
 }
+
+// BloodPuddle.DisplayName: Blood Puddle
+// SoulVortex.DisplayName: Soul Vortex
+// CactusMimic.DisplayName: Cactus Mimic
+// BowlingSpit.DisplayName: Spit Ball

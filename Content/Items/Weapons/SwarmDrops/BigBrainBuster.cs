@@ -1,5 +1,6 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Minions;
-using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -10,14 +11,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class BigBrainBuster : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("Big Brain Buster");
-            /* Tooltip.SetDefault(
-"Repeated summons increase the size and damage of the minion\n" +
-$"This caps at {BigBrainProj.MaxMinionSlots} slots\n" +
-"'The reward for a mighty rematch...'"); */
             ItemID.Sets.StaffMinionSlotsRequired[Item.type] = 1;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
         }

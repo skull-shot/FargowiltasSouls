@@ -1,5 +1,5 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -28,6 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.lifeMax /= 2;
                 npc.defense /= 2;
+                npc.damage /= 2;
             }
         }
     }
@@ -58,8 +59,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
-
-            npc.buffImmune[ModContent.BuffType<ClippedWingsBuff>()] = true;
         }
 
         public override bool SafePreAI(NPC npc)
@@ -109,7 +108,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.AI(npc);
 
-            EModeGlobalNPC.Aura(npc, 200, BuffID.VortexDebuff, false, DustID.Vortex);
+            //EModeGlobalNPC.Aura(npc, 200, BuffID.VortexDebuff, false, DustID.Vortex);
 
             if (!npc.dontTakeDamage && npc.HasValidTarget)
             {

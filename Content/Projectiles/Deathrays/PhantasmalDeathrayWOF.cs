@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
 {
     public class PhantasmalDeathrayWOF : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayWOF";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", Name);
         public PhantasmalDeathrayWOF() : base(WorldSavingSystem.SwarmActive ? 45 : 90) { }
 
         public override void SetStaticDefaults()
@@ -158,7 +158,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 30);
+            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 10);
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
                 target.AddBuff(ModContent.BuffType<UnstableBuff>(), 300);
         }
@@ -172,7 +172,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
         
         public override bool PreDraw(ref Color lightColor) => false;
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.masochistModeReal? 0.7f : 2.2f);
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale * (WorldSavingSystem.MasochistModeReal ? 0.7f : 2.2f);
 
         public static Color ColorFunction(float _)
         {
@@ -199,14 +199,14 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             
             // Set shader parameters.
             shader.TrySetParameter("mainColor", new Color(240, 220, 240, 0));
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.DeviInnerStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.DeviInnerStreak.Value);
             shader.TrySetParameter("stretchAmount", 0.25);
             shader.TrySetParameter("scrollSpeed", 2f);
             shader.TrySetParameter("uColorFadeScaler", 0.8f);
             shader.TrySetParameter("useFadeIn", true);
             shader.TrySetParameter("realopacity", 1); // do not change this.
 
-            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.masochistModeReal? 15 : 15);
+            PrimitiveRenderer.RenderTrail(baseDrawPoints, new(WidthFunction, ColorFunction, Pixelate: true, Shader: shader), WorldSavingSystem.MasochistModeReal ? 15 : 15);
         }
         
     }

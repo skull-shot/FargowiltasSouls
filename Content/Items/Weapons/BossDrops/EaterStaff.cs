@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs.Minions;
-using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Minions;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using System.Linq;
 using Terraria;
@@ -11,15 +12,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class EaterStaff : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override bool IsLoadingEnabled(Mod mod) => false;
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("Eater of Worlds Staff");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "世界吞噬者法杖");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese,
-            //@"一个被迫屈服的老对手..
-            //每个召唤栏召唤4段身体");
         }
 
         public override void SetDefaults()

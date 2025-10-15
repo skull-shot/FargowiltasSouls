@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using System;
@@ -23,7 +24,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             discount *= 100;
             discount = Math.Round(discount, 2);
 
-            int i = tooltips.FindIndex(line => line.Name == "Tooltip3");
+
+            int i = tooltips.FindIndex(line => line.Name == "Tooltip2");
             if (i != -1)
                 tooltips[i].Text = string.Format(tooltips[i].Text, discount);
             else
@@ -33,9 +35,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 {
                     tooltips.RemoveAt(i);
                     ItemTooltip tooltip = ItemTooltip.FromLocalization(Tooltip);
-                    tooltips.Insert(i, new TooltipLine(Mod, "WoodEnchantVanity0", tooltip.GetLine(1)));
-                    tooltips.Insert(i + 1, new TooltipLine(Mod, "WoodEnchantVanity1", tooltip.GetLine(2)));
-                    tooltips.Insert(i + 2, new TooltipLine(Mod, "WoodEnchantVanity2", string.Format(tooltip.GetLine(3), discount)));
+                    tooltips.Insert(i, new TooltipLine(Mod, "WoodEnchantVanity1", tooltip.GetLine(1)));
+                    tooltips.Insert(i + 1, new TooltipLine(Mod, "WoodEnchantVanity2", string.Format(tooltip.GetLine(2), discount)));
                 }
             }
         }
@@ -43,12 +44,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Wood Enchantment");
-            /* Tooltip.SetDefault(
-@"Bestiary and banner entries complete twice as fast
-You gain a shop discount based on bestiary completion
-Discount effect works in vanity slots"); */
         }
 
         public override void SetDefaults()
@@ -101,10 +96,10 @@ Discount effect works in vanity slots"); */
             .AddIngredient(ItemID.WoodBreastplate)
             .AddIngredient(ItemID.WoodGreaves)
             .AddIngredient(ItemID.Daybloom)
-            .AddIngredient(ItemID.Apple)
+            .AddRecipeGroup("FargowiltasSouls:AnyForestFruit")
             .AddRecipeGroup("FargowiltasSouls:AnySquirrel")
 
-            .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
 
         }

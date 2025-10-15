@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -29,13 +30,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             AddEffects(player, Item);
         }
-
+        public static int BaseDamage(Player player) => player.FargoSouls().ForceEffect<AncientHallowEnchant>()? 350 : 200;
         public static void AddEffects(Player player, Item item)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             bool minion = player.AddEffect<AncientHallowMinion>(item);
-            modPlayer.AddMinion(item, minion, ModContent.ProjectileType<HallowSword>(), 200, 2);
+            modPlayer.AddMinion(item, minion, ModContent.ProjectileType<HallowSword>(), BaseDamage(player), 2);
         }
 
         public static Color GetFairyQueenWeaponsColor(float alphaChannelMultiplier, float lerpToWhite, float rawHueOverride)
@@ -62,11 +63,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddRecipeGroup("FargowiltasSouls:AnyAncientHallowHead")
                 .AddIngredient(ItemID.AncientHallowedPlateMail)
                 .AddIngredient(ItemID.AncientHallowedGreaves)
-                .AddIngredient(ItemID.RainbowRod)
                 .AddIngredient(ItemID.SwordWhip) //durendal
-                .AddIngredient(ItemID.HolyWater, 50)
-                .AddTile(TileID.CrystalBall)
+                .AddIngredient(ItemID.BouncingShield)
+                .AddIngredient(ItemID.MagicMissile)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
         }
     }
     public class AncientHallowMinion : AccessoryEffect

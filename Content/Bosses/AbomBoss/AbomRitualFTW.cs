@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -25,6 +26,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             // DisplayName.SetDefault("Abominationn Seal");
         }
 
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            CooldownSlot = 0;
+        }
         protected override void Movement(NPC npc)
         {
             Projectile.velocity = npc.Center - Projectile.Center;
@@ -47,13 +53,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //player.AddBuff(ModContent.BuffType<Unstable>(), 240);
-                //target.AddBuff(ModContent.BuffType<Buffs.Masomode.BerserkedBuff>(), 120);
-            }
-            target.AddBuff(BuffID.Bleeding, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
         public override bool PreDraw(ref Color lightColor)
         {
@@ -70,7 +72,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             float radius = threshold - leeway;
             var target = Main.LocalPlayer;
             var blackTile = TextureAssets.MagicPixel;
-            var diagonalNoise = FargosTextureRegistry.WavyNoise;
+            var diagonalNoise = FargoAssets.WavyNoise;
             if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
                 return false;
             var maxOpacity = Projectile.Opacity * (targetPlayer == Main.myPlayer ? 1f : 0.15f);

@@ -1,5 +1,5 @@
 //using FargowiltasSouls.EternityMode.Content.Boss.HM;
-using FargowiltasSouls.Content.Projectiles.Masomode;
+using FargowiltasSouls.Content.Projectiles.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -15,17 +15,18 @@ using FargowiltasSouls.Content.Bosses.AbomBoss;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Core;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.LunaticCultist;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MoonLord;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
     public class GlowLine : ModProjectile
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Glow Line");
             ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 5000;
         }
 
@@ -240,7 +241,8 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             if (FargoSoulsUtil.HostCheck)
                             {
-                                for (int j = 0; j < 4; j++)
+                                int max = WorldSavingSystem.MasochistModeReal ? 8 : 6;
+                                for (int j = 0; j < max; j++)
                                 {
                                     Vector2 speed = (8f * (j + 1) + 4f) * Projectile.velocity;
                                     Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, speed, ModContent.ProjectileType<CelestialFragment>(), Projectile.damage, 0f, Main.myPlayer, Projectile.ai[1]);

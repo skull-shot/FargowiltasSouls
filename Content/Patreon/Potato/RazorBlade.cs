@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
+using Luminance.Core.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
@@ -18,6 +21,7 @@ namespace FargowiltasSouls.Content.Patreon.Potato
 
         int MaxDistance = 100;
         public bool Retreating => Projectile.ai[0] == 2 && MathF.Abs(Projectile.velocity.ToRotation() - Projectile.DirectionTo(Main.player[Projectile.owner].Center).ToRotation()) % MathF.Tau < MathF.PI;
+        public static readonly SoundStyle RazorContainerTink = new("FargowiltasSouls/Assets/Sounds/Accessories/RazorTink") { PitchVariance = 0.25f };
 
         public override void SetDefaults()
         {
@@ -63,7 +67,7 @@ namespace FargowiltasSouls.Content.Patreon.Potato
             if (Main.projectile.Any(p => p.TypeAlive(Type) && p.owner == Projectile.owner && p.whoAmI < Projectile.whoAmI)) // if this is a duplicate
                 Projectile.Kill();
 
-            Projectile.timeLeft++;
+            Projectile.timeLeft = 2;
             Projectile.rotation += 0.3f;
 
             if (Projectile.ai[0] != 1)
@@ -73,6 +77,15 @@ namespace FargowiltasSouls.Content.Patreon.Potato
                 Projectile.Center = player.Center + player.DirectionTo(Projectile.Center) * 750;
 
             Projectile.tileCollide = true;
+
+            for (int i = 0; i < Main.projectile.Length; i++)
+            {
+                Projectile projectile = Main.projectile[i];
+                if (projectile.active && projectile.Distance(Projectile.Center) < 100 && (projectile.aiStyle == ProjAIStyleID.Spear || projectile.aiStyle == ProjAIStyleID.ShortSword || projectile.aiStyle == ProjAIStyleID.Flail || projectile.type == ModContent.ProjectileType<SlimeKingSlasherProj>() || projectile.type == ModContent.ProjectileType<EyeleashFlail>()))
+                {
+                    Launch(player, Projectile);
+                }
+            }
 
             switch (Projectile.ai[0])
             {
@@ -131,6 +144,29 @@ namespace FargowiltasSouls.Content.Patreon.Potato
             }
             //if (Collision.SolidTiles(Projectile.position - Projectile.velocity, Projectile.width, Projectile.height))
                 //Projectile.tileCollide = false;
+        }
+        public static void Launch(Player player, Projectile projectile)
+        {
+            PatreonPlayer modplayer = player.GetModPlayer<PatreonPlayer>();
+            if (modplayer.RazorCD > 0)
+                return;
+            Vector2 velocity = Vector2.Normalize((Main.MouseWorld - player.Center)) * 30;
+
+            for (int j = 0; j < 3; j++)
+            {
+                Vector2 pos = projectile.Center + Main.rand.NextVector2Circular(projectile.width / 2, projectile.height / 2);
+                Particle p = new SparkParticle(pos, Vector2.Normalize(pos - projectile.Center) * Main.rand.NextFloat(2, 5), Color.Lerp(Color.Orange, Color.Red, Main.rand.NextFloat()), 0.2f, 20);
+                p.Spawn();
+            }
+            SoundEngine.PlaySound(RazorContainerTink with { Volume = 0.25f }, projectile.Center);
+            projectile.velocity = velocity;
+            projectile.ai[0] = 1;
+            projectile.ai[1] = 0;
+            projectile.ResetLocalNPCHitImmunity();
+            projectile.netUpdate = true;
+            NetMessage.SendData(MessageID.SyncProjectile, -1, -1, null, projectile.whoAmI);
+
+            modplayer.RazorCD = 60;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {

@@ -1,7 +1,7 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRain;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +19,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
     {
         public override bool DoNotSpawnDust => true;
 
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Masomode/Enemies/Vanilla/SkyAndRain/LightBall";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
 
         public override void SetStaticDefaults()
         {
@@ -34,6 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
             Projectile.penetrate = -1;
             Projectile.timeLeft = 270;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -92,7 +93,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }

@@ -1,10 +1,10 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -69,15 +69,31 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.ObsidianHelm)
-            .AddIngredient(ItemID.ObsidianShirt)
-            .AddIngredient(ItemID.ObsidianPants)
-            .AddIngredient(ItemID.MoltenSkullRose) //molten skull rose
-                                                   //.AddIngredient(ItemID.Cascade)
-            .AddIngredient(null, "AshWoodEnchant")
+                .AddIngredient(ItemID.ObsidianHelm)
+                .AddIngredient(ItemID.ObsidianShirt)
+                .AddIngredient(ItemID.ObsidianPants)
+                .AddIngredient(null, "AshWoodEnchant")
+                .AddIngredient(ItemID.MoltenSkullRose) 
+                .AddIngredient(ItemID.Obsidifish)      //.AddIngredient(ItemID.Cascade)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            Player player = Main.LocalPlayer;
+            scaling = (int)((player.HeldItem.damage + player.FindAmmo([player.HeldItem.useAmmo]).damage) * player.ActualClassDamage(player.HeldItem.DamageType));
+            if (scaling < 0)
+                scaling = 0;
+
+            int softcapMult = (int)(player.ForceEffect<ObsidianProcEffect>() ? 2.5 : 1);
+            if (scaling > 50 * softcapMult)
+                scaling = ((100 * softcapMult) + scaling) / 3;
+
+            damageClass = DamageClass.Default;
+            tooltipColor = null;
+            return 100;
         }
     }
     public class ObsidianEffect : AccessoryEffect
@@ -101,12 +117,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 bool force = player.ForceEffect<ObsidianProcEffect>();
                 float softcapMult = force ? 2.5f : 1f;
 
-                if (force) // this section is just imitating the previous version but cleaner
-                {
-                    explosionDamage *= 1.5f; // technically meant to result to 1.3f but we'll see
-                    if (!(player.lavaWet || modPlayer.LavaWet || AshWoodEffect.TriggerFromDebuffs(player)))
-                        explosionDamage *= 0.75f;
-                }
+                if (force && (AshWoodEffect.TriggerFromDebuffs(player) || player.lavaWet || modPlayer.LavaWet)) // this section is just imitating the previous version but cleaner
+                    explosionDamage *= 1.5f;
 
                 if (explosionDamage > 50f * softcapMult)
                     explosionDamage = ((100f * softcapMult) + explosionDamage) / 3f;

@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -37,22 +38,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void AddEffects(Player player, Item item)
         {
             PassiveEffects(player, item);
-            player.AddEffect<IronPickupEffect>(item);
             player.AddEffect<IronEquippedEffect>(item);
+            if (item.type == ModContent.ItemType<IronEnchant>())
+                player.AddEffect<IronPickupEffect>(item);
         }
 
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.IronHelmet)
-            .AddIngredient(ItemID.IronChainmail)
-            .AddIngredient(ItemID.IronGreaves)
-            .AddIngredient(ItemID.IronHammer)
-            .AddIngredient(ItemID.IronAnvil)
-            .AddIngredient(ItemID.Apricot) //(high in iron pog)
+                .AddIngredient(ItemID.IronHelmet)
+                .AddIngredient(ItemID.IronChainmail)
+                .AddIngredient(ItemID.IronGreaves)
+                .AddIngredient(ItemID.IronHammer)
+                .AddIngredient(ItemID.IronAnvil)
+                .AddIngredient(ItemID.Apricot) //(high in iron pog)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class IronPassiveEffect : AccessoryEffect
@@ -65,7 +67,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<IronEnchant>();
-
+        public static int GrabRangeBonus(Player player)
+        {
+            int rangeBonus = 160;
+            if (player.ForceEffect<IronEquippedEffect>())
+                rangeBonus = 320;
+            if (player.FargoSouls().TerrariaSoul)
+                rangeBonus = 640;
+            return rangeBonus;
+        }
     }
     public class IronEffect : AccessoryEffect
     {
@@ -83,7 +93,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (modPlayer.IronReductionDuration > 0)
             {
-                player.endurance += player.HasEffectEnchant<IronPickupEffect>() && player.ForceEffect<IronPickupEffect>() ? 0.28f : 0.14f;
+                player.endurance += !player.HasEffectEnchant<IronPickupEffect>() ? 0.1f : player.ForceEffect<IronPickupEffect>() ? 0.28f : 0.14f;
                 modPlayer.IronReductionDuration--;
             }
         }

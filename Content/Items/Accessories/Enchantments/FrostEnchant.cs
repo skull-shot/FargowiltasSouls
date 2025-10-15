@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -34,21 +35,27 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.FrostHelmet)
-            .AddIngredient(ItemID.FrostBreastplate)
-            .AddIngredient(ItemID.FrostLeggings)
-            .AddIngredient(ModContent.ItemType<SnowEnchant>())
-            .AddIngredient(ItemID.Frostbrand)
-            .AddIngredient(ItemID.FrostStaff)
-            //frost staff
-            //coolwhip
-            //.AddIngredient(ItemID.BlizzardStaff);
-            //.AddIngredient(ItemID.ToySled);
-            //.AddIngredient(ItemID.BabyGrinchMischiefWhistle);
+                .AddIngredient(ItemID.FrostHelmet)
+                .AddIngredient(ItemID.FrostBreastplate)
+                .AddIngredient(ItemID.FrostLeggings)
+                .AddIngredient(ModContent.ItemType<SnowEnchant>())
+                .AddIngredient(ItemID.Frostbrand)
+                .AddIngredient(ItemID.IceBow)
+                //frost staff
+                //coolwhip
+                //.AddIngredient(ItemID.BlizzardStaff);
+                //.AddIngredient(ItemID.ToySled);
+                //.AddIngredient(ItemID.BabyGrinchMischiefWhistle);
 
-            .AddTile(TileID.CrystalBall)
-            .Register();
-
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return (int)((Main.LocalPlayer.FargoSouls().ForceEffect<FrostEnchant>() ? 100 : 50) * Main.LocalPlayer.ActualClassDamage(DamageClass.Magic));
         }
     }
     public class FrostEffect : AccessoryEffect

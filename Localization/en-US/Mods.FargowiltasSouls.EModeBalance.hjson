@@ -8,21 +8,19 @@ SpeedPositive: Increased speed by {0}%
 Scale: Reduced size by {0}%
 ScalePositive: Increased size by {0}%
 RodofDiscord: Chaos State reduces your damage, defense and damage reduction by 40%
-ChaosState: Reduced damage, defense and damage reduction by 40%
+ChaosState: Eternity Mode: Reduced damage, defense and damage reduction by 40%
 RodofHarmony: Can only be obtained after defeating the Mutant
 Split: Reduced split frequency
-ChlorophyteBullet: Reduced speed and duration
 WaterBolt: Cannot be used until Skeletron is defeated
 SpaceGun: Cannot be used until an evil boss is defeated
 DemonScythe: Reduced damage and speed by 40% until an evil boss is defeated
-HolyDodge: Holy Dodge activation will temporarily reduce your attack speed
-FrozenTurtleShell: Frozen barrier slightly reduces your damage dealt
-BrainOfConfusion: Halved dodge chance
+HolyDodge: Dodge cooldown increased to 45 seconds
 ZenithNone: No nerfs in effect
 ZenithHitRate: "Vastly reduced hit rate, improves by defeating: "
 VampireKnives: Reduced lifesteal rate when above 50% life
-Zapinator: Cannot stack damage multipliers
+Zapinator: Cannot receive random damage multipliers
 CoinGun: Damage of Platinum and Gold Coins heavily reduced, damage of Silver Coins slightly reduced, and damage of Copper Coins increased
+OOAWaves: Reworked event wave progression
 OOASet: Set bonus increases minimum summon damage when you attack using other classes
 MiningHelmet: Increases Undead Miner spawn rates
 MoonsDrops: Bosses and minibosses drop no items until wave {0}
@@ -35,7 +33,7 @@ ViolentPrefix: Adjusted prefix stats: grants attack speed, not melee speed
 ManaPots: Cannot be used during Mana Sickness, but 50% increased restoration
 MinionStack: Damage of minions diminishes when summoning over 3 copies (effect caps at 12)
 SummonMulticlass: Summon damage decreases when you attack using other classes (except in OOA)
-ShadowDodge: Eternity Mode: Dodging will reduce your attack speed
+ShadowDodge: Eternity Mode: Dodge cooldown increased to 45 seconds
 IceBarrier: Eternity Mode: 10% reduced damage
 SwordRework: Reworked broadsword swing animation
 SpearRework: Reworked spear swing animation
@@ -47,16 +45,33 @@ SuperStarCannon: Decreased maximum pierce to 7
 WarmthPotionNerf: Halved damage reduction effect and now applies post-mitigation
 CrossNecklaceNerf: Longer invincibility doesn't trigger on rapid successive hits
 IceBladeFrostburn: Projectile inflicts Frostburn on-hit
-JungleRose: Increases Plantera's Fruit drop rate from Snatcher-type enemies
+JungleRose: The favorite food of all Snatcher-type enemies
 WeatherPain: Increased hit frequency and pierce
-HoundiusShootius: Increased fireball velocity
 SniperRifle: Deals up to double damage to enemies the further away they are
 ChlorophyteSaber: Faster projectiles that slow down on hit
 JackOLanternLauncher: Increased projectile speed by 50%
 GolemFist: Deals up to triple damage to enemies the further out the fist is extended
 Gladius: Hit rate increased to match swing speed
 FlowerPow: Tripled petal firerate
-PiranhaGun: Projectile damage updates dynamically
-ProximityMineLauncher: Projectile damage updates dynamically
+DynamicUpdating: Projectile damage updates dynamically
 PygmyStaff: Spears can now pierce once
 MedusaHead: Deals up to 2.25x damage the fewer enemies are hit
+AerialBane: Damage against airborne enemies decreased to 1.15x
+ChlorophyteBullet: Homing range reduced to 0.5x
+SporeSac: Improved projectile immunity frames
+AvengerEmblem: Damage bonus increased by 3%
+AmethystStaff: Bolt is faster and bounces towards enemies
+TopazStaff: Critical strikes cause an explosion, increased base critical strike chance
+SapphireStaff: Rapidly fires bolts in a spread
+EmeraldStaff: Fires a large bolt with strong knockback and pierce
+AmberStaff: Bolt boomerangs back
+RubyStaff: Bolt splits in half after a duration
+MeleeDamageBugFix: Fixed projectiles not dealing melee damage
+VortexSet: Stealth lasts up to 10 seconds before going on cooldown
+PossessedHatchet: Projectiles bounce off and between enemies
+BetsysCurse: Decreased effectiveness and duration of Betsy's Curse
+ScourgeoftheCorruptor: Eater Bites that graze an enemy at close range split into Tiny Eaters prematurely
+BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
+AntiSpam: Held projectiles have increased hitrate
+Tipsy: Tipsy buff additionally reduces defense by 2
+Trimarang: Doubled projectile speed

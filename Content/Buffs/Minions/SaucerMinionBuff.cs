@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
@@ -7,28 +9,19 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class SaucerMinionBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Mini Saucer");
-            // Description.SetDefault("The Mini Saucer will protect you");
             Main.buffNoTimeDisplay[Type] = true;
             Main.buffNoSave[Type] = true;
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "迷你飞碟");
-            //Description.AddTranslation((int)GameCulture.CultureName.Chinese, "迷你飞碟将会保护你");
         }
-
         public override void Update(Player player, ref int buffIndex)
         {
             player.FargoSouls().MiniSaucer = true;
             if (player.whoAmI == Main.myPlayer)
             {
-                int damage = 30;
-                if (!NPC.downedGolemBoss)
-                {
-                    damage = 15;
-                }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<MiniSaucer>()] < 1)
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<MiniSaucer>(), damage, 3f, player.whoAmI);
+                    Projectile.NewProjectile(player.GetSource_Buff(buffIndex), player.Center, Vector2.Zero, ModContent.ProjectileType<MiniSaucer>(), 0, 3f, player.whoAmI);
             }
         }
     }

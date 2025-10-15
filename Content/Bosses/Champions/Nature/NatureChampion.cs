@@ -1,9 +1,12 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -43,12 +47,16 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             new(0, 4)
         ];
 
+        public const int auraDistance = 1400;
+
         public override void SetStaticDefaults()
         {
             // DisplayName.SetDefault("Champion of Nature");
             //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "自然英灵");
             Main.npcFrameCount[NPC.type] = 14;
             NPCID.Sets.MPAllowedEnemies[Type] = true;
+            NPCID.Sets.NoMultiplayerSmoothingByType[NPC.type] = true;
+            NPCID.Sets.MustAlwaysDraw[Type] = true;
             NPCID.Sets.BossBestiaryPriority.Add(NPC.type);
 
             NPC.AddDebuffImmunities(
@@ -57,8 +65,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                 BuffID.Chilled,
                 BuffID.OnFire,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -84,9 +91,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
         {
             NPC.width = 180;
             NPC.height = 120;
-            NPC.damage = 110;
+            NPC.damage = 105;
             NPC.defense = 100;
-            NPC.lifeMax = 900000;
+            NPC.lifeMax = 440000;
             NPC.HitSound = SoundID.NPCHit6;
             NPC.DeathSound = SoundID.NPCDeath1;
             //NPC.noGravity = true;
@@ -97,9 +104,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
             NPC.value = Item.buyPrice(5);
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
         }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
@@ -564,7 +571,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                         }
                     }
 
-                    if (++NPC.ai[1] > 330 || !WorldSavingSystem.EternityMode) //wait
+                    int endTime = WorldSavingSystem.MasochistModeReal ? 250 : 330;
+                    if (++NPC.ai[1] > endTime || !WorldSavingSystem.EternityMode) //wait
                     {
                         NPC.TargetClosest();
                         NPC.ai[0]++;
@@ -582,7 +590,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
             if (WorldSavingSystem.EternityMode)
             {
-                if (NPC.HasValidTarget && NPC.Distance(player.Center) > 1400 && Vector2.Distance(NPC.Center, player.Center) < 3000f
+                if (NPC.HasValidTarget && NPC.Distance(player.Center) > auraDistance && Vector2.Distance(NPC.Center, player.Center) < 3000f
                   && player.Center.Y > Main.worldSurface * 16 && !player.ZoneUnderworldHeight && NPC.ai[0] > 1)// && NPC.ai[0] != 9) //enrage
                 {
                     NPC.ai[0] = 1;
@@ -593,14 +601,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
                     SoundEngine.PlaySound(SoundID.ForceRoarPitched, player.Center);
                 }
-
-                Vector2 dustOffset = Vector2.Normalize(player.Center - NPC.Center) * 1400;
+                /*
+                Vector2 dustOffset = Vector2.Normalize(player.Center - NPC.Center) * auraDistance;
                 for (int i = 0; i < 20; i++) //dust ring for enrage range
                 {
                     int d = Dust.NewDust(NPC.Center + dustOffset.RotatedByRandom(2 * Math.PI), 0, 0, DustID.BlueTorch, Scale: 2f);
                     Main.dust[d].velocity = NPC.velocity;
                     Main.dust[d].noGravity = true;
                 }
+                */
             }
         }
 
@@ -739,6 +748,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<NatureMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<NatureForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<NatureChampionRelic>()));
@@ -845,6 +856,48 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Nature
                     DrawHead(spriteBatch, screenPos, Lighting.GetColor((int)Main.npc[i].Center.X / 16, (int)Main.npc[i].Center.Y / 16), Main.npc[i]);
                 }
             }
+
+            if (WorldSavingSystem.EternityMode) //aura
+            {
+                Color outerColor = Color.Blue;
+                outerColor.A = 0;
+
+                Color darkColor = outerColor;
+                Color mediumColor = Color.Lerp(outerColor, Color.White, 0.75f);
+                Color lightColor2 = Color.Lerp(outerColor, Color.White, 0.5f);
+
+                Vector2 auraPos = NPC.Center;
+                float radius = auraDistance;
+                var target = Main.LocalPlayer;
+                var blackTile = TextureAssets.MagicPixel;
+                var diagonalNoise = FargoAssets.DottedNoise;
+                if (!blackTile.IsLoaded || !diagonalNoise.IsLoaded)
+                    return false;
+                var maxOpacity = NPC.Opacity;
+
+                ManagedShader borderShader = ShaderManager.GetShader("FargowiltasSouls.NatureAuraShader");
+                borderShader.TrySetParameter("colorMult", 7.35f);
+                borderShader.TrySetParameter("time", Main.GlobalTimeWrappedHourly);
+                borderShader.TrySetParameter("radius", radius);
+                borderShader.TrySetParameter("anchorPoint", auraPos);
+                borderShader.TrySetParameter("screenPosition", Main.screenPosition);
+                borderShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
+                borderShader.TrySetParameter("playerPosition", target.Center);
+                borderShader.TrySetParameter("maxOpacity", maxOpacity);
+                borderShader.TrySetParameter("darkColor", darkColor.ToVector4());
+                borderShader.TrySetParameter("midColor", mediumColor.ToVector4());
+                borderShader.TrySetParameter("lightColor", lightColor2.ToVector4());
+
+                spriteBatch.GraphicsDevice.Textures[1] = diagonalNoise.Value;
+
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearWrap, DepthStencilState.None, Main.Rasterizer, borderShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
+                Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
+                spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+                spriteBatch.End();
+                spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            }
+
             return false;
         }
 

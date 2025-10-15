@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
@@ -41,8 +42,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
                 BuffID.Chilled,
                 BuffID.OnFire,
                 BuffID.Suffocation,
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
 
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             NPC.height = 234;
             NPC.damage = 110;
             NPC.defense = 50;
-            NPC.lifeMax = 240000;
+            NPC.lifeMax = 220000;
             NPC.HitSound = SoundID.NPCHit7;
             NPC.DeathSound = SoundID.NPCDeath1;
             NPC.noGravity = false;
@@ -78,9 +78,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             NPC.value = Item.buyPrice(4);
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
         }
 
         public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)
@@ -93,7 +93,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
         {
             if (SpawnNoContactTimer > 0)
                 return false;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return true;
         }
 
@@ -661,12 +661,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             }
         }
 
-        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<GuiltyBuff>(), 600);
-        }
-
         static bool spawnPhase2 => Main.expertMode;
 
         public override void HitEffect(NPC.HitInfo hit)
@@ -746,6 +740,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TimberMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<TimberForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<TimberChampionRelic>()));

@@ -1,12 +1,13 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Items.Armor;
 using FargowiltasSouls.Content.NPCs;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.KingSlime;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -113,7 +114,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
 
             EModeGlobalNPC.slimeBoss = npc.whoAmI;
-
+            EModeUtils.DropSummon(npc, ItemID.SlimeCrown, NPC.downedSlimeKing, ref DroppedSummon);
             // defaults
             CanFall = true;
 
@@ -127,10 +128,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     return true; // run vanilla despawn code
                 }
             }
-
-            // Drop summon
-            EModeUtils.DropSummon(npc, "SlimyCrown", NPC.downedSlimeKing, ref DroppedSummon);
-
+            
             // Scaling (from vanilla)
             float num255 = (float)npc.life / (float)npc.lifeMax;
             num255 = num255 * 0.5f + 0.75f;
@@ -148,12 +146,21 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             {
                 npc.position.X += npc.width / 2;
                 npc.position.Y += npc.height;
+                var minScale =  33 / 92f;
+                if (num255 < minScale)
+                    num255 = minScale;
                 npc.scale = num255;
-                npc.width = (int)(98f * npc.scale);
-                npc.height = (int)(92f * npc.scale);
+                npc.width = (int)MathF.Round(98f * npc.scale);
+                npc.height = (int)MathF.Round(92f * npc.scale);
                 npc.position.X -= npc.width / 2;
                 npc.position.Y -= npc.height;
             }
+
+            // Anti cheese
+            npc.noTileCollide = false;
+            if (Math.Abs(Target.Center.X - NPC.Center.X) < npc.width / 2 && Target.Center.Y > NPC.Center.Y && !Collision.CanHitLine(NPC.position, npc.width, npc.height, Target.position, Target.width, Target.height))
+                npc.noTileCollide = true;
+
 
             int state = (int)State;
             switch ((States)state)
@@ -194,6 +201,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     Explosion();
                     break;
             }
+            if (npc.velocity.Y < 0)
+                npc.noTileCollide = true;
             return false;
         }
         public bool JumpWindup()
@@ -239,7 +248,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     if (x > 1)
                         x = 1;
                     int side = 14;
-                    int up = 27;
+                    float up = 27;
                     if (Cycle == 0)
                     {
                         side = 12;
@@ -250,6 +259,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         side += 2;
                         up += 1;
                     }
+                    float yDiff = NPC.Center.Y - Target.Center.Y;
+                    if (yDiff > 400)
+                        up *= yDiff / 400f;
                     NPC.velocity.X = xDir * side * x;
                     NPC.velocity.Y = -up;
                     Timer = 1;
@@ -435,7 +447,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         else
                             break;
                     }
-                    if (InTerrain(teleX, teleY) || !Collision.CanHitLine(NPC.Center, 0, 0, Main.player[NPC.target].Center, 0, 0)) // fall back to player center
+                    if (InTerrain(teleX, teleY) || !Collision.CanHitLine(NPC.Center, 0, 0, Main.player[NPC.target].Center, 0, 0) || !Collision.SolidCollision(new Vector2(teleX, teleY) - Vector2.One * 300, 600, 600, true)) // fall back to player center
                     {
                         teleX = Target.Bottom.X;
                         teleY = Target.Bottom.Y;
@@ -637,7 +649,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (FargoSoulsUtil.HostCheck
                 && !FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss.MutantBoss>())
-                && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type))
+                && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC mutant) && !NPC.AnyNPCs(mutant.Type) && !NPC.AnyNPCs(ModContent.NPCType<ReleasedMutant>()))
             {   
                 
                 // manual gore spawn

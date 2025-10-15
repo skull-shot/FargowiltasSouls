@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
 {
     public class RustedOxygenTank : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Expert", Name);
         public override void SetStaticDefaults()
         {
 
@@ -100,6 +102,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Expert
     }
     public class RustedOxygenTankInactive : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Expert", Name);
         public override void SetStaticDefaults()
         {
 

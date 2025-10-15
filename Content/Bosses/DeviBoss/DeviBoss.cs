@@ -1,10 +1,10 @@
 using Fargowiltas.Content.NPCs;
-using FargowiltasSouls.Assets.ExtraTextures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.BossBars;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.BossBags;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Pets;
@@ -14,10 +14,10 @@ using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Content.Patreon.Phupperbat;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Cavern;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Dungeon;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.SkyAndRain;
-using FargowiltasSouls.Content.Projectiles.Masomode.Enemies.Vanilla.Snow;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Dungeon;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Snow;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
@@ -36,6 +36,7 @@ using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using FargowiltasSouls.Common.Utilities;
 
 namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
@@ -101,8 +102,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     BuffID.OnFire,
                     BuffID.Suffocation,
                     BuffID.Lovestruck,
-                    ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>()
+                    ModContent.BuffType<LethargicBuff>()
             ]);
         }
 
@@ -145,9 +145,9 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             NPC.timeLeft = NPC.activeTime * 30;
             NPC.BossBar = ModContent.GetInstance<DevianttBossBar>();
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, (musicMod.Version >= Version.Parse("0.1.4")) ? "Assets/Music/Strawberry_Sparkly_Sunrise" : "Assets/Music/LexusCyanixs") : MusicID.OtherworldlyHallow;
-            SceneEffectPriority = SceneEffectPriority.BossMedium;
+            SceneEffectPriority = SceneEffectPriority.BossMedium;*/
 
             NPC.value = Item.buyPrice(0, 5);
         }
@@ -438,11 +438,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 playerInvulTriggered = true;
 
             //drop summon
-            if (WorldSavingSystem.EternityMode && !WorldSavingSystem.DownedDevi && FargoSoulsUtil.HostCheck && NPC.HasPlayerTarget && !droppedSummon)
-            {
-                Item.NewItem(NPC.GetSource_Loot(), player.Hitbox, ModContent.ItemType<DevisCurse>());
-                droppedSummon = true;
-            }
+            EModeUtils.DropSummon(NPC, ModContent.ItemType<DevisCurse>(), WorldSavingSystem.DownedDevi, ref droppedSummon, WorldSavingSystem.EternityMode);
 
             #region STATES
             void Die()
@@ -908,12 +904,16 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             void RuneWizard()
             {
                 int threshold = WorldSavingSystem.MasochistModeReal ? 400 : 450;
+                int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
 
                 Player localPlayer = Main.LocalPlayer;
 
                 if (NPC.target == localPlayer.whoAmI) // only for target
                 {
-                    EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    if (Timer > attackTime && SubTimer > 0)
+                        EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
+                    else
+                        EModeGlobalNPC.Aura(NPC, threshold, true, -1, Color.GreenYellow);//, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
                     EModeGlobalNPC.Aura(NPC, WorldSavingSystem.MasochistModeReal ? 200 : 150, false, -1, default, ModContent.BuffType<HexedBuff>(), BuffID.Dazed, BuffID.OgreSpit);
                 }
 
@@ -957,7 +957,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 if (WorldSavingSystem.MasochistModeReal && SubTimer < 1)
                     SubTimer = 1;
 
-                int attackTime = WorldSavingSystem.EternityMode ? 40 : 50;
                 if (++Timer == 1)
                 {
                     //TeleportDust();
@@ -1639,13 +1638,31 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     GetNextAttack();
                 }
             }
+            bool CanPetrify(Player player) =>
+                player.active && !player.dead && !player.ghost &&
+                NPC.Distance(player.Center) < 3000 && Collision.CanHitLine(NPC.Center, 0, 0, player.Center, 0, 0) &&
+                Math.Sign(player.direction) == Math.Sign(NPC.Center.X - player.Center.X);
+            void TryPetrify(Player player)
+            {
+                SoundEngine.PlaySound(SoundID.NPCDeath17, NPC.Center);
+
+                if (CanPetrify(Main.LocalPlayer))
+                {
+                    for (int i = 0; i < 40; i++) //petrify dust
+                    {
+                        int d = Dust.NewDust(Main.LocalPlayer.Center, 0, 0, DustID.Stone, 0f, 0f, 0, default, 2f);
+                        Main.dust[d].velocity *= 3f;
+                    }
+
+                    Main.LocalPlayer.AddBuff(BuffID.Stoned, 300);
+                    if (Main.LocalPlayer.HasBuff(BuffID.Stoned))
+                        Main.LocalPlayer.AddBuff(BuffID.Featherfall, 300);
+
+                    Projectile.NewProjectile(NPC.GetSource_FromThis(), Main.LocalPlayer.Center, new Vector2(0, -1), ModContent.ProjectileType<DeviMedusa>(), 0, 0, Main.myPlayer);
+                }
+            }
             void MedusaRay()
             {
-                bool CanPetrify(Player player) =>
-                    player.active && !player.dead && !player.ghost && 
-                    NPC.Distance(player.Center) < 3000 && Collision.CanHitLine(NPC.Center, 0, 0, player.Center, 0, 0) && 
-                    Math.Sign(player.direction) == Math.Sign(NPC.Center.X - player.Center.X);
-
                 ref float FirstFrameCheck = ref NPC.localAI[0];
                 ref float StoredRotation = ref NPC.localAI[1];
                 ref float PulseCounter = ref NPC.ai[3];
@@ -1732,22 +1749,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                     else if (PulseCounter == 4) //petrify
                     {
-                        SoundEngine.PlaySound(SoundID.NPCDeath17, NPC.Center);
-
-                        if (CanPetrify(Main.LocalPlayer))
-                        {
-                            for (int i = 0; i < 40; i++) //petrify dust
-                            {
-                                int d = Dust.NewDust(Main.LocalPlayer.Center, 0, 0, DustID.Stone, 0f, 0f, 0, default, 2f);
-                                Main.dust[d].velocity *= 3f;
-                            }
-
-                            Main.LocalPlayer.AddBuff(BuffID.Stoned, 300);
-                            if (Main.LocalPlayer.HasBuff(BuffID.Stoned))
-                                Main.LocalPlayer.AddBuff(BuffID.Featherfall, 300);
-
-                            Projectile.NewProjectile(NPC.GetSource_FromThis(), Main.LocalPlayer.Center, new Vector2(0, -1), ModContent.ProjectileType<DeviMedusa>(), 0, 0, Main.myPlayer);
-                        }
+                        TryPetrify(player);
                     }
                     else if (PulseCounter < 7) //ray warning
                     {
@@ -1995,10 +1997,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
                 int delay = 180;
                 if (WorldSavingSystem.MasochistModeReal)
-                {
                     delay -= 30;
-                    ignoreMoney = true;
-                }
                 if (WorldSavingSystem.EternityMode)
                     delay -= 60;
                 if (Phase > 1)
@@ -2112,7 +2111,12 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 }
                 else if (Timer == 900)
                 {
-                    if (WorldSavingSystem.DownedDevi)
+                    if (WorldSavingSystem.MasochistModeReal)
+                    {
+                        TryPetrify(player);
+                        CombatText.NewText(displayPoint, Color.HotPink, Language.GetTextValue("Mods.FargowiltasSouls.NPCs.DeviBoss.Bribe.Maso"), true);
+                    }
+                    else if (WorldSavingSystem.DownedDevi)
                     {
                         CombatText.NewText(displayPoint, Color.HotPink, Language.GetTextValue("Mods.FargowiltasSouls.NPCs.DeviBoss.Bribe.Accept3"), true);
                     }
@@ -2122,10 +2126,22 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     }
                 }
 
-                if (++Timer > 1050)
+                int endTime = 1050;
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    if (Timer >= 960 && Timer <= endTime && Timer % 10 == 0 && FargoSoulsUtil.HostCheck)
+                    {
+                        Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, NPC.DirectionTo(player.Center).RotatedByRandom(MathHelper.ToRadians(45)), ModContent.ProjectileType<DeviBigDeathray>(),
+                            FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 0f, NPC.whoAmI);
+                    }
+
+                    endTime += 180;
+                }
+
+                if (++Timer > endTime)
                 {
                     ignoreMoney = true;
-                    if (WorldSavingSystem.DownedDevi)
+                    if (WorldSavingSystem.DownedDevi && !WorldSavingSystem.MasochistModeReal)
                     {
                         NPC.life = 0;
                         NPC.checkDead();
@@ -2146,7 +2162,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(ModContent.BuffType<LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = NPC.whoAmI;
         }
 
         public override void HitEffect(NPC.HitInfo hit)
@@ -2163,7 +2180,11 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             if (State != 8)
                 return false;
 
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
+
+            if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
+                return base.CanHitPlayer(target, ref CooldownSlot);
+
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight;
         }
 
@@ -2175,40 +2196,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 return false;
 
             return base.CanHitNPC(target);
-        }
-
-        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
-        {
-            //if (Item.melee && !ContentModLoaded) damage = (int)(damage * 1.25);
-
-            ModifyHitByAnything(player, ref modifiers);
-        }
-
-        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            //if ((projectile.melee || projectile.minion) && !ContentModLoaded) damage = (int)(damage * 1.25);
-
-            ModifyHitByAnything(Main.player[projectile.owner], ref modifiers);
-        }
-
-        public void ModifyHitByAnything(Player player, ref NPC.HitModifiers hitModifiers)
-        {
-            if (player.loveStruck)
-            {
-                hitModifiers.ModifyHitInfo += (ref NPC.HitInfo hitInfo) =>
-                {
-                    /*npc.life += damage;
-                    if (npc.life > npc.lifeMax)
-                        npc.life = npc.lifeMax;
-                    CombatText.NewText(npc.Hitbox, CombatText.HealLife, damage);*/
-
-                    Vector2 speed = Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(Math.PI * 2);
-                    float ai1 = 30 + Main.rand.Next(30);
-                    Projectile.NewProjectile(NPC.GetSource_FromThis(), player.Center, speed, ModContent.ProjectileType<HostileHealingHeart>(), hitInfo.Damage / 5, 0f, Main.myPlayer, NPC.whoAmI, ai1);
-
-                    hitInfo.Null();
-                };
-            }
         }
 
         public override bool CheckDead()
@@ -2249,7 +2236,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ModContent.ItemType<VermillionTopHat>());
             }
 
-            NPC.SetEventFlagCleared(ref WorldSavingSystem.downedDevi, -1);
+            WorldSavingSystem.SetDeviDowned();
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
@@ -2322,16 +2309,16 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                 // Inner ring.
                 Color innerColor = Color.Red;
                 innerColor.A = 0;
-                float radius = FargosTextureRegistry.HardEdgeRing.Width() / 2;
+                float radius = FargoAssets.HardEdgeRing.Width() / 2;
                 int size = WorldSavingSystem.MasochistModeReal ? 200 : 150;
                 float scale = size / radius;
                 
-                spriteBatch.Draw(FargosTextureRegistry.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargosTextureRegistry.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
+                spriteBatch.Draw(FargoAssets.HardEdgeRing.Value, position, null, innerColor * 0.7f, 0f, FargoAssets.HardEdgeRing.Value.Size() * 0.5f, scale, SpriteEffects.None, 0f);
 
                 // Outer ring.
                 Color outerColor = Color.Green;
                 outerColor.A = 0;
-                spriteBatch.Draw(FargosTextureRegistry.SoftEdgeRing.Value, position, null, outerColor * 0.7f, 0f, FargosTextureRegistry.SoftEdgeRing.Value.Size() * 0.5f, 2.05f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(FargoAssets.SoftEdgeRing.Value, position, null, outerColor * 0.7f, 0f, FargoAssets.SoftEdgeRing.Value.Size() * 0.5f, 2.05f, SpriteEffects.None, 0f);
             }
         }
         #endregion

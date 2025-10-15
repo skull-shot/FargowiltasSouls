@@ -1,6 +1,6 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,11 +18,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpear_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Weapons/FinalUpgrades/Penetrator";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Penetrator");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -39,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.timeLeft = 180;
             Projectile.extraUpdates = 1;
             Projectile.alpha = 0;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
         }
 
@@ -77,38 +76,57 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         }
 
         protected float scaletimer;
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
-            if (--Projectile.localAI[0] < 0)
+            if (Variant == 0) // phase 2
             {
-                if (WorldSavingSystem.MasochistModeReal)
+                if (--Projectile.localAI[0] < 0)
                 {
-                    Projectile.localAI[0] = 3;
-
-                    for (int i = -1; i <= 1; i += 2)
+                    if (WorldSavingSystem.MasochistModeReal)
                     {
-                        if (FargoSoulsUtil.HostCheck)
+                        Projectile.localAI[0] = 3;
+
+                        for (int i = -1; i <= 1; i += 2)
                         {
-                            int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f / 2f * Vector2.Normalize(Projectile.velocity).RotatedBy(MathHelper.PiOver2 * i),
-                              ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
-                            if (p != Main.maxProjectiles)
-                                Main.projectile[p].timeLeft = 15;
+                            if (FargoSoulsUtil.HostCheck)
+                            {
+                                int p = Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, 16f / 2f * Vector2.Normalize(Projectile.velocity).RotatedBy(MathHelper.PiOver2 * i),
+                                  ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, -1);
+                                if (p != Main.maxProjectiles)
+                                    Main.projectile[p].timeLeft = 15;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Projectile.localAI[0] = 4;
+                    else
+                    {
+                        Projectile.localAI[0] = 4;
 
-                    if (Projectile.ai[1] == 0 && FargoSoulsUtil.HostCheck)
-                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0]);
+                        if (Projectile.ai[1] == 0 && FargoSoulsUtil.HostCheck)
+                            Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0]);
+                    }
+                }
+            }
+            else // phase 1
+            {
+                if (Projectile.localAI[0] == 0)
+                    Projectile.localAI[0] = Main.rand.Next(7);
+
+                int freq = WorldSavingSystem.MasochistModeReal ? 3 : 4;
+                if (++Projectile.localAI[0] % freq == 0)
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        int side = Projectile.localAI[0] % (2 * freq) == 0 ? -1 : 1;
+                        Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedBy(MathHelper.PiOver2 * side), ModContent.ProjectileType<MutantSphereSmall>(), Projectile.damage, 0f, Projectile.owner, Projectile.ai[0], ai2: Variant);
+                    }
                 }
             }
 
             if (Projectile.localAI[1] == 0f)
             {
                 Projectile.localAI[1] = 1f;
-                SoundEngine.PlaySound(WorldSavingSystem.masochistModeReal ? FargosSoundRegistry.PenetratorExplosion : FargosSoundRegistry.PenetratorThrow, Projectile.Center);
+                SoundEngine.PlaySound(WorldSavingSystem.MasochistModeReal ? FargosSoundRegistry.PenetratorExplosion : FargosSoundRegistry.PenetratorThrow, Projectile.Center);
             }
 
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(135f);
@@ -119,13 +137,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<MutantBombSmall>(), 0, 0f, Projectile.owner);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
 
             TryLifeSteal(target.Center, target.whoAmI);
         }

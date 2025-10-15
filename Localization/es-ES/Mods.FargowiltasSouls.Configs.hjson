@@ -6,23 +6,18 @@ ClientConfig: {
 		// Patreon: "[i:FargowiltasSouls/RoombaPet] [c/ffffff:Patreon Items]"
 	}
 
-	HideTogglerWhenInventoryIsClosed: {
-		// Label: Only show effect toggler when inventory is open
-		// Tooltip: If true, the effect toggler is automatically hidden when your inventory is closed.
-	}
-
 	ItemDisabledTooltip: {
 		// Label: Disabled Effect Tooltip
 		// Tooltip: If true, items with any effects disabled by the Effect Toggler will have a tooltip line stating this.
 	}
 
-	ToggleSearchReset: {
-		// Label: Accessory Effects menu resets search bar when closed
-		// Tooltip: ""
+	ItemBalanceTooltip: {
+		// Label: Item Change Tooltips
+		// Tooltip: Determines which items with changed effects will have a tooltip line stating this.
 	}
 
 	RainbowHealThreshold: {
-		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatic Heal Threshold"
+		// Label: "[i:FargowiltasSouls/ConcentratedRainbowMatter] Automatic Heal Threshold (%)"
 		// Tooltip: ""
 	}
 
@@ -31,12 +26,12 @@ ClientConfig: {
 		// Tooltip: If false, precision mode is instead toggled with the key.
 	}
 
-	OncomingMutantX: {
+	EternityMutantX: {
 		// Label: Eternity Mode inventory icon X position
 		// Tooltip: ""
 	}
 
-	OncomingMutantY: {
+	EternityMutantY: {
 		// Label: Eternity Mode inventory icon Y position
 		// Tooltip: ""
 	}
@@ -56,12 +51,12 @@ ClientConfig: {
 		// Tooltip: ""
 	}
 
-	SkillMenuX: {
+	ActiveSkillMenuX: {
 		// Label: Skill Menu X
 		// Tooltip: Measured from the right side of the screen.
 	}
 
-	SkillMenuY: {
+	ActiveSkillMenuY: {
 		// Label: Skill Menu Y
 		// Tooltip: ""
 	}
@@ -70,10 +65,20 @@ ClientConfig: {
 		// Label: Photosensitivity Mode
 		// Tooltip: ""
 	}
+
+	WikiNotification: {
+		// Label: Wiki Notification
+		// Tooltip: When enabled, a chat notification for the wiki is sent on entering the world
+	}
+
+	MusicModNotification: {
+		// Label: Music Mod Notification
+		// Tooltip: When enabled, a chat notification for the music mod is sent on entering the world
+	}
 }
 
 SoulConfig: {
-	// DisplayName: Soul Config
+	// DisplayName: Server Config
 
 	Headers: {
 		// Maso: Eternity Mode
@@ -201,4 +206,11 @@ RespawnPreventionSetting: {
 	// Eternity.Label: Eternity Mode
 	// Masochist.Label: Masochist Mode
 	// Disabled.Label: Disabled
+}
+
+BalanceTooltipSetting: {
+	// Tooltip: ""
+	// All.Label: All
+	// Reworks.Label: Reworks and Mechanical Changes
+	// None.Label: None
 }

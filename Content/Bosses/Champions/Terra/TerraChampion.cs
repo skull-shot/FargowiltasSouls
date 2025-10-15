@@ -1,8 +1,10 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Items.Armor.Masks;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.Items.Placables.Relics;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.Systems;
@@ -60,9 +62,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
         {
             NPC.width = 80;
             NPC.height = 80;
-            NPC.damage = 140;
+            NPC.damage = 135;
             NPC.defense = 80;
-            NPC.lifeMax = 170000;
+            NPC.lifeMax = 155000;
             NPC.HitSound = SoundID.NPCHit41;
             NPC.DeathSound = SoundID.NPCDeath14;
             NPC.noGravity = true;
@@ -74,9 +76,9 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
             NPC.boss = true;
 
-            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Champions") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.behindTiles = true;
             NPC.trapImmune = true;
@@ -92,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < 30 * NPC.scale;
         }
 
@@ -269,7 +271,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
                         float rotationDifference = MathHelper.WrapAngle(NPC.velocity.ToRotation() - NPC.SafeDirectionTo(player.Center).ToRotation());
                         bool inFrontOfMe = Math.Abs(rotationDifference) < MathHelper.ToRadians(90 / 2);
 
-                        bool proceed = NPC.localAI[0] > 300 && (NPC.localAI[0] > 360 || inFrontOfMe);
+                        int timeToProceed = WorldSavingSystem.MasochistModeReal ? 180 : 270;
+                        bool proceed = NPC.localAI[0] > timeToProceed && (NPC.localAI[0] > timeToProceed + 60 || inFrontOfMe);
 
                         if (proceed)
                         {
@@ -366,14 +369,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
                         const int end = 360;
 
-                        /*Vector2 offset;
-                        offset.X = 10f * NPC.localAI[0];
-                        offset.Y = 600 * (float)Math.Sin(2f * Math.PI / end * 4 * NPC.localAI[0]);
-
-                        NPC.Center = new Vector2(NPC.localAI[2], NPC.localAI[3]) + offset.RotatedBy(NPC.localAI[1]);
-                        NPC.velocity = Vector2.Zero;
-                        NPC.rotation = (NPC.position - NPC.oldPosition).ToRotation();*/
-
                         float sinModifier = (float)Math.Sin(2 * (float)Math.PI * (NPC.localAI[0] / end * 3 + 0.25f));
                         NPC.rotation = NPC.localAI[1] + (float)Math.PI / 2 * sinModifier;
                         NPC.velocity = 36f * NPC.rotation.ToRotationVector2();
@@ -381,6 +376,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
                         if (Math.Abs(sinModifier) < 0.001f) //account for rounding issues
                         {
                             SoundEngine.PlaySound(SoundID.Item12, NPC.Center);
+
+                            NPC.localAI[2] = WorldSavingSystem.MasochistModeReal ? 20 : 10;
 
                             if (FargoSoulsUtil.HostCheck)
                             {
@@ -403,6 +400,11 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
                                         FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0, Main.myPlayer, NPC.localAI[1] + rotationOffset, ai1New);
                                 }
                             }
+                        }
+
+                        if (--NPC.localAI[2] > 0 && FargoSoulsUtil.HostCheck)
+                        {
+                            Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<LightningVortexHostile>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, 1, Main.player[NPC.target].DirectionFrom(NPC.Center).ToRotation());
                         }
 
                         if (++NPC.localAI[0] > end * 0.8f)
@@ -744,7 +746,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
             target.AddBuff(BuffID.OnFire, 600);
             if (WorldSavingSystem.EternityMode)
             {
-                target.AddBuff(ModContent.BuffType<LivingWastelandBuff>(), 600);
                 target.AddBuff(ModContent.BuffType<LightningRodBuff>(), 600);
             }
         }
@@ -774,6 +775,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Terra
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
+            npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<TerraMask>(), 7));
+
             npcLoot.Add(new ChampionEnchDropRule(BaseForce.EnchantsIn<TerraForce>()));
 
             npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<TerraChampionRelic>()));

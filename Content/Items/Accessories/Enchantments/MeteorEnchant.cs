@@ -1,5 +1,7 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
@@ -32,10 +34,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            // magilumi lighting
-            DelegateMethods.v3_1 = new Vector3(0.9f, 0.8f, 0.5f);
-            Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
-            Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
             AddEffects(player, Item);
         }
         public static void AddEffects(Player player, Item item)
@@ -49,15 +47,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.MeteorHelmet)
-            .AddIngredient(ItemID.MeteorSuit)
-            .AddIngredient(ItemID.MeteorLeggings)
-            .AddIngredient(ItemID.StarCannon)
-            .AddIngredient(ItemID.Magiluminescence)
-            .AddIngredient(ItemID.PlaceAbovetheClouds)
-            .AddCondition(Condition.DownedEowOrBoc)
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddIngredient(ItemID.MeteorHelmet)
+                .AddIngredient(ItemID.MeteorSuit)
+                .AddIngredient(ItemID.MeteorLeggings)
+                .AddIngredient(ItemID.StarCannon)
+                .AddIngredient(ItemID.Magiluminescence)
+                .AddIngredient(ItemID.Starfury)
+                .AddCondition(Condition.DownedEowOrBoc)
+
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return MeteorEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class MeteorMomentumEffect : AccessoryEffect
@@ -68,14 +74,17 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.whoAmI == Main.myPlayer)
             {
-                if (!player.FargoSouls().NoMomentum && !player.mount.Active) //overriden by nomomentum
+                player.hasMagiluminescence = true;
+                // magilumi lighting
+                DelegateMethods.v3_1 = new Vector3(1.2f, 0.6f, 0.4f);
+                Utils.PlotTileLine(player.Center, player.Center + player.velocity * 6f, 20f, DelegateMethods.CastLightOpen);
+                Utils.PlotTileLine(player.Left, player.Right, 20f, DelegateMethods.CastLightOpen);
+
+                /*if (!player.FargoSouls().NoMomentum && !player.mount.Active) //overriden by nomomentum
                 {
                     player.runAcceleration *= 1.3f;
                     player.runSlowdown *= 1.3f;
-
                 }
-                player.hasMagiluminescence = true;
-                /*
                 if (player.HasEffect<MeteorTrailEffect>())
                 {
                     const int SparkDelay = 2;
@@ -115,16 +124,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (player.whoAmI == Main.myPlayer)
             {
-                if (modPlayer.WeaponUseTimer > 0)
-                {
-                    modPlayer.MeteorCD--;
-                }
+                modPlayer.MeteorCD--;
                 float denominator = 20f;
                 if (modPlayer.ForceEffect<MeteorEnchant>())
                     denominator = 12f;
                 modPlayer.MeteorCD -= player.velocity.Length() / denominator;
             }
         }
+        public static int BaseDamage(Player player) => (int)((player.FargoSouls().ForceEffect<MeteorEnchant>() ? 160 : 45) * player.ActualClassDamage(DamageClass.Magic));
         public override void OnHitNPCEither(Player player, NPC target, NPC.HitInfo hitInfo, DamageClass damageClass, int baseDamage, Projectile projectile, Item item)
         {
             if (player.whoAmI != Main.myPlayer)
@@ -135,11 +142,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 return;
 
             bool forceEffect = modPlayer.ForceEffect<MeteorEnchant>();
-            int damage = forceEffect ? 160 : 45;
             modPlayer.MeteorCD = Cooldown;
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("MeteorEnchantCooldown", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
+                CooldownBarManager.Activate("MeteorEnchantCooldown", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "MeteorEnchant").Value, Color.Lerp(MeteorEnchant.NameColor, Color.OrangeRed, 0.75f), 
                 
                     () => 1f - Main.LocalPlayer.FargoSouls().MeteorCD / (float)Cooldown, activeFunction: () => player.HasEffect<MeteorEffect>()); 
 
@@ -159,7 +165,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort, pos);
 
             int force = forceEffect ? 1 : 0;
-            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), (int)(damage * player.ActualClassDamage(DamageClass.Magic)), 0.5f, player.whoAmI, force);
+            int i = Projectile.NewProjectile(GetSource_EffectItem(player), pos, vel, ModContent.ProjectileType<MeteorEnchantMeatball>(), BaseDamage(player), 0.5f, player.whoAmI, force);
         }
     }
 }

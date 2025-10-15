@@ -1,4 +1,4 @@
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -24,6 +24,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.ignoreWater = true;
             Projectile.tileCollide = false;
             Projectile.hostile = true;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
 

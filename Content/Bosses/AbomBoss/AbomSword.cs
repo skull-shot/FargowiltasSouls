@@ -1,8 +1,8 @@
-﻿
-
-using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Assets.Sounds;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
@@ -22,12 +22,6 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public int counter;
         public bool spawnedHandle;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-            // DisplayName.SetDefault("Styx Gazer Blade");
-        }
 
         public override void SetDefaults()
         {
@@ -209,13 +203,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<AbomBlast>(), 0, 0f, Projectile.owner);
 
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                target.AddBuff(BuffID.Burning, 180);
-            }
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
 
         public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2;
@@ -270,7 +260,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             shader.TrySetParameter("fadeStart", fadeStart);
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            Texture2D fademap = FargosTextureRegistry.MagmaStreak.Value;
+            Texture2D fademap = FargoAssets.MagmaStreak.Value;
             FargoSoulsUtil.SetTexture1(fademap);
             for (int j = 0; j < 2; j++)
             {

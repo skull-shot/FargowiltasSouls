@@ -1,8 +1,9 @@
-﻿using FargowiltasSouls.Assets.UI;
+﻿using Fargowiltas.Assets.Textures;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,17 +52,17 @@ namespace FargowiltasSouls.Content.UI.Elements
 
             bool disabledByMinos = Effect.MinionEffect && modPlayer.GalacticMinionsDeactivated;
             bool disabledByPresence = modPlayer.MutantPresence && (Effect.MutantsPresenceAffects || Effect.MinionEffect);
-            bool disabledByGlobalToggle = (Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled) || (Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled);
+            bool disabledByGlobalToggle = (Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled) || (Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled) || (Effect.ExtraJumpEffect && modPlayer.Toggler_ExtraJumpsDisabled);
             bool toggled = Main.LocalPlayer.GetToggleValue(Effect, true);
 
-            spriteBatch.Draw(FargoUIManager.CheckBox.Value, position, Color.White);
+            spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckBox.Value, position, Color.White);
 
             if (disabledByMinos)
-                spriteBatch.Draw(FargoUIManager.Cross.Value, position, Color.Cyan);
+                spriteBatch.Draw(FargoMutantAssets.UI.Toggler.Cross.Value, position, Color.Cyan);
             else if ((disabledByPresence && modPlayer.PresenceTogglerTimer <= 50) || disabledByGlobalToggle)
-                spriteBatch.Draw(FargoUIManager.Cross.Value, position, toggled ? Color.White : Color.Gray);
+                spriteBatch.Draw(FargoMutantAssets.UI.Toggler.Cross.Value, position, toggled ? Color.White : Color.Gray);
             else if (toggled)
-                spriteBatch.Draw(FargoUIManager.CheckMark.Value, position, Color.White);
+                spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckMark.Value, position, Color.White);
 
             string text = Effect.ToggleDescription;
             position += new Vector2(Width.Pixels * Main.UIScale, 0);
@@ -165,10 +166,10 @@ namespace FargowiltasSouls.Content.UI.Elements
                 modPlayer.Toggler_ExtraAttacksDisabled = !modPlayer.Toggler_ExtraAttacksDisabled;
             }
 
-            spriteBatch.Draw(FargoUIManager.CheckBox.Value, position, Color.White);
+            spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckBox.Value, position, Color.White);
 
             if (modPlayer.Toggler_ExtraAttacksDisabled)
-                spriteBatch.Draw(FargoUIManager.CheckMark.Value, position, Color.White);
+                spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckMark.Value, position, Color.White);
 
             string text = Language.GetTextValue($"Mods.FargowiltasSouls.Toggler.DisableAllAttackEffects");
             position += new Vector2(Width.Pixels * Main.UIScale, 0);
@@ -203,12 +204,50 @@ namespace FargowiltasSouls.Content.UI.Elements
                 modPlayer.Toggler_MinionsDisabled = !modPlayer.Toggler_MinionsDisabled;
             }
 
-            spriteBatch.Draw(FargoUIManager.CheckBox.Value, position, Color.White);
+            spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckBox.Value, position, Color.White);
 
             if (modPlayer.Toggler_MinionsDisabled)
-                spriteBatch.Draw(FargoUIManager.CheckMark.Value, position, Color.White);
+                spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckMark.Value, position, Color.White);
 
             string text = Language.GetTextValue($"Mods.FargowiltasSouls.Toggler.DisableAllMinionEffects");
+            position += new Vector2(Width.Pixels * Main.UIScale, 0);
+            position += new Vector2(CheckboxTextSpace, 0);
+            position += new Vector2(0, Font.MeasureString(text).Y * 0.175f);
+            Color color = Color.White;
+            Utils.DrawBorderString(spriteBatch, text, position, color);
+        }
+    }
+    public class ExtraJumpsDisabledToggle : UIElement
+    {
+        public const int CheckboxTextSpace = UIToggle.CheckboxTextSpace;
+
+        public static DynamicSpriteFont Font => UIToggle.Font;
+
+        public ExtraJumpsDisabledToggle()
+        {
+
+            Width.Set(19, 0);
+            Height.Set(21, 0);
+        }
+
+        protected override void DrawSelf(SpriteBatch spriteBatch)
+        {
+            base.DrawSelf(spriteBatch);
+            Vector2 position = GetDimensions().Position();
+            Player player = Main.LocalPlayer;
+            FargoSoulsPlayer modPlayer = player.FargoSouls();
+
+            if (IsMouseHovering && Main.mouseLeft && Main.mouseLeftRelease)
+            {
+                modPlayer.Toggler_ExtraJumpsDisabled = !modPlayer.Toggler_ExtraJumpsDisabled;
+            }
+
+            spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckBox.Value, position, Color.White);
+
+            if (modPlayer.Toggler_ExtraJumpsDisabled)
+                spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckMark.Value, position, Color.White);
+
+            string text = Language.GetTextValue($"Mods.FargowiltasSouls.Toggler.DisableAllExtraJumpEffects");
             position += new Vector2(Width.Pixels * Main.UIScale, 0);
             position += new Vector2(CheckboxTextSpace, 0);
             position += new Vector2(0, Font.MeasureString(text).Y * 0.175f);

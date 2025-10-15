@@ -1,13 +1,16 @@
-﻿using FargowiltasSouls.Content.Bosses.MutantBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Achievements;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Placables;
-using FargowiltasSouls.Content.Projectiles.Masomode.Environment;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert;
+using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +44,7 @@ namespace FargowiltasSouls.Core.Globals
         public static int eyeBoss = -1;
         public static int eaterBoss = -1;
         public static int brainBoss = -1;
+        public static int mageBoss = -1;
         public static int beeBoss = -1;
         public static int skeleBoss = -1;
         public static int deerBoss = -1;
@@ -102,7 +106,7 @@ namespace FargowiltasSouls.Core.Globals
                 return base.PreAI(npc);
 
             //in pre-hm, enemies glow slightly at night
-            if (!Main.dayTime && !Main.hardMode && Main.player.Any(p => p.Alive() && p.FargoSouls().BoxofGizmos))
+            if (!Main.dayTime && !Main.hardMode && Main.player.Any(p => p.Alive() && p.FargoSouls().SquirrelCharm != null))
             {
                 int x = (int)npc.Center.X / 16;
                 int y = (int)npc.Center.Y / 16;
@@ -115,6 +119,7 @@ namespace FargowiltasSouls.Core.Globals
                     }
                 }
             }
+
 
             /*if (Stop > 0)
             {
@@ -155,7 +160,7 @@ namespace FargowiltasSouls.Core.Globals
                     if (Main.player[npc.target].ZoneCorrupt)
                         npc.AddBuff(BuffID.CursedInferno, 2, true);
                     if (Main.player[npc.target].ZoneCrimson)
-                        npc.AddBuff(BuffID.Ichor, 2, true);
+                        npc.AddBuff(BuffID.Ichor, 2, true); 
                     if (Main.player[npc.target].ZoneHallow)
                         npc.AddBuff(ModContent.BuffType<SmiteBuff>(), 2, true);
                     if (Main.player[npc.target].ZoneJungle)
@@ -198,12 +203,22 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
         }
+        public static bool DemonCondition(Player player) =>  !Main.remixWorld || MathF.Abs(player.Center.X / 16f - Main.spawnTileX) > Main.maxTilesX / 3;
         public override void EditSpawnRate(Player player, ref int spawnRate, ref int maxSpawns)
         {
             if (WorldSavingSystem.EternityMode)
             {
                 spawnRate = (int)(spawnRate * 0.9);
                 maxSpawns = (int)(maxSpawns * 1.2f);
+
+                if (player.ZoneUnderworldHeight && !NPC.downedBoss2)
+                {
+                    if (DemonCondition(player))
+                    {
+                        spawnRate /= 2;
+                        maxSpawns *= 2;
+                    }
+                }
 
                 if ((player.ZoneTowerSolar && NPC.ShieldStrengthTowerSolar == 0)
                     || (player.ZoneTowerVortex && NPC.ShieldStrengthTowerVortex == 0)
@@ -257,17 +272,12 @@ namespace FargowiltasSouls.Core.Globals
             bool pumpkinMoon = surface && night && Main.pumpkinMoon;
             bool solarEclipse = surface && day && Main.eclipse;
             bool lunarEvents = NPC.LunarApocalypseIsUp && (nebulaTower || vortexTower || stardustTower || solarTower);
-            //bool monsterMadhouse = MMWorld.MMArmy;
             bool noEvent = Main.invasionType == 0 && !oldOnesArmy && !frostMoon && !pumpkinMoon && !solarEclipse && !lunarEvents;
+            bool thunderstorm = Main.IsItStorming && surface && !snow && !spawnInfo.Player.ZoneSandstorm && noEvent;
 
-            //no work?
-            //is lava on screen
-            //bool nearLava = Collision.LavaCollision(spawnInfo.Player.position, spawnInfo.SpawnTileX, spawnInfo.SpawnTileY);
             bool noInvasion = FargowiltasSouls.NoInvasion(spawnInfo);
+            bool worldEvil = WorldGen.crimson;
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
-
-            bool bossCanSpawn = WorldSavingSystem.MasochistModeReal && !spawnInfo.Player.HasEffect<SinisterIconEffect>() && !LumUtils.AnyBosses();
-
 
 
             //MASOCHIST MODE
@@ -283,50 +293,35 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (noBiome)
                             {
-                                pool[NPCID.CorruptBunny] = NPC.downedBoss1 ? .02f : .01f;
-                                pool[NPCID.CrimsonBunny] = NPC.downedBoss1 ? .02f : .01f;
+                                pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = NPC.downedBoss1 ? .04f : .02f;
                             }
 
                             if (snow)
                             {
-                                pool[NPCID.CorruptPenguin] = NPC.downedBoss1 ? .04f : .02f;
-                                pool[NPCID.CrimsonPenguin] = NPC.downedBoss1 ? .04f : .02f;
+                                pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
                             if (ocean || Main.raining)
                             {
-                                pool[NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .04f : .02f;
-                                pool[NPCID.CrimsonGoldfish] = NPC.downedBoss1 ? .04f : .02f;
+                                pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
-                            if (NPC.downedBoss1)
-                            {
-                                if (jungle)
-                                    pool[NPCID.DoctorBones] = .05f;
-
-                                if (NPC.downedBoss3 && !NPC.downedMechBoss2 && bossCanSpawn)
-                                    pool[NPCID.EyeofCthulhu] = Main.bloodMoon ? .0004f : .0002f;
-                            }
+                            if (jungle)
+                                pool[NPCID.DoctorBones] = .05f;
                         }
 
-                        /*
-                        if (normalSpawn && WorldSavingSystem.DownedAnyBoss)
+                        if (thunderstorm && normalSpawn)
                         {
-                            if (snow)
-                                pool[NPCID.IceGolem] = .005f;
-
-                            if (desert)
-                                pool[NPCID.SandElemental] = .005f;
+                            if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                                pool[NPCID.AngryNimbus] = .1f;
                         }
-                        */
-                        if (Main.slimeRain && NPC.downedBoss2 && bossCanSpawn)
-                            pool[NPCID.KingSlime] = 0.004f;
 
-                        if (day && NPC.downedGolemBoss && (noBiome || dungeon))
+                        if (day && NPC.downedGolemBoss && (noBiome || dungeon) && normalSpawn)
                             pool[NPCID.CultistArcherWhite] = .01f;
+
                         float scoutRate = 0.07f;
                         int xFromSpawn = Math.Abs(x - Main.spawnTileX);
-                        bool goblinCondition = xFromSpawn > Main.maxTilesX / 3 || Main.remixWorld;
+                        bool goblinCondition = (xFromSpawn > Main.maxTilesX / 3 || Main.remixWorld) && noBiome && normalSpawn;
                         if ((!NPC.savedGoblin && goblinCondition) || (pool.TryGetValue(NPCID.GoblinScout, out float value) && value < scoutRate))
                         {
                             pool[NPCID.GoblinScout] = scoutRate;
@@ -336,24 +331,18 @@ namespace FargowiltasSouls.Core.Globals
                     }
                     else if (wideUnderground)
                     {
-                        //if (deepUnderground && !jungle && !snow)
-                        //{
-                        //    pool[NPCID.FireImp] = .01f;
-                        //    pool[NPCID.LavaSlime] = .01f;
-                        //}
-
-                        if (marble && NPC.downedBoss2)
+                        if (marble && NPC.downedBoss2 && normalSpawn)
                         {
                             pool[NPCID.Medusa] = .04f;
                         }
 
-                        if (granite)
+                        if (granite && normalSpawn)
                         {
                             pool[NPCID.GraniteFlyer] = .1f;
                             pool[NPCID.GraniteGolem] = .1f;
                         }
 
-                        if (cavern)
+                        if (cavern && normalSpawn)
                         {
                             if (noBiome && NPC.downedBoss3)
                                 pool[NPCID.DarkCaster] = .02f;
@@ -368,72 +357,44 @@ namespace FargowiltasSouls.Core.Globals
                         if (spiderCave && !NPC.savedStylist && !NPC.AnyNPCs(NPCID.WebbedStylist))
                             pool[NPCID.WebbedStylist] = .5f;
                     }
-                    else if (underworld)
+                    else if (underworld && normalSpawn)
                     {
                         pool[NPCID.LeechHead] = .02f;
                         pool[NPCID.BlazingWheel] = .05f;
-                        //if (!FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
-                        //pool[NPCID.RedDevil] = .025f;
-                    }
-                    else if (sky)
-                    {
-                        if (normalSpawn)
-                        {
-                            pool[NPCID.AngryNimbus] = .02f;
-
-                            if (WorldSavingSystem.DownedAnyBoss)
-                                pool[NPCID.WyvernHead] = .005f;
-                        }
                     }
 
                     //height-independent biomes
-                    if (corruption)
-                    {
-                        if (NPC.downedBoss2)
-                        {
-                            pool[NPCID.SeekerHead] = .005f;
-                            if (normalSpawn && NPC.downedBoss3 && !underworld && bossCanSpawn)
-                                pool[NPCID.EaterofWorldsHead] = .0002f;
-                        }
-                    }
-
-                    if (crimson)
-                    {
-                        if (NPC.downedBoss2)
-                        {
-                            pool[NPCID.IchorSticker] = .005f;
-                            if (normalSpawn && NPC.downedBoss3 && !underworld && bossCanSpawn)
-                                pool[NPCID.BrainofCthulhu] = .0002f;
-                        }
-                    }
-
                     if (jungle)
                     {
                         if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && normalSpawn)
                             pool[NPCID.Parrot] = .01f;
                     }
 
-                    if (mushroom)
+                    if (mushroom && normalSpawn)
                     {
                         pool[NPCID.FungiBulb] = .02f;
                         pool[NPCID.MushiLadybug] = .02f;
                         pool[NPCID.ZombieMushroom] = .02f;
                         pool[NPCID.ZombieMushroomHat] = .02f;
                         pool[NPCID.AnomuraFungus] = .02f;
+                        pool[NPCID.TruffleWorm] = .005f;
                     }
 
                     if (ocean)
                     {
-                        pool[NPCID.PigronCorruption] = .002f;
-                        pool[NPCID.PigronCrimson] = .002f;
-                        pool[NPCID.PigronHallow] = .002f;
+                        if (normalSpawn)
+                            pool[NPCID.PigronHallow] = .006f;
+
+                        if (Main.bloodMoon && spawnInfo.Water)
+                        {
+                            pool[NPCID.EyeballFlyingFish] = .02f;
+                            pool[NPCID.ZombieMerman] = .02f;
+                        }
                     }
 
-                    if (!surface && normalSpawn)
+                    if (normalSpawn && (!surface || Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].WallType == WallID.DirtUnsafe))
                     {
                         pool[NPCID.Mimic] = .002f;
-                        if (desert && NPC.downedBoss2)
-                            pool[NPCID.DuneSplicerHead] = .002f;
                     }
                 }
                 else //all the hardmode
@@ -445,88 +406,49 @@ namespace FargowiltasSouls.Core.Globals
                         {
                             if (normalSpawn)
                             {
-                                if (noBiome && bossCanSpawn)
-                                    pool[NPCID.KingSlime] = Main.slimeRain ? .0004f : .0002f;
-
                                 if (NPC.downedGolemBoss && (noBiome || dungeon))
                                     pool[NPCID.CultistArcherWhite] = .01f;
                             }
                         }
                         else //night
                         {
-                            if (Main.bloodMoon)
+                            if (Main.bloodMoon && normalSpawn)
                             {
                                 pool[NPCID.ChatteringTeethBomb] = .1f;
-                                /*if (!sinisterIcon && !NPC.downedMechBoss2 && !LumUtils.AnyBosses())
-                                    pool[NPCID.EyeofCthulhu] = .004f;
-
-                                if (NPC.downedPlantBoss)
-                                {
-                                    if (bossCanSpawn)
-                                    {
-                                        pool[NPCID.Retinazer] = .002f;
-                                        pool[NPCID.Spazmatism] = .002f;
-                                        pool[NPCID.TheDestroyer] = .002f;
-                                        pool[NPCID.SkeletronPrime] = .002f;
-                                    }
-                                }*/
-                            }
-
-                            if (noInvasion && !oldOnesArmy && bossCanSpawn)
-                            {
-                                pool[NPCID.Clown] = 0.01f;
-                                if (!pool.ContainsKey(NPCID.Werewolf) || pool[NPCID.Werewolf] < 0.005f)
-                                    pool[NPCID.Werewolf] = 0.005f;
                             }
                                 
-
                             if (normalSpawn)
                             {
                                 if (NPC.downedBoss1)
                                 {
                                     if (noBiome)
                                     {
-                                        pool[NPCID.CorruptBunny] = .05f;
-                                        pool[NPCID.CrimsonBunny] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
                                     }
 
                                     if (snow)
                                     {
-                                        pool[NPCID.CorruptPenguin] = .05f;
-                                        pool[NPCID.CrimsonPenguin] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
                                     }
 
                                     if (ocean || Main.raining)
                                     {
-                                        pool[NPCID.CorruptGoldfish] = .05f;
-                                        pool[NPCID.CrimsonGoldfish] = .05f;
+                                        pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
                                     }
                                 }
-
-                                if (bossCanSpawn && !NPC.downedMechBoss2)
-                                    pool[NPCID.EyeofCthulhu] = .001f;
 
                                 if (NPC.downedMechBossAny)
                                     pool[NPCID.Probe] = 0.01f;
 
-                                if (NPC.downedPlantBoss) //GODLUL
+                                if (NPC.downedPlantBoss)
                                 {
-                                    if (bossCanSpawn)
-                                    {
-                                        pool[NPCID.Retinazer] = .0001f;
-                                        pool[NPCID.Spazmatism] = .0001f;
-                                        pool[NPCID.TheDestroyer] = .0001f;
-                                        pool[NPCID.SkeletronPrime] = .0001f;
-                                    }
-
-                                    //if (!spawnInfo.player.FargoSouls().SkullCharm)
                                     pool[NPCID.SkeletonSniper] = .005f;
                                     pool[NPCID.SkeletonCommando] = .005f;
                                     pool[NPCID.TacticalSkeleton] = .005f;
                                 }
                             }
 
-                            if (NPC.downedMechBossAny && noInvasion)
+                            if (noInvasion && normalSpawn)
                             {
                                 #region night pumpkin moon, frost moon
                                 if (noBiome)
@@ -541,12 +463,6 @@ namespace FargowiltasSouls.Core.Globals
                                     pool[NPCID.Scarecrow8] = .01f;
                                     pool[NPCID.Scarecrow9] = .01f;
                                     pool[NPCID.Scarecrow10] = .01f;
-
-                                    if (NPC.downedHalloweenKing && bossCanSpawn)
-                                    {
-                                        //pool[NPCID.HeadlessHorseman] = .01f;
-                                        pool[NPCID.Pumpking] = .0025f;
-                                    }
                                 }
                                 else //in some biome
                                 {
@@ -557,11 +473,6 @@ namespace FargowiltasSouls.Core.Globals
                                     else if (crimson || corruption)
                                     {
                                         pool[NPCID.Splinterling] = .05f;
-
-                                        if (NPC.downedHalloweenTree && bossCanSpawn)
-                                        {
-                                            pool[NPCID.MourningWood] = .0025f;
-                                        }
                                     }
 
                                     if (snow)
@@ -569,88 +480,40 @@ namespace FargowiltasSouls.Core.Globals
                                         pool[NPCID.ZombieElf] = .02f;
                                         pool[NPCID.ZombieElfBeard] = .02f;
                                         pool[NPCID.ZombieElfGirl] = .02f;
-                                        pool[NPCID.Yeti] = .01f;
 
                                         pool[NPCID.ElfArcher] = .05f;
                                         pool[NPCID.ElfCopter] = .01f;
-
-                                        if (NPC.downedChristmasTree && bossCanSpawn)
-                                        {
-                                            pool[NPCID.Everscream] = .0025f;
-                                        }
-
-                                        if (NPC.downedChristmasSantank && bossCanSpawn)
-                                        {
-                                            pool[NPCID.SantaNK1] = .0025f;
-                                        }
                                     }
                                 }
                                 #endregion
                             }
                         }
 
-                        if (hallow)
+                        if (hallow && normalSpawn)
                         {
-                            if (!Main.raining)
-                                pool[NPCID.RainbowSlime] = .001f;
                             pool[NPCID.GingerbreadMan] = .05f;
                         }
 
-                        if (snow && noInvasion)
-                        {
-                            if (!Main.raining && !spawnInfo.PlayerInTown)
-                                pool[NPCID.IceGolem] = .01f;
-                            /*pool[NPCID.SnowBalla] = .04f;
-                            pool[NPCID.MisterStabby] = .04f;
-                            pool[NPCID.SnowmanGangsta] = .04f;*/
-                        }
-
-                        if (ocean)
+                        if (ocean && normalSpawn)
                         {
                             if (night)
                             {
                                 pool[NPCID.CreatureFromTheDeep] = .02f;
                             }
-
-                            pool[NPCID.PigronCorruption] = .01f;
-                            pool[NPCID.PigronCrimson] = .01f;
-                            pool[NPCID.PigronHallow] = .01f;
-                            if (NPC.downedFishron && bossCanSpawn)
-                                pool[NPCID.DukeFishron] = .0002f;
+                            if (Main.bloodMoon && spawnInfo.Water)
+                            {
+                                pool[NPCID.BloodEelHead] = .02f;
+                                pool[NPCID.GoblinShark] = .02f;
+                            }
+                            pool[NPCID.PigronHallow] = .06f;
                         }
-                        else if (desert)
+                        else if (desert && normalSpawn)
                         {
-                            pool[NPCID.DesertBeast] = .05f;
-                        }
-
-                        if (NPC.downedMechBossAny && Main.raining)
-                        {
-                            pool[NPCID.LightningBug] = .1f;
-                        }
-
-                        if (corruption)
-                        {
-                            pool[NPCID.SeekerHead] = .1f;
-                        }
-
-                        if (crimson)
-                        {
-                            pool[NPCID.IchorSticker] = .1f;
+                            pool[NPCID.DesertBeast] = .1f;
                         }
                     }
                     else if (wideUnderground)
                     {
-                        if (desert && !corruption && !crimson)
-                        {
-                            pool[NPCID.DesertDjinn] = .05f;
-                        }
-
-                        //if (deepUnderground && !jungle && !snow)
-                        //{
-                        //    pool[NPCID.FireImp] = .02f;
-                        //    pool[NPCID.LavaSlime] = .02f;
-                        //}
-
                         if (cavern)
                         {
                             if (noBiome && NPC.downedBoss3)
@@ -659,227 +522,110 @@ namespace FargowiltasSouls.Core.Globals
 
                         if (!NPC.savedWizard && !NPC.AnyNPCs(NPCID.BoundWizard))
                             pool[NPCID.BoundWizard] = .5f;
-
-                        if (dungeon && night && normalSpawn && bossCanSpawn)
-                            pool[NPCID.SkeletronHead] = .00005f;
-
-                        if (NPC.downedMechBossAny)
-                        {
-                            if (snow && !Main.dayTime) //frost moon underground
-                            {
-                                if (underground)
-                                    pool[NPCID.Nutcracker] = .05f;
-
-                                if (cavern)
-                                {
-                                    pool[NPCID.Krampus] = .025f;
-                                    if (NPC.downedChristmasIceQueen && bossCanSpawn)
-                                        pool[NPCID.IceQueen] = .0025f;
-                                }
-                            }
-                        }
-
-                        if (NPC.downedAncientCultist && dungeon && bossCanSpawn)
-                            pool[NPCID.CultistBoss] = 0.00002f;
-
-                        if (spawnInfo.Player.ZoneUndergroundDesert)
-                        {
-                            if (!hallow && !corruption && !crimson)
-                            {
-                                pool[NPCID.SandShark] = .1f;
-                            }
-                            else
-                            {
-                                if (hallow)
-                                    pool[NPCID.SandsharkHallow] = .1f;
-                                if (corruption)
-                                    pool[NPCID.SandsharkCorrupt] = .1f;
-                                if (crimson)
-                                    pool[NPCID.SandsharkCrimson] = .1f;
-                            }
-                        }
                     }
                     else if (underworld)
                     {
                         pool[NPCID.LeechHead] = .025f;
-                        pool[NPCID.BoneSerpentHead] = .025f;
                         pool[NPCID.BlazingWheel] = .05f;
 
-                        if (bossCanSpawn && !FargoSoulsUtil.BossIsAlive(ref wallBoss, NPCID.WallofFlesh))
-                            pool[NPCID.TheHungryII] = .03f;
-
-                        if (NPC.downedMechBossAny)
+                        if (NPC.downedPlantBoss)
                         {
-                            pool[NPCID.BlazingWheel] = .05f;
+                            pool[NPCID.DiabolistRed] = .01f;
+                            pool[NPCID.DiabolistWhite] = .01f;
+                            pool[NPCID.Necromancer] = .01f;
+                            pool[NPCID.NecromancerArmored] = .01f;
+                            pool[NPCID.RaggedCaster] = .01f;
+                            pool[NPCID.RaggedCasterOpenCoat] = .01f;
                         }
-
-                        if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
-                        {
-                            pool[NPCID.DiabolistRed] = .001f;
-                            pool[NPCID.DiabolistWhite] = .001f;
-                            pool[NPCID.Necromancer] = .001f;
-                            pool[NPCID.NecromancerArmored] = .001f;
-                            pool[NPCID.RaggedCaster] = .001f;
-                            pool[NPCID.RaggedCasterOpenCoat] = .001f;
-                        }
-
-                        if (WorldSavingSystem.DownedBetsy && bossCanSpawn)
-                            pool[NPCID.DD2Betsy] = .0002f;
                     }
-                    else if (sky)
+                    else if (sky && normalSpawn)
                     {
-                        if (normalSpawn)
+                       if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                           pool[NPCID.AngryNimbus] = .1f;
+                       pool[NPCID.MartianProbe] = .01f;
+
+                        if (NPC.downedGolemBoss)
                         {
-                            pool[NPCID.AngryNimbus] = .05f;
-                            pool[NPCID.MartianSaucerCore] = 0.001f;
-
-                            if (NPC.downedGolemBoss)
-                            {
-                                pool[NPCID.SolarCrawltipedeHead] = .03f;
-                                pool[NPCID.VortexHornetQueen] = .03f;
-                                pool[NPCID.NebulaBrain] = .03f;
-                                pool[NPCID.StardustJellyfishBig] = .03f;
-                                pool[NPCID.AncientCultistSquidhead] = .03f;
-                                pool[NPCID.CultistDragonHead] = .03f;
-                            }
-                            else if (NPC.downedMechBossAny)
-                            {
-                                pool[NPCID.SolarCrawltipedeHead] = .001f;
-                                pool[NPCID.VortexHornetQueen] = .001f;
-                                pool[NPCID.NebulaBrain] = .001f;
-                                pool[NPCID.StardustJellyfishBig] = .001f;
-                            }
-
-                            if (NPC.downedMoonlord && bossCanSpawn)
-                            {
-                                pool[NPCID.MoonLordCore] = 0.0002f;
-                            }
+                            pool[NPCID.SolarCrawltipedeHead] = .03f;
+                            pool[NPCID.VortexHornetQueen] = .03f;
+                            pool[NPCID.NebulaBrain] = .03f;
+                            pool[NPCID.StardustJellyfishBig] = .03f;
+                            pool[NPCID.AncientCultistSquidhead] = .03f;
+                            pool[NPCID.CultistDragonHead] = .03f;
                         }
                     }
 
                     //height-independent biomes
-                    if (corruption)
+                    if (jungle && normalSpawn)
                     {
-                        if (normalSpawn && bossCanSpawn)
-                            pool[NPCID.EaterofWorldsHead] = .0002f;
-                    }
-
-                    if (crimson)
-                    {
-                        if (normalSpawn && bossCanSpawn)
-                            pool[NPCID.BrainofCthulhu] = .0002f;
-                    }
-
-                    if (jungle)
-                    {
-                        if (normalSpawn && bossCanSpawn)
-                            pool[NPCID.QueenBee] = .0001f;
-
-                        if (normalSpawn)
-                            pool[NPCID.Parrot] = .01f;
+                        pool[NPCID.Parrot] = .01f;
 
                         if (!surface)
                         {
                             pool[NPCID.BigMimicJungle] = .0015f;
-
-                            if (NPC.downedGolemBoss && bossCanSpawn)
-                                pool[NPCID.Plantera] = .00005f;
                         }
                     }
 
-                    if (spawnInfo.Lihzahrd && spawnInfo.SpawnTileType == TileID.LihzahrdBrick)
+                    if (spawnInfo.Lihzahrd && spawnInfo.SpawnTileType == TileID.LihzahrdBrick && normalSpawn)
                     {
-                        pool[NPCID.BlazingWheel] = .1f;
-                        pool[NPCID.SpikeBall] = .1f;
-
-                        if (NPC.downedPlantBoss)// && !spawnInfo.player.FargoSouls().SkullCharm)
-                        {
-                            const float rate = .01f;
-                            pool[NPCID.BigMimicJungle] = rate;
-
-                            pool[NPCID.DiabolistRed] = rate / 2;
-                            pool[NPCID.DiabolistWhite] = rate / 2;
-                            pool[NPCID.Necromancer] = rate / 2;
-                            pool[NPCID.NecromancerArmored] = rate / 2;
-                            pool[NPCID.RaggedCaster] = rate / 2;
-                            pool[NPCID.RaggedCasterOpenCoat] = rate / 2;
-                        }
+                        //pool[NPCID.BlazingWheel] = .1f;
+                        //pool[NPCID.SpikeBall] = .1f;
+                        //pool[NPCID.BigMimicJungle] = .1f;
                     }
 
-                    if (ocean && spawnInfo.Water)
+                    if (ocean && spawnInfo.Water && normalSpawn)
                     {
                         pool[NPCID.AnglerFish] = .1f;
                     }
                 }
                 // irrespective of hardmode
-                if (snow && !surface)
+                if (snow && normalSpawn)
                 {
                     pool[NPCID.SnowFlinx] = .05f;
                 }
             }
-
-            /*if (monsterMadhouse)
-            {
-                pool.Clear();
-                if (MMWorld.MMPoints >= 0) //Goblin Army
-                {
-
-                }
-                if (MMWorld.MMPoints >= 90 && MMWorld.MMPoints < 270) //OOA 1
-                {
-
-                }
-                if (MMWorld.MMPoints >= 180) //Pirates
-                {
-
-                }
-                if (MMWorld.MMPoints >= 270 && MMWorld.MMPoints < 630) //OOA2
-                {
-
-                }
-                if (MMWorld.MMPoints >= 360) //Eclipse
-                {
-
-                }
-                if (MMWorld.MMPoints >= 450) //Pumpkin Moon
-                {
-
-                }
-                if (MMWorld.MMPoints >= 540) //Frost Moon
-                {
-
-                }
-                if (MMWorld.MMPoints >= 540) //Martians
-                {
-
-                }
-                if (MMWorld.MMPoints >= 630) //OOA3
-                {
-
-                }
-                if (MMWorld.MMPoints >= 720) //Lunar Events
-                {
-
-                }
-            }*/
         }
+
+        public static List<int> CrimsonEnemies =
+        [
+            NPCID.FaceMonster, NPCID.Crimera, NPCID.BigCrimera, NPCID.LittleCrimera, NPCID.BloodCrawler, NPCID.BloodCrawlerWall, NPCID.CrimsonGoldfish, NPCID.CrimsonBunny, NPCID.CrimsonPenguin,
+            NPCID.Herpling, NPCID.Crimslime, NPCID.BigCrimslime, NPCID.LittleCrimslime, NPCID.BloodJelly, NPCID.BloodFeeder, NPCID.BloodMummy, NPCID.DesertLamiaDark, NPCID.DesertGhoulCrimson, 
+            NPCID.DesertDjinn, NPCID.SandsharkCrimson, NPCID.IchorSticker, NPCID.FloatyGross, NPCID.CrimsonAxe, NPCID.PigronCrimson, NPCID.BigMimicCrimson
+        ];
 
         public override void OnKill(NPC npc)
         {
             base.OnKill(npc);
-
+            if (!WorldSavingSystem.EternityMode)
+                return;
             if (npc.type == NPCID.Painter && WorldSavingSystem.DownedMutant && NPC.AnyNPCs(ModContent.NPCType<MutantBoss>()))
                 Item.NewItem(npc.GetSource_Loot(), npc.Hitbox, ModContent.ItemType<ScremPainting>());
 
             int closestP = Player.FindClosest(npc.Center, 1, 1);
-            if (closestP >= 0 && Main.player[closestP].ZoneCrimson)
+            if (CrimsonEnemies.Contains(npc.type) && !FargoSoulsUtil.AnyBossAlive() && closestP >= 0 && Main.player[closestP].ZoneCrimson && (Main.player[closestP].ZoneOverworldHeight || Main.player[closestP].ZoneDirtLayerHeight))
             {
                 for (int i = 0; i < Main.rand.Next(1, 4); i++)
                 {
-                    Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center, new Vector2(0, Main.rand.NextFloat(-10, -2)).RotatedByRandom(MathHelper.ToRadians(20)), ModContent.ProjectileType<BloodDroplet>(), 0, 0);
+                    Projectile.NewProjectileDirect(npc.GetSource_Death(), npc.Center, new Vector2(0, Main.rand.NextFloat(-14, -4)).RotatedByRandom(MathHelper.ToRadians(35)), ModContent.ProjectileType<BloodDroplet>(), 0, 0);
+                }
+            }         
+        }
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
+        {          
+            if (npc.boss && npc.life <= 0 && WorldSavingSystem.EternityMode)
+            {
+                if (npc.ModNPC == null || npc.ModNPC.Mod == Mod)
+                {
+                    for (int i = 0; i < Main.maxPlayers; i++)
+                    {
+                        if (Main.myPlayer == Main.player[i].whoAmI)
+                            ModContent.GetInstance<FirstEternityBossAchievement>().Condition.Complete();                        
+                    }
                 }
             }
+            base.HitEffect(npc, hit);
         }
+        
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
             #region tim's concoction drops
@@ -895,14 +641,14 @@ namespace FargowiltasSouls.Core.Globals
             switch (npc.type)
             {
                 case NPCID.BlueSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(npc.netID == NPCID.Pinky ? ItemID.TeleportationPotion : ItemID.RecallPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(npc.netID == NPCID.Pinky ? ItemID.TeleportationPotion : ItemID.RecallPotion, 3));
                     break;
 
                 case NPCID.DemonEye:
                 case NPCID.DemonEye2:
                 case NPCID.DemonEyeOwl:
                 case NPCID.DemonEyeSpaceship:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.NightOwlPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.NightOwlPotion, 2));
                     break;
 
                 case NPCID.MossHornet:
@@ -912,18 +658,13 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.HornetLeafy:
                 case NPCID.HornetSpikey:
                 case NPCID.HornetStingy:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RagePotion, 1, 1, 2));
-                    break;
-
-                case NPCID.Bee:
-                case NPCID.BeeSmall:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WrathPotion, 2));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.BattlePotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.GoblinPeon:
                 case NPCID.GoblinThief:
                 case NPCID.GoblinWarrior:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BattlePotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BuilderPotion, 4));
                     break;
 
                 case NPCID.JungleBat:
@@ -931,13 +672,29 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.Vampire:
                 case NPCID.VampireBat:
                 case NPCID.GiantFlyingFox:
-                case NPCID.Hellbat:
-                case NPCID.Lavabat:
                 case NPCID.IlluminantBat:
                 case NPCID.CaveBat:
                 case NPCID.GiantBat:
                 case NPCID.SporeBat:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SonarPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SonarPotion, 2));
+                    break;
+
+                case NPCID.Demon:
+                case NPCID.VoodooDemon:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WrathPotion, 1, 1, 2));
+                    break;
+
+                case NPCID.Hellbat:
+                case NPCID.Lavabat:
+                case NPCID.LavaSlime:
+                    TimsConcoctionDrop(new CommonDrop(ItemID.RagePotion, 3, chanceNumerator: 2));
+                    break;
+
+                case NPCID.SnowFlinx:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion, 1, 2, 3));
+                    break;
+                case NPCID.UndeadViking:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion));
                     break;
 
                 case NPCID.AngryBones:
@@ -956,18 +713,18 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.BlueArmoredBonesMace:
                 case NPCID.BlueArmoredBonesNoPants:
                 case NPCID.BlueArmoredBonesSword:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TitanPotion));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TitanPotion, 2));
                     break;
 
                 case NPCID.DarkCaster:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.PotionOfReturn, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.PotionOfReturn, 1, 2, 3));
                     break;
 
                 case NPCID.GiantShelly:
                 case NPCID.GiantShelly2:
                 case NPCID.GiantTortoise:
                 case NPCID.IceTortoise:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ThornsPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ThornsPotion, 1, 1, 2));
                     break;
 
                 case NPCID.Zombie:
@@ -983,13 +740,31 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.SwampZombie:
                 case NPCID.SmallSwampZombie:
                 case NPCID.BigSwampZombie:
+                case NPCID.TorchZombie:
+                case NPCID.ArmedZombie:
+                case NPCID.ArmedZombieCenx:
+                case NPCID.ArmedTorchZombie:
+                case NPCID.ArmedZombiePincussion:
+                case NPCID.ArmedZombieSlimed:
+                case NPCID.ArmedZombieSwamp:
+                case NPCID.ArmedZombieTwiggy:
                 case NPCID.ZombieDoctor:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.StinkPotion));
+                    //TimsConcoctionDrop(ItemDropRule.Common(ItemID.StinkPotion, 5));
+                    break;
+
+                case NPCID.WalkingAntlion:
+                case NPCID.GiantWalkingAntlion:
+                case NPCID.FlyingAntlion:
+                case NPCID.GiantFlyingAntlion:
+                case NPCID.Tumbleweed:
+                case NPCID.DesertBeast:
+                    TimsConcoctionDrop(new CommonDrop(ItemID.SwiftnessPotion, 3, chanceNumerator: 2));
                     break;
 
                 case NPCID.Antlion:
-                case NPCID.WalkingAntlion:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BuilderPotion, 1, 1, 3));
+                case NPCID.TombCrawlerHead:
+                case NPCID.DuneSplicerHead:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HunterPotion, 1, 1, 2));
                     break;
 
                 case NPCID.WallCreeper:
@@ -998,41 +773,42 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.BlackRecluseWall:
                 case NPCID.JungleCreeper:
                 case NPCID.JungleCreeperWall:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TrapsightPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TrapsightPotion));
                     break;
 
                 case NPCID.FireImp:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InfernoPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InfernoPotion));
                     break;
 
                 case NPCID.Harpy:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CalmingPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CalmingPotion));
                     break;
 
                 case NPCID.Crab:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CratePotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.CratePotion));
                     break;
 
                 case NPCID.FlyingFish:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.FishingPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.FishingPotion));
                     break;
 
                 case NPCID.IceSlime:
                 case NPCID.SpikedIceSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WaterWalkingPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WaterWalkingPotion));
                     break;
 
                 case NPCID.Piranha:
                 case NPCID.Arapaima:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GillsPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GillsPotion));
                     break;
 
                 case NPCID.BloodZombie:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RegenerationPotion, 1, 1, 3));
+                case NPCID.ZombieMerman:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RegenerationPotion, 1));
                     break;
 
-                case NPCID.LavaSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.WarmthPotion, 1, 1, 3));
+                case NPCID.GoblinShark:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.RegenerationPotion, 1, 3, 5));
                     break;
 
                 case NPCID.UmbrellaSlime:
@@ -1040,7 +816,12 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.Drippler:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HeartreachPotion, 1, 1, 3));
+                case NPCID.EyeballFlyingFish:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HeartreachPotion, 1));
+                    break;
+
+                case NPCID.BloodEelHead:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HeartreachPotion, 1, 3, 5));
                     break;
 
                 case NPCID.GiantWormHead:
@@ -1053,11 +834,12 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GraniteFlyer:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.IronskinPotion, 1, 1, 3));
+                case NPCID.GraniteGolem:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.IronskinPotion, 1, 1, 2));
                     break;
 
-                case NPCID.GraniteGolem:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.EndurancePotion, 1, 3, 5));
+                case NPCID.RockGolem:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.IronskinPotion, 1, 3, 8));
                     break;
 
                 case NPCID.Shark:
@@ -1065,17 +847,17 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GoblinArcher:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ArcheryPotion, 1, 1, 3));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.ArcheryPotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.GoblinSorcerer:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ManaRegenerationPotion, 1, 1, 3));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.ManaRegenerationPotion, 3, 1, 2, 2));
                     break;
 
                 case NPCID.PinkJellyfish:
                 case NPCID.BlueJellyfish:
                 case NPCID.GreenJellyfish:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ShinePotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ShinePotion));
                     break;
 
                 case NPCID.Salamander:
@@ -1087,59 +869,50 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.Salamander7:
                 case NPCID.Salamander8:
                 case NPCID.Salamander9:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InvisibilityPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.InvisibilityPotion, 1, 1, 2));
                     break;
 
                 case NPCID.MotherSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 3, 8));
                     break;
 
                 case NPCID.Nymph:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LovePotion, 1, 1, 6));
-                    break;
-
-                case NPCID.Tumbleweed:
-                case NPCID.DesertBeast:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SwiftnessPotion, 1, 1, 6));
-                    break;
-
-                case NPCID.TombCrawlerHead:
-                case NPCID.DuneSplicerHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.HunterPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LovePotion, 1));
                     break;
 
                 case NPCID.DoctorBones:
                 case NPCID.Mimic:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SpelunkerPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SpelunkerPotion, 1, 2, 3));
                     break;
 
                 case NPCID.UndeadMiner:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MiningPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MiningPotion, 1, 2, 3));
                     break;
 
                 case NPCID.Tim:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 2, 3));
                     break;
 
                 case NPCID.BoneSerpentHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ObsidianSkinPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ObsidianSkinPotion, 1, 3, 8));
                     break;
 
 
                 case NPCID.Gnome:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionLesser, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionLesser, 1, 2, 3));
                     break;
                 case NPCID.DungeonSlime:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotion, 1, 2, 3));
                     break;
                 case NPCID.Clown:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionGreater, 1, 1, 6));
+                case NPCID.EnchantedSword:
+                case NPCID.CrimsonAxe:
+                case NPCID.CursedHammer:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LuckPotionGreater, 1, 2, 3));
                     break;
 
-
                 case NPCID.ChaosElemental:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TeleportationPotion, 1, 1, 3));
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.PotionOfReturn, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.TeleportationPotion, 1, 2, 3));
                     break;
 
                 case NPCID.RainbowSlime:
@@ -1147,20 +920,20 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.RuneWizard:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 1, 6));
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ManaRegenerationPotion, 1, 1, 6));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.MagicPowerPotion, 1, 2, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.ManaRegenerationPotion, 1, 2, 3));
                     break;
 
                 case NPCID.GoblinSummoner:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.SummoningPotion, 1, 3, 8));
                     break;
 
                 case NPCID.PirateCaptain:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.AmmoReservationPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.AmmoReservationPotion, 1, 3, 8));
                     break;
 
                 case NPCID.WyvernHead:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GravitationPotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GravitationPotion, 1, 3, 8));
                     break;
 
                 case NPCID.BigMimicJungle:
@@ -1169,23 +942,36 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.BigMimicCorruption:
                 case NPCID.BigMimicCrimson:
                 case NPCID.BigMimicHallow:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LifeforcePotion, 1, 1, 12));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.LifeforcePotion, 1, 3, 8));
                     break;
 
                 case NPCID.ManEater:
                 case NPCID.Nutcracker:
                 case NPCID.Parrot:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.GenderChangePotion, 1, 1, 3));
+                    //TimsConcoctionDrop(ItemDropRule.Common(ItemID.GenderChangePotion));
                     break;
+
                 case NPCID.CorruptBunny:
                 case NPCID.CrimsonBunny:
                 case NPCID.CorruptGoldfish:
                 case NPCID.CrimsonGoldfish:
                 case NPCID.CorruptPenguin:
                 case NPCID.CrimsonPenguin:
-                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BiomeSightPotion, 1, 1, 3));
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.BiomeSightPotion, 2));
                     break;
-                default: break;
+
+                case NPCID.Maggot:
+                case NPCID.MaggotZombie:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.StinkPotion, 3));
+                    break;
+
+                default:
+                    if (npc.ModNPC != null)
+                    {
+                        if (npc.type == ModContent.NPCType<CactusMimic>())
+                            TimsConcoctionDrop(ItemDropRule.Common(ItemID.ThornsPotion, 1, 1, 2));
+                    }
+                    break;
             }
             #endregion
             //if (npc.ModNPC == null || npc.ModNPC.Mod is FargowiltasSouls) //not for other mods
@@ -1291,30 +1077,6 @@ namespace FargowiltasSouls.Core.Globals
             }
         }
 
-        public override void ModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
-        {
-            //ModifyHitByEither(npc, player, ref damage, ref knockback, ref crit);
-
-            if (WorldSavingSystem.EternityMode)
-            {
-                if (NPCID.Sets.CountsAsCritter[npc.type]) //npc.catchItem != 0 && npc.lifeMax == 5)
-                    player.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-            }
-        }
-
-        public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
-        {
-            Player player = Main.player[projectile.owner];
-
-            //ModifyHitByEither(npc, player, ref damage, ref knockback, ref crit);
-
-            if (WorldSavingSystem.EternityMode)
-            {
-                if (NPCID.Sets.CountsAsCritter[npc.type] /*npc.catchItem != 0 && npc.lifeMax == 5*/ && projectile.friendly && !projectile.hostile && projectile.type != ProjectileID.FallingStar)
-                    player.AddBuff(ModContent.BuffType<GuiltyBuff>(), 300);
-            }
-        }
-
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (WorldSavingSystem.EternityMode)
@@ -1325,7 +1087,7 @@ namespace FargowiltasSouls.Core.Globals
                 if (PaladinsShield)
                     modifiers.FinalDamage *= 0.5f;
 
-                if (WorldSavingSystem.MasochistModeReal && ((npc.boss || LumUtils.AnyBosses()) && FargoSoulsGlobalNPC.boss.IsWithinBounds(Main.maxNPCs) && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
+                if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld && ((npc.boss || LumUtils.AnyBosses()) && FargoSoulsGlobalNPC.boss.IsWithinBounds(Main.maxNPCs) && npc.Distance(Main.npc[FargoSoulsGlobalNPC.boss].Center) < 3000))
                     modifiers.FinalDamage *= 0.9f;
             }
 
@@ -1347,42 +1109,6 @@ namespace FargowiltasSouls.Core.Globals
                 Main.EntitySpriteDraw(buffIcon, drawPos - Main.screenPosition + new Vector2(0f, npc.gfxOffY), buffIcon.Bounds, buffColor, 0, buffIcon.Bounds.Size() / 2, 1f, SpriteEffects.None, 0);
             }
         }*/
-
-        public static bool StealFromInventory(Player target, ref Item item)
-        {
-            if (target.FargoSouls().StealingCooldown <= 0 && !item.IsAir)
-            {
-                target.FargoSouls().StealingCooldown = 900; //trust me, keep these separate
-                target.AddBuff(ModContent.BuffType<ThiefCDBuff>(), 900);
-
-
-                //int i = Item.NewItem(target.GetSource_DropAsItem("Stolen"), (int)target.position.X, (int)target.position.Y, target.width, target.height, item.type, item.stack, false, -1, false, false);
-                //Vector2 position = Main.item[i].position;
-
-                //Main.item[i] = item.Clone();
-                //Main.item[i].whoAmI = i;
-                //Main.item[i].position = position;
-                //Main.item[i].stack = item.stack;
-
-                //Main.item[i].velocity.X = Main.rand.Next(-20, 21) * 0.2f;
-                //Main.item[i].velocity.Y = Main.rand.Next(-20, 1) * 0.2f;
-                //Main.item[i].noGrabDelay = 100;
-                //Main.item[i].newAndShiny = false;
-
-                //if (Main.netMode == NetmodeID.MultiplayerClient)
-                //    NetMessage.SendData(MessageID.SyncItem, -1, -1, null, i, 1f);
-
-                //item.TurnToAir();
-
-                target.DropItem(target.GetSource_DropAsItem("Stolen"), target.Center, ref item);
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         public static void Horde(NPC npc, int size)
         {
@@ -1455,6 +1181,11 @@ namespace FargowiltasSouls.Core.Globals
                 foreach (int buff in buffs)
                 {
                     FargoSoulsUtil.AddDebuffFixedDuration(p, buff, 2);
+                }
+
+                if (buffs.Contains(ModContent.BuffType<HexedBuff>()))
+                {
+                    p.FargoSouls().HexedInflictor = npc.whoAmI;
                 }
             }
         }

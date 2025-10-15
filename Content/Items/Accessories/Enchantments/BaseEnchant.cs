@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public abstract class BaseEnchant : SoulsItem
     {
+        public override string Texture => $"{Mod.Name}/Assets/Textures/Content/Items/Accessories/Enchantments/{Name}";
         public abstract Color nameColor { get; }
         public bool IsAccessory = false;
         public string wizardEffect()
@@ -93,12 +95,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             {
                 for (int j = 0; j < 12; j++)
                 {
-                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 1f;
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 4f;
                     float modifier = 0.5f + ((float)Math.Sin(drawTimer / 30f) / 6);
-                    Color glowColor = Color.Lerp(Color.Blue with { A = 0 }, Color.Silver with { A = 0 }, modifier) * 0.5f;
+                    Color glowColor = Color.Lerp(Color.Blue with { A = 0 }, Color.Silver with { A = 0 }, modifier) * 0.8f;
 
                     Texture2D texture = Terraria.GameContent.TextureAssets.Item[Item.type].Value;
-                    Main.EntitySpriteDraw(texture, position + afterimageOffset, null, glowColor, 0, texture.Size() * 0.5f, Item.scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, position + afterimageOffset, null, glowColor, 0, origin, scale, SpriteEffects.None, 0f);
                 }
             }
             drawTimer++;

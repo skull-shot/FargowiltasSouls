@@ -1,9 +1,10 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Accessories.Souls;
-using FargowiltasSouls.Content.Items.Armor;
+using FargowiltasSouls.Content.Items.Armor.Gaia;
+using FargowiltasSouls.Content.Items.Armor.Eternal;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Summons;
 using FargowiltasSouls.Core.Systems;
@@ -15,11 +16,13 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Misc
 {
     public class EternityAdvisor : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Misc", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -131,7 +134,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     ModContent.ItemType<TungstenEnchant>()
                 );
             }
-            else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.CursedCoffin])
+            else if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin])
             {
                 summonType = ModContent.ItemType<CoffinSummon>();
                 build += GetBuildText(
@@ -197,7 +200,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     Main.rand.Next(new int[] { ItemID.BundleofBalloons, ItemID.HorseshoeBundle, ModContent.ItemType<BeeEnchant>() })
                     ) + GetBuildTextRandom(
                     2,
-                    ModContent.ItemType<SkullCharm>(),
+                    ModContent.ItemType<CrystalSkull>(),
                     ModContent.ItemType<ShadowEnchant>(),
                     ModContent.ItemType<TinEnchant>(),
                     ModContent.ItemType<TungstenEnchant>(),
@@ -243,7 +246,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     Main.rand.Next(new int[] { ModContent.ItemType<SupremeDeathbringerFairy>(), ModContent.ItemType<SparklingAdoration>() })
                 ) + GetBuildTextRandom(3,
                     ModContent.ItemType<TinEnchant>(),
-                    ModContent.ItemType<SkullCharm>(),
+                    ModContent.ItemType<CrystalSkull>(),
                     ModContent.ItemType<CopperEnchant>(),
                     ModContent.ItemType<FossilEnchant>(),
                     ModContent.ItemType<NinjaEnchant>());
@@ -271,7 +274,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                 mageSpecific = [ItemID.SorcererEmblem];
                 summonerSpecific = [ItemID.SummonerEmblem, ItemID.PygmyNecklace];
             }
-            else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.BanishedBaron])
+            else if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.BanishedBaron])
             {
                 summonType = ModContent.ItemType<MechLure>();
                 build += GetBuildText(
@@ -364,9 +367,9 @@ namespace FargowiltasSouls.Content.Items.Misc
                 mageSpecific = [ItemID.SorcererEmblem];
                 summonerSpecific = [ItemID.SummonerEmblem, ModContent.ItemType<AncientHallowEnchant>()];
             }
-            else if (!WorldSavingSystem.downedBoss[(int)WorldSavingSystem.Downed.Lifelight])
+            else if (!WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.Lifelight])
             {
-                summonType = ModContent.ItemType<FragilePixieLamp>();
+                summonType = ModContent.ItemType<CrystallineEffigy>();
                 build += GetBuildText(
                     Main.rand.Next(new int[] { ModContent.ItemType<AeolusBoots>(), ModContent.ItemType<MeteorEnchant>() }),
                     Main.rand.Next(new int[] { ItemID.FlameWings, ItemID.FrozenWings, ItemID.BeeWings, ModContent.ItemType<GelicWings>() })
@@ -529,7 +532,7 @@ namespace FargowiltasSouls.Content.Items.Misc
 
                     Main.rand.NextBool() ? ItemID.BetsyWings : ItemID.FishronWings,
                     ItemID.EmpressFlightBooster,
-                    ModContent.ItemType<ChaliceoftheMoon>()
+                    ModContent.ItemType<VerdantDoomsayerMask>()
                 ) + GetBuildTextRandom(
                     4,
                     Main.rand.NextBool() ? ModContent.ItemType<AeolusBoots>() : ModContent.ItemType<ValhallaKnightEnchant>(),
@@ -555,7 +558,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     ModContent.ItemType<TerraForce>(),
                     ModContent.ItemType<EarthForce>(),
-                    ModContent.ItemType<ShadowForce>(),
+                    ModContent.ItemType<DeathForce>(),
                     ModContent.ItemType<NatureForce>(),
                     ModContent.ItemType<WillForce>(),
                     ModContent.ItemType<HeartoftheMasochist>()
@@ -576,7 +579,7 @@ namespace FargowiltasSouls.Content.Items.Misc
                     3,
                     ModContent.ItemType<TerraForce>(),
                     ModContent.ItemType<EarthForce>(),
-                    ModContent.ItemType<ShadowForce>(),
+                    ModContent.ItemType<DeathForce>(),
                     ModContent.ItemType<NatureForce>(),
                     ModContent.ItemType<WillForce>(),
                     ModContent.ItemType<HeartoftheMasochist>()
@@ -603,9 +606,9 @@ namespace FargowiltasSouls.Content.Items.Misc
             {
                 summonType = ModContent.ItemType<MutantsCurse>();
                 build += GetBuildText(
-                    ModContent.ItemType<MutantMask>(),
-                    ModContent.ItemType<MutantBody>(),
-                    ModContent.ItemType<MutantPants>()
+                    ModContent.ItemType<EternalFlame>(),
+                    ModContent.ItemType<EternalCore>(),
+                    ModContent.ItemType<EternalLeggings>()
                 ) + " " + GetBuildText(
                     ModContent.ItemType<EternitySoul>(),
                     ModContent.ItemType<MasochistSoul>(),

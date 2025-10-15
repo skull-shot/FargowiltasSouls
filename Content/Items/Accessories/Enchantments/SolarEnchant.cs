@@ -1,9 +1,11 @@
-﻿using FargowiltasSouls.Assets.Sounds;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Cosmos;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
@@ -16,6 +18,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
@@ -58,9 +61,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SolarEruption)
             .AddIngredient(ItemID.StarWrath) //terrarian
 
-            .AddTile(TileID.LunarCraftingStation)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
 
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return SolarFlareEffect.BaseDamage(Main.LocalPlayer);
         }
     }
 
@@ -69,12 +79,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override Header ToggleHeader => Header.GetHeader<CosmoHeader>();
         public override int ToggleItemType => ModContent.ItemType<SolarEnchant>();
         public override bool ExtraAttackEffect => true;
+        public static int BaseDamage(Player player) => (int)((player.ForceEffect<SolarFlareEffect>() ? 5800 : 2900) * player.ActualClassDamage(DamageClass.Melee));
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
             if (player.whoAmI == Main.myPlayer)
-                CooldownBarManager.Activate("SolarEnchantCharge", ModContent.Request<Texture2D>("FargowiltasSouls/Content/Items/Accessories/Enchantments/SolarEnchant").Value, SolarEnchant.NameColor, 
+                CooldownBarManager.Activate("SolarEnchantCharge", FargoAssets.GetTexture2D("Content/Items/Accessories/Enchantments", "SolarEnchant").Value, SolarEnchant.NameColor, 
                     () => Main.LocalPlayer.FargoSouls().SolarEnchCharge / 240, true, activeFunction: () => player.HasEffect<SolarFlareEffect>());
 
             player.endurance += 0.2f * modPlayer.SolarEnchCharge / 240f;

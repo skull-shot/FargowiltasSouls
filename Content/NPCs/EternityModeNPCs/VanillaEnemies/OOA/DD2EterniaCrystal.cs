@@ -2,6 +2,7 @@
 using FargowiltasSouls.Core.NPCMatching;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent.Events;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
@@ -11,6 +12,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.DD2EterniaCrystal);
 
         public int InvulTimer;
+
+        public override void SetStaticDefaults()
+        {
+            NPCID.Sets.ImmuneToAllBuffs[NPCID.DD2EterniaCrystal] = true;
+        }
 
         public override void AI(NPC npc)
         {
@@ -39,6 +45,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             }
 
         }
+
+        public override bool? CanBeHitByProjectile(NPC npc, Projectile projectile)
+        {
+            if (projectile.FargoSouls().Reflected)
+                return false;
+            return base.CanBeHitByProjectile(npc, projectile);
+        }
+
         public override void ModifyIncomingHit(NPC npc, ref NPC.HitModifiers modifiers)
         {
             if (InvulTimer > 0)

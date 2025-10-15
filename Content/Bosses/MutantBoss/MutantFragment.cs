@@ -1,9 +1,10 @@
 using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
@@ -12,11 +13,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantFragment_April" :
-            "FargowiltasSouls/Content/Projectiles/Masomode/Bosses/LunaticCultist/CelestialFragment";
+            "FargowiltasSouls/Assets/Textures/Content/Projectiles/Eternity/Bosses/LunaticCultist/CelestialFragment";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Celestial Fragment");
             Main.projFrames[Projectile.type] = 4;
         }
 
@@ -30,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         private int ritualID = -1;
@@ -96,17 +96,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 360);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            switch ((int)Projectile.ai[0])
-            {
-                case 0: target.AddBuff(ModContent.BuffType<ReverseManaFlowBuff>(), 180); break; //nebula
-                case 1: target.AddBuff(ModContent.BuffType<AtrophiedBuff>(), 180); break; //solar
-                case 2: target.AddBuff(ModContent.BuffType<JammedBuff>(), 180); break; //vortex
-                default: target.AddBuff(ModContent.BuffType<AntisocialBuff>(), 180); break; //stardust
-            }
         }
 
         public override Color? GetAlpha(Color lightColor)

@@ -1,4 +1,4 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
+﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -27,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.scale = 0;
             Projectile.Opacity = 1;
         }

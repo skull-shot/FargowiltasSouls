@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Fargowiltas.Content.Items.Tiles;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 
@@ -45,7 +46,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.LavaproofTackleBag)
                 .AddIngredient(ItemID.FishingBobberGlowingStar)
                 .AddIngredient(ItemID.FiberglassFishingPole)
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
         }
     }

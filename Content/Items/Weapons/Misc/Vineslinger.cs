@@ -1,3 +1,4 @@
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.JungleMimic;
 using Terraria;
 using Terraria.ID;
@@ -7,12 +8,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 {
     public class Vineslinger : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Misc", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ToolTipDamageMultiplier[Type] = 2f;
-            // DisplayName.SetDefault("Vineslinger");
-            // Tooltip.SetDefault("Hitting an enemy fires leaves");
         }
 
         public override void SetDefaults()

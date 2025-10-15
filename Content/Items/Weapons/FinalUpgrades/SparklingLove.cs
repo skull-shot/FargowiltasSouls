@@ -1,8 +1,9 @@
 ﻿
 using FargowiltasSouls.Assets.Sounds;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Materials;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,14 +16,11 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     public class SparklingLove : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.ItemsThatAllowRepeatedRightClick[Type] = true;
-            // DisplayName.SetDefault("Sparkling Love");
-            /* Tooltip.SetDefault(@"Right click to summon the soul of Deviantt
-Right click pattern becomes denser with up to 12 empty minion slots
-'The soul-consuming demon axe of love and justice from a defeated foe...'"); */
         }
 
         public override void SetDefaults()
@@ -38,7 +36,7 @@ Right click pattern becomes denser with up to 12 empty minion slots
             Item.scale = 2f;
             Item.rare = ItemRarityID.Purple;
             Item.UseSound = FargosSoundRegistry.DeviSwing;
-            Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.SparklingLove>();
+            Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.SparklingLove>();
             Item.value = Item.sellPrice(0, 70);
             Item.noMelee = true; //no melee hitbox
             Item.noUseGraphic = true; //dont draw Item
@@ -67,7 +65,7 @@ Right click pattern becomes denser with up to 12 empty minion slots
             }
             else
             {
-                Item.shoot = ModContent.ProjectileType<Projectiles.BossWeapons.SparklingLove>();
+                Item.shoot = ModContent.ProjectileType<Content.Projectiles.Weapons.FinalUpgrades.SparklingLove>();
                 Item.useStyle = ItemUseStyleID.Swing;
                 Item.DamageType = DamageClass.Melee;
                 Item.noUseGraphic = true;

@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.Misc;
-using FargowiltasSouls.Content.Projectiles.Critters;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Misc;
+using FargowiltasSouls.Content.Projectiles.Weapons;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,13 +9,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 {
     public class TophatSquirrelWeapon : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Misc", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("Top Hat Squirrel");
-            // Tooltip.SetDefault("'Who knew this squirrel had phenomenal cosmic power?'");
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "高顶礼帽松鼠");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'谁能知道,这只松鼠竟然有着非凡的宇宙力量呢?'");
         }
 
         public override void SetDefaults()
@@ -23,7 +21,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Misc
 
             Item.width = 20;
             Item.height = 20;
-            Item.rare = ItemRarityID.Yellow;
+            Item.rare = ItemRarityID.Lime;
             Item.useAnimation = 45;
             Item.useTime = 45;
 

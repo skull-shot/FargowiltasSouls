@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.BossBags;
-using FargowiltasSouls.Content.Projectiles.ChallengerItems;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,6 +9,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class MountedAcornGun : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         public override void SetStaticDefaults()
         {
             ItemID.Sets.IsRangedSpecialistWeapon[Item.type] = true;

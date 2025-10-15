@@ -1,8 +1,14 @@
 ﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -10,19 +16,12 @@ using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.AbomBoss
 {
-    public class AbomDeathray : BaseDeathray
+    public class AbomDeathray : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/AbomDeathray";
-        public AbomDeathray() : base(120) { }
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "AbomDeathray");
+        public AbomDeathray() : base(120, drawDistance: 6000) { }
         private Vector2 spawnPos;
         public bool fadeStart = false;
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Abominable Deathray");
-        }
 
         public override void AI()
         {
@@ -77,10 +76,11 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
                 {
                     if (FargoSoulsUtil.HostCheck)
                     {
-                        for (int i = Main.rand.Next(150); i < 3000; i += 300)
+                        for (int i = Main.rand.Next(150); i < 6000; i += 300)
                         {
+                            float ai0 = Projectile.ai[0];
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.Center + Projectile.velocity * i, Vector2.Zero,
-                                ModContent.ProjectileType<AbomScytheSplit>(), Projectile.damage, Projectile.knockBack, Projectile.owner, Projectile.ai[0], -1f);
+                                ModContent.ProjectileType<AbomScytheSplit>(), Projectile.damage, Projectile.knockBack, Projectile.owner, ai0, -1f);
                         }
                     }
 
@@ -142,26 +142,36 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.position -= Projectile.velocity;
             Projectile.rotation = Projectile.velocity.ToRotation() - 1.57079637f;
         }
-
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                target.AddBuff(BuffID.Burning, 180);
-            }
-            target.AddBuff(BuffID.WitheredArmor, 600);
-            target.AddBuff(BuffID.WitheredWeapon, 600);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
 
-        public float WidthFunction(float _) => Projectile.width * Projectile.scale * 2;
+        public float WidthFunction(float _) => Projectile.width * Projectile.scale;
 
         public static Color ColorFunction(float _) => new(253, 254, 32, 100);
 
         public override bool PreDraw(ref Color lightColor)
         {
-            AbomSword.DrawStyxGazerDeathray(Projectile, drawDistance, WidthFunction, false, fadeStart);
+            
             return false;
+        }
+
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+            List<Vector2> laserPositions = Projectile.GetLaserControlPoints(12, drawDistance);
+
+            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.FlameFieldShader");
+            shader.TrySetParameter("laserDirection", Projectile.velocity);
+            shader.TrySetParameter("screenPosition", Main.screenPosition);
+            shader.SetTexture(FargoAssets.WavyNoise.Value, 1, SamplerState.LinearWrap);
+
+            PrimitiveSettings laserSettings = new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader);
+            PrimitiveRenderer.RenderTrail(laserPositions, laserSettings, 60);
+            Main.spriteBatch.ResetToDefault();
         }
     }
 }

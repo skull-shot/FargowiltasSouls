@@ -1,4 +1,6 @@
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -12,7 +14,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
     public class LifeSlurp : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/LifelightParts/ShardGem1";
+        public override string Texture => FargoSoulsUtil.EmptyTexture;
 
         private int rGem = 1;
 
@@ -51,7 +53,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override bool? CanDamage() => Projectile.ai[0] >= 30f ? base.CanDamage() : false;
         public override void AI()
         {
-            if (Projectile.ai[0] > 30 && !First && !lifelight.TypeAlive<LifeChallenger>())
+            if (Projectile.ai[0] > 30 && !First && !lifelight.TypeAlive<Lifelight>())
             {
                 Projectile.Kill();
                 return;
@@ -74,7 +76,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 if (First)
                 {
                     lifelight = Main.npc[(int)Projectile.ai[1]];
-                    if (!lifelight.TypeAlive<LifeChallenger>())
+                    if (!lifelight.TypeAlive<Lifelight>())
                     {
                         Projectile.Kill();
                         return;
@@ -155,11 +157,11 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 3);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/ExtraTextures/LifelightParts/ShardGem{rGem}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            AtlasTexture texture2D13 = AtlasManager.GetTexture($"FargowiltasSouls.ShardGem{rGem}");
             int num156 = texture2D13.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
@@ -176,10 +178,10 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 color27 *= (float)(ProjectileID.Sets.TrailCacheLength[Projectile.type] - i) / ProjectileID.Sets.TrailCacheLength[Projectile.type];
                 Vector2 value4 = Projectile.oldPos[i];
                 float num165 = Projectile.oldRot[i];
-                Main.EntitySpriteDraw(texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, Projectile.scale, effects, 0);
+                Utilities.Draw(Main.spriteBatch, texture2D13, value4 + Projectile.Size / 2f - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, new Vector2(Projectile.scale), effects);
             }
-
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+            
+            Utilities.Draw(Main.spriteBatch, texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, new Vector2(Projectile.scale), effects);
             return false;
         }
     }

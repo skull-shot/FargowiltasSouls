@@ -1,6 +1,7 @@
-﻿using FargowiltasSouls.Content.Items.Materials;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+using FargowiltasSouls.Content.Projectiles.Weapons.FinalUpgrades;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
@@ -11,6 +12,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
 {
     public class PhantasmalLeashOfCthulhu : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/FinalUpgrades", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -52,7 +54,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.FinalUpgrades
         {
             CreateRecipe()
 
-            .AddIngredient(ModContent.ItemType<MechanicalLeashOfCthulhu>(), 1)
+            .AddIngredient(ModContent.ItemType<LeashofCthulhu>(), 1)
             .AddIngredient(ModContent.ItemType<EternalEnergy>(), 15)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))

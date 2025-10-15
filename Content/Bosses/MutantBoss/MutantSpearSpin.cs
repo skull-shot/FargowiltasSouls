@@ -1,9 +1,12 @@
-﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -15,11 +18,10 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
     {
         public override string Texture => FargoSoulsUtil.AprilFools ?
             "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpear_April" :
-            "FargowiltasSouls/Content/Projectiles/BossWeapons/Penetrator";
+            FargoAssets.GetAssetString("Content/Projectiles/Weapons/FinalUpgrades", "Penetrator");
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("The Penetrator");
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
@@ -34,20 +36,23 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.alpha = 0;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.FargoSouls().TimeFreezeImmune = true;
             Projectile.FargoSouls().DeletionImmuneRank = 2;
         }
 
         private bool predictive;
         private int direction = 1;
+        private float spinRender;
 
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             if (Projectile.localAI[1] == 0)
             {
                 Projectile.localAI[1] = Main.rand.NextBool() ? -1 : 1;
                 Projectile.timeLeft = (int)Projectile.ai[1];
+                Projectile.rotation = Main.rand.NextFloat(MathHelper.TwoPi);
             }
 
             NPC mutant = Main.npc[(int)Projectile.ai[0]];
@@ -56,18 +61,25 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Projectile.Center = mutant.Center;
                 direction = mutant.direction;
 
-                if (mutant.ai[0] == 4 || mutant.ai[0] == 13 || mutant.ai[0] == 21)
+                float[] allowedStates = {
+                    4,
+                    13,
+                    21,
+                    32,
+                    40,
+                    -3,
+                    -4,
+                };
+                if (allowedStates.Contains(mutant.ai[0]))
                 {
-                    Projectile.rotation += (float)Math.PI / 6.85f * Projectile.localAI[1];
+                    Projectile.rotation += (float)Math.PI / 6.85f * Projectile.localAI[1] * Math.Min(1f, ++Projectile.localAI[2] / 90);
 
-                    if (++Projectile.localAI[0] > 8)
+                    if (Variant == 0 && ++Projectile.localAI[0] > 8)
                     {
                         Projectile.localAI[0] = 0;
                         if (FargoSoulsUtil.HostCheck && Projectile.Distance(Main.player[mutant.target].Center) > 360)
                         {
-                            Vector2 speed = Vector2.UnitY.RotatedByRandom(Math.PI / 2) * Main.rand.NextFloat(6f, 9f);
-                            if (mutant.Center.Y < Main.player[mutant.target].Center.Y)
-                                speed *= -1f;
+                            Vector2 speed = mutant.DirectionFrom(Main.player[mutant.target].Center).RotatedByRandom(Math.PI / 2) * Main.rand.NextFloat(6f, 9f);
                             float ai1 = Projectile.timeLeft + Main.rand.Next(Projectile.timeLeft / 2);
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), Projectile.position + Main.rand.NextVector2Square(0f, Projectile.width),
                                 speed, ModContent.ProjectileType<MutantEyeHoming>(), Projectile.damage, 0f, Projectile.owner, mutant.target, ai1);
@@ -141,13 +153,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), target.Center + Main.rand.NextVector2Circular(100, 100), Vector2.Zero, ModContent.ProjectileType<MutantBombSmall>(), 0, 0f, Projectile.owner);
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.FargoSouls().MaxLifeReduction += 100;
-                target.AddBuff(ModContent.BuffType<OceanicMaulBuff>(), 5400);
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
-            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
         }
 
         public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity;
@@ -208,18 +216,60 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
 
-            if (Projectile.ai[1] > 0)
+            if (Variant < 2 && Projectile.ai[1] > 0)
             {
                 Texture2D glow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantSpearAimGlow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
                 float modifier = Projectile.timeLeft / Projectile.ai[1];
                 Color glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 191, 51, 210) : new(51, 255, 191, 210);
                 if (predictive)
                     glowColor = FargoSoulsUtil.AprilFools ? new Color(255, 0, 0, 210) : new Color(0, 0, 255, 210);
+                
+                const int fireballAnimTime = 30;
+                float repeats = (float)(Projectile.localAI[2] * Math.Min(1f, Projectile.localAI[2] / 90f) % fireballAnimTime) / fireballAnimTime;
+                FancyFireballs(repeats, glowColor);
+
                 glowColor *= 1f - modifier;
                 float glowScale = Projectile.scale * 8f * modifier;
                 Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(glow.Bounds), glowColor, 0, glow.Bounds.Size() / 2, glowScale, SpriteEffects.None, 0);
             }
             return false;
+        }
+
+        void FancyFireballs(float repeats, Color glowColor)
+        {
+            AtlasTexture glow = AtlasManager.GetTexture("FargowiltasSouls.Bloom"); //ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/MutantBoss/MutantEye_Glow").Value;
+            int rect1 = glow.Height;
+            int rect2 = rect1 * Projectile.frame;
+            Rectangle? glowrectangle = new(0, rect2, glow.Width, rect1);
+            Vector2 gloworigin2 = glowrectangle.Value.Size() / 2f;
+
+            const int max = 6;
+            const int trail = 12;
+            for (int i = 0; i < max; i++)
+            {
+                for (int j = 0; j < trail; j++)
+                {
+                    float modifier = repeats - j * 0.01f;
+
+                    float distance = 360 * (1f - modifier);
+                    float rotation = MathHelper.TwoPi * modifier;
+                    float lerp = MathF.Pow((float)j / trail, 0.5f);
+                    Color baseColor = Color.Lerp(Color.White, glowColor, 0.7f + 0.3f * lerp);
+                    Color finalColor = baseColor * (float)Math.Sqrt(modifier);
+
+                    finalColor *= 1f - (float)j / trail;
+
+                    Vector2 offset = distance * Vector2.UnitX.RotatedBy(rotation + MathHelper.TwoPi / max * i);
+                    Vector2 drawPos = Projectile.Center + offset;
+                    float scale = 1f * (1f - 0.9f * modifier);
+                    float drawRotation = offset.ToRotation();
+                    float endRotation = drawRotation + MathHelper.PiOver2;
+                    drawRotation = MathHelper.Lerp(drawRotation, endRotation, modifier);
+
+                    Utilities.Draw(Main.spriteBatch, glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor with { A = 0 }, drawRotation, null, Vector2.One * scale, SpriteEffects.None);
+                    //SpriteBatch.Draw(glow, drawPos - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), glowrectangle, finalColor, drawRotation, gloworigin2, scale, SpriteEffects.None, 0);
+                }
+            }
         }
     }
 }

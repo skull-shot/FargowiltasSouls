@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Masomode;
-using FargowiltasSouls.Content.Items.Armor;
+﻿using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Armor.Eternal;
 using FargowiltasSouls.Content.Items.Materials;
 using Terraria.ModLoader;
 
@@ -40,9 +40,9 @@ namespace FargowiltasSouls.Core.Toggler.Content
         public override int Item => ModContent.ItemType<PureHeart>();
         public override float Priority => 1.6f;
     }
-    public class ChaliceHeader : MasoHeader
+    public class VerdantHeader : MasoHeader
     {
-        public override int Item => ModContent.ItemType<ChaliceoftheMoon>();
+        public override int Item => ModContent.ItemType<VerdantDoomsayerMask>();
         public override float Priority => 1.7f;
     }
     public class HeartHeader : MasoHeader
@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Core.Toggler.Content
     }
     public class MutantArmorHeader : MasoHeader
     {
-        public override int Item => ModContent.ItemType<MutantMask>();
+        public override int Item => ModContent.ItemType<EternalFlame>();
         public override float Priority => 4f;
     }
 }

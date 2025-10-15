@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
+using FargowiltasSouls.Content.Rarities;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -7,14 +9,10 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 {
     public class Blender : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/SwarmDrops", Name);
         public override void SetStaticDefaults()
         {
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
-            // DisplayName.SetDefault("The Blender");
-            // Tooltip.SetDefault("'The reward for a mighty rematch...'");
-
-            //DisplayName.AddTranslation((int)GameCulture.CultureName.Chinese, "绞肉机");
-            //Tooltip.AddTranslation((int)GameCulture.CultureName.Chinese, "'屠戮众多的奖励...'");
         }
 
         public override void SetDefaults()
@@ -35,7 +33,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.damage = 340;
 
             Item.value = Item.sellPrice(0, 25);
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<AbominableRarity>();
         }
 
         public override void HoldItem(Player player)

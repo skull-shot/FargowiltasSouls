@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Buffs.Eternity;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.DeviBoss
@@ -12,9 +14,8 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Energy Heart");
+            Main.projFrames[Type] = 5;
         }
-
         public override void SetDefaults()
         {
             Projectile.width = 30;
@@ -24,7 +25,7 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Projectile.tileCollide = false;
             Projectile.timeLeft = 480;
             Projectile.alpha = 200;
-            //CooldownSlot = 1; //deliberate, so deathray will always hit
+            CooldownSlot = ImmunityCooldownID.Bosses;
         }
 
         public override void AI()
@@ -38,11 +39,20 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
                     Projectile.alpha = 0;
             }
             Projectile.scale = 1f - Projectile.alpha / 255f;
+
+            if (++Projectile.frameCounter >= 5)
+            {
+                Projectile.frame++;
+                Projectile.frameCounter = 0;
+                if (Projectile.frame >= 5)
+                    Projectile.frame = 1;
+            }
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(ModContent.BuffType<Buffs.Masomode.LovestruckBuff>(), 120);
+            target.AddBuff(ModContent.BuffType<HexedBuff>(), 120);
+            target.FargoSouls().HexedInflictor = Projectile.GetSourceNPC().whoAmI;
         }
 
         public override void OnKill(int timeleft)

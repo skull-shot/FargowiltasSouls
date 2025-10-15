@@ -1,14 +1,16 @@
-﻿using FargowiltasSouls.Content.Projectiles.ChallengerItems;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System;
 using FargowiltasSouls.Content.Items.BossBags;
+using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Assets.Textures;
 
 namespace FargowiltasSouls.Content.Items.Weapons.Challengers
 {
     public class SisypheanFist : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/Challengers", Name);
         private int delay = 0;
         private bool LastMouse = false;
 

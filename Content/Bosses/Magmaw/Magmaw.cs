@@ -1,6 +1,6 @@
 ﻿
 using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +20,8 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
     [AutoloadBossHead]
     public partial class Magmaw : ModNPC
     {
-        public override bool IsLoadingEnabled(Mod mod) => false;
+        public const bool LoadThis = false; // here to sync ModSceneEffect until manual fix
+        public override bool IsLoadingEnabled(Mod mod) => LoadThis;
         #region Variables
 
         //Visuals
@@ -110,9 +111,8 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
                 BuffID.Suffocation,
                 BuffID.OnFire,
                 BuffID.OnFire3,
-                ModContent.BuffType<HellFireBuff>(),
-                ModContent.BuffType<LethargicBuff>(),
-                ModContent.BuffType<ClippedWingsBuff>()
+                ModContent.BuffType<BlackInfernoBuff>(),
+                ModContent.BuffType<LethargicBuff>()
             ]);
             /*
             NPCID.Sets.NPCBestiaryDrawOffset.Add(NPC.type, new NPCID.Sets.NPCBestiaryDrawModifiers()
@@ -146,8 +146,8 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
             NPC.HitSound = SoundID.NPCHit2;
             NPC.DeathSound = SoundID.NPCDeath44;
 
-            Music = MusicID.Boss2; //ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.Boss2;
-            SceneEffectPriority = SceneEffectPriority.BossLow;
+            /*Music = MusicID.Boss2; //ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod) ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/Baron") : MusicID.Boss2;
+            SceneEffectPriority = SceneEffectPriority.BossLow;*/
 
             NPC.value = Item.buyPrice(0, 15);
 
@@ -250,16 +250,11 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
         public override bool? CanFallThroughPlatforms() => true;
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.OnFire3, 60 * 10);
-            if (!WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(BuffID.Oiled, 60 * 5);
-                return;
-            }
+            target.AddBuff(ModContent.BuffType<DaybrokenBuff>(), 60 * 4);
         }
         public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (ProjectileID.Sets.CultistIsResistantTo[projectile.type] && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.FargoSouls().Homing == true && !FargoSoulsUtil.IsSummonDamage(projectile))
                 modifiers.FinalDamage *= 0.8f;
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -331,7 +326,6 @@ namespace FargowiltasSouls.Content.Bosses.Magmaw
 
             LeadingConditionRule rule = new LeadingConditionRule(new Conditions.NotExpert());
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<TheBaronsTusk>(), ModContent.ItemType<RoseTintedVisor>(), ModContent.ItemType<NavalRustrifle>(), ModContent.ItemType<DecrepitAirstrikeRemote>()));
-            rule.OnSuccess(ItemDropRule.Common(5003, 1, 1, 5)); //seaside crate
             rule.OnSuccess(ItemDropRule.OneFromOptions(3, ItemID.Sextant, ItemID.WeatherRadio, ItemID.FishermansGuide));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishingBobber, 4, 1, 1));
             rule.OnSuccess(ItemDropRule.Common(ItemID.FishingPotion, 3, 2, 5));

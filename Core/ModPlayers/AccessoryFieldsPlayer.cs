@@ -1,6 +1,7 @@
 ﻿using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Collections.Generic;
+using System.Security.Cryptography.Pkcs;
 using Terraria;
 using static FargowiltasSouls.Core.Systems.DashManager;
 
@@ -25,9 +26,12 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int NekomiAttackReadyTimer;
         public const int SuperAttackMaxWindow = 30;
 
+        public bool SupersonicDodge;
+
         //        //minions
         public bool BrainMinion;
         public bool EaterMinion;
+        public bool PixieMinion;
         public bool BigBrainMinion;
         public bool DukeFishron;
 
@@ -87,7 +91,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public float MeteorCD = 60;
 
         public int ApprenticeItemCD;
-        public bool CactusImmune = false;
         public int CactusProcCD;
         public bool ChlorophyteEnchantActive = false;
         public bool MonkEnchantActive = false;
@@ -99,7 +102,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool TitaniumDRBuff;
         public bool TitaniumCD;
-        public bool SquireEnchantActive = false;
+        public Item SquireEnchantItem;
         public bool ValhallaEnchantActive = false;
 
         public bool AncientShadowEnchantActive = false;
@@ -116,21 +119,19 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool GalacticMinionsDeactivated = false;
         public bool GalacticMinionsDeactivatedBuffer = false; // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
-        //public bool JumpsDisabled = false;
-        //public bool JumpsDisabledBuffer = false;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
 
         public int DeactivatedMinionEffectCount = 0;
 
         public int CrimsonRegenAmount;
         public int CrimsonRegenTime;
 
-        public bool CanSummonForbiddenStorm = false;
         public List<int> ForbiddenTornados = [];
         public List<int> ShadowOrbs = [];
         public int IcicleCount;
         public int icicleCD;
         public int GladiatorCD;
         public int GladiatorStandardCD;
+        public int IceQueenCrownCD;
         public bool GoldEnchMoveCoins;
         public bool GoldShell;
         private int goldHP;
@@ -146,6 +147,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool CanCobaltJump;
         public bool JustCobaltJumped;
         public int CobaltCooldownTimer;
+        public bool CobaltEnchantActive = false;
         public bool ApprenticeEnchantActive;
         public bool DarkArtistEnchantActive;
         public int BeeCD;
@@ -184,7 +186,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SnowVisual;
         public int SpectreCD;
         public int SpectreGhostTime;
+        public int ForbiddenCD;
         public bool MinionCrits;
+        public int SpiderCD;
         //public bool squireReduceIframes;
         public bool FreezeTime;
         public int freezeLength;
@@ -194,7 +198,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public int HallowRepelTime;
         public int TurtleCounter;
-        public int TurtleShellHP = 2000;
+        public float TurtleShellHP = TurtleEffect.TurtleShellMaxHP;
+        public bool TurtleShellBroken;
         public bool ShellHide;
         public int ValhallaVerticalDashing;
         public int VortexCD;
@@ -219,8 +224,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SupersonicSoul;
         public bool WorldShaperSoul;
         public bool FlightMasterySoul;
-        public bool RangedEssence;
         public bool BuilderMode;
+        public bool DimensionSoul;
         public bool UniverseSoul;
         public bool UniverseSoulBuffer;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
         public bool UniverseCore;
@@ -233,14 +238,17 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Eternity;
         public float TinEternityDamage;
 
+        public int MinionSlotsNonstack;
+        public int SentrySlotsNonstack;
+
         //maso items
         public Item SlimyShieldItem;
         public bool SlimyShieldFalling;
         public int FallthroughCD;
         public int AgitatingLensCD;
         public bool BerserkedFromAgitation = false;
-        public Item DarkenedHeartItem;
-        public int DarkenedHeartCD;
+        public Item RottingHeartItem;
+        public int RottingHeartCD;
         public int GuttedHeartCD = 60; //should prevent spawning despite disabled toggle when loading into world
         public Item NecromanticBrewItem;
         public float NecromanticBrewRotation;
@@ -262,7 +270,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Probes;
         public bool MagicalBulb;
         public bool PlanterasChild;
-        public bool SkullCharm;
+        public bool CrystalSkull;
         public bool PungentEyeball;
         public Item LihzahrdTreasureBoxItem;
         public int GroundPound;
@@ -280,7 +288,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MasochistSoul;
         public Item MasochistSoulItem;
         public bool MasochistHeart;
-        public bool HasClickedWrench;
         public bool SandsofTime;
         public bool SecurityWallet;
         public int FrigidGemstoneCD;
@@ -291,7 +298,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int NymphsPerfumeCD = 30;
         public bool RainbowSlime;
         public bool SkeletronArms;
-        public bool IceQueensCrown;
         public bool CirnoGraze;
         public bool MiniSaucer;
         public bool SupremeDeathbringerFairy;
@@ -302,6 +308,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool RabiesVaccine;
         public bool TwinsEX;
         public bool TimsConcoction;
+        public bool TimsInspect;
+        public int TimsInspectCD;
         public bool ReceivedMasoGift;
         public bool DeviGraze;
         public bool Graze;
@@ -336,14 +344,15 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         //debuffs
         public bool Hexed;
+        public int HexedInflictor = -1;
         public bool Unstable;
         private int unstableCD;
         public bool Fused;
         public int FusedStandStillTime;
         public bool Shadowflame;
+        public bool Daybroken;
         public bool Oiled;
         public bool DeathMarked;
-        public bool Hypothermia;
         public bool noDodge;
         public bool noSupersonic;
         public bool NoMomentum;
@@ -358,7 +367,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool IvyVenom;
         public bool GodEater;               //defense removed, endurance removed, colossal DOT
         public bool FlamesoftheUniverse;    //activates various vanilla debuffs
-        public bool MutantNibble;           //moon bite effect, feral bite effect, disables lifesteal
         public int StatLifePrevious = -1;   //used for mutantNibble
         public bool Asocial;                //disables minions, disables pets
         public bool WasAsocial;
@@ -391,27 +399,28 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Swarming;
         public bool LowGround;
         public int FallthroughTimer;
-        public bool Flipped;
         public bool Illuminated;
         public bool Mash;
+        public bool GrabDamage;
         public bool[] MashPressed = new bool[4];
-        public int MashCounter;
+        public float MashCounter;
+        public float FramesSinceLastMash;
         public int StealingCooldown;
         //public bool LihzahrdBlessing;
         public bool Berserked;
-        public bool CerebralMindbreak;
-        public bool NanoInjection;
         public bool Stunned;
         public bool HaveCheckedAttackSpeed;
         public bool HasJungleRose;
+        public bool Quicksanding;
 
 
         public int ReallyAwfulDebuffCooldown;
 
-        public bool BoxofGizmos;
+        public Item SquirrelCharm;
         public bool OxygenTank;
 
         public int DreadShellVulnerabilityTimer;
+        public bool LanternGuarding;
         public int shieldTimer;
         public int shieldCD;
         public int shieldHeldTime;

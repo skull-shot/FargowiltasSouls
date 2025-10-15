@@ -1,7 +1,7 @@
 using FargowiltasSouls.Common.Utilities;
 using FargowiltasSouls.Content.Bosses.AbomBoss;
-using FargowiltasSouls.Content.Buffs.Masomode;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.EmpressOfLight;
+using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EmpressOfLight;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SetDefaults(npc);
 
-            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.15, MidpointRounding.ToEven);
+            npc.lifeMax = (int)Math.Round(npc.lifeMax * 1.3, MidpointRounding.ToEven);
         }
 
         public override bool CanHitPlayer(NPC npc, Player target, ref int CooldownSlot)
@@ -76,8 +76,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             EModeGlobalNPC.empressBoss = npc.whoAmI;
             Ritual = false;
 
-            if (Main.LocalPlayer.active && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
-                Main.LocalPlayer.AddBuff(ModContent.BuffType<PurgedBuff>(), 2);
+            if (Main.LocalPlayer.active && Main.dayTime && !Main.LocalPlayer.dead && !Main.LocalPlayer.ghost)
+                Main.LocalPlayer.FargoSouls().noDodge = true;
 
             bool useP2Attacks = npc.ai[3] != 0 || WorldSavingSystem.MasochistModeReal;
             switch ((int)npc.ai[0])
@@ -304,7 +304,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             Ritual = true;
             int spinTime = WorldSavingSystem.MasochistModeReal ? 210 : 160;
-            float spins = /*WorldSavingSystem.MasochistModeReal ? 2 :*/ 1.5f;
+            float spins = 1.5f;
             int startDelay = 60;
             if (AttackTimer == 0)
             {
@@ -341,7 +341,13 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (AttackTimer > startDelay && AttackTimer <= spinTime * spins + startDelay && AttackTimer % 2 == 0)
             {
-                int max = WorldSavingSystem.MasochistModeReal ? 3 : 2;
+                int max = 2;
+                if (WorldSavingSystem.MasochistModeReal)
+                {
+                    max = 3;
+                    if (Main.getGoodWorld)
+                        max = 7;
+                }
                 for (int i = 0; i < max; i++)
                 {
                     int direction = WorldSavingSystem.MasochistModeReal ? -1 : 1;
@@ -682,14 +688,14 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 900);
+            target.AddBuff(ModContent.BuffType<SmiteBuff>(), 600);
         }
 
         public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             base.SafeModifyHitByProjectile(npc, projectile, ref modifiers);
 
-            if (ProjectileID.Sets.CultistIsResistantTo[projectile.type] && !FargoSoulsUtil.IsSummonDamage(projectile))
+            if (projectile.FargoSouls().Homing == true && !FargoSoulsUtil.IsSummonDamage(projectile))
                 modifiers.FinalDamage *= 0.75f;
         }
 

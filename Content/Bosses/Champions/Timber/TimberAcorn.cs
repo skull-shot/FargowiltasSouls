@@ -1,4 +1,5 @@
 using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,7 +27,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.aiStyle = -1;
             Projectile.hostile = true;
             Projectile.timeLeft = 600;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             Projectile.tileCollide = false;
         }
 
@@ -40,12 +41,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
             Projectile.velocity.Y += 0.2f;
 
             Projectile.rotation = Projectile.velocity.ToRotation() + (float)Math.PI * 1.25f;
-        }
-
-        public override void OnHitPlayer(Player target, Player.HurtInfo info)
-        {
-            if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.GuiltyBuff>(), 600);
         }
 
         public override void OnKill(int timeLeft)

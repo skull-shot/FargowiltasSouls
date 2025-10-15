@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Content.Buffs.Boss;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -29,7 +30,6 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                     BuffID.OnFire,
                     BuffID.Suffocation,
                     ModContent.BuffType<LethargicBuff>(),
-                    ModContent.BuffType<ClippedWingsBuff>(),
                     ModContent.BuffType<LightningRodBuff>()
             ]);
         }
@@ -61,8 +61,15 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
         public override bool CanHitPlayer(Player target, ref int CooldownSlot)
         {
-            CooldownSlot = 1;
+            if (target.HasBuff<GrabbedBuff>())
+                return false;
+            CooldownSlot = ImmunityCooldownID.Bosses;
             return NPC.localAI[3] == 0;
+        }
+
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            modifiers.FinalDamage *= 0.25f;
         }
 
         public override void AI()
@@ -119,7 +126,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
 
                 case 1: //you think you're safe?
                     {
-                        if (head.ai[0] != 3 && head.ai[0] != -3) //return to normal when head no longer wants to grab
+                        if (head.ai[0] != -3 && NPC.ai[0] == 3 && NPC.ai[3] != 1) // special maso hand
+                        {
+                            NPC.ai[3] = 1; // mark it as the special maso hand
+                            NPC.netUpdate = true;
+                        }
+                        if (head.ai[0] != 3 && head.ai[0] != -3 && !(WorldSavingSystem.MasochistModeReal && NPC.ai[0] == 3)) //return to normal when head no longer wants to grab
                         {
                             NPC.ai[0] = 0;
                             NPC.netUpdate = true;
@@ -174,6 +186,8 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                         }
 
                         NPC.ai[0] = head.ai[0] == -3 ? 1 : 0;
+                        if (NPC.ai[3] == 1)
+                            NPC.ai[0] = 3;
                         NPC.netUpdate = true;
                     }
                     else //keep trying to grab
@@ -323,10 +337,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
             if (Math.Abs(NPC.velocity.Y) > cap)
                 NPC.velocity.Y = cap * Math.Sign(NPC.velocity.Y);
         }
-        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
-        {
-            modifiers.FinalDamage *= 0.4f;
-        }
+        
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (WorldSavingSystem.EternityMode)
@@ -369,12 +380,12 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Spirit
                 Main.EntitySpriteDraw(texture2D13, value4 + NPC.Size / 2f - screenPos + new Vector2(0, NPC.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), color27, num165, origin2, NPC.scale, effects, 0);
             }
 
-            if (NPC.ai[0] == 1)
+            if (NPC.ai[0] == 1 || NPC.ai[0] == 4 || NPC.ai[0] == 3)
             {
                 Main.spriteBatch.UseBlendState(BlendState.Additive);
                 for (int j = 0; j < 12; j++)
                 {
-                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 8f * NPC.scale;
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12).ToRotationVector2() * 12f * NPC.scale;
                     Color glowColor = Color.Purple;
 
                     Main.EntitySpriteDraw(texture2D13, NPC.Center + afterimageOffset - screenPos + new Vector2(0f, NPC.gfxOffY), rectangle, glowColor, NPC.rotation, origin2, NPC.scale, effects);

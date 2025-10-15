@@ -3,6 +3,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -11,6 +12,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     //[AutoloadEquip(EquipType.Back)]
     public class WorldShaperSoul : BaseSoul
     {
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 36));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -84,28 +91,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player.autoPaint = true;
             //presserator
             Player.autoActuator = true;
-            //royal gel
-            Player.npcTypeNoAggro[1] = true;
-            Player.npcTypeNoAggro[16] = true;
-            Player.npcTypeNoAggro[59] = true;
-            Player.npcTypeNoAggro[71] = true;
-            Player.npcTypeNoAggro[81] = true;
-            Player.npcTypeNoAggro[138] = true;
-            Player.npcTypeNoAggro[121] = true;
-            Player.npcTypeNoAggro[122] = true;
-            Player.npcTypeNoAggro[141] = true;
-            Player.npcTypeNoAggro[147] = true;
-            Player.npcTypeNoAggro[183] = true;
-            Player.npcTypeNoAggro[184] = true;
-            Player.npcTypeNoAggro[204] = true;
-            Player.npcTypeNoAggro[225] = true;
-            Player.npcTypeNoAggro[244] = true;
-            Player.npcTypeNoAggro[302] = true;
-            Player.npcTypeNoAggro[333] = true;
-            Player.npcTypeNoAggro[335] = true;
-            Player.npcTypeNoAggro[334] = true;
-            Player.npcTypeNoAggro[336] = true;
-            Player.npcTypeNoAggro[537] = true;
 
             player.AddEffect<BuilderEffect>(item);
 
@@ -142,7 +127,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.HandOfCreation)
             .AddIngredient(ItemID.ActuationAccessory)
             .AddIngredient(ItemID.LaserRuler)
-            .AddIngredient(ItemID.RoyalGel)
             //.AddRecipeGroup("FargowiltasSouls:AnyShellphone")
             //.AddIngredient(ItemID.Shellphone)
             //.AddIngredient(ItemID.BloodHamaxe) //haemoraxe

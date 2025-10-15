@@ -1,6 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-
-
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -16,11 +15,10 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
     public class LifeRuneHitbox : ModProjectile, IPixelatedPrimitiveRenderer
     {
 
-        public override string Texture => "FargowiltasSouls/Assets/ExtraTextures/LifelightParts/Rune1";
+        public override string Texture => FargoSoulsUtil.EmptyTexture;
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Life Rune");
             ProjectileID.Sets.TrailingMode[Type] = 1;
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
         }
@@ -70,7 +68,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void AI()
         {
             NPC lifelight = Main.npc[(int)Projectile.ai[0]];
-            if (!lifelight.TypeAlive<LifeChallenger>())
+            if (!lifelight.TypeAlive<Lifelight>())
             {
                 Projectile.Kill();
             }
@@ -90,13 +88,12 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 6);
-        }
-        const string PartsPath = "FargowiltasSouls/Assets/ExtraTextures/LifelightParts/";
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
+        }       
         public override bool PreDraw(ref Color lightColor)
         {
             int i = (int)Projectile.ai[1];
-            Texture2D RuneTexture = ModContent.Request<Texture2D>(PartsPath + $"Rune{i + 1}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            AtlasTexture RuneTexture = AtlasManager.GetTexture("FargowiltasSouls." + $"Rune{i + 1}");
 
             //rune glow
             for (int j = 0; j < 12; j++)
@@ -110,10 +107,11 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                     glowColor = new Color(1f, 1f, 0f, 0f) * 0.7f;
                 else //pink
                     glowColor = new Color(1, 192 / 255f, 203 / 255f, 0f) * 0.7f;
-
-                Main.EntitySpriteDraw(RuneTexture, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, RuneTexture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0f);
+            
+                Utilities.Draw(Main.spriteBatch, RuneTexture, Projectile.Center + afterimageOffset - Main.screenPosition, null, glowColor, Projectile.rotation, RuneTexture.Size * 0.5f, new Vector2(Projectile.scale), SpriteEffects.None);
             }
-            Main.EntitySpriteDraw(origin: new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), texture: RuneTexture, position: Projectile.Center - Main.screenPosition, sourceRectangle: null, color: Color.White, rotation: Projectile.rotation, scale: Projectile.scale, effects: SpriteEffects.None);
+
+            Utilities.Draw(Main.spriteBatch, RuneTexture, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, new Vector2(RuneTexture.Width / 2, RuneTexture.Height / 2), new Vector2(Projectile.scale), SpriteEffects.None);
             return false;
         }
 
@@ -130,7 +128,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
         {
             ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.FadedStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 44);
         }
 

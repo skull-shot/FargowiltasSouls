@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -69,7 +71,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
                 Projectile.width = Projectile.height = ExplosionSize;
                 Projectile.Center = Projectile.position;
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                SoundEngine.PlaySound(LifeChallenger.RuneSound1 with { PitchRange = (-0.6f, -0.4f) }, Projectile.Center);
+                SoundEngine.PlaySound(Lifelight.RuneSound1 with { PitchRange = (-0.6f, -0.4f) }, Projectile.Center);
 
                 for (int j = 0; j < 32; j++)
                 {
@@ -96,7 +98,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 6);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
         }
         
 
@@ -122,14 +124,14 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             
             //draw glow ring
             Color RingColor = ColorFunction(1);
-            Texture2D ringTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D ringTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
             float RingScale = Projectile.scale * (1f / 0.7f) * ExplosionSize / ringTexture.Height;
             Rectangle ringrect = new(0, 0, ringTexture.Width, ringTexture.Height);
             Vector2 ringorigin = ringrect.Size() / 2f;
             Main.EntitySpriteDraw(ringTexture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(ringrect), RingColor, Projectile.rotation, ringorigin, RingScale, SpriteEffects.None, 0);
 
             RingColor = Color.White * MathF.Sqrt(Projectile.Opacity) * 0.25f;
-            ringTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRingHollow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            ringTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRingHollow").Value;
             RingScale = Projectile.scale * 1f * ExplosionSize / ringTexture.Height;
             ringrect = new(0, 0, ringTexture.Width, ringTexture.Height);
             ringorigin = ringrect.Size() / 2f;

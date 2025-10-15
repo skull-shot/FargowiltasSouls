@@ -1,3 +1,4 @@
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -38,12 +39,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.LeadHelmet)
                 .AddIngredient(ItemID.LeadChainmail)
                 .AddIngredient(ItemID.LeadGreaves)
-                .AddIngredient(ItemID.LeadShortsword)
+                .AddIngredient(ItemID.LeadHammer)
                 .AddIngredient(ItemID.GrayPaint, 100)
                 .AddIngredient(ItemID.Peach)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
         }
     }
     public class LeadEffect : AccessoryEffect
@@ -53,18 +54,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
         public static void ProcessLeadEffectLifeRegen(Player player)
         {
+            float debuffresistance = 0.7f;
+            if (player.FargoSouls().ForceEffect<LeadEnchant>())
+                debuffresistance = 0.5f;
             if (player.HasEffect<LeadEffect>())
-            {
-                if (player.FargoSouls().ForceEffect<LeadEnchant>())
-                {
-                    player.lifeRegen = (int)(player.lifeRegen * 0.4f);
-                }
-                else
-                {
-                    player.lifeRegen = (int)(player.lifeRegen * 0.6f);
-                }
-            }
-
+                player.lifeRegen = (int)(player.lifeRegen * debuffresistance);
         }
     }
     public class LeadPoisonEffect : AccessoryEffect

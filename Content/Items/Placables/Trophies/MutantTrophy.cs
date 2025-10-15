@@ -1,3 +1,5 @@
+using FargowiltasSouls.Content.UI.Elements;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Placables.Trophies
@@ -9,8 +11,7 @@ namespace FargowiltasSouls.Content.Items.Placables.Trophies
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Mutant Trophy");
+            ItemID.Sets.ShimmerTransformToItem[Type] = ModContent.ItemType<OncomingMutantItem>();
         }
     }
 }

@@ -1,4 +1,5 @@
-using FargowiltasSouls.Content.Projectiles.Minions;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -6,10 +7,9 @@ namespace FargowiltasSouls.Content.Buffs.Minions
 {
     public class BigBrainMinionBuff : ModBuff
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Minions", Name);
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Big Brain of Cthulhu");
-            // Description.SetDefault("The Brain of Cthulhu will fight for you");
             Main.buffNoSave[Type] = true;
             Main.buffNoTimeDisplay[Type] = true;
         }

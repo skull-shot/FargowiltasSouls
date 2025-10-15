@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -35,31 +36,37 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.EskimoHood)
-            .AddIngredient(ItemID.EskimoCoat)
-            .AddIngredient(ItemID.EskimoPants)
-            //hand warmer
-            //fruitcake chakram
-            .AddIngredient(ItemID.IceBoomerang)
-            .AddIngredient(ItemID.FrostMinnow)
-            .AddIngredient(ItemID.AtlanticCod)
-
-            .AddTile(TileID.DemonAltar)
-            .Register();
-
-            CreateRecipe()
-
-            .AddIngredient(ItemID.EskimoHood)
-            .AddIngredient(ItemID.EskimoCoat)
-            .AddIngredient(ItemID.EskimoPants)
-            //hand warmer
-            //fruitcake chakram
+            .AddRecipeGroup("FargowiltasSouls:AnySnowHood")
+            .AddRecipeGroup("FargowiltasSouls:AnySnowCoat")
+            .AddRecipeGroup("FargowiltasSouls:AnySnowPants")
+            .AddIngredient(ItemID.FlinxFurCoat)
             .AddIngredient(ItemID.IceBlade)
             .AddIngredient(ItemID.FrostMinnow)
-            .AddIngredient(ItemID.AtlanticCod)
 
-            .AddTile(TileID.DemonAltar)
+
+                .AddTile<EnchantedTreeSheet>()
             .Register();
+
+            //CreateRecipe()
+
+            //.AddIngredient(ItemID.EskimoHood)
+            //.AddIngredient(ItemID.EskimoCoat)
+            //.AddIngredient(ItemID.EskimoPants)
+            ////hand warmer
+            ////fruitcake chakram
+            //.AddIngredient(ItemID.IceBlade)
+            //.AddIngredient(ItemID.FrostMinnow)
+            //.AddIngredient(ItemID.AtlanticCod)
+
+            //.AddTile(TileID.DemonAltar)
+            //.Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Magic;
+            tooltipColor = null;
+            scaling = null;
+            return SnowEffect.BaseDamage(Main.LocalPlayer);
         }
     }
     public class SnowEffect : AccessoryEffect
@@ -70,6 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             target.AddBuff(BuffID.Frostburn, 120);
         }
+        public static int BaseDamage(Player player) => (int)(player.FargoSouls().ForceEffect<FrostEnchant>() ? 100 : (player.HasEffect<FrostEffect>() ? 50 : 18) * player.ActualClassDamage(DamageClass.Magic));
         public override void PostUpdateEquips(Player player)
         {
             if (player.whoAmI == Main.myPlayer)

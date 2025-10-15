@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Projectiles.Minions;
-using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
+using FargowiltasSouls.Content.Projectiles.Weapons.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -46,13 +47,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.Banana)
                 .AddIngredient(ItemID.Coconut)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Summon;
+            tooltipColor = null;
+            scaling = null;
+            return (int)(PalmwoodEffect.BaseDamage(Main.LocalPlayer) * Main.LocalPlayer.ActualClassDamage(DamageClass.Summon));
         }
     }
     public class PalmwoodEffect : AccessoryEffect
     {
-
         public override Header ToggleHeader => null;
         public override int ToggleItemType => ModContent.ItemType<PalmWoodEnchant>();
         public override bool ActiveSkill => Main.LocalPlayer.HasEffectEnchant<PalmwoodEffect>();
@@ -80,6 +87,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (!stunned)
                 ActivatePalmwoodSentry(player);
+        }
+        public static int BaseDamage(Player player)
+        {
+            int dmg = player.FargoSouls().ForceEffect<PalmWoodEnchant>() ? 140 : 18;
+            return dmg;
         }
         public static void ActivatePalmwoodSentry(Player player)
         {
@@ -109,7 +121,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     }
 
                     Vector2 offset = forceEffect ? (-40 * Vector2.UnitX) + (-120 * Vector2.UnitY) : (-41 * Vector2.UnitY);
-                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Misc(""), mouse + offset, Vector2.Zero, ModContent.ProjectileType<PalmTreeSentry>(), forceEffect ? 140 : 18, 0f, player.whoAmI, ai1: -30);
+                    FargoSoulsUtil.NewSummonProjectile(player.GetSource_Misc(""), mouse + offset, Vector2.Zero, ModContent.ProjectileType<PalmTreeSentry>(), BaseDamage(player), 0f, player.whoAmI, ai1: -30);
                 }
             }
         }

@@ -1,35 +1,27 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-
+﻿using Fargowiltas.Content.NPCs;
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Projectiles.Deathrays;
+using FargowiltasSouls.Core.Systems;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
-using FargowiltasSouls.Core.Systems;
-using FargowiltasSouls.Content.Projectiles.Deathrays;
-
-using Luminance.Core.Graphics;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Bosses.MutantBoss
 {
 	public class MutantDeathrayAim : BaseDeathray, IPixelatedPrimitiveRenderer
     {
-        public override string Texture => "FargowiltasSouls/Content/Projectiles/Deathrays/PhantasmalDeathrayML";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Deathrays", "PhantasmalDeathrayML");
         public MutantDeathrayAim() : base(60) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
 
         public override bool? CanDamage()
         {
             return false;
         }
-
+        public ref float Variant => ref Projectile.ai[2];
         public override void AI()
         {
             maxTime = Projectile.ai[0];
@@ -39,7 +31,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 Projectile.velocity = -Vector2.UnitY;
             }
             NPC npc = FargoSoulsUtil.NPCExists(Projectile.ai[1], ModContent.NPCType<MutantBoss>());
-            if (npc != null && !npc.dontTakeDamage && !WorldSavingSystem.MasochistModeReal)
+            if (npc != null && !npc.dontTakeDamage && (!WorldSavingSystem.MasochistModeReal || Variant > 0))
             {
                 Projectile.Center = npc.Center;
             }
@@ -77,8 +69,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             //num804 += 1.57079637f;
             //Projectile.velocity = num804.ToRotationVector2();
 
-            Projectile.velocity = Projectile.velocity.ToRotation().AngleLerp(npc.SafeDirectionTo(Main.player[npc.target].Center + Main.player[npc.target].velocity * 30).ToRotation(), 0.2f).ToRotationVector2();
-            Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2;
+            if (Variant == 0)
+            {
+                Vector2 idealAngle = npc.SafeDirectionTo(Main.player[npc.target].Center + Main.player[npc.target].velocity * 30);
+                Projectile.velocity = Projectile.velocity.ToRotation().AngleLerp(idealAngle.ToRotation(), 0.2f).ToRotationVector2();
+                Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2;
+            }
+            else if (Variant == 1)
+            {
+                Projectile.velocity = Vector2.UnitY;
+                Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2;
+            }
 
             float num805 = 3f;
             float num806 = Projectile.width;
@@ -159,7 +160,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             // Set shader parameters. This one takes a fademap and a color.
 
             // GameShaders.Misc["FargoswiltasSouls:MutantDeathray"].UseImage1(); cannot be used due to only accepting vanilla paths.
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // The laser should fade to this in the middle.
             shader.TrySetParameter("mainColor", FargoSoulsUtil.AprilFools ? new Color(255, 255, 183, 100) : new Color(183, 252, 253, 100));
             shader.TrySetParameter("stretchAmount", 3);

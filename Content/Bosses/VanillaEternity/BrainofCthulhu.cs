@@ -1,8 +1,8 @@
 using FargowiltasSouls.Common.Utilities;
-using FargowiltasSouls.Content.NPCs.EternityModeNPCs;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.BossMinions;
 using FargowiltasSouls.Content.Projectiles;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.BrainOfCthulhu;
-using FargowiltasSouls.Content.Projectiles.Masomode.Bosses.MechanicalBosses;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.BrainOfCthulhu;
+using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -437,7 +437,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
             }
 
-            EModeUtils.DropSummon(npc, "GoreySpine", NPC.downedBoss2, ref DroppedSummon);
+            EModeUtils.DropSummon(npc, ItemID.BloodySpine, NPC.downedBoss2, ref DroppedSummon);
 
             npc.defense = 0;
             npc.defDefense = 0;

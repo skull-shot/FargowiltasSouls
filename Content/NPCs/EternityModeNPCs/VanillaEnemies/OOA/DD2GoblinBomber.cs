@@ -1,8 +1,15 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
+using System.IO;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent.Events;
 using Terraria.ID;
+using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -14,19 +21,44 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             NPCID.DD2GoblinBomberT3
         );
 
-        public override void OnKill(NPC npc)
-        {
-            base.OnKill(npc);
+        public int Timer = 0;
+        public int rand = 0;
 
-            if (FargoSoulsUtil.HostCheck)
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write7BitEncodedInt(Timer);
+            binaryWriter.Write7BitEncodedInt(rand);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            Timer = binaryReader.Read7BitEncodedInt();
+            rand = binaryReader.Read7BitEncodedInt();
+        }
+
+        public override bool SafePreAI(NPC npc)
+        {
+            if (!npc.HasPlayerTarget)
+                npc.TargetClosest();
+
+            Timer++;
+            if (Timer == 180)
+                rand = Main.rand.Next(3);
+            if (Timer > 180 && npc.HasPlayerTarget && npc.Distance(Main.player[npc.target].Center) < 700)
             {
-                for (int i = 0; i < 3; i++)
+                if (rand == 0) // chance to not throw
                 {
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center,
-                        new Vector2(Main.rand.NextFloat(-3f, 3f), Main.rand.NextFloat(-9f, -6f)),
-                        ProjectileID.DD2GoblinBomb, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
+                    Vector2 targetPos = Main.player[npc.target].Center - npc.Center;
+                    if (FargoSoulsUtil.HostCheck)
+                        Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Main.rand.NextFloat(0.8f, 1.2f) * 8 * Vector2.UnitX.RotatedBy(targetPos.ToRotation()) - 2 * (npc.Center.Y - targetPos.Y) / 2000f * Vector2.UnitY, ModContent.ProjectileType<StinkBomb>(), FargoSoulsUtil.ScaledProjectileDamage(npc.damage), 1);
+                    SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort with { Pitch = 1f }, npc.Center);
                 }
+                Timer = 0;
             }
+
+            return base.SafePreAI(npc);
         }
     }
 }

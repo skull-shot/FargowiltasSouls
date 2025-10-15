@@ -1,11 +1,12 @@
-﻿using System;
-using Fargowiltas.Common.Configs;
+﻿using Fargowiltas.Common.Configs;
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Systems;
 using FargowiltasSouls.Core.Toggler.Content;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -42,11 +43,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             .AddIngredient(ItemID.SquireAltHead)
             .AddIngredient(ItemID.SquireAltShirt)
             .AddIngredient(ItemID.SquireAltPants)
-            .AddIngredient(ItemID.VikingHelmet)
             .AddIngredient(null, "SquireEnchant")
+            .AddIngredient(ItemID.DD2BallistraTowerT3Popper)
+            //.AddIngredient(ItemID.VikingHelmet)
             .AddIngredient(ItemID.ShadowJoustingLance)
 
-            .AddTile(TileID.CrystalBall)
+                .AddTile<EnchantedTreeSheet>()
             .Register();
         }
     }
@@ -113,6 +115,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                             }
                         }
                     }
+                    if (modPlayer.FallthroughTimer < player.FargoSouls().IsDashingTimer)
+                        modPlayer.FallthroughTimer = player.FargoSouls().IsDashingTimer;
+                        
+                    if (modPlayer.FallthroughTimer < player.FargoSouls().ValhallaVerticalDashing)
+                        modPlayer.FallthroughTimer = player.FargoSouls().ValhallaVerticalDashing;
                 }
             }
         }

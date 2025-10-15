@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Items.Accessories.Forces;
-using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Items.Accessories.Forces;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -37,15 +38,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.AncientCobaltHelmet)
-            .AddIngredient(ItemID.AncientCobaltBreastplate)
-            .AddIngredient(ItemID.AncientCobaltLeggings)
-            .AddIngredient(ItemID.Bomb, 10)
-            .AddIngredient(ItemID.Dynamite, 10)
-            .AddIngredient(ItemID.Grenade, 10)
+                .AddIngredient(ItemID.AncientCobaltHelmet)
+                .AddIngredient(ItemID.AncientCobaltBreastplate)
+                .AddIngredient(ItemID.AncientCobaltLeggings)
+                .AddIngredient(ItemID.Bomb, 10)
+                .AddIngredient(ItemID.Dynamite, 10)
+                .AddIngredient(ItemID.Grenade, 10)
 
-            .AddTile(TileID.DemonAltar)
-            .Register();
+                .AddTile<EnchantedTreeSheet>()
+                .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Melee;
+            tooltipColor = null;
+            scaling = null;
+            return AncientCobaltEffect.BaseDamage(Main.LocalPlayer);
         }
     }
 
@@ -53,7 +61,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
     {
         public override Header ToggleHeader => Header.GetHeader<EarthHeader>();
         public override int ToggleItemType => ModContent.ItemType<AncientCobaltEnchant>();
-
+        public static int BaseDamage(Player player)
+        {
+            int dmg = 35;
+            if (player.FargoSouls().CobaltEnchantActive || player.ForceEffect<AncientCobaltEffect>())
+                dmg = 150;
+            if (player.FargoSouls().CobaltEnchantActive && player.ForceEffect<AncientCobaltEffect>())
+                dmg = 300;
+            return (int)(dmg * player.ActualClassDamage(DamageClass.Melee));
+        }
         public override void PostUpdateEquips(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
@@ -92,7 +108,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                     debuff = 2;
                 }
 
-                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, projType, (int)(damage * player.ActualClassDamage(DamageClass.Melee)), 0, player.whoAmI, ai0: scale, ai1: debuff);
+                Projectile.NewProjectile(GetSource_EffectItem(player), player.Center, Vector2.Zero, ModContent.ProjectileType<CobaltExplosion>(), BaseDamage(player), 0, player.whoAmI, ai0: scale, ai1: debuff);
 
                 modPlayer.JustCobaltJumped = true;
 
@@ -112,11 +128,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 player.jumpBoost = true; //balloon effect
                 if (notAncient || player.ForceEffect<AncientCobaltEffect>())
                 {
-                    player.jumpSpeedBoost += 5f; //+100%
+                    player.jumpSpeedBoost += !player.controlDown ? 5f : 1f; //+100% / +20% when holding down
                 }
                 else
                 {
-                    player.jumpSpeedBoost += 2.5f; //+50%
+                    player.jumpSpeedBoost += !player.controlDown ? 2.5f : 1f; //+50% / +20% when holding down
                 }
             }
         }

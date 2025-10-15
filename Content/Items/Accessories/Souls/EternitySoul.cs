@@ -1,6 +1,8 @@
 ﻿
+using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Content.Rarities;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -26,17 +28,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override bool Eternity => true;
         public override int NumFrames => 10;
 
-        public static int WingSlotID
-        {
-            get;
-            private set;
-        }
-
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
-
-            WingSlotID = Item.wingSlot;
 
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 10));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
@@ -104,12 +98,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Item.defense = 100;
 
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
-            Item.UseSound = SoundID.Item6;
+            Item.useTime = 30;
+            Item.useAnimation = 30;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
 
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
+        public override void UseItemFrame(Player player) => SandsofTime.Use(player, Item);
         public override bool? UseItem(Player player) => true;
 
         void PassiveEffect(Player player)
@@ -169,7 +163,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //DIMENSIONS
             player.statLifeMax2 *= 5;
             player.buffImmune[BuffID.ChaosState] = true;
-            ColossusSoul.AddEffects(player, Item, 0, 0.4f, 15);
+            ColossusSoul.AddEffects(player, Item, 0, 0.4f, 8);
             SupersonicSoul.AddEffects(player, Item, hideVisual);
             FlightMasterySoul.AddEffects(player, Item);
             TrawlerSoul.AddEffects(player, Item, hideVisual);
@@ -184,14 +178,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(null, "UniverseSoul")
-            .AddIngredient(null, "DimensionSoul")
-            .AddIngredient(null, "TerrariaSoul")
-            .AddIngredient(null, "MasochistSoul")
+            .AddIngredient<UniverseSoul>()
+            .AddIngredient<DimensionSoul>()
+            .AddIngredient<MasochistSoul>()
+            .AddIngredient<TerrariaSoul>()
 
-            .AddIngredient(null, "EternalEnergy", 30)
+            .AddIngredient<EternalEnergy>(30)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
             .Register();
         }
@@ -211,19 +205,27 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             string[] startsWithFilter = Language.GetTextValue("Mods.FargowiltasSouls.Items.EternitySoul.Extra.StartsWithFilter").Split("|", StringSplitOptions.RemoveEmptyEntries);
             string[] containsFilter = Language.GetTextValue("Mods.FargowiltasSouls.Items.EternitySoul.Extra.ContainsFilter").Split("|", StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null && r.createItem.ModItem is BaseSoul))
+            foreach (Recipe recipe in Main.recipe.Where(r => r.createItem != null && r.createItem.ModItem is EternitySoul))
             {
                 foreach (Item item in recipe.requiredItem)
                 {
                     if (item.ModItem is ModItem modItem)
                     {
-                        var tooltips = modItem.Tooltip.Value.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) // trim lines start with whitespace
+                        string tooltipToSplit = modItem.Tooltip.Value;
+
+                        string ruminateKey = $"Mods.FargowiltasSouls.Items.{modItem.Name}.RuminateTooltip";
+                        string rumination = Language.GetTextValue(ruminateKey);
+                        if (rumination != ruminateKey)
+                            tooltipToSplit = rumination;
+
+                        var tooltips = tooltipToSplit.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) // trim lines start with whitespace
                             .Where(line => !startsWithFilter.Any(line.StartsWith) && !containsFilter.Any(line.Contains)); // filter flavor text or undesired lines
 
                         Tooltips.AddRange(tooltips);
                     }
                 }
             }
+            
         }
     }
     public class EternityTin : AccessoryEffect

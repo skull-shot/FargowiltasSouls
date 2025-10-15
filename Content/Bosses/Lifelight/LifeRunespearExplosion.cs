@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
@@ -76,7 +77,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
             {
                 Projectile.Opacity = 0;
                 SoundEngine.PlaySound(SoundID.Item14, Projectile.Center);
-                SoundEngine.PlaySound(LifeChallenger.RuneSound1 with { PitchRange = (-0.6f, -0.4f) }, Projectile.Center);
+                SoundEngine.PlaySound(Lifelight.RuneSound1 with { PitchRange = (-0.6f, -0.4f) }, Projectile.Center);
 
                 int damage = Projectile.damage;
                 if (FargoSoulsUtil.HostCheck)
@@ -102,7 +103,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
 
             NPC parent = FargoSoulsUtil.NPCExists(ParentIndex);
             // Stick to a position set by lifelight.
-            if (parent != null && parent.ModNPC is LifeChallenger lifelight)
+            if (parent != null && parent.ModNPC is Lifelight lifelight)
             {
                 Projectile.Center = parent.Center + lifelight.LockVector1 + lifelight.LockVector2 * (LifeRunespearHitbox.Length + 30);
                 if (parent.HasPlayerTarget)
@@ -119,7 +120,7 @@ namespace FargowiltasSouls.Content.Bosses.Lifelight
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             if (WorldSavingSystem.EternityMode)
-                target.AddBuff(ModContent.BuffType<Buffs.Masomode.SmiteBuff>(), 60 * 6);
+                target.AddBuff(ModContent.BuffType<SmiteBuff>(), 60 * 4);
         }
         public override void OnKill(int timeLeft)
         {

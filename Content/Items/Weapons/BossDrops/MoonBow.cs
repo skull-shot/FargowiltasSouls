@@ -1,5 +1,6 @@
-﻿using FargowiltasSouls.Content.Buffs;
-using FargowiltasSouls.Content.Projectiles.BossWeapons;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs;
+using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -10,6 +11,7 @@ namespace FargowiltasSouls.Content.Items.Weapons.BossDrops
 {
     public class MoonBow : SoulsItem
     {
+        public override string Texture => FargoAssets.GetAssetString("Content/Items/Weapons/BossDrops", Name);
         public override bool IsLoadingEnabled(Mod mod) => false;
 
         public override void SetStaticDefaults()

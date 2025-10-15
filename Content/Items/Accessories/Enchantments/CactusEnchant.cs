@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Souls;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
@@ -25,18 +26,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             Item.value = 20000;
         }
 
+        public override void UpdateInventory(Player player) => player.AddEffect<CactusPassiveEffect>(Item);
+        public override void UpdateVanity(Player player) => player.AddEffect<CactusPassiveEffect>(Item);
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.FargoSouls().CactusImmune = true;
             player.AddEffect<CactusEffect>(Item);
-        }
-        public override void UpdateInventory(Player player)
-        {
-            player.FargoSouls().CactusImmune = true;
-        }
-        public override void UpdateVanity(Player player)
-        {
-            player.FargoSouls().CactusImmune = true;
+            player.AddEffect<CactusPassiveEffect>(Item);
         }
 
         public override void AddRecipes()
@@ -45,11 +40,18 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.CactusHelmet)
                 .AddIngredient(ItemID.CactusBreastplate)
                 .AddIngredient(ItemID.CactusLeggings)
+                .AddIngredient(ItemID.CactusSword)
+                .AddIngredient(ItemID.PinkPricklyPear)
                 .AddIngredient(ItemID.Waterleaf)
-                .AddIngredient(ItemID.Flounder)
-                .AddIngredient(ItemID.SecretoftheSands)
-                .AddTile(TileID.DemonAltar)
+                .AddTile<EnchantedTreeSheet>()
                 .Register();
+        }
+        public override int DamageTooltip(out DamageClass damageClass, out Color? tooltipColor, out int? scaling)
+        {
+            damageClass = DamageClass.Generic;
+            tooltipColor = null;
+            scaling = null;
+            return CactusEffect.BaseDamage(Main.LocalPlayer);
         }
     }
 
@@ -86,16 +88,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             CactusSpray(player, npc.Center);
         }
-
+        public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, player.FargoSouls().ForceEffect<CactusEnchant>() ? 40 : 16);
         private static void CactusSpray(Player player, Vector2 position)
         {
-            int dmg = 16;
             int numNeedles = 8;
             int rangemult = 1;
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.ForceEffect<CactusEnchant>())
+            if (player.FargoSouls().ForceEffect<CactusEnchant>())
             {
-                dmg = 40;
                 numNeedles = 16;
                 rangemult = 2;
             }
@@ -103,7 +102,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             for (int i = 0; i < numNeedles; i++)
             {
                 int spread = (int)MathHelper.Lerp(0.9f, 4.5f, i);
-                int p = Projectile.NewProjectile(player.GetSource_EffectItem<CactusEffect>(), position, Vector2.UnitX.RotatedBy(spread + Main.rand.NextFloat(-0.2f, 0.2f)) * (4 + Main.rand.NextFloat(-0.5f, 0.5f)) * rangemult, ModContent.ProjectileType<CactusNeedle>(), FargoSoulsUtil.HighestDamageTypeScaling(player, dmg), 5f);
+                int p = Projectile.NewProjectile(player.GetSource_EffectItem<CactusEffect>(), position, Vector2.UnitX.RotatedBy(spread + Main.rand.NextFloat(-0.2f, 0.2f)) * (4 + Main.rand.NextFloat(-0.5f, 0.5f)) * rangemult, ModContent.ProjectileType<CactusNeedle>(), BaseDamage(player), 5f);
                 if (p != Main.maxProjectiles)
                 {
                     Projectile proj = Main.projectile[p];
@@ -119,4 +118,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
     }
 
+    public class CactusPassiveEffect : AccessoryEffect
+    {
+        public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
+        public override int ToggleItemType => ModContent.ItemType<CactusEnchant>();
+    }
 }

@@ -1,13 +1,15 @@
-﻿using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using Fargowiltas.Content.Items.Tiles;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
-using FargowiltasSouls.Content.Items.Accessories.Masomode;
+using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Materials;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,27 +24,36 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
              AccessoryEffectLoader.GetEffect<ParryEffect>(),
              AccessoryEffectLoader.GetEffect<DiveEffect>(),
              AccessoryEffectLoader.GetEffect<DebuffInstallKeyEffect>(),
-             AccessoryEffectLoader.GetEffect<FrigidGemstoneKeyEffect>(),
-             AccessoryEffectLoader.GetEffect<BombKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(),
+             AccessoryEffectLoader.GetEffect<IceShieldEffect>(),
+             AccessoryEffectLoader.GetEffect<TimsInspectEffect>(),
+             AccessoryEffectLoader.GetEffect<RemoteLightningEffect>(),
              AccessoryEffectLoader.GetEffect<BulbKeyEffect>(),
              AccessoryEffectLoader.GetEffect<AmmoCycleEffect>()];
+
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 50));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
 
         public override void SetDefaults()
         {
             base.SetDefaults();
 
             Item.value = 5000000;
-            Item.defense = 30;
-            Item.useTime = 180;
-            Item.useAnimation = 180;
+            //Item.defense = 12;
+            Item.useTime = 30;
+            Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useTurn = true;
-            Item.UseSound = SoundID.Item6;
+            Item.UseSound = SoundID.DD2_BetsyFlameBreath with { Pitch = -1f, Volume = 2f };
         }
         public static readonly Color ItemColor = new(255, 51, 153, 0);
         protected override Color? nameColor => ItemColor;
 
-        public override void UseItemFrame(Player player) => SandsofTime.Use(player);
+        public override void UseItemFrame(Player player) => SandsofTime.Use(player, Item);
         public override bool? UseItem(Player player) => true;
 
         public static void PassiveEffect(Player player, Item item)
@@ -59,7 +70,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             FargoSoulsPlayer fargoPlayer = player.FargoSouls();
-            ChaliceoftheMoon.DeactivateMinions(fargoPlayer, Item);
 
             BionomicCluster.PassiveEffect(player, Item);
             LithosphericCluster.PassiveEffect(player, Item);
@@ -74,18 +84,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
 
             //stat modifiers
             DamageClass damageClass = player.ProcessDamageTypeFromHeldItem();
-            player.GetDamage(damageClass) += 0.5f;
-            player.endurance += 0.1f;
-            player.GetArmorPenetration(DamageClass.Generic) += 50;
-            player.statLifeMax2 += player.statLifeMax;
-            if (!fargoPlayer.MutantPresence)
-            {
-                player.lifeRegen += 7;
-                player.lifeRegenTime += 7;
-                player.lifeRegenCount += 7;
-            }
-            fargoPlayer.WingTimeModifier += 2f;
-            player.moveSpeed += 0.2f;
+            player.GetDamage(damageClass) += 0.12f;
+            player.GetCritChance(damageClass) += 12f;
+            player.endurance += 0.05f;
+            //player.GetArmorPenetration(DamageClass.Generic) += 50;
+            player.statLifeMax2 += player.statLifeMax / 10;
+            //player.lifeRegen += 4;
+            fargoPlayer.WingTimeModifier += 0.5f;
+            player.moveSpeed += 0.1f;
 
             //slimy shield
             player.buffImmune[BuffID.Slimed] = true;
@@ -93,16 +99,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<SlimeFallEffect>(Item);
             player.AddEffect<PlatformFallthroughEffect>(Item);
 
-            /*
-            if (player.AddEffect<SlimyShieldEffect>(Item))
-            {
-                player.FargoSouls().SlimyShieldItem = Item;
-            }
-            */
+            //if (player.AddEffect<SlimyShieldEffect>(Item))
+                //player.FargoSouls().SlimyShieldItem = Item;
 
             //agitating lens
             //player.AddEffect<AgitatingLensEffect>(Item);
-            player.AddEffect<AgitatingLensInstall>(Item);
+            //player.AddEffect<AgitatingLensInstall>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
 
             //queen stinger
@@ -135,21 +137,20 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //pure heart
             fargoPlayer.PureHeart = true;
 
-            //corrupt heart
-            fargoPlayer.DarkenedHeartItem = Item;
-            //player.AddEffect<DarkenedHeartEaters>(Item);
-            player.hasMagiluminescence = true;
-            if (fargoPlayer.DarkenedHeartCD > 0)
-                fargoPlayer.DarkenedHeartCD -= 2;
+            //rotting heart
+            fargoPlayer.RottingHeartItem = Item;
+            //player.AddEffect<RottingHeartEaters>(Item);
+            if (fargoPlayer.RottingHeartCD > 0)
+                fargoPlayer.RottingHeartCD -= 2;
 
             //gutted heart
             player.AddEffect<GuttedHeartEffect>(Item);
             player.AddEffect<GuttedHeartMinions>(Item);
-            fargoPlayer.GuttedHeartCD -= 2; //faster spawns
+            //fargoPlayer.GuttedHeartCD -= 2; //faster spawns
 
             //gelic wings
             player.FargoSouls().GelicWingsItem = Item;
-            player.AddEffect<GelicWingJump>(Item);
+            //player.AddEffect<GelicWingJump>(Item);
 
             //mutant antibodies
             player.buffImmune[BuffID.Wet] = true;
@@ -162,7 +163,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Blackout] = true;
             player.buffImmune[BuffID.Obstructed] = true;
             player.buffImmune[BuffID.Dazed] = true;
-            fargoPlayer.SkullCharm = true;
+            fargoPlayer.CrystalSkull = true;
             fargoPlayer.PungentEyeball = true;
             player.AddEffect<PungentEyeballCursor>(Item);
             player.buffImmune[ModContent.BuffType<CrystalSkullBuff>()] = true;
@@ -193,8 +194,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<FusedLensInstall>(Item);
             player.AddEffect<FusedLensStats>(Item);
             player.AddEffect<DebuffInstallKeyEffect>(Item);
-            player.AddEffect<GroundStickDR>(Item);
-            player.AddEffect<ProbeMinionEffect>(Item);
+            player.AddEffect<RemoteControlDR>(Item);
+            //player.AddEffect<ProbeMinionEffect>(Item);
             player.AddEffect<RemoteLightningEffect>(Item);
             player.AddEffect<ReinforcedStats>(Item);
             player.noKnockback = true;
@@ -203,12 +204,13 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[BuffID.Venom] = true;
             fargoPlayer.MagicalBulb = true;
             player.AddEffect<BulbKeyEffect>(Item);
+            player.AddEffect<BulbRegenEffect>(Item);
 
             //ice queen's crown
-            IceQueensCrown.AddEffects(player, Item);
+            IceQueensShield.AddEffects(player, Item);
 
             //lihzahrd treasure
-            player.buffImmune[BuffID.Burning] = true;
+            player.buffImmune[ModContent.BuffType<DaybrokenBuff>()] = true;
             fargoPlayer.LihzahrdTreasureBoxItem = Item;
             player.AddEffect<LihzahrdGroundPound>(Item);
             player.AddEffect<DiveEffect>(Item);
@@ -230,23 +232,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.AddEffect<ParryEffect>(Item);
 
             //celestial rune
-            /*
-            player.AddEffect<CelestialRuneAttacks>(Item);
-            if (fargoPlayer.AdditionalAttacksTimer > 0)
-                fargoPlayer.AdditionalAttacksTimer -= 2;
-            */
-          //player.AddEffect<CelestialRuneOnhit>(Item);
+            //player.AddEffect<CelestialRuneAttacks>(Item);
 
-            //chalice
+            //verdant doomsayer
             fargoPlayer.MoonChalice = true;
 
-            //galactic globe
+            //chalice of the moon
             player.buffImmune[BuffID.VortexDebuff] = true;
             //player.buffImmune[BuffID.ChaosState] = true;
             fargoPlayer.GravityGlobeEXItem = Item;
             player.AddEffect<ChalicePotionEffect>(Item);
+            MinionsDeactivatedEffect.DeactivateMinions(fargoPlayer, Item);
 
-            //heart of maso
+            //heart of master
             fargoPlayer.MasochistHeart = true;
             player.buffImmune[BuffID.MoonLeech] = true;
 
@@ -268,27 +266,19 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.buffImmune[ModContent.BuffType<CurseoftheMoonBuff>()] = true;
             player.buffImmune[ModContent.BuffType<DefenselessBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FlamesoftheUniverseBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<FlippedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<HallowIlluminatedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<FusedBuff>()] = true;
             //player.buffImmune[ModContent.BuffType<GodEater>()] = true;
-            player.buffImmune[ModContent.BuffType<GuiltyBuff>()] = true;
             player.buffImmune[ModContent.BuffType<HexedBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<HypothermiaBuff>()] = true;
             player.buffImmune[ModContent.BuffType<InfestedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<IvyVenomBuff>()] = true;
             player.buffImmune[ModContent.BuffType<JammedBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             player.buffImmune[ModContent.BuffType<LightningRodBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LivingWastelandBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LoosePocketsBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LovestruckBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<LowGroundBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MarkedforDeathBuff>()] = true;
             player.buffImmune[ModContent.BuffType<MidasBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<MutantNibbleBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<NanoInjectionBuff>()] = true;
-            player.buffImmune[ModContent.BuffType<NullificationCurseBuff>()] = true;
+            //player.buffImmune[ModContent.BuffType<PoweroftheCosmosBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OiledBuff>()] = true;
             player.buffImmune[ModContent.BuffType<OceanicMaulBuff>()] = true;
             player.buffImmune[ModContent.BuffType<ReverseManaFlowBuff>()] = true;
@@ -309,15 +299,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ModContent.ItemType<SinisterIcon>())
             .AddIngredient(ModContent.ItemType<SupremeDeathbringerFairy>())
             .AddIngredient(ModContent.ItemType<BionomicCluster>())
-            .AddIngredient(ModContent.ItemType<LithosphericCluster>())
             .AddIngredient(ModContent.ItemType<DubiousCircuitry>())
             .AddIngredient(ModContent.ItemType<PureHeart>())
-            .AddIngredient(ModContent.ItemType<ChaliceoftheMoon>())
+            .AddRecipeGroup("FargowiltasSouls:AnyLithosphericLantern")
+            .AddIngredient(ModContent.ItemType<VerdantDoomsayerMask>())
             .AddIngredient(ModContent.ItemType<HeartoftheMasochist>())
-            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
             .AddIngredient(ModContent.ItemType<DeviatingEnergy>(), 15)
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 15)
 
-            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .AddTile<CrucibleCosmosSheet>()
 
 
             .Register();

@@ -1,3 +1,4 @@
+using FargowiltasSouls.Content.Buffs.Boss;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,7 +32,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
             Projectile.scale = 0.3f;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             if (WorldSavingSystem.MasochistModeReal)
                 Projectile.FargoSouls().GrazeCheck = Projectile => false;
@@ -48,12 +49,9 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
+            target.AddBuff(BuffID.Bleeding, 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<Buffs.Boss.AbomFangBuff>(), 300);
-                //target.AddBuff(BuffID.Confused, 300);
-            }
-            target.AddBuff(BuffID.Electrified, 180);
+                target.AddBuff(ModContent.BuffType<AbomFangBuff>(), 240);
         }
 
         public override Color? GetAlpha(Color lightColor)

@@ -1,5 +1,5 @@
-﻿using FargowiltasSouls.Assets.ExtraTextures;
-using FargowiltasSouls.Content.Buffs.Masomode;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Deathrays;
 using FargowiltasSouls.Core;
 using Luminance.Core.Graphics;
@@ -16,14 +16,6 @@ namespace FargowiltasSouls.Content.Projectiles
     public class GiantDeathray : MutantSpecialDeathray
     {
         public GiantDeathray() : base(180) { }
-
-        public override void SetStaticDefaults()
-        {
-            base.SetStaticDefaults();
-
-            // DisplayName.SetDefault("Phantasmal Deathray");
-        }
-
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -60,7 +52,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 Projectile.velocity = -Vector2.UnitY;
             }
 
+            Player player = Main.player[Projectile.owner];
             Projectile.Center = Main.player[Projectile.owner].Center;
+            player.immune = true;
+            player.immuneTime = Math.Max(player.immuneTime, 2);
+            for (int i = 0; i < player.hurtCooldowns.Length; i++)
+                player.hurtCooldowns[i] = Math.Max(player.hurtCooldowns[i], 2);
 
             if (Projectile.velocity.HasNaNs() || Projectile.velocity == Vector2.Zero)
             {
@@ -114,7 +111,6 @@ namespace FargowiltasSouls.Content.Projectiles
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 600);
-            target.AddBuff(ModContent.BuffType<MutantNibbleBuff>(), 300);
         }
 
         public override void PostAI()
@@ -182,10 +178,10 @@ namespace FargowiltasSouls.Content.Projectiles
             // The laser should fade to white in the middle.
             Color brightColor = new(194, 255, 242, 100);
             shader.TrySetParameter("mainColor", brightColor);
-            FargoSoulsUtil.SetTexture1(FargosTextureRegistry.MutantStreak.Value);
+            FargoSoulsUtil.SetTexture1(FargoAssets.MutantStreak.Value);
             // Draw a big glow above the start of the laser, to help mask the intial fade in due to the immense width.
 
-            Texture2D glowTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Projectiles/GlowRing").Value;
+            Texture2D glowTexture = FargoAssets.GetTexture2D("Content/Projectiles", "GlowRing").Value;
 
             Vector2 glowDrawPosition = Projectile.Center;
 

@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.BossBars;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.NPCMatching;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
@@ -131,8 +131,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             if (bigCells > 0)
             {
                 //The pillar is purposefully not immune because it's meant to bait aggro, this is a mechanic you need to deal with. Same goes for the dragon.
-                npc.defense = 99999999;
+                //no that sucked actually
+                npc.dontTakeDamage = true;
                 npc.life = npc.lifeMax;
+                npc.ai[3] = 1f;
             }
             else
             {
@@ -142,7 +144,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                 {
                     CellState((int)States.Idle);
                     npc.defense = 0;
-                    npc.ai[3] = 1f;
+                    //npc.ai[3] = 1f;
                     npc.netUpdate = true;
                     npc.dontTakeDamage = false;
                     NetSync(npc);

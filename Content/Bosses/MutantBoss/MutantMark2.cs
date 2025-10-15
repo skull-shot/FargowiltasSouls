@@ -1,5 +1,5 @@
 ﻿using FargowiltasSouls.Content.Buffs.Boss;
-using FargowiltasSouls.Content.Buffs.Masomode;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.hostile = true;
             Projectile.timeLeft = 900;
             Projectile.aiStyle = -1;
-            CooldownSlot = 1;
+            CooldownSlot = ImmunityCooldownID.Bosses;
 
             Projectile.hide = true;
             Projectile.FargoSouls().DeletionImmuneRank = 1;
@@ -63,13 +63,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Poisoned, Main.rand.Next(60, 300));
+            target.AddBuff(ModContent.BuffType<CurseoftheMoonBuff>(), 240);
             if (WorldSavingSystem.EternityMode)
-            {
-                target.AddBuff(ModContent.BuffType<InfestedBuff>(), Main.rand.Next(60, 300));
-                target.AddBuff(ModContent.BuffType<IvyVenomBuff>(), Main.rand.Next(60, 300));
                 target.AddBuff(ModContent.BuffType<MutantFangBuff>(), 180);
-            }
         }
 
         public override bool PreDraw(ref Color lightColor)
