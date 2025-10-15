@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         // new forces
         public int TerraProcCD;
-        public int CosmosMoonTimer;
+        public float CosmosMoonTimer;
         public int CosmosMoonCycle;
         public bool CosmosForce;
         public bool LifeForceActive;

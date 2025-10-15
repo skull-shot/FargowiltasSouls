@@ -84,7 +84,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
         public override int ToggleItemType => ModContent.ItemType<CosmoForce>();
         public override bool ExtraAttackEffect => true;
         public static int BaseDamage(Player player) => FargoSoulsUtil.HighestDamageTypeScaling(player, 1200);
-        public override void PostUpdateEquips(Player player)
+        public override void PostUpdate(Player player)
         {
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
@@ -92,7 +92,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             {
                 if (!player.ItemTimeIsZero)
                 {
-                    modPlayer.CosmosMoonTimer += 2;
+                    modPlayer.CosmosMoonTimer += 2f * modPlayer.AttackSpeed;
                     if (modPlayer.CosmosMoonTimer >= LumUtils.SecondsToFrames(3) && player.whoAmI == Main.myPlayer)
                     {
 
@@ -124,7 +124,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
 
             if (player.HeldItem != null && player.HeldItem.damage > 0 && (player.controlUseItem || !player.ItemTimeIsZero))
             {
-                modPlayer.CosmosMoonTimer += 2;
+                modPlayer.CosmosMoonTimer += 2f * modPlayer.AttackSpeed;
                 int moonCount = player.ownedProjectileCounts[ModContent.ProjectileType<CosmosForceMoon>()];
                 if (modPlayer.CosmosMoonTimer >= LumUtils.SecondsToFrames(3) && player.whoAmI == Main.myPlayer && moonCount < 4)
                 {
