@@ -11,11 +11,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         public override string Texture => "Terraria/Images/Projectile_109";
 
-        public override void SetStaticDefaults()
-        {
-            // DisplayName.SetDefault("Snowball");
-        }
-
         public override void SetDefaults()
         {
             Projectile.width = 10;
@@ -35,7 +30,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
-            target.AddBuff(BuffID.Chilled, 60);
+            //target.AddBuff(BuffID.Chilled, 60);
         }
 
         public override void OnKill(int timeLeft)

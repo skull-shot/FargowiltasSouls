@@ -127,15 +127,15 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             Vector2 distance = Main.player[NPC.target].Center - pos;// + player.velocity * 30f;
                             distance.X /= time;
                             distance.Y = distance.Y / time - 0.5f * gravity * time;
-                            //for (int i = 0; i < 10; i++)
-                            //{
+                            for (int i = 0; i < 10; i++)
+                            {
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     SoundEngine.PlaySound(FargosSoundRegistry.TrojanCannon, pos);
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, distance + Main.rand.NextVector2Square(-0.5f, 0.5f),
                                         ModContent.ProjectileType<TrojanAcorn>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                                 }
-                            //}
+                            }
                         }
                     }
 
