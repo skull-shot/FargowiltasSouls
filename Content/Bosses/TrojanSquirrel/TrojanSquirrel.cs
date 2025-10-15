@@ -14,12 +14,14 @@ using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.Graphics.Shaders;
@@ -30,15 +32,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 {
     public abstract class TrojanSquirrelPart : ModNPC
     {
+        
         protected int baseWidth;
         protected int baseHeight;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
 
-            // DisplayName.SetDefault("Trojan Squirrel");
-
-            Main.npcFrameCount[NPC.type] = 8;
             NPCID.Sets.MPAllowedEnemies[Type] = true;
 
             NPCID.Sets.TrailCacheLength[Type] = 8;
@@ -47,7 +47,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.AddDebuffImmunities(
             [
                 BuffID.Confused,
-                    ModContent.BuffType<LethargicBuff>()
+                ModContent.BuffType<LethargicBuff>()
             ]);
         }
 
@@ -188,12 +188,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         {
             base.FindFrame(frameHeight);
 
-            if (body != null)
-                NPC.frame = body.frame;
+            //if (body != null)
+            //    NPC.frame = body.frame;
         }
         public bool Trail => body.ai[0] == 0 && body.localAI[0] > 0; //while charging
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
+            return true;
+            
             if (body == null)
                 return base.PreDraw(spriteBatch, screenPos, drawColor);
 
@@ -230,13 +232,16 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
     [AutoloadBossHead]
     public class TrojanSquirrel : TrojanSquirrelPart
-    {
-        private const float BaseWalkSpeed = 4f;
+    {   
+        //TODO: Change back to 4F when animation has been sorted out.
+        private const float BaseWalkSpeed = 1f;
         string TownNPCName;
         bool hasplayedbreaksound;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
+
+            Main.npcFrameCount[Type] = 5;
 
             NPCID.Sets.BossBestiaryPriority.Add(NPC.type);
 
@@ -264,15 +269,16 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.lifeMax = 800;
 
             NPC.width = baseWidth = 100;
-            NPC.height = baseHeight = 120; //234
+            NPC.height = baseHeight = 147; //234
 
             NPC.value = Item.buyPrice(silver: 75);
             NPC.boss = true;
 
-            /*Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
+            /*
+            Music = ModLoader.TryGetMod("FargowiltasMusic", out Mod musicMod)
                 ? MusicLoader.GetMusicSlot(musicMod, "Assets/Music/TrojanSquirrel") : MusicID.OtherworldlyBoss1;
-            SceneEffectPriority = SceneEffectPriority.BossLow;*/
-
+            SceneEffectPriority = SceneEffectPriority.BossLow;
+            */
             NPC.BossBar = ModContent.GetInstance<TrojanSquirrelBossBar>();
         }
         /*
@@ -285,6 +291,17 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public NPC arms;
         public int lifeMaxHead;
         public int lifeMaxArms;
+
+        //Used to create a convincing "stepping" animation.
+        public static Asset<Texture2D> ArmTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanSquirrelArms", AssetRequestMode.ImmediateLoad);    
+        public Rectangle LegFrameAlt = new Rectangle(0, 0, LegTexture.Width() / 5, LegTexture.Height() / LegFrameMax);
+        public int LegAltFramecounter;
+
+        public static Asset<Texture2D> LegTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanSquirrelLegs", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+        public int LegFrameType;
+        public Rectangle LegFrame = new Rectangle(0, 0, LegTexture.Width() / 5, LegTexture.Height() / LegFrameMax);
+        public const int LegFrameMax = 7;
+        public int LegFramecounter;
 
         private bool spawned;
 
@@ -460,8 +477,11 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             TileCollision(target.Y > NPC.Bottom.Y, Math.Abs(target.X - NPC.Center.X) < NPC.width / 2 && NPC.Bottom.Y < target.Y);
         }
         public bool Jumping = false;
+
+        #region AI
         public override void AI()
         {
+            
             if (!spawned)
             {
                 spawned = true;
@@ -473,13 +493,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     head = FargoSoulsUtil.NPCExists(FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromThis(), NPC.Center, ModContent.NPCType<TrojanSquirrelHead>(), NPC.whoAmI, target: NPC.target));
                     arms = FargoSoulsUtil.NPCExists(FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromThis(), NPC.Center, ModContent.NPCType<TrojanSquirrelArms>(), NPC.whoAmI, target: NPC.target));
                 }
-
                 //drop summon
-                EModeUtils.DropSummon(NPC, ModContent.ItemType<SquirrelCoatofArms>(),  WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel], ref spawned);
+                EModeUtils.DropSummon(NPC, ModContent.ItemType<SquirrelCoatofArms>(), WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel], ref spawned);
 
                 //start by jumping
                 NPC.ai[0] = 1f;
                 NPC.ai[3] = 1f;
+
+                LegFrameType = 1;
 
                 for (int i = 0; i < 80; i++)
                 {
@@ -494,6 +515,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 //SoundEngine.PlaySound(SoundID.Roar, Main.player[NPC.target].Center);
             }
 
+            
+
+            //NPC.ai[0] = -1;
+
             Player player = Main.player[NPC.target];
             NPC.direction = NPC.spriteDirection = NPC.Center.X < player.Center.X ? 1 : -1;
 
@@ -503,9 +528,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             {
                 case 0: //mourning wood movement
                     {
+                        
                         Vector2 target = player.Bottom - Vector2.UnitY;
                         if (NPC.localAI[0] > 0) //doing running attack
                         {
+                            if (LegFrameType == 1)
+                                LegFrameType = 2;
                             NPC.localAI[0] -= 1f;
 
                             if (NPC.localAI[0] % 10 == 0) //hermes boot clouds
@@ -513,8 +541,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                 SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/TrojanFootstep") with {Variants = [1, 2, 3], Volume = 0.5f}, NPC.Bottom);
                                 Vector2 vel = (-NPC.velocity).RotatedByRandom(MathHelper.Pi / 11f);
                                 vel /= 2;
-                                Gore gore = Gore.NewGoreDirect(player.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 10, vel, Main.rand.Next(11, 14), Scale: Main.rand.NextFloat(1.5f, 2f));
-                                gore.timeLeft /= 2;
+                                //Gore gore = Gore.NewGoreDirect(player.GetSource_FromThis(), NPC.Bottom - Vector2.UnitY * 10, vel, Main.rand.Next(11, 14), Scale: Main.rand.NextFloat(1.5f, 2f));
+                                //gore.timeLeft /= 2;
                             }
 
                             float distance = NPC.Center.X - target.X;
@@ -683,11 +711,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                 case 2: //jump
                     {
+                        
                         const float gravity = 0.4f;
                         float time = WorldSavingSystem.EternityMode && arms == null ? 60f : 90f;
 
                         if (NPC.localAI[0]++ == 0)
                         {
+                            if (LegFrameType == 1)
+                                LegFrameType = 2;
                             Vector2 distance = player.Top - NPC.Bottom;
 
                             if (WorldSavingSystem.EternityMode && arms == null)
@@ -916,6 +947,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             SmokeVisuals();
         }
+        #endregion
 
         private void ExplodeAttack()
         {
@@ -940,6 +972,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         private void SmokeVisuals()
         {
+            return;
             int headsmokedir = 0;
             int armsmokedir = 0;
 
@@ -1029,43 +1062,229 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void FindFrame(int frameHeight)
         {
-            switch ((int)NPC.ai[0])
+            Main.NewText("AnimationType: " + LegFrameType);
+            Main.NewText("framey: " + LegFrame.Y);
+            Main.NewText("framex: " + LegFrame.X);
+            //140 is the width of each X Frame.
+            NPC.frame.X = 0;
+            if (++NPC.frameCounter >= 7)
             {
-                case 0:
-                    {
-                        NPC.frameCounter += 1f / BaseWalkSpeed / NPC.scale * Math.Abs(NPC.velocity.X);
+                NPC.frameCounter = 0;
+                NPC.frame.Y = 0;
+            }
+                
+            if (NPC.frame.Y >= frameHeight * 5)
+                NPC.frame.Y = 0;                
 
-                        if (NPC.frameCounter > 2.5f) //walking animation
+            switch (LegFrameType)
+            {   
+                
+                //Walk Animation
+                case 1:
+                    {
+                        //96 is the width of an X Frame.
+                        LegFrame.X = 96 * 3;
+                        if (++LegFramecounter >= 5)
                         {
-                            NPC.frameCounter = 0;
-                            NPC.frame.Y += frameHeight;
+                            //LegFramecounter = 0;
+                            LegFrame.Y += LegFrame.Height;
+
+                            if (LegFrame.Y >= LegFrame.Height * LegFrameMax)
+                                LegFrame.Y = 0;
                         }
 
-                        if (NPC.frame.Y >= frameHeight * 6)
-                            NPC.frame.Y = 0;
+                        LegFrameAlt.X = 96 * 3;
+                        if (LegFramecounter >= 5)
+                        {
+                            LegFramecounter = 0;
+                            LegFrameAlt.Y += LegFrameAlt.Height;
 
-                        if (arms != null && arms.ai[0] == 1 && arms.ai[3] == 1)
-                            NPC.frame.Y = frameHeight * 6;
+                            if (LegFrameAlt.Y >= LegFrameAlt.Height * LegFrameMax)
+                                LegFrameAlt.Y = 0;
+                        }
 
-                        if (NPC.velocity.X == 0)
-                            NPC.frame.Y = frameHeight; //stationary sprite if standing still
 
-                        if (NPC.velocity.Y > 4)
-                            NPC.frame.Y = frameHeight * 7; //jumping
+                    }
+                    break;
+                
+                //Preparing to either jump, or run.
+                case 2:
+                    {
+                        bool PreparingJump = NPC.ai[0] == 2;
+                        bool PreparingRun = false;
+                        if (NPC.ai[0] == 0)
+                            PreparingRun = true;
+                        LegFrame.X = 0;
+                        if (++LegFramecounter >= 3)
+                        {
+                            LegFramecounter = 0;
+                            LegFrame.Y += LegFrame.Height;
+                            if (LegFrame.Y >= LegFrame.Height * 6)
+                            {
+                                if (PreparingJump)
+                                {
+                                    LegFrame.X = 96 * 4;
+                                    LegFrame.Y = 0;
+                                    LegFrameType = 4;
+                                }
+                                    
+
+                                if (PreparingRun)
+                                {
+                                    LegFrame.X = 96;
+                                    LegFrame.Y = 0;
+                                    LegFrameType = 3;
+                                }
+                                    
+                            }
+                                
+                        }
+                    }
+                    break;
+                
+                //Running
+                case 3:
+                    {
+                        ++LegFramecounter;
+                        
+                        //Reverse running to move to next stage
+                        if (NPC.ai[0] == 0 && NPC.localAI[0] <= 0)
+                        {
+                            LegFrame.X = 96;
+                            if (LegFramecounter >= 16)
+                            {
+                                LegFramecounter = 0;
+                                LegFrame.Y -= LegFrame.Height;
+                                if (LegFrame.Y <= 0)
+                                {
+                                    //LegFrame.X -= 96;
+                                    LegFrame.Y = 0;
+                                    LegFrameType = 1;
+                                }
+                            }
+                        }
+                        else if (LegFrame.X == 96) //Running
+                        {
+                            if (LegFramecounter >= 12)
+                            {
+                                LegFramecounter = 0;
+                                LegFrame.Y += LegFrame.Height;
+                                if (LegFrame.Y >= LegFrame.Height * 2)
+                                {
+                                    LegFrame.X += 96;
+                                    LegFrame.Y = 0;
+                                    --LegFramecounter;
+                                }
+                            }
+                        }
+                        else if (LegFrame.X == 96 * 2)
+                        {
+                            if (LegFramecounter >= 7)
+                            {
+                                LegFramecounter = 0;
+                                LegFrame.Y += LegFrame.Height;
+                                if (LegFrame.Y >= LegFrame.Height * 2)
+                                {
+                                    LegFrame.Y = 0;
+                                }
+                            }
+                        }
+
+
+
+                    }
+                    break;
+                
+                //Jumping
+                case 4:
+                    {
+                        if (++LegFramecounter >= 16)
+                        {
+                            LegFramecounter = 0;
+                            LegFrame.Y += LegFrame.Height;
+                            if (LegFrame.Y >= LegFrame.Height * 2)
+                            {
+                                LegFrame.Y = LegFrame.Height * 2;
+                                LegFramecounter--;
+                            }
+
+                            if (!Jumping)
+                            {
+                                LegFrame.Y = 0;
+                                LegFrameType = 1;
+                            }
+                                
+                        }
                     }
                     break;
 
-                case 1:
-                    NPC.frame.Y = frameHeight * 6; //crouching for jump
-                    break;
+                case 5:
+                    {
+                        LegFrame.X = 0;
+                        if (++LegFramecounter >= 6)
+                        {
+                            LegFramecounter = 0;
+                            LegFrame.Y -= LegFrame.Height;
+                            if (LegFrame.Y <= 0)
+                            {
+                                LegFrameType = 1;
+                            }
 
-                case 2:
-                    NPC.frame.Y = frameHeight * 7; //jumping
+                        }
+                    }
                     break;
 
                 default:
-                    goto case 0;
+                    {
+                        LegFrameType = 1;
+                    }
+                    goto case 1;
             }
+        }
+
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (NPC.IsABestiaryIconDummy)
+            {
+                return true;
+            }
+
+            
+                
+            Texture2D ArmTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanSquirrelArms", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D LegTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanSquirrelLegs", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+            Texture2D BodyTexture = TextureAssets.Npc[NPC.type].Value;
+            Rectangle rectangle = new Rectangle(NPC.frame.X, NPC.frame.Y, NPC.frame.Width / 2, NPC.frame.Height);
+            Vector2 origin2 = rectangle.Size() / 2f;
+            //NPC.direction = 1;
+            //Legs
+            Rectangle LegRectangle = LegFrame;
+            Vector2 LegOrigin = LegRectangle.Size() / 2f;
+            Rectangle LegRectangleAlt = LegFrameAlt;
+            Vector2 LegAltOrigin = LegRectangleAlt.Size() / 2f;
+
+            Color color26 = drawColor;
+            color26 = NPC.GetAlpha(color26);
+
+            SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            
+
+            
+            if (arms != null)
+            {   
+                Rectangle ArmRectangle = new Rectangle(arms.frame.X, arms.frame.Y, arms.frame.Width / 3, arms.frame.Height);
+                Vector2 ArmOrigin = ArmRectangle.Size() / 2f;
+                Main.EntitySpriteDraw(ArmTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 0 : 73f, NPC.gfxOffY + 26 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(ArmRectangle), color26, NPC.rotation, origin2, NPC.scale * 0.9f, effects, 0);
+            }
+                
+
+            Main.EntitySpriteDraw(LegTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? -32 : 46f, NPC.gfxOffY + 33 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(LegFrameType == 1 ? LegRectangleAlt : LegRectangle), color26, NPC.rotation, LegAltOrigin, NPC.scale, effects, 0);
+
+            Main.EntitySpriteDraw(BodyTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 40 : -25f, NPC.gfxOffY - 43 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+
+            Main.EntitySpriteDraw(LegTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 40 : -24f, NPC.gfxOffY + 33 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(LegRectangle), color26, NPC.rotation, LegOrigin, NPC.scale, effects, 0);
+
+            return false;
         }
 
         public override void HitEffect(NPC.HitInfo hit)

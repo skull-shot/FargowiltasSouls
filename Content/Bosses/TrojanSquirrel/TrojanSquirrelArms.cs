@@ -2,9 +2,11 @@ using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Core.Systems;
 using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -14,6 +16,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         public LoopedSoundInstance? Loop;
         int looptimer;
+
+        public override void SetStaticDefaults()
+        {
+            Main.npcFrameCount[Type] = 6;
+            base.SetStaticDefaults();
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -26,6 +34,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void AI()
         {
+            //return;
             base.AI();
 
             if (body == null)
@@ -218,6 +227,39 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     }
                     break;
             }
+        }
+
+        public override void FindFrame(int frameHeight)
+        {   
+            //74 is the width of each X Frame.
+            NPC.frame.X = 0;
+            if (++NPC.frameCounter >= 7)
+            {
+                NPC.frameCounter = 0;
+                NPC.frame.Y = 0;
+            }
+
+            if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[Type])
+                NPC.frame.Y = 0;
+        }
+
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D texture2D13 = TextureAssets.Npc[NPC.type].Value;
+            Rectangle rectangle = new Rectangle(NPC.frame.X, NPC.frame.Y, NPC.frame.Width / 3, NPC.frame.Height);
+            Vector2 origin2 = rectangle.Size() / 2f;
+            //NPC.direction = 1;
+
+
+            Color color26 = drawColor;
+            color26 = NPC.GetAlpha(color26);
+
+            SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+            if (body != null)
+                Main.EntitySpriteDraw(texture2D13, body.Center - screenPos + new Vector2(NPC.direction < 0 ? 20f : -2f, NPC.gfxOffY - 24 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+
+            return false;
         }
 
         private Vector2 GetShootPos()
