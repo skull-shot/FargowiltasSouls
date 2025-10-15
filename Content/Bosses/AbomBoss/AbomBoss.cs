@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.AbomBoss
             NPC.damage = 200;
             NPC.defense = 80;
             // more expert hp to compensate universe core
-            NPC.lifeMax = Main.expertMode ? 1150000 : 750000;
+            NPC.lifeMax = Main.expertMode ? 1100000 : 700000;
             NPC.value = Item.buyPrice(12);
             NPC.HitSound = SoundID.NPCHit57;
             NPC.noGravity = true;
