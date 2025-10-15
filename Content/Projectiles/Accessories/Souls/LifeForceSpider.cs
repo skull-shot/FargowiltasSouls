@@ -59,7 +59,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 {
                     Projectile.rotation = Projectile.rotation.ToRotationVector2().RotateTowards(Projectile.DirectionTo(Target.Center).ToRotation() + MathHelper.PiOver2, 0.1f).ToRotation();
                     SpitTimer++;
-                    if (SpitTimer >= 30 && Projectile.owner == Main.myPlayer)
+                    if (SpitTimer >= 40 && Projectile.owner == Main.myPlayer)
                     {
                         SpitTimer = 0;
                         int spit = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.UnitX.RotatedBy(Projectile.rotation - MathHelper.PiOver2) * 10, ProjectileID.WebSpit, Projectile.damage, Projectile.knockBack, Projectile.owner);

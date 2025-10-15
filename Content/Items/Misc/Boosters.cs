@@ -1,7 +1,8 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using System.Reflection;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Souls;
+using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
-using System.Reflection;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -66,8 +67,14 @@ namespace FargowiltasSouls.Content.Items.Misc
         public override string Texture => "Terraria/Images/Item_3458";
         public override void PickupEffect(BoosterPlayer boosterPlayer)
         {
-            if (boosterPlayer.SolarTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Activate", 5), true);
+            //if (boosterPlayer.SolarTimer <= 0)
+            //    CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Yellow, Language.GetTextValue("Mods.FargowiltasSouls.Items.SolarBooster.Activate", 5), true);
+            for (int i = 0; i < 6; i++)
+            {
+                int d = Dust.NewDust(Item.Center, 0, 0, DustID.SolarFlare, Scale: 2f);
+                Main.dust[d].noGravity = true;
+                Main.dust[d].velocity = 5 * Vector2.UnitY.RotatedBy((MathHelper.TwoPi / 6 * i) + MathHelper.Pi / 6);
+            }
             boosterPlayer.SolarTimer = LunarDuration;
             boosterPlayer.Player.AddBuff(ModContent.BuffType<SolarBuff>(), LunarDuration);
         }
@@ -79,8 +86,14 @@ namespace FargowiltasSouls.Content.Items.Misc
         {
             //if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg3))
             //    return;
-            if (boosterPlayer.VortexTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.LightCyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.VortexBooster.Activate", 20), true);
+            //if (boosterPlayer.VortexTimer <= 0)
+            //    CombatText.NewText(boosterPlayer.Player.Hitbox, Color.LightCyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.VortexBooster.Activate", 20), true);
+            for (int i = 0; i < 6; i++)
+            {
+                int d = Dust.NewDust(Item.Center, 0, 0, DustID.Vortex, Scale: 2f);
+                Main.dust[d].noGravity = true;
+                Main.dust[d].velocity = 5 * Vector2.UnitY.RotatedBy((MathHelper.TwoPi / 6 * i) + MathHelper.Pi / 6);
+            }
             boosterPlayer.VortexTimer = LunarDuration;
             boosterPlayer.Player.AddBuff(ModContent.BuffType<VortexBuff>(), LunarDuration);
         }
@@ -92,8 +105,14 @@ namespace FargowiltasSouls.Content.Items.Misc
         {
             if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpLife3))
                 return;
-            if (boosterPlayer.NebulaTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Magenta, Language.GetTextValue("Mods.FargowiltasSouls.Items.NebulaBooster.Activate", 2), true);
+            //if (boosterPlayer.NebulaTimer <= 0)
+            //    CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Magenta, Language.GetTextValue("Mods.FargowiltasSouls.Items.NebulaBooster.Activate", 2), true);
+            for (int i = 0; i < 6; i++)
+            {
+                int d = Dust.NewDust(Item.Center, 0, 0, DustID.Enchanted_Pink, Scale: 2f);
+                Main.dust[d].noGravity = true; 
+                Main.dust[d].velocity = 5 * Vector2.UnitY.RotatedBy((MathHelper.TwoPi / 6 * i) + MathHelper.Pi / 6);
+            }
             boosterPlayer.NebulaTimer = LunarDuration;
             boosterPlayer.Player.AddBuff(ModContent.BuffType<NebulaBuff>(), LunarDuration);
         }
@@ -105,8 +124,14 @@ namespace FargowiltasSouls.Content.Items.Misc
         {
             if (boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg1) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg2) || boosterPlayer.Player.HasBuff(BuffID.NebulaUpDmg3))
                 return;
-            if (boosterPlayer.StardustTimer <= 0)
-                CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Cyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.StardustBooster.Activate", 20), true);
+            //if (boosterPlayer.StardustTimer <= 0)
+            //    CombatText.NewText(boosterPlayer.Player.Hitbox, Color.Cyan, Language.GetTextValue("Mods.FargowiltasSouls.Items.StardustBooster.Activate", 20), true);
+            for (int i = 0; i < 6; i++)
+            {
+                int d = Dust.NewDust(Item.Center, 0, 0, DustID.PurificationPowder, Scale: 2f);
+                Main.dust[d].noGravity = true;
+                Main.dust[d].velocity = 5 * Vector2.UnitY.RotatedBy((MathHelper.TwoPi / 6 * i) + MathHelper.Pi / 6);
+            }
             boosterPlayer.StardustTimer = LunarDuration;
             boosterPlayer.Player.AddBuff(ModContent.BuffType<StardustBuff>(), LunarDuration);
         }

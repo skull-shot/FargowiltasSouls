@@ -21,7 +21,7 @@ namespace FargowiltasSouls.Content.Buffs.Boss
             player.FargoSouls().noDodge = true;
             player.FargoSouls().noSupersonic = true;
             player.moonLeech = true;
-            player.bleed = true;
+            //player.bleed = true;
         }
     }
 }
