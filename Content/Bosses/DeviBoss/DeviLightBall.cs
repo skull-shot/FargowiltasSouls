@@ -17,8 +17,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
 {
     public class DeviLightBall : LightBall, IPixelatedPrimitiveRenderer
     {
-        public override bool DoNotSpawnDust => true;
-
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
 
         public override void SetStaticDefaults()
@@ -68,17 +66,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             }
         }
 
-        public float WidthFunction(float completionRatio)
-        {
-            float baseWidth = Projectile.scale * Projectile.width * 1.3f;
-            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
-        }
-
-        public static Color ColorFunction(float completionRatio)
-        {
-            return Color.Lerp(new(250, 249, 128), Color.Transparent, completionRatio) * 0.7f;
-        }
-
         public override bool PreDraw(ref Color lightColor)
         {
             Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
@@ -88,13 +75,6 @@ namespace FargowiltasSouls.Content.Bosses.DeviBoss
             Vector2 origin2 = rectangle.Size() / 2f;
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
-        }
-
-        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
-        {
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
-            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }
 }

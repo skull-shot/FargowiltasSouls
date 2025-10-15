@@ -39,8 +39,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             npc.buffImmune[BuffID.Suffocation] = true;
         }
-
-        public static float nerf => Main.getGoodWorld ? 0f : WorldSavingSystem.MasochistModeReal ? 0.2f : 0.4f;
         public bool IsItemValid(NPC npc, Player player, Item item)
         {
             if (player.FargoSouls().GravityGlobeEXItem != null)

@@ -17,7 +17,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
     public class DarkBall : LightBall, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories/LithosphericCluster", "DarkBall");
-        public override bool DoNotSpawnDust => true;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -43,7 +42,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
             {
                 if (Projectile.velocity.X != 0)
                     Projectile.spriteDirection = Projectile.direction = Projectile.velocity.X > 0 ? 1 : -1;
-                Projectile.rotation += 0.3f * Projectile.direction;
+                Projectile.rotation += 0.05f * Projectile.direction;
             }
 
             bool slowdown = true;
@@ -95,24 +94,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Buffs
                 Main.dust[d].velocity *= 2f;
                 Main.dust[d].fadeIn = 0.5f;
             }
-        }
-
-        public float WidthFunction(float completionRatio)
-        {
-            float baseWidth = Projectile.scale * Projectile.width * 1.3f;
-            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
-        }
-
-        public static Color ColorFunction(float completionRatio)
-        {
-            return Color.Lerp(new(182, 27, 248), Color.Transparent, completionRatio) * 0.7f;
-        }
-
-        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
-        {
-            ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
-            FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
-            PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
         }
     }
 }

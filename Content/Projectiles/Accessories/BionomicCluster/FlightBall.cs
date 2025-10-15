@@ -3,14 +3,12 @@ using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRain;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
-using Microsoft.Xna.Framework;
+using Luminance.Core.Graphics;
 using Terraria;
-using Terraria.Audio;
-using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
 {
-    public class FlightBall : LightBall
+    public class FlightBall : LightBall, IPixelatedPrimitiveRenderer
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
 
@@ -28,22 +26,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.BionomicCluster
 
         public override void AI()
         {
-            if (++Projectile.localAI[0] == 0f)
-            {
-                SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
-            }
-
-            for (int i = 0; i < 2; i++)
-            {
-                int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, new Color(), 2f);
-                Main.dust[d].noGravity = true;
-                Main.dust[d].velocity.X *= 0.6f;
-                Main.dust[d].velocity.Y *= 0.6f;
-
-                if (Projectile.velocity.X != 0)
-                    Projectile.spriteDirection = Projectile.direction = Projectile.velocity.X > 0 ? 1 : -1;
-                Projectile.rotation += 0.3f * Projectile.direction;
-            }
+            base.AI();
 
             bool slowdown = true;
             if (Projectile.localAI[0] > 90f)
