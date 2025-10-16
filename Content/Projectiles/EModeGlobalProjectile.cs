@@ -229,7 +229,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile? sourceProj = null;
 
-            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
+            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, false, false)))
             {
                 if (source is not null)
                 {
@@ -240,8 +240,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     FargoSoulsUtil.GetOrigin(projectile, source, out sourceProj);
                     SourceItemType = projectile.FargoSouls().SourceItemType;
 
-                    if (sourceProj is not null && sourceProj.FargoSouls().ItemSource && FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(sourceProj.type))
-                    { // reuse this with the intention to make shots from held projectiles work with Huntress
+                    if (sourceProj is not null && sourceProj.FargoSouls().ItemSource && (((sourceProj.minion || sourceProj.sentry) && (ProjectileID.Sets.MinionShot[projectile.type] || ProjectileID.Sets.SentryShot[projectile.type])) || FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(sourceProj.type)))
+                    { // reuse this with the intention to make shots from held projectiles work with Huntress, or make minion shots count as ItemSource
                         projectile.FargoSouls().ItemSource = true;
                     }
                     projectile.FargoSouls().Homing = projectile.IsHoming(Main.player[projectile.owner], source);

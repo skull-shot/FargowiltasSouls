@@ -298,7 +298,7 @@ namespace FargowiltasSouls.Content.Projectiles
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             Projectile? sourceProj = null;
 
-            if (projectile.friendly)
+            if (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, false, false))
             {
                 if (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
                     ItemSource = true;
@@ -307,8 +307,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 if (sourceProj is not null)
                 {
-                    if (sourceProj.FargoSouls().ItemSource && DoesNotAffectHuntressType.Contains(sourceProj.type))
-                        ItemSource = true; // reuse this with the intention to make shots from held projectiles work with Huntress
+                    if (sourceProj.FargoSouls().ItemSource && (((sourceProj.minion || sourceProj.sentry) && (ProjectileID.Sets.MinionShot[projectile.type] || ProjectileID.Sets.SentryShot[projectile.type])) || DoesNotAffectHuntressType.Contains(sourceProj.type)))
+                        ItemSource = true; // reuse this with the intention to make shots from held projectiles work with Huntress, or make minion shots count as ItemSource
 
                     if (sourceProj.FargoSouls().TikiTagged)
                     { //projs shot by tiki-buffed projs will also inherit the tiki buff
