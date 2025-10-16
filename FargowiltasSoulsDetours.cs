@@ -508,7 +508,7 @@ namespace FargowiltasSouls
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
         { // hallowed dodge nerf
             orig(self);
-            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
+            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail).Any(s => s == "HolyDodge"))
                 self.shadowDodgeTimer = 60 * 45;
         }
 
@@ -530,7 +530,7 @@ namespace FargowiltasSouls
             orig(self, sItem, ref projToShoot, ref speed, ref canShoot, ref totalDamage, ref KnockBack, out usedAmmoItemId, dontConsume);
             if (self is not null)
             {
-                if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type))
+                if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type).Any(s => s == "CoinGun"))
                 {
                     if (projToShoot == ProjectileID.CopperCoin)
                         totalDamage = (int)Math.Ceiling(totalDamage * 1.6f);
