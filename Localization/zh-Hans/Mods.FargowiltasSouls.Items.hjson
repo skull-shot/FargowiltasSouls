@@ -1982,7 +1982,7 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		Increases your minion slots by 3 and sentry slots by 1, does not stack with downgrades
 		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 

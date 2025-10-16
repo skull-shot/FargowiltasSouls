@@ -1,10 +1,8 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
-using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
 {
@@ -140,44 +138,29 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
 
             if (npc.type == NPCID.BlueSlime)
             {
-                void SplitIntoSlimes(int type, int amount)
+                void SplitIntoSlimes(int type)
                 {
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        for (int i = 0; i < amount; i++)
-                        {
-                            if (!Main.rand.NextBool(3))
-                                continue;
-
-                            int n = FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, type,
-                                velocity: new Vector2(npc.velocity.X * 2, npc.velocity.Y));
-
-                            if (n != Main.maxNPCs)
-                            {
-                                Main.npc[n].velocity.X += Main.rand.Next(-20, 20) * 0.1f + i * npc.direction * 0.3f;
-                                Main.npc[n].velocity.Y -= Main.rand.Next(0, 10) * 0.1f + i;
-                            }
-                        }
-                    }
+                    if (Main.rand.NextBool(3) && FargoSoulsUtil.HostCheck)
+                        FargoSoulsUtil.NewNPCEasy(npc.GetSource_FromAI(), npc.Center, type);
                 }
 
                 switch (npc.netID)
                 {
                     case NPCID.YellowSlime:
-                        SplitIntoSlimes(NPCID.PurpleSlime, 2);
+                        SplitIntoSlimes(NPCID.PurpleSlime);
                         break;
 
                     case NPCID.PurpleSlime:
-                        SplitIntoSlimes(NPCID.RedSlime, 2);
+                        SplitIntoSlimes(NPCID.RedSlime);
                         break;
 
                     case NPCID.RedSlime:
-                        SplitIntoSlimes(NPCID.GreenSlime, 2);
+                        SplitIntoSlimes(NPCID.GreenSlime);
                         break;
 
                     case NPCID.Pinky:
-                        SplitIntoSlimes(NPCID.YellowSlime, 2);
-                        SplitIntoSlimes(NPCID.MotherSlime, 1);
+                        SplitIntoSlimes(NPCID.YellowSlime);
+                        //SplitIntoSlimes(NPCID.MotherSlime);
                         break;
 
                     default:
