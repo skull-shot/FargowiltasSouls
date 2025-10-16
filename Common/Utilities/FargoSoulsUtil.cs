@@ -611,6 +611,18 @@ namespace FargowiltasSouls //lets everything access it without using
             return (currentTargetPosition - startingPosition).SafeNormalize(Vector2.UnitY) * shootSpeed;
         }
 
+        public static float NPCRotateTowards(NPC npc, Vector2 target, float speed, float overriderotation = -999)
+        {
+            float rot = overriderotation != -999 ? overriderotation : npc.rotation;
+            Vector2 LV = rot.ToRotationVector2();
+            Vector2 PV = npc.SafeDirectionTo(target);
+            float anglediff = RotationDifference(LV, PV);
+            if (anglediff == 0)
+                return rot; //no change
+            //change rotation towards target
+            return rot.ToRotationVector2().RotatedBy(Math.Sign(anglediff) * Math.Min(Math.Abs(anglediff), speed * MathHelper.Pi / 180)).ToRotation();
+        }
+
         public static void HeartDust(Vector2 position, float rotationOffset = MathHelper.PiOver2, Vector2 addedVel = default, float spreadModifier = 1f, float scaleModifier = 1f)
         {
             for (float j = 0; j < MathHelper.TwoPi; j += MathHelper.ToRadians(360 / 60))
