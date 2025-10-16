@@ -103,8 +103,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
-
-            npc.lifeMax *= 2;
         }
 
         public override void OnFirstTick(NPC npc) { }
@@ -114,7 +112,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             if (npc.life < npc.lifeMax / 2)
             {
                 npc.knockBackResist = 0f;
-                if (++AttackTimer > 20)
+                if (++AttackTimer > 40)
                 {
                     AttackTimer = 0;
                     if (FargoSoulsUtil.HostCheck)
