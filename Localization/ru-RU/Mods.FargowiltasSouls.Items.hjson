@@ -822,21 +822,19 @@ LifeForce: {
 	DisplayName: Артефакт Жизни
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/BeeEnchant] Даёт сильные крылья и эффекты рюкзака-улья
-		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] В полёте вы оставляете за собой цветы, которые могут ранить врагов или восстанавливать ваше время полёта и усилять вас по касании
-		[i:FargowiltasSouls/SpiderEnchant] Призываемые существа могут наносить критические удары, но урон увеличивается в 1,25 раз
+		[i:FargowiltasSouls/BeeEnchant] Даёт могучие крылья и эффекты рюкзака-улья
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/SpiderEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] В полёте вы оставляете за собой цветы, которые могут ранить врагов или восстанавливать ваше время полёта и усилять вас при касании
 		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
 		«Живое существо, неподвластное вашей воле — это редкость»
 		'''
 	RuminateTooltip:
 		'''
-		[i:FargowiltasSouls/BeeEnchant] Даёт сильные крылья
-		[i:FargowiltasSouls/BeeEnchant] Вы оставляете за собой цветы во время полёта
-		[i:FargowiltasSouls/PumpkinEnchant] Цветы при прикосновении выпускают рой пчёл, дают бафф «Амброзия» и восстанавливают время полёта
+		[i:FargowiltasSouls/BeeEnchant] Даёт могучие крылья, которые в полёте оставляют за собой цветы
+		[i:FargowiltasSouls/SpiderEnchant] Вокруг цветов собираются различные насекомые, нападающие на ближайших врагов
+		[i:FargowiltasSouls/PumpkinEnchant] Цветы при прикосновении дают бафф «Амброзия» и восстанавливают время полёта
 		[i:FargowiltasSouls/CactusEnchant] Если же цветов касаются враги, они выпускают иглы
 		[i:FargowiltasSouls/BeetleEnchant] «Амброзия» увеличивает урон на 20%, сопротивление урону на 8% и регенерацию здоровья на 2,5 ОЗ/сек
-		[i:FargowiltasSouls/SpiderEnchant] Призываемые существа могут наносить критические удары, но урон увеличивается в 1,25 раз
-		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
+		[i:FargowiltasSouls/TurtleEnchant] Остановитесь на месте в полёта, чтобы войти в панцирь, уменьшающий получаемый урон одного удара
 		[i:FargowiltasSouls/BeeEnchant] Эффекты рюкзака-улья
 		[i:FargowiltasSouls/CactusEnchant] Пассивные кактусы не наносят урона (работает в инвентаре и слотах для украшений)
 		«Живое существо, неподвластное вашей воле — это редкость»
@@ -1212,7 +1210,7 @@ ChaliceofTheMoon: {
 		[c/ADD8E6:«Железная кожа», «Регенерация», «Скорость», «Регенерация маны», «Магическая сила», «Экономия патронов», «Лучник»,]
 		[c/ADD8E6:«Строитель», «Ящики», «Выносливость», «Рыбалка», «Жабры», «Счастливый», «Сердечный магнит», «Жизненная сила», «Добыча», «Обсидиановая кожа»,]
 		[c/ADD8E6:«Месть», «Ярость», «Сонар», «Призыватель», «Шипы», «Титан», «Согревание», «Хождение по воде», «Изысканное удовлетворение»,]
-		[c/ADD8E6:«Заточено», «Ящик с боеприпасами», «Ясновидение», «Колдовство», «Стратег»]
+		[c/ADD8E6:«Заточено», «Ящик с боеприпасами», «Ясновидение», «Колдовство», «Стратег», «Сахарная лихорадка», «Омнистанция»]
 		'''
 }
 
@@ -1682,8 +1680,8 @@ ConjuristsSoul: {
 		'''
 		Увеличивает призывательный урон на 22%
 		Увеличивает дальность атаки хлыстов на 15%
-		Увеличивает максимальное количество миньонов на 3, не увеличивается с материалами
-		Увеличивает максимальное количество стражников на 1, не увеличивается с материалами
+		Увеличивает максимальное количество миньонов на 3
+		Увеличивает максимальное количество стражников на 1
 		Увеличивает отбрасывание миньонов
 		«Целая армия в вашем распоряжении»
 		'''
@@ -1818,7 +1816,7 @@ TerrariaSoul: {
 	DisplayName: Душа Террарии
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Даёт эффекты всех артефактов
+		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Даёт эффекты всех артефактов
 		«Истинный повелитель Террарии»
 		'''
 	RuminateTooltip:
