@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Projectiles
         private bool PerformSafetyChecks(Projectile projectile, int itemType, out Player player, string str)
         {
             player = Main.player[projectile.owner];
-            return projectile.owner.IsWithinBounds(Main.maxPlayers) && SourceItemType == itemType && EmodeItemBalance.HasEmodeChange(player, SourceItemType).Any(s => s == str);
+            return projectile.owner.IsWithinBounds(Main.maxPlayers) && SourceItemType == itemType && EmodeItemBalance.HasEmodeChange(player, SourceItemType).Contains(str);
         }
 
         public override void SetStaticDefaults()
@@ -135,7 +135,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Any(s => s == "ZenitHitRate"))
+                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Contains("ZenitHitRate"))
                     {
                         projectile.usesLocalNPCImmunity = false;
                         projectile.localNPCHitCooldown = 0;
