@@ -1,5 +1,6 @@
 ﻿using Fargowiltas.Content.Items.Tiles;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Buffs.Souls;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
@@ -39,9 +40,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             PassiveEffect(player);
             player.AddEffect<AshWoodEffect>(Item);
             player.AddEffect<AshWoodFireballs>(Item);
+            player.lavaMax += 60 * 3;
+            if (player.lavaWet)
+            {
+                player.AddBuff(ModContent.BuffType<ObsidianLavaWetBuff>(), ObsidianEnchant.LavaWetTime);
+            }
         }
-
-
 
         public override void AddRecipes()
         {
@@ -84,14 +88,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public static bool TriggerFromDebuffs(Player player)
         {
-            bool debuffed = false;
             for (int i = 0; i < Player.MaxBuffs; i++)
             {
                 int type = player.buffType[i];
                 if (type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
-                    debuffed = true;
+                {
+                    return true;
+                }
             }
-            return debuffed;
+            return false;
         }
     }
     public class AshWoodFireballs : AccessoryEffect
@@ -110,7 +115,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!HasEffectEnchant(player))
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-            if (modPlayer.AshwoodCD <= 0 && AshWoodEffect.TriggerFromDebuffs(player))
+            if (modPlayer.AshwoodCD <= 0 && (AshWoodEffect.TriggerFromDebuffs(player) || player.lavaWet || modPlayer.LavaWet))
             {
                 modPlayer.AshwoodCD = modPlayer.ForceEffect<AshWoodEnchant>() ? 20 : 35;
 

@@ -13,6 +13,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 {
     public class ObsidianEnchant : BaseEnchant
     {
+        internal const int LavaWetTime = 60 * 10;
         public override void SetStaticDefaults()
         {
             base.SetStaticDefaults();
@@ -55,7 +56,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 player.ignoreWater = true;
                 player.accFlipper = true;
 
-                player.AddBuff(ModContent.BuffType<ObsidianLavaWetBuff>(), 600);
+                player.AddBuff(ModContent.BuffType<ObsidianLavaWetBuff>(), LavaWetTime);
             }
 
             if (modPlayer.ObsidianCD > 0)
