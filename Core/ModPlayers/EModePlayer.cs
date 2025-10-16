@@ -229,6 +229,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 float ai1 = Main.rand.NextFloat(-2f, 2f);
                 Projectile.NewProjectile(Player.GetSource_Misc("TorchGod"), Main.rand.NextVector2FromRectangle(Player.Hitbox), Vector2.Zero, ModContent.ProjectileType<TorchGodFlame>(), 20, 0f, Main.myPlayer, ai0, ai1);
             }
+
         }
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
@@ -236,7 +237,19 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
         }
+        public override void PreUpdateMovement()
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return;
 
+            if (Player.slowFall && Player.TryingToHoverDown && EmodeItemBalance.HasEmodeChange(Player, ItemID.FeatherfallPotion).Contains("FeatherfallPotionNerf"))
+            {
+                if (Player.velocity.Y * Player.gravDir > Player.maxFallSpeed / 1.66f)
+                    Player.velocity.Y = Player.gravDir * Player.maxFallSpeed / 1.66f;
+            }
+
+            base.PreUpdateMovement();
+        }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (!WorldSavingSystem.EternityMode)

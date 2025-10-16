@@ -148,6 +148,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
+
                 /*case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
@@ -354,6 +355,10 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.WarmthPotion:
                     balanceTextKeys = ["WarmthPotionNerf"];
+                    return EModeChange.Nerf;
+
+                case ItemID.FeatherfallPotion:
+                    balanceTextKeys = ["FeatherfallPotionNerf"];
                     return EModeChange.Nerf;
 
                 case ItemID.JungleRose:
