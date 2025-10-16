@@ -813,8 +813,7 @@ LifeForce: {
 	/* Tooltip:
 		'''
 		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings and effects of Hive Pack
-		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/BeetleEnchant][i:FargowiltasSouls/CactusEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
-		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
+		[i:FargowiltasSouls/PumpkinEnchant][i:FargowiltasSouls/SpiderEnchant][i:FargowiltasSouls/CactusEnchant][i:FargowiltasSouls/BeetleEnchant] Flying leaves behind flowers that can hurt enemies, or refresh your flight time and massively buff you if you collect them
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
 		'Rare is a living thing that dare disobey your will'
 		''' */

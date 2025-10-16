@@ -871,4 +871,11 @@ TwilightStar.DisplayName: Сумеречная звезда
 TwilightStarSpawn.DisplayName: Сумеречная звезда
 TimInspectProjectile.DisplayName: Tim Inspect Projectile
 TimsInspectProjectile.DisplayName: Tims Inspect Projectile
-BloodTrail.DisplayName: Кровавый след
+// LifeForceBugs.DisplayName: Life Force Bugs
+// LifeForceBeetle.DisplayName: Life Force Beetle
+// LifeForceSpider.DisplayName: Life Force Spider
+// LifeForceWasp.DisplayName: Life Force Wasp
+// TimMagicBlast.DisplayName: Tim Magic Blast
+// TimInferno.DisplayName: Tim Inferno
+// TimFireball.DisplayName: Tim Fireball
+// TimHatSummon.DisplayName: Tim Hat Summon
