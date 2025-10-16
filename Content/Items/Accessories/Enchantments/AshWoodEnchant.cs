@@ -118,11 +118,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 int effectItemType = EffectItem(player).type;
                 Item heldItem = player.HeldItem;
                 int ashwood = ModContent.ItemType<AshWoodEnchant>();
-                if (!player.ForceEffect<AshWoodFireballs>() && (effectItemType == ashwood))
+                if (!player.ForceEffect<AshWoodFireballs>() && effectItemType == ashwood)
                     softcapMult = 1f;
 
                 float fireballDamage = damage;
-                if (!modPlayer.TerrariaSoul && heldItem != null && heldItem.IsWeaponWithDamageClass())
+                if (heldItem != null && heldItem.IsWeaponWithDamageClass())
                 {
                     fireballDamage *= player.ActualClassDamage(DamageClass.Magic) / player.ActualClassDamage(heldItem.DamageType);
                     if (fireballDamage > 24f * softcapMult)
