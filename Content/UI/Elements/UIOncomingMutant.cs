@@ -92,6 +92,7 @@ namespace FargowiltasSouls.Content.UI.Elements
             if (ContainsPoint(Main.MouseScreen) && conditions)
             {
                 if (!Hovering)
+                    if (!dragging)
                     SoundEngine.PlaySound(SoundID.MenuTick);
                 Hovering = true;
                 Main.LocalPlayer.mouseInterface = true;
