@@ -810,10 +810,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (head == null)
             {
                 Vector2 pos = NPC.Top;
-                pos.X += 2f * 16f * NPC.direction;
-                pos.Y -= 8f;
+                pos.X += 2f * 2f * NPC.direction;
+                pos.Y += 8;
 
-                int width = 4 * 16;
+                int width = 2 * 16;
                 int height = 2 * 16;
 
                 pos.X -= width / 2f;
@@ -827,12 +827,18 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     Main.dust[d].noGravity = true;
                 }*/
 
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                 {
-                    int d = Dust.NewDust(pos, width, height, DustID.Torch, NPC.velocity.X * 0.4f, NPC.velocity.Y * 0.4f, 100, default, 2.5f);
+                    int d = Dust.NewDust(pos, width, height, DustID.Torch, NPC.velocity.X * 0.9f, NPC.velocity.Y * 0.9f, 100, default, 2f);
                     Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity.Y -= 3f;
+                    Main.dust[d].velocity.Y -= Main.rand.NextFloat(3f, 8f);
                     Main.dust[d].velocity *= 1.5f;
+                }
+
+                if (Main.rand.NextBool(6))
+                {
+                    Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(new Rectangle((int)pos.X, (int)pos.Y, width, height)), NPC.velocity * 0.9f - Vector2.UnitY * 6, Color.Gray, 50, 0.3f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                    p.Spawn();
                 }
             }
             else
