@@ -301,7 +301,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public int LegFrameType;
         public Rectangle LegFrame = new Rectangle(0, 0, LegTexture.Width() / 5, LegTexture.Height() / LegFrameMax);
         public const int LegFrameMax = 7;
-        public int LegFramecounter;
+        public float LegFramecounter;
 
         private bool spawned;
 
@@ -1101,13 +1101,27 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         //96 is the width of an X Frame.
                         LegFrame.X = 96 * 3;
-                        if (++LegFramecounter >= 5)
+
+                        float increment = 1f / BaseWalkSpeed / NPC.scale * Math.Abs(NPC.velocity.X);
+                        // trojan backstepping technology
+                        increment *= Math.Sign(NPC.direction * Math.Sign(NPC.velocity.X));
+
+                        LegFramecounter += increment;
+                        if (LegFramecounter >= 2.5f)
                         {
                             LegFramecounter = 0;
                             LegFrame.Y += LegFrame.Height;
 
                             if (LegFrame.Y >= LegFrame.Height * LegFrameMax)
                                 LegFrame.Y = 0;
+                        }
+                        else if (LegFramecounter <= 0)
+                        {
+                            LegFramecounter = 2.5f;
+                            LegFrame.Y -= LegFrame.Height;
+
+                            if (LegFrame.Y < 0)
+                                LegFrame.Y = LegFrame.Height * (LegFrameMax - 1);
                         }
 
                         LegFrameAlt.X = 96 * 3;
