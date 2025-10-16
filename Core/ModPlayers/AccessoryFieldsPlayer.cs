@@ -77,8 +77,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int ParryDebuffImmuneTime;
         public int ObsidianCD;
         public bool LavaWet;
-        public float TinCritMax;
-        public float TinCrit = 5;
+        public float TinCritMax = 25;
+        public float TinCrit = 0;
         public int TinProcCD;
         public bool TinCritBuffered;
         public int TungstenCD;
