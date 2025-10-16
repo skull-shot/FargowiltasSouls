@@ -234,7 +234,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     public class TrojanSquirrel : TrojanSquirrelPart
     {   
         //TODO: Change back to 4F when animation has been sorted out.
-        private const float BaseWalkSpeed = 1f;
+        public static float BaseWalkSpeed => 4f;
         string TownNPCName;
         bool hasplayedbreaksound;
         public override void SetStaticDefaults()
@@ -665,6 +665,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         NPC.velocity.X = 0;
 
+                        if (LegFrameType == 1)
+                            LegFrameType = 2;
+
                         TileCollision(player.Bottom.Y - 1 > NPC.Bottom.Y, Math.Abs(player.Center.X - NPC.Center.X) < NPC.width / 2 && NPC.Bottom.Y < player.Bottom.Y - 1);
 
                         int threshold = 105;
@@ -686,6 +689,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             int maxShake = 8;
                             float shake = dir * maxShake * (NPC.localAI[0] / threshold);
                             NPC.position.X += shake;
+
+                            if (LegFrameType == 3) // run frame; incorrect, can happen on transition sometimes
+                                LegFrameType = 2;
+                        }
+                        else // telegraphing run
+                        {
+                            if (LegFrameType == 4) // jump frame; incorrect
+                                LegFrameType = 2;
                         }
 
                         if (++NPC.localAI[0] > threshold)
@@ -1062,9 +1073,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void FindFrame(int frameHeight)
         {
-            Main.NewText("AnimationType: " + LegFrameType);
-            Main.NewText("framey: " + LegFrame.Y);
-            Main.NewText("framex: " + LegFrame.X);
+            //Main.NewText("AnimationType: " + LegFrameType);
+            //Main.NewText("framey: " + LegFrame.Y);
+            //Main.NewText("framex: " + LegFrame.X);
             //140 is the width of each X Frame.
             NPC.frame.X = 0;
             if (++NPC.frameCounter >= 7)
@@ -1086,13 +1097,20 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         LegFrame.X = 96 * 3;
                         if (++LegFramecounter >= 5)
                         {
-                            //LegFramecounter = 0;
+                            LegFramecounter = 0;
                             LegFrame.Y += LegFrame.Height;
 
                             if (LegFrame.Y >= LegFrame.Height * LegFrameMax)
                                 LegFrame.Y = 0;
                         }
 
+                        LegFrameAlt.X = 96 * 3;
+                        int frameY = LegFrame.Y / LegFrame.Height;
+                        int frameAltY = frameY + (LegFrameMax / 2);
+                        frameAltY %= LegFrameMax;
+                        LegFrameAlt.Y = frameAltY * LegFrameAlt.Height;
+
+                        /*
                         LegFrameAlt.X = 96 * 3;
                         if (LegFramecounter >= 5)
                         {
@@ -1102,7 +1120,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             if (LegFrameAlt.Y >= LegFrameAlt.Height * LegFrameMax)
                                 LegFrameAlt.Y = 0;
                         }
-
+                        */
 
                     }
                     break;
@@ -1111,14 +1129,17 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 case 2:
                     {
                         bool PreparingJump = NPC.ai[0] == 2;
-                        bool PreparingRun = false;
-                        if (NPC.ai[0] == 0)
-                            PreparingRun = true;
+                        bool BeforeJump = (NPC.ai[0] == 1 && NPC.ai[3] != 0f);
+                        bool PreparingRun = NPC.ai[0] == 0 || (NPC.ai[0] == 1 && NPC.ai[3] == 0f);
+
                         LegFrame.X = 0;
                         if (++LegFramecounter >= 3)
                         {
                             LegFramecounter = 0;
-                            LegFrame.Y += LegFrame.Height;
+
+                            if (!BeforeJump)
+                                LegFrame.Y += LegFrame.Height;
+
                             if (LegFrame.Y >= LegFrame.Height * 6)
                             {
                                 if (PreparingJump)
@@ -1127,15 +1148,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                     LegFrame.Y = 0;
                                     LegFrameType = 4;
                                 }
-                                    
-
                                 if (PreparingRun)
                                 {
                                     LegFrame.X = 96;
                                     LegFrame.Y = 0;
                                     LegFrameType = 3;
                                 }
-                                    
                             }
                                 
                         }

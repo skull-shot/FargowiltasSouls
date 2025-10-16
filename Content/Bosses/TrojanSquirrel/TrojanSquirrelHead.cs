@@ -114,9 +114,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                         if (doAttack)
                         {
-                            Vector2 pos = NPC.Center;
-                            pos.X += 22 * NPC.direction; //FUCKING LAUGH
-                            pos.Y += 22;
+                            Vector2 pos = ShootCenter;
 
                             const float gravity = 0.2f;
                             float time = 80f;
@@ -414,7 +412,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             return false;
         }
-
+        public Vector2 ShootCenter => NPC.Center + NPC.direction * Vector2.UnitX * NPC.scale * 30f;
         private void ShootSquirrelAt(Vector2 target)
         {
             float gravity = 0.6f;
@@ -427,19 +425,19 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             gravity *= origTime / time;
 
-            Vector2 distance = target - NPC.Center;// + player.velocity * 30f;
+            Vector2 distance = target - ShootCenter;// + player.velocity * 30f;
             distance.X += Main.rand.NextFloat(-128, 128);
             distance.X /= time;
             distance.Y = distance.Y / time - 0.5f * gravity * time;
 
             distance.X += Math.Min(4f, Math.Abs(NPC.velocity.X)) * Math.Sign(NPC.velocity.X);
 
-            SoundEngine.PlaySound(SoundID.Item1, NPC.Center);
+            SoundEngine.PlaySound(SoundID.Item1, ShootCenter);
 
             if (FargoSoulsUtil.HostCheck)
             {
                 float ai1 = time + Main.rand.Next(-10, 11) - 1;
-                Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, distance,
+                Projectile.NewProjectile(NPC.GetSource_FromThis(), ShootCenter, distance,
                     ModContent.ProjectileType<TrojanSquirrelProj>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, gravity, ai1);
             }
         }
