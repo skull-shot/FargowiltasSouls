@@ -694,6 +694,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             List<P1Attacks> GetAttacks()
             {
                 var attacks = new List<P1Attacks>(P1AvailableAttacks);
+
+                attacks.Remove((P1Attacks)sourceAI); // just to make sure
+                if (sourceAI == (int)P1Attacks.SpearTossDiagonalEnd)
+                    attacks.Remove(P1Attacks.SpearTossDiagonal);
+                if (sourceAI == (int)P1Attacks.BoundaryDash4)
+                    attacks.Remove(P1Attacks.BoundaryDash);
+
                 // remove bad combos
                 if (sourceAI == (int)P1Attacks.SpearTossDirect)
                     attacks.Remove(P1Attacks.SpearTossDiagonal);
@@ -723,18 +730,19 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     var attacks = GetAttacks();
 
-                    /*
+                    
                     string text = "";
                     foreach (var attack in attacks)
                         text += attack + " ";
                     Main.NewText(text);
-                    */
+                    
 
                     AttackChoice = (int)Main.rand.NextFromCollection(attacks);
                     P1AvailableAttacks.Remove((P1Attacks)AttackChoice);
                     NPC.localAI[2] = 0f;
                 }
             }
+
 
             NPC.ai[1] = 0;
             NPC.ai[2] = 0;
