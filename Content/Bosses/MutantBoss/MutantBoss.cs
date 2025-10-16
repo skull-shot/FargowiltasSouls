@@ -730,12 +730,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 {
                     var attacks = GetAttacks();
 
-                    
+                    /*
                     string text = "";
                     foreach (var attack in attacks)
                         text += attack + " ";
                     Main.NewText(text);
-                    
+                    */
 
                     AttackChoice = (int)Main.rand.NextFromCollection(attacks);
                     P1AvailableAttacks.Remove((P1Attacks)AttackChoice);
