@@ -787,6 +787,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         if (FargoSoulsUtil.HostCheck && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC modNPC) && !NPC.AnyNPCs(modNPC.Type))
                         {
                             FargoSoulsUtil.ClearHostileProjectiles(2, NPC.whoAmI);
+
+                            foreach (var proj in Main.ActiveProjectiles)
+                                if (proj.TypeAlive<MutantChain>())
+                                    proj.Kill();
+
                             int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, modNPC.Type);
                             if (n != Main.maxNPCs)
                             {
