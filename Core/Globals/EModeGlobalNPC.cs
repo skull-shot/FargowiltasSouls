@@ -579,7 +579,7 @@ namespace FargowiltasSouls.Core.Globals
                     }
                 }
                 // irrespective of hardmode
-                if (snow && normalSpawn)
+                if (snow && normalSpawn && (underground || day))
                 {
                     pool[NPCID.SnowFlinx] = .05f;
                 }

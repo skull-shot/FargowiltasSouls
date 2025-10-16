@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Buffs.Eternity;
+﻿using System.Collections.Generic;
+using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Terraria;
@@ -44,36 +45,39 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             NPCID.BigSlimedZombie,
             NPCID.ZombieMerman
         );
-
-        private static void transformZombie(NPC npc, int armedId = -1)
-        {
-            if (npc.type != NPCID.ZombieEskimo && Main.LocalPlayer.ZoneSnow && Main.rand.NextBool())
-            {
-                npc.Transform(NPCID.ZombieEskimo);
-            }
-
-            if (Main.rand.NextBool(8) && npc.FargoSouls().CanHordeSplit)
-                EModeGlobalNPC.Horde(npc, 6);
-            if (armedId != -1 && Main.rand.NextBool(5))
-                npc.Transform(armedId);
-        }
+        public static List<int> RegularZombies = //no halloween/christmas or biome variants 
+        [
+            NPCID.Zombie,
+            NPCID.ArmedZombie,
+            NPCID.ArmedZombieCenx,
+            NPCID.ArmedZombiePincussion,
+            NPCID.ArmedZombieSlimed,
+            NPCID.ArmedZombieSwamp,
+            NPCID.ArmedZombieTwiggy,
+            NPCID.BaldZombie,
+            NPCID.FemaleZombie,
+            NPCID.PincushionZombie,
+            NPCID.SlimedZombie,
+            NPCID.TwiggyZombie,
+            NPCID.SwampZombie,
+            NPCID.SmallSwampZombie,
+            NPCID.BigSwampZombie,
+            NPCID.TorchZombie,
+            NPCID.ArmedTorchZombie,
+            NPCID.SmallSlimedZombie,
+            NPCID.BigSlimedZombie
+        ];
 
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
+            if (Main.rand.NextBool(8) && npc.FargoSouls().CanHordeSplit)
+                EModeGlobalNPC.Horde(npc, 6);
 
-            switch (npc.type)
-            {
-                case NPCID.Zombie: transformZombie(npc, NPCID.ArmedZombie); break;
-                case NPCID.ZombieEskimo: transformZombie(npc, NPCID.ArmedZombieEskimo); break;
-                case NPCID.PincushionZombie: transformZombie(npc, NPCID.ArmedZombiePincussion); break;
-                case NPCID.FemaleZombie: transformZombie(npc, NPCID.ArmedZombieCenx); break;
-                case NPCID.SlimedZombie: transformZombie(npc, NPCID.ArmedZombieSlimed); break;
-                case NPCID.TwiggyZombie: transformZombie(npc, NPCID.ArmedZombieTwiggy); break;
-                case NPCID.SwampZombie: transformZombie(npc, NPCID.ArmedZombieSwamp); break;
-
-                default: break;
-            }
+            if (RegularZombies.Contains(npc.type) && Main.raining && Main.LocalPlayer.ZoneOverworldHeight)
+                npc.Transform(NPCID.ZombieRaincoat);
+            //if (npc.type != NPCID.ZombieEskimo && Main.LocalPlayer.ZoneSnow && Main.rand.NextBool())
+                //npc.Transform(NPCID.ZombieEskimo);
         }
 
         public override void AI(NPC npc)
@@ -121,11 +125,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         public override void OnHitNPC(NPC npc, NPC target, NPC.HitInfo hit)
         {
             base.OnHitNPC(npc, target, hit);
-
-            if (target.townNPC && (hit.InstantKill || target.life < hit.Damage))
-            {
-                target.Transform(npc.type);
-            }
         }
 
         public override void OnKill(NPC npc)
