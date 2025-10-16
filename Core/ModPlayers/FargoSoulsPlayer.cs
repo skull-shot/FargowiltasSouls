@@ -364,6 +364,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             WorldShaperSoul = false;
             FlightMasterySoul = false;
             BuilderMode = false;
+            DimensionSoul = false;
             if (!UniverseSoulBuffer)
             {
                 UniverseSoul = false;
@@ -458,7 +459,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Oiled = false;
             Slimed = false;
             noDodge = false;
-            noSupersonic = false;
             NoMomentum = false;
             Bloodthirsty = false;
             DisruptedFocus = false;

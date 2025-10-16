@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         // new forces
         public int TerraProcCD;
-        public int CosmosMoonTimer;
+        public float CosmosMoonTimer;
         public int CosmosMoonCycle;
         public bool CosmosForce;
         public bool LifeForceActive;
@@ -225,6 +225,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool WorldShaperSoul;
         public bool FlightMasterySoul;
         public bool BuilderMode;
+        public bool DimensionSoul;
         public bool UniverseSoul;
         public bool UniverseSoulBuffer;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
         public bool UniverseCore;
@@ -353,7 +354,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Oiled;
         public bool DeathMarked;
         public bool noDodge;
-        public bool noSupersonic;
         public bool NoMomentum;
         public bool Bloodthirsty;
         public bool Unlucky;

@@ -1193,7 +1193,7 @@ ChaliceofTheMoon: {
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable, Sugar Rush, Omnistation]
 		'''
 }
 
@@ -1784,7 +1784,7 @@ TerrariaSoul: {
 	DisplayName: Soul of Terraria
 	Tooltip:
 		'''
-		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Grants effects of all Forces
+		[i:FargowiltasSouls/TimberForce][i:FargowiltasSouls/TerraForce][i:FargowiltasSouls/EarthForce][i:FargowiltasSouls/NatureForce][i:FargowiltasSouls/LifeForce][i:FargowiltasSouls/SpiritForce][i:FargowiltasSouls/DeathForce][i:FargowiltasSouls/WillForce][i:FargowiltasSouls/CosmoForce] Grants effects of all Forces
 		'A true master of Terraria'
 		'''
 	RuminateTooltip:

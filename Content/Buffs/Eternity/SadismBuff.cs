@@ -8,7 +8,7 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
 {
     public class SadismBuff : ModBuff
     {
-        public override string Texture => FargoAssets.GetAssetString("Content/Buffs", "PlaceholderBuff");
+        public override string Texture => FargoAssets.GetAssetString("Content/Buffs/Eternity", Name);
 
         public override void SetStaticDefaults()
         {

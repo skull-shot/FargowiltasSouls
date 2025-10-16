@@ -679,7 +679,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             LoadSpecial(recolor, ref TextureAssets.Ninja, ref FargowiltasSouls.TextureBuffer.Ninja, "Ninja");
         }
-
+        public float StretchX = 0;
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             NPC = npc;
@@ -727,6 +727,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             Vector2 scale = Vector2.One * npc.scale;
             if (Stretch > 0)
                 scale.Y *= 1 - Stretch * 0.45f;
+
+            float xStretch = MathF.Pow(Math.Abs(npc.velocity.Y) / 20f, 0.5f);
+            StretchX = MathHelper.Lerp(StretchX, xStretch, 0.1f);
+            if (StretchX > 0)
+                scale.X *= 1 - StretchX * 0.42f;
             
             var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor /*with { A = 200 }*/, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             if (resprite)

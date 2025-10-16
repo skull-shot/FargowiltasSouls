@@ -29,7 +29,6 @@ namespace FargowiltasSouls.Content.Buffs.Eternity
             player.FargoSouls().MutantPresence = true; //LUL
 
             player.FargoSouls().noDodge = true;
-            player.FargoSouls().noSupersonic = true;
             player.moonLeech = true;
 
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.fishBoss, NPCID.DukeFishron))

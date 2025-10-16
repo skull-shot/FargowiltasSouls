@@ -73,7 +73,6 @@ namespace FargowiltasSouls
         //internal static ModKeybind SpecialDashKey;
         //internal static ModKeybind BombKey;
         internal static ModKeybind PrecisionSealKey;
-        internal static ModKeybind RuminateKey;
         //internal static ModKeybind MagicalBulbKey;
         //internal static ModKeybind FrigidSpellKey;
         //internal static ModKeybind DebuffInstallKey;
@@ -160,7 +159,6 @@ namespace FargowiltasSouls
             //SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
             //BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
             PrecisionSealKey = KeybindLoader.RegisterKeybind(this, "PrecisionSeal", "LeftShift");
-            RuminateKey = KeybindLoader.RegisterKeybind(this, "Ruminate", "LeftShift");
             //MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
             //FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
             //DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");

@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.UI.Elements;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -236,7 +237,7 @@ namespace FargowiltasSouls.Content.Items
             }
         }
 
-        public static bool IsNotRuminating(Item item) => item.ModItem != null && Fargowiltas.Fargowiltas.SoulsMods.Contains(item.ModItem.Mod.Name) && !(Language.GetTextValue($"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip") != $"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip" && FargowiltasSouls.RuminateKey.Current && !FargoGlobalItem.NoRuminateText.Contains(item.type));
+        public static bool IsNotRuminating(Item item) => item.ModItem != null && Fargowiltas.Fargowiltas.SoulsMods.Contains(item.ModItem.Mod.Name) && !(Language.GetTextValue($"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip") != $"Mods.{item.ModItem.Mod.Name}.Items.{item.ModItem.Name}.RuminateTooltip" && Keyboard.GetState().IsKeyDown(Keys.LeftShift) && !FargoGlobalItem.NoRuminateText.Contains(item.type));
 
         public static Color DamageClassColor(DamageClass damageClass)
         {

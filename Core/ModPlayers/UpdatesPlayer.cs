@@ -620,6 +620,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;
+            else
+                CosmosMoonTimer = 0;
 
             if (FallthroughCD > 0)
                 FallthroughCD--;

@@ -1,10 +1,13 @@
-﻿using FargowiltasSouls.Assets.Textures;
+﻿using System;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles.Eternity.Buffs;
+using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,8 +16,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRa
     public class LightBall : ModProjectile
     {
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Enemies/Vanilla/SkyAndRain", "LightBall");
-        public virtual bool DoNotSpawnDust => false;
-
         public override void SetDefaults()
         {
             Projectile.width = 16;
@@ -35,14 +36,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRa
                 SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
             }
 
-            if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height) && !DoNotSpawnDust)
-            {
-                int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 100, new Color(), 2f);
-                Main.dust[index2].noGravity = true;
-                Main.dust[index2].velocity.X *= 0.3f;
-                Main.dust[index2].velocity.Y *= 0.3f;
-            }
-
             Projectile.velocity *= 1f + Math.Abs(Projectile.ai[1]);
             Vector2 acceleration = Projectile.velocity.RotatedBy(Math.PI / 2);
             acceleration *= Projectile.ai[1];
@@ -51,22 +44,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRa
             Projectile.velocity *= 1 + Projectile.ai[0];
 
             Projectile.spriteDirection = Projectile.direction = Projectile.velocity.X > 0 ? 1 : -1;
-            Projectile.rotation += 0.3f * Projectile.direction;
+            Projectile.rotation += 0.1f * Projectile.direction;
         }
 
         public override void OnKill(int timeLeft)
         {
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
-            if (DoNotSpawnDust) 
-                return;
-            for (int index1 = 0; index1 < 10; ++index1)
-            {
-                int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, -Projectile.velocity.X * 0.2f, -Projectile.velocity.Y * 0.2f, 100, new Color(), 2f);
-                Main.dust[index2].noGravity = true;
-                Main.dust[index2].velocity *= 2f;
-                int index3 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.GoldCoin, -Projectile.velocity.X * 0.2f, -Projectile.velocity.Y * 0.2f, 100, new Color(), 1f);
-                Main.dust[index3].velocity *= 2f;
-            }
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -76,18 +59,40 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.SkyAndRa
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color(200, 200, 200, 25);
+            return base.GetAlpha(lightColor);
+            //return new Color(200, 200, 200, 25);
+        }
+
+        public float WidthFunction(float completionRatio)
+        {
+            float baseWidth = Projectile.scale * Projectile.width * 1.3f;
+            return MathHelper.SmoothStep(baseWidth, 3.5f, completionRatio);
+        }
+        public Color ColorFunction(float completionRatio)
+        {
+            Color color = Projectile.type == ModContent.ProjectileType<DarkBall>() ? new(182, 27, 248) : new(250, 249, 128);
+            return Color.Lerp(color, Color.Transparent, completionRatio) * 0.7f;
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
-            int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            int num156 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
+            Rectangle rectangle = new(0, y3, texture.Width, num156);
             Vector2 origin2 = rectangle.Size() / 2f;
-            Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White, Projectile.rotation, origin2, Projectile.scale, SpriteEffects.None, 0);
             return false;
+        }
+
+        public void RenderPixelatedPrimitives(SpriteBatch spriteBatch)
+        {
+            if (Projectile.velocity != Vector2.Zero)
+            {
+                ManagedShader shader = ShaderManager.GetShader("FargowiltasSouls.BlobTrail");
+                FargoSoulsUtil.SetTexture1(FargoAssets.FadedStreak.Value);
+                PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, _ => Projectile.Size * 0.5f, Pixelate: true, Shader: shader), 25);
+            }
         }
     }
 }

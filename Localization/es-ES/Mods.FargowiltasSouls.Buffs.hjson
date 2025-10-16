@@ -115,7 +115,7 @@ AbomFangBuff: {
 
 AbomPresenceBuff: {
 	// DisplayName: Abominable Presence
-	// Description: Life regen reduced; Moon Leech effect
+	// Description: Unable to steal life
 }
 
 BaronsBurdenBuff: {
@@ -670,12 +670,12 @@ MushroomPowerBuff: {
 
 SolarBuff: {
 	// DisplayName: Solar Buff
-	// Description: Increased damage reduction
+	// Description: 5% reduced damage
 }
 
 VortexBuff: {
 	// DisplayName: Vortex Buff
-	// Description: Increased critical strike chance
+	// Description: 15% increased critical strike chance
 }
 
 NebulaBuff: {
@@ -685,7 +685,7 @@ NebulaBuff: {
 
 StardustBuff: {
 	// DisplayName: Stardust Buff
-	// Description: Increased damage
+	// Description: 15% increased damage
 }
 
 AmbrosiaBuff: {
