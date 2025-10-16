@@ -96,10 +96,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (valid)
                 modifiers.FinalDamage *= 1.75f;
 
-            //TODO: make this not affect summon projectiles from accessories or armor
-            if (FargoSoulsUtil.IsSummonDamage(projectile) && (GetVulnerabilityState(npc) != 3))
+            if (FargoSoulsUtil.IsSummonDamage(projectile) && projectile.FargoSouls().ItemSource && (GetVulnerabilityState(npc) != 3))
             {
-                if (Main.player[projectile.owner].HeldItem.DamageType != DamageClass.Summon && Main.player[projectile.owner].HeldItem.DamageType != DamageClass.SummonMeleeSpeed)
+                if (Main.player[projectile.owner].HeldItem.DamageType.CountsAsClass(DamageClass.Summon))
                     modifiers.FinalDamage *= 0.5f;
             }
         }
