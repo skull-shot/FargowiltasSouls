@@ -586,7 +586,7 @@ namespace FargowiltasSouls
         }
         public static void MakeCommonTilesEasierToBreak(Orig_PickPowerCheck orig, Tile target, int pickPower, ref int damage)
         {
-            if (WorldSavingSystem.EternityMode && FargoSoulsSets.Tiles.CommonTiles.Contains(target.TileType))
+            if (!Main.getGoodWorld && WorldSavingSystem.EternityMode && FargoSoulsSets.Tiles.CommonTiles[target.TileType])
             {
                 damage *= 2;
             }

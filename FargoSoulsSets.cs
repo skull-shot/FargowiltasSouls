@@ -25,7 +25,7 @@ namespace FargowiltasSouls
         }
         public class Tiles
         {
-            public static List<int> CommonTiles;
+            public static bool[] CommonTiles;
         }
 
         public class Buffs
@@ -85,49 +85,25 @@ namespace FargowiltasSouls
             SetFactory npcFactory = NPCID.Sets.Factory;
             #endregion
             #region Tiles
-            //SetFactory tileFactory = TileID.Sets.Factory;
+            SetFactory tileFactory = TileID.Sets.Factory;
 
-            var Shovel = TileID.Sets.CanBeDugByShovel.GetTrueIndexes();
-            var Stone = TileID.Sets.Conversion.Stone.GetTrueIndexes();
-            var Sand = TileID.Sets.Conversion.Sand.GetTrueIndexes();
-            var Sandstone = TileID.Sets.Conversion.HardenedSand.GetTrueIndexes();
-            var Ice = TileID.Sets.Conversion.Ice.GetTrueIndexes();
-            var Mud = TileID.Sets.Mud.GetTrueIndexes();
-            Tiles.CommonTiles =
-            [
+            var Shovel = TileID.Sets.CanBeDugByShovel;
+            var Stone = TileID.Sets.Conversion.Stone;
+            var Sand = TileID.Sets.Conversion.Sand;
+            var Sandstone = TileID.Sets.Conversion.HardenedSand;
+            var Ice = TileID.Sets.Conversion.Ice;
+            var Mud = TileID.Sets.Mud;
+            Tiles.CommonTiles = tileFactory.CreateBoolSet(false,
                 TileID.Marble,
                 TileID.Granite
-            ];
-            for (int i = 0; i < Shovel.Count; i++)
-            {
-                if (!Tiles.CommonTiles.Contains(Shovel[i]))
-                    Tiles.CommonTiles.Add(Shovel[i]);
-            }
-            for (int i = 0; i < Stone.Count; i++)
-            {
-                if (!Tiles.CommonTiles.Contains(Stone[i]))
-                    Tiles.CommonTiles.Add(Stone[i]);
-            }
-            for (int i = 0; i < Sand.Count; i++)
-            {
-                if (!Tiles.CommonTiles.Contains(Sand[i]))
-                    Tiles.CommonTiles.Add(Sand[i]);
-            }
-            for (int i = 0; i < Sandstone.Count; i++)
-            {
-                if (!Tiles.CommonTiles.Contains(Sandstone[i]))
-                    Tiles.CommonTiles.Add(Sandstone[i]);
-            }
-            for (int i = 0; i < Ice.Count; i++)
-            {
-                if (!Tiles.CommonTiles.Contains(Ice[i]))
-                    Tiles.CommonTiles.Add(Ice[i]);
-            }
-            for (int i = 0; i < Mud.Count; i++)
-            {
-                if (!Tiles.CommonTiles.Contains(Mud[i]))
-                    Tiles.CommonTiles.Add(Mud[i]);
-            }
+            ).Concat(Shovel)
+            .Concat(Stone)
+            .Concat(Sand)
+            .Concat(Sandstone)
+            .Concat(Ice)
+            .Concat(Mud)
+            .ToArray();
+            
             #endregion
             #region Buffs
             SetFactory buffFactory = BuffID.Sets.Factory;
