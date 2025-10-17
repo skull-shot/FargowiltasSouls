@@ -606,6 +606,12 @@ namespace FargowiltasSouls.Content.Items
                         balanceTextKeys = ["ChlorophyteBullet"];
                         return EModeChange.Nerf;
                     }
+                    else if (ContentSamples.ItemsByType[itemType].ModItem == null && (ItemID.Sets.IsDrill[itemType] || ItemID.Sets.IsChainsaw[itemType] || itemType == ItemID.ChlorophyteJackhammer))
+                    {
+                        balanceTextKeys = ["Speed"];
+                        balanceNumber = 1.25f;
+                        return EModeChange.Buff;
+                    }
                     else if (ContentSamples.ItemsByType[itemType] is Item item2 && item2.buffType == BuffID.Tipsy)
                     {
                         balanceTextKeys = ["Tipsy"];
