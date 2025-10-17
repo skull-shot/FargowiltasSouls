@@ -348,7 +348,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Contains("ZenitHitRate"))
+                    if (PerformSafetyChecks(projectile, ItemID.Zenith, out _, "ZenithHitRate") && !WorldSavingSystem.DownedMutant)
                     {
                         projectile.usesLocalNPCImmunity = false;
                         projectile.localNPCHitCooldown = 0;
