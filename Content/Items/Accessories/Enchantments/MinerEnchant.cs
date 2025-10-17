@@ -57,8 +57,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.UltrabrightHelmet)
                 .AddIngredient(ItemID.MiningShirt)
                 .AddIngredient(ItemID.MiningPants)
-                .AddIngredient(ItemID.GravediggerShovel)
                 .AddIngredient(ItemID.CopperPickaxe)
+                .AddIngredient(ItemID.DiamondMinecart)
                 .AddIngredient(ItemID.MagicLantern)
 
                 .AddTile<EnchantedTreeSheet>()

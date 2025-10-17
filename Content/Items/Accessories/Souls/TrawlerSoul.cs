@@ -95,6 +95,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //player.hasLuckyCoin = true;
             player.hasLuck_LuckyCoin = true;
             player.discountEquipped = true;
+
+            //frog gear
+            player.autoJump = true;
+            player.jumpSpeedBoost += 1.6f;
+            player.extraFall += 10;
+            player.spikedBoots += 2;
         }
 
         public override void AddRecipes()
@@ -104,18 +110,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.CelestialShell)
             .AddIngredient(ItemID.ArcticDivingGear)
             .AddIngredient(ItemID.GreedyRing)
+            .AddIngredient(ItemID.FrogGear)
             .AddIngredient(ItemID.RoyalGel)
             .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
             .AddIngredient(ItemID.BoneHelm)
 
-            .AddIngredient(ItemID.SittingDucksFishingRod)
-            .AddIngredient(ItemID.GoldenFishingRod)
-            .AddIngredient(ItemID.GoldenCarp)
-            .AddIngredient(ItemID.ReaverShark)
-            .AddIngredient(ItemID.Bladetongue)
-            .AddIngredient(ItemID.ObsidianSwordfish)
-            .AddIngredient(ItemID.FuzzyCarrot)
+            //.AddIngredient(ItemID.SittingDucksFishingRod)
+            //.AddIngredient(ItemID.GoldenFishingRod)
+            //.AddIngredient(ItemID.GoldenCarp)
 
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
 

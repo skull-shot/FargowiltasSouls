@@ -780,7 +780,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
                 case ProjectileID.SolarWhipSwordExplosion:
                     if (PerformSafetyChecks(projectile, ItemID.SolarEruption, out _, "MeleeDamageBugFix"))
-                        projectile.DamageType = DamageClass.Melee; // removing check here so buff can be disabled in dlc while keeping fix, unsure how else to work with current hasemodechange implementation
+                        projectile.DamageType = DamageClass.Melee;
                     break;
                 case ProjectileID.DaybreakExplosion:
                     if (PerformSafetyChecks(projectile, ItemID.DayBreak, out _, "MeleeDamageBugFix"))
