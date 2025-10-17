@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC)
             {
                 npc = sourceNPC;
-                offset = Projectile.Center - npc.Center;
+                offset = Projectile.Center - npc.Center - Projectile.velocity;
                 dir = sourceNPC.direction;
             }
         }
@@ -137,7 +137,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             return false;
         }
 
-        Vector2 ChainOrigin => npc == null ? Projectile.Center : npc.Center + offset;
+        Vector2 ChainOrigin => npc == null || !npc.TypeAlive<TrojanSquirrelArms>() ? Projectile.Center : npc.As<TrojanSquirrelArms>().GetNextShootPos((int)Projectile.ai[2]);
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
