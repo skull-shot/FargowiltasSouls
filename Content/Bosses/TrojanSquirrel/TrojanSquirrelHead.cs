@@ -94,6 +94,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         pos.X += 22 * NPC.direction; //FUCKING LAUGH
                         pos.Y += 22;
 
+                        /*
                         for (int j = 0; j < 20; j++)
                         {
                             int d = Dust.NewDust(pos, 0, 0, DustID.GrassBlades, Scale: 3f);
@@ -101,6 +102,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             Main.dust[d].velocity *= 4f;
                             Main.dust[d].velocity.X += NPC.direction * Main.rand.NextFloat(6f, 18f);
                         }
+                        */
                     }
 
                     if (++NPC.ai[1] % (body.dontTakeDamage || WorldSavingSystem.MasochistModeReal ? 30 : 45) == 0)
