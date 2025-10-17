@@ -28,6 +28,11 @@ namespace FargowiltasSouls
             public static List<int> CommonTiles;
         }
 
+        public class Buffs
+        {
+            public static bool[] Debuffs;
+        }
+
         public override void PostSetupContent()
         {
             #region Items
@@ -123,6 +128,11 @@ namespace FargowiltasSouls
                 if (!Tiles.CommonTiles.Contains(Mud[i]))
                     Tiles.CommonTiles.Add(Mud[i]);
             }
+            #endregion
+            #region Buffs
+            SetFactory buffFactory = BuffID.Sets.Factory;
+
+            Buffs.Debuffs = buffFactory.CreateBoolSet(false, [.. FargowiltasSouls.DebuffIDs]);
             #endregion
         }
     }
