@@ -111,10 +111,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddIngredient(ItemID.ArcticDivingGear)
             .AddIngredient(ItemID.GreedyRing)
             .AddIngredient(ItemID.FrogGear)
-            .AddIngredient(ItemID.RoyalGel)
-            .AddIngredient(ItemID.VolatileGelatin)
             .AddIngredient(ItemID.SporeSac)
             .AddIngredient(ItemID.BoneHelm)
+            .AddIngredient(ItemID.RoyalGel)
+            .AddIngredient(ItemID.VolatileGelatin)
 
             //.AddIngredient(ItemID.SittingDucksFishingRod)
             //.AddIngredient(ItemID.GoldenFishingRod)
