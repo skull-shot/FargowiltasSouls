@@ -36,6 +36,11 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public static void AddEffects(Player player, float pickSpeed, Item item)
         {
             player.pickSpeed -= pickSpeed;
+            Item? heldItem = player.HeldItem;
+            if (heldItem != null && (ItemID.Sets.IsDrill[heldItem.type] || ItemID.Sets.IsChainsaw[heldItem.type] || heldItem.type == ItemID.ChlorophyteJackhammer))
+            {
+                player.FargoSouls().AttackSpeed += pickSpeed;
+            }
             player.nightVision = true;
 
             player.AddEffect<MiningSpelunk>(item);
