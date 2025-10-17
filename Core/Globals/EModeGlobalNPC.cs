@@ -309,7 +309,6 @@ namespace FargowiltasSouls.Core.Globals
                             if (Main.moonPhase == 0) //full moon
                             {
                                 pool[NPCID.Raven] = .7f;
-                                Main.NewText($"{pool[NPCID.Raven]}");
                             }
 
                             if (jungle)
