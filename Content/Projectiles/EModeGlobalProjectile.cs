@@ -59,10 +59,10 @@ namespace FargowiltasSouls.Content.Projectiles
         /// <param name="itemType"></param>
         /// <param name="player"></param>
         /// <returns></returns>
-        private bool PerformSafetyChecks(Projectile projectile, int itemType, out Player player)
+        private bool PerformSafetyChecks(Projectile projectile, int itemType, out Player player, string str)
         {
             player = Main.player[projectile.owner];
-            return projectile.owner.IsWithinBounds(Main.maxPlayers) && SourceItemType == itemType && EmodeItemBalance.HasEmodeChange(player, SourceItemType);
+            return projectile.owner.IsWithinBounds(Main.maxPlayers) && SourceItemType == itemType && EmodeItemBalance.HasEmodeChange(player, SourceItemType).Contains(str);
         }
 
         public override void SetStaticDefaults()
@@ -135,7 +135,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith))
+                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Contains("ZenitHitRate"))
                     {
                         projectile.usesLocalNPCImmunity = false;
                         projectile.localNPCHitCooldown = 0;
@@ -229,7 +229,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
             Projectile? sourceProj = null;
 
-            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, true, false)))
+            if (projectile is not null && projectile.owner.IsWithinBounds(Main.maxPlayers) && (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, false, false)))
             {
                 if (source is not null)
                 {
@@ -240,8 +240,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     FargoSoulsUtil.GetOrigin(projectile, source, out sourceProj);
                     SourceItemType = projectile.FargoSouls().SourceItemType;
 
-                    if (sourceProj is not null && sourceProj.FargoSouls().ItemSource && FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(sourceProj.type))
-                    { // reuse this with the intention to make shots from held projectiles work with Huntress
+                    if (sourceProj is not null && sourceProj.FargoSouls().ItemSource && (((sourceProj.minion || sourceProj.sentry) && (ProjectileID.Sets.MinionShot[projectile.type] || ProjectileID.Sets.SentryShot[projectile.type])) || FargoSoulsGlobalProjectile.DoesNotAffectHuntressType.Contains(sourceProj.type)))
+                    { // reuse this with the intention to make shots from held projectiles work with Huntress, or make minion shots count as ItemSource
                         projectile.FargoSouls().ItemSource = true;
                     }
                     projectile.FargoSouls().Homing = projectile.IsHoming(Main.player[projectile.owner], source);
@@ -252,7 +252,7 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 case ItemID.ProximityMineLauncher:
                 case ItemID.PiranhaGun:
-                    if (PerformSafetyChecks(projectile, SourceItemType, out _) && projectile.FargoSouls().ItemSource)
+                    if (PerformSafetyChecks(projectile, SourceItemType, out _, "DynamicUpdating") && projectile.FargoSouls().ItemSource)
                     {
                         projectile.ContinuouslyUpdateDamageStats = true;
                     }
@@ -272,7 +272,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         case ItemID.ZapinatorGray:
                         case ItemID.ZapinatorOrange:
-                            if (PerformSafetyChecks(projectile, SourceItemType, out _))
+                            if (PerformSafetyChecks(projectile, SourceItemType, out _, "Zapinator"))
                                 projectile.originalDamage = projectile.damage;
                             break;
 
@@ -282,7 +282,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.PygmySpear:
-                    if (PerformSafetyChecks(projectile, ItemID.PygmyStaff, out _) && sourceProj is Projectile pygmy && pygmy.type >= ProjectileID.Pygmy && pygmy.type <= ProjectileID.Pygmy4)
+                    if (PerformSafetyChecks(projectile, ItemID.PygmyStaff, out _, "PygmyStaff") && sourceProj is Projectile pygmy && pygmy.type >= ProjectileID.Pygmy && pygmy.type <= ProjectileID.Pygmy4)
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = -1;
@@ -291,7 +291,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.GladiusStab:
-                    if (PerformSafetyChecks(projectile, ItemID.Gladius, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.Gladius, out _, "Gladius"))
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = -1;
@@ -299,7 +299,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.AmethystBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmethystStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.AmethystStaff, out _, "AmethystStaff"))
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = -1;
@@ -309,7 +309,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.EmeraldBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.EmeraldStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.EmeraldStaff, out _, "EmeraldStaff"))
                     {
                         projectile.position = projectile.Center;
                         int mult = 4;
@@ -323,14 +323,14 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.RubyBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.RubyStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.RubyStaff, out _, "RubyStaff"))
                     {
                         projectile.penetrate = 1;
                     }
                     break;
 
                 case ProjectileID.AmberBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out _, "AmberStaff"))
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = 30;
@@ -340,7 +340,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.SporeGas:
                 case ProjectileID.SporeGas2:
                 case ProjectileID.SporeGas3:
-                    if (PerformSafetyChecks(projectile, ItemID.SporeSac, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.SporeSac, out _, "SporeSac"))
                     {
                         projectile.usesIDStaticNPCImmunity = true;
                         projectile.idStaticNPCHitCooldown = 12;
@@ -348,7 +348,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.WeatherPainShot:
-                    if (PerformSafetyChecks(projectile, ItemID.WeatherPain, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.WeatherPain, out _, "WeatherPain"))
                     {
                         projectile.idStaticNPCHitCooldown = 10;
                         projectile.penetrate = 45;
@@ -356,7 +356,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.PossessedHatchet:
-                    if (PerformSafetyChecks(projectile, ItemID.PossessedHatchet, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.PossessedHatchet, out _, "PossessedHatchet"))
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = 30;
@@ -369,16 +369,15 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.VampireHeal:
-                    if (projectile.owner.IsWithinBounds(Main.maxPlayers))
+                    if (PerformSafetyChecks(projectile, ItemID.VampireKnives, out Player pl, "VampireKnives"))
                     {
-                        Player player = Main.player[projectile.owner];
                         //each lifesteal hits timer again when above 50% life (total, halved lifesteal rate)
-                        if (player.statLife > player.statLifeMax2 / 3 && SourceItemType == ItemID.VampireKnives && EmodeItemBalance.HasEmodeChange(player, SourceItemType))
-                            player.lifeSteal -= projectile.ai[1];
+                        if (pl.statLife > pl.statLifeMax2 / 3)
+                            pl.lifeSteal -= projectile.ai[1];
 
                         //each lifesteal hits timer again when above 75% life (stacks with above, total 1/3rd lifesteal rate)
-                        if (player.statLife > player.statLifeMax2 * 2 / 3)
-                            player.lifeSteal -= projectile.ai[1];
+                        if (pl.statLife > pl.statLifeMax2 * 2 / 3)
+                            pl.lifeSteal -= projectile.ai[1];
                     }
                     break;
 
@@ -663,7 +662,7 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.ChlorophyteBullet:
-                    if (PerformSafetyChecks(projectile, ItemID.ChlorophyteBullet, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.ChlorophyteBullet, out _, "ChlorophyteBullet"))
                     {
                         // vanilla Chlorophyte Bullet AI imitation to apply more elaborate tweaks.
                         if (projectile.alpha < 170)
@@ -765,13 +764,13 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.AmberBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out Player player) && counter > 30 && counter < 50)
+                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out Player player, "AmberStaff") && counter > 30 && counter < 50)
                     {
                         projectile.velocity += projectile.DirectionTo(player.Center) * 0.9f;
                     }
                     break;
                 case ProjectileID.RubyBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.RubyStaff, out _) && counter == 20)
+                    if (PerformSafetyChecks(projectile, ItemID.RubyStaff, out _, "RubyStaff") && counter == 20)
                     {
                         var ps = FargoSoulsGlobalProjectile.SplitProj(projectile, 2, MathHelper.PiOver2 * 0.12f, 0.66f);
                         foreach (Projectile p in ps)
@@ -780,16 +779,16 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.SolarWhipSwordExplosion:
-                    if (SourceItemType == ItemID.SolarEruption /*&& EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], SourceItemType)*/)
+                    if (PerformSafetyChecks(projectile, ItemID.SolarEruption, out _, "MeleeDamageBugFix"))
                         projectile.DamageType = DamageClass.Melee; // removing check here so buff can be disabled in dlc while keeping fix, unsure how else to work with current hasemodechange implementation
                     break;
                 case ProjectileID.DaybreakExplosion:
-                    if (PerformSafetyChecks(projectile, ItemID.DayBreak, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.DayBreak, out _, "MeleeDamageBugFix"))
                         projectile.DamageType = DamageClass.Melee;
                     break;
 
                 case ProjectileID.BookOfSkullsSkull:
-                    if (projectile.owner == Main.myPlayer && PerformSafetyChecks(projectile, ItemID.BookofSkulls, out _))
+                    if (projectile.owner == Main.myPlayer && PerformSafetyChecks(projectile, ItemID.BookofSkulls, out _, "BookofSkulls"))
                     {
                         bool Tracking = projectile.ai[1] > 0;
                         projectile.tileCollide = !Tracking;
@@ -841,7 +840,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         {
                             case ItemID.ZapinatorGray:
                             case ItemID.ZapinatorOrange:
-                                if (PerformSafetyChecks(projectile, SourceItemType, out _) && projectile.damage > projectile.originalDamage)
+                                if (PerformSafetyChecks(projectile, SourceItemType, out _, "Zapinator") && projectile.damage > projectile.originalDamage)
                                     projectile.damage = projectile.originalDamage;
                                 break;
 
@@ -1497,7 +1496,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.FlowerPow:
-                    if (PerformSafetyChecks(projectile, ItemID.FlowerPow, out Player pl) && pl.whoAmI == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f)
+                    if (PerformSafetyChecks(projectile, ItemID.FlowerPow, out Player pl, "FlowerPow") && pl.whoAmI == Main.myPlayer && projectile.localAI[0] > 0f && projectile.localAI[0] < 20f)
                     {
                         projectile.localAI[0] += 2f; // tripled petal firerate
                         projectile.netUpdate = true;
@@ -1505,7 +1504,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.EatersBite:
-                    if (PerformSafetyChecks(projectile, ItemID.ScourgeoftheCorruptor, out Player pl2) && pl2.whoAmI == Main.myPlayer)
+                    if (PerformSafetyChecks(projectile, ItemID.ScourgeoftheCorruptor, out Player pl2, "ScourgeoftheCorruptor") && pl2.whoAmI == Main.myPlayer)
                     {
                         const float GrazeDistanceSQ = 2500f; // 50f squared
                         double velSquared = (double)projectile.velocity.LengthSquared();
@@ -1529,7 +1528,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.Trimarang:
-                    if (PerformSafetyChecks(projectile, ItemID.Trimarang, out Player pl3) && pl3.whoAmI == Main.myPlayer/* && projectile.ai[0] == 1f*/)
+                    if (PerformSafetyChecks(projectile, ItemID.Trimarang, out Player pl3, "Trimarang") && pl3.whoAmI == Main.myPlayer/* && projectile.ai[0] == 1f*/)
                     {
                         projectile.extraUpdates = 1;
                         projectile.netUpdate = true;
@@ -1542,7 +1541,7 @@ namespace FargowiltasSouls.Content.Projectiles
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            if (SpearRework.ReworkedSpears.Contains(projectile.type) && PerformSafetyChecks(projectile, SourceItemType, out _))
+            if (SpearRework.ReworkedSpears.Contains(projectile.type) && PerformSafetyChecks(projectile, SourceItemType, out _, "SpearRework"))
             {
                 modifiers.SourceDamage *= 1.5f;
             }
@@ -1575,14 +1574,14 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;*/
 
                 case ProjectileID.OrichalcumHalberd:
-                    if (PerformSafetyChecks(projectile, ItemID.OrichalcumHalberd, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.OrichalcumHalberd, out _, "OrichalcumHalberdRework"))
                     {
                         modifiers.SourceDamage *= SpearRework.OrichalcumDoTDamageModifier(target.lifeRegen);
                     }
                     break;
 
                 case ProjectileID.MedusaHeadRay:
-                    if (PerformSafetyChecks(projectile, ItemID.MedusaHead, out Player pl) && pl.Alive() && medusaList?.Count > 0)
+                    if (PerformSafetyChecks(projectile, ItemID.MedusaHead, out Player pl, "MedusaHead") && pl.Alive() && medusaList?.Count > 0)
                     {
                         float maxBonus = 1.25f;                    // Medusa Head can target up to 3 enemies max, this EMode buff makes it so that
                         float bonus = maxBonus / medusaList.Count; // for every enemy target slot that's empty, the damage goes up by +0.625x,
@@ -1591,7 +1590,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.DD2BetsyArrow: // Aerial Bane arrow
-                    if (PerformSafetyChecks(projectile, ItemID.DD2BetsyBow, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.DD2BetsyBow, out _, "AerialBane"))
                     {
                         if (!WorldUtils.Find(projectile.Center.ToTileCoordinates(), Searches.Chain(new Searches.Down(12), new Conditions.IsSolid()), out _)) //vanilla conditions for "airborne enemy"
                         {
@@ -1604,28 +1603,28 @@ namespace FargowiltasSouls.Content.Projectiles
                 case ProjectileID.StardustDragon2:
                 case ProjectileID.StardustDragon3:
                 case ProjectileID.StardustDragon4:
-                    if (PerformSafetyChecks(projectile, ItemID.StardustDragonStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.StardustDragonStaff, out _, "Damage"))
                     {
                         modifiers.SourceDamage *= 0.67f;
                     }
                     break;
 
                 case ProjectileID.MoonlordTurretLaser:
-                    if (PerformSafetyChecks(projectile, ItemID.MoonlordTurretStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.MoonlordTurretStaff, out _, "Damage"))
                     {
                         modifiers.SourceDamage *= 0.5f;
                     }
                     break;
 
                 case ProjectileID.RainbowCrystalExplosion:
-                    if (PerformSafetyChecks(projectile, ItemID.RainbowCrystalStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.RainbowCrystalStaff, out _, "Damage"))
                     {
                         modifiers.SourceDamage *= 0.6f;
                     }
                     break;
 
                 case ProjectileID.GolemFist:
-                    if (PerformSafetyChecks(projectile, ItemID.GolemFist, out Player pl2) && pl2.Alive())
+                    if (PerformSafetyChecks(projectile, ItemID.GolemFist, out Player pl2, "GolemFist") && pl2.Alive())
                     {
                         float maxBonus = 2f;
                         float bonus = maxBonus * pl2.Distance(target.Center) / 600f;
@@ -1635,7 +1634,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.UFOLaser: // Xeno Staff
-                    if (PerformSafetyChecks(projectile, ItemID.XenoStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.XenoStaff, out _, "Damage"))
                     {
                         modifiers.SourceDamage *= 0.7f;
                     }
@@ -1648,7 +1647,7 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (SourceItemType)
             {
                 case ItemID.SniperRifle:
-                    if (PerformSafetyChecks(projectile, SourceItemType, out Player pl) && pl.Alive() && projectile.FargoSouls().ItemSource)
+                    if (PerformSafetyChecks(projectile, SourceItemType, out Player pl, "SniperRifle") && pl.Alive() && projectile.FargoSouls().ItemSource)
                     {
                         float maxBonus = 1f;
                         float bonus = maxBonus * pl.Distance(target.Center) / 1800f;
@@ -1689,7 +1688,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.AmethystBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmethystStaff, out _) && projectile.penetrate > 1)
+                    if (PerformSafetyChecks(projectile, ItemID.AmethystStaff, out _, "AmethystStaff") && projectile.penetrate > 1)
                     {
                         projectile.penetrate -= 1;
                         NPC npc = projectile.FindTargetWithinRange(450, true);
@@ -1737,7 +1736,7 @@ namespace FargowiltasSouls.Content.Projectiles
             switch (projectile.type)
             {
                 case ProjectileID.PalladiumPike:
-                    if (PerformSafetyChecks(projectile, ItemID.PalladiumPike, out Player pl))
+                    if (PerformSafetyChecks(projectile, ItemID.PalladiumPike, out Player pl, "PalladiumPikeRework"))
                     {
                         if (target.type != NPCID.TargetDummy && !target.friendly) //may add more checks here idk
                         {
@@ -1751,7 +1750,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.CobaltNaginata:
-                    if (PerformSafetyChecks(projectile, ItemID.CobaltNaginata, out Player pl2))
+                    if (PerformSafetyChecks(projectile, ItemID.CobaltNaginata, out Player pl2, "CobaltNaginataRework"))
                     {
                         if (projectile.ai[2] < 2) //only twice per swing
                         {
@@ -1763,19 +1762,19 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.IceBolt: //Ice Blade projectile
-                    if (PerformSafetyChecks(projectile, ItemID.IceBlade, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.IceBlade, out _, "IceBladeFrostburn"))
                     {
                         target.AddBuff(BuffID.Frostburn, 60 * 3);
                     }
                     break;
                 case ProjectileID.SporeCloud:
-                    if (PerformSafetyChecks(projectile, ItemID.ChlorophyteSaber, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.ChlorophyteSaber, out _, "ChlorophyteSaber"))
                     {
                         projectile.velocity *= 0.25f;
                     }
                     break;
                 case ProjectileID.AmethystBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmethystStaff, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.AmethystStaff, out _, "AmethystStaff"))
                     {
                         NPC npc = projectile.FindTargetWithinRange(450, true);
                         if (npc != null)
@@ -1783,7 +1782,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.TopazBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.TopazStaff, out Player pl3))
+                    if (PerformSafetyChecks(projectile, ItemID.TopazStaff, out Player pl3, "TopazStaff"))
                     {
                         if (hit.Crit)
                         {
@@ -1792,7 +1791,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.PossessedHatchet:
-                    if (PerformSafetyChecks(projectile, ItemID.PossessedHatchet, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.PossessedHatchet, out _, "PossessedHatchet"))
                     {
                         NPC ricotarget = projectile.FindTargetWithinRange(640, true);
                         if (projectile.ai[2] < 4)
@@ -1817,7 +1816,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.ApprenticeStaffT3Shot:
-                    if (PerformSafetyChecks(projectile, ItemID.ApprenticeStaffT3, out _))
+                    if (PerformSafetyChecks(projectile, ItemID.ApprenticeStaffT3, out _, "BetsysCurse"))
                     {
                         for (int i = 0; i < NPC.maxBuffs; i++)
                         {
@@ -1833,7 +1832,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.Flamelash:
                 case ProjectileID.RainbowRodBullet:
-                    if ((SourceItemType == ItemID.Flamelash || SourceItemType == ItemID.RainbowRod) && PerformSafetyChecks(projectile, SourceItemType, out _))
+                    if ((SourceItemType == ItemID.Flamelash || SourceItemType == ItemID.RainbowRod) && PerformSafetyChecks(projectile, SourceItemType, out _, "AntiSpam"))
                     {
                         if (projectile.ai[0] >= 0 && projectile.penetrate > 1)
                             projectile.ResetLocalNPCHitImmunity();

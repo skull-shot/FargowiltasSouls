@@ -14,7 +14,7 @@ namespace FargowiltasSouls.Content.Sky
 
         public override void Update(GameTime gameTime)
         {
-            int vulState = -1;
+            MoonLord.ClassState vulState = default;
             int vulTimer = 0;
             bool bossAlive = false;
             if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.moonBoss, NPCID.MoonLordCore))
@@ -26,7 +26,7 @@ namespace FargowiltasSouls.Content.Sky
 
             if (!Main.dedServ && vulTimer % 30 == 0)
             {
-                bool HandleScene(string name, int neededState)
+                bool HandleScene(string name, MoonLord.ClassState neededState)
                 {
                     if (Filters.Scene[$"FargowiltasSouls:{name}"].IsActive())
                     {
@@ -37,8 +37,8 @@ namespace FargowiltasSouls.Content.Sky
                     return true;
                 }
 
-                if (HandleScene("Solar", 0) & HandleScene("Vortex", 1)
-                    & HandleScene("Nebula", 2) & HandleScene("Stardust", 3) & !bossAlive)
+                if (HandleScene("Solar", MoonLord.ClassState.Melee) & HandleScene("Vortex", MoonLord.ClassState.Ranged)
+                    & HandleScene("Nebula", MoonLord.ClassState.Magic) & HandleScene("Stardust", MoonLord.ClassState.Summon) & !bossAlive)
                 {
                     Deactivate();
                 }

@@ -9,7 +9,7 @@ Scale: 尺寸减少{0}%
 ScalePositive: 尺寸增加{0}%
 RodofDiscord: 混乱状态会降低你40%的伤害、防御和伤害减免
 ChaosState: 伤害、防御和伤害减免降低40%
-RodofHarmony: 在打败突变体后才能获取
+RodOfHarmony: 在打败突变体后才能获取
 Split: 降低分裂频率
 WaterBolt: 在骷髅王被击败前无法使用
 SpaceGun: 在任意邪恶Boss被击败前无法使用
@@ -43,6 +43,7 @@ MythrilHalberdRework: 不攻击持续2秒后下一击造成八倍伤害，受攻
 OrichalcumHalberdRework: 对受减益伤害的敌人造成最多两倍伤害，随敌人的减益伤害增加而增加
 SuperStarCannon: 最大穿透次数降低为7次
 WarmthPotionNerf: 伤害减免效果减半且在防御后计算
+// FeatherfallPotionNerf: Decreased maximum fall speed while holding down
 CrossNecklaceNerf: 连续受击不会触发延长无敌时间的效果
 IceBladeFrostburn: 射弹击中敌人造成霜冻减益
 JungleRose: 增加抓人草类敌怪掉落世纪之果的几率

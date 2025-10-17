@@ -60,9 +60,9 @@ AshWoodEnchant: {
 	DisplayName: Ash Wood Enchantment
 	Tooltip:
 		'''
-		Fire debuffs deal no damage
+		Fire debuffs deal no damage, touching lava grants the lava wet buff
 		While afflicted with a debuff, attacks are occasionally accompanied by fireballs
-		Reduces damage from touching lava
+		Provides 3 seconds of immunity to lava and reduces damage from touching lava
 		'You're telling me this isn't wood?'
 		'''
 }

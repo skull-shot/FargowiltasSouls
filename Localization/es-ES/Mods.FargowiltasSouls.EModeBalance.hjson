@@ -9,7 +9,7 @@
 // ScalePositive: Increased size by {0}%
 // RodofDiscord: Chaos State reduces your damage, defense and damage reduction by 40%
 // ChaosState: Eternity Mode: Reduced damage, defense and damage reduction by 40%
-// RodofHarmony: Can only be obtained after defeating the Mutant
+// RodOfHarmony: Can only be obtained after defeating the Mutant
 // Split: Reduced split frequency
 // WaterBolt: Cannot be used until Skeletron is defeated
 // SpaceGun: Cannot be used until an evil boss is defeated
@@ -43,6 +43,7 @@
 // OrichalcumHalberdRework: Deals up to double damage to enemies taking damage over time, scaling with amount
 // SuperStarCannon: Decreased maximum pierce to 7
 // WarmthPotionNerf: Halved damage reduction effect and now applies post-mitigation
+// FeatherfallPotionNerf: Decreased maximum fall speed while holding down
 // CrossNecklaceNerf: Longer invincibility doesn't trigger on rapid successive hits
 // IceBladeFrostburn: Projectile inflicts Frostburn on-hit
 // JungleRose: The favorite food of all Snatcher-type enemies

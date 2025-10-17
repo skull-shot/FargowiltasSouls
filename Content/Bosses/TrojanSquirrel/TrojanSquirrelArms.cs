@@ -4,6 +4,7 @@ using Luminance.Core.Sounds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Reflection.Metadata;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
@@ -16,6 +17,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     {
         public LoopedSoundInstance? Loop;
         int looptimer;
+        public int ArmsAnimationType;
+        public int ArmsAnimationAngle = 1;
 
         public override void SetStaticDefaults()
         {
@@ -55,6 +58,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 case 0:
                     if (body.ai[0] == 0 && body.localAI[0] <= 0)
                     {
+                        ArmsAnimationType = 0;
+                        ArmsAnimationAngle = 1;
+
                         NPC.ai[1] += WorldSavingSystem.EternityMode ? 1.5f : 1f;
 
                         if (body.dontTakeDamage)
@@ -124,10 +130,42 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         {
                             body.velocity.X *= 0.9f;
                             if (NPC.ai[1] <= 1)
+                            {
                                 SoundEngine.PlaySound(FargosSoundRegistry.TrojanHookTelegraph, NPC.Center);
+
+                                // start shot prep animation
+                            }
+                                
                         }
 
                         NPC.ai[1]++;
+
+                        Vector2 direction = GetNextShootPos().DirectionTo(Main.player[NPC.target].Center);
+                        float offset = FargoSoulsUtil.RotationDifference(Math.Abs(direction.X) * Vector2.UnitX + direction.Y * Vector2.UnitY, Vector2.UnitX);
+                        int aimAngle = (int)(-offset / (MathHelper.PiOver4 * 0.45f));
+
+                        if (NPC.ai[1] < start) // prep animation
+                        {
+                            float startAnimTime = start / 2;
+                            if (NPC.ai[1] < startAnimTime) // starting animation
+                            {
+                                ArmsAnimationType = 1;
+                                // this is here the Y-frame-variable straight up
+                                ArmsAnimationAngle = (int)MathHelper.Lerp(0, 5.9f, NPC.ai[1] / startAnimTime);
+                            }
+                            else // aim
+                            {
+                                ArmsAnimationType = 2;
+                                float lerper = (NPC.ai[1] - startAnimTime) / (start - startAnimTime);
+                                lerper = Math.Clamp(lerper + 0.2f, 0, 1);
+                                ArmsAnimationAngle = (int)MathHelper.Lerp(1, aimAngle, lerper);
+                            }
+                        }
+                        else
+                        {
+                            ArmsAnimationType = 2;
+                            //ArmsAnimationAngle = aimAngle;
+                        }
 
                         //to help animate body
                         NPC.ai[3] = NPC.ai[1] < start && NPC.ai[1] % teabagInterval < teabagInterval / 2 ? 1 : 0;
@@ -141,8 +179,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             if (Math.Abs(MathHelper.WrapAngle(angle - baseAngle)) > MathHelper.PiOver2)
                                 angle = MathHelper.PiOver2 * Math.Sign(angle);
 
+                            ArmsAnimationAngle = aimAngle;
+
                             if (FargoSoulsUtil.HostCheck)
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, 8f * angle.ToRotationVector2(), ModContent.ProjectileType<TrojanHook>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
+                                Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, angle.ToRotationVector2() * 8f, ModContent.ProjectileType<TrojanHook>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer);
                         }
 
                         if (NPC.ai[1] > 300 && FargoSoulsUtil.HostCheck && Main.LocalPlayer.ownedProjectileCounts[ModContent.ProjectileType<TrojanHook>()] <= 0)
@@ -188,6 +228,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                 }
                             }
                         }
+                        // animation
+                        ArmsAnimationType = 0;
+                        if (NPC.ai[1] < start)
+                        {
+                            ArmsAnimationAngle = (int)MathHelper.Lerp(1, -2.9f, NPC.ai[1] / start);
+                        }
+                            
 
                         if (NPC.ai[1] > start && NPC.ai[1] % 4 == 0)
                         {
@@ -209,6 +256,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                 Vector2 distance = target - pos;
                                 distance.X /= time;
                                 distance.Y = distance.Y / time - 0.5f * gravity * time;
+
+                                float offset = FargoSoulsUtil.RotationDifference(Math.Abs(distance.X) * Vector2.UnitX + distance.Y * Vector2.UnitY, Vector2.UnitX);
+                                ArmsAnimationAngle = (int)(-offset / (MathHelper.PiOver4 * 0.7f));
+
                                 if (FargoSoulsUtil.HostCheck)
                                     Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, distance, ModContent.ProjectileType<TrojanSnowball>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, gravity);
                             }
@@ -217,6 +268,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                         if (NPC.ai[1] > end)
                         {
+                            ArmsAnimationAngle = 1;
                             NPC.ai[0] = 0;
                             NPC.ai[1] = 0;
                             NPC.netUpdate = true;
@@ -230,19 +282,41 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         }
 
         public override void FindFrame(int frameHeight)
-        {   
+        {
             //74 is the width of each X Frame.
-            NPC.frame.X = 0;
-            if (++NPC.frameCounter >= 7)
+            switch (ArmsAnimationType)
             {
-                NPC.frameCounter = 0;
-                NPC.frame.Y = 0;
+                case 1: // harpoon shot
+                    NPC.frame.X = 74;
+                    NPC.frame.Y = frameHeight * ArmsAnimationAngle;
+                    break;
+                case 2: // harpoon out
+                    NPC.frame.X = 74 * 2;
+                    NPC.frame.Y = frameHeight * AngleToFrame(ArmsAnimationAngle);
+                    break;
+                default: // normal
+                    NPC.frame.X = 0;
+                    NPC.frame.Y = frameHeight * AngleToFrame(ArmsAnimationAngle);
+                    break;
             }
+                
 
             if (NPC.frame.Y >= frameHeight * Main.npcFrameCount[Type])
                 NPC.frame.Y = 0;
         }
-
+        public int AngleToFrame(int angle)
+        {
+            return angle switch
+            {
+                
+                1 => 0, // 1 down, default
+                2 => 4, // 2 down
+                0 => 1, // forward
+                -1 => 2, // 1 up
+                -2 => 3, // 2 up
+                _ => 0, // default is 1 down
+            };
+        }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Texture2D texture2D13 = TextureAssets.Npc[NPC.type].Value;
@@ -264,13 +338,19 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         private Vector2 GetShootPos()
         {
+            Vector2 pos = GetNextShootPos();
             NPC.localAI[0] = NPC.localAI[0] == 0 ? 1 : 0;
 
+            return pos;
+        }
+
+        private Vector2 GetNextShootPos()
+        {
             Vector2 pos = NPC.Bottom;
             pos.X += NPC.width / 2f * NPC.direction;
             pos.Y -= 16 * NPC.scale;
 
-            pos.X -= (NPC.localAI[0] == 0 ? 10 : 48) * NPC.direction * NPC.scale;
+            pos.X -= (NPC.localAI[0] != 0 ? 10 : 48) * NPC.direction * NPC.scale;
 
             return pos;
         }

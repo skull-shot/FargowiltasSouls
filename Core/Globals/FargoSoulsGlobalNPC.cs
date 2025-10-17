@@ -1418,7 +1418,7 @@ namespace FargowiltasSouls.Core.Globals
                     def = 50;
                 modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
-            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3))
+            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3).Contains("BetsysCurse"))
             {
                 modifiers.Defense.Flat += 15; //25 total ap
             }

@@ -694,6 +694,13 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             List<P1Attacks> GetAttacks()
             {
                 var attacks = new List<P1Attacks>(P1AvailableAttacks);
+
+                attacks.Remove((P1Attacks)sourceAI); // just to make sure
+                if (sourceAI == (int)P1Attacks.SpearTossDiagonalEnd)
+                    attacks.Remove(P1Attacks.SpearTossDiagonal);
+                if (sourceAI == (int)P1Attacks.BoundaryDash4)
+                    attacks.Remove(P1Attacks.BoundaryDash);
+
                 // remove bad combos
                 if (sourceAI == (int)P1Attacks.SpearTossDirect)
                     attacks.Remove(P1Attacks.SpearTossDiagonal);
@@ -735,6 +742,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     NPC.localAI[2] = 0f;
                 }
             }
+
 
             NPC.ai[1] = 0;
             NPC.ai[2] = 0;
@@ -779,6 +787,11 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         if (FargoSoulsUtil.HostCheck && ModContent.TryFind("Fargowiltas", "Mutant", out ModNPC modNPC) && !NPC.AnyNPCs(modNPC.Type))
                         {
                             FargoSoulsUtil.ClearHostileProjectiles(2, NPC.whoAmI);
+
+                            foreach (var proj in Main.ActiveProjectiles)
+                                if (proj.TypeAlive<MutantChain>())
+                                    proj.Kill();
+
                             int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, modNPC.Type);
                             if (n != Main.maxNPCs)
                             {
@@ -3128,7 +3141,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
 
             const int masoMovingRainAttackTime = 60;
-            const int timeToMove = 360;
+            int timeToMove = WorldSavingSystem.MasochistModeReal ? 420 : 360;
             int endTime = masoMovingRainAttackTime + timeToMove + (int)(100 * endTimeVariance);
 
             if (NPC.ai[1] > masoMovingRainAttackTime && NPC.ai[1] % 6 == 0) //rain down slime balls
@@ -3195,7 +3208,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
             if (NPC.ai[1] > masoMovingRainAttackTime && --NPC.ai[2] < 0)
             {
-                float safespotMoveSpeed = WorldSavingSystem.MasochistModeReal ? 6.5f : 6f;
+                float safespotMoveSpeed = WorldSavingSystem.MasochistModeReal ? 6f : 4f;
 
                 if (--NPC.localAI[2] < 0) //reset and recalibrate for the other direction
                 {
@@ -3726,7 +3739,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     //if (WorldSavingSystem.MasochistModeReal) i *= -1;
                     for (int j = -1; j <= 1; j += 2) //flappy bird tubes
                     {
-                        float gapRadiusHeight = 130;
+                        float gapRadiusHeight = WorldSavingSystem.MasochistModeReal ? 130 : 142;
                         Vector2 sansTargetPos = centerPoint;
                         const int timeToReachMiddle = 60;
                         sansTargetPos.X += xSpeedWhenAttacking * timeToReachMiddle * i;
@@ -3735,7 +3748,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         int travelTime = 50;
                         Vector2 vel = (sansTargetPos - NPC.Center) / travelTime;
 
-                        if (FargoSoulsUtil.HostCheck)
+                        if (FargoSoulsUtil.HostCheck && NPC.ai[1] > attackDelay) // skip first one
                         {
                             Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel,
                                 ModContent.ProjectileType<MutantSansHead>(),
