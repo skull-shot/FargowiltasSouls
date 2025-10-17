@@ -4,6 +4,7 @@ using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Souls
@@ -12,6 +13,12 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
     public class ColossusSoul : BaseSoul
     {
 
+        public override void SetStaticDefaults()
+        {
+            base.SetStaticDefaults();
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 68));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+        }
         public override void SetDefaults()
         {
             base.SetDefaults();

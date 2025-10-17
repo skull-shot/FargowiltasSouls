@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Achievements;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -84,6 +85,9 @@ namespace FargowiltasSouls
             On_Player.ApplyTouchDamage += ApplyTouchDamage;
             On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float += IgnorePlayerImmunityCooldowns;
+            On_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += GetTileType;
+            On_Player.ApplyItemTime += MinerEnchBuffMoreToolSpeed;
+            On_Player.ItemCheck_UseMiningTools_TryHittingWall += MinerEnchWallHammerSpeed;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -125,6 +129,9 @@ namespace FargowiltasSouls
             On_Player.ApplyTouchDamage -= ApplyTouchDamage;
             On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float -= IgnorePlayerImmunityCooldowns;
+            On_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool -= GetTileType;
+            On_Player.ApplyItemTime -= MinerEnchBuffMoreToolSpeed;
+            On_Player.ItemCheck_UseMiningTools_TryHittingWall -= MinerEnchWallHammerSpeed;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -506,7 +513,7 @@ namespace FargowiltasSouls
         }*/
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
-        { // hallowed dodge nerf
+        { //Hallowed dodge nerf
             orig(self);
             if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail).Contains("HolyDodge"))
                 self.shadowDodgeTimer = 60 * 45;
@@ -583,6 +590,38 @@ namespace FargowiltasSouls
                     value = orig(self, damageSource, Damage, hitDirection, out info, pvp, true, cooldownCounter, false, armorPenetration, scalingArmorPenetration, 0f);
             }
             return value;
+        }
+        private void GetTileType(On_Player.orig_ItemCheck_UseMiningTools_ActuallyUseMiningTool orig, Player self, Item sItem, out bool canHitWalls, int x, int y)
+        {
+            EModeGlobalTile.CaptureTileTypeBeingMined = Main.tile[x, y].TileType;
+            orig(self, sItem, out canHitWalls, x, y);
+            EModeGlobalTile.CaptureTileTypeBeingMined = null;
+        }
+        public void MinerEnchBuffMoreToolSpeed(On_Player.orig_ApplyItemTime orig, Player self, Item sItem, float multiplier, bool? callUseItem)
+        {
+            if (AchievementsHelper.CurrentlyMining && self.FargoSouls().MiningImmunity && EModeGlobalTile.CaptureTileTypeBeingMined != null)
+            {
+                int tile = (int)EModeGlobalTile.CaptureTileTypeBeingMined;
+                if (Main.tileAxe[tile] || (sItem.pick == 0 && Main.tileHammer[tile]))
+                { //Miner Enchantment
+                    float speedMult = self.FargoSouls().ForceEffect<MinerEnchant>() ? 0.25f : 0.5f; // This affects useTime
+                    orig(self, sItem, multiplier * speedMult, callUseItem);
+                    return;
+                }
+            }
+            orig(self, sItem, multiplier, callUseItem);
+        }
+        private void MinerEnchWallHammerSpeed(On_Player.orig_ItemCheck_UseMiningTools_TryHittingWall orig, Player self, Item sItem, int wX, int wY)
+        {
+            if (self.FargoSouls().MiningImmunity)
+            { //Miner Enchantment
+                float speedMult = self.FargoSouls().ForceEffect<MinerEnchant>() ? 0.25f : 0.5f;
+                int time = sItem.useTime;
+                sItem.useTime = (int)Math.Max(1, sItem.useTime * speedMult);
+                orig(self, sItem, wX, wY);
+                sItem.useTime = time;
+            }
+            else orig(self, sItem, wX, wY);
         }
         public static void MakeCommonTilesEasierToBreak(Orig_PickPowerCheck orig, Tile target, int pickPower, ref int damage)
         {

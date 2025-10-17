@@ -94,8 +94,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool noInteractionWithNPCImmunityFrames;
         private int tempIframe;
-
-        public int DamageCap;
         public bool EnchantmentProj;
         public float HeldProjMemorizedDamage;
         public float HeldProjMemorizedCrit;
@@ -469,9 +467,6 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 HuntressProj = 1;
             }
-
-            if (sourceProj is not null && sourceProj.FargoSouls().DamageCap > 0)
-                DamageCap = sourceProj.FargoSouls().DamageCap;
 
             if (projectile.bobber && CanSplit && source is EntitySource_ItemUse)
             {
@@ -1260,9 +1255,6 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-            if (DamageCap > 0 && projectile.damage > DamageCap)
-                projectile.damage = DamageCap;
 
             if (projectile.whoAmI == player.heldProj
                 || projectile.aiStyle == ProjAIStyleID.HeldProjectile
