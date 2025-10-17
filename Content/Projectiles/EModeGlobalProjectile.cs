@@ -134,22 +134,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.GetGlobalProjectile<AttackSpeedScalingGlobalProjectile>().UseAttackSpeedForAdditionalUpdates = true;
                     break;
 
-                case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Contains("ZenitHitRate"))
-                    {
-                        projectile.usesLocalNPCImmunity = false;
-                        projectile.localNPCHitCooldown = 0;
-
-                        projectile.usesIDStaticNPCImmunity = true;
-                        if (WorldSavingSystem.DownedAbom)
-                            projectile.idStaticNPCHitCooldown = 3;
-                        else
-                            projectile.idStaticNPCHitCooldown = 5;
-
-                        projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
-                    }
-                    break;
-
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
                     EModeCanHurt = false;
@@ -360,6 +344,22 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = 30;
+                    }
+                    break;
+
+                case ProjectileID.FinalFractal: //zenith
+                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Contains("ZenitHitRate"))
+                    {
+                        projectile.usesLocalNPCImmunity = false;
+                        projectile.localNPCHitCooldown = 0;
+
+                        projectile.usesIDStaticNPCImmunity = true;
+                        if (WorldSavingSystem.DownedAbom)
+                            projectile.idStaticNPCHitCooldown = 3;
+                        else
+                            projectile.idStaticNPCHitCooldown = 5;
+
+                        projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
                     }
                     break;
 
