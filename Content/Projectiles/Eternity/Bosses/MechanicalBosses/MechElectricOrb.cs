@@ -1,6 +1,8 @@
+using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Core;
 using FargowiltasSouls.Core.Globals;
@@ -29,7 +31,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MechanicalBosses
         private ref float ColorAI => ref Projectile.ai[2];
         public float ColorType
         {
-            get => Projectile.friendly || (WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors) ? ColorAI : Red;
+            get => Projectile.friendly || (WorldSavingSystem.EternityMode && SoulConfig.Instance.BossRecolors) || FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()) ? ColorAI : Red;
         }
         public override void SetStaticDefaults()
         {
