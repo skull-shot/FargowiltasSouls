@@ -306,6 +306,11 @@ namespace FargowiltasSouls.Core.Globals
                                 pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
+                            if (Main.moonPhase == 0) //full moon
+                            {
+                                pool[NPCID.Raven] = .7f;
+                            }
+
                             if (jungle)
                                 pool[NPCID.DoctorBones] = .05f;
                         }
@@ -419,22 +424,24 @@ namespace FargowiltasSouls.Core.Globals
                                 
                             if (normalSpawn)
                             {
-                                if (NPC.downedBoss1)
+                                if (noBiome)
                                 {
-                                    if (noBiome)
-                                    {
-                                        pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
-                                    }
+                                    pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
+                                }
 
-                                    if (snow)
-                                    {
-                                        pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
-                                    }
+                                if (snow)
+                                {
+                                    pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
+                                }
 
-                                    if (ocean || Main.raining)
-                                    {
-                                        pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
-                                    }
+                                if (ocean || Main.raining)
+                                {
+                                    pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
+                                }
+
+                                if (Main.moonPhase == 0) //full moon
+                                {
+                                    pool[NPCID.Raven] = .3f;
                                 }
 
                                 if (NPC.downedMechBossAny)

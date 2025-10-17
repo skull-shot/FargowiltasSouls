@@ -1,11 +1,14 @@
+using System;
+using System.IO;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
+using Luminance.Assets;
 using Microsoft.Xna.Framework;
-using System;
-using System.IO;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -51,22 +54,20 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
-
-            if (Main.hardMode && Main.rand.NextBool(4))
-                npc.Transform(NPCID.WanderingEye);
         }
 
         public override void AI(NPC npc)
         {
             base.AI(npc);
-            AttackTimer++;
-            if (AttackTimer == 360) //warning dust
+            if (npc.HasPlayerTarget)
+                AttackTimer++;
+            if (AttackTimer == 360) //warning flash
             {
-                FargoSoulsUtil.DustRing(npc.Center, 32, DustID.Torch, 5f, scale: 1.5f);
+                SoundEngine.PlaySound(SoundID.MaxMana with {Pitch = 0.8f, MaxInstances = 1}, npc.Center);
                 npc.netUpdate = true;
                 NetSync(npc);
             }
-            else if (AttackTimer >= 420)
+            if (AttackTimer >= 420)
             {
                 npc.TargetClosest();
 
@@ -80,19 +81,35 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
 
             if (Math.Abs(npc.velocity.Y) > 5 || Math.Abs(npc.velocity.X) > 5)
             {
-                int dustId = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + 2f), npc.width, npc.height + 5, DustID.Stone, npc.velocity.X * 0.2f,
+                int dustId = Dust.NewDust(npc.position, npc.width, npc.height, DustID.SomethingRed, npc.velocity.X * 0.2f,
                     npc.velocity.Y * 0.2f, 100, default, 1f);
                 Main.dust[dustId].noGravity = true;
-                int dustId3 = Dust.NewDust(new Vector2(npc.position.X, npc.position.Y + 2f), npc.width, npc.height + 5, DustID.Stone, npc.velocity.X * 0.2f,
-                    npc.velocity.Y * 0.2f, 100, default, 1f);
-                Main.dust[dustId3].noGravity = true;
+                Main.dust[dustId].noLight = true;
+                Main.dust[dustId].velocity *= 0.1f;
             }
         }
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            //target.AddBuff(BuffID.Obstructed, 15);
             target.AddBuff(ModContent.BuffType<BerserkedBuff>(), 120);
+        }
+
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            if (AttackTimer >= 360 && AttackTimer <= 375)
+            {
+                Vector2 position = npc.Center + npc.rotation.ToRotationVector2() * npc.spriteDirection * npc.width * 0.4f;
+                Texture2D shine = MiscTexturesRegistry.ShineFlareTexture.Value;
+                float flarescale = Math.Abs(AttackTimer - 375);
+                for (int i = 0; i < 1; i++)
+                {
+                    Main.spriteBatch.Draw(shine, position - Main.screenPosition, null, Color.Lerp(Color.IndianRed, Color.Red, 0.2f) with { A = 0 }, Main.GlobalTimeWrappedHourly * 2f, shine.Size() * 0.5f, flarescale/60 + 0.05f, 0, 0f);
+                    Main.spriteBatch.Draw(shine, position - Main.screenPosition, null, Color.AliceBlue with { A = 0 }, Main.GlobalTimeWrappedHourly * -2f, shine.Size() * 0.5f, flarescale/90 + 0.05f, 0, 0f);
+                }
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.ZoomMatrix);
+            }
+            base.PostDraw(npc, spriteBatch, screenPos, drawColor);
         }
     }
 
