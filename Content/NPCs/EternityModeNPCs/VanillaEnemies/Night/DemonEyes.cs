@@ -74,7 +74,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                 Vector2 velocity = Vector2.Normalize(Main.player[npc.target].Center - npc.Center) * 10;
                 npc.velocity = velocity;
 
-                AttackTimer = Main.rand.Next(300, 301);
+                AttackTimer = Main.rand.Next(-300, 0);
                 npc.netUpdate = true;
                 NetSync(npc);
             }
