@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.GameContent.Generation;
 using Terraria.ID;
+using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -104,7 +106,16 @@ namespace FargowiltasSouls.Core.Systems
 
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
+            int mushroomIndex = getStepIndex(tasks, "Mushroom Patches");
+            tasks.Insert(mushroomIndex + 1, new PassLegacy("Bouncy Mushroom", addBouncyMushrooms));
+
+
             base.ModifyWorldGenTasks(tasks, ref totalWeight);
+        }
+
+        private int getStepIndex(List<GenPass> tasks, string name)
+        {
+            return tasks.FindIndex(genPass => genPass.Name.Equals(name));
         }
 
         public void addWaterToUGDesert()
@@ -114,10 +125,49 @@ namespace FargowiltasSouls.Core.Systems
             int j4 = undergroundDesertLocation.Top - 10;
 
 
-
+            //if (GenVars.UndergroundDesertLocation.Contains(new Point(num936, num937)))
 
 
             //    WorldGen.Pyramid(x15, j4);
+        }
+
+        private void addBouncyMushrooms(GenerationProgress progress, GameConfiguration configuration)
+        {
+            for (int i = 0; i < GenVars.numMushroomBiomes; i++)
+            {
+                Point mushroomPoint = GenVars.mushroomBiomesPosition[i];
+
+                //pick some random points close by the center point
+                for (int j = 0; j < 5; j++)
+                {
+                    int x = WorldGen.genRand.Next(mushroomPoint.X - 50, mushroomPoint.X + 50);
+                    int y = WorldGen.genRand.Next(mushroomPoint.Y - 50, mushroomPoint.Y + 50);
+
+                    //try to move to an open surface??
+
+                    //get the tile here
+                    Tile tile = Main.tile[x, y];
+
+
+
+                    //varying strength
+                    int strength = WorldGen.genRand.Next(5, 15);
+                    int steps = WorldGen.genRand.Next(5, 15);
+
+                    WorldGen.OreRunner(x, y, strength, steps, TileID.PinkSlimeBlock);
+                }
+
+                
+
+                
+            }
+
+            
+        }
+
+        private void createMarioMushroom(int x, int y, int height, int width)
+        {
+        
         }
     }
 }
