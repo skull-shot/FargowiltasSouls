@@ -1,5 +1,6 @@
 ﻿using Fargowiltas;
 using FargowiltasSouls.Content.Items.Weapons.Challengers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -87,23 +88,23 @@ namespace FargowiltasSouls
             #region Tiles
             SetFactory tileFactory = TileID.Sets.Factory;
 
-            var Shovel = TileID.Sets.CanBeDugByShovel;
-            var Stone = TileID.Sets.Conversion.Stone;
-            var Sand = TileID.Sets.Conversion.Sand;
-            var Sandstone = TileID.Sets.Conversion.HardenedSand;
-            var Ice = TileID.Sets.Conversion.Ice;
-            var Mud = TileID.Sets.Mud;
+            var shovel = TileID.Sets.CanBeDugByShovel;
+            var stone = TileID.Sets.Conversion.Stone;
+            var sand = TileID.Sets.Conversion.Sand;
+            var sandstone = TileID.Sets.Conversion.HardenedSand;
+            var ice = TileID.Sets.Conversion.Ice;
+            var mud = TileID.Sets.Mud;
+
             Tiles.CommonTiles = tileFactory.CreateBoolSet(false,
                 TileID.Marble,
                 TileID.Granite
-            ).Concat(Shovel)
-            .Concat(Stone)
-            .Concat(Sand)
-            .Concat(Sandstone)
-            .Concat(Ice)
-            .Concat(Mud)
-            .ToArray();
-            
+            );
+
+            for (int i = 0; i < Tiles.CommonTiles.Length; i++)
+            {
+                Tiles.CommonTiles[i] |= shovel[i] || stone[i] || sand[i] || sandstone[i] || ice[i] || mud[i];
+            }
+
             #endregion
             #region Buffs
             SetFactory buffFactory = BuffID.Sets.Factory;
