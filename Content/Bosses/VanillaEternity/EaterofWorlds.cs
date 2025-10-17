@@ -277,7 +277,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (!npc.HasValidTarget || npc.Distance(Main.player[npc.target].Center) > 6000)
             {
                 // check for other eater heads. if all eater heads have no target or are out of range...
-                if (Main.npc.All(otherNpc => !(otherNpc.active && otherNpc.type == npc.type && (!otherNpc.HasValidTarget || otherNpc.Distance(Main.player[otherNpc.target].Center) > 6000))))
+                if (!Main.npc.Any(otherNpc => otherNpc.active && otherNpc.type == npc.type && otherNpc.HasValidTarget && otherNpc.Distance(Main.player[otherNpc.target].Center) < 6000))
                 {
                     // then try to sync despawn
                     npc.velocity.Y += 0.25f;
