@@ -235,7 +235,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.2f;
                     return EModeChange.Buff;
 
-                case ItemID.PumpkinMoonMedallion:
+                /*case ItemID.PumpkinMoonMedallion:
                     balanceNumber = PumpkinMoonBosses.WAVELOCK;
                     if (WorldSavingSystem.MasochistModeReal)
                     {
@@ -258,7 +258,7 @@ namespace FargowiltasSouls.Content.Items
                     {
                         balanceTextKeys = ["MoonsDrops"];
                         return EModeChange.ReworkNerf;
-                    }
+                    }*/
                 case ItemID.DD2ElderCrystal:
                     balanceTextKeys = ["OOAWaves"];
                     return EModeChange.ReworkNerf;
