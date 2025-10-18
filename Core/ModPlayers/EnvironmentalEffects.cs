@@ -131,7 +131,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Main.bloodMoon && !fargoSoulsPlayer.PureHeart)
             {
-                Player.AddBuff(BuffID.WaterCandle, 2);
+                //Player.AddBuff(BuffID.WaterCandle, 2);
             }
                     
             //boss environs
