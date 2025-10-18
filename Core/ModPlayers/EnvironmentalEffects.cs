@@ -114,10 +114,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HallowedIlluminated(); //pheart prevents dr reduction
             }
 
-            if (Player.ZoneUnderworldHeight && !fargoSoulsPlayer.PureHeart)
+            /*if (Player.ZoneUnderworldHeight && !fargoSoulsPlayer.PureHeart)
             {
                 UnderworldFire();
-            }
+            }*/
 
             if (Player.Center.ToTileCoordinates().Y <= (Main.worldSurface * 0.25) && !fargoSoulsPlayer.PureHeart)
             {
@@ -458,13 +458,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
-        private void UnderworldFire()
+        /*private void UnderworldFire()
         {
             bool anyAshwoodEffect = Player.HasEffect<AshWoodEffect>() || Player.HasEffect<ObsidianEffect>();
 
             if (anyAshwoodEffect || !(Player.fireWalk || Player.lavaMax > 0))
                 FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.OnFire, 2);
-        }
+        }*/
 
         private void RainLightning(Tile currentTile)
         {

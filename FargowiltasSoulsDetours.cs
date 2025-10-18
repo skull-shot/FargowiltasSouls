@@ -88,6 +88,8 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += GetTileType;
             On_Player.ApplyItemTime += MinerEnchBuffMoreToolSpeed;
             On_Player.ItemCheck_UseMiningTools_TryHittingWall += MinerEnchWallHammerSpeed;
+            On_NPC.AI_123_Deerclops += AI_123_Deerclops;
+            On_Projectile.StatusPlayer += StatusPlayer;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -132,6 +134,8 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool -= GetTileType;
             On_Player.ApplyItemTime -= MinerEnchBuffMoreToolSpeed;
             On_Player.ItemCheck_UseMiningTools_TryHittingWall -= MinerEnchWallHammerSpeed;
+            On_NPC.AI_123_Deerclops -= AI_123_Deerclops;
+            On_Projectile.StatusPlayer -= StatusPlayer;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -185,6 +189,8 @@ namespace FargowiltasSouls
             Terraria.On_Player.orig_AddBuff orig,
             Player self, int type, int timeToAdd, bool quiet, bool foodHack)
         {
+            if (WorldSavingSystem.EternityMode && DeerclopsAICurrentlyRunning is NPC deer && deer.ai[0] == 3 && type == BuffID.Slow && timeToAdd == 720)
+                return; // Remove stupid Slow debuff from deer
             FargoSoulsPlayer modPlayer = self.FargoSouls();
             if (Main.debuff[type]
                 && timeToAdd > 3 //dont affect auras
@@ -630,6 +636,18 @@ namespace FargowiltasSouls
                 damage *= 2;
             }
             orig(target, pickPower, ref damage);
+        }
+        private void AI_123_Deerclops(On_NPC.orig_AI_123_Deerclops orig, NPC self)
+        {
+            DeerclopsAICurrentlyRunning = self;
+            orig(self); // Capture whether Deerclops is the one currently inflicting a debuff or the sorts.
+            DeerclopsAICurrentlyRunning = null;
+        }
+        private void StatusPlayer(On_Projectile.orig_StatusPlayer orig, Projectile self, int playerIndex)
+        {
+            if (self.type == ProjectileID.DeerclopsIceSpike && WorldSavingSystem.EternityMode && self.GetSourceNPC().type == NPCID.Deerclops)
+                return; // Remove annoying Frozen debuff from EMode+ Deer spikes
+            orig(self, playerIndex);
         }
     }
 }

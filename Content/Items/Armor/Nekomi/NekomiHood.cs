@@ -116,7 +116,7 @@ namespace FargowiltasSouls.Content.Items.Armor.Nekomi
             if (fargoPlayer.Graze && player.whoAmI == Main.myPlayer && player.HasEffect<MasoGrazeRing>() && player.ownedProjectileCounts[ModContent.ProjectileType<GrazeRing>()] < 1)
                 Projectile.NewProjectile(player.GetSource_Accessory(item), player.Center, Vector2.Zero, ModContent.ProjectileType<GrazeRing>(), 0, 0f, Main.myPlayer);
 
-            const int decayTime = 420;
+            //const int decayTime = 420;
             if (fargoPlayer.NekomiTimer > 0)
             {
                 const int bonusSpeedPoint = 90;
