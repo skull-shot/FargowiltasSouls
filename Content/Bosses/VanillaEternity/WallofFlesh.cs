@@ -801,13 +801,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     public class Hungry : EModeNPCBehaviour
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.TheHungry, NPCID.TheHungryII);
-
-        public override void SetDefaults(NPC npc)
-        {
-            base.SetDefaults(npc);
-
-            npc.lifeMax = (int)Math.Round(npc.lifeMax / WallofFlesh.HealthMultiplier);
-        }
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
