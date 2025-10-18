@@ -100,6 +100,8 @@ namespace FargowiltasSouls
 
         public UserInterface CustomResources;
 
+        private NPC DeerclopsAICurrentlyRunning;
+
         internal static Dictionary<int, int> ModProjDict = [];
 
         public static bool DrawingTooltips = false;
