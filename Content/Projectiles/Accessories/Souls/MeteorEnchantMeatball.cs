@@ -126,7 +126,11 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                     Vector2 vel = Main.rand.NextVector2CircularEdge(1, 1) * Main.rand.NextFloat(4, 8);
                     int type = i + 1;
                     if (!Main.dedServ)
-                        Gore.NewGore(Projectile.GetSource_FromThis(), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"MeteorGore{type}").Type, Projectile.scale);
+                    {
+                        int gore = Gore.NewGore(Projectile.GetSource_FromThis(), pos, vel, ModContent.Find<ModGore>(Mod.Name, $"MeteorGore{type}").Type, Projectile.scale);
+                        if (gore.IsWithinBounds(Main.maxGore))
+                            Main.gore[gore].timeLeft = 180;
+                    }
                 }
             }
         }

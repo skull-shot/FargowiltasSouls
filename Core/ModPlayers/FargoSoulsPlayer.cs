@@ -726,7 +726,8 @@ namespace FargowiltasSouls.Core.ModPlayers
                 && !ProjectileID.Sets.NoMeleeSpeedVelocityScaling[item.shoot]
                 && item.shoot > ProjectileID.None
                 && item.shoot != ProjectileID.WireKite
-                && item.shoot != ModContent.ProjectileType<Retiglaive>())
+                && item.shoot != ModContent.ProjectileType<Retiglaive>()
+                && ContentSamples.ProjectilesByType[item.shoot].aiStyle != ProjAIStyleID.Spear)
             {
                 if (NinjaEffect.PlayerCanHaveBuff(Player))
                 {

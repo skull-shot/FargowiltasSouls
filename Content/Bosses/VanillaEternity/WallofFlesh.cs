@@ -854,6 +854,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 {
                     attachEye = eye.whoAmI;
                     Vector2 dir = Vector2.UnitX.RotatedBy(eye.rotation);
+                    if (eye.direction == 1)
+                        dir = -dir;
                     int myIndex = 0;
                     bool found = false;
                     int hungries = 0;
