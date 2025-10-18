@@ -27,7 +27,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoo
         public override void AI()
         {
             Projectile.velocity.Y += 0.1f;
-
             Player target = null;
             int p = Player.FindClosest(Projectile.Center, 16, 16);
             if (p >= 0) target = Main.player[p];
@@ -40,22 +39,12 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoo
                 else target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 600);
             }
 
-            /*for (int b = 0; b < Main.maxProjectiles; b++)
-            {
-                Projectile proj = Main.projectile[b];
-                if (proj.type == Projectile.type && proj.ai[0] == Projectile.ai[0])
-                {
-                    if (proj.ai[1] == 0) proj.ai[1] = 1;
-                }
-            }*/
-
             if (Main.rand.NextBool(5))
             {
                 int d = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.VampireHeal, Scale: 1.5f);
                 Main.dust[d].noGravity = true;
                 Main.dust[d].velocity = Vector2.Zero;
                 Main.dust[d].velocity.Y -= 3;
-
                 for (int i = 0; i < 2; i++)
                 {
                     int b = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<BloodDust>());
