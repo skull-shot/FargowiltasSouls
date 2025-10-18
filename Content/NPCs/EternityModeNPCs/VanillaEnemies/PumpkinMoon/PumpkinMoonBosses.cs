@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinM
 
         }
 
-        public override bool PreKill(NPC npc)
+        /*public override bool PreKill(NPC npc)
         {
             if (Main.pumpkinMoon && NPC.waveNumber < WAVELOCK)
             {
@@ -35,6 +35,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PumpkinM
             }
 
             return base.PreKill(npc);
-        }
+        }*/
     }
 }
