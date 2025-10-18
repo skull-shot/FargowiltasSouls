@@ -43,7 +43,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             NPCID.ZombieElfGirl,
             NPCID.SmallSlimedZombie,
             NPCID.BigSlimedZombie,
-            NPCID.ZombieMerman
+            NPCID.ZombieMerman,
+            NPCID.TheGroom,
+            NPCID.TheBride
         );
         public static List<int> RegularZombies = //no halloween/christmas or biome variants 
         [
