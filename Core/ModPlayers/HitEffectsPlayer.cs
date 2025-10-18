@@ -552,7 +552,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            Player player = Main.player[Main.myPlayer];
+            Player player = Main.LocalPlayer;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             WasHurtBySomething = true;
 
