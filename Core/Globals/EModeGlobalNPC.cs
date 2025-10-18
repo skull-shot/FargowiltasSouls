@@ -156,7 +156,7 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (npc.wet && !npc.honeyWet && !npc.lavaWet && !npc.shimmerWet && !npc.noTileCollide && !isWaterEnemy && npc.HasPlayerTarget)
                 {
-                    npc.AddBuff(ModContent.BuffType<LethargicBuff>(), 2, true);
+                    /*npc.AddBuff(ModContent.BuffType<LethargicBuff>(), 2, true);
                     if (Main.player[npc.target].ZoneCorrupt)
                         npc.AddBuff(BuffID.CursedInferno, 2, true);
                     if (Main.player[npc.target].ZoneCrimson)
@@ -164,7 +164,7 @@ namespace FargowiltasSouls.Core.Globals
                     if (Main.player[npc.target].ZoneHallow)
                         npc.AddBuff(ModContent.BuffType<SmiteBuff>(), 2, true);
                     if (Main.player[npc.target].ZoneJungle)
-                        npc.AddBuff(BuffID.Poisoned, 2, true);
+                        npc.AddBuff(BuffID.Poisoned, 2, true);*/
                 }
 
 
