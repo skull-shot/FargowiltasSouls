@@ -353,7 +353,6 @@ namespace FargowiltasSouls.Core.Globals
                                 pool[NPCID.DarkCaster] = .02f;
                             if (noBiome && (!pool.ContainsKey(NPCID.RockGolem) || pool[NPCID.RockGolem] < 0.01f))
                                 pool[NPCID.RockGolem] = 0.01f;
-                                
                         }
 
                         if (NPC.downedGoblins && !NPC.savedGoblin && !NPC.AnyNPCs(NPCID.BoundGoblin))
@@ -366,6 +365,11 @@ namespace FargowiltasSouls.Core.Globals
                     {
                         pool[NPCID.LeechHead] = .02f;
                         pool[NPCID.BlazingWheel] = .05f;
+                    }
+                    else if (sky && normalSpawn)
+                    {
+                        if (NPC.downedBoss2 && (x / 16f < Main.maxTilesX * 0.45 || x / 16f > Main.maxTilesX * 0.55)) //harpy condition
+                            pool[NPCID.MeteorHead] = .1f;
                     }
 
                     //height-independent biomes
@@ -547,9 +551,10 @@ namespace FargowiltasSouls.Core.Globals
                     }
                     else if (sky && normalSpawn)
                     {
-                       if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
-                           pool[NPCID.AngryNimbus] = .1f;
-                       pool[NPCID.MartianProbe] = .01f;
+                        if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                            pool[NPCID.AngryNimbus] = .1f;
+                        pool[NPCID.MeteorHead] = .05f;
+                        pool[NPCID.MartianProbe] = .01f;
 
                         if (NPC.downedGolemBoss)
                         {
