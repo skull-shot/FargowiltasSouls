@@ -1342,7 +1342,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         {
             if (NPC.life <= 0)
             {
-                for (int i = 3; i <= 7; i++)
+                for (int i = 2; i <= 7; i++)
                 {
                     Vector2 pos = NPC.position + new Vector2(Main.rand.NextFloat(NPC.width), Main.rand.NextFloat(NPC.height));
                     if (!Main.dedServ)

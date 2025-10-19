@@ -437,7 +437,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (NPC.life <= 0)
             {
                 Loop?.Stop();
-                for (int i = 8; i <= 10; i++)
+                for (int i = 8; i <= 9; i++)
                 {
                     Vector2 pos = Main.rand.NextVector2FromRectangle(NPC.Hitbox);
                     if (!Main.dedServ)
