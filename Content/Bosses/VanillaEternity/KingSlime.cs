@@ -785,8 +785,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.noTileCollide = false;
             npc.velocity.Y = npc.velocity.ClampLength(0, 35).Y;
 
-            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);
-            Main.NewText(npc.velocity.Y = npc.velocity.ClampLength(0, npc.velocity.Y).Y);
+            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);         
 
             // stall death animation whilst in the air
             if (npc.velocity.Y != 0)
