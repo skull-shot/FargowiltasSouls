@@ -13,6 +13,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoon
 {
@@ -119,8 +120,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         {
             if (FargoSoulsUtil.HostCheck)
             {
-                foreach (Projectile scythe in FargoSoulsUtil.XWay(4, npc.GetSource_FromThis(), npc.Center, ModContent.ProjectileType<BloodScythe>(), 1f, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0))
-                    scythe.ai[2] = 1;
+                float rng = MathHelper.ToRadians(Main.rand.NextFloat(0, 360));
+                for (int i = 0; i < 5; i++)
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, new Vector2(1f, 1f).RotatedBy(2 * Math.PI / 5 * i + rng), ModContent.ProjectileType<BloodScythe>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer, ai2: 1);
             }
             DashCount += 1;
         }
