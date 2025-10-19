@@ -76,3 +76,13 @@ TitleLinks: {
 // AvailableSkills: Available Skills
 // SelectDifficulty: Select Difficulty
 // NoRespawn: Respawn prevented: Only one respawn per boss in {0} multiplayer!
+
+DeviQuestBoard: {
+	// Title: Quest Board
+	// InfoBlank: Select a Quest!
+	// TaskButton: Tasks
+	// RewardButton: Rewards
+	// SubmitButton: Submit
+	// TasksHeader: Current Tasks
+	// RewardsHeader: Completion Rewards
+}

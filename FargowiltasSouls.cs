@@ -28,6 +28,7 @@ using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Jungle;
 using FargowiltasSouls.Content.Patreon.Volknet;
 using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Content.Projectiles.Weapons.ChallengerItems;
+using FargowiltasSouls.Content.Quests;
 using FargowiltasSouls.Content.Sky;
 using FargowiltasSouls.Content.Tiles;
 using FargowiltasSouls.Content.UI;
@@ -62,6 +63,8 @@ namespace FargowiltasSouls
 {
     public partial class FargowiltasSouls : Mod
     {
+        internal static DeviQuestTracker questTracker;
+
         public static Mod MutantMod;
         public static Mod CalamityMod;
         public static Mod MusicDisplay;
@@ -175,6 +178,8 @@ namespace FargowiltasSouls
 
             ToggleLoader.Load();
             FargoUIManager.LoadUI();
+
+            questTracker = new DeviQuestTracker();
 
             if (Main.netMode != NetmodeID.Server)
             {
@@ -664,7 +669,9 @@ namespace FargowiltasSouls
             WakeUpDeviantt,
             WakeUpMutant,
             SyncSoulVortexHit,
-            ClearNPCBuffFromClient
+            ClearNPCBuffFromClient,
+
+            RequestDeviQuestReward
         }
 
         public override void HandlePacket(BinaryReader reader, int whoAmI)
@@ -1045,6 +1052,17 @@ namespace FargowiltasSouls
                                 if (index > -1)
                                     npc.DelBuff(index);
                             }
+                        }
+                        break;
+                    case PacketID.RequestDeviQuestReward:
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            Player player = Main.player[reader.ReadByte()];
+                            string key = reader.ReadString();
+                            DeviQuest? quest = DeviQuestRegistry.GetQuest(key);
+                            if (quest == null)
+                                break;
+                            quest.GiveQuestRewards(player);
                         }
                         break;
                     default:
