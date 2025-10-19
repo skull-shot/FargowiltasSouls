@@ -275,7 +275,7 @@ namespace FargowiltasSouls.Core.Globals
             bool noEvent = Main.invasionType == 0 && !oldOnesArmy && !frostMoon && !pumpkinMoon && !solarEclipse && !lunarEvents;
             bool thunderstorm = Main.IsItStorming && surface && !snow && !spawnInfo.Player.ZoneSandstorm && noEvent;
 
-            bool noInvasion = FargowiltasSouls.NoInvasion(spawnInfo);
+            bool noInvasion = !spawnInfo.Invasion;//FargowiltasSouls.NoInvasion(spawnInfo);
             bool worldEvil = WorldGen.crimson;
             bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
 
