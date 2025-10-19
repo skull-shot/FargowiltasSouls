@@ -24,10 +24,10 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
             {
                 return "SoD";
             }
-            /*if (Main.LocalPlayer.FargoSouls().ColossusSoul)
+            if (Main.LocalPlayer.FargoSouls().ColossusSoul)
             {
                 return "Colossus";
-            }*/
+            }
             return string.Empty;
         }
         public override void PostDrawResource(ResourceOverlayDrawContext context)
@@ -37,24 +37,24 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
             string fancyFolder = "Images/UI/PlayerResourceSets/FancyClassic/";
             string barsFolder = "Images/UI/PlayerResourceSets/HorizontalBars/";
 
-            if (/*Main.LocalPlayer.FargoSouls().ColossusSoul != true &&*/ Main.LocalPlayer.FargoSouls().DimensionSoul != true)
+            if (Main.LocalPlayer.FargoSouls().ColossusSoul != true && Main.LocalPlayer.FargoSouls().DimensionSoul != true)
                 return;
 
             if (AssetString() != string.Empty)
             {
                 if (asset == TextureAssets.Heart || asset == TextureAssets.Heart2)
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Heart").Asset;
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Heart", AssetRequestMode.ImmediateLoad).Asset;
                     context.Draw();
                 }
                 else if (CompareAssets(asset, fancyFolder + "Heart_Fill") || CompareAssets(asset, fancyFolder + "Heart_Fill_B"))
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "FancyHeart").Asset;
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "FancyHeart", AssetRequestMode.ImmediateLoad).Asset;
                     context.Draw();
                 }
                 else if (CompareAssets(asset, barsFolder + "HP_Fill") || CompareAssets(asset, barsFolder + "HP_Fill_Honey"))
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "BarHeart").Asset;
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "BarHeart", AssetRequestMode.ImmediateLoad).Asset;
                     context.Draw();
                 }
             }
@@ -98,17 +98,17 @@ namespace FargowiltasSouls.Content.UI.ResourceOverlays
             {
                 if (asset == TextureAssets.Mana)
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Mana").Asset;
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "Mana", AssetRequestMode.ImmediateLoad).Asset;
                     context.Draw();
                 }
                 else if (CompareAssets(asset, fancyFolder + "Star_Fill"))
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "FancyMana").Asset;
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "FancyMana", AssetRequestMode.ImmediateLoad).Asset;
                     context.Draw();
                 }
                 else if (CompareAssets(asset, barsFolder + "MP_Fill"))
                 {
-                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "BarMana").Asset;
+                    context.texture = FargoAssets.GetTexture2D("UI/ResourceOverlays", AssetString() + "BarMana", AssetRequestMode.ImmediateLoad).Asset;
                     context.Draw();
                 }
             }
