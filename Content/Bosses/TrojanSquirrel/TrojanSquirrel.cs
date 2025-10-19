@@ -1221,7 +1221,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         }
                         else if (LegFrame.X == 96 * 2)
                         {
-                            if (LegFramecounter >= 12)
+                            if (LegFramecounter >= 7)
                             {
                                 LegFramecounter = 0;
                                 LegFrame.Y += LegFrame.Height;
