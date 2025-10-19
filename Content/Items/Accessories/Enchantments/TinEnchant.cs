@@ -62,7 +62,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         {
             if (player.FargoSouls().Eternity)
                 return 50;
-            if (player.HasEffect<TerraEffect>())
+            if (!player.HasEffectEnchant<TinEffect>())
                 return 0;
             return 5;
         }
@@ -128,7 +128,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         public override void OnHurt(Player player, Player.HurtInfo info)
         {
             //reset crit
-            if (info.Damage < 5)
+            bool parry = (player.FargoSouls().shieldHeldTime <= FargoSoulsPlayer.HARD_PARRY_WINDOW) && player.FargoSouls().shieldHeldTime > 0;
+            if (info.Damage < 5 || parry)
                 return;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             float oldCrit = modPlayer.TinCrit;

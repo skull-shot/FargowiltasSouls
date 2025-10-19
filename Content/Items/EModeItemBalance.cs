@@ -39,7 +39,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["RodofDiscord"];
                     return EModeChange.ReworkNerf;
                 case ItemID.RodOfHarmony:
-                    balanceTextKeys = ["RodofHarmony"];
+                    balanceTextKeys = ["RodOfHarmony"];
                     return EModeChange.ReworkNeutral;
 
                 /*case ItemID.WaterBolt:
@@ -148,6 +148,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.7f;
                     return EModeChange.Nerf;
 
+
                 /*case ItemID.DD2SquireBetsySword:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.9f;
@@ -234,7 +235,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.2f;
                     return EModeChange.Buff;
 
-                case ItemID.PumpkinMoonMedallion:
+                /*case ItemID.PumpkinMoonMedallion:
                     balanceNumber = PumpkinMoonBosses.WAVELOCK;
                     if (WorldSavingSystem.MasochistModeReal)
                     {
@@ -257,7 +258,7 @@ namespace FargowiltasSouls.Content.Items
                     {
                         balanceTextKeys = ["MoonsDrops"];
                         return EModeChange.ReworkNerf;
-                    }
+                    }*/
                 case ItemID.DD2ElderCrystal:
                     balanceTextKeys = ["OOAWaves"];
                     return EModeChange.ReworkNerf;
@@ -354,6 +355,10 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.WarmthPotion:
                     balanceTextKeys = ["WarmthPotionNerf"];
+                    return EModeChange.Nerf;
+
+                case ItemID.FeatherfallPotion:
+                    balanceTextKeys = ["FeatherfallPotionNerf"];
                     return EModeChange.Nerf;
 
                 case ItemID.JungleRose:
@@ -601,6 +606,12 @@ namespace FargowiltasSouls.Content.Items
                         balanceTextKeys = ["ChlorophyteBullet"];
                         return EModeChange.Nerf;
                     }
+                    else if (ContentSamples.ItemsByType[itemType].ModItem == null && (ItemID.Sets.IsDrill[itemType] || ItemID.Sets.IsChainsaw[itemType] || itemType == ItemID.ChlorophyteJackhammer))
+                    {
+                        balanceTextKeys = ["Speed"];
+                        balanceNumber = 1.25f;
+                        return EModeChange.Buff;
+                    }
                     else if (ContentSamples.ItemsByType[itemType] is Item item2 && item2.buffType == BuffID.Tipsy)
                     {
                         balanceTextKeys = ["Tipsy"];
@@ -610,13 +621,13 @@ namespace FargowiltasSouls.Content.Items
             }
         }
 
-        public static bool HasEmodeChange(Player player, int itemID)
+        public static string[] HasEmodeChange(Player player, int itemID)
         {
             string extra = string.Empty;
             float balanceNumber = -1;
             string[] balanceTextKeys = null;
             EModeChange balance = EmodeBalancePerID(itemID, ref balanceNumber, ref balanceTextKeys, ref extra);
-            return balance != EModeChange.None;
+            return balance != EModeChange.None ? balanceTextKeys : [];
         }
 
         public static void BalanceWeaponStats(Player player, Item item, ref StatModifier damage)

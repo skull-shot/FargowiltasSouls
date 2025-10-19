@@ -1,12 +1,15 @@
 ﻿using Fargowiltas.Assets.Textures;
 using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Expert;
 using FargowiltasSouls.Content.Items.Accessories.Forces;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using ReLogic.Graphics;
 using Terraria;
 using Terraria.GameContent;
@@ -42,18 +45,46 @@ namespace FargowiltasSouls.Content.UI.Elements
             Player player = Main.LocalPlayer;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
 
-            if (IsMouseHovering && Main.mouseLeft && Main.mouseLeftRelease)
-            {
-                modPlayer.Toggler.Toggles[Effect].ToggleBool = !modPlayer.Toggler.Toggles[Effect].ToggleBool;
-
-                if (Main.netMode == NetmodeID.MultiplayerClient)
-                    modPlayer.SyncToggle(Effect);
-            }
-
             bool disabledByMinos = Effect.MinionEffect && modPlayer.GalacticMinionsDeactivated;
             bool disabledByPresence = modPlayer.MutantPresence && (Effect.MutantsPresenceAffects || Effect.MinionEffect);
-            bool disabledByGlobalToggle = (Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled) || (Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled) || (Effect.ExtraJumpEffect && modPlayer.Toggler_ExtraJumpsDisabled);
+            bool disabledByMinionToggle = Effect.MinionEffect && modPlayer.Toggler_MinionsDisabled;
+            bool disabledByAttackToggle = Effect.ExtraAttackEffect && modPlayer.Toggler_ExtraAttacksDisabled;
+            bool disabledByJumpToggle = Effect.ExtraJumpEffect && modPlayer.Toggler_ExtraJumpsDisabled;
+            bool disabledByGlobalToggle = disabledByMinionToggle || disabledByAttackToggle || disabledByJumpToggle;
             bool toggled = Main.LocalPlayer.GetToggleValue(Effect, true);
+
+            if (IsMouseHovering)
+            {
+
+                if (Main.mouseLeft && Main.mouseLeftRelease)
+                {
+                    modPlayer.Toggler.Toggles[Effect].ToggleBool = !modPlayer.Toggler.Toggles[Effect].ToggleBool;
+
+                    if (Main.netMode == NetmodeID.MultiplayerClient)
+                        modPlayer.SyncToggle(Effect);
+                }
+                string disabledText = "";
+                if (disabledByPresence)
+                    disabledText = Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisabledByPresence");
+                if (disabledByMinos || disabledByMinionToggle)
+                    disabledText = Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisabledByToggle", Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisableAllMinionEffects"));
+                if (disabledByAttackToggle)
+                    disabledText = Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisabledByToggle", Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisableAllAttackEffects"));
+                if (disabledByJumpToggle)
+                    disabledText = Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisabledByToggle", Language.GetTextValue("Mods.FargowiltasSouls.Toggler.DisableAllExtraJumpEffects"));
+                if (disabledText != "")
+                {
+                    Item hoverItem = new(2);
+                    hoverItem.createTile = -1;
+                    hoverItem.material = false;
+                    hoverItem.consumable = false;
+                    hoverItem.SetNameOverride(disabledText);
+                    Main.HoverItem = hoverItem;
+                    Main.instance.MouseText("", 0, 0);
+                    Main.hoverItemName = disabledText;
+                    Main.mouseText = true;
+                }
+            }
 
             spriteBatch.Draw(FargoMutantAssets.UI.Toggler.CheckBox.Value, position, Color.White);
 

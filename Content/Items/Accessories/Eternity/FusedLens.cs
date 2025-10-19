@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Buffs.Boss;
@@ -56,7 +57,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
                 if (player.FargoSouls().MasochistSoul && type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type) && type != ModContent.BuffType<MutantPresenceBuff>())
                     sotm = true;
 
-                if (sotm || (type > 0 && Main.debuff[type] && (FargowiltasSouls.DefenseReducingDebuffs.Contains(type) || (type == ModContent.BuffType<BerserkerInstallBuff>() && player.FargoSouls().BerserkedFromAgitation == true) || (type == 88 && EmodeItemBalance.HasEmodeChange(player, ItemID.RodofDiscord)))) || player.FargoSouls().TwinsInstall && type != ModContent.BuffType<MutantPresenceBuff>())
+                if (sotm || (type > 0 && Main.debuff[type] && (FargowiltasSouls.DefenseReducingDebuffs.Contains(type) || (type == ModContent.BuffType<BerserkerInstallBuff>() && player.FargoSouls().BerserkedFromAgitation == true) || (type == 88 && EmodeItemBalance.HasEmodeChange(player, ItemID.RodofDiscord).Contains("RodofDiscord")))) || player.FargoSouls().TwinsInstall && type != ModContent.BuffType<MutantPresenceBuff>())
                 {
                     if (!dubious) player.FargoSouls().FusedLensIchor = true;
                     player.GetCritChance(DamageClass.Generic) += 15;

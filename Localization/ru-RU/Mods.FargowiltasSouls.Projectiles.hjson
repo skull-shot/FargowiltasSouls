@@ -870,11 +870,13 @@ SnotBaseballSplit.DisplayName: Шарик слюней
 TwilightStar.DisplayName: Сумеречная звезда
 TwilightStarSpawn.DisplayName: Сумеречная звезда
 TimsInspectProjectile.DisplayName: Tims Inspect Projectile
-// LifeForceBugs.DisplayName: Life Force Bugs
-// LifeForceBeetle.DisplayName: Life Force Beetle
-// LifeForceSpider.DisplayName: Life Force Spider
-// LifeForceWasp.DisplayName: Life Force Wasp
-// TimMagicBlast.DisplayName: Magic Blast
-// TimInferno.DisplayName: Inferno Ring
-// TimFireball.DisplayName: Fireball
-// TimHatSummon.DisplayName: Tim's Magic Hat
+LifeForceBugs.DisplayName: Насекомые
+LifeForceBeetle.DisplayName: Жук
+LifeForceSpider.DisplayName: Паук
+LifeForceWasp.DisplayName: Оса
+TimMagicBlast.DisplayName: Волшебный заряд
+TimInferno.DisplayName: Кольцо адского пламени
+TimFireball.DisplayName: Огненный шар
+TimHatSummon.DisplayName: Волшебная шляпа Тима
+// BloodTrail.DisplayName: Blood Trail
+// MermanAnchor.DisplayName: Merman Anchor

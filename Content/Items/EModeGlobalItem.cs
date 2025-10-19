@@ -314,7 +314,7 @@ namespace FargowiltasSouls.Content.Items
             switch (item.type)
             {
                 case ItemID.TopazStaff:
-                    if (EmodeItemBalance.HasEmodeChange(player, ItemID.TopazStaff))
+                    if (EmodeItemBalance.HasEmodeChange(player, ItemID.TopazStaff).Contains("TopazStaff"))
                         crit += 6;
                     break;
                 default:
@@ -381,11 +381,11 @@ namespace FargowiltasSouls.Content.Items
         {
             if (!WorldSavingSystem.EternityMode)
                 return base.UseSpeedMultiplier(item, player);
-            if (item.type == ItemID.SapphireStaff && EmodeItemBalance.HasEmodeChange(player, item.type))
+            if (item.type == ItemID.SapphireStaff && EmodeItemBalance.HasEmodeChange(player, item.type).Contains("SapphireStaff"))
             {
                 return 1.5f;
             }
-            if (item.type == ItemID.EmeraldStaff && EmodeItemBalance.HasEmodeChange(player, item.type))
+            if (item.type == ItemID.EmeraldStaff && EmodeItemBalance.HasEmodeChange(player, item.type).Contains("EmeraldStaff"))
             {
                 return 0.75f;
             }
@@ -398,20 +398,20 @@ namespace FargowiltasSouls.Content.Items
             switch (item.type)
             {                    
                 case ItemID.ChlorophyteSaber:
-                    if (EmodeItemBalance.HasEmodeChange(player, item.type))
+                    if (EmodeItemBalance.HasEmodeChange(player, item.type).Contains("ChlorophyteSaber"))
                     {
                         velocity *= 2f;
                     }
                     break;
 
                 case ItemID.JackOLanternLauncher:
-                    if (EmodeItemBalance.HasEmodeChange(player, item.type))
+                    if (EmodeItemBalance.HasEmodeChange(player, item.type).Contains("JackOLanternLauncher"))
                     {
                         velocity *= 1.5f;
                     }
                     break;
                 case ItemID.SapphireStaff:
-                    if (EmodeItemBalance.HasEmodeChange(player, item.type))
+                    if (EmodeItemBalance.HasEmodeChange(player, item.type).Contains("SapphireStaff"))
                     {
                         velocity = velocity.RotatedByRandom(MathHelper.PiOver2 * 0.2f);
                     }

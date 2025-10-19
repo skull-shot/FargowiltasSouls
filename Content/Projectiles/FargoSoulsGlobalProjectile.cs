@@ -94,8 +94,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool noInteractionWithNPCImmunityFrames;
         private int tempIframe;
-
-        public int DamageCap;
         public bool EnchantmentProj;
         public float HeldProjMemorizedDamage;
         public float HeldProjMemorizedCrit;
@@ -298,7 +296,7 @@ namespace FargowiltasSouls.Content.Projectiles
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             Projectile? sourceProj = null;
 
-            if (projectile.friendly)
+            if (projectile.friendly || FargoSoulsUtil.IsSummonDamage(projectile, false, false))
             {
                 if (FargoSoulsUtil.IsProjSourceItemUseReal(projectile, source))
                     ItemSource = true;
@@ -307,8 +305,8 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 if (sourceProj is not null)
                 {
-                    if (sourceProj.FargoSouls().ItemSource && DoesNotAffectHuntressType.Contains(sourceProj.type))
-                        ItemSource = true; // reuse this with the intention to make shots from held projectiles work with Huntress
+                    if (sourceProj.FargoSouls().ItemSource && (((sourceProj.minion || sourceProj.sentry) && (ProjectileID.Sets.MinionShot[projectile.type] || ProjectileID.Sets.SentryShot[projectile.type])) || DoesNotAffectHuntressType.Contains(sourceProj.type)))
+                        ItemSource = true; // reuse this with the intention to make shots from held projectiles work with Huntress, or make minion shots count as ItemSource
 
                     if (sourceProj.FargoSouls().TikiTagged)
                     { //projs shot by tiki-buffed projs will also inherit the tiki buff
@@ -469,9 +467,6 @@ namespace FargowiltasSouls.Content.Projectiles
             {
                 HuntressProj = 1;
             }
-
-            if (sourceProj is not null && sourceProj.FargoSouls().DamageCap > 0)
-                DamageCap = sourceProj.FargoSouls().DamageCap;
 
             if (projectile.bobber && CanSplit && source is EntitySource_ItemUse)
             {
@@ -1260,9 +1255,6 @@ namespace FargowiltasSouls.Content.Projectiles
         {
             Player player = Main.player[projectile.owner];
             FargoSoulsPlayer modPlayer = player.FargoSouls();
-
-            if (DamageCap > 0 && projectile.damage > DamageCap)
-                projectile.damage = DamageCap;
 
             if (projectile.whoAmI == player.heldProj
                 || projectile.aiStyle == ProjAIStyleID.HeldProjectile

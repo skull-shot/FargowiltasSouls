@@ -304,7 +304,7 @@ namespace FargowiltasSouls.Core.Globals
                 SuffocationTimer = 0;
 
             if (!npc.friendly && npc.damage > 0
-                && Main.LocalPlayer.active && !Main.LocalPlayer.dead)
+                && Main.LocalPlayer.active && !Main.LocalPlayer.dead && !(WorldSavingSystem.EternityMode && npc.type is NPCID.TheHungry or NPCID.TheHungryII))
             {
                 if (--GrazeCD < 0) //managed by the npc itself so worm segments dont make it count down faster
                     GrazeCD = 6;
@@ -1418,7 +1418,7 @@ namespace FargowiltasSouls.Core.Globals
                     def = 50;
                 modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
-            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3))
+            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3).Contains("BetsysCurse"))
             {
                 modifiers.Defense.Flat += 15; //25 total ap
             }

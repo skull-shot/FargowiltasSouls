@@ -110,7 +110,6 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		“多汁解渴！”
 		'''
-	// VanityTooltip: Passive cactuses become harmless
 }
 
 ChlorophyteEnchant: {
@@ -854,10 +853,8 @@ LifeForce: {
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place with the wings to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
 		''' */
-	// VanityTooltip: Passive cactuses become harmless
 }
 
 NatureForce: {
@@ -1982,7 +1979,7 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		Increases your minion slots by 3 and sentry slots by 1, does not stack with downgrades
 		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 

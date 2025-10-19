@@ -141,8 +141,6 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (Main.LocalPlayer.active && !Main.LocalPlayer.ghost && !Main.LocalPlayer.dead && npc.Distance(Main.LocalPlayer.Center) < 1000)
             {
                 Main.LocalPlayer.AddBuff(ModContent.BuffType<LowGroundBuff>(), 2);
-                Main.LocalPlayer.buffImmune[BuffID.Frozen] = true;
-                Main.LocalPlayer.buffImmune[BuffID.Slow] = true;
             }
             if (npc.ai[0] != 1)
                 HandsCheck = true;

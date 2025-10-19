@@ -234,7 +234,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     public class TrojanSquirrel : TrojanSquirrelPart
     {   
         //TODO: Change back to 4F when animation has been sorted out.
-        private const float BaseWalkSpeed = 1f;
+        public static float BaseWalkSpeed => 4f;
         string TownNPCName;
         bool hasplayedbreaksound;
         public override void SetStaticDefaults()
@@ -301,7 +301,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public int LegFrameType;
         public Rectangle LegFrame = new Rectangle(0, 0, LegTexture.Width() / 5, LegTexture.Height() / LegFrameMax);
         public const int LegFrameMax = 7;
-        public int LegFramecounter;
+        public float LegFramecounter;
 
         private bool spawned;
 
@@ -665,6 +665,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         NPC.velocity.X = 0;
 
+                        if (LegFrameType == 1)
+                            LegFrameType = 2;
+
                         TileCollision(player.Bottom.Y - 1 > NPC.Bottom.Y, Math.Abs(player.Center.X - NPC.Center.X) < NPC.width / 2 && NPC.Bottom.Y < player.Bottom.Y - 1);
 
                         int threshold = 105;
@@ -686,6 +689,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             int maxShake = 8;
                             float shake = dir * maxShake * (NPC.localAI[0] / threshold);
                             NPC.position.X += shake;
+
+                            if (LegFrameType == 3) // run frame; incorrect, can happen on transition sometimes
+                                LegFrameType = 2;
+                        }
+                        else // telegraphing run
+                        {
+                            if (LegFrameType == 4) // jump frame; incorrect
+                                LegFrameType = 2;
                         }
 
                         if (++NPC.localAI[0] > threshold)
@@ -799,10 +810,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (head == null)
             {
                 Vector2 pos = NPC.Top;
-                pos.X += 2f * 16f * NPC.direction;
-                pos.Y -= 8f;
+                pos.X += 2f * 2f * NPC.direction;
+                pos.Y += 8;
 
-                int width = 4 * 16;
+                int width = 2 * 16;
                 int height = 2 * 16;
 
                 pos.X -= width / 2f;
@@ -816,12 +827,18 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     Main.dust[d].noGravity = true;
                 }*/
 
-                if (Main.rand.NextBool(3))
+                if (Main.rand.NextBool(2))
                 {
-                    int d = Dust.NewDust(pos, width, height, DustID.Torch, NPC.velocity.X * 0.4f, NPC.velocity.Y * 0.4f, 100, default, 2.5f);
+                    int d = Dust.NewDust(pos, width, height, DustID.Torch, NPC.velocity.X * 0.9f, NPC.velocity.Y * 0.9f, 100, default, 2f);
                     Main.dust[d].noGravity = true;
-                    Main.dust[d].velocity.Y -= 3f;
+                    Main.dust[d].velocity.Y -= Main.rand.NextFloat(3f, 8f);
                     Main.dust[d].velocity *= 1.5f;
+                }
+
+                if (Main.rand.NextBool(6))
+                {
+                    Particle p = new SmokeParticle(Main.rand.NextVector2FromRectangle(new Rectangle((int)pos.X, (int)pos.Y, width, height)), NPC.velocity * 0.9f - Vector2.UnitY * 6, Color.Gray, 50, 0.3f, 0.05f, Main.rand.NextFloat(MathF.Tau));
+                    p.Spawn();
                 }
             }
             else
@@ -1062,9 +1079,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         public override void FindFrame(int frameHeight)
         {
-            Main.NewText("AnimationType: " + LegFrameType);
-            Main.NewText("framey: " + LegFrame.Y);
-            Main.NewText("framex: " + LegFrame.X);
+            //Main.NewText("AnimationType: " + LegFrameType);
+            //Main.NewText("framey: " + LegFrame.Y);
+            //Main.NewText("framex: " + LegFrame.X);
             //140 is the width of each X Frame.
             NPC.frame.X = 0;
             if (++NPC.frameCounter >= 7)
@@ -1084,15 +1101,36 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         //96 is the width of an X Frame.
                         LegFrame.X = 96 * 3;
-                        if (++LegFramecounter >= 5)
+
+                        float increment = 1f / BaseWalkSpeed / NPC.scale * Math.Abs(NPC.velocity.X);
+                        // trojan backstepping technology
+                        increment *= Math.Sign(NPC.direction * Math.Sign(NPC.velocity.X));
+
+                        LegFramecounter += increment;
+                        if (LegFramecounter >= 2.5f)
                         {
-                            //LegFramecounter = 0;
+                            LegFramecounter = 0;
                             LegFrame.Y += LegFrame.Height;
 
                             if (LegFrame.Y >= LegFrame.Height * LegFrameMax)
                                 LegFrame.Y = 0;
                         }
+                        else if (LegFramecounter <= 0)
+                        {
+                            LegFramecounter = 2.5f;
+                            LegFrame.Y -= LegFrame.Height;
 
+                            if (LegFrame.Y < 0)
+                                LegFrame.Y = LegFrame.Height * (LegFrameMax - 1);
+                        }
+
+                        LegFrameAlt.X = 96 * 3;
+                        int frameY = LegFrame.Y / LegFrame.Height;
+                        int frameAltY = frameY + (LegFrameMax / 2);
+                        frameAltY %= LegFrameMax;
+                        LegFrameAlt.Y = frameAltY * LegFrameAlt.Height;
+
+                        /*
                         LegFrameAlt.X = 96 * 3;
                         if (LegFramecounter >= 5)
                         {
@@ -1102,7 +1140,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             if (LegFrameAlt.Y >= LegFrameAlt.Height * LegFrameMax)
                                 LegFrameAlt.Y = 0;
                         }
-
+                        */
 
                     }
                     break;
@@ -1111,14 +1149,19 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 case 2:
                     {
                         bool PreparingJump = NPC.ai[0] == 2;
-                        bool PreparingRun = false;
-                        if (NPC.ai[0] == 0)
-                            PreparingRun = true;
+                        bool BeforeJump = (NPC.ai[0] == 1 && NPC.ai[3] != 0f);
+                        bool PreparingRun = NPC.ai[0] == 0 || (NPC.ai[0] == 1 && NPC.ai[3] == 0f);
+
                         LegFrame.X = 0;
                         if (++LegFramecounter >= 3)
                         {
                             LegFramecounter = 0;
-                            LegFrame.Y += LegFrame.Height;
+
+                            if (!BeforeJump)
+                                LegFrame.Y += LegFrame.Height;
+                            else
+                                LegFrame.Y = 0;
+
                             if (LegFrame.Y >= LegFrame.Height * 6)
                             {
                                 if (PreparingJump)
@@ -1127,15 +1170,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                     LegFrame.Y = 0;
                                     LegFrameType = 4;
                                 }
-                                    
-
                                 if (PreparingRun)
                                 {
                                     LegFrame.X = 96;
                                     LegFrame.Y = 0;
                                     LegFrameType = 3;
                                 }
-                                    
                             }
                                 
                         }
@@ -1268,15 +1308,20 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             
-
-            
             if (arms != null)
-            {   
-                Rectangle ArmRectangle = new Rectangle(arms.frame.X, arms.frame.Y, arms.frame.Width / 3, arms.frame.Height);
+            {
+                var trojanArms = arms.As<TrojanSquirrelArms>();
+                int animationType = trojanArms.AltArmAnimationType switch
+                {
+                    0 => 0,
+                    2 => 2,
+                    _ => trojanArms.ArmsAnimationType
+                };
+                Rectangle armsFrame = trojanArms.GetFrame(animationType, arms.frame.Height);
+                Rectangle ArmRectangle = new(armsFrame.X, armsFrame.Y, armsFrame.Width / 3, armsFrame.Height);
                 Vector2 ArmOrigin = ArmRectangle.Size() / 2f;
                 Main.EntitySpriteDraw(ArmTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 0 : 73f, NPC.gfxOffY + 26 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(ArmRectangle), color26, NPC.rotation, origin2, NPC.scale * 0.9f, effects, 0);
             }
-                
 
             Main.EntitySpriteDraw(LegTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? -32 : 46f, NPC.gfxOffY + 33 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(LegFrameType == 1 ? LegRectangleAlt : LegRectangle), color26, NPC.rotation, LegAltOrigin, NPC.scale, effects, 0);
 

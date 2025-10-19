@@ -394,6 +394,11 @@ namespace FargowiltasSouls.Core.Globals
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Geode, 10, 1, 3));
                     }
                     break;
+                case NPCID.Raven:
+                    {
+                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.GoodieBag, 10));
+                        break;
+                    }
                 case NPCID.RockGolem:
                     {
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.CopperOre, 3, 10, 30));

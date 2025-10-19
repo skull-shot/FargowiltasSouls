@@ -60,9 +60,9 @@ AshWoodEnchant: {
 	DisplayName: Ash Wood Enchantment
 	Tooltip:
 		'''
-		Fire debuffs deal no damage
+		Fire debuffs deal no damage, touching lava grants the lava wet buff
 		While afflicted with a debuff, attacks are occasionally accompanied by fireballs
-		Reduces damage from touching lava
+		Provides 3 seconds of immunity to lava and reduces damage from touching lava
 		'You're telling me this isn't wood?'
 		'''
 }
@@ -106,10 +106,8 @@ CactusEnchant: {
 		'''
 		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Passive cactuses become harmless (works from inventory or vanity slots)
 		'It's the quenchiest!'
 		'''
-	VanityTooltip: Passive cactuses become harmless
 }
 
 ChlorophyteEnchant: {
@@ -826,10 +824,8 @@ LifeForce: {
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place with the wings to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
 		'''
-	VanityTooltip: Passive cactuses become harmless
 }
 
 NatureForce: {
@@ -1655,8 +1651,8 @@ ConjuristsSoul: {
 		'''
 		22% increased summon damage
 		15% increased whip range
-		Increases your max number of minions by 3, doesn't stack
-		Increases your max number of sentries by 1, doesn't stack
+		Increases your max number of minions by 3
+		Increases your max number of sentries by 1
 		Increased minion knockback
 		'An army at your disposal'
 		'''
@@ -1817,9 +1813,9 @@ TrawlerSoul: {
 		'''
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into a merfolk when entering water
-		[i:1861] Increases your ice and water mobility and underwater breathing
+		[i:3995][i:1861] Improves jumping, swimming, sliding, and climbing mobility
 		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
-		[i:4987][i:3336][i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
+		[i:3336][i:4987][i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		'''
 }
@@ -1830,7 +1826,7 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		Increases your minion slots by 3 and sentry slots by 1, does not stack with downgrades
 		[i:FargowiltasSouls/BerserkerSoul][i:FargowiltasSouls/SnipersSoul][i:FargowiltasSouls/ArchWizardsSoul][i:FargowiltasSouls/ConjuristsSoul] Grants all additional effects of components
 		'The heavens themselves bow to you'
 
@@ -1839,7 +1835,7 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		Increases your minion slots by 3 and sentry slots by 1, does not stack with downgrades
 		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 

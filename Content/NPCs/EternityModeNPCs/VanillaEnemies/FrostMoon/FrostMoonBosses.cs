@@ -15,7 +15,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoo
             NPCID.IceQueen
         );
 
-        public override bool PreKill(NPC npc)
+        /*public override bool PreKill(NPC npc)
         {
             if (Main.snowMoon && NPC.waveNumber < WAVELOCK)
             {
@@ -28,6 +28,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.FrostMoo
             }
 
             return base.PreKill(npc);
-        }
+        }*/
     }
 }
