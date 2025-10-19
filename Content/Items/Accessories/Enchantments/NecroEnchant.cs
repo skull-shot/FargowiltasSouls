@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 .AddIngredient(ItemID.NecroGreaves)
                 .AddIngredient(ItemID.BookofSkulls)
                 .AddIngredient(ItemID.BoneWhip)
-                .AddIngredient(ItemID.StillLife)
+                .AddIngredient(ItemID.GravediggerShovel)
 
                 .AddTile<EnchantedTreeSheet>()
                 .Register();

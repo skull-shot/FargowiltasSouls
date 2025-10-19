@@ -2,6 +2,7 @@
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA;
 using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Quests;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Globals;
 using Microsoft.Xna.Framework;
@@ -145,6 +146,9 @@ namespace FargowiltasSouls //lets everything access it without using
             => player.GetModPlayer<EModePlayer>();
         public static AccessoryEffectPlayer AccessoryEffects(this Player player)
             => player.GetModPlayer<AccessoryEffectPlayer>();
+        public static DeviQuestModPlayer QuestPlayer(this Player player)
+            => player.GetModPlayer<DeviQuestModPlayer>();
+
         public static bool ForceEffect<T>(this Player player) where T : AccessoryEffect
         {
             Item item = player.EffectItem<T>();

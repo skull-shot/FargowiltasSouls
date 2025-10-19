@@ -134,22 +134,6 @@ namespace FargowiltasSouls.Content.Projectiles
                     projectile.GetGlobalProjectile<AttackSpeedScalingGlobalProjectile>().UseAttackSpeedForAdditionalUpdates = true;
                     break;
 
-                case ProjectileID.FinalFractal: //zenith
-                    if (!WorldSavingSystem.DownedMutant && EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.Zenith).Contains("ZenitHitRate"))
-                    {
-                        projectile.usesLocalNPCImmunity = false;
-                        projectile.localNPCHitCooldown = 0;
-
-                        projectile.usesIDStaticNPCImmunity = true;
-                        if (WorldSavingSystem.DownedAbom)
-                            projectile.idStaticNPCHitCooldown = 3;
-                        else
-                            projectile.idStaticNPCHitCooldown = 5;
-
-                        projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
-                    }
-                    break;
-
                 case ProjectileID.Sharknado:
                 case ProjectileID.Cthulunado:
                     EModeCanHurt = false;
@@ -360,6 +344,22 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = 30;
+                    }
+                    break;
+
+                case ProjectileID.FinalFractal: //zenith
+                    if (PerformSafetyChecks(projectile, ItemID.Zenith, out _, "ZenithHitRate") && !WorldSavingSystem.DownedMutant)
+                    {
+                        projectile.usesLocalNPCImmunity = false;
+                        projectile.localNPCHitCooldown = 0;
+
+                        projectile.usesIDStaticNPCImmunity = true;
+                        if (WorldSavingSystem.DownedAbom)
+                            projectile.idStaticNPCHitCooldown = 3;
+                        else
+                            projectile.idStaticNPCHitCooldown = 5;
+
+                        projectile.FargoSouls().noInteractionWithNPCImmunityFrames = true;
                     }
                     break;
 
@@ -780,7 +780,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
                 case ProjectileID.SolarWhipSwordExplosion:
                     if (PerformSafetyChecks(projectile, ItemID.SolarEruption, out _, "MeleeDamageBugFix"))
-                        projectile.DamageType = DamageClass.Melee; // removing check here so buff can be disabled in dlc while keeping fix, unsure how else to work with current hasemodechange implementation
+                        projectile.DamageType = DamageClass.Melee;
                     break;
                 case ProjectileID.DaybreakExplosion:
                     if (PerformSafetyChecks(projectile, ItemID.DayBreak, out _, "MeleeDamageBugFix"))

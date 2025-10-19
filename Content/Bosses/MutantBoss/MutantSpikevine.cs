@@ -197,7 +197,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.Plantera
         }
         public override bool PreDraw(ref Color lightColor)
         {
-            bool recolor = SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
+            bool recolor = true; // SoulConfig.Instance.BossRecolors && WorldSavingSystem.EternityMode;
 
             Vector2 position = Projectile.Center;
             int index = 0;

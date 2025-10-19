@@ -24,9 +24,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Crimson
             {
                 npc.frameCounter++;
                 npc.velocity *= 0.9f;
-                RotateTowards(npc, Main.player[npc.target].Center, 3);
+                realrotation = FargoSoulsUtil.NPCRotateTowards(npc, Main.player[npc.target].Center, 3, realrotation);
+                npc.rotation = realrotation - MathHelper.PiOver2;
             }
             else realrotation = npc.rotation + MathHelper.PiOver2;
+
             if (SpitTimer <= -60 && SpitTimer % -30 == 0)
             {
                 if (FargoSoulsUtil.HostCheck)
@@ -68,17 +70,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Crimson
                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Top, new Vector2(Main.rand.NextFloat(-2, 2), Main.rand.NextFloat(-5, -7)), ProjectileID.GoldenShowerHostile, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0, Main.myPlayer);
             }
             //FargoSoulsUtil.XWay(5, npc.GetSource_FromThis(), npc.Center, ProjectileID.GoldenShowerHostile, 4, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 2);
-        }
-        private void RotateTowards(NPC npc, Vector2 target, float speed)
-        {
-            Vector2 LV = realrotation.ToRotationVector2();
-            Vector2 PV = npc.SafeDirectionTo(target);
-            float anglediff = FargoSoulsUtil.RotationDifference(LV, PV);
-            if (!(anglediff > 0 || anglediff < 0))
-                return;
-            //change rotation towards target
-            realrotation = realrotation.ToRotationVector2().RotatedBy(Math.Sign(anglediff) * Math.Min(Math.Abs(anglediff), speed * MathHelper.Pi / 180)).ToRotation();
-            npc.rotation = realrotation - MathHelper.PiOver2;
         }
     }
 }

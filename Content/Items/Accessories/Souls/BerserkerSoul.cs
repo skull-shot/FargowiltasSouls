@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Core.AccessoryEffectSystem;
+﻿using FargowiltasSouls.Content.Items.Materials;
+using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -50,21 +51,21 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.WarriorEmblem)
+            //.AddIngredient(ItemID.WarriorEmblem)
             .AddIngredient(ItemID.FireGauntlet)
             .AddIngredient(ItemID.YoyoBag)
             //prehm weps
-            .AddIngredient(ItemID.Trimarang)
             .AddRecipeGroup("FargowiltasSouls:BallOHurtOrTheRottedFork")
-            .AddRecipeGroup("FargowiltasSouls:AnyPhaseblade")
+            .AddIngredient(ItemID.Trimarang)
+            //.AddRecipeGroup("FargowiltasSouls:AnyPhaseblade")
             .AddIngredient(ItemID.HiveFive)
             .AddIngredient(ItemID.DarkLance)
             //hm weps
-            .AddIngredient(ItemID.DripplerFlail)
+            //.AddIngredient(ItemID.DripplerFlail)
             .AddIngredient(ItemID.LightDisc)
-            .AddRecipeGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives")
-            .AddIngredient(ItemID.Keybrand)
+            //.AddIngredient(ItemID.Keybrand)
             .AddIngredient(ItemID.TheEyeOfCthulhu)
+            .AddRecipeGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives")
             .AddIngredient(ItemID.Flairon)
 
             //old recipe
@@ -78,6 +79,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             //.AddIngredient(ItemID.NorthPole)
             //.AddIngredient(ItemID.Zenith)
 
+            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .Register();
+
+            //alt recipe with abom energy instead of weapons
+            CreateRecipe()
+            .AddIngredient(ItemID.FireGauntlet)
+            .AddIngredient(ItemID.YoyoBag)
+            .AddRecipeGroup("FargowiltasSouls:ScourgeoftheCorruptorOrVampireKnives")
+            .AddIngredient(ItemID.TheEyeOfCthulhu)
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 10)
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();
         }

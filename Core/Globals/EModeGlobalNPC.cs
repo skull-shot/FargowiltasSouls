@@ -156,7 +156,7 @@ namespace FargowiltasSouls.Core.Globals
 
                 if (npc.wet && !npc.honeyWet && !npc.lavaWet && !npc.shimmerWet && !npc.noTileCollide && !isWaterEnemy && npc.HasPlayerTarget)
                 {
-                    npc.AddBuff(ModContent.BuffType<LethargicBuff>(), 2, true);
+                    /*npc.AddBuff(ModContent.BuffType<LethargicBuff>(), 2, true);
                     if (Main.player[npc.target].ZoneCorrupt)
                         npc.AddBuff(BuffID.CursedInferno, 2, true);
                     if (Main.player[npc.target].ZoneCrimson)
@@ -164,7 +164,7 @@ namespace FargowiltasSouls.Core.Globals
                     if (Main.player[npc.target].ZoneHallow)
                         npc.AddBuff(ModContent.BuffType<SmiteBuff>(), 2, true);
                     if (Main.player[npc.target].ZoneJungle)
-                        npc.AddBuff(BuffID.Poisoned, 2, true);
+                        npc.AddBuff(BuffID.Poisoned, 2, true);*/
                 }
 
 
@@ -306,6 +306,11 @@ namespace FargowiltasSouls.Core.Globals
                                 pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = NPC.downedBoss1 ? .08f : .04f;
                             }
 
+                            if (Main.moonPhase == 0) //full moon
+                            {
+                                pool[NPCID.Raven] = .7f;
+                            }
+
                             if (jungle)
                                 pool[NPCID.DoctorBones] = .05f;
                         }
@@ -419,22 +424,24 @@ namespace FargowiltasSouls.Core.Globals
                                 
                             if (normalSpawn)
                             {
-                                if (NPC.downedBoss1)
+                                if (noBiome)
                                 {
-                                    if (noBiome)
-                                    {
-                                        pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
-                                    }
+                                    pool[worldEvil ? NPCID.CrimsonBunny : NPCID.CorruptBunny] = .1f;
+                                }
 
-                                    if (snow)
-                                    {
-                                        pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
-                                    }
+                                if (snow)
+                                {
+                                    pool[worldEvil ? NPCID.CrimsonPenguin : NPCID.CorruptPenguin] = .1f;
+                                }
 
-                                    if (ocean || Main.raining)
-                                    {
-                                        pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
-                                    }
+                                if (ocean || Main.raining)
+                                {
+                                    pool[worldEvil ? NPCID.CrimsonGoldfish : NPCID.CorruptGoldfish] = .1f;
+                                }
+
+                                if (Main.moonPhase == 0) //full moon
+                                {
+                                    pool[NPCID.Raven] = .3f;
                                 }
 
                                 if (NPC.downedMechBossAny)

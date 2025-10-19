@@ -235,7 +235,7 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.2f;
                     return EModeChange.Buff;
 
-                case ItemID.PumpkinMoonMedallion:
+                /*case ItemID.PumpkinMoonMedallion:
                     balanceNumber = PumpkinMoonBosses.WAVELOCK;
                     if (WorldSavingSystem.MasochistModeReal)
                     {
@@ -258,7 +258,7 @@ namespace FargowiltasSouls.Content.Items
                     {
                         balanceTextKeys = ["MoonsDrops"];
                         return EModeChange.ReworkNerf;
-                    }
+                    }*/
                 case ItemID.DD2ElderCrystal:
                     balanceTextKeys = ["OOAWaves"];
                     return EModeChange.ReworkNerf;
@@ -605,6 +605,12 @@ namespace FargowiltasSouls.Content.Items
                     {
                         balanceTextKeys = ["ChlorophyteBullet"];
                         return EModeChange.Nerf;
+                    }
+                    else if (ContentSamples.ItemsByType[itemType].ModItem == null && (ItemID.Sets.IsDrill[itemType] || ItemID.Sets.IsChainsaw[itemType] || itemType == ItemID.ChlorophyteJackhammer))
+                    {
+                        balanceTextKeys = ["Speed"];
+                        balanceNumber = 1.25f;
+                        return EModeChange.Buff;
                     }
                     else if (ContentSamples.ItemsByType[itemType] is Item item2 && item2.buffType == BuffID.Tipsy)
                     {

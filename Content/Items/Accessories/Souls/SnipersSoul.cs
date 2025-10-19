@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Materials;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -36,25 +37,23 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            /*
-hive pack*/
-            .AddIngredient(ItemID.RangerEmblem)
+            //.AddIngredient(ItemID.RangerEmblem)
             .AddRecipeGroup("FargowiltasSouls:AnyQuiver")
             .AddRecipeGroup("FargowiltasSouls:AnySniperScope")
             .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
             //prehm
-            .AddIngredient(ItemID.FlintlockPistol)
-            .AddIngredient(ItemID.Blowgun)
-            .AddIngredient(ItemID.PewMaticHorn)
-            .AddIngredient(ItemID.HellwingBow)
+            .AddIngredient(ItemID.Blowpipe)
+            .AddIngredient(ItemID.Boomstick)
+            .AddIngredient(ItemID.BeesKnees)
+            //.AddIngredient(ItemID.HellwingBow)
             .AddIngredient(ItemID.PhoenixBlaster)
             //hm
             .AddIngredient(ItemID.DaedalusStormbow)
             .AddIngredient(ItemID.Megashark)
             .AddIngredient(ItemID.PiranhaGun)
-            .AddIngredient(ItemID.ElfMelter)
+            //.AddIngredient(ItemID.ElfMelter)
             .AddIngredient(ItemID.Tsunami)
-            .AddIngredient(ItemID.Xenopopper)
+            //.AddIngredient(ItemID.Xenopopper)
 
             //old recipe
             //.AddIngredient(ItemID.DartPistol)
@@ -72,6 +71,16 @@ hive pack*/
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();
 
+            //alt recipe with abom energy instead of weapons
+            CreateRecipe()
+            .AddRecipeGroup("FargowiltasSouls:AnyQuiver")
+            .AddRecipeGroup("FargowiltasSouls:AnySniperScope")
+            .AddRecipeGroup("FargowiltasSouls:AnySharktoothNecklace")
+            .AddIngredient(ItemID.PiranhaGun)
+            .AddIngredient(ItemID.Tsunami)
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 10)
+            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .Register();
         }
     }
 }

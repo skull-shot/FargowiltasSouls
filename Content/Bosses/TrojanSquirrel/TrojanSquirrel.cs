@@ -1159,6 +1159,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
                             if (!BeforeJump)
                                 LegFrame.Y += LegFrame.Height;
+                            else
+                                LegFrame.Y = 0;
 
                             if (LegFrame.Y >= LegFrame.Height * 6)
                             {
@@ -1306,15 +1308,20 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             
-
-            
             if (arms != null)
-            {   
-                Rectangle ArmRectangle = new Rectangle(arms.frame.X, arms.frame.Y, arms.frame.Width / 3, arms.frame.Height);
+            {
+                var trojanArms = arms.As<TrojanSquirrelArms>();
+                int animationType = trojanArms.AltArmAnimationType switch
+                {
+                    0 => 0,
+                    2 => 2,
+                    _ => trojanArms.ArmsAnimationType
+                };
+                Rectangle armsFrame = trojanArms.GetFrame(animationType, arms.frame.Height);
+                Rectangle ArmRectangle = new(armsFrame.X, armsFrame.Y, armsFrame.Width / 3, armsFrame.Height);
                 Vector2 ArmOrigin = ArmRectangle.Size() / 2f;
                 Main.EntitySpriteDraw(ArmTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 0 : 73f, NPC.gfxOffY + 26 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(ArmRectangle), color26, NPC.rotation, origin2, NPC.scale * 0.9f, effects, 0);
             }
-                
 
             Main.EntitySpriteDraw(LegTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? -32 : 46f, NPC.gfxOffY + 33 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(LegFrameType == 1 ? LegRectangleAlt : LegRectangle), color26, NPC.rotation, LegAltOrigin, NPC.scale, effects, 0);
 

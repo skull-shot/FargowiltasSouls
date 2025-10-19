@@ -106,10 +106,8 @@ CactusEnchant: {
 		'''
 		While attacking you release a spray of needles in every direction
 		Enemies hit by needles will spray more needles on death
-		Passive cactuses become harmless (works from inventory or vanity slots)
 		'It's the quenchiest!'
 		''' */
-	// VanityTooltip: Passive cactuses become harmless
 }
 
 ChlorophyteEnchant: {
@@ -826,10 +824,8 @@ LifeForce: {
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
 		[i:FargowiltasSouls/TurtleEnchant] Hover in place with the wings to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
 		''' */
-	// VanityTooltip: Passive cactuses become harmless
 }
 
 NatureForce: {
@@ -1839,9 +1835,9 @@ TrawlerSoul: {
 		'''
 		[i:FargowiltasSouls/AnglerEnchant] Greatly increases fishing proficiency and your rods have 10 extra lures
 		[i:3110] Turns the holder into a werewolf at night and into a merfolk when entering water
-		[i:1861] Increases your ice and water mobility and underwater breathing
+		[i:3995][i:1861] Improves jumping, swimming, sliding, and climbing mobility
 		[i:3035] Increases luck and coin pickup range, shop prices lowered by 20%
-		[i:4987][i:3336][i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
+		[i:3336][i:4987][i:BoneHelm] You release damaging fog at nearby enemies and [i:3090] slimes become friendly
 		'Fish fear me'
 		''' */
 }
@@ -3778,5 +3774,42 @@ SoulLantern: {
 		'''
 		Increases spawn rate for the enemy type in the lantern by 3x
 		Current enemy: {0}
+		''' */
+}
+
+InteractReset: {
+	// DisplayName: Interact Reset
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Resets all quest interations
+		''' */
+}
+
+SubmitReset: {
+	// DisplayName: Submit Reset
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Resets all claimed quests
+		''' */
+}
+
+BlockWorldSave: {
+	// DisplayName: Block World Save
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Toggle quests ability to save
+		Set to false and then rebuild to reset all quest progress
+		''' */
+}
+
+DeviQuestToggle: {
+	// DisplayName: Devi Quest Toggle
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Toggles the Deviantt Quest Board UI
 		''' */
 }

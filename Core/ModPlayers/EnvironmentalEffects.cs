@@ -114,10 +114,10 @@ namespace FargowiltasSouls.Core.ModPlayers
                 HallowedIlluminated(); //pheart prevents dr reduction
             }
 
-            if (Player.ZoneUnderworldHeight && !fargoSoulsPlayer.PureHeart)
+            /*if (Player.ZoneUnderworldHeight && !fargoSoulsPlayer.PureHeart)
             {
                 UnderworldFire();
-            }
+            }*/
 
             if (Player.Center.ToTileCoordinates().Y <= (Main.worldSurface * 0.25) && !fargoSoulsPlayer.PureHeart)
             {
@@ -131,7 +131,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (Main.bloodMoon && !fargoSoulsPlayer.PureHeart)
             {
-                Player.AddBuff(BuffID.WaterCandle, 2);
+                //Player.AddBuff(BuffID.WaterCandle, 2);
             }
                     
             //boss environs
@@ -205,9 +205,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 Vector2 playerPos = Player.Center;
                 bool icicleSpawned = false;
-
-                while (!icicleSpawned)
+                int attempts = 300;
+                while (!icicleSpawned && attempts > 0)
                 {
+                    attempts--;
                     int x = Main.rand.Next(4, spawningRange) * (Main.rand.NextBool() ? 1 : -1);
                     int y = Main.rand.Next(4, spawningRange) * (Main.rand.NextBool() ? 1 : -1);
 
@@ -458,13 +459,13 @@ namespace FargowiltasSouls.Core.ModPlayers
             }
         }
 
-        private void UnderworldFire()
+        /*private void UnderworldFire()
         {
             bool anyAshwoodEffect = Player.HasEffect<AshWoodEffect>() || Player.HasEffect<ObsidianEffect>();
 
             if (anyAshwoodEffect || !(Player.fireWalk || Player.lavaMax > 0))
                 FargoSoulsUtil.AddDebuffFixedDuration(Player, BuffID.OnFire, 2);
-        }
+        }*/
 
         private void RainLightning(Tile currentTile)
         {

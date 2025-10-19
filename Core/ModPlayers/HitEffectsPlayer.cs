@@ -225,7 +225,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 spawnPos = Player.Center + offset.RotatedBy(Math.PI / 7 * i);
                         Vector2 speed = Vector2.Normalize(Main.MouseWorld - spawnPos);
 
-                        int baseHeartDamage = AbomWandItem == null ? 17 : 170;
+                        int baseHeartDamage = AbomWandItem == null ? 15 : 170;
                         //heartDamage = (int)(heartDamage * Player.ActualClassDamage(DamageClass.Summon));
 
                         float ai1 = (Main.MouseWorld - spawnPos).Length() / 17;
@@ -552,7 +552,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            Player player = Main.player[Main.myPlayer];
+            Player player = Main.LocalPlayer;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             WasHurtBySomething = true;
 

@@ -43,7 +43,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             NPCID.ZombieElfGirl,
             NPCID.SmallSlimedZombie,
             NPCID.BigSlimedZombie,
-            NPCID.ZombieMerman
+            NPCID.ZombieMerman,
+            NPCID.TheGroom,
+            NPCID.TheBride
         );
         public static List<int> RegularZombies = //no halloween/christmas or biome variants 
         [
@@ -71,7 +73,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
-            if (Main.rand.NextBool(8) && npc.FargoSouls().CanHordeSplit)
+            if (Main.rand.NextBool(8) && npc.FargoSouls().CanHordeSplit && npc.type != NPCID.ZombieMerman && npc.type != NPCID.TheGroom && npc.type != NPCID.TheBride)
                 EModeGlobalNPC.Horde(npc, 6);
 
             if (RegularZombies.Contains(npc.type) && Main.raining && Main.LocalPlayer.ZoneOverworldHeight)
