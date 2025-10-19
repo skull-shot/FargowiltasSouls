@@ -233,7 +233,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
     [AutoloadBossHead]
     public class TrojanSquirrel : TrojanSquirrelPart
     {   
-        //TODO: Change back to 4F when animation has been sorted out.
+        public Vector2 bodyOffset { get; private set; }
         public static float BaseWalkSpeed => 4f;
         string TownNPCName;
         bool hasplayedbreaksound;
@@ -989,7 +989,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
         private void SmokeVisuals()
         {
-            return;
             int headsmokedir = 0;
             int armsmokedir = 0;
 
@@ -1001,8 +1000,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             if (NPC.direction == -1)
             {
-                headsmokedir = 5;
-                armsmokedir = 25;
+                headsmokedir = 35;
+                armsmokedir = 40;
             }
             Vector2 headsmokepos = NPC.Center + new Vector2(headsmokedir, -35);
 
@@ -1157,12 +1156,15 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         {
                             LegFramecounter = 0;
 
-                            if (!BeforeJump)
-                                LegFrame.Y += LegFrame.Height;
-                            else
-                                LegFrame.Y = 0;
+                            
+                            LegFrame.Y += LegFrame.Height;
+                            if (LegFrame.Y >= LegFrame.Height * 5)
+                            {
+                                LegFrame.Y = LegFrame.Height * 5;
+                            }
 
-                            if (LegFrame.Y >= LegFrame.Height * 6)
+
+                            if (LegFrame.Y >= LegFrame.Height * 5)
                             {
                                 if (PreparingJump)
                                 {
@@ -1199,9 +1201,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                 {
                                     //LegFrame.X -= 96;
                                     LegFrame.Y = 0;
-                                    LegFrameType = 1;
+                                    LegFrameType = 1;                             
                                 }
-                            }
+                            } 
                         }
                         else if (LegFrame.X == 96) //Running
                         {
@@ -1232,8 +1234,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
 
 
-                    }
+                    } 
                     break;
+
                 
                 //Jumping
                 case 4:
@@ -1244,8 +1247,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             LegFrame.Y += LegFrame.Height;
                             if (LegFrame.Y >= LegFrame.Height * 2)
                             {
-                                LegFrame.Y = LegFrame.Height * 2;
-                                LegFramecounter--;
+                                LegFrame.Y = LegFrame.Height * 2;                              
                             }
 
                             if (!Jumping)
@@ -1254,22 +1256,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                                 LegFrameType = 1;
                             }
                                 
-                        }
-                    }
-                    break;
-
-                case 5:
-                    {
-                        LegFrame.X = 0;
-                        if (++LegFramecounter >= 6)
-                        {
-                            LegFramecounter = 0;
-                            LegFrame.Y -= LegFrame.Height;
-                            if (LegFrame.Y <= 0)
-                            {
-                                LegFrameType = 1;
-                            }
-
                         }
                     }
                     break;
@@ -1307,7 +1293,25 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             color26 = NPC.GetAlpha(color26);
 
             SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-            
+
+            if (LegFrame.X == 0)
+            {
+                bodyOffset = Vector2.Lerp(new(0, 0), new(0, 2), LegFrame.Y / LegFrame.Height);
+            }
+            else if (LegFrame.X == 96)
+            {
+                bodyOffset = Vector2.Lerp(new(0, 0), new(0, -6), LegFrame.Y / LegFrame.Height);
+            }
+            else if (LegFrame.X == 96 * 2)
+            {
+                bodyOffset = new(0, -6);
+                bodyOffset += Vector2.Lerp(new(0, 0), new(0, -1), LegFrame.Y / LegFrame.Height);
+            }
+            else
+            {
+                bodyOffset = new(0, 0);
+            }
+
             if (arms != null)
             {
                 var trojanArms = arms.As<TrojanSquirrelArms>();
@@ -1320,12 +1324,14 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 Rectangle armsFrame = trojanArms.GetFrame(animationType, arms.frame.Height);
                 Rectangle ArmRectangle = new(armsFrame.X, armsFrame.Y, armsFrame.Width / 3, armsFrame.Height);
                 Vector2 ArmOrigin = ArmRectangle.Size() / 2f;
-                Main.EntitySpriteDraw(ArmTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 0 : 73f, NPC.gfxOffY + 26 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(ArmRectangle), color26, NPC.rotation, origin2, NPC.scale * 0.9f, effects, 0);
+                Main.EntitySpriteDraw(ArmTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 0 : 73f, NPC.gfxOffY + 26 * NPC.scale) + bodyOffset, new Microsoft.Xna.Framework.Rectangle?(ArmRectangle), color26, NPC.rotation, origin2, NPC.scale * 0.9f, effects, 0);
             }
+
+            
 
             Main.EntitySpriteDraw(LegTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? -32 : 46f, NPC.gfxOffY + 33 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(LegFrameType == 1 ? LegRectangleAlt : LegRectangle), color26, NPC.rotation, LegAltOrigin, NPC.scale, effects, 0);
 
-            Main.EntitySpriteDraw(BodyTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 40 : -25f, NPC.gfxOffY - 43 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+            Main.EntitySpriteDraw(BodyTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 40 : -25f, NPC.gfxOffY - 43 * NPC.scale) + bodyOffset, new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
 
             Main.EntitySpriteDraw(LegTexture, NPC.Center - screenPos + new Vector2(NPC.direction < 0 ? 40 : -24f, NPC.gfxOffY + 33 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(LegRectangle), color26, NPC.rotation, LegOrigin, NPC.scale, effects, 0);
 

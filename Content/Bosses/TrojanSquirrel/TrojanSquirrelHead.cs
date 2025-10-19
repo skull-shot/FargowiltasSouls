@@ -409,8 +409,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
+            var trojan = body.As<TrojanSquirrel>();
             if (body != null)
-                Main.EntitySpriteDraw(texture2D13, body.Top - screenPos + new Vector2(10f, NPC.gfxOffY - 30 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+                Main.EntitySpriteDraw(texture2D13, body.Top - screenPos + new Vector2(10f, NPC.gfxOffY - 30 * NPC.scale) + trojan.bodyOffset, new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
 
             return false;
         }
