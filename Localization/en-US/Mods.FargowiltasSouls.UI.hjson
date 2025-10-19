@@ -1,5 +1,6 @@
 SoulToggler: "[i:FargowiltasSouls/EffectTogglerItem] Effect Toggles"
 ActiveSkillMenu: "[i:FargowiltasSouls/ActiveSkillMenuItem] Active Skills"
+DeviQuestBoardMenu: "[i:FargowiltasSouls/DeviQuestBoardItem] Eternity Quests"
 Standard: Standard Mode
 Eternity: Eternity Mode
 Masochist: Masochist Mode
