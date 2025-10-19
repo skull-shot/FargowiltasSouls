@@ -15,11 +15,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 {
     public class TrojanHook : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_13";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Squirrel Hook");
             ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 8000;
         }
 
