@@ -1,8 +1,8 @@
 DisableAllAttackEffects: Отключить все эффекты с доп. атаками
 DisableAllMinionEffects: Отключить все эффекты с прислужниками
 DisableAllExtraJumpEffects: Крылья отключают прыжки
-// DisabledByToggle: Disabled by '{0}' toggle
-// DisabledByPresence: Disabled by Mutant's Presence
+DisabledByToggle: Выключено переключателем «{0}»
+DisabledByPresence: Выключено «Присутствием Мутанта»
 TimberHeader: "{$Mods.FargowiltasSouls.Items.TimberForce.DisplayName}"
 WoodCompletionEffect: Заполнение бестиария
 BorealEffect: Снежки
