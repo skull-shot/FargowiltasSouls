@@ -1,6 +1,8 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Data;
 using Terraria;
 using Terraria.Audio;
@@ -35,14 +37,15 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
             Projectile.light = 0.5f;
-            Projectile.scale = 0.8f;
+            Projectile.scale = 0.5f;
         }
 
         public override void AI()
         {
             Projectile.ai[1]++;
-            if (Projectile.ai[0] == 0)
+            if (Projectile.ai[0] == 0) // initial
             {
+                Projectile.ai[2] = -1;
                 Projectile.velocity *= 0.97f;
                 if (Projectile.ai[1] > 15)
                 {
@@ -56,6 +59,39 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 SoundEngine.PlaySound(SoundID.Item9 with { Pitch = -0.7f }, Projectile.Center);
                 FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.GoldFlame, 2f, scale: 1.5f);
                 Projectile.ai[0] = 2;
+                Projectile.ai[1] = 0;
+            }
+            else if (Projectile.ai[0] == 2)
+            {
+
+                if (Projectile.ai[2] == -1)
+                {
+                    Projectile.ai[2] = FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1000);
+                }
+                else // has target
+                {
+                    NPC target = Main.npc[(int)Projectile.ai[2]];
+
+                    if (!target.active)
+                    {
+                        Projectile.ai[2] = -1;
+                        return;
+                    }
+
+                    Projectile.direction = (int)Projectile.HorizontalDirectionTo(target.Center);
+                    Projectile.spriteDirection = Projectile.direction;
+                    float rot = (target.Center - Projectile.Center).ToRotation();
+
+
+                    float rotDiff = (rot - Projectile.velocity.ToRotation()) % MathHelper.TwoPi;
+                    float dist = (target.Center - Projectile.Center).Length();
+                    if (Math.Abs(rotDiff) < 1.2f)
+                        Projectile.velocity = Projectile.velocity.RotatedBy((rotDiff / dist) * 100);
+                }
+            }
+            else
+            {
+                Projectile.velocity *= 1.02f;
             }
             Projectile.rotation = MathHelper.Pi + Projectile.velocity.ToRotation();
         }
@@ -70,6 +106,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            if (Projectile.ai[0] == 2)
+            {
+                Projectile.ai[0]++;
+                Projectile.timeLeft = 300;
+            }
+
             FargoSoulsUtil.DustRing(target.Center, 20, DustID.GoldFlame, 3, scale: 1.5f);
             SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
             base.OnHitNPC(target, hit, damageDone);
@@ -82,7 +124,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override bool PreDraw(ref Color lightColor)
         {
-            if (Projectile.ai[0] == 2)
+            if (Projectile.ai[0] >= 2)
             {
                 MiscShaderData miscShaderData = GameShaders.Misc["MagicMissile"];
                 miscShaderData.UseSaturation(-2.8f);
@@ -96,17 +138,17 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
 
-                Rectangle rectangle = new(0, 0, texture2D13.Width, texture2D13.Height);
+                Rectangle rectangle = texture2D13.Frame();
                 Vector2 origin2 = rectangle.Size() / 2f;
                 SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
                 Color origColor = Color.Gold;
 
                 for (int k = 5; k >= 0; k--)
                 {
-                    Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + origin2;
+                    Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition;
                     Color color = Projectile.GetAlpha(origColor) * ((5 - k) / ((float)5 * 2));
                     Main.EntitySpriteDraw(texture2D13, drawPos, rectangle, 
-                        color, 0, origin2 / 0.8f, Projectile.scale, spriteEffects, 0);
+                        color, 0, Vector2.Zero, Projectile.scale, spriteEffects, 0);
                 }
 
                 int count = 6;
