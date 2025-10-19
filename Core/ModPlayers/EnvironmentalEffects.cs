@@ -205,9 +205,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
                 Vector2 playerPos = Player.Center;
                 bool icicleSpawned = false;
-
-                while (!icicleSpawned)
+                int attempts = 300;
+                while (!icicleSpawned && attempts > 0)
                 {
+                    attempts--;
                     int x = Main.rand.Next(4, spawningRange) * (Main.rand.NextBool() ? 1 : -1);
                     int y = Main.rand.Next(4, spawningRange) * (Main.rand.NextBool() ? 1 : -1);
 
