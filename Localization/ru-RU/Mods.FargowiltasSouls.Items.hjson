@@ -3797,3 +3797,40 @@ SoulLantern: {
 		Сейчас действует на врага: {0}
 		'''
 }
+
+InteractReset: {
+	// DisplayName: Interact Reset
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Resets all quest interations
+		''' */
+}
+
+SubmitReset: {
+	// DisplayName: Submit Reset
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Resets all claimed quests
+		''' */
+}
+
+BlockWorldSave: {
+	// DisplayName: Block World Save
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Toggle quests ability to save
+		Set to false and then rebuild to reset all quest progress
+		''' */
+}
+
+DeviQuestToggle: {
+	// DisplayName: Devi Quest Toggle
+	/* Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Toggles the Deviantt Quest Board UI
+		''' */
+}

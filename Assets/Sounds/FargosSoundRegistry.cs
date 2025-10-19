@@ -15,6 +15,7 @@ namespace FargowiltasSouls.Assets.Sounds
         public const string WeaponsPath = SoundsPath + "Weapons/";
         public const string AccessoriesPath = SoundsPath + "Accessories/";
 
+        public static readonly SoundStyle Victory = new(SoundsPath + "Victory");
         public static readonly SoundStyle ThrowShort = new(SoundsPath + "ThrowShort");
         public static readonly SoundStyle ReticleBeep = new(SoundsPath + "ReticleBeep");
         public static readonly SoundStyle ReticleLockOn = new(SoundsPath + "ReticleLockOn");
