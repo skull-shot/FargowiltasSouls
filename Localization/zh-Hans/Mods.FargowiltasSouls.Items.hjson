@@ -1084,7 +1084,7 @@ LithosphericCluster: {
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
 		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
-		'The amalgamate born of a thousand common enemies'
+		'It pulses with vitality'
 		''' */
 	/* VanityTooltip:
 		'''
@@ -1111,7 +1111,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
 		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
-		'The amalgamate born of a thousand common enemies'
+		'It pulses with vitality'
 		''' */
 	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
