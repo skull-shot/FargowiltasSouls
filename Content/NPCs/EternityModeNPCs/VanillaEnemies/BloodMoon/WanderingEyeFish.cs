@@ -58,7 +58,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
                         else if (Pos3 == Vector2.Zero && pos.Distance(Pos2) > 16 * 5 && pos.Distance(Pos1) > 16 * 5)
                             Pos3 = pos;
                         else break;
-                        if (i > 200) Main.NewText($"Yes it died.");
                     }
                 }
             }
