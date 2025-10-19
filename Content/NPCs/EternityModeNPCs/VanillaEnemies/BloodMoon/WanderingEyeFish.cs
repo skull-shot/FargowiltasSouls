@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.EyeOfCthulhu;
 using FargowiltasSouls.Core.Globals;
@@ -11,6 +12,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoon
 {
@@ -23,6 +25,19 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         public Vector2 Pos1;
         public Vector2 Pos2;
         public Vector2 Pos3;
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            base.SendExtraAI(npc, bitWriter, binaryWriter);
+            binaryWriter.Write7BitEncodedInt(TeleDashTimer);
+            binaryWriter.Write7BitEncodedInt(DashCount);
+        }
+
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            base.ReceiveExtraAI(npc, bitReader, binaryReader);
+            TeleDashTimer = binaryReader.Read7BitEncodedInt();
+            DashCount = binaryReader.Read7BitEncodedInt();
+        }
         public override bool SafePreAI(NPC npc)
         {
             if (npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
