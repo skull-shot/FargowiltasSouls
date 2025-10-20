@@ -1,13 +1,11 @@
 ﻿using Fargowiltas.Content.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ID;
 using Terraria.Localization;
-using Terraria.UI;
 
 namespace FargowiltasSouls.Content.Quests.UI
 {
@@ -15,13 +13,9 @@ namespace FargowiltasSouls.Content.Quests.UI
     {
         public static string GetLocalizedUIText(string key) => Language.GetTextValue($"Mods.FargowiltasSouls.UI.DeviQuestBoard.{key}");
 
-        public override bool MenuToggleSound => true;
-        public override int InterfaceIndex(List<GameInterfaceLayer> layers, int vanillaInventoryIndex) => vanillaInventoryIndex + 1;
-
         public UIPanel BackPanel;
         public UIPanel QuestListBackPanel;
         public UIList QuestList;
-        public UICloseButton CloseButton;
         internal DeviQuestInfoPanel QuestInfoPanel;
 
         public int OpenTime = 0;
@@ -46,18 +40,20 @@ namespace FargowiltasSouls.Content.Quests.UI
 
         internal DeviQuest? GetSelectedQuest() => selectedQuest;
 
-        public override void OnLoad()
+        internal void OnQuestClaimed()
         {
-            CombinedUI.AddUI<DeviQuestBoard>(Language.GetText("Mods.FargowiltasSouls.UI.DeviQuestBoardMenu"), 5);
+
         }
 
         public override void UpdateUI()
         {
-            if (Main.gameMenu)
-                FargoUIManager.Close<DeviQuestBoard>();
+            if (Main.gameMenu || Main.playerInventory)
+                FargoUIManager.Close(this);
         }
         public override void OnOpen()
         {
+            SoundEngine.PlaySound(SoundID.MenuOpen);
+            
             BackPanel?.RemoveAllChildren();
 
             UpdateElements();
@@ -67,6 +63,7 @@ namespace FargowiltasSouls.Content.Quests.UI
         }
         public override void OnClose()
         {
+            SoundEngine.PlaySound(SoundID.MenuClose);
             selectedQuest = null;
         }
 
@@ -74,16 +71,6 @@ namespace FargowiltasSouls.Content.Quests.UI
         {
             BackPanel.RemoveAllChildren();
 
-            var title = new UIText(GetLocalizedUIText("Title"));
-            title.Top.Set(6f, 0);
-            title.HAlign = 0.5f;
-
-            BackPanel.Append(title);
-
-            CloseButton = new UICloseButton();
-            CloseButton.Left.Set(-18, 1f);
-            CloseButton.Top.Set(-2, 0);
-            CloseButton.OnLeftClick += CloseButton_OnLeftClick;
 
             // back panel for list
             QuestListBackPanel = new UIPanel();
@@ -126,8 +113,6 @@ namespace FargowiltasSouls.Content.Quests.UI
             QuestInfoPanel.Activate();
 
             BackPanel.Append(QuestInfoPanel);
-
-            BackPanel.Append(CloseButton);
         }
 
         public void CreateList()
@@ -175,11 +160,11 @@ namespace FargowiltasSouls.Content.Quests.UI
         public override void OnInitialize()
         {
 
-            Vector2 offset = CombinedUI.CenterRight;
+            Vector2 offset = new(-BackWidth / 2, -BackHeight / 2);
 
             BackPanel = new UIPanel();
-            BackPanel.Left.Set(offset.X, 0f);
-            BackPanel.Top.Set(offset.Y - (BackHeight / 2), 0f);
+            BackPanel.Left.Set(offset.X, 0.5f);
+            BackPanel.Top.Set(offset.Y, 0.5f);
             BackPanel.Width.Set(BackWidth, 0);
             BackPanel.Height.Set(BackHeight, 0);
             BackPanel.PaddingLeft = BackPanel.PaddingRight = BackPanel.PaddingTop = BackPanel.PaddingBottom = 0;
@@ -199,16 +184,16 @@ namespace FargowiltasSouls.Content.Quests.UI
                 OpenTime = 0;
             if (!BackPanel.IsMouseHovering)
             {
-                //if (Main.mouseLeft && OpenTime >= 30)
-                //    FargoUIManager.Close(this);
+                if (Main.mouseLeft && OpenTime >= 30)
+                    FargoUIManager.Close(this);
             }
             else
                 Main.LocalPlayer.mouseInterface = true;
         }
 
-        private void CloseButton_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
+        protected override void DrawChildren(SpriteBatch spriteBatch)
         {
-            FargoUIManager.Close<DeviQuestBoard>();
+            base.DrawChildren(spriteBatch);
         }
     }
 }

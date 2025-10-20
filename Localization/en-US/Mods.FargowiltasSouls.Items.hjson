@@ -3782,7 +3782,11 @@ BlockWorldSave: {
 		'''
 }
 
-DeviQuestBoardItem: {
-	DisplayName: Eternity Quests
-	Tooltip: Use to open the Eternity Quests menu
+DeviQuestToggle: {
+	DisplayName: Devi Quest Toggle
+	Tooltip:
+		'''
+		[c/ff0000:Debug item]
+		Toggles the Deviantt Quest Board UI
+		'''
 }
