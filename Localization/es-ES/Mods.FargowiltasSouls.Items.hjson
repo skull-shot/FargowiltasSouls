@@ -3268,6 +3268,7 @@ TheBaronsTusk: {
 		Swings emit flying shrapnel that can embed in enemies
 		Hitting enemies that have more than 15 embedded shrapnel with the tusk rips it out
 		The rip deals a large chunk of damage and is guaranteed to critically strike
+		Cannot crit normally, but special crit damage scales with your crit chance
 		Shrapnel is also ripped out when the enemy dies
 		''' */
 }
@@ -3279,6 +3280,7 @@ NavalRustrifle: {
 		Manually reload after each shot
 		Time the reload correctly to empower your next shot
 		Empowered shots deal double damage and are guaranteed to critically strike
+		Cannot crit normally, but special crit damage scales with your crit chance
 		''' */
 }
 
@@ -3315,7 +3317,8 @@ RoseTintedVisor: {
 	/* Tooltip:
 		'''
 		Fires up to 6 lasers on release, depending on charge time
-		Has extra critical strike chance depending on lasers charged, up to 100%
+		Has critical strike chance depending on lasers charged, up to 100%
+		Cannot crit normally, but special crit damage scales with your crit chance
 		''' */
 }
 

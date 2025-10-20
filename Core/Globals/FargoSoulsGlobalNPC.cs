@@ -49,6 +49,7 @@ namespace FargowiltasSouls.Core.Globals
 {
     public class FargoSoulsGlobalNPC : GlobalNPC
     {
+        #region Variables
         public override bool InstancePerEntity => true;
 
 #pragma warning disable CA2211
@@ -128,6 +129,7 @@ namespace FargowiltasSouls.Core.Globals
 
         static HashSet<int> RareNPCs = [];
 
+        #endregion
         public override void Load()
         {
             //On_NPC.SetDefaults += PostSetDefaults;
@@ -1174,7 +1176,7 @@ namespace FargowiltasSouls.Core.Globals
         {
             static IItemDropRule BossDrop(int item)
             {
-                return new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10));
+                return new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10), ItemDropRule.Common(item, 1));
             }
 
             switch (npc.type)
@@ -1211,7 +1213,8 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.SkeletronHead:
-                    var drop = new DropBasedOnEMode(ItemDropRule.Common(ModContent.ItemType<BoneZone>(), 3), ItemDropRule.Common(ModContent.ItemType<BoneZone>(), 10));
+                    int item = ModContent.ItemType<BoneZone>();
+                    var drop = new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10), ItemDropRule.Common(item, 1));
                     drop.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BrittleBone>(), 1, 200, 200));
                     npcLoot.Add(drop);
                     break;
