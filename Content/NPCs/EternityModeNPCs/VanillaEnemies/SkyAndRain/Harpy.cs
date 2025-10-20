@@ -158,7 +158,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
         {
             base.OnHitPlayer(npc, target, hurtInfo);
 
-            target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
+            //target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
         }
     }
 }
