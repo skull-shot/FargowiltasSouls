@@ -166,9 +166,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 Vector2 lightningOrigin = lightningRect.Size() / 2f;
                 Main.EntitySpriteDraw(lightningTexture, position - Main.screenPosition, lightningRect, Color.White, rotation, lightningOrigin, 1f, SpriteEffects.None, 0);
             }
-            if (npc != null && TextureAssets.Chain.IsLoaded)
+            if (npc != null)
             {
-                Texture2D texture = TextureAssets.Chain.Value;
+                Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanChain", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value; ;
                 Vector2 position = Projectile.Center;
                 Vector2 mountedCenter = ChainOrigin;
                 Rectangle? sourceRectangle = new Rectangle?();

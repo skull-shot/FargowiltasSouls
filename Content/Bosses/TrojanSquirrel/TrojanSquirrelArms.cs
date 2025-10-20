@@ -168,10 +168,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         else
                         {
                             ArmsAnimationType = 2;
-                            if (NPC.ai[1] > end - 120 || Main.projectile.Any(p => p.TypeAlive<TrojanHook>() && p.ai[2] == -1))
+                            if (NPC.ai[1] > end - 15 || Main.projectile.Any(p => p.TypeAlive<TrojanHook>() && p.ai[2] == -1))
                                 ArmsAnimationType = 0;
                             AltArmAnimationType = 2;
-                            if (NPC.ai[1] > end - 120 || Main.projectile.Any(p => p.TypeAlive<TrojanHook>() && p.ai[2] == 1))
+                            if (NPC.ai[1] > end - 15 || Main.projectile.Any(p => p.TypeAlive<TrojanHook>() && p.ai[2] == 1))
                                 AltArmAnimationType = 0;
 
                             //ArmsAnimationAngle = aimAngle;
