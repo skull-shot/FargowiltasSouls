@@ -388,6 +388,19 @@ namespace FargowiltasSouls
             return Main.LocalPlayer.FargoSouls().AttackSpeed;
         }
     }
+    internal sealed class CachedAttackSpeedCall : ModCall
+    {
+        public override IEnumerable<string> GetCallCommands()
+        {
+            yield return "CachedAttackSpeed";
+            yield return "GetCachedAttackSpeed";
+        }
+        public override IEnumerable<Type> GetInputTypes() => null;
+        protected override object SafeProcess(params object[] argsWithoutCommand)
+        {
+            return Main.LocalPlayer.FargoSouls().CachedAttackSpeed;
+        }
+    }
     internal sealed class DeletionImmuneRankCall : ModCall
     {
         public override IEnumerable<string> GetCallCommands()
