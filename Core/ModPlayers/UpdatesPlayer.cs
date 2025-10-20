@@ -652,6 +652,9 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (NinjaDecrementCD > 0)
                 NinjaDecrementCD--;
 
+            if (ShadewoodCharge > 0 && !Player.HasEffect<ShadewoodEffect>())
+                ShadewoodCharge = 0;
+
             if (!Player.HasEffectEnchant<BeetleEffect>())
             {
                 Beetles = 0;

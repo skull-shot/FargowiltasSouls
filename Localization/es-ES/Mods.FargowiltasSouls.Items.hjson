@@ -499,8 +499,9 @@ ShadewoodEnchant: {
 	// DisplayName: Shadewood Enchantment
 	/* Tooltip:
 		'''
-		You have an aura of Bleeding
-		Enemies struck while Bleeding spew damaging blood
+		You are surrounded by an aura of blood
+		Having enemies in the aura siphons blood power from them
+		With full blood power, hitting enemies consumes it to cause a splatter of blood
 		'Surprisingly clean'
 		''' */
 }

@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MahoganyCanUseDR;
         public int MahoganyTimer;
         public float EbonwoodCharge;
-        public int ShadewoodCD;
+        public float ShadewoodCharge;
         public bool WoodEnchantDiscount;
         public int PearlwoodCritDuration;
         public int PearlwoodManaCD;
