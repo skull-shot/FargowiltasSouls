@@ -38,8 +38,6 @@ namespace FargowiltasSouls
     {
         private static readonly MethodInfo? CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
 
-        private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
-
         private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
 
         private static readonly MethodInfo? On_TileLoader_PickPowerCheck_Method = typeof(TileLoader).GetMethod("PickPowerCheck", LumUtils.UniversalBindingFlags);
@@ -151,7 +149,6 @@ namespace FargowiltasSouls
         void ICustomDetourProvider.ModifyMethods()
         {
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
-            HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
             HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
             HookHelper.ModifyMethodWithDetour(On_TileLoader_PickPowerCheck_Method, MakeCommonTilesEasierToBreak);
         }
@@ -523,19 +520,6 @@ namespace FargowiltasSouls
             orig(self);
             if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail).Contains("HolyDodge"))
                 self.shadowDodgeTimer = 60 * 45;
-        }
-
-        public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
-        {
-            ref var proj = ref FargoSoulsGlobalProjectile.globalProjectileField;
-            ref var ninjaCrit = ref FargoSoulsGlobalProjectile.ninjaCritIncrease;
-            if (proj is not null && ninjaCrit > 0)
-            {
-                proj.CritChance = Math.Max(proj.CritChance - ninjaCrit, 0);
-                // reset this
-                FargoSoulsGlobalProjectile.globalProjectileField = null;
-            }
-            return orig(self, hit, fromNet, noPlayerInteraction);
         }
 
         internal void NerfCoinGun(Orig_PickAmmo orig, Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume)

@@ -86,7 +86,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
         }
         public override void ModifyHitNPCWithProj(Player player, Projectile proj, NPC target, ref NPC.HitModifiers modifiers)
         {
-            int critChance = (int)player.ActualClassCrit(proj.DamageType) + FargoSoulsGlobalProjectile.ninjaCritIncrease;
+            int critChance = (int)player.ActualClassCrit(proj.DamageType);
             PearlwoodCritReroll(player, ref modifiers, critChance, target);
         }
         public override void ModifyHitNPCWithItem(Player player, Item item, NPC target, ref NPC.HitModifiers modifiers)

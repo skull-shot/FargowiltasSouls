@@ -105,10 +105,6 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool ApprenticeSupportProjectile; // whether this projectile has been spawned by Apprentice Support effect
 
-        public static Projectile? globalProjectileField = null; // enables modifying tagged projectile in any method
-
-        public static int ninjaCritIncrease; // the crit gain a projectile currently has from Ninja Enchantment
-
         public int SourceItemType = 0;
         public bool? Homing = null; // used for when a dynamically homing projectile requires specific conditions
         public static List<int> PureProjectile =
@@ -466,6 +462,28 @@ namespace FargowiltasSouls.Content.Projectiles
                 && !DoesNotAffectHuntressType.Contains(projectile.type))
             {
                 HuntressProj = 1;
+            }
+            if (player.HasEffect<NinjaEffect>() && modPlayer.NinjaCounter >= 1
+                && ItemSource
+                && projectile.damage > 0 && projectile.friendly && !projectile.hostile && !projectile.trap
+                && projectile.DamageType != DamageClass.Default
+                && projectile.whoAmI != player.heldProj
+                && projectile.aiStyle != ProjAIStyleID.NightsEdge // fancy sword swings like excalibur
+                && !projectile.minion && !projectile.sentry
+                && !ProjectileID.Sets.IsAWhip[projectile.type]
+                && !ProjectileID.Sets.NoMeleeSpeedVelocityScaling[projectile.type]
+                && projectile.type != ProjectileID.WireKite
+                && projectile.type != ModContent.ProjectileType<Retiglaive>()
+                && projectile.aiStyle != ProjAIStyleID.Spear
+                )
+            {
+                projectile.velocity *= 2;
+                projectile.knockBack *= 2;
+                if (modPlayer.NinjaDecrementCD <= 0)
+                {
+                    modPlayer.NinjaCounter--;
+                    modPlayer.NinjaDecrementCD = FargoSoulsPlayer.NinjaDecrementMaxCD;
+                }
             }
 
             if (projectile.bobber && CanSplit && source is EntitySource_ItemUse)
@@ -1438,21 +1456,6 @@ namespace FargowiltasSouls.Content.Projectiles
                 TikiTagged = false;
             }
 
-
-            if (player.HasEffect<NinjaDamageEffect>() && player.ActualClassCrit(projectile.DamageType) > 0 && projectile.CritChance > 0)
-            {
-                if (typeof(NPC.HitModifiers).GetField("_critOverride", LumUtils.UniversalBindingFlags)?.GetValue(modifiers) as bool? != false)
-                {// no point in running if crit is disabled anyway
-                    int maxIncrease = modPlayer.ForceEffect<NinjaEnchant>() ? 24 : 12;
-                    ninjaCritIncrease = (int)(maxIncrease * Math.Clamp((projectile.extraUpdates + 1) * projectile.velocity.Length() / 40f, 0, 1));
-                    if (ninjaCritIncrease > 0)
-                    {
-                        globalProjectileField = projectile;
-                        globalProjectileField.CritChance += ninjaCritIncrease;
-                    }
-                }
-            }
-
             if (projectile.type == ProjectileID.MythrilHalberd)
             {
                 if (Main.player[projectile.owner].Eternity().MythrilHalberdTimer >= 120)
@@ -1501,24 +1504,6 @@ namespace FargowiltasSouls.Content.Projectiles
             if (noInteractionWithNPCImmunityFrames)
                 target.immune[projectile.owner] = tempIframe;
 
-            if (Main.player[projectile.owner].HasEffect<NinjaDamageEffect>())
-            {
-                if (hit.Crit)
-                {
-                    int critroll = Main.rand.Next(projectile.CritChance + ninjaCritIncrease);
-                    if (critroll <= projectile.CritChance + ninjaCritIncrease && critroll > projectile.CritChance)
-                    {
-                        for (int i = 0; i < 8; i++)
-                        {
-                            Vector2 velocity = 4 * Vector2.UnitY.RotatedBy(MathHelper.TwoPi / 8 * i);
-                            int d = Dust.NewDust(projectile.Center, 0, 0, DustID.Smoke, 0, 0, 100, Color.DarkGray, 1.5f);
-                            Main.dust[d].velocity = velocity;
-                            Main.dust[d].noGravity = true;
-                        }
-                    }
-                }
-                ninjaCritIncrease = 0;
-            }
             if (projectile.type == ProjectileID.SharpTears && !projectile.usesLocalNPCImmunity && projectile.usesIDStaticNPCImmunity && projectile.idStaticNPCHitCooldown == 60 && noInteractionWithNPCImmunityFrames)
             {
                 target.AddBuff(ModContent.BuffType<AnticoagulationBuff>(), 360);

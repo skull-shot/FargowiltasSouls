@@ -108,6 +108,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool AncientShadowEnchantActive = false;
         public int AncientShadowFlameCooldown;
         public int ShadowOrbRespawnTimer;
+        public float NinjaCounter;
+        public int NinjaDecrementCD;
+        public static int NinjaDecrementMaxCD = 20;
 
         public Item PlatinumEffect;
         public int PalladCounter;
