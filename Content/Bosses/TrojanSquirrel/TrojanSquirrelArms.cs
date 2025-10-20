@@ -372,8 +372,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
+            var trojan = body.As<TrojanSquirrel>();
             if (body != null)
-                Main.EntitySpriteDraw(texture2D13, body.Center - screenPos + new Vector2(NPC.direction < 0 ? 20f : -2f, NPC.gfxOffY - 24 * NPC.scale), new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+                Main.EntitySpriteDraw(texture2D13, body.Center - screenPos + new Vector2(NPC.direction < 0 ? 20f : -2f, NPC.gfxOffY - 24 * NPC.scale) + trojan.bodyOffset, new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
 
             return false;
         }
@@ -436,7 +437,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (NPC.life <= 0)
             {
                 Loop?.Stop();
-                for (int i = 8; i <= 10; i++)
+                for (int i = 8; i <= 9; i++)
                 {
                     Vector2 pos = Main.rand.NextVector2FromRectangle(NPC.Hitbox);
                     if (!Main.dedServ)

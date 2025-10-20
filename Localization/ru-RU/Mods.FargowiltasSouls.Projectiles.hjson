@@ -878,5 +878,5 @@ TimMagicBlast.DisplayName: Волшебный заряд
 TimInferno.DisplayName: Кольцо адского пламени
 TimFireball.DisplayName: Огненный шар
 TimHatSummon.DisplayName: Волшебная шляпа Тима
-// BloodTrail.DisplayName: Blood Trail
-// MermanAnchor.DisplayName: Merman Anchor
+BloodTrail.DisplayName: Кровавый след
+MermanAnchor.DisplayName: Якорь тритона

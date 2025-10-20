@@ -776,11 +776,24 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public void DeathAnimation(NPC npc)
         {
+            
             Particle p;
             float scaleMult;
             int screenshake = 3;
             npc.velocity.X *= 0.9f;
-            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);
+            // prevent king slime from flinging himself into heaven
+            npc.noTileCollide = false;
+            npc.velocity.Y = npc.velocity.ClampLength(0, 35).Y;
+
+            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);         
+
+            // stall death animation whilst in the air
+            if (npc.velocity.Y != 0)
+            {
+                DeathTimer--;
+               
+            }
+
             // Dust
             if (Main.rand.NextBool(5))
             {          
@@ -838,48 +851,4 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
         }
     }
-    /*
-    public class KingSlimeMinionRemovalHack : EModeNPCBehaviour
-    {
-        public override NPCMatcher CreateMatcher()
-        {
-            return new();
-        }
-        bool KILL = false;
-        public override void OnSpawn(NPC npc, IEntitySource source)
-        {
-            if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC && sourceNPC.type == NPCID.KingSlime)
-            {
-                Main.NewText("yeetus deletus");
-                DELETE(npc);
-                KILL = true;
-            }
-        }
-        public override bool SafePreAI(NPC npc)
-        {
-            if (KILL)
-            {
-                DELETE(npc);
-            }
-            return base.SafePreAI(npc);
-        }
-        public override void SafePostAI(NPC npc)
-        {
-            if (KILL)
-            {
-                DELETE(npc);
-            }
-            base.SafePostAI(npc);
-        }
-        void DELETE(NPC npc)
-        {
-            npc.life = 0;
-            npc.HitEffect();
-            npc.checkDead();
-            npc.active = false;
-            npc.timeLeft = 0;
-            npc = null;
-        }
-    }
-    */
 }

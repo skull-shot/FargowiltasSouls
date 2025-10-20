@@ -1003,7 +1003,7 @@ BionomicCluster: {
 		[i:FargowiltasSouls/SandsofTime] Use to teleport to where you were 1 minute before you last died
 		[i:FargowiltasSouls/TimsConcoction] Certain enemies will drop potions when defeated
 		[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster (works from inventory or vanity slots)
-		'The amalgamate born of a thousand common enemies'
+		'A glimpse of Terraria's beauty'
 		''' */
 	// VanityTooltip: "[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster"
 	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
@@ -1024,7 +1024,7 @@ LithosphericCluster: {
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
 		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
-		'The amalgamate born of a thousand common enemies'
+		'It pulses with vitality'
 		''' */
 	/* VanityTooltip:
 		'''
@@ -1051,7 +1051,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
 		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
-		'The amalgamate born of a thousand common enemies'
+		'It pulses with vitality'
 		''' */
 	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
@@ -1316,7 +1316,7 @@ MysticSkull: {
 		Right click to disable
 		Grants immunity to Suffocation
 		Automatically use mana potions when needed
-		'The quietly muttering head of a defeated foe'
+		'It burns with ephemeral soulflame'
 		''' */
 	/* VanityTooltip:
 		'''
@@ -1332,7 +1332,7 @@ MysticSkullInactive: {
 		Currently inactive, Right click to activate
 		Grants immunity to Suffocation
 		Automatically use mana potions when needed
-		'The quietly muttering head of a defeated foe'
+		'It burns with ephemeral soulflame'
 		''' */
 }
 
@@ -1409,7 +1409,7 @@ PureHeart: {
 		[i:FargowiltasSouls/GuttedHeart][i:FargowiltasSouls/RottingHeart] Up to 3 creepers hover around you, respawning faster when near terrain and erupting into mini eaters on death
 		[i:FargowiltasSouls/GelicWings] Flying emits crystal spikes
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
-		'It pulses with vitality'
+		'It was as if your very soul was glowing'
 		''' */
 	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 }
@@ -3805,11 +3805,7 @@ BlockWorldSave: {
 		''' */
 }
 
-DeviQuestToggle: {
-	// DisplayName: Devi Quest Toggle
-	/* Tooltip:
-		'''
-		[c/ff0000:Debug item]
-		Toggles the Deviantt Quest Board UI
-		''' */
+DeviQuestBoardItem: {
+	// DisplayName: Eternity Quests
+	// Tooltip: Use to open the Eternity Quests menu
 }
