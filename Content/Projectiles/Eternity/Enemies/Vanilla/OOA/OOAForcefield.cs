@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
 
             float distance = 3f * 24;
 
-            Main.projectile.Where(x => x.active && x.friendly && !x.Eternity().isADD2Proj && x.FargoSouls().DeletionImmuneRank == 0 && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
+            Main.projectile.Where(x => x.active && x.friendly && !x.Eternity().isADD2Proj && x.FargoSouls().DeletionImmuneRank == 0 && x.aiStyle != ProjAIStyleID.Boomerang && !x.FargoSouls().IsOnHitSource && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
             {
                 if (Vector2.Distance(x.Center, Projectile.Center) <= distance)
                 {
