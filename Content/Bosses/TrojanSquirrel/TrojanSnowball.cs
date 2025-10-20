@@ -26,6 +26,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public override void AI()
         {
             Projectile.velocity.Y += Projectile.ai[0];
+            Projectile.rotation += 0.22f;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

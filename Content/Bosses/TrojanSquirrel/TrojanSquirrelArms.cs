@@ -56,6 +56,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             AltArmAnimationType = -1;
 
+            ArmsAnimationAngle = (int)MathHelper.Clamp(ArmsAnimationAngle, -2, 2);
+
             switch ((int)NPC.ai[0])
             {
                 case 0:
@@ -146,7 +148,6 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         Vector2 direction = GetNextShootPos().DirectionTo(Main.player[NPC.target].Center);
                         float offset = FargoSoulsUtil.RotationDifference(Math.Abs(direction.X) * Vector2.UnitX + direction.Y * Vector2.UnitY, Vector2.UnitX);
                         int aimAngle = (int)(-offset / (MathHelper.PiOver4 * 0.25f));
-
                         if (NPC.ai[1] <= start) // prep animation
                         {
                             float startAnimTime = start / 2;
@@ -372,11 +373,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 
             SpriteEffects effects = NPC.direction < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-            if (body == null)
-                return false;
+            if (body != null)
+            {
+                var trojan = body.As<TrojanSquirrel>();
 
-            var trojan = body.As<TrojanSquirrel>();
-            Main.EntitySpriteDraw(texture2D13, body.Center - screenPos + new Vector2(NPC.direction < 0 ? 20f : -2f, NPC.gfxOffY - 24 * NPC.scale) + trojan.bodyOffset, new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+                Main.EntitySpriteDraw(texture2D13, body.Center - screenPos + new Vector2(NPC.direction < 0 ? 20f : -2f, NPC.gfxOffY - 24 * NPC.scale) + trojan.bodyOffset, new Microsoft.Xna.Framework.Rectangle?(rectangle), color26, NPC.rotation, origin2, NPC.scale, effects, 0);
+            }
 
             return false;
         }
@@ -398,35 +400,35 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 angle = 0;
             switch (ArmsAnimationAngle)
             {
-                case -2:
+                case -2: // frame 4
                     pos.X += NPC.width / 2f * NPC.direction;
                     pos.Y -= 44 * NPC.scale;
 
-                    pos.X -= (altArm ? 20 : 64) * NPC.direction * NPC.scale;
+                    pos.X -= (NPC.direction == -1 ? (altArm ? 36 : 86) : (altArm ? 20 : 64)) * NPC.direction * NPC.scale;
                     break;
-                case -1:
+                case -1: // frame 3
                     pos.X += NPC.width / 2f * NPC.direction;
                     pos.Y -= 36 * NPC.scale;
 
-                    pos.X -= (altArm ? 12 : 58) * NPC.direction * NPC.scale;
+                    pos.X -= (NPC.direction == -1 ? (altArm ? 34 : 82) : (altArm ? 12 : 58)) * NPC.direction * NPC.scale;
                     break;
-                case 0:
+                case 0: // frame 2
                     pos.X += NPC.width / 2f * NPC.direction;
                     pos.Y -= 24 * NPC.scale;
 
-                    pos.X -= (altArm ? 12 : 58) * NPC.direction * NPC.scale;
+                    pos.X -= (NPC.direction == -1 ? (altArm ? 34 : 82) : (altArm ? 12 : 58)) * NPC.direction * NPC.scale;
                     break;
-                case 1: // default
+                case 1: // default; frame 1
                     pos.X += NPC.width / 2f * NPC.direction;
                     pos.Y -= 16 * NPC.scale;
 
-                    pos.X -= (altArm ? 12 : 66) * NPC.direction * NPC.scale;
+                    pos.X -= (NPC.direction == -1 ? (altArm ? 34 : 82) : (altArm ? 12 : 66)) * NPC.direction * NPC.scale;
                     break;
-                case 2:
+                case 2: // frame 5
                     pos.X += NPC.width / 2f * NPC.direction;
-                    //pos.Y -= 0 * NPC.scale;
+                    pos.Y -= 2 * NPC.scale;
 
-                    pos.X -= (altArm ? 16 : 58) * NPC.direction * NPC.scale;
+                    pos.X -= (NPC.direction == -1 ? (altArm ? 34 : 82) : (altArm ? 16 : 58)) * NPC.direction * NPC.scale;
                     break;
             }
                
