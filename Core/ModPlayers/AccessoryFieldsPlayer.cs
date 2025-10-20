@@ -291,7 +291,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SandsofTime;
         public bool SecurityWallet;
         public int FrigidGemstoneCD;
-        public int WretchedPouchCD;
+        public float WretchedPouchCD;
         public bool NymphsPerfume;
         public bool NymphsPerfumeRespawn;
         public int NymphsPerfumeRestoreLife;

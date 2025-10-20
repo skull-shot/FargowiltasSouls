@@ -73,6 +73,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool IsStandingStill;
         public float AttackSpeed;
+        /// <summary>
+        /// Caches the attack speed every frame. Ensures that attack speed is properly calculated for any given place during the update loop, by retrieving the last frame's speed otherwise.
+        /// </summary>
+        public float CachedAttackSpeed;
         public float UseTimeDebt;
         public float WingTimeModifier = 1f;
 
@@ -811,7 +815,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.GetAttackSpeed(DamageClass.SummonMeleeSpeed) += AttackSpeed - 1f;
                 return 1f;
             }
-
+            CachedAttackSpeed = AttackSpeed;
             return AttackSpeed;
         }
         public override void OnConsumeMana(Item item, int manaConsumed)
