@@ -1939,7 +1939,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.HarpyFeather:
-                    target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
+                    //target.AddBuff(ModContent.BuffType<ClippedWingsBuff>(), 300);
                     break;
 
                 case ProjectileID.SandBallFalling:

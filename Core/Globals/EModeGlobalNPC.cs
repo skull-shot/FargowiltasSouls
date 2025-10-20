@@ -275,9 +275,10 @@ namespace FargowiltasSouls.Core.Globals
             bool noEvent = Main.invasionType == 0 && !oldOnesArmy && !frostMoon && !pumpkinMoon && !solarEclipse && !lunarEvents;
             bool thunderstorm = Main.IsItStorming && surface && !snow && !spawnInfo.Player.ZoneSandstorm && noEvent;
 
-            bool noInvasion = FargowiltasSouls.NoInvasion(spawnInfo);
+            bool noInvasion = !spawnInfo.Invasion;//FargowiltasSouls.NoInvasion(spawnInfo);
             bool worldEvil = WorldGen.crimson;
-            bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy && noEvent;
+            bool normalSpawn = !spawnInfo.PlayerInTown && noInvasion && !oldOnesArmy;
+            bool wallHackerSpawn = !spawnInfo.PlayerSafe;
 
 
             //MASOCHIST MODE
@@ -353,7 +354,6 @@ namespace FargowiltasSouls.Core.Globals
                                 pool[NPCID.DarkCaster] = .02f;
                             if (noBiome && (!pool.ContainsKey(NPCID.RockGolem) || pool[NPCID.RockGolem] < 0.01f))
                                 pool[NPCID.RockGolem] = 0.01f;
-                                
                         }
 
                         if (NPC.downedGoblins && !NPC.savedGoblin && !NPC.AnyNPCs(NPCID.BoundGoblin))
@@ -364,8 +364,14 @@ namespace FargowiltasSouls.Core.Globals
                     }
                     else if (underworld && normalSpawn)
                     {
-                        pool[NPCID.LeechHead] = .02f;
+                        if (wallHackerSpawn)
+                            pool[NPCID.LeechHead] = .02f;
                         pool[NPCID.BlazingWheel] = .05f;
+                    }
+                    else if (sky && normalSpawn)
+                    {
+                        if (NPC.downedBoss2 && wallHackerSpawn && (x / 16f < Main.maxTilesX * 0.45 || x / 16f > Main.maxTilesX * 0.55)) //harpy condition
+                            pool[NPCID.MeteorHead] = .1f;
                     }
 
                     //height-independent biomes
@@ -377,27 +383,29 @@ namespace FargowiltasSouls.Core.Globals
 
                     if (mushroom && normalSpawn)
                     {
-                        pool[NPCID.FungiBulb] = .02f;
                         pool[NPCID.MushiLadybug] = .02f;
                         pool[NPCID.ZombieMushroom] = .02f;
                         pool[NPCID.ZombieMushroomHat] = .02f;
                         pool[NPCID.AnomuraFungus] = .02f;
                         pool[NPCID.TruffleWorm] = .005f;
+                        if (wallHackerSpawn)
+                            pool[NPCID.FungiBulb] = .02f;
                     }
 
                     if (ocean)
                     {
-                        if (normalSpawn)
+                        if (normalSpawn && wallHackerSpawn)
                             pool[NPCID.PigronHallow] = .006f;
 
-                        if (Main.bloodMoon && spawnInfo.Water)
+                        if (Main.bloodMoon && spawnInfo.Water && normalSpawn)
                         {
                             pool[NPCID.EyeballFlyingFish] = .02f;
-                            pool[NPCID.ZombieMerman] = .02f;
+                            if (wallHackerSpawn) //technically yeah he does
+                                pool[NPCID.ZombieMerman] = .02f;
                         }
                     }
 
-                    if (normalSpawn && (!surface || Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY].WallType == WallID.DirtUnsafe))
+                    if (normalSpawn && (!surface || Main.tile[x, y].WallType == WallID.DirtUnsafe))
                     {
                         pool[NPCID.Mimic] = .002f;
                     }
@@ -444,7 +452,7 @@ namespace FargowiltasSouls.Core.Globals
                                     pool[NPCID.Raven] = .3f;
                                 }
 
-                                if (NPC.downedMechBossAny)
+                                if (NPC.downedMechBossAny && wallHackerSpawn)
                                     pool[NPCID.Probe] = 0.01f;
 
                                 if (NPC.downedPlantBoss)
@@ -507,7 +515,7 @@ namespace FargowiltasSouls.Core.Globals
                             {
                                 pool[NPCID.CreatureFromTheDeep] = .02f;
                             }
-                            if (Main.bloodMoon && spawnInfo.Water)
+                            if (Main.bloodMoon && spawnInfo.Water && wallHackerSpawn)
                             {
                                 pool[NPCID.BloodEelHead] = .02f;
                                 pool[NPCID.GoblinShark] = .02f;
@@ -547,9 +555,10 @@ namespace FargowiltasSouls.Core.Globals
                     }
                     else if (sky && normalSpawn)
                     {
-                       if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
-                           pool[NPCID.AngryNimbus] = .1f;
-                       pool[NPCID.MartianProbe] = .01f;
+                        if (NPC.CountNPCS(NPCID.AngryNimbus) < 2) //abide by vanilla limit
+                            pool[NPCID.AngryNimbus] = .1f;
+                        pool[NPCID.MeteorHead] = .05f;
+                        pool[NPCID.MartianProbe] = .01f;
 
                         if (NPC.downedGolemBoss)
                         {
