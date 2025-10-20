@@ -480,7 +480,7 @@ namespace FargowiltasSouls.Content.Projectiles
                 && projectile.aiStyle != ProjAIStyleID.Spear
                 )
             {
-                projectile.velocity *= 2;
+                projectile.velocity = projectile.velocity.LengthSquared() < 1225 ? (projectile.velocity * 2).ClampLength(0f, 35f) : projectile.velocity;
                 projectile.knockBack *= 2;
                 if (modPlayer.NinjaDecrementCD <= 0)
                 {
