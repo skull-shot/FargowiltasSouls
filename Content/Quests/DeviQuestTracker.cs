@@ -50,7 +50,7 @@ namespace FargowiltasSouls.Content.Quests
             SortedQuests = new List<DeviQuest>
             {
                 NewQuest("Tutorial1", TaskSingle("Hunt", NPCID.Tim, 3), RewardSingle(ItemID.Cactus, 50)),
-                NewQuest("Tutorial2", TaskSingle("Hunt", NPCType<CursedCoffin>(), 1), RewardDouble(ItemType<SoulLantern>(), ItemID.SandBlock, 1, 30)),
+                //NewQuest("Tutorial2", TaskSingle("Hunt", NPCType<CursedCoffin>(), 1), RewardDouble(ItemType<SoulLantern>(), ItemID.SandBlock, 1, 30)),
                 NewQuest("CustomTest", TaskSingle("Custom", () => WorldSavingSystem.DownedBetsy, () => "Murder Betsy!!!"), RewardSingle(ItemID.DefendersForge), () => NPC.downedBoss1),
                 NewQuest("CraftTest", TaskSingle("Craft", ItemType<ZephyrBoots>()), RewardSingle(ItemID.GoldCoin, 10)),
                 NewQuest("Tutorial3", TaskSingle("Collect", ItemID.DirtBlock, 50), RewardSingle(ItemType<DeviatingEnergy>(), 5)),

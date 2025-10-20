@@ -348,7 +348,7 @@ namespace FargowiltasSouls.Content.Bosses.CursedCoffin
 
             rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
 
-            rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SoulLantern>()));
+            //rule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<SoulLantern>()));
 
             rule.OnSuccess(ItemDropRule.OneFromOptions(1, ModContent.ItemType<SisypheanFist>(), ModContent.ItemType<SpiritLongbow>(), ModContent.ItemType<GildedSceptre>(), ModContent.ItemType<EgyptianFlail>()));
             // gems

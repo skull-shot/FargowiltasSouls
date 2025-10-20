@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Items.BossBags
         public override void ModifyItemLoot(ItemLoot itemLoot)
         {
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<CoffinMask>(), 7));
-            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulLantern>()));
+            //itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulLantern>()));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<AccursedAnkh>()));
             itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<CursedCoffin>()));
 

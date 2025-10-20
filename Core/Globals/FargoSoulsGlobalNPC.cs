@@ -1062,6 +1062,7 @@ namespace FargowiltasSouls.Core.Globals
                 spawnRate /= 2;
                 maxSpawns *= 2;
             }
+            /*
             if (player.HasEffect<SoulLanternEffect>() && player.EffectItem<SoulLanternEffect>().ModItem is SoulLantern lantern && lantern.SoulLanternID > 0)
             {
                 spawnRate /= 4;
@@ -1069,6 +1070,7 @@ namespace FargowiltasSouls.Core.Globals
                 SoulLanternEffect.CurrentPlayerLanternID = lantern.SoulLanternID;
                 SoulLanternEffect.InSpawnNPC = true;
             }
+            */
 
             //if (modPlayer.BuilderMode) maxSpawns = 0;
         }
