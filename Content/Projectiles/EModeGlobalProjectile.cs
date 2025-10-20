@@ -229,6 +229,8 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.FargoSouls().ItemSource = true;
                     }
                     projectile.FargoSouls().Homing = projectile.IsHoming(Main.player[projectile.owner], source);
+                if (source is not EntitySource_ItemUse_WithAmmo && source is EntitySource_ItemUse && ContentSamples.ItemsByType[SourceItemType].IsWeaponWithDamageClass())
+                    projectile.FargoSouls().IsOnHitSource = true;
                 }
             }
 

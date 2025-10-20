@@ -111,6 +111,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public int SourceItemType = 0;
         public bool? Homing = null; // used for when a dynamically homing projectile requires specific conditions
+        public bool IsOnHitSource;
         public static List<int> PureProjectile =
         [
             ModContent.ProjectileType<GelicWingSpike>(),
@@ -320,6 +321,8 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     projectile.FargoSouls().Homing ??= projectile.IsHoming(player, source);
                 }
+                if (source is not EntitySource_ItemUse_WithAmmo && source is EntitySource_ItemUse && ContentSamples.ItemsByType[SourceItemType].IsWeaponWithDamageClass())
+                    IsOnHitSource = true;
                 if (modPlayer.Jammed && Main.rand.NextBool(3) && ItemSource && !projectile.hostile && projectile.damage > 0 && !projectile.trap && !projectile.npcProj && projectile.CountsAsClass(DamageClass.Ranged))
                 {
                     for (int i = 0; i < 3; i++)

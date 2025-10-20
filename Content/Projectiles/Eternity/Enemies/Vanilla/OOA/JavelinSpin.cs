@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
 
             if (Projectile.ai[1] > 70) // reflect
             {
-                Main.projectile.Where(x => x.active && x.friendly && x.FargoSouls().DeletionImmuneRank == 0 && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
+                Main.projectile.Where(x => x.active && x.friendly && x.FargoSouls().DeletionImmuneRank == 0 && x.aiStyle != ProjAIStyleID.Boomerang && !x.FargoSouls().IsOnHitSource && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
                 {
                     if (Vector2.Distance(x.Center, npc.Center) <= distance)
                     {
