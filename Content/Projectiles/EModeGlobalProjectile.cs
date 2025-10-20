@@ -2355,5 +2355,12 @@ namespace FargowiltasSouls.Content.Projectiles
                 lightColor = Color.Lerp(lightColor, Color.Purple, JammedRecoverTime / 90f);
             return base.PreDraw(projectile, ref lightColor);
         }
+
+        public static bool CanBeAbsorbed(Projectile p)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return false;
+            return p.CanBeReflected() && p.FargoSouls().DeletionImmuneRank == 0 && !p.FargoSouls().IsOnHitSource && !FargoSoulsUtil.IsSummonDamage(p, false);
+        }
     }
 }

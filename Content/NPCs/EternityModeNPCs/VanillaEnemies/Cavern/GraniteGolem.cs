@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
+﻿using FargowiltasSouls.Content.Projectiles;
+using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
@@ -39,7 +40,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             {
                 float distance = 2f * 16;
 
-                Main.projectile.Where(x => x.active && x.friendly && x.FargoSouls().DeletionImmuneRank == 0 && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
+                Main.projectile.Where(x => EModeGlobalProjectile.CanBeAbsorbed(x)).ToList().ForEach(x =>
                 {
                     if (Vector2.Distance(x.Center, npc.Center) <= distance)
                     {
@@ -65,7 +66,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                                 pebbles[i].ai[1] = startRot + (spacing * i);
                             }
                         }
-                        x.Kill();
+                        x.active = false;
                     }
                 });
             }
