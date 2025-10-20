@@ -96,8 +96,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.position.X += npc.width / 2;
                     npc.position.Y += npc.height;
                     npc.scale = scale;
-                    npc.width = (int)(98f * npc.scale);
-                    npc.height = (int)(92f * npc.scale);
+                    npc.width = Math.Clamp((int)(98f * npc.scale), 32, short.MaxValue);
+                    npc.height = Math.Clamp((int)(92f * npc.scale), 32, short.MaxValue);
                     npc.position.X -= npc.width / 2;
                     npc.position.Y -= npc.height;
                 }
@@ -150,8 +150,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (num255 < minScale)
                     num255 = minScale;
                 npc.scale = num255;
-                npc.width = (int)MathF.Round(98f * npc.scale);
-                npc.height = (int)MathF.Round(92f * npc.scale);
+                npc.width = Math.Clamp((int)MathF.Round(98f * npc.scale), 32, short.MaxValue);
+                npc.height = Math.Clamp((int)MathF.Round(92f * npc.scale), 32, short.MaxValue);
                 npc.position.X -= npc.width / 2;
                 npc.position.Y -= npc.height;
             }
@@ -487,8 +487,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             NPC.position.X += NPC.width / 2;
             NPC.position.Y += NPC.height;
-            NPC.width = (int)(98f * NPC.scale);
-            NPC.height = (int)(92f * NPC.scale);
+            NPC.width = Math.Clamp((int)(98f * NPC.scale), 32, short.MaxValue);
+            NPC.height = Math.Clamp((int)(92f * NPC.scale), 32, short.MaxValue);
             NPC.position.X -= NPC.width / 2;
             NPC.position.Y -= NPC.height;
 

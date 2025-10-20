@@ -1,8 +1,8 @@
-using System;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
+using System;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ID;
@@ -172,7 +172,6 @@ namespace FargowiltasSouls
         public static void Projectile_Damage_IL(ILContext context)
         {
             ILCursor cursor = new(context);
-            cursor.Index = 3880; // Get as close as possible to the phantasmTime check
             if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdfld<Projectile>("arrow"))) // Go directly after the Projectile.arrow check
             {
                 FargowiltasSouls.Instance.Logger.Warn("Phantasm Arrow Rain fix failure on MatchLdfld<Projectile>('arrow')");
