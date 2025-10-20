@@ -44,6 +44,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
         public int Phase = 1;
 
+        public static int LastAttack;
+        public static int AttackRepeat;
+
         public static bool Alone(NPC npc) => npc.type == NPCID.CultistBoss && !NPC.AnyNPCs(NPCID.CultistBossClone);
 
         public enum States
@@ -204,7 +207,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     break;
                 case States.Reposition:
                     {
-                        int duration = WorldSavingSystem.MasochistModeReal ? 16 : 40;
+                        int duration = WorldSavingSystem.MasochistModeReal ? 16 : 30;
+                        if (EModeGlobalNPC.cultBoss.IsWithinBounds(Main.maxNPCs) && FargoSoulsUtil.NPCExists(EModeGlobalNPC.cultBoss, NPCID.CultistBoss) is NPC cultist && cultist.GetGlobalNPC<LunaticCultist>().Phase == 3)
+                            duration = WorldSavingSystem.MasochistModeReal ? 40 : 60;
                         if (alone)
                             duration = WorldSavingSystem.MasochistModeReal ? 8 : 30;
                         animation = (int)Animation.Float;
@@ -554,10 +559,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             List<States> randAttacks = [States.SolarCircle, States.IceShatter, States.Lightning, States.Shadow, States.AncientLight];
             randAttacks.Remove((States)oldAttack);
+            if (AttackRepeat >= 1)
+                randAttacks.Remove((States)LastAttack);
             state = (int)Main.rand.NextFromCollection(randAttacks);
             timer = 0;
             npc.netUpdate = true;
-
+            if (LastAttack == state)
+                AttackRepeat++;
+            else
+                AttackRepeat = 0;
+            LastAttack = state;
             // debug
             //state = (int)States.IceShatter;
         }
@@ -1001,7 +1012,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 npc.velocity.X = npc.ai[2];
                 npc.velocity.Y = npc.ai[3];
             }
-            else if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.cultBoss, NPCID.CultistBoss) && !WorldSavingSystem.MasochistModeReal)
+            else if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.cultBoss, NPCID.CultistBoss))
             {
                 if (++Timer < 40)
                 {
