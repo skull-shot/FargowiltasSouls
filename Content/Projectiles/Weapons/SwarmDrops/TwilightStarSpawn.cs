@@ -1,4 +1,5 @@
 ﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Patreon.DanielTheRobot;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,82 +39,25 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.localNPCHitCooldown = 20;
             Projectile.light = 0.5f;
             Projectile.scale = 0.5f;
+            Projectile.timeLeft = 240;
         }
 
         public override void AI()
         {
-            Projectile.ai[1]++;
-            if (Projectile.ai[0] == 0) // initial
-            {
-                Projectile.ai[2] = -1;
-                Projectile.velocity *= 0.97f;
-                if (Projectile.ai[1] > 15)
-                {
-                    Projectile.ai[0] = 1;
-                    Projectile.ai[1] = -1;
-                }
-            }
-            else if (Projectile.ai[0] == 1)
-            {
-                Projectile.velocity = 45 * Vector2.UnitX.RotatedBy((Main.MouseWorld - Projectile.Center).ToRotation());
-                SoundEngine.PlaySound(SoundID.Item9 with { Pitch = -0.7f }, Projectile.Center);
-                FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.GoldFlame, 2f, scale: 1.5f);
-                Projectile.ai[0] = 2;
-                Projectile.ai[1] = 0;
-            }
-            else if (Projectile.ai[0] == 2)
-            {
-
-                if (Projectile.ai[2] == -1)
-                {
-                    Projectile.ai[2] = FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 1000);
-                }
-                else // has target
-                {
-                    NPC target = Main.npc[(int)Projectile.ai[2]];
-
-                    if (!target.active)
-                    {
-                        Projectile.ai[2] = -1;
-                        return;
-                    }
-
-                    Projectile.direction = (int)Projectile.HorizontalDirectionTo(target.Center);
-                    Projectile.spriteDirection = Projectile.direction;
-                    float rot = (target.Center - Projectile.Center).ToRotation();
-
-
-                    float rotDiff = (rot - Projectile.velocity.ToRotation()) % MathHelper.TwoPi;
-                    float dist = (target.Center - Projectile.Center).Length();
-                    if (Math.Abs(rotDiff) < 1.2f)
-                        Projectile.velocity = Projectile.velocity.RotatedBy((rotDiff / dist) * 100);
-                }
-            }
-            else
-            {
-                Projectile.velocity *= 1.02f;
-            }
+            Projectile.velocity *= 1.01f;
             Projectile.rotation = MathHelper.Pi + Projectile.velocity.ToRotation();
         }
 
         public override void OnKill(int timeLeft)
         {
-            for (int i = 0; i < 40; i++)
-                Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Gold);
             SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
             base.OnKill(timeLeft);
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            if (Projectile.ai[0] == 2)
-            {
-                Projectile.ai[0]++;
-                Projectile.timeLeft = 300;
-            }
-
-            FargoSoulsUtil.DustRing(target.Center, 20, DustID.GoldFlame, 3, scale: 1.5f);
-            SoundEngine.PlaySound(SoundID.Item110, Projectile.Center);
+            new SmallSparkle(target.Center, 2 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f), 1f, 14).Spawn();
+            new SmallSparkle(target.Center, 2 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f), 1f, 14).Spawn();
             base.OnHitNPC(target, hit, damageDone);
         }
 
@@ -124,7 +68,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override bool PreDraw(ref Color lightColor)
         {
-            if (Projectile.ai[0] >= 2)
+            if (Projectile.ai[0] >= 0)
             {
                 MiscShaderData miscShaderData = GameShaders.Misc["MagicMissile"];
                 miscShaderData.UseSaturation(-2.8f);
@@ -164,7 +108,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         private Color StripColors(float progressOnStrip)
         {
-            Color result = Color.Lerp(Color.White, Color.Gold, Utils.GetLerpValue(0f, 0.7f, progressOnStrip, clamped: true)) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip));
+            Color result = Color.Lerp(Color.White, Color.SkyBlue, Utils.GetLerpValue(0f, 0.7f, progressOnStrip, clamped: true)) * (1f - Utils.GetLerpValue(0f, 0.98f, progressOnStrip));
             result.A /= 2;
             return result;
         }

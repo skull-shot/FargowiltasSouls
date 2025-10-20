@@ -26,8 +26,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
          * 2 = firing
          * 3 = despawning
          */
-        public ref float state => ref Projectile.ai[0];
-        public ref float projCount => ref Projectile.ai[1];
+        public ref float state => ref Projectile.ai[1];
+        public ref float ai0 => ref Projectile.ai[0];
         public ref float timer => ref Projectile.ai[2];
         #endregion
 
@@ -38,14 +38,14 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void SetDefaults()
         {
-            Projectile.width = 52;
-            Projectile.height = 52;
+            Projectile.width = 42;
+            Projectile.height = 42;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.friendly = true;
             Projectile.tileCollide = false;
-            Projectile.penetrate = -1;
+            Projectile.penetrate = 1;
             Projectile.Opacity = 0.9f;
-            Projectile.light = 0.6f;
+            //Projectile.light = 0.6f;
         }
 
         public override void AI()
@@ -55,10 +55,13 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.Kill();
 
             timer++;
-            Frame();
+
+            Color trailColor = Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f);
+            float velLen = Projectile.velocity.Length() / 5f;
+
             switch (state)
             {
-                case 0:
+                case 0: // spawning
                     if (!player.channel)
                         Projectile.Kill();
                     if (timer > 20)
@@ -67,7 +70,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         state = 1;
                     }
                     break;
-                case 1:
+                case 1: // following mouse
                     if (!player.channel && player.HeldItem.type == ModContent.ItemType<TwilightTome>() && !player.controlUseItem)
                     {
                         SoundEngine.PlaySound(SoundID.Item43 with { Pitch = -0.5f }, Projectile.Center);
@@ -77,77 +80,119 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     }
                     else
                     {
-                        if (timer % 30 == 0) // occasional twinkle
-                            for (int i = 0; i < 3; i++)
-                            {
-                                float randRot = Main.rand.NextFloat(0, MathHelper.TwoPi);
-                                new SparkParticle(Projectile.Center + 5 * Vector2.UnitX.RotatedBy(randRot), 2 * Vector2.UnitX.RotatedBy(randRot), Color.SkyBlue, 0.2f, 6).Spawn();
-                                new SmallSparkle(Projectile.Center + 5 * Vector2.UnitX.RotatedBy(randRot), 2 * Vector2.UnitX.RotatedBy(randRot), Color.SkyBlue, 1f, 7).Spawn();
-                            }
+                        Movement(Main.MouseWorld, trailColor);
+                        Projectile.netUpdate = true;
                     }
                     break;
-                case 2:
+                case 2: // prep to fire
                     if (timer > 3) // let unformed stars despawn
                     {
                         // scale projectile count with star number
-                        projCount = 2 * player.ownedProjectileCounts[Projectile.type];
+                        ai0 = 2 * Main.projectile.Where(p => p.active && p.type == Type && p.ai[1] < 4).Count();
 
                         timer = 0;
                         state = 3;
                     }
                     break;
-                case 3:
-                    if (timer % 15 == 14 && projCount > 0)
+                case 3: // firing
+                    Projectile.velocity *= 0.9f;
+                    if (timer % 15 == 14)
                     {
-                        float rot = (Main.MouseWorld - Projectile.Center).ToRotation();
-                        Vector2 vel = new Vector2(10f, 0f).RotatedBy(rot);
-                        FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.HallowSpray, 3f, scale: 1.5f);
-                        SoundEngine.PlaySound(SoundID.Item75 with { Pitch = -0.5f }, Projectile.Center);
-
-                        // Random spread
-                        float spread = MathHelper.Pi / 24;
-                        float randRot = Main.rand.NextFloat(-spread, spread);
-
-                        if (FargoSoulsUtil.HostCheck)
-                            Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel.RotatedBy(randRot),
-                                ModContent.ProjectileType<TwilightStarSpawn>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
-
-                        projCount--;
-                        if (projCount <= 0)
+                        if (ai0 > 0)
                         {
+                            float rot = (Main.MouseWorld - Projectile.Center).ToRotation();
+                            Vector2 vel = new Vector2(25f, 0f).RotatedBy(rot);
+                            for (int i = 0; i < 3; i++)
+                                new SmallSparkle(Projectile.Center, 2 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), trailColor, 0.5f, 14).Spawn();
+
+                            SoundEngine.PlaySound(SoundID.Item75 with { Pitch = -0.5f }, Projectile.Center);
+
+                            if (FargoSoulsUtil.HostCheck)
+                                Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
+                                    ModContent.ProjectileType<TwilightStarSpawn>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
+                            Projectile.netUpdate = true;
+                        }
+                        else if (ai0 < 0)
+                        {
+                            FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.HallowSpray, 3f);
+                            SoundEngine.PlaySound(SoundID.Item29, Projectile.Center);
+                            ai0 = -1;
+                            timer = 0;
                             state = 4;
                         }
+
+                        ai0--;
                         Projectile.netUpdate = true;
                     }
                     break;
-                case 4:
-                    Projectile.timeLeft = Math.Min(Projectile.timeLeft, 20);
-                    Projectile.Opacity -= 1 / 40f;
-                    if (Projectile.Opacity <= 0)
-                        Projectile.Kill();
+                case 4: // homing charge
+                    if (ai0 < 0) // no target
+                    {
+                        ai0 = FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 2000f);
+                    }
+                    else
+                    {
+                        NPC target = Main.npc[(int)ai0];
+                        if (target.active)
+                            Movement(target.Center, trailColor);
+                    }
                     break;
             }
 
             if (timer % 22 == 0)
-                SoundEngine.PlaySound(SoundID.Item24 with { Volume = 0.4f }, Projectile.Center);
-            Lighting.AddLight(Projectile.Center, TorchID.Shimmer);
+                SoundEngine.PlaySound(SoundID.Item24 with { Volume = 0.5f }, Projectile.Center);
+            Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.8f, 1f));
         }
 
-        void Frame()
+        public void Movement(Vector2 targetPos, Color tColor)
         {
-            
+            float velLen = Projectile.velocity.Length() / 5f;
+
+            Vector2 posToIdle = targetPos - Projectile.Center;
+            float dist = posToIdle.Length();
+            Projectile.velocity += 0.25f * Vector2.UnitX.RotatedBy(posToIdle.ToRotation());
+
+            if (Math.Abs((posToIdle.ToRotation() - Projectile.velocity.ToRotation()) / MathHelper.TwoPi) > 0.5f)
+            {
+                Projectile.velocity *= 0.98f;
+            }
+
+            float velCap = 12f;
+            if (velLen > velCap / 5f)
+            {
+                Projectile.velocity.Normalize();
+                Projectile.velocity *= velCap;
+            }
+
+            new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, velLen * Vector2.One, 25).Spawn();
+
+            float spread = 0.5f;
+            if (timer % 14 == 0)
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    float randRot = Projectile.velocity.ToRotation() + Main.rand.NextFloat(-spread, spread);
+                    new SmallSparkle(Projectile.Center, velLen * Vector2.UnitX.RotatedBy(randRot), tColor, velLen * 0.25f, 24).Spawn();
+                }
+            }
+
+            Projectile.netUpdate = true;
         }
 
-        public override bool? CanHitNPC(NPC target)
+        public override bool? CanHitNPC(NPC target) => state >= 4;
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            return false;
+            FargoSoulsUtil.DustRing(target.Center, 20, DustID.HallowSpray, 3f);
+
+            base.OnHitNPC(target, hit, damageDone);
         }
 
         public override bool PreDraw(ref Color lightColor)
         {
             float opac = Projectile.Opacity;
             if (state == 0)
-                opac = timer / 20;
+                opac = Projectile.Opacity * timer / 20;
 
             Texture2D text = TextureAssets.Projectile[16].Value;
             Rectangle frame = text.Frame();
@@ -157,7 +202,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 float scale = (1 - (i / count));
                 Color c = Color.SkyBlue * opac * (i/count);
-                Main.EntitySpriteDraw(text, Projectile.position - Main.screenPosition + frame.Size() / 2, frame, c, 0, frame.Size() / 2, Projectile.scale * scale, SpriteEffects.None);
+                Main.EntitySpriteDraw(text, Projectile.Center - Main.screenPosition, frame, c, 0, frame.Size() / 2, Projectile.scale * scale, SpriteEffects.None);
             }
             //FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor * opac, rotation: 0);
             return false;
