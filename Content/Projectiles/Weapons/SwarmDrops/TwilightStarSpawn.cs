@@ -68,40 +68,27 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override bool PreDraw(ref Color lightColor)
         {
-            if (Projectile.ai[0] >= 0)
+            MiscShaderData miscShaderData = GameShaders.Misc["MagicMissile"];
+            miscShaderData.UseSaturation(-2.8f);
+            miscShaderData.UseOpacity(2f);
+            miscShaderData.Apply();
+            _vertexStrip.PrepareStripWithProceduralPadding(Projectile.oldPos, Projectile.oldRot, StripColors, StripWidth, -Main.screenPosition + Projectile.Size / 2f);
+            _vertexStrip.DrawTrail();
+            Main.pixelShader.CurrentTechnique.Passes[0].Apply();
+
+            Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
+
+            Rectangle rectangle = texture2D13.Frame();
+            Vector2 origin2 = rectangle.Size() / 2f;
+            SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+            Color origColor = Color.SkyBlue;
+
+            int count = 6;
+            for (int i = 0; i < count; i++)
             {
-                MiscShaderData miscShaderData = GameShaders.Misc["MagicMissile"];
-                miscShaderData.UseSaturation(-2.8f);
-                miscShaderData.UseOpacity(2f);
-                miscShaderData.Apply();
-                _vertexStrip.PrepareStripWithProceduralPadding(Projectile.oldPos, Projectile.oldRot, StripColors, StripWidth, -Main.screenPosition + Projectile.Size / 2f);
-                _vertexStrip.DrawTrail();
-                Main.pixelShader.CurrentTechnique.Passes[0].Apply();
-            }
-            else
-            {
-                Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
-
-                Rectangle rectangle = texture2D13.Frame();
-                Vector2 origin2 = rectangle.Size() / 2f;
-                SpriteEffects spriteEffects = Projectile.spriteDirection < 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
-                Color origColor = Color.Gold;
-
-                for (int k = 5; k >= 0; k--)
-                {
-                    Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition;
-                    Color color = Projectile.GetAlpha(origColor) * ((5 - k) / ((float)5 * 2));
-                    Main.EntitySpriteDraw(texture2D13, drawPos, rectangle, 
-                        color, 0, Vector2.Zero, Projectile.scale, spriteEffects, 0);
-                }
-
-                int count = 6;
-                for (int i = 0; i < count; i++)
-                {
-                    float opac = (i + 1) / count;
-                    Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition, rectangle, 
-                        origColor * opac, 0, origin2, opac * Projectile.scale, spriteEffects, 0);
-                }
+                float opac = (i + 1) / count;
+                Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition, rectangle, 
+                    origColor * opac, Projectile.rotation, origin2, opac * Projectile.scale, spriteEffects, 0);
             }
             return false;
         }
@@ -115,7 +102,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         private float StripWidth(float progressOnStrip)
         {
-            return Projectile.scale * 3 * MathHelper.Lerp(26f, 32f, Utils.GetLerpValue(0f, 0.2f, progressOnStrip, clamped: true)) * Utils.GetLerpValue(0f, 0.07f, progressOnStrip, clamped: true);
+            return Projectile.scale * 2 * MathHelper.Lerp(26f, 32f, Utils.GetLerpValue(0f, 0.2f, progressOnStrip, clamped: true)) * Utils.GetLerpValue(0f, 0.07f, progressOnStrip, clamped: true);
         }
         #endregion
     }

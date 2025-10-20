@@ -4,6 +4,7 @@ using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using ReLogic.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,8 +46,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.tileCollide = false;
             Projectile.penetrate = 1;
             Projectile.Opacity = 0.9f;
-            //Projectile.light = 0.6f;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 20;
         }
+
+        Color tColor = Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f);
 
         public override void AI()
         {
@@ -55,25 +59,28 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.Kill();
 
             timer++;
-
-            Color trailColor = Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f);
             float velLen = Projectile.velocity.Length() / 5f;
 
             switch (state)
             {
                 case 0: // spawning
+                    ai0 = -1;
                     if (!player.channel)
                         Projectile.Kill();
                     if (timer > 20)
                     {
-                        SoundEngine.PlaySound(SoundID.Item29 with { Pitch = -1f, Volume = 0.5f }, Projectile.Center);
+                        for (int i = 0; i < 20; i++)
+                        {
+                            new SmallSparkle(Projectile.Center, Main.rand.NextFloat(2, 5) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), tColor, Main.rand.NextFloat(0.2f, 0.4f), 14).Spawn();
+                        }
+                        SoundEngine.PlaySound(SoundID.NPCDeath7 with { Pitch = -0.7f }, Projectile.Center);
                         state = 1;
                     }
                     break;
                 case 1: // following mouse
                     if (!player.channel && player.HeldItem.type == ModContent.ItemType<TwilightTome>() && !player.controlUseItem)
                     {
-                        SoundEngine.PlaySound(SoundID.Item43 with { Pitch = -0.5f }, Projectile.Center);
+                        SoundEngine.PlaySound(SoundID.Item43 with { Pitch = -0.3f }, Projectile.Center);
                         timer = 0;
                         state = 2;
                         return;
@@ -95,7 +102,8 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     }
                     break;
                 case 3: // firing
-                    Projectile.velocity *= 0.9f;
+                    Projectile.velocity *= 0.95f;
+
                     if (timer % 15 == 14)
                     {
                         if (ai0 > 0)
@@ -103,22 +111,20 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                             float rot = (Main.MouseWorld - Projectile.Center).ToRotation();
                             Vector2 vel = new Vector2(25f, 0f).RotatedBy(rot);
                             float sparkRot = Main.rand.NextFloat(0, MathHelper.TwoPi);
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 20; i++)
                             {
-                                new SmallSparkle(Projectile.Center, 2 * Vector2.UnitX.RotatedBy(sparkRot + (MathHelper.TwoPi * (i / 5f))), trailColor, 1f, 14).Spawn();
+                                new SmallSparkle(Projectile.Center, Main.rand.NextFloat(1, 2) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), tColor, Main.rand.NextFloat(0.2f, 0.6f), 18).Spawn();
                             }
 
-                            SoundEngine.PlaySound(SoundID.Item75 with { Pitch = -0.5f }, Projectile.Center);
+                            SoundEngine.PlaySound(SoundID.Item102 with { Pitch = -0.5f, Volume = 0.5f }, Projectile.Center);
 
-                            if (FargoSoulsUtil.HostCheck)
+                            if (Main.myPlayer == Projectile.owner)
                                 Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, vel,
                                     ModContent.ProjectileType<TwilightStarSpawn>(), Projectile.damage / 3, Projectile.knockBack, Projectile.owner);
                             Projectile.netUpdate = true;
                         }
                         else if (ai0 < 0)
                         {
-                            FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.HallowSpray, 3f);
-                            SoundEngine.PlaySound(SoundID.Item29, Projectile.Center);
                             ai0 = -1;
                             timer = 0;
                             state = 4;
@@ -132,6 +138,18 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     if (ai0 < 0) // no target
                     {
                         ai0 = FargoSoulsUtil.FindClosestHostileNPC(Projectile.Center, 2000f);
+
+                        if (ai0 >= 0)
+                        {
+                            FargoSoulsUtil.DustRing(Projectile.Center, 20, DustID.HallowSpray, 3f);
+                            SoundEngine.PlaySound(SoundID.DD2_BookStaffCast with { Pitch = -0.5f, Volume = 3f, Variants = [0] }, Projectile.Center);
+                        }
+
+                        if (timer > 30)
+                        {
+                            SoundEngine.PlaySound(SoundID.NPCDeath52 with { Volume = 0.2f, Pitch = -0.2f }, Projectile.Center);
+                            Projectile.Kill();
+                        }
                     }
                     else
                     {
@@ -139,20 +157,36 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         NPC target = Main.npc[(int)ai0];
                         if (target.active)
                             Movement(target.Center);
+                        else
+                        {
+                            Projectile.extraUpdates = 0;
+                            ai0 = -1;
+                            timer = 0;
+                        }
                     }
                     break;
             }
 
-            if (timer % 22 == 0)
-                SoundEngine.PlaySound(SoundID.Item24 with { Volume = 0.5f }, Projectile.Center);
-            Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.8f, 1f));
+            // visual fx
+            if (Projectile.velocity.Length() > 1)
+            {
+                new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, (velLen) * Vector2.One, 25).Spawn();
+                float spread = 0.5f;
+                if (timer % 10 == 0)
+                {
+                    float randRot = Projectile.velocity.ToRotation() + Main.rand.NextFloat(-spread, spread);
+                    new SmallSparkle(Projectile.Center, (velLen / 5f) * Vector2.UnitX.RotatedBy(randRot), tColor, (velLen) * 0.35f, 24).Spawn();
+                }
+            }
+
+            if (timer % 22 == 0 && state < 3)
+                SoundEngine.PlaySound(SoundID.Item9 with { Pitch = -1f, Volume = 0.1f, MaxInstances = 1 }, Projectile.Center);
+            Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.8f, 2f));
         }
 
         public void Movement(Vector2 targetPos)
         {
             bool enemy = state == 4;
-
-            Color tColor = Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f);
             float velLen = Projectile.velocity.Length();
 
             Vector2 posToIdle = targetPos - Projectile.Center;
@@ -171,15 +205,6 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.velocity *= speedCap;
             }
 
-            new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, (velLen / 5f) * Vector2.One, 25).Spawn();
-
-            float spread = 0.5f;
-            if (timer % 10 == 0)
-            {
-                float randRot = Projectile.velocity.ToRotation() + Main.rand.NextFloat(-spread, spread);
-                new SmallSparkle(Projectile.Center, (velLen / 5f) * Vector2.UnitX.RotatedBy(randRot), tColor, (velLen / 5f) * 0.35f, 24).Spawn();
-            }
-
             Projectile.netUpdate = true;
         }
 
@@ -190,6 +215,32 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             FargoSoulsUtil.DustRing(target.Center, 20, DustID.HallowSpray, 3f);
 
             base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            base.OnKill(timeLeft);
+
+            if (ai0 >= 0)
+            {
+                SoundEngine.PlaySound(SoundID.Item102 with { Pitch = -0.5f, Volume = 0.5f }, Projectile.Center);
+                if (Main.myPlayer == Projectile.owner)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Vector2 offset = new(Main.rand.NextFloat(-300, 300), -500);
+                        float rot = (Main.npc[(int)ai0].Center - (Projectile.Center + offset)).ToRotation() + Main.rand.NextFloat(-0.03f, 0.03f);
+                        Projectile.NewProjectile(Projectile.InheritSource(Projectile), Projectile.Center + offset, 30 * Vector2.UnitX.RotatedBy(rot),
+                            ModContent.ProjectileType<TwilightStarSpawn>(), Projectile.damage / 3, 1f, Projectile.owner);
+                    }
+                }
+            }
+
+            SoundEngine.PlaySound(SoundID.NPCDeath7 with { Pitch = -0.2f }, Projectile.Center);
+            for (int i = 0; i < 20; i++)
+            {
+                new SmallSparkle(Projectile.Center, Main.rand.NextFloat(2, 5) * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), tColor, Main.rand.NextFloat(0.2f, 0.6f), 24).Spawn();
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)

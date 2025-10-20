@@ -3563,8 +3563,8 @@ DarkTome: {
 	DisplayName: Dark Tome
 	Tooltip:
 		'''
-		Hold button to summon up to 3 spectral books that chase your cursor
-		Releasing button causes the books to release a volley of pages
+		Hold attack to summon up to 3 spectral books that chase your cursor
+		Releasing causes the books to fire a volley of pages
 		'The arcane grimoire of a defeated foe...'
 		'''
 }
@@ -3739,9 +3739,8 @@ TwilightTome: {
 	DisplayName: Twilight Compendium
 	Tooltip:
 		'''
-		Hold button to summon up to 3 twilight stars at your cursor
-		Releasing button causes the stars to conjure a starstorm
-		The storm of stars will launch towards your cursor
+		Hold attack to conjure up to 3 twilight stars
+		Release attack to make them fire smaller stars at your cursor, then home in on the nearest enemy and unleash a starstorm
 		'The reward for a mighty rematch...'
 		'''
 }

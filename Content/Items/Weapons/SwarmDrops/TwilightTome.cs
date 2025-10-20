@@ -20,13 +20,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
             Item.damage = 600;
             Item.DamageType = DamageClass.Magic;
             Item.mana = 20;
-            Item.rare = ItemRarityID.Orange;
+            Item.rare = ItemRarityID.Purple;
             Item.width = 44;
             Item.height = 48;
             Item.useTime = 45;
             Item.useAnimation = 45;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.UseSound = SoundID.DD2_DarkMageAttack;
+            Item.UseSound = SoundID.Item8;
             Item.shoot = ModContent.ProjectileType<TwilightStar>();
             Item.shootSpeed = 10f;
             Item.knockBack = 2f;
@@ -38,13 +38,13 @@ namespace FargowiltasSouls.Content.Items.Weapons.SwarmDrops
 
         public override Vector2? HoldoutOffset()
         {
-            return new(6, 12);
+            return null;
         }
 
         public override bool CanUseItem(Player player)
         {
             bool starCount = Main.projectile.Where(p => p.active && p.type == Item.shoot && p.ai[1] < 4).Count() < 3;
-            Item.UseSound = SoundID.Item8 with { Volume = starCount ? 1f : 0.5f };
+            Item.UseSound = SoundID.Item8 with { Volume = starCount ? 1f : 0f };
             return base.CanUseItem(player) && timer == 0;
         }
 
