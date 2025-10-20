@@ -77,13 +77,3 @@ ActiveSkills: Активные умения
 AvailableSkills: Доступные умения
 SelectDifficulty: Выбрать сложность
 NoRespawn: "{0}: Вы можете возродиться только один раз за битву!"
-
-DeviQuestBoard: {
-	// Title: Quest Board
-	// InfoBlank: Select a Quest!
-	// TaskButton: Tasks
-	// RewardButton: Rewards
-	// SubmitButton: Submit
-	// TasksHeader: Current Tasks
-	// RewardsHeader: Completion Rewards
-}
