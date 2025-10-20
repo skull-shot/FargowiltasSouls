@@ -305,7 +305,7 @@ MeteorEnchant: {
 	Tooltip:
 		'''
 		Hitting an enemy occasionally drops a gigantic meteor on them
-		10 second cooldown, decreasing faster the more you move around
+		Cooldown decreases faster the more you move around
 		[i:Magiluminescence] Effects of Magiluminescence
 		'Drop a draco on 'em'
 		'''
