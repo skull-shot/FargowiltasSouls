@@ -766,7 +766,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.AmberBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out Player player, "AmberStaff") && counter > 30 && counter < 50)
+                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out Player player, "AmberStaff") && counter > 30 && counter < 60)
                     {
                         projectile.velocity += projectile.DirectionTo(player.Center) * 0.9f;
                     }
