@@ -3739,7 +3739,7 @@ TwilightTome: {
 	DisplayName: Twilight Compendium
 	Tooltip:
 		'''
-		Hold attack to conjure up to 3 twilight stars
+		Hold attack to conjure up to 3 twilight stars that chase your cursor
 		Release attack to make them fire smaller stars at your cursor, then home in on the nearest enemy and unleash a starstorm
 		'The reward for a mighty rematch...'
 		'''
