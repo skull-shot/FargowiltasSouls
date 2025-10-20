@@ -47,7 +47,6 @@ namespace FargowiltasSouls.Content.Items.Weapons.Challengers
         public override void ModifyWeaponCrit(Player player, ref float crit)
         {
             crit = Charges * (100f / 6);
-            Main.NewText(crit);
         }
         public override void HoldItem(Player player)
         {
