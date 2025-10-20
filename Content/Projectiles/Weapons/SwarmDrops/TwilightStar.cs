@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     }
                     else
                     {
-                        Movement(Main.MouseWorld, trailColor);
+                        Movement(Main.MouseWorld);
                         Projectile.netUpdate = true;
                     }
                     break;
@@ -102,8 +102,11 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                         {
                             float rot = (Main.MouseWorld - Projectile.Center).ToRotation();
                             Vector2 vel = new Vector2(25f, 0f).RotatedBy(rot);
-                            for (int i = 0; i < 3; i++)
-                                new SmallSparkle(Projectile.Center, 2 * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), trailColor, 0.5f, 14).Spawn();
+                            float sparkRot = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                            for (int i = 0; i < 5; i++)
+                            {
+                                new SmallSparkle(Projectile.Center, 2 * Vector2.UnitX.RotatedBy(sparkRot + (MathHelper.TwoPi * (i / 5f))), trailColor, 1f, 14).Spawn();
+                            }
 
                             SoundEngine.PlaySound(SoundID.Item75 with { Pitch = -0.5f }, Projectile.Center);
 
@@ -132,9 +135,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     }
                     else
                     {
+                        Projectile.extraUpdates = 1;
                         NPC target = Main.npc[(int)ai0];
                         if (target.active)
-                            Movement(target.Center, trailColor);
+                            Movement(target.Center);
                     }
                     break;
             }
@@ -144,9 +148,12 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.8f, 1f));
         }
 
-        public void Movement(Vector2 targetPos, Color tColor)
+        public void Movement(Vector2 targetPos)
         {
-            float velLen = Projectile.velocity.Length() / 5f;
+            bool enemy = state == 4;
+
+            Color tColor = Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f);
+            float velLen = Projectile.velocity.Length();
 
             Vector2 posToIdle = targetPos - Projectile.Center;
             float dist = posToIdle.Length();
@@ -154,26 +161,23 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
             if (Math.Abs((posToIdle.ToRotation() - Projectile.velocity.ToRotation()) / MathHelper.TwoPi) > 0.5f)
             {
-                Projectile.velocity *= 0.98f;
+                Projectile.velocity *= enemy ? 0.90f : 0.98f;
             }
 
-            float velCap = 12f;
-            if (velLen > velCap / 5f)
+            float speedCap = enemy ? 8f : 12f;
+            if (velLen > speedCap)
             {
                 Projectile.velocity.Normalize();
-                Projectile.velocity *= velCap;
+                Projectile.velocity *= speedCap;
             }
 
-            new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, velLen * Vector2.One, 25).Spawn();
+            new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, (velLen / 5f) * Vector2.One, 25).Spawn();
 
             float spread = 0.5f;
-            if (timer % 14 == 0)
+            if (timer % 10 == 0)
             {
-                for (int i = 0; i < 1; i++)
-                {
-                    float randRot = Projectile.velocity.ToRotation() + Main.rand.NextFloat(-spread, spread);
-                    new SmallSparkle(Projectile.Center, velLen * Vector2.UnitX.RotatedBy(randRot), tColor, velLen * 0.25f, 24).Spawn();
-                }
+                float randRot = Projectile.velocity.ToRotation() + Main.rand.NextFloat(-spread, spread);
+                new SmallSparkle(Projectile.Center, (velLen / 5f) * Vector2.UnitX.RotatedBy(randRot), tColor, (velLen / 5f) * 0.35f, 24).Spawn();
             }
 
             Projectile.netUpdate = true;

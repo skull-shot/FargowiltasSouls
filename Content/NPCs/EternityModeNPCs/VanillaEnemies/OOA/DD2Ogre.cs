@@ -612,7 +612,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (!NormalAI)
+            if (!NormalAI && !npc.IsABestiaryIconDummy)
                 Animate(npc);
             return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
