@@ -1,4 +1,6 @@
+using FargowiltasSouls.Assets.Sounds;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
@@ -36,7 +38,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public override void OnKill(int timeLeft)
         {
             Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<TrojanSnowPile>(), 0, 0, Main.myPlayer);
-            SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
+            SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/Challengers/Trojan/SnowballSplat") with { Variants = [1, 2, 3] }, Projectile.Center);
             for (int index1 = 0; index1 < 5; ++index1)
             {
                 int index2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.SnowBlock);
@@ -82,7 +84,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             
             if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
             {
-                Projectile.velocity.Y += 0.12f;
+                Projectile.velocity.Y += 0.32f;
             }
             else
             {

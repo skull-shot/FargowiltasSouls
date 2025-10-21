@@ -140,7 +140,7 @@ namespace FargowiltasSouls.Core.Systems
             {
                 if (Main.bloodMoon)
                 {
-                    if (!HaveForcedAbomFromGoblins && (!DownedAnyBoss || Main.LocalPlayer.statLifeMax >= 200) //pre boss, disable some events
+                    if (!HaveForcedAbomFromGoblins && (!DownedAnyBoss || Main.LocalPlayer.statLifeMax < 200) //pre boss, disable some events
                         && ModContent.TryFind("Fargowiltas", "Abominationn", out ModNPC abom) && !NPC.AnyNPCs(abom.Type))
                     {
                         FargoSoulsUtil.PrintLocalization($"Mods.{Mod.Name}.Message.{Name}.BloodMoonCancel", new Color(175, 75, 255));

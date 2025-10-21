@@ -361,6 +361,16 @@ namespace FargowiltasSouls.Content.Items
                     balanceTextKeys = ["FeatherfallPotionNerf"];
                     return EModeChange.Nerf;
 
+                case ItemID.WrathPotion:
+                case ItemID.RagePotion:
+                case ItemID.InfernoPotion:
+                    if (!NPC.downedBoss2)
+                    {
+                        balanceTextKeys = ["EarlyPotions"];
+                        return EModeChange.ReworkNerf;
+                    }
+                    return EModeChange.None;
+
                 case ItemID.JungleRose:
                     balanceTextKeys = ["JungleRose"];
                     return EModeChange.ReworkBuff;

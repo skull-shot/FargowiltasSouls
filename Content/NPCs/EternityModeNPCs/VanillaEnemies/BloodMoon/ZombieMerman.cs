@@ -125,7 +125,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
                     if (npc.Center.X > Main.player[t].Center.X - 16 && npc.Center.X < Main.player[t].Center.X + 16 && !AnchorSlam && Collision.CanHitLine(npc.Center, 0, 0, Main.player[t].Center, 0, 0))
                     {
                         AnchorSlam = true;
-                        AnchorSlamStartup = 40;
+                        AnchorSlamStartup = 10;
                         SoundEngine.PlaySound(SoundID.DD2_WitherBeastHurt with { Pitch = 0.5f }, npc.Center);
                     }
                     if (AnchorSlam)
@@ -134,14 +134,28 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
                         {
                             npc.ai[0] = 1;
                             npc.ai[1]++;
-                            npc.velocity *= 0.01f;
+                            if (AnchorSlamStartup > 9)
+                                npc.velocity.Y *= 0.01f;
+                            npc.velocity.X *= 0.01f;
+                            npc.velocity.Y -= 1.5f;
                             AnchorSlamStartup--;
                         }
                         else //initiate 
                         {
                             npc.noTileCollide = false;
-                            npc.velocity.Y += 2;
-                            npc.MaxFallSpeedMultiplier *= 2f;
+                            if (npc.velocity.Y == 0)
+                                npc.ai[1] = 0;
+                            else
+                            {
+                                if (npc.velocity.Y < 20)
+                                    npc.velocity.Y += 0.75f;
+                                else
+                                    npc.velocity.Y = 20;
+                                npc.noGravity = true;
+                                npc.MaxFallSpeedMultiplier *= 1f;
+                                npc.ai[1]++;
+                            }
+                                
                         }
                     }
                     JumpTimer = 0;
@@ -200,12 +214,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
                         AnchorSlam = false;
                     }
                     npc.ai[0] = 0;
+                    npc.ai[1] = 0;
                     npc.MaxFallSpeedMultiplier *= 1;
                 }
             }
             return result;
         }
-
+        public override bool? CanFallThroughPlatforms(NPC npc)
+        {
+            if (AnchorSlam && npc.HasPlayerTarget && Main.player[npc.target] is Player player && (player.Top.Y > npc.Bottom.Y + 30))
+                return true;
+            return base.CanFallThroughPlatforms(npc);
+        }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             base.OnHitPlayer(npc, target, hurtInfo);
