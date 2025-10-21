@@ -689,8 +689,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             threshold -= 20;
 
                         AnimationLengthOverride = threshold;
-                        if (AnimationLengthOverride > 60)
-                            AnimationLengthOverride = Math.Max(AnimationLengthOverride - 45, 60);
+                        AnimationLengthOverride -= 45;
+                        AnimationLengthOverride = Math.Max(15, AnimationLengthOverride);
 
                         if (NPC.ai[3] != 0f) //telegraphing jump
                         {
