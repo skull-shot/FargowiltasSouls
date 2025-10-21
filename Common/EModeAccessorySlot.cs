@@ -14,24 +14,6 @@ namespace FargowiltasSouls.Common
 {
     public class EModeAccessorySlot : ModAccessorySlot
     {
-        int[] AllowedItemExceptions =
-        //technically these are souls so should legally go in the slot that allows souls
-        [
-            ModContent.ItemType<ParadoxWolfSoul>(),
-            ItemID.RareEnchantment,
-            ItemID.SoulofLight,
-            ItemID.SoulofNight,
-            ItemID.SoulofFlight,
-            ItemID.SoulofFright,
-            ItemID.SoulofSight,
-            ItemID.SoulofMight,
-            ItemID.SoulBottleFlight,
-            ItemID.SoulBottleFright,
-            ItemID.SoulBottleLight,
-            ItemID.SoulBottleMight,
-            ItemID.SoulBottleNight,
-            ItemID.SoulBottleSight
-        ];
 
         public override bool HasEquipmentLoadoutSupport => true;      
 
