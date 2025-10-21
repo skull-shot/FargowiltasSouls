@@ -1,8 +1,11 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using Fargowiltas;
+using FargowiltasSouls.Common;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry;
@@ -29,6 +32,7 @@ using Terraria.GameContent.Achievements;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 
@@ -88,6 +92,8 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_UseMiningTools_TryHittingWall += MinerEnchWallHammerSpeed;
             On_NPC.AI_123_Deerclops += AI_123_Deerclops;
             On_Projectile.StatusPlayer += StatusPlayer;
+
+            On_ItemSlot.PickItemMovementAction += AllowSouls;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -134,6 +140,26 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_UseMiningTools_TryHittingWall -= MinerEnchWallHammerSpeed;
             On_NPC.AI_123_Deerclops -= AI_123_Deerclops;
             On_Projectile.StatusPlayer -= StatusPlayer;
+
+            On_ItemSlot.PickItemMovementAction -= AllowSouls;
+        }
+
+        private int AllowSouls(On_ItemSlot.orig_PickItemMovementAction orig, Item[] inv, int context, int slot, Item checkItem)
+        {
+            bool shouldAllow = (context == -10 || context == -11) && LoaderManager.Get<AccessorySlotLoader>().ModSlotCheck(checkItem, slot, context) && FargoSoulsSets.Items.AllowedSoulItemExceptions[checkItem.type];
+
+            if (!WorldSavingSystem.EternityMode)
+                return orig(inv, context, slot, checkItem);
+
+            if (shouldAllow)
+                return 1;
+
+            int result = orig(inv, context, slot, checkItem);
+
+            //if (shouldAllow)
+            //    checkItem.accessory = false;
+
+            return result;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
