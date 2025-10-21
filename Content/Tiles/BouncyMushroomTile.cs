@@ -1,12 +1,38 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Tiles
 {
-    public class BouncyMushroomTile
+    public class BouncyMushroomTile : ModTile
     {
+        public override string Texture => "Terraria/Images/Tiles_190";
+
+        public override void SetStaticDefaults()
+        {
+            Main.tileSolid[Type] = true;
+            Main.tileMergeDirt[Type] = true;
+            Main.tileBlockLight[Type] = true;
+            Main.tileBouncy[Type] = true;
+
+            VanillaFallbackOnModDeletion = TileID.MushroomBlock;
+
+            AddMapEntry(Color.LightBlue);
+        }
+
+        public override void NumDust(int i, int j, bool fail, ref int num)
+        {
+            num = fail ? 1 : 3;
+        }
+
+        
+
+        
     }
 }

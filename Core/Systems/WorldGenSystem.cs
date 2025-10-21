@@ -138,23 +138,43 @@ namespace FargowiltasSouls.Core.Systems
                 Point mushroomPoint = GenVars.mushroomBiomesPosition[i];
 
                 //pick some random points close by the center point
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 10; j++)
                 {
                     int x = WorldGen.genRand.Next(mushroomPoint.X - 50, mushroomPoint.X + 50);
                     int y = WorldGen.genRand.Next(mushroomPoint.Y - 50, mushroomPoint.Y + 50);
 
-                    //try to move to an open surface??
+                    //try to move to an open surface
+                    Tile tile;
 
-                    //get the tile here
-                    Tile tile = Main.tile[x, y];
+                    do
+                    {
+                        tile = Main.tile[x, y--];
 
+                    } while (tile.HasTile);
 
+                    y += 2;
 
-                    //varying strength
-                    int strength = WorldGen.genRand.Next(5, 15);
-                    int steps = WorldGen.genRand.Next(5, 15);
+                    if (!Main.tile[x, y].HasTile)
+                    {
+                        continue;
+                    }
 
-                    WorldGen.OreRunner(x, y, strength, steps, TileID.PinkSlimeBlock);
+                    //ore spot
+                    if (WorldGen.genRand.NextBool())
+                    {
+                        int strength = WorldGen.genRand.Next(5, 15);
+                        int steps = WorldGen.genRand.Next(5, 15);
+
+                        WorldGen.OreRunner(x, y, strength, steps, (ushort)ModContent.TileType<BouncyMushroomTile>());
+                    }
+                    else
+                    {
+                        int height = WorldGen.genRand.Next(2, 6);
+                        int width = WorldGen.genRand.Next(3, 8);
+
+                        createMarioMushroom(x, y, height, width);
+                    }
+                        
                 }
 
                 
@@ -167,7 +187,38 @@ namespace FargowiltasSouls.Core.Systems
 
         private void createMarioMushroom(int x, int y, int height, int width)
         {
-        
+            if (width % 2 == 0)
+            {
+                width++;
+            }
+
+            y = y - height;
+
+            //surface
+            for (int i = x - width / 2; i <= x + width / 2; i++)
+            {
+                addBlock(i, y, ModContent.TileType<BouncyMushroomTile>());
+            }
+
+            //stalk
+            for (int i = y; i < y + height; i++)
+            {
+                addBlock(x, i, ModContent.TileType<BouncyMushroomTile>());
+            }
+        }
+
+        private void addBlock(int x, int y, int type)
+        {
+            WorldGen.PlaceTile(x, y, type, mute: true, forced: true);
+
+            //Main.tile[x, y].TileType = (ushort)type;
+            //Main.tile[x, y].ClearBlockPaintAndCoating();
+            //WorldGen.SquareTileFrame(x, y);
+
+            //if (Main.netMode == 2)
+            //{
+            //    NetMessage.SendTileSquare(-1, x, y);
+            //}
         }
     }
 }
