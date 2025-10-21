@@ -229,6 +229,8 @@ namespace FargowiltasSouls.Content.Projectiles
                         projectile.FargoSouls().ItemSource = true;
                     }
                     projectile.FargoSouls().Homing = projectile.IsHoming(Main.player[projectile.owner], source);
+                if (source is not EntitySource_ItemUse_WithAmmo && source is EntitySource_ItemUse && ContentSamples.ItemsByType[SourceItemType].IsWeaponWithDamageClass())
+                    projectile.FargoSouls().IsOnHitSource = true;
                 }
             }
 
@@ -764,7 +766,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
                 case ProjectileID.AmberBolt:
-                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out Player player, "AmberStaff") && counter > 30 && counter < 50)
+                    if (PerformSafetyChecks(projectile, ItemID.AmberStaff, out Player player, "AmberStaff") && counter > 30 && counter < 60)
                     {
                         projectile.velocity += projectile.DirectionTo(player.Center) * 0.9f;
                     }
@@ -2352,6 +2354,13 @@ namespace FargowiltasSouls.Content.Projectiles
             else if (JammedRecoverTime > 0)
                 lightColor = Color.Lerp(lightColor, Color.Purple, JammedRecoverTime / 90f);
             return base.PreDraw(projectile, ref lightColor);
+        }
+
+        public static bool CanBeAbsorbed(Projectile p)
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return false;
+            return p.CanBeReflected() && p.FargoSouls().DeletionImmuneRank == 0 && !p.FargoSouls().IsOnHitSource && !FargoSoulsUtil.IsSummonDamage(p, false);
         }
     }
 }

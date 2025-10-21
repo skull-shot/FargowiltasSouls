@@ -724,19 +724,24 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (Player.HasEffect<NinjaEffect>()
-                && item.IsWeapon()
-                && !ProjectileID.Sets.IsAWhip[item.shoot]
-                && !ProjectileID.Sets.NoMeleeSpeedVelocityScaling[item.shoot]
-                && item.shoot > ProjectileID.None
-                && item.shoot != ProjectileID.WireKite
-                && item.shoot != ModContent.ProjectileType<Retiglaive>()
-                && ContentSamples.ProjectilesByType[item.shoot].aiStyle != ProjAIStyleID.Spear)
+            if (Player.HasEffect<NinjaEffect>() && item.IsWeapon())
             {
-                if (NinjaEffect.PlayerCanHaveBuff(Player))
+                if (NinjaCounter >= 1)
                 {
-                    velocity *= 2f;
-                    knockback *= 2f;
+                    //velocity *= 2f;
+                    //knockback *= 2f;
+                    NinjaCounter--;
+                    NinjaDecrementCD = NinjaDecrementMaxCD;
+                }
+            }
+        }
+        public override void ModifyWeaponCrit(Item item, ref float crit)
+        {
+            if (Player.HasEffect<NinjaEffect>() && item.IsWeapon())
+            {
+                if (NinjaCounter >= 1)
+                {
+                    crit += Player.ForceEffect<NinjaEffect>() ? 30 : 16;
                 }
             }
         }

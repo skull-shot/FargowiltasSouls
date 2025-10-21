@@ -1,8 +1,11 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using Fargowiltas;
+using FargowiltasSouls.Common;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry;
@@ -29,6 +32,7 @@ using Terraria.GameContent.Achievements;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 
@@ -37,8 +41,6 @@ namespace FargowiltasSouls
     public partial class FargowiltasSouls : ICustomDetourProvider
     {
         private static readonly MethodInfo? CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
-
-        private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
 
         private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
 
@@ -90,6 +92,8 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_UseMiningTools_TryHittingWall += MinerEnchWallHammerSpeed;
             On_NPC.AI_123_Deerclops += AI_123_Deerclops;
             On_Projectile.StatusPlayer += StatusPlayer;
+
+            On_ItemSlot.PickItemMovementAction += AllowSouls;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -136,6 +140,26 @@ namespace FargowiltasSouls
             On_Player.ItemCheck_UseMiningTools_TryHittingWall -= MinerEnchWallHammerSpeed;
             On_NPC.AI_123_Deerclops -= AI_123_Deerclops;
             On_Projectile.StatusPlayer -= StatusPlayer;
+
+            On_ItemSlot.PickItemMovementAction -= AllowSouls;
+        }
+
+        private int AllowSouls(On_ItemSlot.orig_PickItemMovementAction orig, Item[] inv, int context, int slot, Item checkItem)
+        {
+            bool shouldAllow = (context == -10 || context == -11) && LoaderManager.Get<AccessorySlotLoader>().ModSlotCheck(checkItem, slot, context) && FargoSoulsSets.Items.AllowedSoulItemExceptions[checkItem.type];
+
+            if (!WorldSavingSystem.EternityMode)
+                return orig(inv, context, slot, checkItem);
+
+            if (shouldAllow)
+                return 1;
+
+            int result = orig(inv, context, slot, checkItem);
+
+            //if (shouldAllow)
+            //    checkItem.accessory = false;
+
+            return result;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -151,7 +175,6 @@ namespace FargowiltasSouls
         void ICustomDetourProvider.ModifyMethods()
         {
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
-            HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
             HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
             HookHelper.ModifyMethodWithDetour(On_TileLoader_PickPowerCheck_Method, MakeCommonTilesEasierToBreak);
         }
@@ -523,19 +546,6 @@ namespace FargowiltasSouls
             orig(self);
             if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail).Contains("HolyDodge"))
                 self.shadowDodgeTimer = 60 * 45;
-        }
-
-        public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
-        {
-            ref var proj = ref FargoSoulsGlobalProjectile.globalProjectileField;
-            ref var ninjaCrit = ref FargoSoulsGlobalProjectile.ninjaCritIncrease;
-            if (proj is not null && ninjaCrit > 0)
-            {
-                proj.CritChance = Math.Max(proj.CritChance - ninjaCrit, 0);
-                // reset this
-                FargoSoulsGlobalProjectile.globalProjectileField = null;
-            }
-            return orig(self, hit, fromNet, noPlayerInteraction);
         }
 
         internal void NerfCoinGun(Orig_PickAmmo orig, Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume)

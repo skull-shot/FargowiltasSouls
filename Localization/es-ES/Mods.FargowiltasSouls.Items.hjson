@@ -382,8 +382,8 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
-		Drastically increases projectile speed and knockback while you're moving slowly
+		While standing still, gain up to 5 stealth
+		Your attacks consume 1 stealth, gaining 2x velocity and knockback, and +16% critical strike chance
 		'Wait for when the moment is right'
 		''' */
 }
@@ -499,8 +499,9 @@ ShadewoodEnchant: {
 	// DisplayName: Shadewood Enchantment
 	/* Tooltip:
 		'''
-		You have an aura of Bleeding
-		Enemies struck while Bleeding spew damaging blood
+		You are surrounded by an aura of blood
+		Having enemies in the aura siphons blood power from them
+		With full blood power, hitting enemies consumes it to cause a splatter of blood
 		'Surprisingly clean'
 		''' */
 }
