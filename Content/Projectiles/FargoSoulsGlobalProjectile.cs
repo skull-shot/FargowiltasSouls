@@ -6,7 +6,6 @@ using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Bosses.Champions.Shadow;
 using FargowiltasSouls.Content.Bosses.Champions.Timber;
 using FargowiltasSouls.Content.Bosses.DeviBoss;
-using FargowiltasSouls.Content.Bosses.MutantBoss;
 using FargowiltasSouls.Content.Bosses.TrojanSquirrel;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Buffs.Souls;
@@ -19,8 +18,6 @@ using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Accessories.HeartOfTheMaster;
 using FargowiltasSouls.Content.Projectiles.Accessories.PureHeart;
 using FargowiltasSouls.Content.Projectiles.Accessories.Souls;
-using FargowiltasSouls.Content.Projectiles.Deathrays;
-using FargowiltasSouls.Content.Projectiles.Eternity.Environment;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
@@ -30,14 +27,12 @@ using Luminance.Core.Graphics;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Mono.Cecil;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static FargowiltasSouls.Content.Items.Accessories.Forces.TimberForce;
 
 namespace FargowiltasSouls.Content.Projectiles
 {
@@ -733,7 +728,7 @@ namespace FargowiltasSouls.Content.Projectiles
                         }
                         if (!player.frozen)
                         {
-                            if (projectile.type == 699)
+                            if (projectile.type == ProjectileID.MonkStaffT2)
                             {
                                 projectile.spriteDirection = (projectile.direction = player.direction);
                                 Vector2 vector2 = vector;
@@ -786,7 +781,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                     }
                                 }
                             }
-                            else if (projectile.type == 708)
+                            else if (projectile.type == ProjectileID.MonkStaffT3_Alt)
                             {
                                 Lighting.AddLight(player.Center, 0.75f, 0.9f, 1.15f);
                                 projectile.spriteDirection = (projectile.direction = player.direction);
@@ -828,7 +823,7 @@ namespace FargowiltasSouls.Content.Projectiles
                                             break;
                                     }
                                     vector7 *= 10f + (float)Main.rand.Next(4);
-                                    Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vector7, 709, projectile.damage, 0f, projectile.owner);
+                                    Projectile.NewProjectile(projectile.GetSource_FromThis(), projectile.Center, vector7, ProjectileID.MonkStaffT3_AltShot, projectile.damage, 0f, projectile.owner);
                                 }
                                 for (int k = 0; k < 3; k += 2)
                                 {
