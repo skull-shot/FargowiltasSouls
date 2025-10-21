@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Content.Projectiles;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -44,10 +45,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                 {
                     if (Vector2.Distance(x.Center, npc.Center) <= distance)
                     {
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i < 10; i++)
                         {
+                            float rot = Main.rand.NextFloat(0, MathHelper.TwoPi);
                             int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.BlueTorch, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100, default, 1.5f);
                             Main.dust[dustId].noGravity = true;
+                            float scale = Main.rand.NextFloat(2, 4);
+
+                            new SparkParticle(npc.Center + 5 * Vector2.UnitX.RotatedBy(rot), scale * Vector2.UnitX.RotatedBy(rot), Color.Lerp(Color.SkyBlue, Color.Blue, 0.8f), 0.1f * scale, 15).Spawn();
                         }
 
                         SoundEngine.PlaySound(SoundID.MaxMana, npc.Center);

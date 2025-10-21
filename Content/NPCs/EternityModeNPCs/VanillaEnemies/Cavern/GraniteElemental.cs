@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Content.Projectiles;
+﻿using FargowiltasSouls.Common.Graphics.Particles;
+using FargowiltasSouls.Content.Patreon.DanielTheRobot;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -20,6 +22,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 
         public int AttackTimer = 0;
         public int DamageStored = 0;
+        public bool wasInvul = false;
 
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
@@ -48,10 +51,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                 {
                     if (Vector2.Distance(x.Center, npc.Center) <= distance)
                     {
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i < 10; i++)
                         {
+                            float rot = Main.rand.NextFloat(0, MathHelper.TwoPi);
                             int dustId = Dust.NewDust(new Vector2(x.position.X, x.position.Y + 2f), x.width, x.height + 5, DustID.BlueTorch, x.velocity.X * 0.2f, x.velocity.Y * 0.2f, 100, default, 1.5f);
                             Main.dust[dustId].noGravity = true;
+                            float scale = Main.rand.NextFloat(2, 4);
+
+                            new SparkParticle(npc.Center + 5 * Vector2.UnitX.RotatedBy(rot), scale * Vector2.UnitX.RotatedBy(rot), Color.Lerp(Color.SkyBlue, Color.Blue, 0.8f), 0.1f * scale, 15).Spawn();
                         }
 
                         SoundEngine.PlaySound(SoundID.MaxMana, npc.Center);
@@ -68,31 +75,32 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             base.SafePostAI(npc);
             if (npc.dontTakeDamage)
             {
-                const int timeToAttack = 50;
-
-                npc.velocity *= AttackTimer >= timeToAttack ? 0.99f : 0f;
+                npc.velocity *= 0.99f;
                 npc.noGravity = true;
-                AttackTimer++;
-                if (AttackTimer == timeToAttack - 25)
-                {
-                    SoundEngine.PlaySound(SoundID.Item91, npc.Center);
-                    FargoSoulsUtil.DustRing(npc.Center, 20, 180, 5f, scale: 2f);
-                }
-                if (AttackTimer == timeToAttack && npc.HasValidTarget)
-                {
-                    SoundEngine.PlaySound(SoundID.Item72, npc.Center);
-                    Vector2 vel = (Main.player[npc.target].Center - npc.Center);
-                    vel.Normalize();
-                    if (FargoSoulsUtil.HostCheck)
-                    {
-                        float scale = 1 + (DamageStored / 80f);
-                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, 3f * vel, ModContent.ProjectileType<GraniteBolt>(), (int)(scale * npc.damage / 6), 0f);
-                    }
-                    npc.velocity = -vel;
-                }
+                wasInvul = true;
+
+                float randRot = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                new SparkParticle(npc.Center + 50 * Vector2.UnitX.RotatedBy(randRot), -8 * Vector2.UnitX.RotatedBy(randRot), Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f), 0.2f, 5).Spawn();
+                Lighting.AddLight(npc.Center, TorchID.Blue);
             }
             else
             {
+                if (wasInvul)
+                {
+                    if (npc.HasValidTarget && DamageStored > 0)
+                    {
+                        SoundEngine.PlaySound(SoundID.Item72, npc.Center);
+                        float rot = (Main.player[npc.target].Center - npc.Center).ToRotation();
+                        if (FargoSoulsUtil.HostCheck)
+                        {
+                            float scale = 1 + (DamageStored / 80f);
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, 2.5f * Vector2.UnitX.RotatedBy(rot), ModContent.ProjectileType<GraniteBolt>(), (int)(scale * npc.damage / 6), 0f);
+                        }
+                        npc.velocity = -Vector2.UnitX.RotatedBy(rot);
+                    }
+
+                    wasInvul = false;
+                }
                 DamageStored = 0;
                 AttackTimer = 0;
             }
