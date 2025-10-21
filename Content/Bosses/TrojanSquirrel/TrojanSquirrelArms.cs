@@ -48,6 +48,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             NPC.target = body.target;
             NPC.direction = NPC.spriteDirection = body.direction;
             NPC.Center = body.Bottom + new Vector2(18f * NPC.direction, -105f) * body.scale;
+            
             if (NPC.ai[0] != 1 && Loop?.HasLoopSoundBeenStarted == true)
             {
                 looptimer = 0;
@@ -108,8 +109,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 case 1: //chains
                     {
                         if (++looptimer >= 90)
-                        {
-                            Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.TrojanHookLoop with { Volume = 0.5f }, () =>
+                        {   
+                            
+                            Loop ??= LoopedSoundManager.CreateNew(FargosSoundRegistry.TrojanHookLoop with { Volume = 0.2f }, () =>
                             {
                                 return NPC == null || !NPC.active || NPC.ai[0] != 1;
                             });
