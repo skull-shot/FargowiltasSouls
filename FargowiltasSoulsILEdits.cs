@@ -1,5 +1,6 @@
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
+using FargowiltasSouls.Core.Systems;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
@@ -70,6 +71,41 @@ namespace FargowiltasSouls
             cursor.EmitOr(); // for the previous stuff
             cursor.Emit(OpCodes.Ldarg_0); // get player instance as argument
             cursor.EmitDelegate(CanFallthrough); // outputs 1 or 0, next instruction is "or" to include this and the previous stuff we collected with EmitOr
+        }
+    }
+    internal sealed class Player_UpdateBuffs_ILEdit : ILEditUtils
+    {
+        public static bool ShouldNerf() => WorldSavingSystem.EternityMode && !NPC.downedBoss2;
+        public override void OnModLoad() => IL_Player.UpdateBuffs += Player_UpdateBuffs_IL;
+        public static void Player_UpdateBuffs_IL(ILContext context)
+        {
+            ILCursor cursor = new(context);
+            if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchStfld<Player>("inferno")))
+            {
+                FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure on MatchStfld<Player>('inferno')");
+                MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
+                return;
+            }
+            // Find the IL pattern where 323 is loaded into num2
+            if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(BuffID.OnFire3)))
+            {
+                FargowiltasSouls.Instance.Logger.Warn("Inferno edit failure: could not find ldc.i4 323");
+                MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
+                return;
+            }
+
+            cursor.EmitDelegate(() => ShouldNerf() ? BuffID.OnFire : BuffID.OnFire3);
+            cursor.Remove();
+
+            if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(20)))
+            {
+                FargowiltasSouls.Instance.Logger.Warn("Inferno edit failure: could not find ldc.i4 20");
+                MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
+                return;
+            }
+
+            cursor.EmitDelegate(() => ShouldNerf() ? 8 : 20);
+            cursor.Remove();
         }
     }
     internal sealed class Projectile_AI_099_1_ILEdit : ILEditUtils
