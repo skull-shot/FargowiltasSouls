@@ -302,6 +302,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public Rectangle LegFrame = new Rectangle(0, 0, LegTexture.Width() / 5, LegTexture.Height() / LegFrameMax);
         public const int LegFrameMax = 7;
         public float LegFramecounter;
+        public int AnimationLengthOverride;
 
         private bool spawned;
 
@@ -666,7 +667,11 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         NPC.velocity.X = 0;
 
                         if (LegFrameType == 1)
+                        {
                             LegFrameType = 2;
+                            LegFrame.Y = 0;
+                        }
+                            
 
                         TileCollision(player.Bottom.Y - 1 > NPC.Bottom.Y, Math.Abs(player.Center.X - NPC.Center.X) < NPC.width / 2 && NPC.Bottom.Y < player.Bottom.Y - 1);
 
@@ -683,6 +688,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         if (WorldSavingSystem.MasochistModeReal || NPC.localAI[3] >= 2)
                             threshold -= 20;
 
+                        AnimationLengthOverride = threshold;
+                        if (AnimationLengthOverride > 60)
+                            AnimationLengthOverride = Math.Max(AnimationLengthOverride - 45, 60);
+
                         if (NPC.ai[3] != 0f) //telegraphing jump
                         {
                             int dir = NPC.localAI[0] % 2 == 0 ? 1 : -1;
@@ -691,12 +700,18 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             NPC.position.X += shake;
 
                             if (LegFrameType == 3) // run frame; incorrect, can happen on transition sometimes
+                            {
                                 LegFrameType = 2;
+                                LegFrame.Y = 0;
+                            }
                         }
                         else // telegraphing run
                         {
                             if (LegFrameType == 4) // jump frame; incorrect
+                            {
                                 LegFrameType = 2;
+                                LegFrame.Y = 0;
+                            }
                         }
 
                         if (++NPC.localAI[0] > threshold)
@@ -1147,12 +1162,16 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 //Preparing to either jump, or run.
                 case 2:
                     {
+                        int animLength = AnimationLengthOverride;
+                        int framesPerFrame = 3;
+                        if (animLength > 0)
+                            framesPerFrame = (int)(animLength / 5f);
                         bool PreparingJump = NPC.ai[0] == 2;
                         bool BeforeJump = (NPC.ai[0] == 1 && NPC.ai[3] != 0f);
                         bool PreparingRun = NPC.ai[0] == 0 || (NPC.ai[0] == 1 && NPC.ai[3] == 0f);
 
                         LegFrame.X = 0;
-                        if (++LegFramecounter >= 3)
+                        if (++LegFramecounter >= framesPerFrame)
                         {
                             LegFramecounter = 0;
 
