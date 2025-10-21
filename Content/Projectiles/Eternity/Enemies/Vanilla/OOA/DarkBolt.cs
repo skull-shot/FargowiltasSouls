@@ -24,7 +24,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
 
         public override void SetDefaults()
         {
-            ProjectileID.Sets.TrailCacheLength[Type] = 12;
             Projectile.width = 16;
             Projectile.height = 16;
             Projectile.hostile = true;
