@@ -82,14 +82,14 @@ namespace FargowiltasSouls
             ILCursor cursor = new(context);
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchStfld<Player>("inferno")))
             {
-                FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure on MatchStfld<Player>('inferno')");
+                FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: on MatchStfld<Player>('inferno')");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
             // Find the IL pattern where 323 is loaded into num2
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(BuffID.OnFire3)))
             {
-                FargowiltasSouls.Instance.Logger.Warn("Inferno edit failure: could not find ldc.i4 323");
+                FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: could not find ldc.i4 323");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
@@ -99,7 +99,7 @@ namespace FargowiltasSouls
 
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(20)))
             {
-                FargowiltasSouls.Instance.Logger.Warn("Inferno edit failure: could not find ldc.i4 20");
+                FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: could not find ldc.i4 20");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
