@@ -1,4 +1,5 @@
-﻿using FargowiltasSouls.Common.Graphics.Particles;
+﻿using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Items.Weapons.SwarmDrops;
 using FargowiltasSouls.Content.Projectiles.Weapons.BossWeapons;
 using Microsoft.Xna.Framework;
@@ -18,7 +19,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 {
     public class TwilightStar : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_79";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Weapons/SwarmWeapons", Name);
 
         #region References
         /*
@@ -34,26 +35,29 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
 
         public override void SetStaticDefaults()
         {
-
+            Main.projFrames[Type] = 8;
         }
 
         public override void SetDefaults()
         {
-            Projectile.width = 42;
-            Projectile.height = 42;
+            Projectile.width = 24;
+            Projectile.height = 38;
             Projectile.DamageType = DamageClass.Magic;
             Projectile.friendly = true;
             Projectile.tileCollide = false;
             Projectile.penetrate = 1;
-            Projectile.Opacity = 0.9f;
+            Projectile.Opacity = 1f;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
         }
 
+        int drawTimer = 0;
         Color tColor = Color.Lerp(Color.SkyBlue, Color.Blue, 0.6f);
 
         public override void AI()
         {
+            Frame();
+
             Player player = Main.player[Projectile.owner];
             if (!player.active || player.dead || player.ghost)
                 Projectile.Kill();
@@ -170,7 +174,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             // visual fx
             if (Projectile.velocity.Length() > 1)
             {
-                new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, (velLen) * Vector2.One, 25).Spawn();
+                new AlphaBloomParticle(Projectile.Center, Projectile.velocity * 0.5f, tColor, Vector2.Zero, 1.2f * Projectile.scale * (velLen) * Vector2.One, 25).Spawn();
                 float spread = 0.5f;
                 if (timer % 10 == 0)
                 {
@@ -182,6 +186,18 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (timer % 22 == 0 && state < 3)
                 SoundEngine.PlaySound(SoundID.Item9 with { Pitch = -1f, Volume = 0.1f, MaxInstances = 1 }, Projectile.Center);
             Lighting.AddLight(Projectile.Center, new Vector3(0.8f, 0.8f, 2f));
+        }
+
+        public void Frame()
+        {
+            Projectile.rotation = -Projectile.spriteDirection * Projectile.velocity.Length() / 12f;
+            drawTimer++;
+            if (drawTimer % 6 == 0)
+            {
+                Projectile.frame++;
+                if (Projectile.frame >= 8)
+                    Projectile.frame = 0;
+            }
         }
 
         public void Movement(Vector2 targetPos)
@@ -205,6 +221,7 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                 Projectile.velocity *= speedCap;
             }
 
+            Projectile.spriteDirection = Projectile.velocity.X > 0 ? -1 : 1;
             Projectile.netUpdate = true;
         }
 
@@ -249,17 +266,18 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             if (state == 0)
                 opac = Projectile.Opacity * timer / 20;
 
-            Texture2D text = TextureAssets.Projectile[16].Value;
-            Rectangle frame = text.Frame();
+            Texture2D text = TextureAssets.Projectile[Type].Value;
+            int height = text.Height / Main.projFrames[Type];
+            Rectangle frame = new (0, Projectile.frame * height, text.Width, height);
 
-            float count = 10;
-            for (int i = 0; i < count; i++)
-            {
-                float scale = (1 - (i / count));
-                Color c = Color.SkyBlue * opac * (i/count);
-                Main.EntitySpriteDraw(text, Projectile.Center - Main.screenPosition, frame, c, 0, frame.Size() / 2, Projectile.scale * scale, SpriteEffects.None);
-            }
-            //FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor * opac, rotation: 0);
+            //float count = 10;
+            //for (int i = 0; i < count; i++)
+            //{
+            //    float scale = (1 - (i / count));
+            //    Color c = Color.SkyBlue * opac * (i/count);
+            //    Main.EntitySpriteDraw(text, Projectile.Center - Main.screenPosition, frame, lightColor, 0, frame.Size() / 2, Projectile.scale * scale, SpriteEffects.None);
+            //}
+            FargoSoulsUtil.GenericProjectileDraw(Projectile, lightColor * opac);
             return false;
         }
     }
