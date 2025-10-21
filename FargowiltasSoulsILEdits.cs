@@ -86,7 +86,6 @@ namespace FargowiltasSouls
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
-            // Find the IL pattern where 323 is loaded into num2
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(BuffID.OnFire3)))
             {
                 FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: could not find ldc.i4 323");
