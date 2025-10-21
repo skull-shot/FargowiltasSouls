@@ -4,6 +4,7 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.IO;
 using Terraria;
 using Terraria.Audio;
@@ -75,18 +76,19 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                 if (Timer > 390)
                 {
                     Timer = 0;
-                    if (Javelin != 1)
+                    if (Javelin != -1)
                     {
                         Main.projectile[Javelin].Kill();
                         Javelin = -1;
                     }
                     return false;
                 }
-                float jTimer = Main.projectile[Javelin].ai[1];
+                float jTimer = Math.Min(Main.projectile[Javelin].ai[1], 120);
 
-                npc.velocity.X = npc.direction * MathHelper.Lerp(0, 1.5f, jTimer / 80);
+                npc.velocity.X = npc.direction * MathHelper.Lerp(0, 3f, jTimer / 120);
 
-                if (jTimer > 85)
+
+                if (jTimer >= 100)
                     new SparkParticle(npc.Top - npc.spriteDirection * npc.width * Vector2.UnitX + Main.rand.NextFloat(0, npc.height) * Vector2.UnitY, -npc.velocity * 0.5f, Color.Green, 0.3f, 8).Spawn();
 
                 return false;
