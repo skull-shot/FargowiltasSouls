@@ -419,7 +419,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public void AmmoCycleKey()
         {
-            SoundEngine.PlaySound(SoundID.Unlock with {Pitch = -0.5f}, Player.Center);
+            SoundEngine.PlaySound(SoundID.Item149, Player.Center);
             Vector2 vel = new(Main.rand.NextFloat(-2, -6) * Player.direction, Main.rand.NextFloat(-5, -8));
             Gore.NewGore(Player.GetSource_Accessory(Player.EffectItem<AmmoCycleEffect>()), Player.Top, vel, ModContent.Find<ModGore>(Mod.Name, "MartianCartridge").Type);
             for (int i = 54; i <= 56; i++)
