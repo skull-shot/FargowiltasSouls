@@ -79,30 +79,34 @@ namespace FargowiltasSouls
         public override void OnModLoad() => IL_Player.UpdateBuffs += Player_UpdateBuffs_IL;
         public static void Player_UpdateBuffs_IL(ILContext context)
         {
+            // nerf inferno pre evils in emode
             ILCursor cursor = new(context);
+            // go to inferno = true at start of the inferno method
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchStfld<Player>("inferno")))
             {
                 FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: on MatchStfld<Player>('inferno')");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
+            // go to where OnFire3 is loaded into which buff should be applied
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(BuffID.OnFire3)))
             {
                 FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: could not find ldc.i4 323");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
-
+            // replace it with condition ? OnFire : OnFire3
             cursor.EmitDelegate(() => ShouldNerf() ? BuffID.OnFire : BuffID.OnFire3);
             cursor.Remove();
 
+            // go to where 20 damage is loaded into how much damage should be dealt
             if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdcI4(20)))
             {
                 FargowiltasSouls.Instance.Logger.Warn("Inferno Potion nerf failure: could not find ldc.i4 20");
                 MonoModHooks.DumpIL(ModContent.GetInstance<FargowiltasSouls>(), context);
                 return;
             }
-
+            // replace it with condition ? 8 : 20
             cursor.EmitDelegate(() => ShouldNerf() ? 8 : 20);
             cursor.Remove();
         }
