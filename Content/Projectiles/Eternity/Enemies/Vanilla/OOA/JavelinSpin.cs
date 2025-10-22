@@ -46,7 +46,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
         {
             Projectile.ai[1]++;
             NPC npc = Main.npc[(int)owner];
-            if (!npc.active)
+            if (!npc.active || !(npc.type is NPCID.DD2JavelinstT1 or NPCID.DD2JavelinstT2 or NPCID.DD2JavelinstT3))
                 Projectile.Kill();
 
 

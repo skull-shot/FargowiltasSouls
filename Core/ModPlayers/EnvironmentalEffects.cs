@@ -156,6 +156,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         private void EvilWaterDust(int dustId)
         {
+            return;
             //search around player for water, add dust
             Vector2 playerPos = Player.Center;
             int radius = 1000;
