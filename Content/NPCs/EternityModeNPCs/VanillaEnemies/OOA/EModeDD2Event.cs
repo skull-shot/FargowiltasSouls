@@ -654,7 +654,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     ];
                 case 6:
                     return [
-                        DD2GoblinT3,
                         DD2GoblinBomberT3,
                         DD2WyvernT3,
                         DD2WitherBeastT3,
