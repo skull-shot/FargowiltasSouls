@@ -17,7 +17,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Accessories", "SlimeBall");
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Slime Rain");
             Main.projFrames[Projectile.type] = 4;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
@@ -45,19 +44,17 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2;
             if (Projectile.localAI[0] == 0) //choose a texture to use
             {
-                Projectile.localAI[0] += Main.rand.Next(1, 4);
+                Projectile.localAI[0] = Main.rand.Next(1, 3);
+            }
+            if (ContentSamples.ProjectilesByType[Type].timeLeft == Projectile.timeLeft)
+            {
+                Projectile.ai[2] = Main.rand.Next(Projectile.localAI[0] == 2 ? 12 : 18);
             }
 
-            if (Projectile.timeLeft % Projectile.MaxUpdates == 0)
+            if (++Projectile.frameCounter % 4 == 0)
             {
-                //if (Projectile.timeLeft < 45 * Projectile.MaxUpdates) Projectile.velocity *= 1.015f;
-
-                if (++Projectile.frameCounter >= 6)
-                {
-                    Projectile.frameCounter = 0;
-                    if (++Projectile.frame >= Main.projFrames[Projectile.type])
-                        Projectile.frame = 0;
-                }
+                if (++Projectile.frame >= Main.projFrames[Type])
+                    Projectile.frame = 0;
             }
 
             if (++Projectile.localAI[1] > 10 && FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.mutantBoss, ModContent.NPCType<MutantBoss>()))
@@ -99,12 +96,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             int sheetClamped = (int)Projectile.localAI[0];
             if (sheetClamped < 1)
                 sheetClamped = 1;
-            if (sheetClamped > 3)
-                sheetClamped = 3;
+            if (sheetClamped > 2)
+                sheetClamped = 2;
             Texture2D texture2D13 = ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Bosses/MutantBoss/MutantSlimeBall{FargoSoulsUtil.TryAprilFoolsTexture}_{sheetClamped}", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             int num156 = texture2D13.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
+            Rectangle rectangle = new((texture2D13.Width / (Projectile.localAI[0] == 2 ? 12 : 18)) * (int)Projectile.ai[2], y3, texture2D13.Width / (Projectile.localAI[0] == 2 ? 12 : 18), num156);
             Vector2 origin2 = rectangle.Size() / 2f;
 
             Color color26 = lightColor;

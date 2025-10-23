@@ -2975,7 +2975,8 @@ Masochist: {
 		-New Eternity-exclusive item drops
 		-Deviantt provides a starter pack and progress-based advice
 		-Improves base stats
-		-Player damage reduction is now scaled to emulate multiplicative scaling: every additional 15% DR reduces damage by 15% compared to the previous value, instead of being additive
+		-Player damage reduction is now scaled to emulate multiplicative scaling: 
+		 Every additional 15% DR reduces damage by 15% compared to the previous value, instead of being additive
 		-Debuffs wear off faster when not attacking, you cannot die to damage over time debuffs unless in Masochist Mode
 		-Changes the functionality and strength of certain items
 		-In Masochist Mode multiplayer, each player can only respawn once per bossfight (can be toggled)
