@@ -47,12 +47,5 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Crimson
             }
             return base.SafePreAI(npc);
         }
-
-        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
-        {
-            base.OnHitPlayer(npc, target, hurtInfo);
-
-            target.AddBuff(BuffID.Rabies, 900);
-        }
     }
 }

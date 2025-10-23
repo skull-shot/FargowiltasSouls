@@ -22,6 +22,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             NPCID.PigronCorruption,
             NPCID.PigronCrimson,
             NPCID.PigronHallow,
+            NPCID.AnglerFish,
             NPCID.AngryNimbus,
             NPCID.MushiLadybug,
             NPCID.AnomuraFungus,
@@ -103,6 +104,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
                         npc.defense = (int)Math.Round(npc.defense / 3.5);
                         npc.damage /= 3;
                         npc.value = (int)Math.Round(npc.value / 1.5);
+                        npc.knockBackResist *= 2f;
+                        break;
+                    case NPCID.AnglerFish:
+                        npc.lifeMax = (int)Math.Round(npc.lifeMax / 1.5);
+                        npc.damage /= 3;
+                        npc.defense /= 4;
+                        npc.value /= 2;
                         npc.knockBackResist *= 2f;
                         break;
                     default: break;
