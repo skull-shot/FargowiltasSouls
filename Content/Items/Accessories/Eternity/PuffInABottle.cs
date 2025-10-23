@@ -36,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class PuffJump : ExtraJump
     {
-        public override Position GetDefaultPosition() => new After(BlizzardInABottle);
+        public override Position GetDefaultPosition() => new After(CloudInABottle);
 
         public override IEnumerable<Position> GetModdedConstraints() //hover for explanation, leaving here if we want it later
         {
