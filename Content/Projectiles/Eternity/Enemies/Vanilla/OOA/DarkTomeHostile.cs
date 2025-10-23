@@ -102,13 +102,9 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
                     Projectile.velocity = -0.5f * vel;
 
                 }
-                if (Timer > 1)
+                if (Timer > 20)
                 {
-                    Projectile.Opacity -= 0.05f;
-                    if (Projectile.Opacity <= 0)
-                    {
-                        Projectile.Kill();
-                    }
+                    Projectile.Kill();
                 }
             }
         }
