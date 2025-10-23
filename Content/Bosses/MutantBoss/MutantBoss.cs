@@ -687,8 +687,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Main.NewText($"after: {text}");*/
 
             //NPC.ai[2] = 28; // debug
-
-            NPC.ai[2] = 35;
         }
 
         void P1NextAttackOrMasoOptions(float sourceAI)
