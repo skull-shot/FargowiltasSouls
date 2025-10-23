@@ -687,6 +687,8 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Main.NewText($"after: {text}");*/
 
             //NPC.ai[2] = 28; // debug
+
+            NPC.ai[2] = 35;
         }
 
         void P1NextAttackOrMasoOptions(float sourceAI)
@@ -2974,29 +2976,31 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 if (FargoSoulsUtil.HostCheck)
                     Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<MutantSlimeRain>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, NPC.whoAmI);
             }
+            int offset = 1080;
 
             if (NPC.ai[1] == 0) //telegraphs for where slime will fall
             {
                 bool first = NPC.localAI[0] == 0;
-                NPC.localAI[0] = Main.rand.Next(5, 9) * 120;
+                NPC.localAI[0] = Main.rand.Next(6, 8) * 120;
                 if (first) //always start on the same side as the player
                 {
-                    if (player.Center.X < NPC.Center.X && NPC.localAI[0] > 1200)
-                        NPC.localAI[0] -= 1200;
-                    else if (player.Center.X > NPC.Center.X && NPC.localAI[0] < 1200)
-                        NPC.localAI[0] += 1200;
+                    NPC.localAI[0] = Main.rand.Next(5, 9) * 120;
+                    if (player.Center.X < NPC.Center.X && NPC.localAI[0] > offset)
+                        NPC.localAI[0] -= offset;
+                    else if (player.Center.X > NPC.Center.X && NPC.localAI[0] < offset)
+                        NPC.localAI[0] += offset;
                 }
                 else //after that, always be on opposite side from player
                 {
-                    if (player.Center.X < NPC.Center.X && NPC.localAI[0] < 1200)
-                        NPC.localAI[0] += 1200;
-                    else if (player.Center.X > NPC.Center.X && NPC.localAI[0] > 1200)
-                        NPC.localAI[0] -= 1200;
+                    if (player.Center.X < NPC.Center.X && NPC.localAI[0] < offset)
+                        NPC.localAI[0] += offset;
+                    else if (player.Center.X > NPC.Center.X && NPC.localAI[0] > offset)
+                        NPC.localAI[0] -= offset;
                 }
                 NPC.localAI[0] += 60;
 
                 Vector2 basePos = NPC.Center;
-                basePos.X -= 1200;
+                basePos.X -= offset;
                 for (int i = -360; i <= 2760; i += 120) //spawn telegraphs
                 {
                     if (FargoSoulsUtil.HostCheck)
@@ -3029,7 +3033,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                     }
 
                     Vector2 basePos = NPC.Center;
-                    basePos.X -= 1200;
+                    basePos.X -= offset;
                     float yOffset = -1300;
 
                     const float safeRange = 110;
