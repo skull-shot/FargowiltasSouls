@@ -110,7 +110,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
                         for (int i = 0; i < 5; i++)
                         {
                             Vector2 targ = target.Center + Main.rand.NextVector2Circular(8, 8);
-                            Vector2 spawnPos = FindSharpTearsSpot(Collision.CanHitLine(npc.Center, 0, 0, target.Center, 0, 0) ? npc.Center : target.Center, targ).ToWorldCoordinates(Main.rand.Next(17), Main.rand.Next(17));
+                            Vector2 spawnPos = FindSharpTearsSpot(Collision.CanHitLine(npc.Center, npc.width, npc.height, target.Center, target.width, target.height) ? npc.Center : target.Center, targ).ToWorldCoordinates(Main.rand.Next(17), Main.rand.Next(17));
                             Projectile.NewProjectile(npc.GetSource_FromThis(), spawnPos, Vector2.Zero, ModContent.ProjectileType<BloodThornWarning>(), FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, (16f * Vector2.Normalize(targ - spawnPos)).X, (16f * Vector2.Normalize(targ - spawnPos)).Y);
                         }
                         if (Jumps == 1)
