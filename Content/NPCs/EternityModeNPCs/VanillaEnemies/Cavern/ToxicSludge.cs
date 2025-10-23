@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -23,9 +24,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
 
             if (Exploding)
             {
-                npc.ai[0] = -3000; //stop jumpign
+                npc.ai[0] = -3000; //stop jumping
                 if (npc.velocity.Y == 0)
                     Timer++;
+
+                if (Timer % 10 == 0 && Timer != 0) SoundEngine.PlaySound(SoundID.Zombie55 with {Volume = 1.5f, Pitch = MathHelper.Lerp(0, 1, (float)(Timer/30))}, npc.Center);
                 if (Timer > 0)
                 {
                     //rapid flashing
