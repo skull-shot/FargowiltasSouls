@@ -50,6 +50,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             Exploding = true;
             npc.dontTakeDamage = true;
             npc.netUpdate = true;
+            if (npc.buffType[0] != 0) //cleanse all buffs
+                npc.DelBuff(0);
             return false;
         }
         public override void OnKill(NPC npc)
