@@ -55,7 +55,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                             new SparkParticle(npc.Center + 5 * Vector2.UnitX.RotatedBy(rot), scale * Vector2.UnitX.RotatedBy(rot), Color.Lerp(Color.SkyBlue, Color.Blue, 0.8f), 0.1f * scale, 15).Spawn();
                         }
 
-                        SoundEngine.PlaySound(SoundID.MaxMana, npc.Center);
+                        SoundEngine.PlaySound(SoundID.MaxMana with { MaxInstances = 2 }, npc.Center);
                         if (projCount < 10) {
 
                             if (FargoSoulsUtil.HostCheck)
