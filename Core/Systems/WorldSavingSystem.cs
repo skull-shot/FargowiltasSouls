@@ -55,6 +55,8 @@ namespace FargowiltasSouls.Core.Systems
         private static bool shiftingSandEvent;
         private static bool haveForcedMutantFromKS;
 
+        public static bool QueueEnableEternityMode;
+
         public static bool EternityMode { get; set; }
 
         public static bool EternityVanillaBehaviour { get; set; }
