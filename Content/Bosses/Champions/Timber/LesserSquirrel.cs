@@ -81,7 +81,7 @@ namespace FargowiltasSouls.Content.Bosses.Champions.Timber
 
             if (++counter > 900)
             {
-                NPC.SimpleStrikeNPC(int.MaxValue, 0, false, 0, null, false, 0, true);
+                NPC.SimpleStrikeNPC(NPC.lifeMax, 0, false, 0, null, false, 0, true);
             }
 
             if (!NPC.dontTakeDamage && WorldSavingSystem.EternityMode)
