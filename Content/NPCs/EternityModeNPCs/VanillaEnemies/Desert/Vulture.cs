@@ -34,7 +34,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
                 SwoopTimer = Main.rand.Next(1, 60 * 3);
                 npc.netUpdate = true;
             }
-            bool lineOfSight = npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0) && npc.Distance(Main.player[npc.target].Center) < 700;
+            bool lineOfSight = npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0) && npc.Distance(Main.player[npc.target].Center) < 450;
             if (!lineOfSight && SwoopTimer > swoopStart - 30 && (SwoopTimer < swoopStart || !npc.HasPlayerTarget))
             {
                 SwoopTimer = swoopStart - 30 - Main.rand.Next(30, 120);
