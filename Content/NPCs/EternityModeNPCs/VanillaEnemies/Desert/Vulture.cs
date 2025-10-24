@@ -44,7 +44,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Desert
             {
                 npc.knockBackResist = 0f;
                 Player player = Main.player[npc.target];
-                float startupEnd = swoopStart + 40;
+                float startupEnd = swoopStart + 60;
                 float telegraphEnd = startupEnd + 15;
                 float swoopEnd = telegraphEnd + 80;
                 float endlagEnd = swoopEnd + 40;
