@@ -63,7 +63,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                 AttackTimer++;
             if (AttackTimer == 360) //warning flash
             {
-                if (Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
+                if (!Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
                 {
                     AttackTimer = Main.rand.Next(0, 120);
                 }
