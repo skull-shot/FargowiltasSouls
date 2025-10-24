@@ -1107,7 +1107,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             //Main.NewText("framex: " + LegFrame.X);
             //140 is the width of each X Frame.
 
-            if (LegFrame.Height == 0) // mp
+            if (Main.netMode == NetmodeID.Server) // mp
                 return;
 
             NPC.frame.X = 0;
