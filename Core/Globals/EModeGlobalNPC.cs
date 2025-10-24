@@ -606,6 +606,8 @@ namespace FargowiltasSouls.Core.Globals
                 {
                     pool[NPCID.SnowFlinx] = .05f;
                 }
+
+                pool[NPCID.BartenderUnconscious] = 0f;
             }
         }
 
