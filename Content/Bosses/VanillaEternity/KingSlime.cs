@@ -309,7 +309,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    if (NPC.velocity.Y < 18)
+                    if (Math.Abs(NPC.velocity.Y) < 3)
+                        NPC.velocity.Y += 0.4f;
+                    else if (NPC.velocity.Y < 18)
                         NPC.velocity.Y += 1;
                 }
                     
