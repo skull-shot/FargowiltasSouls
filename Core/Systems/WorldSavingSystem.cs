@@ -54,6 +54,7 @@ namespace FargowiltasSouls.Core.Systems
         private static bool wOFDroppedDeviGift2;
         private static bool shiftingSandEvent;
         private static bool haveForcedMutantFromKS;
+        public static bool tavernkeepPortalEvent;
 
         public static bool QueueEnableEternityMode;
 
@@ -99,6 +100,8 @@ namespace FargowiltasSouls.Core.Systems
         
         public static bool HaveForcedMutantFromKS { get => haveForcedMutantFromKS; set => haveForcedMutantFromKS = value;}
 
+        public static bool HaveSeenTavernkeepEvent { get => tavernkeepPortalEvent; set => tavernkeepPortalEvent = value; }
+
         public static bool PlacedMutantStatue;
 
         public static string DungeonBrickType = "B";
@@ -125,6 +128,7 @@ namespace FargowiltasSouls.Core.Systems
 
             HaveForcedAbomFromGoblins = false;
             HaveForcedMutantFromKS = false;
+            tavernkeepPortalEvent = false;
             SkipMutantP1 = 0;
 
             ReceivedTerraStorage = false;
@@ -185,6 +189,9 @@ namespace FargowiltasSouls.Core.Systems
             if (HaveForcedMutantFromKS)
                 downed.Add("haveForcedMutantFromKS");
 
+            if (tavernkeepPortalEvent)
+                downed.Add("tavernkeepPortalEvent");
+
             if (ReceivedTerraStorage)
                 downed.Add("ReceivedTerraStorage");
 
@@ -235,6 +242,7 @@ namespace FargowiltasSouls.Core.Systems
             AngryMutant = downed.Contains("AngryMutant");
             HaveForcedAbomFromGoblins = downed.Contains("haveForcedAbomFromGoblins");
             HaveForcedMutantFromKS = downed.Contains("haveForcedMutantFromKS");
+            tavernkeepPortalEvent = downed.Contains("tavernkeepPortalEvent");
             ReceivedTerraStorage = downed.Contains("ReceivedTerraStorage");
             SpawnedDevi = downed.Contains("spawnedDevi");
             DownedAnyBoss = downed.Contains("downedAnyBoss");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FargowiltasSouls.Content.Bosses.CursedCoffin;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA;
 using FargowiltasSouls.Content.WorldGeneration;
 using FargowiltasSouls.Core.Globals;
 using Luminance.Core.Graphics;
@@ -27,6 +28,7 @@ namespace FargowiltasSouls.Core.Systems
         public static bool SeenRedDevilMessage;
         public static int CorruptWaterTimer;
         public static int CrimsonWaterTimer;
+        public static int TavernkeepPortalTimer;
 
         public override void PreUpdateNPCs() => SwarmActive = FargowiltasSouls.MutantMod is Mod fargo && (bool)fargo.Call("SwarmActive");
 
@@ -461,6 +463,25 @@ namespace FargowiltasSouls.Core.Systems
 
                 //make water do stuff
                 //Main.SceneMetrics.ActiveFountainColor = 12;
+            }
+
+            if (!HaveSeenTavernkeepEvent && NPC.downedBoss2 && !NPC.savedBartender)
+            {
+                Player? player = Main.player.FirstOrDefault(x => x.active && (x.ZoneOverworldHeight || (Main.remixWorld && x.ZoneUnderworldHeight)));
+                if (player != null)
+                {
+                    int portalCD = LumUtils.SecondsToFrames(10);
+
+                    TavernkeepPortalTimer++;
+                    if (TavernkeepPortalTimer >= portalCD && !NPC.AnyNPCs(NPCID.BartenderUnconscious))
+                    {
+                        FargoSoulsUtil.NewNPCEasy(null, player.Center, ModContent.NPCType<TavernkeepPortal>());
+                        TavernkeepPortalTimer = 0;
+                        HaveSeenTavernkeepEvent = true;
+                        if (Main.netMode == NetmodeID.Server)
+                            NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
             }
         }
         public static bool CanActuallyPlayMaso => (FargoSoulsUtil.WorldIsMaster() && CanPlayMaso) || Main.zenithWorld;
