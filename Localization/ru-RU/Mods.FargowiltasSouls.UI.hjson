@@ -77,3 +77,4 @@ ActiveSkills: Активные умения
 AvailableSkills: Доступные умения
 SelectDifficulty: Выбрать сложность
 NoRespawn: "{0}: Вы можете возродиться только один раз за битву!"
+// TogglesEternity: Toggles the Eternity Mode, which overhauls many parts of the game.
