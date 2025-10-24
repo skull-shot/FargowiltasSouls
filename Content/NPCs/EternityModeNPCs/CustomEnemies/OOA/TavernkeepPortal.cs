@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Common.Graphics.Particles;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -40,19 +42,36 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
 
         public override void AI()
         {
+            NPC.dontTakeDamage = true;
+            void SparkCircle(int count, Color color, float posOffset, float vel, float scale, int lifeTime)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    float rot = Main.rand.NextFloat(0, MathHelper.TwoPi);
+                    Vector2 rotX = Vector2.UnitX.RotatedBy(rot);
+                    new SparkParticle(NPC.Center + posOffset * rotX, vel * rotX, color, scale, lifeTime).Spawn();
+                }
+            }
+
             timer++;
-            Lighting.AddLight(NPC.Center, TorchID.Purple);
+            if (state != 0)
+                Lighting.AddLight(NPC.Center, TorchID.Purple);
+
             if (state == 0)
             {
-                if (timer > 60)
+                if (timer % 45 == 0)
                 {
-                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen, NPC.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalDryadTouch with { Pitch = 0.5f }, NPC.Center);
+                    FargoSoulsUtil.ScreenshakeRumble(1.5f);
+
+                    SparkCircle(10, Color.Purple, 5, 3, 0.3f, 20);
+                    SparkCircle(10, Color.Lerp(Color.Purple, Color.Pink, 0.3f), 5, 2, 0.3f, 10);
+                }
+                if (timer > 45 * 3)
+                {
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen with { Volume = 2f }, NPC.Center);
                     timer = 0;
                     state = 1;
-                }
-                else
-                {
-                    Dust.NewDustPerfect(NPC.Center + 10 * Vector2.UnitY, DustID.Shadowflame, 1.5f * Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi), Scale: 0.4f);
                 }
             }
             else if (state == 1)
@@ -69,18 +88,33 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
             }
             else if (state == 2)
             {
+                if (timer == 1)
+                {
+                    SoundEngine.PlaySound(SoundID.DD2_OgreHurt with { Variants = [2], Pitch = -0.5f }, NPC.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalSpawnEnemy, NPC.Center);
+                }
+
                 if (timer == 60)
                     SoundEngine.PlaySound(SoundID.DD2_OgreSpit, NPC.Center);
 
                 if (timer == 140)
+                {
                     SoundEngine.PlaySound(SoundID.DD2_OgreAttack, NPC.Center);
+                    SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort, NPC.Center);
+                }
 
                 if (timer == 152 && FargoSoulsUtil.HostCheck)
                 {
                     int tavernkeep = FargoSoulsUtil.NewNPCEasy(NPC.GetSource_FromThis(), NPC.Center + 60 * Vector2.UnitX,
-                        NPCID.BartenderUnconscious, velocity: 30 * Vector2.UnitX);
+                        NPCID.BartenderUnconscious, velocity: 30 * NPC.direction * Vector2.UnitX - 5 * Vector2.UnitY);
                     if (tavernkeep < 200)
                         Main.npc[tavernkeep].AddBuff(BuffID.OgreSpit, 600);
+                }
+
+                if (timer == 210)
+                {
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalSpawnEnemy, NPC.Center);
+                    SoundEngine.PlaySound(SoundID.DD2_OgreRoar, NPC.Center);
                 }
 
                 if (timer >= 260)
@@ -94,8 +128,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
                 float scale = (60 - timer) / 60f;
                 Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Shadowflame, Scale: scale);
 
+                if (timer == 1)
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalOpen with { Volume = 2f }, NPC.Center);
+
                 if (timer > 60)
                 {
+                    SoundEngine.PlaySound(SoundID.DD2_EtherianPortalDryadTouch with { Pitch = 0.5f }, NPC.Center);
+                    FargoSoulsUtil.ScreenshakeRumble(1.5f);
+                    SparkCircle(10, Color.Purple, 5, 3, 0.3f, 30);
+                    SparkCircle(10, Color.Lerp(Color.Purple, Color.Pink, 0.3f), 5, 2, 0.3f, 15);
                     NPC.active = false;
                 }
             }
@@ -150,7 +191,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
             Vector2 eyeOffset = (NPC.height / 4) * Vector2.UnitY;
             eyeOffset.Y *= 4 * scale;
 
-            Main.EntitySpriteDraw(eyeText, NPC.Center - screenPos - eyeOffset, eyeFrame, Color.Pink * opac, 0, eyeOrigin, 0.25f + (opac * scale / 2), SpriteEffects.None);
+            //Main.EntitySpriteDraw(eyeText, NPC.Center - screenPos - eyeOffset, eyeFrame, Color.Pink * opac, 0, eyeOrigin, 0.25f + (opac * scale / 2), SpriteEffects.None);
 
             if (state == 2)
                 AnimateOgre(screenPos, drawColor);
@@ -185,7 +226,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA
 
             int spriteDirection = NPC.direction;
 
-            Vector2 offset = Vector2.UnitX;
+            Vector2 offset = NPC.direction * Vector2.UnitX;
             if (timer < 60)
             {
                 offset *= MathHelper.Clamp(timer / 2, 0, 30);

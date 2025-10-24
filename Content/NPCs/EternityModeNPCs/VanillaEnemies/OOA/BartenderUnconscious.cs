@@ -1,4 +1,6 @@
-﻿using FargowiltasSouls.Core.Globals;
+﻿using FargowiltasSouls.Assets.Sounds;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA;
+using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,9 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -18,21 +22,46 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.BartenderUnconscious);
 
+        public int State;
         public int Timer;
 
         public override void OnSpawn(NPC npc, IEntitySource source)
         {
             Timer = 300;
+            if (source is EntitySource_Parent parent && parent.Entity is NPC parentNPC && parentNPC.type == ModContent.NPCType<TavernkeepPortal>())
+                State = 1;
+            else
+                State = -1;
+
             base.OnSpawn(npc, source);
         }
 
         public override bool SafePreAI(NPC npc)
         {
+            if (State < 0)
+                return base.SafePreAI(npc);
+
             Timer--;
-            npc.AddBuff(BuffID.OgreSpit, 2);
             int rate = (int)Math.Floor(300f - Timer);
+
             if (Timer % rate == 0)
                 Gore.NewGore(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, GoreID.OgreSpit1);
+
+            if (State == 1 && npc.velocity.Y == 0)
+            {
+                SoundEngine.PlaySound(FargosSoundRegistry.DeviFloorImpact, npc.Center);
+                Gore.NewGoreDirect(npc.GetSource_FromThis(), npc.Bottom, new Vector2(5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+                Gore.NewGoreDirect(npc.GetSource_FromThis(), npc.Bottom, new Vector2(-5, 0), Main.rand.Next(11, 14), Scale: 0.8f);
+
+                int[] gores = [GoreID.OgreSpit1, GoreID.OgreSpit2, GoreID.OgreSpit3];
+                for (int i = 0; i < 20; i++)
+                {
+                    Gore.NewGore(npc.GetSource_FromThis(), npc.Bottom, new Vector2(0, -1).RotatedBy(Main.rand.NextFloat(-0.4f, 0.4f)), Main.rand.NextFromList(gores));
+                }
+
+                State = 0;
+            }
+
             return base.SafePreAI(npc);
         }
 

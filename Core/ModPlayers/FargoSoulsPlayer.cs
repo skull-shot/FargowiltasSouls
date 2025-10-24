@@ -218,6 +218,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();
 
+            if (WorldSavingSystem.QueueEnableEternityMode)
+            {
+                WorldSavingSystem.QueueEnableEternityMode = false;
+                EternityDifficultyOption.EnableEternity();
+            }
+
             if (ClientConfig.Instance.MusicModNotification && !ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
                 Main.NewText(Language.GetTextValue($"Mods.{Mod.Name}.Message.NoMusic1"), Color.LimeGreen);

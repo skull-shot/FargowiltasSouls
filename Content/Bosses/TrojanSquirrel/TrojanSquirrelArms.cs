@@ -182,19 +182,28 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         //to help animate body
                         NPC.ai[3] = NPC.ai[1] < start && NPC.ai[1] % teabagInterval < teabagInterval / 2 ? 1 : 0;
 
-                        if (NPC.ai[1] > start && NPC.ai[1] < end && NPC.ai[1] % (body.dontTakeDamage || WorldSavingSystem.MasochistModeReal ? 40 : 70) == 0)
+                        int freq = body.dontTakeDamage || WorldSavingSystem.MasochistModeReal ? 40 : 70;
+                        if (NPC.ai[1] > start && NPC.ai[1] < end && NPC.ai[1] % freq == 0)
                         {
-                            Vector2 pos = GetShootPos();
+                            if (NPC.ai[1] > freq && NPC.direction * NPC.HorizontalDirectionTo(Main.player[NPC.target].Center) < 0) // end early if facing the wrong direction after 2 hooks
+                            {
+                                NPC.ai[1] = end + 10;
+                            }
+                            else
+                            {
+                                Vector2 pos = GetShootPos();
 
-                            float baseAngle = NPC.direction > 0 ? 0f : MathHelper.Pi;
-                            float angle = NPC.SafeDirectionTo(Main.player[NPC.target].Center).ToRotation();
-                            if (Math.Abs(MathHelper.WrapAngle(angle - baseAngle)) > MathHelper.PiOver2)
-                                angle = MathHelper.PiOver2 * Math.Sign(angle);
+                                float baseAngle = NPC.direction > 0 ? 0f : MathHelper.Pi;
+                                float angle = NPC.SafeDirectionTo(Main.player[NPC.target].Center).ToRotation();
+                                if (Math.Abs(MathHelper.WrapAngle(angle - baseAngle)) > MathHelper.PiOver2)
+                                    angle = MathHelper.PiOver2 * Math.Sign(angle);
 
-                            ArmsAnimationAngle = aimAngle;
+                                ArmsAnimationAngle = aimAngle;
 
-                            if (FargoSoulsUtil.HostCheck)
-                                Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, angle.ToRotationVector2() * 8f, ModContent.ProjectileType<TrojanHook>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, ai2: NPC.localAI[0] == 1 ? 1 : -1);
+                                if (FargoSoulsUtil.HostCheck)
+                                    Projectile.NewProjectile(NPC.GetSource_FromThis(), pos, angle.ToRotationVector2() * 8f, ModContent.ProjectileType<TrojanHook>(), FargoSoulsUtil.ScaledProjectileDamage(NPC.defDamage), 0f, Main.myPlayer, ai2: NPC.localAI[0] == 1 ? 1 : -1);
+                            }
+                                
                         }
 
 
@@ -216,8 +225,8 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                     {
                         NPC.ai[1]++;
 
-                        int start = 70;
-                        int end = 340;
+                        int start = 100;
+                        int end = 370;
                         if (WorldSavingSystem.EternityMode)
                         {
                             start -= 30;

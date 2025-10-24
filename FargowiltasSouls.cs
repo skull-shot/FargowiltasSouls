@@ -63,6 +63,7 @@ namespace FargowiltasSouls
     public partial class FargowiltasSouls : Mod
     {
         public static Mod MutantMod;
+        public static Mod BOBW;
         public static Mod CalamityMod;
         public static Mod MusicDisplay;
 
@@ -133,6 +134,7 @@ namespace FargowiltasSouls
         {
             Instance = this;
             ModLoader.TryGetMod("Fargowiltas", out MutantMod);
+            ModLoader.TryGetMod("FargoSeeds", out BOBW);
             ModLoader.TryGetMod("CalamityMod", out CalamityMod);
             ModLoader.TryGetMod("MusicDisplay", out MusicDisplay);
 
@@ -566,7 +568,7 @@ namespace FargowiltasSouls
                 //}
 
                 //mutant shop
-                Mod fargos = FargowiltasSouls.MutantMod;
+                Mod fargos = MutantMod;
                 fargos.Call("AddSummon", 0.5f, "FargowiltasSouls", "SquirrelCoatofArms", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel]), Item.buyPrice(0, 4));
                 fargos.Call("AddSummon", 2.79f, "FargowiltasSouls", "CoffinSummon", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin]), Item.buyPrice(0, 9));
                 fargos.Call("AddSummon", 6.9f, "FargowiltasSouls", "DevisCurse", new Func<bool>(() => WorldSavingSystem.DownedDevi), Item.buyPrice(0, 17, 50));
@@ -581,6 +583,10 @@ namespace FargowiltasSouls
                 fargos.Call("AddPermaUpgrade", new Item(ModContent.ItemType<RabiesVaccine>()), () => Main.LocalPlayer.FargoSouls().RabiesVaccine);
                 fargos.Call("AddPermaUpgrade", new Item(ModContent.ItemType<MutantsDiscountCard>()), () => Main.LocalPlayer.FargoSouls().MutantsDiscountCard);
                 fargos.Call("AddPermaUpgrade", new Item(ModContent.ItemType<MutantsCreditCard>()), () => Main.LocalPlayer.FargoSouls().MutantsCreditCard);
+
+                // emode world gen screen toggle
+                Action<bool> setEmode = (value) => WorldSavingSystem.QueueEnableEternityMode = value;
+                BOBW.Call("AddWorldGenToggle", Name, "Mods.FargoSeeds.WorldGenMenu.HeaderGeneral", "Mods.FargowiltasSouls.UI.Eternity", "Mods.FargowiltasSouls.UI.TogglesEternity", new Color(28, 222, 152), FargoAssets.Filepath + "UI/OncomingMutant", false, setEmode);
             }
             catch (Exception e)
             {

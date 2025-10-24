@@ -169,7 +169,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (npc != null)
             {
                 Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanChain", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-                Texture2D glowtexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanChain_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value; ;
+                Texture2D glowtexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanChain_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
                 Vector2 position = Projectile.Center;
                 Vector2 mountedCenter = ChainOrigin;
                 Rectangle? sourceRectangle = new Rectangle?();

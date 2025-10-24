@@ -606,6 +606,8 @@ namespace FargowiltasSouls.Core.Globals
                 {
                     pool[NPCID.SnowFlinx] = .05f;
                 }
+
+                pool[NPCID.BartenderUnconscious] = 0f;
             }
         }
 
@@ -857,8 +859,10 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GraniteFlyer:
-                case NPCID.GraniteGolem:
                     TimsConcoctionDrop(ItemDropRule.Common(ItemID.IronskinPotion, 1, 1, 2));
+                    break;
+                case NPCID.GraniteGolem:
+                    TimsConcoctionDrop(ItemDropRule.Common(ItemID.EndurancePotion, 1, 1, 2));
                     break;
 
                 case NPCID.RockGolem:
@@ -874,7 +878,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GoblinSorcerer:
-                    TimsConcoctionDrop(new CommonDrop(ItemID.ManaRegenerationPotion, 3, 1, 2, 2));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.ManaRegenerationPotion, 1, 2, 2));
                     break;
 
                 case NPCID.PinkJellyfish:

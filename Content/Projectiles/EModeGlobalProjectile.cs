@@ -1967,7 +1967,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
                 case ProjectileID.Stinger:
                 case ProjectileID.QueenBeeStinger:
-                    target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 300);
+                    //target.AddBuff(ModContent.BuffType<SwarmingBuff>(), 300);
                     break;
 
                 case ProjectileID.Skull:

@@ -36,11 +36,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
     }
     public class PuffJump : ExtraJump
     {
-        public override Position GetDefaultPosition() => new After(BlizzardInABottle);
+        public override Position GetDefaultPosition() => AfterBottleJumps;
 
         public override IEnumerable<Position> GetModdedConstraints() //hover for explanation, leaving here if we want it later
         {
-            return null;
+            foreach (var jump in ExtraJumpLoader.OrderedJumps)
+            {
+                if (jump.Type != Type)
+                    yield return new After(jump);
+            }
         }
 
         public override float GetDurationMultiplier(Player player)

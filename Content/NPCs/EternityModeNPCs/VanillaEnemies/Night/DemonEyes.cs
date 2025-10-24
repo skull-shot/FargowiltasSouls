@@ -63,7 +63,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                 AttackTimer++;
             if (AttackTimer == 360) //warning flash
             {
-                SoundEngine.PlaySound(SoundID.MaxMana with {Pitch = 0.8f, MaxInstances = 1}, npc.Center);
+                if (!Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
+                {
+                    AttackTimer = Main.rand.Next(0, 120);
+                }
+                else
+                {
+                    SoundEngine.PlaySound(SoundID.MaxMana with { Pitch = 0.8f, MaxInstances = 1 }, npc.Center);
+                }
                 npc.netUpdate = true;
                 NetSync(npc);
             }
