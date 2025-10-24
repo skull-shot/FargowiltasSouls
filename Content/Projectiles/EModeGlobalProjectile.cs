@@ -52,6 +52,20 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool Jammed = false;
         public int JammedRecoverTime = 0;
 
+        public static readonly int[] PierceResistImmuneAiStyles =
+        [
+            ProjAIStyleID.Yoyo,
+            ProjAIStyleID.Spear,
+            ProjAIStyleID.ShortSword,
+            ProjAIStyleID.Drill,
+            ProjAIStyleID.HeldProjectile,
+            ProjAIStyleID.NightsEdge, // all fancy sword swings
+            ProjAIStyleID.CursedFlameWall, // clinger staff
+            ProjAIStyleID.Rainbow, // rainbow gun
+            ProjAIStyleID.MechanicalPiranha,
+            ProjAIStyleID.SleepyOctopod
+        ];
+
         /// <summary>
         /// Performs common safety checks used to run specialized EMode vanilla player projectile balance changes.
         /// </summary>

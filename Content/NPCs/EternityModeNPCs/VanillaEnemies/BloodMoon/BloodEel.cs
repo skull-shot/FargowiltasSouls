@@ -1,6 +1,7 @@
 ﻿using System;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.BloodMoon;
 using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
@@ -147,6 +148,28 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
             NPCID.BloodEelBody,
             NPCID.BloodEelTail
         );
+
+        //pierce resist
+        public override void SafeModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers)
+        {
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && !EModeGlobalProjectile.PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
+                modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
+
+            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && EModeGlobalProjectile.PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
+            { //only affects projs of the type that are effectively infinite pierce
+                modifiers.FinalDamage *= 0.7f;
+            }
+        }
+        public override void SafeModifyHitByItem(NPC npc, Player player, Item item, ref NPC.HitModifiers modifiers)
+        {
+            modifiers.FinalDamage *= 0.7f;
+        }
+        public override void UpdateLifeRegen(NPC npc, ref int damage)
+        {
+            if (npc.lifeRegen >= 0) return;
+            npc.lifeRegen /= 2;
+            damage /= 2;
+        } 
 
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {

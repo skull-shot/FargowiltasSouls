@@ -1096,25 +1096,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             modifiers.FinalDamage *= 0.7f;
         }
-        private static readonly int[] PierceResistImmuneAiStyles =
-        [
-            ProjAIStyleID.Yoyo,
-            ProjAIStyleID.Spear,
-            ProjAIStyleID.ShortSword,
-            ProjAIStyleID.Drill,
-            ProjAIStyleID.HeldProjectile,
-            ProjAIStyleID.NightsEdge, // all fancy sword swings
-            ProjAIStyleID.CursedFlameWall, // clinger staff
-            ProjAIStyleID.Rainbow, // rainbow gun
-            ProjAIStyleID.MechanicalPiranha,
-            ProjAIStyleID.SleepyOctopod
-        ];
         public static void PierceResistance(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
-            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && !PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
+            if (projectile.numHits > 0 && !FargoSoulsUtil.IsSummonDamage(projectile) && !FargoSoulsSets.Projectiles.PierceResistImmune[projectile.type] && !EModeGlobalProjectile.PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
                 modifiers.FinalDamage *= 1f / MathF.Pow(1.75f, projectile.numHits);
 
-            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
+            if ((projectile.maxPenetrate >= 20 || projectile.maxPenetrate <= -1) && EModeGlobalProjectile.PierceResistImmuneAiStyles.Contains(projectile.aiStyle))
             { //only affects projs of the type that are effectively infinite pierce
                 modifiers.FinalDamage *= 0.7f;
             }
