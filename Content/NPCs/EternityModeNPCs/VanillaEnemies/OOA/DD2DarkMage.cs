@@ -231,7 +231,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public void Movement(NPC npc)
         {
             npc.velocity = Vector2.UnitY;
-            Vector2 vel = Vector2.Zero;
             int crystal = NPC.FindFirstNPC(NPCID.DD2EterniaCrystal);
             if (crystal != -1)
             {
@@ -249,6 +248,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     return;
                 npc.velocity += Vector2.UnitX * npc.direction;
             }
+
+            // stop him getting stuck on ledges
+            if (Collision.SolidCollision(npc.position + Vector2.UnitX * npc.velocity.X, npc.width, npc.height))
+                npc.velocity -= 3 * Vector2.UnitY;
         }
         #endregion
         #region Animation

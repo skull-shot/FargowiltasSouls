@@ -173,7 +173,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
                         Main.dust[dustId].noGravity = true;
                     }
 
-                    SoundEngine.PlaySound(SoundID.MaxMana, Projectile.Center);
+                    SoundEngine.PlaySound(SoundID.MaxMana with { MaxInstances = 2 }, Projectile.Center);
                     x.Kill();
                 }
             });

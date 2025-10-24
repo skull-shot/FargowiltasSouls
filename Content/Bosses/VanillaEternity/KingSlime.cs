@@ -309,7 +309,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    if (NPC.velocity.Y < 18)
+                    if (Math.Abs(NPC.velocity.Y) < 3)
+                        NPC.velocity.Y += 0.4f;
+                    else if (NPC.velocity.Y < 18)
                         NPC.velocity.Y += 1;
                 }
                     
@@ -687,7 +689,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             // Draw the Ninja (Mutant).
             var ninjaOffset = new Vector2(-npc.velocity.X * 2f, -npc.velocity.Y);
+            ninjaOffset /= 3;
             var ninjaRotation = npc.velocity.X * 0.05f;
+            ninjaRotation /= 2;
             
             switch (npc.frame.Y)
             {
@@ -726,10 +730,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             Vector2 scale = Vector2.One * npc.scale;
             if (Stretch > 0)
-                scale.Y *= 1 - Stretch * 0.45f;
+                scale.Y *= 1 - Stretch * 0.55f;
 
             float xStretch = MathF.Pow(Math.Abs(npc.velocity.Y) / 20f, 0.5f);
-            StretchX = MathHelper.Lerp(StretchX, xStretch, 0.1f);
+            StretchX = MathHelper.Lerp(StretchX, xStretch, 0.3f);
             if (StretchX > 0)
                 scale.X *= 1 - StretchX * 0.42f;
             
@@ -759,18 +763,23 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             var spriteEffects = npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             center.Y += npc.gfxOffY - (70f - yOffset) * scale.Y;
 
+            float crownUp = 30 * StretchX;
             spriteBatch.UseBlendState(BlendState.Additive);
             if (PhaseTwo && P2Visuals < 1)
                 P2Visuals += 0.025f;
-            for (int j = 0; j < 12; j++)
+            if (P2Visuals > 0)
             {
-                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f * P2Visuals * npc.scale;
-                Color color = Color.Red;
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f * P2Visuals * npc.scale;
+                    Color color = Color.Red;
 
-                spriteBatch.Draw(crownTexture, center + afterimageOffset - screenPos, null, color, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+                    spriteBatch.Draw(crownTexture, center + afterimageOffset- screenPos - Vector2.UnitY * crownUp, null, color, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+                }
             }
             spriteBatch.ResetToDefault();
-            spriteBatch.Draw(crownTexture, center - screenPos, null, drawColor, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+            
+            spriteBatch.Draw(crownTexture, center - screenPos - Vector2.UnitY * crownUp, null, drawColor, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
             return false;
         }
 

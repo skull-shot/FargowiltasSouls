@@ -392,12 +392,19 @@ namespace FargowiltasSouls.Core.Globals
                             pool[NPCID.FungiBulb] = .02f;
                     }
 
-                    if (ocean)
+                    if (ocean && normalSpawn)
                     {
-                        if (normalSpawn && wallHackerSpawn)
-                            pool[NPCID.PigronHallow] = .006f;
+                        if (spawnInfo.Water)
+                        {
+                            pool[NPCID.AnglerFish] = .1f;
+                        }
 
-                        if (Main.bloodMoon && spawnInfo.Water && normalSpawn)
+                        if (wallHackerSpawn)
+                        {
+                            pool[NPCID.PigronHallow] = .006f;
+                        }
+
+                        if (Main.bloodMoon && spawnInfo.Water)
                         {
                             pool[NPCID.EyeballFlyingFish] = .02f;
                             if (wallHackerSpawn) //technically yeah he does
@@ -599,6 +606,8 @@ namespace FargowiltasSouls.Core.Globals
                 {
                     pool[NPCID.SnowFlinx] = .05f;
                 }
+
+                pool[NPCID.BartenderUnconscious] = 0f;
             }
         }
 

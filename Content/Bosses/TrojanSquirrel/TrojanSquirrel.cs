@@ -305,6 +305,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
         public int AnimationLengthOverride;
 
         private bool spawned;
+        private bool introJump;
 
         public override void SendExtraAI(BinaryWriter writer)
         {
@@ -486,6 +487,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (!spawned)
             {
                 spawned = true;
+                introJump = true;
 
                 NPC.TargetClosest(false);
 
@@ -605,9 +607,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         {
                             float increment = 1f;
                             if (head == null)
-                                increment += 0.5f;
+                                increment += 0.75f;
                             if (arms == null)
-                                increment += 0.5f;
+                                increment += 0.75f;
                             if (WorldSavingSystem.MasochistModeReal)
                                 increment += 1f;
                             if (NPC.dontTakeDamage)
@@ -679,11 +681,11 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         if (WorldSavingSystem.EternityMode)
                         {
                             if (head == null)
-                                threshold -= 20;
+                                threshold -= WorldSavingSystem.MasochistModeReal ? 15 : 10;
                             if (arms == null)
-                                threshold -= 20;
+                                threshold -= WorldSavingSystem.MasochistModeReal ? 15 : 10;
                             if (head == null && arms == null)
-                                threshold -= 30;
+                                threshold -= WorldSavingSystem.MasochistModeReal ? 35 : 35;
                         }
                         if (WorldSavingSystem.MasochistModeReal || NPC.localAI[3] >= 2)
                             threshold -= 20;
@@ -746,6 +748,13 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                             if (LegFrameType == 1)
                                 LegFrameType = 2;
                             Vector2 distance = player.Top - NPC.Bottom;
+
+                            if (introJump)
+                            {
+                                distance.X /= 2;
+                                introJump = false;
+                            }
+                                
 
                             if (WorldSavingSystem.EternityMode && arms == null)
                             {

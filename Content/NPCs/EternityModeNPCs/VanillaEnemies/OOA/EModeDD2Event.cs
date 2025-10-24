@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using static Terraria.ID.NPCID;
 using Microsoft.Xna.Framework.Graphics;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.OOA;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
 {
@@ -654,7 +655,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                     ];
                 case 6:
                     return [
-                        DD2GoblinT3,
                         DD2GoblinBomberT3,
                         DD2WyvernT3,
                         DD2WitherBeastT3,
@@ -687,7 +687,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
         public override bool InstancePerEntity => true;
 
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
-            => Sets.BelongsToInvasionOldOnesArmy[entity.type] && entity.type != NPCID.DD2EterniaCrystal;
+            => Sets.BelongsToInvasionOldOnesArmy[entity.type] && entity.type != NPCID.DD2EterniaCrystal && entity.type != ModContent.NPCType<TavernkeepPortal>();
 
         public static bool IsInstance(NPC npc) => Sets.BelongsToInvasionOldOnesArmy[npc.type] && npc.type != NPCID.DD2EterniaCrystal;
 
