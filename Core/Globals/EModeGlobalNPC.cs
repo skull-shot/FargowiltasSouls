@@ -876,7 +876,7 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.GoblinSorcerer:
-                    TimsConcoctionDrop(new CommonDrop(ItemID.ManaRegenerationPotion, 3, 1, 2, 2));
+                    TimsConcoctionDrop(new CommonDrop(ItemID.ManaRegenerationPotion, 1, 2, 2));
                     break;
 
                 case NPCID.PinkJellyfish:
