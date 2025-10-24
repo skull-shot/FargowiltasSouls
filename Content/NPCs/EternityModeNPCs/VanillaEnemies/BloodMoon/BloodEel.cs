@@ -23,6 +23,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         public int State;
         public bool Cycle;
         public float Dist;
+        public override void SetDefaults(NPC npc)
+        {
+            npc.lifeMax *= 2;
+        }
         public override bool SafePreAI(NPC npc)
         {
             Player target = Main.player[npc.target];

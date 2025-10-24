@@ -10,6 +10,7 @@ using FargowiltasSouls.Core.Globals;
 using FargowiltasSouls.Core.NPCMatching;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -181,7 +182,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
 
                 if (Jumps >= 3 || AttackTimer > 1200)
                 {
-                    npc.velocity.X *= 0.6f;
+                    npc.velocity.X *= 0.2f;
                     Jumps = State = AttackTimer = 0;
                     npc.ai[0] = 0;
                     npc.ai[1] = 150;
@@ -247,11 +248,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
             if (State == 1) return false;
             return base.CanFallThroughPlatforms(npc);
         }
-        public override void FindFrame(NPC npc, int frameHeight)
-        {
-            if (State != 0)
-                npc.frame.Y = Frame * frameHeight;
-        }
+
         public override void OnHitByAnything(NPC npc, Player player, NPC.HitInfo hit, int damageDone)
         {
             npc.justHit = false; // dont pause vanilla attacks on hit
@@ -272,6 +269,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
                     Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GlowRingHollow>(), 0, 0f, Main.myPlayer, 8, 200);
                 }
             }
+        }
+
+        public override void FindFrame(NPC npc, int frameHeight)
+        {
+            float offset = (State == 2 && Frame >= 10) ? frameHeight / 5 : 0;
+            if (State != 0)
+                npc.frame.Y = (int)((Frame * frameHeight) - offset);
+        }
+
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
         }
 
         private static Point FindSharpTearsSpot(Vector2 origin, Vector2 targetSpot)
