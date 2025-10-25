@@ -210,6 +210,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
                         projectile.penetrate = 7;
                     break;*/
+
+                case ProjectileID.QueenBeeStinger:
+                    projectile.ignoreWater = true;
+                    break;
                 default:
                     break;
             }
@@ -1029,7 +1033,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.QueenBeeStinger:
-                    projectile.velocity.Y -= 0.1f; //negate gravity
+                    projectile.velocity.Y -= 0.1f; // negate gravity
                     break;
 
                 case ProjectileID.BeeHive:
