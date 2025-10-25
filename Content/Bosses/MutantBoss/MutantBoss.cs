@@ -2247,7 +2247,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         if (NPC.localAI[0] == 0)
                             NPC.localAI[1] = Main.rand.Next(5, 9);
                         else
-                            NPC.localAI[1] = Main.rand.Next(3, 7);
+                            NPC.localAI[1] = Main.rand.Next(4, 7);
                     }
                 }
                 else
