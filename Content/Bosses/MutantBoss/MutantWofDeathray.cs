@@ -149,6 +149,12 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
         }
 
+        public override void PostAI()
+        {
+            base.PostAI();
+            Projectile.hide = true;
+        }
+
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
             //empty, disables inherited function

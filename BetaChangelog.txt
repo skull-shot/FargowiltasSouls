@@ -234,3 +234,10 @@ fixed abom cannonballs being able to kaizo you if you exploded them by making ab
 implemented framework for rumination tooltips
 fixed soe not being able to read full tooltips from ponderable materials
 fish ex p3 spawns invul bubble rings
+
+mutant dive nuke ends & explodes immediately if he falls to a certain height relative to player
+mutant rof cf tells are thicker
+tried fixing mutant rof rays drawing in front of ichor
+fixed ftw mutant still having contact damage in desp
+removed maso twins having double rings
+nerfed slime rain so you dont have to run as far

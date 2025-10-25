@@ -194,11 +194,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             CooldownSlot = ImmunityCooldownID.Bosses;
 
+            if (AttackChoice <= -1)
+                return false;
+
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
                 return base.CanHitPlayer(target, ref CooldownSlot);
 
             if (WorldSavingSystem.MasochistModeReal)
-                return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && AttackChoice > -1;
+                return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight;
 
             return false;
         }
@@ -1119,12 +1122,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
             else
             {
-                
-                if (timer < sphereTime + divePrepTime + diveDuration)
+
+                float endAttackTime = sphereTime + divePrepTime + diveDuration;
+                if (timer < endAttackTime)
                 {
                     NPC.velocity = Vector2.UnitY * 1700 / diveDuration;
+                    float triggerHeight = player.Center.Y + 16 * 3;
+                    if (NPC.Center.Y > triggerHeight && timer < endAttackTime - 1)
+                        timer = endAttackTime - 1;
                 }
-                else if (timer == sphereTime + divePrepTime + diveDuration) // impact
+                else if (timer == endAttackTime) // impact
                 {
                     NPC.velocity = Vector2.Zero;
 
@@ -2989,9 +2996,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 else //after that, always be on opposite side from player
                 {
                     if (player.Center.X < NPC.Center.X && NPC.localAI[0] < 1200)
-                        NPC.localAI[0] += 1200;
+                        NPC.localAI[0] += 1200 - 120; //slight reduction to bias it closer to player
                     else if (player.Center.X > NPC.Center.X && NPC.localAI[0] > 1200)
-                        NPC.localAI[0] -= 1200;
+                        NPC.localAI[0] -= 1200 - 120;
                 }
                 NPC.localAI[0] += 60;
 
@@ -3683,7 +3690,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.velocity *= 0f;
             }
 
-            int attacksToDo = 12;
+            int attacksToDo = 12 + 1;
             if (WorldSavingSystem.MasochistModeReal)
                 attacksToDo += 4;
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
