@@ -45,15 +45,16 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         swap = true;
                         EmoteBubble.NewBubble(EmoteID.EmotionAlert, new WorldUIAnchor(npc), 40);
                     }
+                    Timer++;
                     if (!MadeDustRingForTrans)
                     {
-                        if (Timer++ > 40)
+                        if (Timer > 40)
                         {
                             FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 4, scale: 1.5f);
                             MadeDustRingForTrans = true;
                         }
                     }
-                    if (Timer++ > 40)
+                    if (Timer > 40)
                     {
                         npc.dontTakeDamage = true;
                         npc.position -= npc.velocity / 2; //halved speed
@@ -67,16 +68,17 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         Timer = 0;
                         swap = false;
                     }
+                    Timer++;
                     if (MadeDustRingForTrans)
                     {
-                        if (Timer++ > 20)
+                        if (Timer > 40)
                         {
                             FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 8, scale: 1.5f);
                             MadeDustRingForTrans = false;
                             SoundEngine.PlaySound(SoundID.NPCHit36 with { Pitch = 0.5f, MaxInstances = 1 }, npc.Center);
                         }
                     }
-                    if (Timer++ > 20)
+                    if (Timer > 40)
                     {
                         npc.dontTakeDamage = false;
                         npc.Opacity = MathHelper.Lerp(npc.Opacity, 1f, 0.1f);
