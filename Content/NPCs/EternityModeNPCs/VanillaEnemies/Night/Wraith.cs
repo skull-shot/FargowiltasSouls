@@ -19,16 +19,16 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         {
             base.AI(npc);
 
-            Main.projectile.Where(x => x.friendly && x.Alive() && x.FargoSouls().DeletionImmuneRank == 0 && !x.FargoSouls().IsOnHitSource).ToList().ForEach(x =>
+            Main.projectile.Where(x => x.friendly && !x.hostile && x.Alive() && x.damage > 0 && x.FargoSouls().DeletionImmuneRank == 0 && !x.FargoSouls().IsOnHitSource && !x.FargoSouls().IsAHeldProj).ToList().ForEach(x =>
             {
-                if (Vector2.Distance(x.Center, npc.Center) <= 16 * 10)
+                if (Vector2.Distance(x.Center, npc.Center) <= 16 * 10 && x.velocity != Vector2.Zero)
                 {
                     if (x.Eternity().beingWraithReflectBy < 0 || x.Eternity().beingWraithReflectBy == npc.whoAmI)
                     {
                         x.velocity += (Vector2.Normalize(x.Center - npc.Center) * x.velocity.Length()) / 10;
                         x.Eternity().beingWraithReflectBy = npc.whoAmI;
 
-                        int d = Dust.NewDust(x.position, x.width, x.height, DustID.RedTorch, Alpha: 100, Scale: 2f);
+                        int d = Dust.NewDust(x.position, x.width, x.height, DustID.Clentaminator_Red, Alpha: 100, Scale: 1.5f);
                         Main.dust[d].noGravity = true;
                         Main.dust[d].velocity = Vector2.Zero;
                         Main.dust[d].velocity += Vector2.Normalize(x.Center - npc.Center) * 2;

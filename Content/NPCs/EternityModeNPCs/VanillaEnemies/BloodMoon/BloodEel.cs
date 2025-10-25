@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FargowiltasSouls.Common.Graphics.Particles;
 using FargowiltasSouls.Content.Buffs.Eternity;
 using FargowiltasSouls.Content.Projectiles;
@@ -8,10 +9,9 @@ using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using static Fargowiltas.Content.UI.StatSheetUI;
+using Terraria.ModLoader.IO;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoon
 {
@@ -23,6 +23,18 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.BloodMoo
         public int State;
         public bool Cycle;
         public float Dist;
+        public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
+        {
+            binaryWriter.Write7BitEncodedInt(AttackTimer);
+            binaryWriter.Write7BitEncodedInt(State);
+            binaryWriter.Write(Cycle);
+        }
+        public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
+        {
+            AttackTimer = binaryReader.Read7BitEncodedInt();
+            State = binaryReader.Read7BitEncodedInt();
+            Cycle = binaryReader.ReadBoolean();
+        }
         public override void SetDefaults(NPC npc)
         {
             npc.lifeMax *= 2;
