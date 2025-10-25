@@ -105,8 +105,8 @@ namespace FargowiltasSouls.Core.Globals
             if (!WorldSavingSystem.EternityMode)
                 return base.PreAI(npc);
 
-            //in pre-hm, enemies glow slightly at night
-            if (!Main.dayTime && !Main.hardMode && Main.player.Any(p => p.Alive() && p.FargoSouls().SquirrelCharm != null))
+            //squirrel 
+            if (!Main.dayTime && Main.player.Any(p => p.Alive() && p.FargoSouls().SquirrelCharm != null))
             {
                 int x = (int)npc.Center.X / 16;
                 int y = (int)npc.Center.Y / 16;
