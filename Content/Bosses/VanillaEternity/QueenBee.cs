@@ -439,7 +439,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     // speed
                     timer++;
-                    int duration = 60 * 6;
+                    int duration = 60 * 7;
                     float durationDiv = 1f;
                     float lifeFraction = npc.GetLifePercent();
                     if (lifeFraction < 0.75)
@@ -468,7 +468,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         speedMod = 0.8f;
                         float spread = MathHelper.PiOver2 * 0.05f;
 
-                        float baseFrequency = 15f;
+                        float baseFrequency = 13f;
                         float frequency = (int)Math.Round(baseFrequency / durationDiv);
                         if (timer % frequency == 0)
                         {
@@ -483,15 +483,16 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         speedMod = 0.05f;
                         float spreadProgress = (progress - straightFrac) / (1f - straightFrac);
-                        float spread = MathHelper.PiOver2 * 1.4f * spreadProgress;
+                        float spread = MathHelper.PiOver2 * 1.2f * spreadProgress;
 
-                        float baseFrequency = 7f;
+                        float baseFrequency = 5f;
                         float frequency = (int)Math.Round(baseFrequency / durationDiv);
                         if (frequency < 3)
                             frequency = 3;
                         if (timer % frequency == 0)
                         {
-                            float angle = Main.rand.NextFloat(-spread, spread);
+                            float angleTimer = timer - straightFrac * duration;
+                            float angle = spread * MathF.Sin(MathF.Tau * angleTimer / 127f);
                             SoundEngine.PlaySound(SoundID.Item97, npc.position);
                             float speed = 12f;
                             Shot(angle, 0f, speed);
@@ -601,6 +602,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             speedMod += 1f * enrageFactor;
                         }
                         speedMod += ((70f - shotFrequency) / 70f) * 0.4f;
+                        if (cycleProgress < 0.45f) // relock if too close
+                        {
+                            float threshold = 160;
+                            if (LockVector1.Distance(player.Center) < threshold)
+                                LockVector1 = player.Center + player.DirectionTo(LockVector1) * threshold;
+                        }
                         Vector2 desiredPos = LockVector1;
                         Movement(npc, desiredPos, speedMod, maxSpeed);
                     }
@@ -675,7 +682,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     speed += 7f * enrageFactor;
                     Vector2 pos = new Vector2(npc.Center.X, npc.position.Y + npc.height * 0.8f);
                     int dmg = 11;
-                    int type = 719;
+                    int type = ProjectileID.QueenBeeStinger;
                     Vector2 vel = npc.DirectionTo(Main.player[npc.target].Center) * speed;
                     vel = vel.RotatedBy(angle);
                     int num688 = Projectile.NewProjectile(npc.GetSource_FromAI(), pos, vel, type, dmg, 0f, Main.myPlayer);

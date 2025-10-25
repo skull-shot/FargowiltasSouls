@@ -2361,12 +2361,26 @@ namespace FargowiltasSouls.Content.Projectiles
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
-            if (projectile.type == ProjectileID.PoisonSeedPlantera || projectile.type == ProjectileID.SeedPlantera)
+            if (!WorldSavingSystem.EternityMode)
+                return base.PreDraw(projectile, ref lightColor);
+            switch (projectile.type)
             {
-                projectile.Opacity = 1f;
-                FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor);
+                case ProjectileID.PoisonSeedPlantera:
+                case ProjectileID.SeedPlantera:
+                    projectile.Opacity = 1f;
+                    FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor);
+                    break;
+
+                case ProjectileID.QueenBeeStinger:
+                    if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.beeBoss, NPCID.QueenBee) && Main.npc[EModeGlobalNPC.beeBoss] is NPC n && n.TryGetGlobalNPC(out QueenBee qb) && qb.RunEmodeAI)
+                    {
+                        FargoSoulsUtil.ProjectileWithGlowDraw(projectile, lightColor, glowColor: Color.Goldenrod, glowRadius: 2f);
+                        return false;
+                    }
+                    break;
             }
-            else if (JammedRecoverTime > 0)
+                
+            if (JammedRecoverTime > 0)
                 lightColor = Color.Lerp(lightColor, Color.Purple, JammedRecoverTime / 90f);
             return base.PreDraw(projectile, ref lightColor);
         }
