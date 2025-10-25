@@ -2215,7 +2215,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 AttackChoice++;
                 NPC.ai[1] = 0;
                 NPC.ai[3] = 0;
-                NPC.localAI[0] = 0;
                 //NPC.TargetClosest();
             }
 
@@ -2241,9 +2240,20 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (NPC.localAI[1] == 0) //max number of attacks
             {
                 if (WorldSavingSystem.EternityMode)
-                    NPC.localAI[1] = Main.rand.Next(WorldSavingSystem.MasochistModeReal ? 3 : 5, 9);
+                {
+                    NPC.localAI[1] = Main.rand.Next(3, 9);
+                    if (WorldSavingSystem.MasochistModeReal)
+                    {
+                        if (NPC.localAI[0] == 0)
+                            NPC.localAI[1] = Main.rand.Next(5, 9);
+                        else
+                            NPC.localAI[1] = Main.rand.Next(4, 7);
+                    }
+                }
                 else
+                {
                     NPC.localAI[1] = 5;
+                }
             }
 
             if (++NPC.ai[1] > (WorldSavingSystem.EternityMode ? 5 : 20))

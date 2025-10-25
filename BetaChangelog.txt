@@ -241,3 +241,4 @@ tried fixing mutant rof rays drawing in front of ichor
 fixed ftw mutant still having contact damage in desp
 removed maso twins having double rings
 nerfed slime rain so you dont have to run as far
+adjusted number of dashes maso mutant can do for diagonal directs
