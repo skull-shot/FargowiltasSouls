@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public bool Jammed = false;
         public int JammedRecoverTime = 0;
 
-        public static readonly int[] PierceResistImmuneAiStyles =
+        public static readonly List<int> PierceResistImmuneAiStyles =
         [
             ProjAIStyleID.Yoyo,
             ProjAIStyleID.Spear,
