@@ -338,8 +338,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
-            Player player = Main.player[Main.myPlayer];
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (LeadPoison)
             {
                 if (Main.rand.Next(4) < 3)
@@ -664,23 +662,28 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
+            // TODO: Move to proper update method instead of a rendering one and
+            //       actually sync these values (ideally don't use LocalPlayer).
+            if (Main.LocalPlayer.TryGetModPlayer<FargoSoulsPlayer>(out var modPlayer))
             {
-                if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
+                if (modPlayer.PureHeart && Main.LocalPlayer.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
                 {
-                    if (player.FargoSouls().MasochistSoul)
-                        PureGazeTime = PungentGazeBuff.MAX_TIME;
-                    else
-                        PureGazeTime += 1;
-                }
+                    if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
+                    {
+                        if (modPlayer.MasochistSoul)
+                            PureGazeTime = PungentGazeBuff.MAX_TIME;
+                        else
+                            PureGazeTime += 1;
+                    }
                     
-                else if (PureGazeTime >= 3)
-                    PureGazeTime -= 3;
-                if (PureGazeTime > PungentGazeBuff.MAX_TIME)
-                    PureGazeTime = PungentGazeBuff.MAX_TIME;
+                    else if (PureGazeTime >= 3)
+                        PureGazeTime -= 3;
+                    if (PureGazeTime > PungentGazeBuff.MAX_TIME)
+                        PureGazeTime = PungentGazeBuff.MAX_TIME;
+                }
+                else if (PureGazeTime > 0)
+                    PureGazeTime -= 3;   
             }
-            else if (PureGazeTime > 0)
-                PureGazeTime -= 3;
 
             if (DeathMarked)
             {
