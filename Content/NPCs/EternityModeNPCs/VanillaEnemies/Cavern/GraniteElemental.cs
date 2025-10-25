@@ -94,7 +94,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                         if (FargoSoulsUtil.HostCheck)
                         {
                             float scale = 1 + (DamageStored / 80f);
-                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, 2.5f * Vector2.UnitX.RotatedBy(rot), ModContent.ProjectileType<GraniteBolt>(), (int)(scale * npc.damage / 6), 0f);
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, 0.5f * Vector2.UnitX.RotatedBy(rot), ModContent.ProjectileType<GraniteBolt>(), (int)(scale * npc.damage / 6), 0f);
                         }
                         npc.velocity = -Vector2.UnitX.RotatedBy(rot);
                     }

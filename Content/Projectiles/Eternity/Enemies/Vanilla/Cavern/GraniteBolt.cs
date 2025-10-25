@@ -22,7 +22,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
             Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.BlueTorch, Vector2.Zero, Scale: 2f * Projectile.scale);
             d.noGravity = true;
 
-            Projectile.velocity *= 1.03f;
+            Projectile.velocity *= 1.044f;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
