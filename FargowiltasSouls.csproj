@@ -74,23 +74,9 @@
     <None Remove="Content\Projectiles\Accessories\Souls\SpookySpinScythe.png" />
     <None Remove="Localization\en-US\Mods.FargowiltasSouls.ActiveSkills.hjson" />
   </ItemGroup>
+    
   <ItemGroup>
-    <Folder Include="Assets\Textures\Gores\Weapons\BigSting\" />
-    <Folder Include="Assets\Sounds\Challengers\Trojan\" />
-    <Folder Include="Assets\Sounds\VanillaEternity\KingSlime\" />
-    <Folder Include="Common\Graphics\Drawers\" />
-    <Folder Include="Content\Projectiles\Eternity\Enemies\Custom\" />
-    <Folder Include="Content\WorldGen\" />
+      <Reference Include="lib\**\*"/>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Luminance">
-      <HintPath>Luminance.dll</HintPath>
-    </Reference>
-    <Reference Include="Fargowiltas">
-      <HintPath>Fargowiltas.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureHelper">
-      <HintPath>StructureHelper.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+    
 </Project>
