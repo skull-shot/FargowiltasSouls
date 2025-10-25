@@ -242,3 +242,6 @@ fixed ftw mutant still having contact damage in desp
 removed maso twins having double rings
 nerfed slime rain so you dont have to run as far
 adjusted number of dashes maso mutant can do for diagonal directs
+
+fixed mutant rof rays not rendering & adjusted color of rof rays
+actually fixed mutant chains not disappearing for desp trans
