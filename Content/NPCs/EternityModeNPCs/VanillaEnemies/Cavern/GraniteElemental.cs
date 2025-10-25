@@ -87,7 +87,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             {
                 if (wasInvul)
                 {
-                    if (npc.HasValidTarget && DamageStored > 0)
+                    if (npc.HasValidTarget)
                     {
                         SoundEngine.PlaySound(SoundID.Item72, npc.Center);
                         float rot = (Main.player[npc.target].Center - npc.Center).ToRotation();
