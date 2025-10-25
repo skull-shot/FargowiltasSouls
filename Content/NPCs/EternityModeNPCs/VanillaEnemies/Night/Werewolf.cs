@@ -28,7 +28,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             {
                 if (JumpTimer == 0)
                 {
-                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.Blood, 5f, default, 2f);
+                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.VilePowder, 5f, default, 2f);
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/NPC_Hit_6") with { Pitch = -0.5f }, npc.Center);
                 }
                 npc.velocity *= 0;
