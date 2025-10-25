@@ -545,8 +545,8 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.IceMimic:
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.GoldenCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.GoldenCrateHard));
 
                     FargoSoulsUtil.EModeDrop(npcLoot, new LeadingConditionRule(new Conditions.IsPreHardmode()).OnSuccess(ItemDropRule.OneFromOptions(1,
                         ItemID.IceBoomerang,
