@@ -5,6 +5,7 @@ using FargowiltasSouls.Core.NPCMatching;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent.UI;
 using Terraria.ID;
 
 namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
@@ -34,14 +35,15 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             //EModeGlobalNPC.Aura(npc, 100, BuffID.Cursed, false, 20);
             npc.dontTakeDamage = false;
             Player target = Main.player[npc.target];
-            if (Collision.CanHitLine(npc.Center, 0, 0, target.Center, 0, 0) && Math.Abs(npc.Center.X - target.Center.X) <= 16*40 && Math.Abs(npc.Center.Y - target.Center.Y) <= 16*20)
+            if (Math.Abs(npc.Center.X - target.Center.X) <= 16*40 && Math.Abs(npc.Center.Y - target.Center.Y) <= 16*10)
             {
-                if (npc.HasPlayerTarget && target.Alive() && target.direction == Math.Sign(npc.Center.X - target.Center.X) && npc.direction == -target.direction && npc.Distance(target.Center) >= 16*3)
+                if (npc.HasPlayerTarget && target.Alive() && target.direction == Math.Sign(npc.Center.X - target.Center.X) && npc.spriteDirection == -target.direction && npc.Distance(target.Center) >= 16*3)
                 {
                     if (!swap)
                     {
                         Timer = 0;
                         swap = true;
+                        EmoteBubble.NewBubble(EmoteID.EmotionAlert, new WorldUIAnchor(npc), 40);
                     }
                     if (!MadeDustRingForTrans)
                     {
