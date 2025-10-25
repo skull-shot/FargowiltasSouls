@@ -186,6 +186,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (SubjectDR)
             {
                 npc.HitSound = SoundID.NPCHit4;
+                npc.chaseable = false;
 
                 int dustId = Dust.NewDust(npc.position, npc.width, npc.height, DustID.Stone, 0f, 0f, 100, default, 2f);
                 Main.dust[dustId].noGravity = true;
@@ -213,6 +214,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             else
             {
                 npc.HitSound = SoundID.NPCHit1;
+                npc.chaseable = true;
 
                 if (InPhase2 && HiveThrowTimer % 2 == 0)
                     HiveThrowTimer++; //throw hives faster when no royal subjects alive
