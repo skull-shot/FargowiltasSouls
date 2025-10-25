@@ -47,13 +47,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                     }
                     if (!MadeDustRingForTrans)
                     {
-                        if (Timer++ > 20)
+                        if (Timer++ > 40)
                         {
                             FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 4, scale: 1.5f);
                             MadeDustRingForTrans = true;
                         }
                     }
-                    if (Timer++ > 20)
+                    if (Timer++ > 40)
                     {
                         npc.dontTakeDamage = true;
                         npc.position -= npc.velocity / 2; //halved speed
