@@ -303,7 +303,7 @@ namespace FargowiltasSouls.Core.Systems
                 int baseCooldown = LumUtils.SecondsToFrames(40);
                 int postSpawnCooldown = LumUtils.MinutesToFrames(5);
 
-                int hellBaseCooldown = NPC.downedBoss2 ? LumUtils.MinutesToFrames(10) : LumUtils.MinutesToFrames(2);
+                int hellBaseCooldown = NPC.downedBoss2 ? LumUtils.MinutesToFrames(5) : LumUtils.MinutesToFrames(2);
                 int hellPostSpawnCooldown = hellBaseCooldown * 2;
 
                 int messageDelay = LumUtils.SecondsToFrames(10);
