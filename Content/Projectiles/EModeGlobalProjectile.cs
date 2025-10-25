@@ -50,6 +50,7 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool isADD2Proj = false;
         public bool Jammed = false;
+        public int beingWraithReflectBy = -1;
         public int JammedRecoverTime = 0;
 
         public static readonly int[] PierceResistImmuneAiStyles =
