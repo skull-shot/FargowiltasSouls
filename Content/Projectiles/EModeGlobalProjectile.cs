@@ -53,7 +53,7 @@ namespace FargowiltasSouls.Content.Projectiles
         public int beingWraithReflectBy = -1;
         public int JammedRecoverTime = 0;
 
-        public static readonly int[] PierceResistImmuneAiStyles =
+        public static readonly List<int> PierceResistImmuneAiStyles =
         [
             ProjAIStyleID.Yoyo,
             ProjAIStyleID.Spear,
