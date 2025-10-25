@@ -29,7 +29,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies
             NPCID.ZombieMushroom,
             NPCID.ZombieMushroomHat,
             NPCID.IceGolem,
-            NPCID.SandElemental
+            NPCID.SandElemental,
+            NPCID.RockGolem
         );
 
         public override void SetDefaults(NPC npc)

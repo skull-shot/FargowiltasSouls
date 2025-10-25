@@ -28,10 +28,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
             {
                 if (JumpTimer == 0)
                 {
-                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.Blood, 5f, default, 2f);
+                    FargoSoulsUtil.DustRing(npc.Center, 32, DustID.ViciousPowder, 5f, default, 2f);
                     SoundEngine.PlaySound(new SoundStyle("FargowiltasSouls/Assets/Sounds/NPC_Hit_6") with { Pitch = -0.5f }, npc.Center);
                 }
-                npc.velocity *= 0;
+                npc.velocity *= 0.9f;
                 if (JumpTimer <= -60)
                 {
                     JumpTimer = 60 * 9;
@@ -39,7 +39,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                     {
                         Vector2 targetPoint = Main.player[npc.target].Center - Vector2.UnitY * 200;
                         float distanceScale = MathHelper.Clamp(npc.Distance(targetPoint) / 1000f, 0f, 1f);
-                        float vel = 5f + 20f * distanceScale;
+                        float vel = 5f + 15f * distanceScale;
+                        Main.NewText($"{vel}");
                         npc.velocity = npc.DirectionTo(targetPoint) * vel;
                         SoundEngine.PlaySound(FargosSoundRegistry.ThrowShort with { Pitch = 0.5f }, npc.Center);
                     }

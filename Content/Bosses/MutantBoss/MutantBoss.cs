@@ -194,11 +194,14 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
         {
             CooldownSlot = ImmunityCooldownID.Bosses;
 
+            if (AttackChoice <= -1)
+                return false;
+
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)
                 return base.CanHitPlayer(target, ref CooldownSlot);
 
             if (WorldSavingSystem.MasochistModeReal)
-                return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight && AttackChoice > -1;
+                return NPC.Distance(FargoSoulsUtil.ClosestPointInHitbox(target, NPC.Center)) < Player.defaultHeight;
 
             return false;
         }
@@ -788,10 +791,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                         {
                             FargoSoulsUtil.ClearHostileProjectiles(2, NPC.whoAmI);
 
-                            foreach (var proj in Main.ActiveProjectiles)
-                                if (proj.TypeAlive<MutantChain>())
-                                    proj.Kill();
-
                             int n = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, modNPC.Type);
                             if (n != Main.maxNPCs)
                             {
@@ -1119,12 +1118,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             }
             else
             {
-                
-                if (timer < sphereTime + divePrepTime + diveDuration)
+
+                float endAttackTime = sphereTime + divePrepTime + diveDuration;
+                if (timer < endAttackTime)
                 {
                     NPC.velocity = Vector2.UnitY * 1700 / diveDuration;
+                    float triggerHeight = player.Center.Y + 16 * 3;
+                    if (NPC.Center.Y > triggerHeight && timer < endAttackTime - 1)
+                        timer = endAttackTime - 1;
                 }
-                else if (timer == sphereTime + divePrepTime + diveDuration) // impact
+                else if (timer == endAttackTime) // impact
                 {
                     NPC.velocity = Vector2.Zero;
 
@@ -2208,7 +2211,6 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 AttackChoice++;
                 NPC.ai[1] = 0;
                 NPC.ai[3] = 0;
-                NPC.localAI[0] = 0;
                 //NPC.TargetClosest();
             }
 
@@ -2234,9 +2236,20 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             if (NPC.localAI[1] == 0) //max number of attacks
             {
                 if (WorldSavingSystem.EternityMode)
-                    NPC.localAI[1] = Main.rand.Next(WorldSavingSystem.MasochistModeReal ? 3 : 5, 9);
+                {
+                    NPC.localAI[1] = Main.rand.Next(3, 9);
+                    if (WorldSavingSystem.MasochistModeReal)
+                    {
+                        if (NPC.localAI[0] == 0)
+                            NPC.localAI[1] = Main.rand.Next(5, 9);
+                        else
+                            NPC.localAI[1] = Main.rand.Next(4, 7);
+                    }
+                }
                 else
+                {
                     NPC.localAI[1] = 5;
+                }
             }
 
             if (++NPC.ai[1] > (WorldSavingSystem.EternityMode ? 5 : 20))
@@ -2590,7 +2603,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                             float yDistToTravel = yWallEyeOffset * (i - 0.5f * Math.Sign(i));
                             Vector2 vel = new Vector2(xDistToTravel, yDistToTravel) / chainTimeToTravel;
                             float wofVelX = (xWallStopOffset - xWallSpawnOffset) / wofTimeToTravel * j;
-                            int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantChain>(), 0, 0f, Main.myPlayer, chainTimeToTravel, wofVelX, wofTimeToTravel);
+                            int p = Projectile.NewProjectile(NPC.GetSource_FromThis(), NPC.Center, vel, ModContent.ProjectileType<MutantChain>(), 1, 0f, Main.myPlayer, chainTimeToTravel, wofVelX, wofTimeToTravel);
                             if (p != Main.maxProjectiles)
                                 Main.projectile[p].timeLeft = (int)waitTime;
                         }
@@ -2989,9 +3002,9 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 else //after that, always be on opposite side from player
                 {
                     if (player.Center.X < NPC.Center.X && NPC.localAI[0] < 1200)
-                        NPC.localAI[0] += 1200;
+                        NPC.localAI[0] += 1200 - 120; //slight reduction to bias it closer to player
                     else if (player.Center.X > NPC.Center.X && NPC.localAI[0] > 1200)
-                        NPC.localAI[0] -= 1200;
+                        NPC.localAI[0] -= 1200 - 120;
                 }
                 NPC.localAI[0] += 60;
 
@@ -3683,7 +3696,7 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
                 NPC.velocity *= 0f;
             }
 
-            int attacksToDo = 12;
+            int attacksToDo = 12 + 1;
             if (WorldSavingSystem.MasochistModeReal)
                 attacksToDo += 4;
             if (WorldSavingSystem.MasochistModeReal && Main.getGoodWorld)

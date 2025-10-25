@@ -309,7 +309,7 @@ namespace FargowiltasSouls.Core.Globals
 
                             if (Main.moonPhase == 0) //full moon
                             {
-                                pool[NPCID.Raven] = .7f;
+                                pool[NPCID.Raven] = .3f;
                             }
 
                             if (jungle)
@@ -456,7 +456,7 @@ namespace FargowiltasSouls.Core.Globals
 
                                 if (Main.moonPhase == 0) //full moon
                                 {
-                                    pool[NPCID.Raven] = .3f;
+                                    pool[NPCID.Raven] = .1f;
                                 }
 
                                 if (NPC.downedMechBossAny && wallHackerSpawn)
