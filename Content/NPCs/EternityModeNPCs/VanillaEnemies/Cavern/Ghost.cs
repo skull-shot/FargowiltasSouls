@@ -26,6 +26,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
                 //EModeGlobalNPC.Horde(npc, 3);
         }
         public bool MadeDustRingForTrans;
+        public bool swap;
+        public int Timer;
         public override void AI(NPC npc)
         {
             base.AI(npc);
@@ -34,27 +36,50 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             Player target = Main.player[npc.target];
             if (Collision.CanHitLine(npc.Center, 0, 0, target.Center, 0, 0) && Math.Abs(npc.Center.X - target.Center.X) <= 16*40 && Math.Abs(npc.Center.Y - target.Center.Y) <= 16*20)
             {
-                if (npc.HasPlayerTarget && target.Alive() && target.direction == Math.Sign(npc.Center.X - target.Center.X) && npc.Distance(target.Center) >= 16*3)
+                if (npc.HasPlayerTarget && target.Alive() && target.direction == Math.Sign(npc.Center.X - target.Center.X) && npc.direction == -target.direction && npc.Distance(target.Center) >= 16*3)
                 {
+                    if (!swap)
+                    {
+                        Timer = 0;
+                        swap = true;
+                    }
                     if (!MadeDustRingForTrans)
                     {
-                        FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 4, scale: 1.5f);
-                        MadeDustRingForTrans = true;
+                        if (Timer++ > 20)
+                        {
+                            FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 4, scale: 1.5f);
+                            MadeDustRingForTrans = true;
+                        }
                     }
-                    npc.dontTakeDamage = true;
-                    npc.position -= npc.velocity / 2; //halved speed
-                    npc.Opacity = MathHelper.Lerp(npc.Opacity, 0.4f, 0.1f);
+                    if (Timer++ > 20)
+                    {
+                        npc.dontTakeDamage = true;
+                        npc.position -= npc.velocity / 2; //halved speed
+                        npc.Opacity = MathHelper.Lerp(npc.Opacity, 0.4f, 0.1f);
+                    }
                 }
                 else
                 {
+                    if (swap)
+                    {
+                        Timer = 0;
+                        swap = false;
+                    }
                     if (MadeDustRingForTrans)
                     {
-                        FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 8, scale: 1.5f);
-                        MadeDustRingForTrans = false;
-                        SoundEngine.PlaySound(SoundID.NPCHit36 with {Pitch = 0.5f, MaxInstances = 1}, npc.Center);
+                        if (Timer++ > 20)
+                        {
+                            FargoSoulsUtil.DustRing(npc.Center + npc.velocity, 12, DustID.PortalBolt, 8, scale: 1.5f);
+                            MadeDustRingForTrans = false;
+                            SoundEngine.PlaySound(SoundID.NPCHit36 with { Pitch = 0.5f, MaxInstances = 1 }, npc.Center);
+                        }
                     }
-                    npc.Opacity = MathHelper.Lerp(npc.Opacity, 1f, 0.1f);
-                    npc.position += npc.velocity; //doubled speed
+                    if (Timer++ > 20)
+                    {
+                        npc.dontTakeDamage = false;
+                        npc.Opacity = MathHelper.Lerp(npc.Opacity, 1f, 0.1f);
+                        npc.position += npc.velocity; //doubled speed
+                    }
                 }
             }
         }
