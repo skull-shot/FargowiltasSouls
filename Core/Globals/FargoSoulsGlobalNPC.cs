@@ -334,6 +334,23 @@ namespace FargowiltasSouls.Core.Globals
                     }
                 }
             }
+
+            // TODO: actually sync these values (ideally don't use LocalPlayer).
+            if (Main.LocalPlayer.TryGetModPlayer<FargoSoulsPlayer>(out var modPlayer))
+            {
+                if (modPlayer.PureHeart && Main.LocalPlayer.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
+                {
+                    if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
+                    {
+                        if (modPlayer.MasochistSoul) PureGazeTime = PungentGazeBuff.MAX_TIME;
+                        else PureGazeTime ++;
+                    }
+                    else if (PureGazeTime >= 3) PureGazeTime -= 3;
+
+                    if (PureGazeTime > PungentGazeBuff.MAX_TIME) PureGazeTime = PungentGazeBuff.MAX_TIME;
+                }
+                else if (PureGazeTime > 0) PureGazeTime -= 3;
+            }
         }
 
         public override void DrawEffects(NPC npc, ref Color drawColor)
@@ -660,29 +677,6 @@ namespace FargowiltasSouls.Core.Globals
                         Main.dust[dust].noGravity = true;
                     }
                 }
-            }
-
-            // TODO: Move to proper update method instead of a rendering one and
-            //       actually sync these values (ideally don't use LocalPlayer).
-            if (Main.LocalPlayer.TryGetModPlayer<FargoSoulsPlayer>(out var modPlayer))
-            {
-                if (modPlayer.PureHeart && Main.LocalPlayer.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
-                {
-                    if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
-                    {
-                        if (modPlayer.MasochistSoul)
-                            PureGazeTime = PungentGazeBuff.MAX_TIME;
-                        else
-                            PureGazeTime += 1;
-                    }
-                    
-                    else if (PureGazeTime >= 3)
-                        PureGazeTime -= 3;
-                    if (PureGazeTime > PungentGazeBuff.MAX_TIME)
-                        PureGazeTime = PungentGazeBuff.MAX_TIME;
-                }
-                else if (PureGazeTime > 0)
-                    PureGazeTime -= 3;   
             }
 
             if (DeathMarked)
