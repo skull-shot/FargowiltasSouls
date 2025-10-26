@@ -8,3 +8,4 @@ hideCode = false
 hideResources = false
 modReferences = Fargowiltas@3.3.6, Luminance@1.0.3, FargoSeeds@1.0
 dllReferences = StructureHelper
+sortAfter = SOTS

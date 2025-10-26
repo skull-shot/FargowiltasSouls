@@ -759,15 +759,10 @@ BoxofGizmos: {
 	DisplayName: Коробка для вещиц
 	Tooltip:
 		'''
-		Нажмите ПКМ из панели быстрого доступа, чтобы сложить аксессуары с пассивными эффектами из инвентаря
+		Используйте, чтобы сложить аксессуары с пассивными эффектами из инвентаря
+		Не складывает предметы, помеченные как избранные
 		Лежащие в коробке предметы продолжают давать свои бонусы
-		Чтобы извлечь предметы из коробки, нажмите ЛКМ
-		'''
-	VanityTooltip:
-		'''
-		Стойте неподвижно, чтобы подсветить ближайшие сокровища и врагов
-		Враги испускают свет ночью
-		Даёт авто-атаку предметам, не являющимся оружием
+		Чтобы извлечь предметы из коробки, нажмите ПКМ
 		'''
 	Contains: "[c/00FFFF:Содержит:]"
 	Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Можно сложить в коробку для вещиц]"
@@ -1020,7 +1015,16 @@ BionomicCluster: {
 		«Отблеск красоты Террарии»
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее"
-	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер» (работает в инвентаре или слотах для украшений), [i:FargowiltasSouls/FrigidGrasp] «Ледяной ожог», «Охлаждение», [i:FargowiltasSouls/NymphsPerfume] «Сглаз» и [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка»
+	RuminateTooltip:
+		'''
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SandsofTime] «Сильный ветер» (работает в инвентаре или слотах для украшений), [i:FargowiltasSouls/FrigidGrasp] «Ледяной ожог», «Охлаждение», [i:FargowiltasSouls/NymphsPerfume] «Сглаз» и [i:FargowiltasSouls/SqueakyToy] «Игрушка-пищалка»
+		[i:FargowiltasSouls/NymphsPerfume] Ваши атаки периодически вызывают похищающие здоровье сердца
+		[i:FargowiltasSouls/SqueakyToy] У вражеских атак есть 10% шанс пискнуть и нанести вам 1 единицу урона
+		[i:FargowiltasSouls/SandsofTime] Используйте, чтобы телепортироваться к месту, где вы были за минуту до смерти
+		[i:FargowiltasSouls/TimsConcoction] С большинства врагов будут выпадать зелья после убийства
+		[i:FargowiltasSouls/NymphsPerfume] Вы возрождаетесь с большим количеством здоровья и, [i:FargowiltasSouls/SandsofTime] пока поблизости нет боссов, делаете это быстрее (работает в инвентаре или слотах для украшений)
+		«Отблеск красоты Террарии»
+		'''
 }
 
 LithosphericCluster: {
@@ -1047,7 +1051,21 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
 		[i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		'''
-	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+	RuminateTooltip:
+		'''
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
+		[i:FargowiltasSouls/CrystalSkull] Даёт мрачный фонарь, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
+		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
+		[i:FargowiltasSouls/DreadShell] Контратака аннулирует до 200 урона и накладывает на врагов проклятие
+		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
+		[c/00FFFF:Следующие эффекты пассивно действуют в инвентаре или слотах для украшений (ПКМ, чтобы выключить):]
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
+		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
+		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
+		«Он пульсирует жизненной энергией»
+		'''
 }
 
 LithosphericClusterInactive: {
@@ -1067,7 +1085,21 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
 		«Он пульсирует жизненной энергией»
 		'''
-	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+	RuminateTooltip:
+		'''
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/WretchedPouch] «Теневое пламя», [i:FargowiltasSouls/WyvernFeather] «Оборванные крылья», [i:FargowiltasSouls/CrystalSkull] «Ошеломление», «Паутина» и [i:FargowiltasSouls/DreadShell] «Несвёртываемость»
+		[i:FargowiltasSouls/CrystalSkull] Враги с меньшей вероятностью атакуют вас
+		[i:FargowiltasSouls/CrystalSkull] Даёт мрачный фонарь, который заряжает теневую энергию, пока вы атакуете; прекратите атаковать, чтобы выпустить энергию в виде духов
+		[i:FargowiltasSouls/WretchedPouch] При полном заряде выпускает концентрированный луч теневого пламени
+		[i:FargowiltasSouls/DreadShell] Контратака аннулирует до 200 урона и накладывает на врагов проклятие
+		[i:FargowiltasSouls/WyvernFeather] С проклятых врагов при получении урона падают сферы, пополняющие теневую энергию и время полёта
+		[c/00FFFF:Следующие эффекты сейчас выключены в инвентаре или слотах для украшений (ПКМ, чтобы включить):]
+		    Даёт иммунитет к дебаффам [i:FargowiltasSouls/MysticSkull] «Удушье» и [i:FargowiltasSouls/SecurityWallet] «Мидас»
+		    [i:FargowiltasSouls/WyvernFeather] Стабилизирует гравитацию в космосе и жидкостях
+		    [i:FargowiltasSouls/SecurityWallet] Автоматически складывает деньги в свинью-копилку и уменьшает стоимость перековок на 50%
+		    [i:FargowiltasSouls/MysticSkull] При необходимости автоматически использует зелья маны
+		«Он пульсирует жизненной энергией»
+		'''
 }
 
 CelestialRune: {
@@ -1093,6 +1125,9 @@ VerdantDoomsayerMask: {
 		'''
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/VerdantDoomsayerMask] «Атрофия», «Заклинило», «Обратный поток маны» и «Необщительность»
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/MagicalBulb] «Кислотный яд», «Яд плюща», [i:FargowiltasSouls/LihzahrdTreasureBox] «Заря», «Фитиль» и [i:FargowiltasSouls/CelestialRune] «Помеченный смертью»
+		[i:FargowiltasSouls/MagicalBulb] Увеличивает регенерацию здоровья в зависимости от окружающего света
+		[i:FargowiltasSouls/CelestialRune] Вы периодически выпускаете дополнительные снаряды в зависимости от класса используемого оружия
+		«Всегда наблюдает»
 		'''
 }
 
@@ -1154,7 +1189,16 @@ DubiousCircuitry: {
 		[i:FargowiltasSouls/ReinforcedPlating] Увеличивает защиту и сопротивление урону, пока вы под воздействием дебаффа
 		«Скорее всего не включает в себя вредоносные программы»
 		'''
-	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/RemoteControl] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и невосприимчивость к отбрасыванию
+	RuminateTooltip:
+		'''
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/FusedLens] «Проклятие ада», «Ихор», [i:FargowiltasSouls/RemoteControl] «Электризация», «Громоотвод», [i:FargowiltasSouls/ReinforcedPlating] «Пробитие» и невосприимчивость к отбрасыванию
+		[i:FargowiltasSouls/FusedLens] Пока вы получаете постепенный урон, ваша скорость атаки увеличивается
+		[i:FargowiltasSouls/FusedLens] Пока ваша защита снижена, ваш шанс крит. удара увеличивается
+		[i:FargowiltasSouls/FusedLens] Установка дебаффа накладывает на вас «Проклятие ада» и «Ихор»
+		[i:FargowiltasSouls/RemoteControl] Электрические атаки по вам заряжают вас, что увеличивает ваши скорость передвижения и атаки
+		[i:FargowiltasSouls/ReinforcedPlating] Увеличивает защиту и сопротивление урону, пока вы под воздействием дебаффа
+		«Скорее всего не включает в себя вредоносные программы»
+		'''
 }
 
 EurusSock: {
@@ -1268,6 +1312,13 @@ HeartoftheMasochist: {
 		Даёт иммунитет к дебаффам [i:FargowiltasSouls/IceQueensShield] «Заморозка», [i:FargowiltasSouls/SaucerControlConsole] «Искажение», «Нестабильность»,
 		[i:FargowiltasSouls/BetsysHeart] «В слюнях», «Усохшее оружие», «Усохшая броня», [i:FargowiltasSouls/MutantAntibodies] «Океаническое терзание», дебаффам воды,
 		[i:FargowiltasSouls/PrecisionSeal] «Поражение» и [i:FargowiltasSouls/ChaliceofTheMoon] «Проклятие луны»
+		[i:FargowiltasSouls/MutantAntibodies] Увеличивает урон и [i:FargowiltasSouls/PumpkingsCape] шанс крит. удара на 8% и [i:FargowiltasSouls/IceQueensShield] сопротивление урону на 4%
+		[i:FargowiltasSouls/ChaliceofTheMoon] Даёт базовые баффы зелий (работает в инвентаре и слотах для украшений)
+		[i:FargowiltasSouls/PrecisionSeal] Уменьшает ваш хёртбокс для снарядов, зажмите клавишу печати точности, чтобы отключить рывки и двойные прыжки
+		[i:FargowiltasSouls/MutantAntibodies] При погружении в воду восстанавливает время полёта и улучшает передвижение
+		[i:FargowiltasSouls/ChaliceofTheMoon] Превращает все эффекты аксессуаров с миньонами в +4% к урону и пустые слоты миньонов в +2% к урону за каждый (можно переключить)
+		При выключенном эффекте призывает [i:FargowiltasSouls/SaucerControlConsole] дружественную мини-тарелку
+		«Тёплое, бьётся и не нуждается в теле»
 		'''
 }
 
@@ -1436,7 +1487,18 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Сила «Сублимации» увеличивается быстрее, если мини-пожиратели, ползуны или шипы наносят урон
 		«Будто бы сама ваша душа сияет»
 		'''
-	RuminateTooltip: Даёт [i:FargowiltasSouls/PureHeart] невосприимчивость к негативным эффектам биомов, [i:FargowiltasSouls/RottingHeart] дебаффам «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадность», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
+	RuminateTooltip:
+		'''
+		Даёт [i:FargowiltasSouls/PureHeart] невосприимчивость к негативным эффектам биомов, [i:FargowiltasSouls/RottingHeart] дебаффам «Гниение», [i:FargowiltasSouls/GuttedHeart] «Кровожадность», [i:FargowiltasSouls/PungentEyeball] «Тёмная пелена» и «Затемнение»
+		Увеличивает [i:FargowiltasSouls/GelicWings] время полёта на 30%, [i:FargowiltasSouls/RottingHeart] скорость передвижения на 10%,
+		[i:FargowiltasSouls/GuttedHeart] максимальный запас здоровья на 10% и [i:FargowiltasSouls/PungentEyeball] частоту появления редких врагов
+		[i:FargowiltasSouls/PungentEyeball] Ваш курсор накладывает на врагов дебафф «Сублимация», наносящий постепенный урон и уменьшающий защиту.
+		     Чем дольше вы держите курсор на враге, тем сильнее становится эффект
+		[i:FargowiltasSouls/GuttedHeart] [i:FargowiltasSouls/RottingHeart] До 3 ползунов кружат вокруг вас, появляясь быстрее, пока вы на земле, и выпуская мини-пожирателей при смерти
+		[i:FargowiltasSouls/GelicWings] Во время полёта, из ваших крыльев вылетают шипы
+		[i:FargowiltasSouls/PureHeart] Сила «Сублимации» увеличивается быстрее, если мини-пожиратели, ползуны или шипы наносят урон
+		«Будто бы сама ваша душа сияет»
+		'''
 }
 
 QueenStinger: {
@@ -1582,7 +1644,14 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 20%, а также за вами остаётся след из кровавых шипов
 		«Не гарантирует верховенство»
 		'''
-	RuminateTooltip: Даёт иммунитет к дебаффам [i:FargowiltasSouls/SlimyShield] «Слизень», [i:FargowiltasSouls/AgitatingLens] «Свирепость», [i:FargowiltasSouls/QueenStinger] «Заражение», «Рой», [i:FargowiltasSouls/Deerclawps] «Замедление», «Заморозка» и [i:FargowiltasSouls/NecromanticBrew] «Вялость»
+	RuminateTooltip:
+		'''
+		Даёт иммунитет к дебаффам [i:FargowiltasSouls/SlimyShield] «Слизень», [i:FargowiltasSouls/AgitatingLens] «Свирепость», [i:FargowiltasSouls/QueenStinger] «Заражение», «Рой», [i:FargowiltasSouls/Deerclawps] «Замедление», «Заморозка» и [i:FargowiltasSouls/NecromanticBrew] «Вялость»
+		Значительно увеличивает скорость [i:FargowiltasSouls/NecromanticBrew] рывков и [i:FargowiltasSouls/SlimyShield] падения, удерживайте вниз, чтобы падать через платформы
+		[i:FargowiltasSouls/SlimyShield] [i:FargowiltasSouls/AgitatingLens] Во время движения за вами остаётся след из кровавой слизи
+		[i:FargowiltasSouls/Deerclawps] Во время рывка уменьшает получаемый урон на 20%, а также за вами остаётся след из кровавых шипов
+		«Не гарантирует верховенство»
+		'''
 }
 
 TimsConcoction: {
@@ -3162,7 +3231,7 @@ AnglerEnchant: {
 		'''
 		Увеличивает мастерство рыбалки, вы вылавливаете рыбу почти мгновенно
 		Ваша леска никогда не порвётся, а наживка тратится с меньшим шансом
-		Увеличивает мастерство рыбалки на 20 и позволяет рыбачить в лаве
+		Увеличивает мастерство рыбалки на 20, позволяет рыбачить в лаве и заставляет поплавки светиться
 		«Но если есть в кармане рыба да башмак, значит, всё не так уж плохо на сегодняшний день»
 		'''
 }

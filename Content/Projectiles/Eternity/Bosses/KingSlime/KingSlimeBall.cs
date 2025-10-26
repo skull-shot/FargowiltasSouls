@@ -1,13 +1,9 @@
 using FargowiltasSouls.Assets.Textures;
-using FargowiltasSouls.Core;
-using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -35,10 +31,13 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
             Projectile.timeLeft = 300;
         }
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            Projectile.ai[0] = Main.rand.Next(18);
+        }
+
         public override void AI()
         {
-            if (ContentSamples.ProjectilesByType[Type].timeLeft == Projectile.timeLeft)
-                Projectile.ai[0] = Main.rand.Next(18);
             Projectile.alpha -= 50;
             if (Projectile.alpha < 0)
                 Projectile.alpha = 0;
@@ -47,38 +46,14 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
                 Color color = Color.Blue;
                 switch (Projectile.ai[0])
                 {
-                    case <= 2:
-                        {
-                            color = Color.Blue;
-                        }
-                        break;
-                    case <= 5:
-                        {
-                            color = Color.Green;
-                        }
-                        break;
-                    case <= 8:
-                        {
-                            color = Color.Purple;
-                        }
-                        break;
-                    case <= 11:
-                        {
-                            color = Color.Pink;
-                        }
-                        break;
-                    case <= 14:
-                        {
-                            color = Color.Gray;
-                        }
-                        break;
-                    case <= 17:
-                        {
-                            color = Color.Red;
-                        }
-                        break;
-
+                    case <= 2: color = Color.Blue; break;
+                    case <= 5: color = Color.LightGreen; break;
+                    case <= 8: color = Color.Magenta; break;
+                    case <= 11: color = Color.Pink; break;
+                    case <= 14: color = Color.LightGray; break;
+                    case <= 17: color = Color.Red; break;
                 }
+
                 int d = Dust.NewDust(Projectile.position - Projectile.velocity * 3f, Projectile.width, Projectile.height, DustID.TintableDust, 0f, 0f, 150, color, 1.2f);
                 Main.dust[d].velocity *= 0.3f;
                 Main.dust[d].velocity += Projectile.velocity * 0.3f;
@@ -91,7 +66,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
             }
             Projectile.velocity.Y += 0.3f;
 
-            Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2f;
+            Projectile.rotation = Projectile.velocity.ToRotation() - MathHelper.Pi / 2f;
 
             if (++Projectile.frameCounter % 4 == 0)
             {
@@ -103,6 +78,26 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(BuffID.Slimed, 60);
+        }
+
+        public override void OnKill(int timeLeft)
+        {
+            Color color = Color.Blue;
+            switch (Projectile.ai[0])
+            {
+                case <= 2: color = Color.Blue; break;
+                case <= 5: color = Color.LightGreen; break;
+                case <= 8: color = Color.Magenta; break;
+                case <= 11: color = Color.Pink; break;
+                case <= 14: color = Color.LightGray; break;
+                case <= 17: color = Color.Red; break;
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                int num469 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.TintableDust, -Projectile.velocity.X * 0.2f, -Projectile.velocity.Y * 0.2f, 150, color, 1.2f);
+                Main.dust[num469].noGravity = true;
+            }
         }
 
         public override bool PreDraw(ref Color lightColor)

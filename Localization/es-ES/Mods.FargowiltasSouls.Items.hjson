@@ -748,15 +748,9 @@ BoxofGizmos: {
 	// DisplayName: Box of Gizmos
 	/* Tooltip:
 		'''
-		Use with right click to box up accessories with passive effects in your inventory
+		Use to box up accessories with passive effects in your inventory (won't box favorited items)
 		Boxed accessories continue to grant their passive effects
-		Boxed accessories can be unboxed with left click
-		''' */
-	/* VanityTooltip:
-		'''
-		Stand still to expose nearby treasure and enemies
-		Enemies emit light at night
-		Grants autofire to non-weapon items
+		Right click to unbox accessories
 		''' */
 	// Contains: "[c/00FFFF:Contains:]"
 	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
