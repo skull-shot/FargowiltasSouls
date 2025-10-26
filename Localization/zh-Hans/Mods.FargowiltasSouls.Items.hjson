@@ -770,12 +770,6 @@ BoxofGizmos: {
 		敌怪在夜晚会发光
 		使非武器物品获得自动使用的效果
 		'''
-	VanityTooltip:
-		'''
-		静止不动时显露附近的宝藏与敌人
-		敌怪在夜晚会发光
-		使非武器物品获得自动使用的效果
-		'''
 	// Contains: "[c/00FFFF:Contains:]"
 	// Storable: "[i:FargowiltasSouls/BoxofGizmos] [c/AAAAAA:Can be stored in Box of Gizmos]"
 }

@@ -24,23 +24,19 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             Projectile.timeLeft = 30;
             Projectile.usesIDStaticNPCImmunity = true;
             Projectile.idStaticNPCHitCooldown = 10;
+            Projectile.DamageType = DamageClass.Melee;
         }
         public override void OnSpawn(IEntitySource source)
         {
-            if (source is EntitySource_Parent parent && parent.Entity is Projectile parentProj && parentProj.DamageType == DamageClass.Melee)
-                Projectile.DamageType = DamageClass.Melee;
+            //Projectile.ai[1] = Main.rand.Next(12);
+            Projectile.ai[1] = Main.rand.Next(3);
         }
 
         public override void AI()
         {
-            if (ContentSamples.ProjectilesByType[Type].timeLeft == Projectile.timeLeft)
-            {
-                Projectile.ai[1] = Main.rand.Next(12);
-            }
             if (Main.rand.NextBool(5))
             {
-                int dust = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.BlueTorch, Projectile.velocity.X * 0.2f,
-                    Projectile.velocity.Y * 0.2f, 100, default, 2f);
+                int dust = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.TintableDust, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 200, Color.Blue, 1f);
                 Main.dust[dust].noGravity = true;
             }
 
@@ -54,6 +50,16 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
             {
                 if (++Projectile.frame >= Main.projFrames[Type])
                     Projectile.frame = 0;
+            }
+        }
+
+        public override void OnKill(int timeleft)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                int num469 = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.TintableDust, Projectile.velocity.X * 0.2f, Projectile.velocity.Y * 0.2f, 200, Color.Blue, 1f);
+                Main.dust[num469].noGravity = true;
+                Main.dust[num469].velocity *= 2f;
             }
         }
 
