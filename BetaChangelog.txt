@@ -248,3 +248,4 @@ actually fixed mutant chains not disappearing for desp trans
 
 flipped gizmos inputs (now left is box, right is unbox)
 gizmos wont box favorited items
+you can now consume the moon chalice (it doesnt do anything)

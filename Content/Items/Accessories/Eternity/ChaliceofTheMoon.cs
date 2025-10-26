@@ -30,6 +30,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             //Item.defense = 10;
             Item.rare = ItemRarityID.Purple;
             Item.value = Item.sellPrice(0, 8);
+
+            Item.useStyle = ItemUseStyleID.DrinkLiquid;
+            Item.useAnimation = 17;
+            Item.useTime = 17;
+            Item.useTurn = true;
+            Item.UseSound = SoundID.Item3;
+
+            Item.consumable = false;
         }
         public override void UpdateInventory(Player player)
         {
