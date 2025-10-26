@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Assets.Textures;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace FargowiltasSouls.Content.Tiles
 {
     public class BouncyMushroomTile : ModTile
     {
-        public override string Texture => "Terraria/Images/Tiles_190";
+        public override string Texture => FargoAssets.GetAssetString("Content/Tiles", Name);
 
         public override void SetStaticDefaults()
         {
