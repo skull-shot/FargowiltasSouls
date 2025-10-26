@@ -230,6 +230,11 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 1.1f;
                     return EModeChange.Buff;
 
+                case ItemID.SkyFracture:
+                    balanceTextKeys = ["SkyFracture"];
+                    balanceNumber = 1f;
+                    return EModeChange.Buff;
+
                 case ItemID.DD2SquireDemonSword: // brand of inferno
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
