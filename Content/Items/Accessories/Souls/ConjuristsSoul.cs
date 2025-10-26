@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Materials;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -34,22 +35,22 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         public override void AddRecipes()
         {
             CreateRecipe()
-            .AddIngredient(ItemID.SummonerEmblem)
+            //.AddIngredient(ItemID.SummonerEmblem)
             .AddIngredient(ItemID.PapyrusScarab)
             .AddIngredient(ItemID.PygmyNecklace)
             .AddRecipeGroup("FargowiltasSouls:AnySentryAccessory")
             //prehm weps
             .AddIngredient(ItemID.BabyBirdStaff) // Finch Staff
-            .AddIngredient(ItemID.VampireFrogStaff)
             .AddIngredient(ItemID.BlandWhip) // Leather Whip, replace with Evil Whip in 1.4.5
+            .AddIngredient(ItemID.VampireFrogStaff)
             .AddIngredient(ItemID.HoundiusShootius)
             .AddIngredient(ItemID.ImpStaff)
             //hm weps
-            .AddIngredient(ItemID.FireWhip) // Firecracker
-            .AddIngredient(ItemID.Smolstar) // Blade Staff
-            .AddIngredient(ItemID.DeadlySphereStaff)
+            .AddIngredient(ItemID.CoolWhip)
+            .AddIngredient(ItemID.OpticStaff)
+            //.AddIngredient(ItemID.DeadlySphereStaff)
             .AddIngredient(ItemID.StormTigerStaff) // Desert Tiger
-            .AddIngredient(ItemID.MaceWhip) // Morningstar
+            //.AddIngredient(ItemID.MaceWhip) // Morningstar
             .AddIngredient(ItemID.EmpressBlade) // Terraprisma
 
             //old recipe
@@ -66,7 +67,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();
 
-
+            //alt recipe with abom energy instead of weapons
+            CreateRecipe()
+            .AddIngredient(ItemID.PapyrusScarab)
+            .AddIngredient(ItemID.PygmyNecklace)
+            .AddRecipeGroup("FargowiltasSouls:AnySentryAccessory")
+            .AddIngredient(ItemID.StormTigerStaff) // Desert Tiger
+            .AddIngredient(ItemID.EmpressBlade) // Terraprisma
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 10)
+            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .Register();
         }
     }
 }

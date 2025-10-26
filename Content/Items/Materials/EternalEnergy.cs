@@ -1,8 +1,10 @@
 ﻿using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Buffs.Eternity;
+using FargowiltasSouls.Content.Rarities;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,6 +15,9 @@ namespace FargowiltasSouls.Content.Items.Materials
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Materials", Name);
         public override void SetStaticDefaults()
         {
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 6));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
+            ItemID.Sets.ItemNoGravity[Item.type] = true;
             Terraria.GameContent.Creative.CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 30;
         }
 
@@ -21,7 +26,7 @@ namespace FargowiltasSouls.Content.Items.Materials
             Item.width = 20;
             Item.height = 20;
             Item.maxStack = Item.CommonMaxStack;
-            Item.rare = ItemRarityID.Purple;
+            Item.rare = ModContent.RarityType<EternitySoulRarity>();
             Item.useStyle = ItemUseStyleID.EatFood;
             Item.useAnimation = 17;
             Item.useTime = 17;
@@ -30,22 +35,9 @@ namespace FargowiltasSouls.Content.Items.Materials
             Item.buffTime = 25200;
             Item.UseSound = SoundID.Item3;
             Item.value = Item.sellPrice(0, 5);
+
         }
 
-        public override void SafeModifyTooltips(List<TooltipLine> list)
-        {
-            foreach (TooltipLine line2 in list)
-            {
-                if (line2.Mod == "Terraria" && line2.Name == "ItemName")
-                {
-                    line2.OverrideColor = Main.DiscoColor;//new Color(Main.DiscoR, 51, 255 - (int)(Main.DiscoR * 0.4));
-                }
-            }
-        }
-
-        public override Color? GetAlpha(Color lightColor)
-        {
-            return new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
-        }
+        public override Color? GetAlpha(Color lightColor) => Color.White;
     }
 }

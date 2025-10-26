@@ -866,9 +866,23 @@ WyvernClone.DisplayName: Клон виверны
 StinkBomb.DisplayName: Вонючая бомба
 StinkBombProj.DisplayName: Висящее вонючее облако
 SnotBaseball.DisplayName: Шар слюней
-SnotBaseballSplit.DisplayName: Шарик слюнж
+SnotBaseballSplit.DisplayName: Шарик слюней
 TwilightStar.DisplayName: Сумеречная звезда
 TwilightStarSpawn.DisplayName: Сумеречная звезда
-TimInspectProjectile.DisplayName: Tim Inspect Projectile
 TimsInspectProjectile.DisplayName: Tims Inspect Projectile
+LifeForceBugs.DisplayName: Насекомые
+LifeForceBeetle.DisplayName: Жук
+LifeForceSpider.DisplayName: Паук
+LifeForceWasp.DisplayName: Оса
+TimMagicBlast.DisplayName: Волшебный заряд
+TimInferno.DisplayName: Кольцо адского пламени
+TimFireball.DisplayName: Огненный шар
+TimHatSummon.DisplayName: Волшебная шляпа Тима
 BloodTrail.DisplayName: Кровавый след
+MermanAnchor.DisplayName: Якорь тритона
+JavelinSpark.DisplayName: Искра
+TrojanSnowPile.DisplayName: Сугроб
+// BloodThornWarning.DisplayName: Blood Thorn Warning
+// EelChum.DisplayName: Eel Chum
+// EelChumBucket.DisplayName: Eel Chum Bucket
+// EelDrippler.DisplayName: Eel Drippler

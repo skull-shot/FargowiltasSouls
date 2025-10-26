@@ -47,10 +47,10 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
                 //The numbers may seem random but they correspond to each Lunar Fragment's final ItemID number.
                 RitualTexture = npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState switch //match ML vulnerability to fragment
                 {
-                    0 => 8, // Solar
-                    1 => 6, // Vortex
-                    2 => 7, // Nebula
-                    3 => 9, // Stardust
+                    Content.Bosses.VanillaEternity.MoonLord.ClassState.Melee => 8, // Solar
+                    Content.Bosses.VanillaEternity.MoonLord.ClassState.Ranged => 6, // Vortex
+                    Content.Bosses.VanillaEternity.MoonLord.ClassState.Magic => 7, // Nebula
+                    Content.Bosses.VanillaEternity.MoonLord.ClassState.Summon => 9, // Stardust
                     _ => 0, // All Class
                 };
             }

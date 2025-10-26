@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.Projectiles.Deathrays
             if (Projectile.localAI[0] > 20 && Projectile.localAI[0] < maxTime - 20)
             {
                 //no longer in stardust phase
-                bool skip = (npc.type == NPCID.MoonLordCore ? npc.GetGlobalNPC<MoonLordCore>().GetVulnerabilityState(npc) : npc.GetGlobalNPC<MoonLordBodyPart>().GetVulnerabilityState(npc)) != 3;
+                bool skip = (npc.type == NPCID.MoonLordCore ? npc.GetGlobalNPC<MoonLordCore>().GetVulnerabilityState(npc) : npc.GetGlobalNPC<MoonLordBodyPart>().GetVulnerabilityState(npc)) != MoonLord.ClassState.Summon;
                 for (int i = 0; i < Main.maxNPCs; i++) //if any eye firing a deathray
                 {
                     if (Main.npc[i].active && Main.npc[i].type == NPCID.MoonLordFreeEye

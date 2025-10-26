@@ -19,6 +19,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             [AccessoryEffectLoader.GetEffect<SpiritTornadoEffect>()];
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<ForbiddenEnchant>(),

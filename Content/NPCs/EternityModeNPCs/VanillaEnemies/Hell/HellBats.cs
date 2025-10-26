@@ -18,7 +18,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange([NPCID.Hellbat, NPCID.Lavabat]);
         public bool Death;
         public int Timer = 0;
-        public static int DeathChargeTime => Main.hardMode ? 80 : 160;
+        public static int DeathChargeTime => Main.hardMode ? 60 : 60;
         public override void SetDefaults(NPC npc)
         {
             if (Main.hardMode && npc.lifeMax < 300)
@@ -37,9 +37,9 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
                 }
                 if (npc.HasPlayerTarget)
                 {
-                    if (Timer < DeathChargeTime * 0.8f)
+                    if (Timer < DeathChargeTime * 0.2f)
                     {
-                        float spd = Main.hardMode ? 0.1f : 0.05f;
+                        float spd = Main.hardMode ? 0.1f : 0.2f;
                         npc.velocity += npc.DirectionTo(Main.player[npc.target].Center) * spd;
                     }
                     else

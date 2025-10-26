@@ -42,7 +42,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
         {
             if (Projectile.ai[0] == 13) //if its the top one
             {
-                SoundEngine.PlaySound(LightningSound with { MaxInstances = 4, Volume = 0.2f }, Main.LocalPlayer.Center);
+                SoundEngine.PlaySound(LightningSound with { MaxInstances = 4, Volume = 0.1f }, new Vector2(Projectile.Center.X, Main.LocalPlayer.Center.Y));
                 if (FargoSoulsUtil.HostCheck)
                 {
                     Vector2 dir = Vector2.UnitY;

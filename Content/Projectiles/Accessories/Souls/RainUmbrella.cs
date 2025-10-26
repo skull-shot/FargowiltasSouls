@@ -25,7 +25,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
             Projectile.timeLeft = 900;
             Projectile.aiStyle = -1;
             Projectile.friendly = true;
-            Projectile.minion = true;
+            //Projectile.minion = true;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;

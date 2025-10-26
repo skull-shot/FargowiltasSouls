@@ -7,6 +7,7 @@ using FargowiltasSouls.Content.Items.Accessories.Eternity;
 using FargowiltasSouls.Content.Items.Consumables;
 using FargowiltasSouls.Content.Items.Pets;
 using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.PirateInvasion;
+using FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.StupidSnowmanEvent;
 using FargowiltasSouls.Core.ItemDropRules;
 using FargowiltasSouls.Core.ItemDropRules.Conditions;
 using FargowiltasSouls.Core.Systems;
@@ -394,6 +395,11 @@ namespace FargowiltasSouls.Core.Globals
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.Geode, 10, 1, 3));
                     }
                     break;
+                case NPCID.Raven:
+                    {
+                        FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.GoodieBag, 10));
+                        break;
+                    }
                 case NPCID.RockGolem:
                     {
                         FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.Common(ItemID.CopperOre, 3, 10, 30));
@@ -527,11 +533,29 @@ namespace FargowiltasSouls.Core.Globals
                 case NPCID.Mimic:
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.GoldenCrate));
                     FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.GoldenCrateHard));
+
+                    FargoSoulsUtil.EModeDrop(npcLoot, new LeadingConditionRule(new Conditions.IsPreHardmode()).OnSuccess(ItemDropRule.OneFromOptions(1,
+                        ItemID.BandofRegeneration,
+                        ItemID.MagicMirror,
+                        ItemID.CloudinaBottle,
+                        ItemID.HermesBoots,
+                        ItemID.Mace,
+                        ItemID.ShoeSpikes
+                        )));
                     break;
 
                 case NPCID.IceMimic:
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.FrozenCrate));
-                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.FrozenCrateHard));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsPreHardmode(), ItemID.GoldenCrate));
+                    FargoSoulsUtil.EModeDrop(npcLoot, ItemDropRule.ByCondition(new Conditions.IsHardmode(), ItemID.GoldenCrateHard));
+
+                    FargoSoulsUtil.EModeDrop(npcLoot, new LeadingConditionRule(new Conditions.IsPreHardmode()).OnSuccess(ItemDropRule.OneFromOptions(1,
+                        ItemID.IceBoomerang,
+                        ItemID.IceBlade,
+                        ItemID.IceSkates,
+                        ItemID.SnowballCannon,
+                        ItemID.BlizzardinaBottle,
+                        ItemID.FlurryBoots
+                        )));
                     break;
 
                 case NPCID.IceGolem:

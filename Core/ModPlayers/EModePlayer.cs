@@ -131,7 +131,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             WallID.WroughtIronFence,
             WallID.MetalFence,
         ];
-
         public override void PostUpdateBuffs()
         {
             if (!WorldSavingSystem.EternityMode)
@@ -150,11 +149,21 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             Player.wellFed = true; //no longer expert half regen unless fed
 
-            if (Player.chaosState && EmodeItemBalance.HasEmodeChange(Player, ItemID.RodofDiscord))
+            if (Player.chaosState && EmodeItemBalance.HasEmodeChange(Player, ItemID.RodofDiscord).Contains("RodofDiscord"))
             {
                 Player.statDefense *= 0.6f;
                 Player.endurance -= 0.4f;
                 Player.GetDamage(DamageClass.Generic) *= 0.6f;
+            }
+
+            if (!NPC.downedBoss2 && Player.HasBuff(BuffID.Wrath) && EmodeItemBalance.HasEmodeChange(Player, ItemID.WrathPotion).Contains("EarlyPotions"))
+            {
+                Player.GetDamage(DamageClass.Generic) -= 0.05f;
+            }
+
+            if (!NPC.downedBoss2 && Player.HasBuff(BuffID.Rage) && EmodeItemBalance.HasEmodeChange(Player, ItemID.RagePotion).Contains("EarlyPotions"))
+            {
+                Player.GetCritChance(DamageClass.Generic) -= 5f;
             }
         }
 
@@ -229,6 +238,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 float ai1 = Main.rand.NextFloat(-2f, 2f);
                 Projectile.NewProjectile(Player.GetSource_Misc("TorchGod"), Main.rand.NextVector2FromRectangle(Player.Hitbox), Vector2.Zero, ModContent.ProjectileType<TorchGodFlame>(), 20, 0f, Main.myPlayer, ai0, ai1);
             }
+
         }
 
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers)/* tModPorter If you don't need the Projectile, consider using ModifyHitNPC instead */
@@ -236,13 +246,25 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
         }
+        public override void PreUpdateMovement()
+        {
+            if (!WorldSavingSystem.EternityMode)
+                return;
 
+            if (Player.slowFall && Player.TryingToHoverDown && EmodeItemBalance.HasEmodeChange(Player, ItemID.FeatherfallPotion).Contains("FeatherfallPotionNerf"))
+            {
+                if (Player.velocity.Y * Player.gravDir > Player.maxFallSpeed / 1.66f)
+                    Player.velocity.Y = Player.gravDir * Player.maxFallSpeed / 1.66f;
+            }
+
+            base.PreUpdateMovement();
+        }
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers)
         {
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            if (Player.resistCold && npc.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion)) //warmth potion nerf
+            if (Player.resistCold && npc.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion).Contains("WarmthPotionNerf")) //warmth potion nerf
             {
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30% 
                 modifiers.FinalDamage *= 0.85f;
@@ -253,7 +275,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (!WorldSavingSystem.EternityMode)
                 return;
 
-            if (Player.resistCold && proj.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion)) //warmth potion nerf
+            if (Player.resistCold && proj.coldDamage && EmodeItemBalance.HasEmodeChange(Player, ItemID.WarmthPotion).Contains("WarmthPotionNerf")) //warmth potion nerf
             {
                 modifiers.SourceDamage *= 1f / 0.7f; // warmth potion modifies source damage (pre defense) for some fucking reason. anti-30%
                 modifiers.FinalDamage *= 0.85f;
@@ -318,14 +340,14 @@ namespace FargowiltasSouls.Core.ModPlayers
                 */
             }
 
-            if (((Main.snowMoon && NPC.waveNumber < FrostMoonBosses.WAVELOCK) || (Main.pumpkinMoon && NPC.waveNumber < PumpkinMoonBosses.WAVELOCK)) && WorldSavingSystem.MasochistModeReal)
+            /*if (((Main.snowMoon && NPC.waveNumber < FrostMoonBosses.WAVELOCK) || (Main.pumpkinMoon && NPC.waveNumber < PumpkinMoonBosses.WAVELOCK)) && WorldSavingSystem.MasochistModeReal)
             {
                 if (NPC.waveNumber > 1)
                     NPC.waveNumber--;
                 NPC.waveKills /= 4;
 
                 FargoSoulsUtil.PrintLocalization($"Mods.FargowiltasSouls.Message.MoonsDeathPenalty", new Color(175, 75, 255));
-            }
+            }*/
 
         }
 

@@ -56,7 +56,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
             {
                 if (Projectile.Distance(ritual.Center) > 1600f) //bounce off arena walls
                 {
-                    if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState != 2)
+                    if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState != MoonLord.ClassState.Magic)
                     {
                         Projectile.Kill();
                         return;

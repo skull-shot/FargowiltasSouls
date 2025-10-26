@@ -163,7 +163,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
 
             float distance = 3f * 24;
 
-            Main.projectile.Where(x => x.active && x.friendly && !x.Eternity().isADD2Proj && x.FargoSouls().DeletionImmuneRank == 0 && !FargoSoulsUtil.IsSummonDamage(x, false)).ToList().ForEach(x =>
+            Main.projectile.Where(x => EModeGlobalProjectile.CanBeAbsorbed(x) && !x.Eternity().isADD2Proj).ToList().ForEach(x =>
             {
                 if (Vector2.Distance(x.Center, Projectile.Center) <= distance)
                 {
@@ -173,7 +173,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.OOA
                         Main.dust[dustId].noGravity = true;
                     }
 
-                    SoundEngine.PlaySound(SoundID.MaxMana, Projectile.Center);
+                    SoundEngine.PlaySound(SoundID.MaxMana with { MaxInstances = 2 }, Projectile.Center);
                     x.Kill();
                 }
             });

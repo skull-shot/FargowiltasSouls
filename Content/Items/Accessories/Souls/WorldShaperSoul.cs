@@ -77,7 +77,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             Player Player = player;
             player.FargoSouls().WorldShaperSoul = true;
             //mining speed, spelunker, dangersense, light, hunter, pet
-            MinerEnchant.AddEffects(Player, .66f, item);
+            MinerEnchant.AddEffects(Player, .75f, item);
             //placing speed up
             Player.tileSpeed += 0.5f;
             Player.wallSpeed += 0.5f;
@@ -152,10 +152,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             player.FargoSouls().BuilderMode = true;
             //if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendData(MessageID.SyncPlayer, number: Player.whoAmI);
 
-            for (int i = 0; i < TileLoader.TileCount; i++)
+            /*for (int i = 0; i < TileLoader.TileCount; i++)
             {
                 player.adjTile[i] = true;
-            }
+            }*/
 
             //placing speed up
             player.tileSpeed += 0.5f;

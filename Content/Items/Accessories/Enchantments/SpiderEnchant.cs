@@ -78,7 +78,8 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (modPlayer.SpiderCD > 0)
                 modPlayer.SpiderCD--;
             //minion crits
-            modPlayer.MinionCrits = true;
+            if (player.HasEffectEnchant<SpiderEffect>())
+                modPlayer.MinionCrits = true;
         }
     }
 }

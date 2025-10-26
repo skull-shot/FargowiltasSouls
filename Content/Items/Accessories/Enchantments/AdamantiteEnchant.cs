@@ -89,7 +89,10 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             if (!modPlayer.HeldItemAdamantiteValid)
                 return;
             float maxSpeed = player.ForceEffect<AdamantiteEffect>() ? 0.33f : 0.2f;
-            if (ProjectileID.Sets.CultistIsResistantTo[item.shoot])
+            bool[] homing = ProjectileID.Sets.CultistIsResistantTo;
+            if (item.useAmmo > AmmoID.None && player.PickAmmo(item, out int type, out _, out _, out _, out _, true) && type > 0 && homing[type])
+                maxSpeed /= 2;
+            else if (item.useAmmo == AmmoID.None && homing[item.shoot])
                 maxSpeed /= 2;
 
             float ratio = Math.Max((float)modPlayer.AdamantiteSpread / SpreadCap, 0);
@@ -100,7 +103,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
                 () => (float)Main.LocalPlayer.FargoSouls().AdamantiteSpread / SpreadCap, activeFunction: player.HasEffectEnchant<AdamantiteEffect>, displayAtFull: true);
 
         }
-        public override void PostUpdateEquips(Player player)
+        public override void PostUpdate(Player player)
         {
             if (!HasEffectEnchant(player))
                 return;
@@ -120,7 +123,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
             const float incSeconds = 10;
             const float decSeconds = 1.5f;
             if (modPlayer.WeaponUseTimer > 0)
-                modPlayer.AdamantiteSpread += (adaCap / 60f) / incSeconds; //ada spread change per frame, based on total amount of seconds to reach cap
+                modPlayer.AdamantiteSpread += player.FargoSouls().CachedAttackSpeed * (adaCap / 60f) / incSeconds; //ada spread change per frame, based on total amount of seconds to reach cap
             else
                 modPlayer.AdamantiteSpread -= (adaCap / 60f) / decSeconds;
 

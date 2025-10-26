@@ -82,10 +82,10 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.Minions
                         {
                             switch (moonLord.GetGlobalNPC<MoonLordCore>().VulnerabilityState)
                             {
-                                case 0: Projectile.ai[1] = 1; break;
-                                case 1: Projectile.ai[1] = 3; break;
-                                case 2: Projectile.ai[1] = 5; break;
-                                case 3: Projectile.ai[1] = 7; break;
+                                case MoonLord.ClassState.Melee: Projectile.ai[1] = 1; break;
+                                case MoonLord.ClassState.Ranged: Projectile.ai[1] = 3; break;
+                                case MoonLord.ClassState.Magic: Projectile.ai[1] = 5; break;
+                                case MoonLord.ClassState.Summon: Projectile.ai[1] = 7; break;
                                 default: break;
                             }
                         }

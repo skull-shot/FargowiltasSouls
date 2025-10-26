@@ -96,8 +96,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     npc.position.X += npc.width / 2;
                     npc.position.Y += npc.height;
                     npc.scale = scale;
-                    npc.width = (int)(98f * npc.scale);
-                    npc.height = (int)(92f * npc.scale);
+                    npc.width = Math.Clamp((int)(98f * npc.scale), 32, short.MaxValue);
+                    npc.height = Math.Clamp((int)(92f * npc.scale), 32, short.MaxValue);
                     npc.position.X -= npc.width / 2;
                     npc.position.Y -= npc.height;
                 }
@@ -150,8 +150,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 if (num255 < minScale)
                     num255 = minScale;
                 npc.scale = num255;
-                npc.width = (int)MathF.Round(98f * npc.scale);
-                npc.height = (int)MathF.Round(92f * npc.scale);
+                npc.width = Math.Clamp((int)MathF.Round(98f * npc.scale), 32, short.MaxValue);
+                npc.height = Math.Clamp((int)MathF.Round(92f * npc.scale), 32, short.MaxValue);
                 npc.position.X -= npc.width / 2;
                 npc.position.Y -= npc.height;
             }
@@ -309,7 +309,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 }
                 else
                 {
-                    if (NPC.velocity.Y < 18)
+                    if (Math.Abs(NPC.velocity.Y) < 3)
+                        NPC.velocity.Y += 0.4f;
+                    else if (NPC.velocity.Y < 18)
                         NPC.velocity.Y += 1;
                 }
                     
@@ -487,8 +489,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             NPC.position.X += NPC.width / 2;
             NPC.position.Y += NPC.height;
-            NPC.width = (int)(98f * NPC.scale);
-            NPC.height = (int)(92f * NPC.scale);
+            NPC.width = Math.Clamp((int)(98f * NPC.scale), 32, short.MaxValue);
+            NPC.height = Math.Clamp((int)(92f * NPC.scale), 32, short.MaxValue);
             NPC.position.X -= NPC.width / 2;
             NPC.position.Y -= NPC.height;
 
@@ -679,7 +681,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             LoadSpecial(recolor, ref TextureAssets.Ninja, ref FargowiltasSouls.TextureBuffer.Ninja, "Ninja");
         }
-
+        public float StretchX = 0;
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             NPC = npc;
@@ -687,7 +689,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             // Draw the Ninja (Mutant).
             var ninjaOffset = new Vector2(-npc.velocity.X * 2f, -npc.velocity.Y);
+            ninjaOffset /= 3;
             var ninjaRotation = npc.velocity.X * 0.05f;
+            ninjaRotation /= 2;
             
             switch (npc.frame.Y)
             {
@@ -726,7 +730,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             Vector2 scale = Vector2.One * npc.scale;
             if (Stretch > 0)
-                scale.Y *= 1 - Stretch * 0.45f;
+                scale.Y *= 1 - Stretch * 0.55f;
+
+            float xStretch = MathF.Pow(Math.Abs(npc.velocity.Y) / 20f, 0.5f);
+            StretchX = MathHelper.Lerp(StretchX, xStretch, 0.3f);
+            if (StretchX > 0)
+                scale.X *= 1 - StretchX * 0.42f;
             
             var drawData = new DrawData(ksTexture, npc.Bottom - screenPos + new Vector2(0f, 2f), frame, drawColor /*with { A = 200 }*/, npc.rotation, frame.Size() * new Vector2(0.5f, 1f), scale, npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             if (resprite)
@@ -754,28 +763,46 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             var spriteEffects = npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             center.Y += npc.gfxOffY - (70f - yOffset) * scale.Y;
 
+            float crownUp = 30 * StretchX;
             spriteBatch.UseBlendState(BlendState.Additive);
             if (PhaseTwo && P2Visuals < 1)
                 P2Visuals += 0.025f;
-            for (int j = 0; j < 12; j++)
+            if (P2Visuals > 0)
             {
-                Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f * P2Visuals * npc.scale;
-                Color color = Color.Red;
+                for (int j = 0; j < 12; j++)
+                {
+                    Vector2 afterimageOffset = (MathHelper.TwoPi * j / 12f).ToRotationVector2() * 2f * P2Visuals * npc.scale;
+                    Color color = Color.Red;
 
-                spriteBatch.Draw(crownTexture, center + afterimageOffset - screenPos, null, color, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+                    spriteBatch.Draw(crownTexture, center + afterimageOffset- screenPos - Vector2.UnitY * crownUp, null, color, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+                }
             }
             spriteBatch.ResetToDefault();
-            spriteBatch.Draw(crownTexture, center - screenPos, null, drawColor, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
+            
+            spriteBatch.Draw(crownTexture, center - screenPos - Vector2.UnitY * crownUp, null, drawColor, 0f, crownTexture.Size() / 2f, 1f, spriteEffects, 0f);
             return false;
         }
 
         public void DeathAnimation(NPC npc)
         {
+            
             Particle p;
             float scaleMult;
             int screenshake = 3;
             npc.velocity.X *= 0.9f;
-            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);
+            // prevent king slime from flinging himself into heaven
+            npc.noTileCollide = false;
+            npc.velocity.Y = npc.velocity.ClampLength(0, 35).Y;
+
+            Vector2 mutantEyePos = npc.Center + new Vector2(-5f, -12f);         
+
+            // stall death animation whilst in the air
+            if (npc.velocity.Y != 0)
+            {
+                DeathTimer--;
+               
+            }
+
             // Dust
             if (Main.rand.NextBool(5))
             {          
@@ -833,48 +860,4 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             }
         }
     }
-    /*
-    public class KingSlimeMinionRemovalHack : EModeNPCBehaviour
-    {
-        public override NPCMatcher CreateMatcher()
-        {
-            return new();
-        }
-        bool KILL = false;
-        public override void OnSpawn(NPC npc, IEntitySource source)
-        {
-            if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC && sourceNPC.type == NPCID.KingSlime)
-            {
-                Main.NewText("yeetus deletus");
-                DELETE(npc);
-                KILL = true;
-            }
-        }
-        public override bool SafePreAI(NPC npc)
-        {
-            if (KILL)
-            {
-                DELETE(npc);
-            }
-            return base.SafePreAI(npc);
-        }
-        public override void SafePostAI(NPC npc)
-        {
-            if (KILL)
-            {
-                DELETE(npc);
-            }
-            base.SafePostAI(npc);
-        }
-        void DELETE(NPC npc)
-        {
-            npc.life = 0;
-            npc.HitEffect();
-            npc.checkDead();
-            npc.active = false;
-            npc.timeLeft = 0;
-            npc = null;
-        }
-    }
-    */
 }

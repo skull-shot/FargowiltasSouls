@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             for (int i = 0; i < Player.MaxBuffs; i++)
             {
                 int type = player.buffType[i];
-                if (type > 0 && Main.debuff[type] && FargowiltasSouls.DebuffIDs.Contains(type))
+                if (type > 0 && Main.debuff[type] && FargoSoulsSets.Buffs.Debuffs[type])
                 {
                     player.statDefense += 8;
                     player.endurance += 0.04f;

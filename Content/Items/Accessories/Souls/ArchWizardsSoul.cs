@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FargowiltasSouls.Content.Items.Materials;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -35,7 +36,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
         {
             CreateRecipe()
 
-            .AddIngredient(ItemID.SorcererEmblem)
+            //.AddIngredient(ItemID.SorcererEmblem)
             .AddIngredient(ItemID.CelestialEmblem)
             .AddRecipeGroup("FargowiltasSouls:AnyMagicCuffs")
             .AddRecipeGroup("FargowiltasSouls:AnyManaFlower")
@@ -43,15 +44,15 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddRecipeGroup("FargowiltasSouls:AnyGemStaff")
             .AddRecipeGroup("FargowiltasSouls:VilethornOrCrimsonRod")
             .AddIngredient(ItemID.WeatherPain)
-            .AddIngredient(ItemID.AquaScepter)
+            //.AddIngredient(ItemID.AquaScepter)
             .AddIngredient(ItemID.DemonScythe)
             //hm weps
-            .AddIngredient(ItemID.SharpTears) //Blood Thorn
-            .AddIngredient(ItemID.CrystalSerpent)
+            //.AddIngredient(ItemID.SharpTears) //Blood Thorn
+            .AddIngredient(ItemID.MeteorStaff)
             .AddIngredient(ItemID.VenomStaff)
             .AddIngredient(ItemID.RainbowGun)
             .AddIngredient(ItemID.FairyQueenMagicItem) // Nightglow
-            .AddIngredient(ItemID.LaserMachinegun)
+            //.AddIngredient(ItemID.LaserMachinegun)
 
 
             //old recipe
@@ -69,7 +70,16 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
             .Register();
 
-
+            //alt recipe with abom energy instead of weapons
+            CreateRecipe()
+            .AddIngredient(ItemID.CelestialEmblem)
+            .AddRecipeGroup("FargowiltasSouls:AnyMagicCuffs")
+            .AddRecipeGroup("FargowiltasSouls:AnyManaFlower")
+            .AddIngredient(ItemID.RainbowGun)
+            .AddIngredient(ItemID.FairyQueenMagicItem) // Nightglow
+            .AddIngredient(ModContent.ItemType<AbomEnergy>(), 10)
+            .AddTile(ModContent.Find<ModTile>("Fargowiltas", "CrucibleCosmosSheet"))
+            .Register();
         }
     }
 }

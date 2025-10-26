@@ -529,7 +529,7 @@ namespace FargowiltasSouls.Content.Projectiles
                             }
                             Projectile.rotation = -MathHelper.PiOver2;
 
-                            if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState <= 2)
+                            if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState <= MoonLord.ClassState.Magic)
                             {
                                 if (counter > maxTime / 2)
                                     counter = maxTime / 2;

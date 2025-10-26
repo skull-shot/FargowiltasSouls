@@ -76,12 +76,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             if (MinionCrits && damageClass.CountsAsClass(DamageClass.Summon) && critDisabled != false)
             {
                 float crit = 0f; // spider enchant crits don't deal extra damage, but summon spiderlings
-                if (EridanusSet || Player.HasEffect<LifeForceEffect>())
+                /*if (EridanusSet || Player.HasEffect<LifeForceEffect>())
                 {
                     crit = 0.25f; // crits deal 1.25x damage
                     if (!Player.ProcessDamageTypeFromHeldItem().CountsAsClass(DamageClass.Summon))
                         crit = 0.15f; // crits reduced to 1.15x
-                }
+                }*/
 
                 modifiers.CritDamage -= (modifiers.CritDamage.Additive - 1) * (1 - crit);
             }
@@ -225,7 +225,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                         Vector2 spawnPos = Player.Center + offset.RotatedBy(Math.PI / 7 * i);
                         Vector2 speed = Vector2.Normalize(Main.MouseWorld - spawnPos);
 
-                        int baseHeartDamage = AbomWandItem == null ? 17 : 170;
+                        int baseHeartDamage = AbomWandItem == null ? 15 : 170;
                         //heartDamage = (int)(heartDamage * Player.ActualClassDamage(DamageClass.Summon));
 
                         float ai1 = (Main.MouseWorld - spawnPos).Length() / 17;
@@ -552,7 +552,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override void OnHurt(Player.HurtInfo info)
         {
-            Player player = Main.player[Main.myPlayer];
+            Player player = Main.LocalPlayer;
             FargoSoulsPlayer modPlayer = player.FargoSouls();
             WasHurtBySomething = true;
 

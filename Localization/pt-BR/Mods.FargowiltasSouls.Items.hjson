@@ -57,9 +57,9 @@ AshWoodEnchant: {
 	// DisplayName: Ash Wood Enchantment
 	/* Tooltip:
 		'''
-		Fire debuffs deal no damage
+		Fire debuffs deal no damage, touching lava grants the lava wet buff
 		While afflicted with a debuff, attacks are occasionally accompanied by fireballs
-		Reduces damage from touching lava
+		Provides 3 seconds of immunity to lava and reduces damage from touching lava
 		'You're telling me this isn't wood?'
 		''' */
 }
@@ -69,8 +69,8 @@ BeeEnchant: {
 	/* Tooltip:
 		'''
 		Allows flight and slow fall
-		While flying, leave behind flowers that form petals over time
-		Touching fully formed flowers gives you the Honey buff and creates a swarm of bees
+		While flying, your wings plant flowers that form petals over time
+		Touching fully formed flowers covers you in honey and creates a swarm of bees
 		Enemies touching the flowers also trigger the bee swarm
 		[i:HiveBackpack] Effects of Hive Pack
 		'According to all known laws of aviation, there is no way a bee should be able to fly'
@@ -106,7 +106,6 @@ CactusEnchant: {
 		Grants immunity to ambient cactus damage in Eternity Mode (Works from inventory and vanity)
 		'Não tem nada igual, é!'
 		'''
-	// VanityTooltip: Passive cactuses become harmless
 }
 
 ChlorophyteEnchant: {
@@ -312,7 +311,7 @@ MeteorEnchant: {
 	/* Tooltip:
 		'''
 		Hitting an enemy occasionally drops a gigantic meteor on them
-		10 second cooldown, decreasing faster the more you move around
+		Cooldown decreases faster the more you move around
 		[i:Magiluminescence] Effects of Magiluminescence
 		'Drop a draco on 'em'
 		''' */
@@ -389,8 +388,8 @@ NinjaEnchant: {
 	// DisplayName: Ninja Enchantment
 	/* Tooltip:
 		'''
-		Your projectiles have up to 12% extra critical strike chance, scaling with how fast they're moving
-		Drastically increases projectile speed and knockback while you're moving slowly
+		While standing still, gain up to 5 stealth
+		Your attacks consume 1 stealth, gaining 2x velocity and knockback, and +16% critical strike chance
 		'Wait for when the moment is right'
 		''' */
 }
@@ -834,18 +833,15 @@ LifeForce: {
 		'''
 	/* RuminateTooltip:
 		'''
-		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings
-		[i:FargowiltasSouls/BeeEnchant] Leave behind powerful flowers while flying
-		[i:FargowiltasSouls/PumpkinEnchant] When touched the flowers spawn a burst of bees, grant the Ambrosia buff, and refresh your flight time
+		[i:FargowiltasSouls/BeeEnchant] Grants powerful wings that plant flowers while flying
+		[i:FargowiltasSouls/SpiderEnchant] Various bugs will accumulate onto blooming flowers, and target nearby enemies when provoked
+		[i:FargowiltasSouls/PumpkinEnchant] When touched by you the flowers grant the Ambrosia buff and refresh your flight time
 		[i:FargowiltasSouls/CactusEnchant] When touched by enemies the flowers create a large cluster of needles
 		[i:FargowiltasSouls/BeetleEnchant] The Ambrosia buff provides +20% damage, +8% damage reduction, and 5 life regeneration
-		[i:FargowiltasSouls/SpiderEnchant] Your summon weapons can critically strike for 1.25x damage
-		[i:FargowiltasSouls/TurtleEnchant] Hover in place to enter a shell and resist damage for one hit
+		[i:FargowiltasSouls/TurtleEnchant] Hover in place with the wings to enter a shell and resist damage for one hit
 		[i:FargowiltasSouls/BeeEnchant] Effects of Hive Pack
-		[i:FargowiltasSouls/CactusEnchant] Passive cactuses become harmless (works from inventory or vanity slots)
 		'Rare is a living thing that dare disobey your will'
 		''' */
-	// VanityTooltip: Passive cactuses become harmless
 }
 
 NatureForce: {
@@ -1073,7 +1069,7 @@ LithosphericCluster: {
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
 		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
-		'The amalgamate born of a thousand common enemies'
+		'It pulses with vitality'
 		''' */
 	/* VanityTooltip:
 		'''
@@ -1100,7 +1096,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/WyvernFeather] Stabilizes gravity in space and liquids
 		    [i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
-		'The amalgamate born of a thousand common enemies'
+		'It pulses with vitality'
 		''' */
 	// RuminateTooltip: Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 }
@@ -1246,7 +1242,7 @@ ChaliceofTheMoon: {
 		[c/ADD8E6:Ironskin, Regeneration, Swiftness, Mana Regeneration, Magic Power, Ammo Reservation, Archery,] 
 		[c/ADD8E6:Builder, Crate, Endurance, Fishing, Gills, Lucky, Heartreach, Lifeforce, Mining, Obsidian Skin,] 
 		[c/ADD8E6:Rage, Wrath, Sonar, Summoning, Thorns, Titan, Warmth, Water Walking, Exquisitely Stuffed,]
-		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable]
+		[c/ADD8E6:Sharpened, Ammo Box, Clairvoyance, Bewitched, Wartable, Sugar Rush, Omnistation]
 		''' */
 }
 
@@ -1400,7 +1396,7 @@ MysticSkullInactive: {
 		Currently inactive, Right click to activate
 		Grants immunity to Suffocation
 		Automatically use mana potions when needed
-		'The quietly muttering head of a defeated foe'
+		'It burns with ephemeral soulflame'
 		''' */
 }
 
@@ -1962,7 +1958,7 @@ UniverseSoul: {
 		'''
 		+50% damage and +25% critical strike chance for your current weapon class
 		+25% attack speed, +50% projectile velocity, +100% knockback
-		Increases your minion slots by 3 and sentry slots by 1, doesn't stack
+		Increases your minion slots by 3 and sentry slots by 1, does not stack with downgrades
 		[i:1343] Enables auto swing for and increases the size of melee weapons, and [i:3366] gives the user master yoyo skills
 		[i:1321] Greatly increases arrow speed and 20% chance to not consume arrows
 		[i:1595] Increases your maximum mana by 200, and restores mana when damaged 
@@ -3336,6 +3332,7 @@ TheBaronsTusk: {
 		Swings emit flying shrapnel that can embed in enemies
 		Hitting enemies that have more than 15 embedded shrapnel with the tusk rips it out
 		The rip deals a large chunk of damage and is guaranteed to critically strike
+		Cannot crit normally, but special crit damage scales with your crit chance
 		Shrapnel is also ripped out when the enemy dies
 		''' */
 }
@@ -3347,6 +3344,7 @@ NavalRustrifle: {
 		Manually reload after each shot
 		Time the reload correctly to empower your next shot
 		Empowered shots deal double damage and are guaranteed to critically strike
+		Cannot crit normally, but special crit damage scales with your crit chance
 		''' */
 }
 
@@ -3383,7 +3381,8 @@ RoseTintedVisor: {
 	/* Tooltip:
 		'''
 		Fires up to 6 lasers on release, depending on charge time
-		Has extra critical strike chance depending on lasers charged, up to 100%
+		Has critical strike chance depending on lasers charged, up to 100%
+		Cannot crit normally, but special crit damage scales with your crit chance
 		''' */
 }
 
@@ -3653,8 +3652,8 @@ DarkTome: {
 	// DisplayName: Dark Tome
 	/* Tooltip:
 		'''
-		Hold button to summon up to 3 spectral books that chase your cursor
-		Releasing button causes the books to release a volley of pages
+		Hold attack to summon up to 3 spectral books that chase your cursor
+		Releasing causes the books to fire a volley of pages
 		'The arcane grimoire of a defeated foe...'
 		''' */
 }
@@ -3829,9 +3828,8 @@ TwilightTome: {
 	// DisplayName: Twilight Compendium
 	/* Tooltip:
 		'''
-		Hold button to summon up to 3 twilight stars at your cursor
-		Releasing button causes the stars to conjure a starstorm
-		The storm of stars will launch towards your cursor
+		Hold attack to conjure up to 3 twilight stars that chase your cursor
+		Release attack to make them fire smaller stars at your cursor, then home in on the nearest enemy and unleash a starstorm
 		'The reward for a mighty rematch...'
 		''' */
 }

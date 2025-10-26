@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Mono.Cecil;
 using System;
+using System.Collections.Generic;
 using System.Security.Policy;
 using Terraria;
 using Terraria.Audio;
@@ -88,8 +89,20 @@ namespace FargowiltasSouls.Content.Projectiles.Weapons.SwarmDrops
                     if (ShootTimer > 5 && canShoot)
                     {
                         canShoot = false;
-                        SoundEngine.PlaySound(SoundID.Item156 with { Volume = 0.4f }, Projectile.Center); 
+                        SoundEngine.PlaySound(SoundID.Item156 with { Volume = 0.4f }, Projectile.Center);
                         Projectile.velocity += new Vector2(6, 0).RotatedBy(Projectile.rotation);
+                        Item item = player.HeldItem;
+                        Dictionary<int, Item> Dict = ContentSamples.ItemsByType;
+                        if (player.PickAmmo(item, out int type, out _, out _, out _, out int usedAmmo) && Dict[usedAmmo].consumable && !player.IsAmmoFreeThisShot(item, Dict[usedAmmo], type))
+                        {
+                            Item ammo = player.FindAmmo([usedAmmo]);
+                            CombinedHooks.OnConsumeAmmo(player, item, ammo);
+                            if (ammo.stack-- <= 0)
+                            {
+                                ammo.active = false;
+                                ammo.TurnToAir();
+                            }
+                        }
                         for (int i = 0; i < 3; i++)
                             Projectile.NewProjectile(Terraria.Entity.InheritSource(Projectile), position, velocity.RotatedByRandom(MathHelper.ToRadians(18)) * Main.rand.NextFloat(0.9f, 1.1f), ModContent.ProjectileType<EaterRocket>(), Projectile.damage, 6f);
                     }

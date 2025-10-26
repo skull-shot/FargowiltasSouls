@@ -54,7 +54,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         // new forces
         public int TerraProcCD;
-        public int CosmosMoonTimer;
+        public float CosmosMoonTimer;
         public int CosmosMoonCycle;
         public bool CosmosForce;
         public bool LifeForceActive;
@@ -67,7 +67,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool MahoganyCanUseDR;
         public int MahoganyTimer;
         public float EbonwoodCharge;
-        public int ShadewoodCD;
+        public float ShadewoodCharge;
         public bool WoodEnchantDiscount;
         public int PearlwoodCritDuration;
         public int PearlwoodManaCD;
@@ -77,8 +77,8 @@ namespace FargowiltasSouls.Core.ModPlayers
         public int ParryDebuffImmuneTime;
         public int ObsidianCD;
         public bool LavaWet;
-        public float TinCritMax;
-        public float TinCrit = 5;
+        public float TinCritMax = 25;
+        public float TinCrit = 0;
         public int TinProcCD;
         public bool TinCritBuffered;
         public int TungstenCD;
@@ -108,6 +108,9 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool AncientShadowEnchantActive = false;
         public int AncientShadowFlameCooldown;
         public int ShadowOrbRespawnTimer;
+        public float NinjaCounter;
+        public int NinjaDecrementCD;
+        public static int NinjaDecrementMaxCD = 20;
 
         public Item PlatinumEffect;
         public int PalladCounter;
@@ -225,6 +228,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool WorldShaperSoul;
         public bool FlightMasterySoul;
         public bool BuilderMode;
+        public bool DimensionSoul;
         public bool UniverseSoul;
         public bool UniverseSoulBuffer;  // Needed to make sure the item effect is applied during the entirety of the update cycle, so it doesn't miss anything
         public bool UniverseCore;
@@ -290,7 +294,7 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool SandsofTime;
         public bool SecurityWallet;
         public int FrigidGemstoneCD;
-        public int WretchedPouchCD;
+        public float WretchedPouchCD;
         public bool NymphsPerfume;
         public bool NymphsPerfumeRespawn;
         public int NymphsPerfumeRestoreLife;
@@ -353,7 +357,6 @@ namespace FargowiltasSouls.Core.ModPlayers
         public bool Oiled;
         public bool DeathMarked;
         public bool noDodge;
-        public bool noSupersonic;
         public bool NoMomentum;
         public bool Bloodthirsty;
         public bool Unlucky;

@@ -49,6 +49,7 @@ namespace FargowiltasSouls.Core.Globals
 {
     public class FargoSoulsGlobalNPC : GlobalNPC
     {
+        #region Variables
         public override bool InstancePerEntity => true;
 
 #pragma warning disable CA2211
@@ -128,6 +129,7 @@ namespace FargowiltasSouls.Core.Globals
 
         static HashSet<int> RareNPCs = [];
 
+        #endregion
         public override void Load()
         {
             //On_NPC.SetDefaults += PostSetDefaults;
@@ -304,7 +306,7 @@ namespace FargowiltasSouls.Core.Globals
                 SuffocationTimer = 0;
 
             if (!npc.friendly && npc.damage > 0
-                && Main.LocalPlayer.active && !Main.LocalPlayer.dead)
+                && Main.LocalPlayer.active && !Main.LocalPlayer.dead && !(WorldSavingSystem.EternityMode && npc.type is NPCID.TheHungry or NPCID.TheHungryII))
             {
                 if (--GrazeCD < 0) //managed by the npc itself so worm segments dont make it count down faster
                     GrazeCD = 6;
@@ -336,8 +338,6 @@ namespace FargowiltasSouls.Core.Globals
 
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
-            Player player = Main.player[Main.myPlayer];
-            FargoSoulsPlayer modPlayer = player.FargoSouls();
             if (LeadPoison)
             {
                 if (Main.rand.Next(4) < 3)
@@ -662,23 +662,28 @@ namespace FargowiltasSouls.Core.Globals
                 }
             }
 
-            if (player.FargoSouls().PureHeart && player.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
+            // TODO: Move to proper update method instead of a rendering one and
+            //       actually sync these values (ideally don't use LocalPlayer).
+            if (Main.LocalPlayer.TryGetModPlayer<FargoSoulsPlayer>(out var modPlayer))
             {
-                if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
+                if (modPlayer.PureHeart && Main.LocalPlayer.HasEffect<PungentEyeballCursor>() && npc.active && !npc.dontTakeDamage && npc.lifeMax > 5 && !npc.friendly && !Main.gamePaused)
                 {
-                    if (player.FargoSouls().MasochistSoul)
-                        PureGazeTime = PungentGazeBuff.MAX_TIME;
-                    else
-                        PureGazeTime += 1;
-                }
+                    if (Vector2.Distance(Main.MouseWorld, FargoSoulsUtil.ClosestPointInHitbox(npc.Hitbox, Main.MouseWorld)) < 80)
+                    {
+                        if (modPlayer.MasochistSoul)
+                            PureGazeTime = PungentGazeBuff.MAX_TIME;
+                        else
+                            PureGazeTime += 1;
+                    }
                     
-                else if (PureGazeTime >= 3)
-                    PureGazeTime -= 3;
-                if (PureGazeTime > PungentGazeBuff.MAX_TIME)
-                    PureGazeTime = PungentGazeBuff.MAX_TIME;
+                    else if (PureGazeTime >= 3)
+                        PureGazeTime -= 3;
+                    if (PureGazeTime > PungentGazeBuff.MAX_TIME)
+                        PureGazeTime = PungentGazeBuff.MAX_TIME;
+                }
+                else if (PureGazeTime > 0)
+                    PureGazeTime -= 3;   
             }
-            else if (PureGazeTime > 0)
-                PureGazeTime -= 3;
 
             if (DeathMarked)
             {
@@ -1062,6 +1067,7 @@ namespace FargowiltasSouls.Core.Globals
                 spawnRate /= 2;
                 maxSpawns *= 2;
             }
+            /*
             if (player.HasEffect<SoulLanternEffect>() && player.EffectItem<SoulLanternEffect>().ModItem is SoulLantern lantern && lantern.SoulLanternID > 0)
             {
                 spawnRate /= 4;
@@ -1069,6 +1075,7 @@ namespace FargowiltasSouls.Core.Globals
                 SoulLanternEffect.CurrentPlayerLanternID = lantern.SoulLanternID;
                 SoulLanternEffect.InSpawnNPC = true;
             }
+            */
 
             //if (modPlayer.BuilderMode) maxSpawns = 0;
         }
@@ -1172,7 +1179,7 @@ namespace FargowiltasSouls.Core.Globals
         {
             static IItemDropRule BossDrop(int item)
             {
-                return new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10));
+                return new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10), ItemDropRule.Common(item, 1));
             }
 
             switch (npc.type)
@@ -1209,7 +1216,8 @@ namespace FargowiltasSouls.Core.Globals
                     break;
 
                 case NPCID.SkeletronHead:
-                    var drop = new DropBasedOnEMode(ItemDropRule.Common(ModContent.ItemType<BoneZone>(), 3), ItemDropRule.Common(ModContent.ItemType<BoneZone>(), 10));
+                    int item = ModContent.ItemType<BoneZone>();
+                    var drop = new DropBasedOnEMode(ItemDropRule.Common(item, 3), ItemDropRule.Common(item, 10), ItemDropRule.Common(item, 1));
                     drop.OnSuccess(ItemDropRule.Common(ModContent.ItemType<BrittleBone>(), 1, 200, 200));
                     npcLoot.Add(drop);
                     break;
@@ -1418,7 +1426,7 @@ namespace FargowiltasSouls.Core.Globals
                     def = 50;
                 modifiers.ArmorPenetration += Math.Max(def, minDef);
             }
-            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3))
+            if (npc.betsysCurse && EmodeItemBalance.HasEmodeChange(player, ItemID.ApprenticeStaffT3).Contains("BetsysCurse"))
             {
                 modifiers.Defense.Flat += 15; //25 total ap
             }

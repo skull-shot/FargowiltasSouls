@@ -91,7 +91,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
                 //    }
                 //}
 
-                if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState != 1 && Projectile.timeLeft > 60)
+                if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState != Content.Bosses.VanillaEternity.MoonLord.ClassState.Ranged && Projectile.timeLeft > 60)
                     Projectile.timeLeft = 60;
             }
             else

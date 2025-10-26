@@ -159,7 +159,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         rotation += MathHelper.TwoPi * (num / LunarTowerStardust.CellAmount);
                         Vector2 desiredLocation = parent.Center + NearParent * rotation.ToRotationVector2();
                         NPC.velocity = Vector2.Normalize(NPC.velocity) * contractionSpeed;
-                        RotateTowards(desiredLocation, 2);
+                        NPC.rotation = FargoSoulsUtil.NPCRotateTowards(NPC, desiredLocation, 2);
                         if (NPC.Distance(desiredLocation) <= 100)
                         {
                             State = (int)States.Idle;
@@ -238,7 +238,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         rotation += MathHelper.TwoPi * (num / LunarTowerStardust.CellAmount);
                         Vector2 desiredLocation = parent.Center + NearParent * rotation.ToRotationVector2();
                         NPC.velocity = Vector2.Normalize(NPC.velocity) * contractionSpeed;
-                        RotateTowards(desiredLocation, 3);
+                        NPC.rotation = FargoSoulsUtil.NPCRotateTowards(NPC, desiredLocation, 3);
                         if (NPC.Distance(desiredLocation) <= 100)
                         {
                             State = (int)States.Idle;
@@ -262,7 +262,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
                         int Speed = 16;
                         Vector2 desiredLocation = parent.Center + LockPos;
                         NPC.velocity = Vector2.Normalize(NPC.velocity) * Speed;
-                        RotateTowards(desiredLocation, 2);
+                        NPC.rotation = FargoSoulsUtil.NPCRotateTowards(NPC, desiredLocation, 2);
                         Timer++;
                         if ((NPC.Distance(desiredLocation) <= 300 && substate != HomeBack) || Timer > 60 * 3)
                         {
@@ -352,14 +352,6 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.LunarEve
             return false;
         }
 
-        void RotateTowards(Vector2 target, float speed)
-        {
-            Vector2 PV = NPC.SafeDirectionTo(target);
-            Vector2 LV = NPC.velocity;
-            float anglediff = (float)(Math.Atan2(PV.Y * LV.X - PV.X * LV.Y, LV.X * PV.X + LV.Y * PV.Y)); //real
-            //change rotation towards target
-            NPC.velocity = NPC.velocity.RotatedBy(Math.Sign(anglediff) * Math.Min(Math.Abs(anglediff), speed * MathHelper.Pi / 180));
-        }
         public override void ModifyIncomingHit(ref NPC.HitModifiers modifiers)
         {
             ref float parentIndex = ref NPC.ai[2];

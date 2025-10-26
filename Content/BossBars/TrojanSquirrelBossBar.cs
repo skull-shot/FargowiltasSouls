@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent;

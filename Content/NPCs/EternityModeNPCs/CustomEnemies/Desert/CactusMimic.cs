@@ -14,6 +14,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.Events;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -88,7 +89,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.CustomEnemies.Desert
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             int[] sand = [TileID.Sand, TileID.Ebonsand, TileID.Pearlsand, TileID.Crimsand];
-            if (sand.Contains(spawnInfo.SpawnTileType) && WorldSavingSystem.EternityMode && !spawnInfo.Player.ZoneBeach && !spawnInfo.Water)
+            if (sand.Contains(spawnInfo.SpawnTileType) && WorldSavingSystem.EternityMode && !spawnInfo.Player.ZoneBeach && !spawnInfo.Water && !DD2Event.Ongoing)
             {
                 return 0.7f;
             }

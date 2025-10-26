@@ -73,6 +73,10 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public bool IsStandingStill;
         public float AttackSpeed;
+        /// <summary>
+        /// Caches the attack speed every frame. Ensures that attack speed is properly calculated for any given place during the update loop, by retrieving the last frame's speed otherwise.
+        /// </summary>
+        public float CachedAttackSpeed;
         public float UseTimeDebt;
         public float WingTimeModifier = 1f;
 
@@ -213,6 +217,12 @@ namespace FargowiltasSouls.Core.ModPlayers
             disabledToggles.Clear();
             CooldownBarManager.Instance.RemoveAllChildren();
             ResetOldPosition();
+
+            if (WorldSavingSystem.QueueEnableEternityMode)
+            {
+                WorldSavingSystem.QueueEnableEternityMode = false;
+                EternityDifficultyOption.EnableEternity();
+            }
 
             if (ClientConfig.Instance.MusicModNotification && !ModLoader.TryGetMod("FargowiltasMusic", out Mod _))
             {
@@ -364,6 +374,7 @@ namespace FargowiltasSouls.Core.ModPlayers
             WorldShaperSoul = false;
             FlightMasterySoul = false;
             BuilderMode = false;
+            DimensionSoul = false;
             if (!UniverseSoulBuffer)
             {
                 UniverseSoul = false;
@@ -458,7 +469,6 @@ namespace FargowiltasSouls.Core.ModPlayers
             Oiled = false;
             Slimed = false;
             noDodge = false;
-            noSupersonic = false;
             NoMomentum = false;
             Bloodthirsty = false;
             DisruptedFocus = false;
@@ -720,18 +730,24 @@ namespace FargowiltasSouls.Core.ModPlayers
         }
         public override void ModifyShootStats(Item item, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
-            if (Player.HasEffect<NinjaEffect>()
-                && item.IsWeapon()
-                && !ProjectileID.Sets.IsAWhip[item.shoot]
-                && !ProjectileID.Sets.NoMeleeSpeedVelocityScaling[item.shoot]
-                && item.shoot > ProjectileID.None
-                && item.shoot != ProjectileID.WireKite
-                && item.shoot != ModContent.ProjectileType<Retiglaive>())
+            if (Player.HasEffect<NinjaEffect>() && item.IsWeapon())
             {
-                if (NinjaEffect.PlayerCanHaveBuff(Player))
+                if (NinjaCounter >= 1)
                 {
-                    velocity *= 2f;
-                    knockback *= 2f;
+                    //velocity *= 2f;
+                    //knockback *= 2f;
+                    NinjaCounter--;
+                    NinjaDecrementCD = NinjaDecrementMaxCD;
+                }
+            }
+        }
+        public override void ModifyWeaponCrit(Item item, ref float crit)
+        {
+            if (Player.HasEffect<NinjaEffect>() && item.IsWeapon())
+            {
+                if (NinjaCounter >= 1)
+                {
+                    crit += Player.ForceEffect<NinjaEffect>() ? 30 : 16;
                 }
             }
         }
@@ -810,7 +826,7 @@ namespace FargowiltasSouls.Core.ModPlayers
                 Player.GetAttackSpeed(DamageClass.SummonMeleeSpeed) += AttackSpeed - 1f;
                 return 1f;
             }
-
+            CachedAttackSpeed = AttackSpeed;
             return AttackSpeed;
         }
         public override void OnConsumeMana(Item item, int manaConsumed)
@@ -1481,7 +1497,7 @@ namespace FargowiltasSouls.Core.ModPlayers
 
         public override void HideDrawLayers(PlayerDrawSet drawInfo)
         {
-            if (BetsyDashing || ShellHide || GoldShell || SpectreGhostTime > 0)
+            if (BetsyDashing || ShellHide && TurtleCounter >= 70 || GoldShell || SpectreGhostTime > 0)
             {
                 foreach (var layer in PlayerDrawLayerLoader.Layers)
                 {

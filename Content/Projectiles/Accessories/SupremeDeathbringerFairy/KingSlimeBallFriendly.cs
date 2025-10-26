@@ -1,6 +1,7 @@
-using System;
+using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime;
 using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -10,7 +11,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.SupremeDeathbringerFa
 {
     public class KingSlimeBallFriendly : KingSlimeBall
     {
-        public override string Texture => "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSlimeBall_2";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/KingSlime", "KingSlimeBall");
         public int BounceCount = 0;
 
         public override void SetStaticDefaults()

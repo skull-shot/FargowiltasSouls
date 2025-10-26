@@ -50,9 +50,10 @@ namespace FargowiltasSouls.Assets.Sounds
         public static readonly SoundStyle TrojanDeath = new (SoundsPath + "Challengers/Trojan/TrojanDeath");
         public static readonly SoundStyle TrojanGunStartup = new (SoundsPath + "Challengers/Trojan/TrojanGunStartup");
         public static readonly SoundStyle TrojanSnowball = new (SoundsPath + "Challengers/Trojan/TrojanSnowball");
+        public static readonly SoundStyle TrojanSnowballSplat = new SoundStyle(SoundsPath + "Challengers/Trojan/SnowballSplat") with { Variants = [1, 2, 3] };
         public static readonly SoundStyle TrojanCannon = new(SoundsPath + "Challengers/Trojan/TrojanCannon");
         public static readonly SoundStyle Minigun = new(SoundsPath + "Challengers/Trojan/Minigun");
-        public static readonly SoundStyle TrojanHookLoop = new(SoundsPath + "Challengers/Trojan/TrojanHookLoop");
+        public static readonly SoundStyle TrojanHookLoop = new SoundStyle(SoundsPath + "Challengers/Trojan/TrojanHookLoop") with { Volume = 0.8f};
         public static readonly SoundStyle TrojanHookTelegraph = new(SoundsPath + "Challengers/Trojan/TrojanHookTelegraph");
         public static readonly SoundStyle TrojanSummon = new(SoundsPath + "Challengers/Trojan/TrojanSummon");
 

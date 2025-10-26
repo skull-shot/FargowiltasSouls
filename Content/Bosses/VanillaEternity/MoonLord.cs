@@ -26,7 +26,15 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 {
     public abstract class MoonLord : EModeNPCBehaviour
     {
-        public abstract int GetVulnerabilityState(NPC npc);
+        public abstract ClassState GetVulnerabilityState(NPC npc);
+        public enum ClassState
+        {
+            Melee,
+            Ranged,
+            Magic,
+            Summon,
+            All
+        }
         public override void SetDefaults(NPC npc)
         {
             base.SetDefaults(npc);
@@ -39,14 +47,12 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[ModContent.BuffType<LethargicBuff>()] = true;
             npc.buffImmune[BuffID.Suffocation] = true;
         }
-
-        public static float nerf => Main.getGoodWorld ? 0f : WorldSavingSystem.MasochistModeReal ? 0.2f : 0.4f;
         public bool IsItemValid(NPC npc, Player player, Item item)
         {
             if (player.FargoSouls().GravityGlobeEXItem != null)
                 return true;
-            int masoStateML = GetVulnerabilityState(npc);
-            if (item.CountsAsClass(DamageClass.Melee) && masoStateML > 0 && masoStateML < 4)
+            ClassState masoStateML = GetVulnerabilityState(npc);
+            if (item.CountsAsClass(DamageClass.Melee) && masoStateML > ClassState.Melee && masoStateML < ClassState.All)
                 return false;
             return true;
         }
@@ -56,10 +62,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 return true;
             switch (GetVulnerabilityState(npc))
             {
-                case 0: if (!projectile.CountsAsClass(DamageClass.Melee)) return false; break;
-                case 1: if (!projectile.CountsAsClass(DamageClass.Ranged)) return false; break;
-                case 2: if (!projectile.CountsAsClass(DamageClass.Magic)) return false; break;
-                case 3: if (!FargoSoulsUtil.IsSummonDamage(projectile)) return false; break;
+                case ClassState.Melee: if (!projectile.CountsAsClass(DamageClass.Melee)) return false; break;
+                case ClassState.Ranged: if (!projectile.CountsAsClass(DamageClass.Ranged)) return false; break;
+                case ClassState.Magic: if (!projectile.CountsAsClass(DamageClass.Magic)) return false; break;
+                case ClassState.Summon: if (!FargoSoulsUtil.IsSummonDamage(projectile)) return false; break;
                 default: break;
             }
             return true;
@@ -98,10 +104,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (valid)
                 modifiers.FinalDamage *= 1.75f;
 
-            //TODO: make this not affect summon projectiles from accessories or armor
-            if (FargoSoulsUtil.IsSummonDamage(projectile) && (GetVulnerabilityState(npc) != 3))
+            if (FargoSoulsUtil.IsSummonDamage(projectile) && projectile.FargoSouls().ItemSource && (GetVulnerabilityState(npc) != ClassState.Summon))
             {
-                if (Main.player[projectile.owner].HeldItem.DamageType != DamageClass.Summon && Main.player[projectile.owner].HeldItem.DamageType != DamageClass.SummonMeleeSpeed)
+                if (Main.player[projectile.owner].HeldItem.DamageType.CountsAsClass(DamageClass.Summon))
                     modifiers.FinalDamage *= 0.5f;
             }
         }
@@ -124,9 +129,9 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.MoonLordCore);
 
-        public override int GetVulnerabilityState(NPC npc) => VulnerabilityState;
+        public override ClassState GetVulnerabilityState(NPC npc) => VulnerabilityState;
 
-        public int VulnerabilityState;
+        public ClassState VulnerabilityState;
         public int AttackMemory;
 
         public float VulnerabilityTimer;
@@ -144,7 +149,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.SendExtraAI(npc, bitWriter, binaryWriter);
 
-            binaryWriter.Write7BitEncodedInt(VulnerabilityState);
+            binaryWriter.Write7BitEncodedInt((byte)VulnerabilityState);
             binaryWriter.Write7BitEncodedInt(AttackMemory);
             binaryWriter.Write(VulnerabilityTimer);
             binaryWriter.Write(AttackTimer);
@@ -156,7 +161,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         {
             base.ReceiveExtraAI(npc, bitReader, binaryReader);
 
-            VulnerabilityState = binaryReader.Read7BitEncodedInt();
+            VulnerabilityState = (ClassState)binaryReader.Read7BitEncodedInt();
             AttackMemory = binaryReader.Read7BitEncodedInt();
             VulnerabilityTimer = binaryReader.ReadSingle();
             AttackTimer = binaryReader.ReadSingle();
@@ -172,19 +177,20 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public void ShowClassDamage(NPC npc)
         {
-            string damageClass = VulnerabilityState switch {
-                0 => "Melee",
-                1 => "Ranged",
-                2 => "Magic",
-                3 => "Summon",
+            string damageClass = VulnerabilityState switch
+            {
+                ClassState.Melee => "Melee",
+                ClassState.Ranged => "Ranged",
+                ClassState.Magic => "Magic",
+                ClassState.Summon => "Summon",
                 _ => "All"
             };
             Color color = VulnerabilityState switch
             {
-                0 => Color.Yellow,
-                1 => Color.LightCyan,
-                2 => Color.Magenta,
-                3 => Color.Cyan,
+                ClassState.Melee => Color.Yellow,
+                ClassState.Ranged => Color.LightCyan,
+                ClassState.Magic => Color.Magenta,
+                ClassState.Summon => Color.Cyan,
                 _ => Color.White
             };
             string path = "Mods.FargowiltasSouls.Buffs.PoweroftheCosmosBuff.";
@@ -203,7 +209,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (!SpawnedRituals)
             {
                 SpawnedRituals = true;
-                VulnerabilityState = 0;
+                VulnerabilityState = ClassState.Melee;
                 ShowClassDamage(npc);
                 if (FargoSoulsUtil.HostCheck)
                 {
@@ -238,7 +244,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                     switch (VulnerabilityState)
                     {
-                        case 0: //melee
+                        case ClassState.Melee: //melee
                             for (int i = 0; i < 3; i++)
                             {
                                 NPC bodyPart = Main.npc[(int)npc.localAI[i]];
@@ -259,7 +265,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                             break;
 
-                        case 1: //ranged
+                        case ClassState.Ranged: //ranged
                             for (int j = 0; j < 6; j++)
                             {
                                 Vector2 spawn = Main.player[npc.target].Center + 500 * npc.DirectionFrom(Main.player[npc.target].Center).RotatedBy(MathHelper.TwoPi / 6 * (j + 0.5f));
@@ -268,7 +274,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                             break;
 
-                        case 2: //magic
+                        case ClassState.Magic: //magic
                             for (int i = 0; i < 3; i++)
                             {
                                 NPC bodyPart = Main.npc[(int)npc.localAI[i]];
@@ -294,7 +300,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                             }
                             break;
 
-                        case 3: //summoner
+                        case ClassState.Summon: //summoner
                             for (int i = 0; i < 3; i++)
                             {
                                 NPC bodyPart = Main.npc[(int)npc.localAI[i]];
@@ -358,7 +364,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                 Player player = Main.player[npc.target];
                 switch (VulnerabilityState)
                 {
-                    case 0: //melee
+                    case ClassState.Melee: //melee
                         {
                             if (AttackTimer > 30)
                             {
@@ -372,7 +378,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                         break;
 
-                    case 1: //vortex
+                    case ClassState.Ranged: //vortex
                         {
                             if (AttackMemory == 0) //spawn the vortex
                             {
@@ -386,7 +392,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                         break;
 
-                    case 2: //nebula
+                    case ClassState.Magic: //nebula
                         {
                             if (AttackTimer > 30)
                             {
@@ -410,7 +416,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         }
                         break;
 
-                    case 3: //stardust
+                    case ClassState.Summon: //stardust
                         {
                             if (AttackTimer > 360)
                             {
@@ -503,7 +509,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
             if (npc.ai[0] == 2f) //moon lord is dead
             {
-                VulnerabilityState = 4;
+                VulnerabilityState = ClassState.All;
                 VulnerabilityTimer = 0;
                 AttackTimer = 0;
             }
@@ -526,7 +532,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 if (VulnerabilityTimer > 1800) //next vuln phase
                 {
-                    VulnerabilityState = ++VulnerabilityState % 5;
+                    VulnerabilityState = VulnerabilityState.NextEnum();
                     ShowClassDamage(npc);
 
                     VulnerabilityTimer = 0;
@@ -540,7 +546,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                     {
                         switch (VulnerabilityState)
                         {
-                            case 0: //melee
+                            case ClassState.Melee: //melee
                                 for (int i = 0; i < 3; i++)
                                 {
                                     NPC bodyPart = Main.npc[(int)npc.localAI[i]];
@@ -557,7 +563,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 }
                                 break;
 
-                            case 1: //ranged
+                            case ClassState.Ranged: //ranged
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     Projectile.NewProjectile(
@@ -568,7 +574,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 }
                                 break;
 
-                            case 2: //magic
+                            case ClassState.Magic: //magic
                                 if (FargoSoulsUtil.HostCheck)
                                 {
                                     //for (int i = -1; i <= 1; i++)
@@ -588,7 +594,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                                 }
                                 break;
 
-                            case 3: //summon
+                            case ClassState.Summon: //summon
                                 for (int i = 0; i < 3; i++)
                                 {
                                     NPC bodyPart = Main.npc[(int)npc.localAI[i]];
@@ -637,10 +643,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
 
                 switch (VulnerabilityState)
                 {
-                    case 0: HandleScene("Solar"); break;
-                    case 1: HandleScene("Vortex"); break;
-                    case 2: HandleScene("Nebula"); break;
-                    case 3: HandleScene("Stardust"); break;
+                    case ClassState.Melee: HandleScene("Solar"); break;
+                    case ClassState.Ranged: HandleScene("Vortex"); break;
+                    case ClassState.Magic: HandleScene("Nebula"); break;
+                    case ClassState.Summon: HandleScene("Stardust"); break;
                     default: break;
                 }
             }
@@ -668,10 +674,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchType(NPCID.MoonLordFreeEye);
 
-        public override int GetVulnerabilityState(NPC npc)
+        public override ClassState GetVulnerabilityState(NPC npc)
         {
             NPC core = FargoSoulsUtil.NPCExists(npc.ai[3], NPCID.MoonLordCore);
-            return core == null ? -1 : core.GetGlobalNPC<MoonLordCore>().VulnerabilityState;
+            return core == null ? default : core.GetGlobalNPC<MoonLordCore>().VulnerabilityState;
         }
 
         public int OnSpawnCounter;
@@ -780,7 +786,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             if (ritual != null && ritual.ai[1] == npc.ai[3])
             {
                 int threshold = (int)ritual.localAI[0] - 150;
-                if (GetVulnerabilityState(npc) == 4)
+                if (GetVulnerabilityState(npc) == ClassState.All)
                     threshold = 800 - 150;
                 if (npc.Distance(ritual.Center) > threshold) //stay within ritual range
                 {
@@ -1264,10 +1270,10 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
     {
         public override NPCMatcher CreateMatcher() => new NPCMatcher().MatchTypeRange(NPCID.MoonLordHead, NPCID.MoonLordHand, NPCID.MoonLordLeechBlob);
 
-        public override int GetVulnerabilityState(NPC npc)
+        public override ClassState GetVulnerabilityState(NPC npc)
         {
             NPC core = FargoSoulsUtil.NPCExists(npc.ai[3], NPCID.MoonLordCore);
-            return core == null ? -1 : core.GetGlobalNPC<MoonLordCore>().VulnerabilityState;
+            return core == null ? default : core.GetGlobalNPC<MoonLordCore>().VulnerabilityState;
         }
 
         public override void SetDefaults(NPC npc)

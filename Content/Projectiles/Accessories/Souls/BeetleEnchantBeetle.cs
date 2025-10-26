@@ -100,7 +100,7 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                 else // has target, seek it out
                 {
                     NPC npc = Main.npc[(int)Target];
-                    if (npc != null && npc.Alive())
+                    if (npc != null && npc.Alive() && npc.CanBeChasedBy())
                     {
                         HomingMovement(npc.Center);
                         if (Projectile.Colliding(Projectile.Hitbox, npc.Hitbox))

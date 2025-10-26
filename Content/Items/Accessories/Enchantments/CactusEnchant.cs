@@ -120,7 +120,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Enchantments
 
     public class CactusPassiveEffect : AccessoryEffect
     {
-        public override Header ToggleHeader => Header.GetHeader<LifeHeader>();
-        public override int ToggleItemType => ModContent.ItemType<CactusEnchant>();
+        // Gives player immunity to some cactus hazards like rolling cactus tile damage, DST cactus damage or cactus mimic aggro
+        public override Header ToggleHeader => null;
     }
 }

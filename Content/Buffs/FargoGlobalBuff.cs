@@ -25,13 +25,13 @@ namespace FargowiltasSouls.Content.Buffs
                 switch (type)
                 {
                     case BuffID.ShadowDodge:
-                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.HallowedPlateMail))
+                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.HallowedPlateMail).Contains("HolyDodge"))
                         {
                             tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.ShadowDodge");
                         }
                         break;
                     case BuffID.ChaosState:
-                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.RodofDiscord))
+                        if (EmodeItemBalance.HasEmodeChange(Main.LocalPlayer, ItemID.RodofDiscord).Contains("RodofDiscord"))
                         {
                             tip += "\n" + Language.GetTextValue("Mods.FargowiltasSouls.EModeBalance.RodofDiscord");
                         }
@@ -80,7 +80,7 @@ namespace FargowiltasSouls.Content.Buffs
                     break;
 
                 case BuffID.Tipsy:
-                    if (player.whoAmI == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.Ale))
+                    if (player.whoAmI == Main.myPlayer && EmodeItemBalance.HasEmodeChange(player, ItemID.Ale).Contains("Tipsy"))
                         player.statDefense -= 2;
                     break;
 

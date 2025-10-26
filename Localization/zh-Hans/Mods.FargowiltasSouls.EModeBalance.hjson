@@ -9,11 +9,12 @@ Scale: 尺寸减少{0}%
 ScalePositive: 尺寸增加{0}%
 RodofDiscord: 混乱状态会降低你40%的伤害、防御和伤害减免
 ChaosState: 伤害、防御和伤害减免降低40%
-RodofHarmony: 在打败突变体后才能获取
+RodOfHarmony: 在打败突变体后才能获取
 Split: 降低分裂频率
 WaterBolt: 在骷髅王被击败前无法使用
 SpaceGun: 在任意邪恶Boss被击败前无法使用
 DemonScythe: 任意邪恶Boss被击败前伤害和攻速会降低40%
+// EarlyPotions: Reduced effect until an evil boss is defeated
 // HolyDodge: Dodge cooldown increased to 45 seconds
 ZenithNone: 无削弱
 ZenithHitRate: 造成伤害的频率大幅降低，通过击败下列Boss可提高其输出能力：
@@ -43,6 +44,7 @@ MythrilHalberdRework: 不攻击持续2秒后下一击造成八倍伤害，受攻
 OrichalcumHalberdRework: 对受减益伤害的敌人造成最多两倍伤害，随敌人的减益伤害增加而增加
 SuperStarCannon: 最大穿透次数降低为7次
 WarmthPotionNerf: 伤害减免效果减半且在防御后计算
+// FeatherfallPotionNerf: Decreased maximum fall speed while holding down
 CrossNecklaceNerf: 连续受击不会触发延长无敌时间的效果
 IceBladeFrostburn: 射弹击中敌人造成霜冻减益
 JungleRose: 增加抓人草类敌怪掉落世纪之果的几率
@@ -74,4 +76,4 @@ MedusaHead: 击中的敌怪越少伤害越高，至多增加1.25倍伤害
 // BookofSkulls: Projectiles can now travel through tiles when tracking an enemy
 // AntiSpam: Held projectiles have increased hitrate
 // Tipsy: Tipsy buff additionally reduces defense by 2
-// Trimarang: Increased projectile return speed
+// Trimarang: Doubled projectile speed

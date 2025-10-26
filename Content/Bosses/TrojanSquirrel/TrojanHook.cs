@@ -15,11 +15,9 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
 {
     public class TrojanHook : ModProjectile
     {
-        public override string Texture => "Terraria/Images/Projectile_13";
 
         public override void SetStaticDefaults()
         {
-            // DisplayName.SetDefault("Squirrel Hook");
             ProjectileID.Sets.DrawScreenCheckFluff[Projectile.type] = 8000;
         }
 
@@ -43,7 +41,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             if (source is EntitySource_Parent parent && parent.Entity is NPC sourceNPC)
             {
                 npc = sourceNPC;
-                offset = Projectile.Center - npc.Center;
+                offset = Projectile.Center - npc.Center - Projectile.velocity;
                 dir = sourceNPC.direction;
             }
         }
@@ -137,7 +135,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
             return false;
         }
 
-        Vector2 ChainOrigin => npc == null ? Projectile.Center : npc.Center + offset;
+        Vector2 ChainOrigin => npc == null || !npc.TypeAlive<TrojanSquirrelArms>() ? Projectile.Center : npc.As<TrojanSquirrelArms>().GetNextShootPos((int)Projectile.ai[2]);
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
@@ -168,9 +166,10 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 Vector2 lightningOrigin = lightningRect.Size() / 2f;
                 Main.EntitySpriteDraw(lightningTexture, position - Main.screenPosition, lightningRect, Color.White, rotation, lightningOrigin, 1f, SpriteEffects.None, 0);
             }
-            if (npc != null && TextureAssets.Chain.IsLoaded)
+            if (npc != null)
             {
-                Texture2D texture = TextureAssets.Chain.Value;
+                Texture2D texture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanChain", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+                Texture2D glowtexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanChain_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
                 Vector2 position = Projectile.Center;
                 Vector2 mountedCenter = ChainOrigin;
                 Rectangle? sourceRectangle = new Rectangle?();
@@ -197,6 +196,7 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         Color color2 = Lighting.GetColor((int)position.X / 16, (int)(position.Y / 16.0));
                         color2 = flashingZapEffect ? Color.White * Projectile.Opacity : Projectile.GetAlpha(color2);
                         Main.EntitySpriteDraw(texture, position - Main.screenPosition, sourceRectangle, color2, rotation, origin, 1f, SpriteEffects.None, 0);
+                        Main.EntitySpriteDraw(glowtexture, position - Main.screenPosition, sourceRectangle, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
 
                         bool lightningBehind2 = Main.rand.NextBool();
                         if (lightningBehind2)
@@ -207,16 +207,17 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                         {
                             color2.A = 0;
                             Main.EntitySpriteDraw(texture, position - Main.screenPosition, sourceRectangle, color2, rotation, origin, 1f, SpriteEffects.None, 0);
+                            Main.EntitySpriteDraw(glowtexture, position - Main.screenPosition, sourceRectangle, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
                         }
                         if (!lightningBehind2)
                         {
                             DrawLightning(position, lightColor, rotation);
                         }
-
                     }
             }
 
             Texture2D texture2D13 = TextureAssets.Projectile[Projectile.type].Value;
+            Texture2D hookGlow = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Bosses/TrojanSquirrel/TrojanHook_glow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             int num156 = TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
             Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
@@ -230,10 +231,12 @@ namespace FargowiltasSouls.Content.Bosses.TrojanSquirrel
                 DrawLightning(Projectile.Center, lightColor, Projectile.rotation);
             }
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+            Main.EntitySpriteDraw(hookGlow, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White, Projectile.rotation, origin2, Projectile.scale, effects, 0);
             if (flashingZapEffect)
             {
                 color.A = 0;
                 Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);
+                Main.EntitySpriteDraw(hookGlow, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Color.White, Projectile.rotation, origin2, Projectile.scale, effects, 0);
             }
             if (!lightningBehind)
             {

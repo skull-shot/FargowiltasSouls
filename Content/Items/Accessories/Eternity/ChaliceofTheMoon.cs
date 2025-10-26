@@ -4,11 +4,9 @@ using FargowiltasSouls.Content.Buffs.Minions;
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using FargowiltasSouls.Core.Toggler.Content;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Eternity
@@ -105,8 +103,14 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
             BuffID.WarTable
            // BuffID.Honey
         ];
+        public override void SetStaticDefaults()
+        {
+            if (ModContent.TryFind("Fargowiltas", "Omnistation", out ModBuff omnibuff))
+                ChaliceBuffs.Add(omnibuff.Type);
+        }
         public override void PostUpdateEquips(Player player)
         {
+
             foreach (int buff in ChaliceBuffs)
             {
                 int duration = buff == BuffID.Lucky ? 60 * 60 * 15 : 2;

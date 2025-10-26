@@ -1,12 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using FargowiltasSouls.Assets.Sounds;
 using FargowiltasSouls.Content.Items.Misc;
 using FargowiltasSouls.Content.Projectiles;
 using Luminance.Core.Graphics;
+using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
@@ -171,10 +172,6 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
 
             if (Projectile.owner == Main.myPlayer)
             {
-                int p = Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<Explosion>(), Projectile.damage, 0f, Main.myPlayer);
-                if (p != Main.maxProjectiles)
-                    Main.projectile[p].FargoSouls().CanSplit = false;
-
                 int solar = ModContent.ItemType<SolarBooster>();
                 int vortex = ModContent.ItemType<VortexBooster>();
                 int nebula = ModContent.ItemType<NebulaBooster>();
@@ -189,16 +186,13 @@ namespace FargowiltasSouls.Content.Projectiles.Accessories.Souls
                     NetMessage.SendData(MessageID.SyncItem, -1, -1, null, n, 1f);
             }
 
-
-            const int num226 = 15;
-            for (int num227 = 0; num227 < num226; num227++)
+            List<Color> colors = [Color.Yellow, Color.LightCyan, Color.Magenta, Color.Cyan];
+            FargoSoulsUtil.DustRing(Projectile.Center, 15, DustID.PortalBoltTrail, 30, color: colors[(int)FragmentType] with {A = 50}, scale: 3f);
+            for (int i = 0; i < 30; i++)
             {
-                Vector2 vector6 = Vector2.UnitX * 40f;
-                vector6 = vector6.RotatedBy((num227 - (num226 / 2 - 1)) * 6.28318548f / num226, default) + Projectile.Center;
-                Vector2 vector7 = vector6 - Projectile.Center;
-                int num228 = Dust.NewDust(vector6 + vector7, 0, 0, DustID.Torch, 0f, 0f, 0, default, 3f);
-                Main.dust[num228].noGravity = true;
-                Main.dust[num228].velocity = vector7;
+                int d = Dust.NewDust(Projectile.Center, 0, 0, Main.rand.NextFromList(DustID.DarkCelestial, DustID.Heavenforge, DustID.StarRoyale, DustID.Astra), Scale: 2f);
+                Main.dust[d].noGravity = true;
+                Main.dust[d].velocity = 25 * Vector2.UnitY.RotatedBy(MathHelper.TwoPi / 30 * i);
             }
         }
 

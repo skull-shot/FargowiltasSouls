@@ -42,8 +42,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.SkyAndRa
         {
             base.OnFirstTick(npc);
 
-            if (Main.hardMode && Main.rand.NextBool(10) && npc.FargoSouls().CanHordeSplit)
-                EModeGlobalNPC.Horde(npc, 2);
+            //if (Main.hardMode && Main.rand.NextBool(10) && npc.FargoSouls().CanHordeSplit)
+                //EModeGlobalNPC.Horde(npc, 2);
         }
 
         public override void AI(NPC npc)

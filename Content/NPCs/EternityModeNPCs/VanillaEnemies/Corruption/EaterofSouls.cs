@@ -45,20 +45,13 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Corrupti
                 NPCID.EaterofSouls,
                 NPCID.BigEater,
                 NPCID.LittleEater
-                //NPCID.Crimera,
-                //NPCID.BigCrimera,
-                //NPCID.LittleCrimera
             );
 
         public override void OnFirstTick(NPC npc)
         {
             base.OnFirstTick(npc);
 
-            if (NPC.downedBoss2 && Main.rand.NextBool(5) && npc.FargoSouls().CanHordeSplit)
-                EModeGlobalNPC.Horde(npc, 5);
-
-            if (npc.type == NPCID.EaterofSouls || npc.type == NPCID.BigEater || npc.type == NPCID.LittleEater)
-                npc.buffImmune[BuffID.CursedInferno] = true;
+            npc.buffImmune[BuffID.CursedInferno] = true;
 
             AttackTimer = Main.rand.Next(-80, 80);
         }

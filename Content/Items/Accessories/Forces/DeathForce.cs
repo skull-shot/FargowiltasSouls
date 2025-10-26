@@ -23,6 +23,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
     {
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<NinjaEnchant>(),
@@ -42,7 +43,6 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             player.AddEffect<ShadowForceEffect>(Item);
             // Ninja
             player.AddEffect<NinjaEffect>(Item);
-            player.AddEffect<NinjaDamageEffect>(Item);
             // Ashadow
             player.AddEffect<ShadowBalls>(Item);
             // CrystalAssassin-Shinobi

@@ -15,6 +15,7 @@ namespace FargowiltasSouls.Content.Tiles
 {
     public class EModeGlobalTile : GlobalTile
     {
+        internal static int? CaptureTileTypeBeingMined = null;
         public override void NearbyEffects(int i, int j, int type, bool closer)
         {
             if (!WorldSavingSystem.EternityMode)

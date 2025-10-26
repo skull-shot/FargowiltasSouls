@@ -63,6 +63,8 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
             State = binaryReader.Read7BitEncodedInt();
         }
 
+        public override bool? CanFallThroughPlatforms(NPC npc) => true;
+
         public override bool SafePreAI(NPC npc)
         {
             Timer++;
@@ -94,9 +96,10 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.OOA
                         if (FargoSoulsUtil.HostCheck)
                         {
                             Projectile p = Projectile.NewProjectileDirect(npc.GetSource_FromThis(), npc.Center + npc.direction * 10 * Vector2.UnitX, (crystalCenter.X - 10 - npc.Center.X) / 50 * Vector2.UnitX.RotatedBy(Main.rand.NextFloat(-spread, spread)), ProjectileID.BallofFire, npc.damage / 6, 1f);
-                            p.timeLeft = 60;
+                            p.timeLeft = 80;
                             p.hostile = true;
                             p.friendly = false;
+                            p.tileCollide = false;
                         }
                     }
                     if (Timer > 240)

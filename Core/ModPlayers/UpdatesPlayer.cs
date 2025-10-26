@@ -620,6 +620,8 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (CosmosMoonTimer > 0) // naturally degrades
                 CosmosMoonTimer--;
+            else
+                CosmosMoonTimer = 0;
 
             if (FallthroughCD > 0)
                 FallthroughCD--;
@@ -643,6 +645,15 @@ namespace FargowiltasSouls.Core.ModPlayers
 
             if (TinCrit > 0 && !Player.HasEffect<TinEffect>())
                 TinCrit = 0;
+
+            if (NinjaCounter > 0 && !Player.HasEffect<NinjaEffect>())
+                NinjaCounter = 0;
+
+            if (NinjaDecrementCD > 0)
+                NinjaDecrementCD--;
+
+            if (ShadewoodCharge > 0 && !Player.HasEffect<ShadewoodEffect>())
+                ShadewoodCharge = 0;
 
             if (!Player.HasEffectEnchant<BeetleEffect>())
             {

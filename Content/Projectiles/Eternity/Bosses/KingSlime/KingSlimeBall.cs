@@ -1,8 +1,13 @@
+using FargowiltasSouls.Assets.Textures;
+using FargowiltasSouls.Core;
+using FargowiltasSouls.Core.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -10,7 +15,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
 {
     public class KingSlimeBall : ModProjectile
     {
-        public override string Texture => "FargowiltasSouls/Content/Bosses/MutantBoss/MutantSlimeBall_2";
+        public override string Texture => FargoAssets.GetAssetString("Content/Projectiles/Eternity/Bosses/KingSlime", Name);
 
         public override void SetStaticDefaults()
         {
@@ -32,12 +37,48 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
 
         public override void AI()
         {
+            if (ContentSamples.ProjectilesByType[Type].timeLeft == Projectile.timeLeft)
+                Projectile.ai[0] = Main.rand.Next(18);
             Projectile.alpha -= 50;
             if (Projectile.alpha < 0)
                 Projectile.alpha = 0;
             if (Projectile.alpha == 0 && Main.rand.NextBool(3) && (Projectile.tileCollide || !Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height)))
             {
-                Color color = Projectile.ai[2] == 1 ? Color.DarkRed : new(0, 80, 255, 100);
+                Color color = Color.Blue;
+                switch (Projectile.ai[0])
+                {
+                    case <= 2:
+                        {
+                            color = Color.Blue;
+                        }
+                        break;
+                    case <= 5:
+                        {
+                            color = Color.Green;
+                        }
+                        break;
+                    case <= 8:
+                        {
+                            color = Color.Purple;
+                        }
+                        break;
+                    case <= 11:
+                        {
+                            color = Color.Pink;
+                        }
+                        break;
+                    case <= 14:
+                        {
+                            color = Color.Gray;
+                        }
+                        break;
+                    case <= 17:
+                        {
+                            color = Color.Red;
+                        }
+                        break;
+
+                }
                 int d = Dust.NewDust(Projectile.position - Projectile.velocity * 3f, Projectile.width, Projectile.height, DustID.TintableDust, 0f, 0f, 150, color, 1.2f);
                 Main.dust[d].velocity *= 0.3f;
                 Main.dust[d].velocity += Projectile.velocity * 0.3f;
@@ -69,7 +110,8 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.KingSlime
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             int num156 = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type]; //ypos of lower right corner of sprite to draw
             int y3 = num156 * Projectile.frame; //ypos of upper left corner of sprite to draw
-            Rectangle rectangle = new(0, y3, texture2D13.Width, num156);
+            Rectangle rectangle = new((texture2D13.Width / 18) * (int)Projectile.ai[0], y3, texture2D13.Width / 18, num156);
+            rectangle.Inflate(0, -2);
             Vector2 origin2 = rectangle.Size() / 2f;
             SpriteEffects effects = Projectile.localAI[0] == 2 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             Main.EntitySpriteDraw(texture2D13, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Microsoft.Xna.Framework.Rectangle?(rectangle), Projectile.GetAlpha(lightColor), Projectile.rotation, origin2, Projectile.scale, effects, 0);

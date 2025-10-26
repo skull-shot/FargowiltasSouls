@@ -2,6 +2,8 @@
 using FargowiltasSouls.Core.AccessoryEffectSystem;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace FargowiltasSouls.Content.Items.Accessories.Forces
@@ -12,6 +14,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
             [AccessoryEffectLoader.GetEffect<GoldKeyEffect>()];
         public override void SetStaticDefaults()
         {
+            base.SetStaticDefaults();
             Enchants[Type] =
             [
                 ModContent.ItemType<GoldEnchant>(),
@@ -20,6 +23,9 @@ namespace FargowiltasSouls.Content.Items.Accessories.Forces
                 ModContent.ItemType<RedRidingEnchant>(),
                 ModContent.ItemType<ValhallaKnightEnchant>()
             ];
+
+            Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(6, 9));
+            ItemID.Sets.AnimatesAsSoul[Item.type] = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {

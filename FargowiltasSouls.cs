@@ -63,8 +63,10 @@ namespace FargowiltasSouls
     public partial class FargowiltasSouls : Mod
     {
         public static Mod MutantMod;
+        public static Mod BOBW;
         public static Mod CalamityMod;
         public static Mod MusicDisplay;
+
 
         //internal static ModKeybind FreezeKey;
         //internal static ModKeybind GoldKey;
@@ -72,7 +74,6 @@ namespace FargowiltasSouls
         //internal static ModKeybind SpecialDashKey;
         //internal static ModKeybind BombKey;
         internal static ModKeybind PrecisionSealKey;
-        internal static ModKeybind RuminateKey;
         //internal static ModKeybind MagicalBulbKey;
         //internal static ModKeybind FrigidSpellKey;
         //internal static ModKeybind DebuffInstallKey;
@@ -99,6 +100,8 @@ namespace FargowiltasSouls
         internal static float OldMusicFade;
 
         public UserInterface CustomResources;
+
+        private NPC DeerclopsAICurrentlyRunning;
 
         internal static Dictionary<int, int> ModProjDict = [];
 
@@ -131,6 +134,7 @@ namespace FargowiltasSouls
         {
             Instance = this;
             ModLoader.TryGetMod("Fargowiltas", out MutantMod);
+            ModLoader.TryGetMod("FargoSeeds", out BOBW);
             ModLoader.TryGetMod("CalamityMod", out CalamityMod);
             ModLoader.TryGetMod("MusicDisplay", out MusicDisplay);
 
@@ -159,7 +163,6 @@ namespace FargowiltasSouls
             //SpecialDashKey = KeybindLoader.RegisterKeybind(this, "SpecialDash", "C");
             //BombKey = KeybindLoader.RegisterKeybind(this, "Bomb", "Z");
             PrecisionSealKey = KeybindLoader.RegisterKeybind(this, "PrecisionSeal", "LeftShift");
-            RuminateKey = KeybindLoader.RegisterKeybind(this, "Ruminate", "LeftShift");
             //MagicalBulbKey = KeybindLoader.RegisterKeybind(this, "MagicalBulb", "N");
             //FrigidSpellKey = KeybindLoader.RegisterKeybind(this, "FrigidSpell", "U");
             //DebuffInstallKey = KeybindLoader.RegisterKeybind(this, "DebuffInstall", "Y");
@@ -565,7 +568,7 @@ namespace FargowiltasSouls
                 //}
 
                 //mutant shop
-                Mod fargos = FargowiltasSouls.MutantMod;
+                Mod fargos = MutantMod;
                 fargos.Call("AddSummon", 0.5f, "FargowiltasSouls", "SquirrelCoatofArms", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.TrojanSquirrel]), Item.buyPrice(0, 4));
                 fargos.Call("AddSummon", 2.79f, "FargowiltasSouls", "CoffinSummon", new Func<bool>(() => WorldSavingSystem.DownedBoss[(int)WorldSavingSystem.Downed.CursedCoffin]), Item.buyPrice(0, 9));
                 fargos.Call("AddSummon", 6.9f, "FargowiltasSouls", "DevisCurse", new Func<bool>(() => WorldSavingSystem.DownedDevi), Item.buyPrice(0, 17, 50));
@@ -580,6 +583,10 @@ namespace FargowiltasSouls
                 fargos.Call("AddPermaUpgrade", new Item(ModContent.ItemType<RabiesVaccine>()), () => Main.LocalPlayer.FargoSouls().RabiesVaccine);
                 fargos.Call("AddPermaUpgrade", new Item(ModContent.ItemType<MutantsDiscountCard>()), () => Main.LocalPlayer.FargoSouls().MutantsDiscountCard);
                 fargos.Call("AddPermaUpgrade", new Item(ModContent.ItemType<MutantsCreditCard>()), () => Main.LocalPlayer.FargoSouls().MutantsCreditCard);
+
+                // emode world gen screen toggle
+                Action<bool> setEmode = (value) => WorldSavingSystem.QueueEnableEternityMode = value;
+                BOBW.Call("AddWorldGenToggle", Name, "Mods.FargoSeeds.WorldGenMenu.HeaderGeneral", "Mods.FargowiltasSouls.UI.Eternity", "Mods.FargowiltasSouls.UI.TogglesEternity", new Color(28, 222, 152), FargoAssets.Filepath + "UI/OncomingMutant", false, setEmode);
             }
             catch (Exception e)
             {
@@ -659,7 +666,6 @@ namespace FargowiltasSouls
             SyncAntlionGrab,
             SyncTuskRip,
             DropMutantGift,
-            RequestEnvironmentalProjectile,
             ToggleEternityMode,
             WakeUpDeviantt,
             WakeUpMutant,
@@ -931,36 +937,6 @@ namespace FargowiltasSouls
                             int i = reader.ReadInt32();
                             int j = reader.ReadInt32();
                             WorldGen.KillTile(i, j);
-                        }
-                        break;
-                    case PacketID.RequestEnvironmentalProjectile:
-                        {
-                            if (Main.netMode == NetmodeID.Server)
-                            {
-                                int type = reader.ReadInt32();
-                                Vector2 pos = reader.ReadVector2();
-                                if (type == ModContent.ProjectileType<DeerclopsDarknessHand>())
-                                {
-                                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                                    int p = Projectile.NewProjectile(Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, type, damage, 2f, Main.myPlayer);
-                                    if (p.IsWithinBounds(Main.maxProjectiles))
-                                    {
-                                        Main.projectile[p].light = 1f;
-                                    }
-                                    Lighting.AddLight(pos, 1f, 1f, 1f);
-                                }
-                                else if (type == ModContent.ProjectileType<LifelightEnvironmentStar>())
-                                {
-                                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                                    Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, type, damage, 2f, Main.myPlayer, -120);
-                                }
-                                else if (type == ModContent.ProjectileType<RainLightning>())
-                                {
-                                    float ai1 = reader.ReadSingle();
-                                    int damage = (Main.hardMode ? 120 : 60) / 4;
-                                    Projectile.NewProjectile(Terraria.Entity.GetSource_NaturalSpawn(), pos, Vector2.Zero, type, damage, 2f, Main.myPlayer, Vector2.UnitY.ToRotation(), ai1);
-                                }
-                            }
                         }
                         break;
 

@@ -158,21 +158,6 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.LunaticCultist
 
         public override bool PreDraw(ref Color lightColor)
         {
-            // Cone telegraph
-            if (!Projectile.owner.IsWithinBounds(Main.maxPlayers))
-            {
-                Projectile.Kill();
-                return false;
-            }
-            Player player = Main.player[Projectile.owner];
-            if (!player.Alive())
-            {
-                Projectile.Kill();
-                return false;
-            }
-            if (player.whoAmI != Main.myPlayer)
-                return false;
-
             Vector2 auraPos = Projectile.Center;
 
             Color darkColor = Color.Lerp(Color.Blue, Color.Cyan, 0.5f);

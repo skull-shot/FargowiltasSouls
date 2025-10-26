@@ -15,8 +15,8 @@ namespace FargowiltasSouls.Content.Buffs.Boss
 
         public override void Update(Player player, ref int buffIndex)
         {
-            player.ichor = true;
-            player.onFire2 = true;
+            //player.ichor = true;
+            //player.onFire2 = true;
             player.electrified = true;
             player.moonLeech = true;
         }

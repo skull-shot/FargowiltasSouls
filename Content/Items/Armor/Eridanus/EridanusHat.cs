@@ -136,8 +136,8 @@ namespace FargowiltasSouls.Content.Items.Armor.Eridanus
                 {
                     player.GetDamage(damageClass) += 0.70f; // 70%
 
-                    if (damageClass == DamageClass.Summon)
-                        fargoPlayer.MinionCrits = true;
+                    //if (damageClass == DamageClass.Summon)
+                        //fargoPlayer.MinionCrits = true;
 
                     player.GetCritChance(damageClass) += 30;
 

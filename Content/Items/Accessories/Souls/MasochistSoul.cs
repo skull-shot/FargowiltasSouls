@@ -43,7 +43,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Souls
             base.SetDefaults();
 
             Item.value = 5000000;
-            //Item.defense = 12;
+            Item.rare = ItemRarityID.Expert;
             Item.useTime = 30;
             Item.useAnimation = 30;
             Item.useStyle = ItemUseStyleID.HoldUp;

@@ -1,8 +1,11 @@
-﻿using FargowiltasSouls.Content.Bosses.VanillaEternity;
+﻿using Fargowiltas;
+using FargowiltasSouls.Common;
+using FargowiltasSouls.Content.Bosses.VanillaEternity;
 using FargowiltasSouls.Content.Buffs;
 using FargowiltasSouls.Content.Items;
 using FargowiltasSouls.Content.Items.Accessories.Enchantments;
 using FargowiltasSouls.Content.Items.Accessories.Eternity;
+using FargowiltasSouls.Content.Patreon.ParadoxWolf;
 using FargowiltasSouls.Content.PlayerDrawLayers;
 using FargowiltasSouls.Content.Projectiles;
 using FargowiltasSouls.Content.Projectiles.Accessories.DubiousCircuitry;
@@ -25,9 +28,11 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.GameContent.Achievements;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI;
 using Terraria.Utilities;
 using Terraria.WorldBuilding;
 
@@ -36,8 +41,6 @@ namespace FargowiltasSouls
     public partial class FargowiltasSouls : ICustomDetourProvider
     {
         private static readonly MethodInfo? CombinedHooks_ModifyHitNPCWithProj_Method = typeof(CombinedHooks).GetMethod("ModifyHitNPCWithProj", LumUtils.UniversalBindingFlags);
-
-        private static readonly MethodInfo? On_NPC_StrikeNPC_HitInfo_bool_bool_Method = typeof(NPC).GetMethod("StrikeNPC", BindingFlags.Instance | BindingFlags.Public);
 
         private static readonly MethodInfo? On_Player_PickAmmo_Method = typeof(Player).GetMethod("PickAmmo", BindingFlags.Instance | BindingFlags.NonPublic);
 
@@ -84,6 +87,13 @@ namespace FargowiltasSouls
             On_Player.ApplyTouchDamage += ApplyTouchDamage;
             On_Player.StatusFromNPC += RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float += IgnorePlayerImmunityCooldowns;
+            On_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool += GetTileType;
+            On_Player.ApplyItemTime += MinerEnchBuffMoreToolSpeed;
+            On_Player.ItemCheck_UseMiningTools_TryHittingWall += MinerEnchWallHammerSpeed;
+            On_NPC.AI_123_Deerclops += AI_123_Deerclops;
+            On_Projectile.StatusPlayer += StatusPlayer;
+
+            On_ItemSlot.PickItemMovementAction += AllowSouls;
         }
 
         private void SetSpawnPlayer(On_NPC.orig_SpawnOnPlayer orig, int plr, int Type)
@@ -125,6 +135,31 @@ namespace FargowiltasSouls
             On_Player.ApplyTouchDamage -= ApplyTouchDamage;
             On_Player.StatusFromNPC -= RemoveAnnoyingNPCDebuffs;
             On_Player.Hurt_PlayerDeathReason_int_int_refHurtInfo_bool_bool_int_bool_float_float_float -= IgnorePlayerImmunityCooldowns;
+            On_Player.ItemCheck_UseMiningTools_ActuallyUseMiningTool -= GetTileType;
+            On_Player.ApplyItemTime -= MinerEnchBuffMoreToolSpeed;
+            On_Player.ItemCheck_UseMiningTools_TryHittingWall -= MinerEnchWallHammerSpeed;
+            On_NPC.AI_123_Deerclops -= AI_123_Deerclops;
+            On_Projectile.StatusPlayer -= StatusPlayer;
+
+            On_ItemSlot.PickItemMovementAction -= AllowSouls;
+        }
+
+        private int AllowSouls(On_ItemSlot.orig_PickItemMovementAction orig, Item[] inv, int context, int slot, Item checkItem)
+        {
+            bool shouldAllow = (context == -10 || context == -11) && LoaderManager.Get<AccessorySlotLoader>().ModSlotCheck(checkItem, slot, context) && FargoSoulsSets.Items.AllowedSoulItemExceptions[checkItem.type];
+
+            if (!WorldSavingSystem.EternityMode)
+                return orig(inv, context, slot, checkItem);
+
+            if (shouldAllow)
+                return 1;
+
+            int result = orig(inv, context, slot, checkItem);
+
+            //if (shouldAllow)
+            //    checkItem.accessory = false;
+
+            return result;
         }
 
         private static void CheckBricks(On_WorldGen.orig_MakeDungeon orig, int x, int y)
@@ -140,7 +175,6 @@ namespace FargowiltasSouls
         void ICustomDetourProvider.ModifyMethods()
         {
             HookHelper.ModifyMethodWithDetour(CombinedHooks_ModifyHitNPCWithProj_Method, CombinedHooks_ModifyHitNPCWithProj);
-            HookHelper.ModifyMethodWithDetour(On_NPC_StrikeNPC_HitInfo_bool_bool_Method, UndoNinjaEnchCrit);
             HookHelper.ModifyMethodWithDetour(On_Player_PickAmmo_Method, NerfCoinGun);
             HookHelper.ModifyMethodWithDetour(On_TileLoader_PickPowerCheck_Method, MakeCommonTilesEasierToBreak);
         }
@@ -178,6 +212,8 @@ namespace FargowiltasSouls
             Terraria.On_Player.orig_AddBuff orig,
             Player self, int type, int timeToAdd, bool quiet, bool foodHack)
         {
+            if (WorldSavingSystem.EternityMode && DeerclopsAICurrentlyRunning is NPC deer && deer.ai[0] == 3 && type == BuffID.Slow && timeToAdd == 720)
+                return; // Remove stupid Slow debuff from deer
             FargoSoulsPlayer modPlayer = self.FargoSouls();
             if (Main.debuff[type]
                 && timeToAdd > 3 //dont affect auras
@@ -188,7 +224,7 @@ namespace FargowiltasSouls
                     || modPlayer.MonkDashing > 0
                     || modPlayer.TitaniumDRBuff)
                 && modPlayer.TurtleShellHP > 0
-                && DebuffIDs.Contains(type))
+                && FargoSoulsSets.Buffs.Debuffs[type])
             {
                 return; //doing it this way so that debuffs previously had are retained, but existing debuffs also cannot be extended by reapplying
             }
@@ -506,23 +542,10 @@ namespace FargowiltasSouls
         }*/
 
         public static void ShadowDodgeNerf(On_Player.orig_PutHallowedArmorSetBonusOnCooldown orig, Player self)
-        { // hallowed dodge nerf
+        { //Hallowed dodge nerf
             orig(self);
-            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail))
+            if (EmodeItemBalance.HasEmodeChange(self, ItemID.HallowedPlateMail).Contains("HolyDodge"))
                 self.shadowDodgeTimer = 60 * 45;
-        }
-
-        public static int UndoNinjaEnchCrit(Orig_StrikeNPC_HitInfo_bool_bool orig, NPC self, NPC.HitInfo hit, bool fromNet, bool noPlayerInteraction)
-        {
-            ref var proj = ref FargoSoulsGlobalProjectile.globalProjectileField;
-            ref var ninjaCrit = ref FargoSoulsGlobalProjectile.ninjaCritIncrease;
-            if (proj is not null && ninjaCrit > 0)
-            {
-                proj.CritChance = Math.Max(proj.CritChance - ninjaCrit, 0);
-                // reset this
-                FargoSoulsGlobalProjectile.globalProjectileField = null;
-            }
-            return orig(self, hit, fromNet, noPlayerInteraction);
         }
 
         internal void NerfCoinGun(Orig_PickAmmo orig, Player self, Item sItem, ref int projToShoot, ref float speed, ref bool canShoot, ref int totalDamage, ref float KnockBack, out int usedAmmoItemId, bool dontConsume)
@@ -530,7 +553,7 @@ namespace FargowiltasSouls
             orig(self, sItem, ref projToShoot, ref speed, ref canShoot, ref totalDamage, ref KnockBack, out usedAmmoItemId, dontConsume);
             if (self is not null)
             {
-                if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type))
+                if (canShoot && sItem.type == ItemID.CoinGun && projToShoot >= ProjectileID.CopperCoin && projToShoot <= ProjectileID.PlatinumCoin && EmodeItemBalance.HasEmodeChange(self, sItem.type).Contains("CoinGun"))
                 {
                     if (projToShoot == ProjectileID.CopperCoin)
                         totalDamage = (int)Math.Ceiling(totalDamage * 1.6f);
@@ -584,13 +607,57 @@ namespace FargowiltasSouls
             }
             return value;
         }
+        private void GetTileType(On_Player.orig_ItemCheck_UseMiningTools_ActuallyUseMiningTool orig, Player self, Item sItem, out bool canHitWalls, int x, int y)
+        {
+            EModeGlobalTile.CaptureTileTypeBeingMined = Main.tile[x, y].TileType;
+            orig(self, sItem, out canHitWalls, x, y);
+            EModeGlobalTile.CaptureTileTypeBeingMined = null;
+        }
+        public void MinerEnchBuffMoreToolSpeed(On_Player.orig_ApplyItemTime orig, Player self, Item sItem, float multiplier, bool? callUseItem)
+        {
+            if (AchievementsHelper.CurrentlyMining && self.FargoSouls().MiningImmunity && EModeGlobalTile.CaptureTileTypeBeingMined != null)
+            {
+                int tile = (int)EModeGlobalTile.CaptureTileTypeBeingMined;
+                if (Main.tileAxe[tile] || (sItem.pick == 0 && Main.tileHammer[tile]))
+                { //Miner Enchantment
+                    float speedMult = self.FargoSouls().ForceEffect<MinerEnchant>() ? 0.25f : 0.5f; // This affects useTime
+                    orig(self, sItem, multiplier * speedMult, callUseItem);
+                    return;
+                }
+            }
+            orig(self, sItem, multiplier, callUseItem);
+        }
+        private void MinerEnchWallHammerSpeed(On_Player.orig_ItemCheck_UseMiningTools_TryHittingWall orig, Player self, Item sItem, int wX, int wY)
+        {
+            if (self.FargoSouls().MiningImmunity)
+            { //Miner Enchantment
+                float speedMult = self.FargoSouls().ForceEffect<MinerEnchant>() ? 0.25f : 0.5f;
+                int time = sItem.useTime;
+                sItem.useTime = (int)Math.Max(1, sItem.useTime * speedMult);
+                orig(self, sItem, wX, wY);
+                sItem.useTime = time;
+            }
+            else orig(self, sItem, wX, wY);
+        }
         public static void MakeCommonTilesEasierToBreak(Orig_PickPowerCheck orig, Tile target, int pickPower, ref int damage)
         {
-            if (WorldSavingSystem.EternityMode && FargoSoulsSets.Tiles.CommonTiles.Contains(target.TileType))
+            if (!Main.getGoodWorld && WorldSavingSystem.EternityMode && FargoSoulsSets.Tiles.CommonTiles[target.TileType])
             {
                 damage *= 2;
             }
             orig(target, pickPower, ref damage);
+        }
+        private void AI_123_Deerclops(On_NPC.orig_AI_123_Deerclops orig, NPC self)
+        {
+            DeerclopsAICurrentlyRunning = self;
+            orig(self); // Capture whether Deerclops is the one currently inflicting a debuff or the sorts.
+            DeerclopsAICurrentlyRunning = null;
+        }
+        private void StatusPlayer(On_Projectile.orig_StatusPlayer orig, Projectile self, int playerIndex)
+        {
+            if (self.type == ProjectileID.DeerclopsIceSpike && WorldSavingSystem.EternityMode && self.GetSourceNPC().type == NPCID.Deerclops)
+                return; // Remove annoying Frozen debuff from EMode+ Deer spikes
+            orig(self, playerIndex);
         }
     }
 }

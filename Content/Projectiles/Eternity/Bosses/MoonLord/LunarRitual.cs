@@ -38,7 +38,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Bosses.MoonLord
                 Projectile.Center = target;
             else if (Projectile.Distance(target) > threshold)
                 Projectile.velocity = (target - Projectile.Center) / 30;
-            else if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState == 4 && npc.GetGlobalNPC<MoonLordCore>().VulnerabilityTimer < 60 && !npc.dontTakeDamage)
+            else if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState == Content.Bosses.VanillaEternity.MoonLord.ClassState.All && npc.GetGlobalNPC<MoonLordCore>().VulnerabilityTimer < 60 && !npc.dontTakeDamage)
                 Projectile.velocity = (Main.player[npc.target].Center - Projectile.Center) * 0.05f;
             else
                 Projectile.velocity = Projectile.SafeDirectionTo(target);

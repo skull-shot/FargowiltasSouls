@@ -135,7 +135,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity
                 if (ritual != null)
                     Projectile.position += ritual.position - ritual.oldPosition;
 
-                if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState != 1 && Projectile.timeLeft > 60)
+                if (npc.GetGlobalNPC<MoonLordCore>().VulnerabilityState != MoonLord.ClassState.Ranged && Projectile.timeLeft > 60)
                     Projectile.timeLeft = 60;
             }
             else
