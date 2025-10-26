@@ -196,7 +196,7 @@ namespace FargowiltasSouls.Content.Sky
             blackShader.TrySetParameter("anchorPoint", Main.LocalPlayer.Center - Vector2.UnitY * Main.screenHeight * 2);
             blackShader.TrySetParameter("screenPosition", Main.screenPosition);
             blackShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
-            blackShader.TrySetParameter("maxOpacity", opacity);
+            blackShader.TrySetParameter("maxOpacity", opacity * shaderIntensity);
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = noise.Value;
             //Main.spriteBatch.GraphicsDevice.Textures[2] = noise2.Value;
