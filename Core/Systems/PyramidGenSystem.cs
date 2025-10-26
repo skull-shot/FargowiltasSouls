@@ -263,7 +263,6 @@ namespace FargowiltasSouls.Core.Systems
             return true;
         }
         public bool SaveDrunkWorldGen;
-        private static readonly string[] pyramid_passes = ["Pyramids", "SOTS: Pyramid"];
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             if (!ShouldGenerateArena)
@@ -280,8 +279,7 @@ namespace FargowiltasSouls.Core.Systems
             // Find index of Pyramid pass
             
             // Find latest pass after pyramid generation.
-            int pyramidIndex = pyramid_passes.Select(name => tasks.FindIndex(p => p.Name.Equals(name))).Max();
-            pyramidIndex++;
+            int pyramidIndex = tasks.FindIndex(p => p.Name.Equals("Pyramids"));
             // Before Pyramid pass, if there's STILL no valid pyramid spot, keep designating Pyramid spots until one works.
             tasks.Insert(pyramidIndex, new PassLegacy("GuaranteePyramidAgain", delegate
             {
