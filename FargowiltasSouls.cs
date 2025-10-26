@@ -107,6 +107,8 @@ namespace FargowiltasSouls
 
         public static bool DrawingTooltips = false;
 
+        private static bool MoveDeerclopsChecklistEntry = true;
+
         internal struct TextureBuffer
         {
             public static readonly Dictionary<int, Asset<Texture2D>> NPC = [];
