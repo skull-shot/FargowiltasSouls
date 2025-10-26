@@ -3,6 +3,7 @@ using FargowiltasSouls.Content.WorldGeneration;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent.Biomes;
 using Terraria.GameContent.Generation;
@@ -209,38 +210,60 @@ namespace FargowiltasSouls.Core.Systems
         // Validates a pyramid position. Index is used to be consistent with vanilla code for doing this.
         public static bool ValidatePosition(int x, int y, int index)
         {
-            int num690 = x;
-            int num691 = y;
-            if (num690 > 300 && num690 < Main.maxTilesX - 300 && (GenVars.dungeonSide >= 0 || !((double)num690 < (double)GenVars.dungeonX + (double)Main.maxTilesX * 0.15)) && (GenVars.dungeonSide <= 0 || !((double)num690 > (double)GenVars.dungeonX - (double)Main.maxTilesX * 0.15)))
+            // Checks built into Pyramids pass.
+            
+            if (
+                x <= 300
+             || x >= Main.maxTilesX - 300
+             || (GenVars.dungeonSide < 0 && x < GenVars.dungeonX + Main.maxTilesX * 0.15)
+             || (GenVars.dungeonSide > 0 && x > GenVars.dungeonX - Main.maxTilesX * 0.15)
+            )
             {
-                if (!((double)num691 >= Main.worldSurface) && Main.tile[num690, num691].TileType == 53)
-                {
+                return false;
+            }
 
-                    int num692 = Main.maxTilesX;
-                    for (int num693 = 0; num693 < index; num693++)
-                    {
-                        int num694 = Math.Abs(num690 - GenVars.PyrX[num693]);
-                        if (num694 < num692)
-                        {
-                            num692 = num694;
-                        }
-                    }
-                    int num695 = 220;
-                    if (WorldGen.drunkWorldGen)
-                    {
-                        num695 /= 2;
-                    }
-                    num691--;
-                    int i = num690;
-                    int j = num691;
-                    if (!(Main.tile[i, j].TileType == 151 || Main.tile[i, j].WallType == 151))
-                        return true;
-                    //Pyramid(num690, num691);
+            for (; !Main.tile[x, y].HasTile && y < Main.worldSurface; y++)
+            {
+            }
+
+            if (y >= Main.worldSurface || Main.tile[x, y].TileType != 53)
+            {
+                return false;
+            }
+
+            int horizontalDistanceToClosestPyramid = Main.maxTilesX;
+            for (int i = 0; i < index; i++)
+            {
+                int distanceToThisPyramid = Math.Abs(x - GenVars.PyrX[i]);
+                if (distanceToThisPyramid < horizontalDistanceToClosestPyramid)
+                {
+                    horizontalDistanceToClosestPyramid = distanceToThisPyramid;
                 }
             }
-            return false;
+            int minDistanceToAnotherPyramid = 220;
+            if (WorldGen.drunkWorldGen)
+            {
+                minDistanceToAnotherPyramid /= 2;
+            }
+
+            if (horizontalDistanceToClosestPyramid < minDistanceToAnotherPyramid)
+            {
+                return false;
+            }
+
+            y--;
+            
+            // Checks built into WorldGen::Pyramid
+
+            if (Main.tile[x, y].TileType == 151 || Main.tile[x, y].WallType == 151)
+            {
+                return false;
+            }
+            
+            return true;
         }
         public bool SaveDrunkWorldGen;
+        private static readonly string[] pyramid_passes = ["Pyramids", "SOTS: Pyramid"];
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             if (!ShouldGenerateArena)
@@ -255,19 +278,24 @@ namespace FargowiltasSouls.Core.Systems
                     GenerateDunesWithPyramid();
             }));
             // Find index of Pyramid pass
-            int pyramidIndex = tasks.FindIndex(g => g.Name == "Pyramids");
+            
+            // Find latest pass after pyramid generation.
+            int pyramidIndex = pyramid_passes.Select(name => tasks.FindIndex(p => p.Name.Equals(name))).Max();
+            pyramidIndex++;
             // Before Pyramid pass, if there's STILL no valid pyramid spot, keep designating Pyramid spots until one works.
             tasks.Insert(pyramidIndex, new PassLegacy("GuaranteePyramidAgain", delegate
             {
-                bool ValidPyramid = false;
+                // Attempt to ensure there is an allegedly "valid" location.
+                bool anyValidPyramid = false;
                 int safety = 0;
-                while (!ValidPyramid && ++safety < 1000)
+                while (!anyValidPyramid && ++safety < 1000)
                 {
-                    for (int index = 0; index < GenVars.numPyr; index++)
+                    for (int pyrIndex = 0; pyrIndex < GenVars.numPyr; pyrIndex++)
                     {
-                        ValidPyramid |= ValidatePosition(GenVars.PyrX[index], GenVars.PyrY[index], index);
+                        anyValidPyramid |= ValidatePosition(GenVars.PyrX[pyrIndex], GenVars.PyrY[pyrIndex], pyrIndex);
                     }
-                    if (!ValidPyramid)
+
+                    if (!anyValidPyramid)
                     {
                         // Just keep doing it until it works
                         GenVars.numPyr--; // Decrement to never hit the array index limit. Overwriting older pyramid spots is fine since this only runs if none are valid anyway.
@@ -284,10 +312,25 @@ namespace FargowiltasSouls.Core.Systems
                 progress.Message = "Burying a sarcophagus";
                 if (PyramidLocation == Point.Zero)
                 {
+                    // In the event that there were no valid pyramids generated,
+                    // attempt to force one.
+                    
+                    // Generate at entrace.
                     Rectangle undergroundDesertLocation = GenVars.UndergroundDesertLocation;
                     int x = undergroundDesertLocation.Center.X;
                     int y = undergroundDesertLocation.Top - 10;
-                    WorldGen.Pyramid(x, y);
+                    var didGenerate = WorldGen.Pyramid(x, y);
+
+                    // Okay, desperate attempt to genrate to the side.
+                    if (!didGenerate)
+                    {
+                        var bounds = undergroundDesertLocation.Width - undergroundDesertLocation.Center.X;
+
+                        for (var offset = 1; offset < bounds && !didGenerate; offset++)
+                        {
+                            didGenerate |= WorldGen.Pyramid(x + offset, y) || WorldGen.Pyramid(x - offset, y);
+                        }
+                    }
                 }
                 if (PyramidLocation != Point.Zero)
                 {
