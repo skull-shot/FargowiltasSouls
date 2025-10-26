@@ -3119,7 +3119,7 @@ AnglerEnchant: {
 		'''
 		Increases fishing power and you catch fish almost instantly
 		Fishing line will never break and decreases chance of bait consumption
-		Increases fishing power by 20, allows fishing in lava
+		Increases fishing power by 20, allows fishing in lava and bobbers glow
 		'As long as they aren't all shoes, you can go home happily'
 		'''
 }
