@@ -1,5 +1,5 @@
 ﻿sampler scrollingFireNoise : register(s1);
-sampler fixedFlameNoise : register(s2);
+// sampler fixedFlameNoise : register(s2);
 
 float globalTime;
 float opacity;
@@ -39,7 +39,7 @@ float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) :
     float noiseLuminance = (noiseColor.r + noiseColor.g + noiseColor.b) / 3.0;
 
     float3 finalColor = lerp(sampleColor.rgb, noiseColor, noiseLuminance);
-    float finalModifier = 0.04 * opacity;
+    float finalModifier = 0.05 * opacity;
     finalColor = lerp(sampleColor.rgb, finalColor, finalModifier);
     float finalA = lerp(sampleColor.a, noiseLuminance, finalModifier);
     return float4(finalColor, finalA);

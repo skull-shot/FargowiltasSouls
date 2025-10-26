@@ -267,6 +267,11 @@ namespace FargowiltasSouls.Content.Sky
 
             //Main.spriteBatch.ResetToDefault();
 
+            DoTvBands(spriteBatch, opacity);
+        }
+
+        void DoTvBands(SpriteBatch spriteBatch, float opacity)
+        {
             /*
             if (--delay < 0)
             {
@@ -277,7 +282,7 @@ namespace FargowiltasSouls.Content.Sky
                     yPos[i] = Main.rand.Next(Main.screenHeight);
                 }
             }
-
+            
             Texture2D staticTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/MutantStatic", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             for (int i = 0; i < amountOfStatic; i++) //static on screen
             {
@@ -285,6 +290,7 @@ namespace FargowiltasSouls.Content.Sky
                 spriteBatch.Draw(staticTexture, new Rectangle(xPos[i] - width / 2, yPos[i], width, 3),
                 color * lifeIntensity * 0.75f);
             }
+            */
 
             Color vignetteColor = (FargoSoulsUtil.AprilFools ? Color.Red : Color.Blue) * shaderIntensity * 0.2f;
             spriteBatch.Draw(ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Sky/MutantVignette", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
@@ -300,7 +306,7 @@ namespace FargowiltasSouls.Content.Sky
             wavyTvShader.TrySetParameter("screenPosition", Main.screenPosition);
             wavyTvShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
             wavyTvShader.TrySetParameter("scrollSpeed", opacity);
-            wavyTvShader.TrySetParameter("opacity", shaderIntensity);
+            wavyTvShader.TrySetParameter("opacity", shaderIntensity * lifeIntensity);
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = risingFlame.Value;
 
@@ -312,7 +318,6 @@ namespace FargowiltasSouls.Content.Sky
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            */
         }
 
         public override float GetCloudAlpha()
