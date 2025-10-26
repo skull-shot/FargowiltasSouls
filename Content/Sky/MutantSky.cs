@@ -7,10 +7,12 @@ using Humanizer;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
+using static Fargowiltas.Content.UI.StatSheetUI;
 
 namespace FargowiltasSouls.Content.Sky
 {
@@ -153,7 +155,15 @@ namespace FargowiltasSouls.Content.Sky
 
             return color;
         }
-
+        public struct LightRay(Vector2 position, float rotation, float rotationSpeed, int timeLeft)
+        {
+            public Vector2 Position = position;
+            public float Rotation = rotation;
+            public float RotationSpeed = rotationSpeed;
+            public int TimeLeft = timeLeft;
+            public int MaxTimeLeft = timeLeft;
+        }
+        public List<LightRay> LightRays = [];
         public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
             if (maxDepth < float.MaxValue || minDepth >= float.MaxValue)
@@ -167,13 +177,16 @@ namespace FargowiltasSouls.Content.Sky
 
             var blackTile = TextureAssets.MagicPixel;
             var noise = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/deepspace");
-            var noise2 = FargoAssets.SandyNoise;
+            var rayTexture = FargoAssets.LightRayTexture;
+            //var noise2 = FargoAssets.SandyNoise;
             if (!blackTile.IsLoaded)
                 return;
             if (!noise.IsLoaded)
                 return;
-            if (!noise2.IsLoaded)
+            if (!rayTexture.IsLoaded)
                 return;
+            //if (!noise2.IsLoaded)
+            //    return;
 
             ManagedShader blackShader = ShaderManager.GetShader("FargowiltasSouls.MutantNewBackgroundShader");
             blackShader.TrySetParameter("radius", Main.screenHeight * 1.6f);
@@ -181,17 +194,72 @@ namespace FargowiltasSouls.Content.Sky
             blackShader.TrySetParameter("anchorPoint", Main.LocalPlayer.Center - Vector2.UnitY * Main.screenHeight * 2);
             blackShader.TrySetParameter("screenPosition", Main.screenPosition);
             blackShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
-            blackShader.TrySetParameter("maxOpacity", intensity);
+            blackShader.TrySetParameter("maxOpacity", opacity);
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = noise.Value;
-            Main.spriteBatch.GraphicsDevice.Textures[2] = noise2.Value;
+            //Main.spriteBatch.GraphicsDevice.Textures[2] = noise2.Value;
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, blackShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
             Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
             spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+
+            // aurora
+
+            
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+
+            int timer = (int)(Main.GlobalTimeWrappedHourly * 60f);
+            if (timer % 2 == 0)
+            {
+                Vector2 rayPos = Vector2.UnitX * Main.rand.NextFloat(-Main.screenWidth * 1.3f, Main.screenWidth * 1.3f);
+                float maxRot = MathHelper.PiOver2 * 0.6f;
+                float rayRot = Main.rand.NextFloat(-maxRot, maxRot);
+                int rayTime = 80;
+                float rayRotSpeed = Main.rand.NextFloat(0.25f * maxRot / rayTime, maxRot / rayTime);
+                rayRotSpeed /= 8f;
+                rayRotSpeed *= -rayRot.NonZeroSign();
+                var ray = new LightRay(rayPos, rayRot, rayRotSpeed, rayTime);
+                LightRays.Add(ray);
+            }
+            
+
+            Vector2 lightRayOrigin = Vector2.UnitX * rayTexture.Width() / 2;
+            List<LightRay> removeRays = [];
+            for (int i = 0; i <  LightRays.Count; i++)
+            {
+                var ray = LightRays[i];
+                Vector2 diff = ray.Position - Main.LocalPlayer.Center;
+                ray.TimeLeft--;
+                ray.Rotation += ray.RotationSpeed;
+                LightRays[i] = ray; // because it's a struct, non-reference type
+                if (ray.TimeLeft <= 0)
+                {
+                    removeRays.Add(ray);
+                    continue;
+                }
+                float rayOpacity = opacity;
+                float fadeTime = 16;
+                if (ray.TimeLeft <= fadeTime)
+                {
+                    rayOpacity *= ray.TimeLeft / fadeTime;
+                }
+                float fadeThreshold = ray.MaxTimeLeft - fadeTime;
+                if (ray.TimeLeft >= fadeThreshold)
+                {
+                    rayOpacity *= 1 - (ray.TimeLeft - fadeThreshold) / fadeTime;
+                }
+                Vector2 pos = new Vector2(Main.LocalPlayer.Center.X + ray.Position.X, Main.LocalPlayer.Center.Y + Main.screenHeight * 1.35f);
+                spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.5f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.75f, SpriteEffects.None, 0);
+            }
+
+            foreach (var ray in removeRays)
+                LightRays.Remove(ray);
+
             spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+
+            //Main.spriteBatch.ResetToDefault();
 
             /*
             if (--delay < 0)
