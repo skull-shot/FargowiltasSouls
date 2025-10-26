@@ -16,6 +16,11 @@ namespace FargowiltasSouls.Core.Systems
     public class PyramidGenSystem : ModSystem
     {
         public static bool ShouldGenerateArena => !ModLoader.HasMod("Remnants");
+
+        public static List<string> PassesToWaitFor { get; } = ["SOTS: Pyramid"];
+
+        public static bool ShouldWaitForPasses { get; private set; }
+
         public override void Load()
         {
             On_WorldGen.Pyramid += OnPyramidGen;
@@ -38,7 +43,7 @@ namespace FargowiltasSouls.Core.Systems
         public static bool OnPyramidGen(On_WorldGen.orig_Pyramid orig, int i, int j)
         {
             bool ret = orig(i, j);
-            if (ret && ShouldGenerateArena)
+            if (ret && ShouldGenerateArena && !ShouldWaitForPasses)
             {
                 if (PyramidLocation == Point.Zero)
                 {
@@ -267,12 +272,21 @@ namespace FargowiltasSouls.Core.Systems
         {
             if (!ShouldGenerateArena)
                 return;
+
+            ShouldWaitForPasses = tasks.Any(x => PassesToWaitFor.Contains(x.Name));
+            
             // Find index of Dunes pass
             int dunesIndex = tasks.FindIndex(g => g.Name == "Dunes");
             // After Dunes pass, generate a Dunes biome and designate a Pyramid spot if no pyramid spot was designated
             // Note that this pyramid spot may still be invalidated by later worldgen; which is why later code exists
             tasks.Insert(dunesIndex + 1, new PassLegacy("GuaranteePyramid", delegate
             {
+                if (ShouldWaitForPasses)
+                {
+                    // Don't force a pyramid normally if we have to wait.
+                    return;
+                }
+                
                 if (GenVars.numPyr <= 0)
                     GenerateDunesWithPyramid();
             }));
@@ -283,6 +297,12 @@ namespace FargowiltasSouls.Core.Systems
             // Before Pyramid pass, if there's STILL no valid pyramid spot, keep designating Pyramid spots until one works.
             tasks.Insert(pyramidIndex, new PassLegacy("GuaranteePyramidAgain", delegate
             {
+                if (ShouldWaitForPasses)
+                {
+                    // Don't force a pyramid normally if we have to wait.
+                    return;
+                }
+
                 // Attempt to ensure there is an allegedly "valid" location.
                 bool anyValidPyramid = false;
                 int safety = 0;
@@ -303,11 +323,13 @@ namespace FargowiltasSouls.Core.Systems
             }));
 
             //The Pyramids pass index has incremented, so increment index tracker
-            pyramidIndex++;
+            // Force it to run after any other waiting passes.
+            pyramidIndex = PassesToWaitFor.Select(x => tasks.FindIndex(p => p.Name.Equals(x))).Append(pyramidIndex + 1).Max();
             // Generate Cursed Coffin arena right after Pyramid pass
             tasks.Insert(pyramidIndex + 1, new PassLegacy("CursedCoffinArena", (progress, config) =>
             {
                 progress.Message = "Burying a sarcophagus";
+                ShouldWaitForPasses = false;
                 if (PyramidLocation == Point.Zero)
                 {
                     // In the event that there were no valid pyramids generated,
