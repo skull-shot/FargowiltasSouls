@@ -245,3 +245,6 @@ adjusted number of dashes maso mutant can do for diagonal directs
 
 fixed mutant rof rays not rendering & adjusted color of rof rays
 actually fixed mutant chains not disappearing for desp trans
+
+flipped gizmos inputs (now left is box, right is unbox)
+gizmos wont box favorited items
