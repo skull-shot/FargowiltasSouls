@@ -7,6 +7,7 @@ using Humanizer;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
@@ -155,9 +156,10 @@ namespace FargowiltasSouls.Content.Sky
 
             return color;
         }
-        public struct LightRay(Vector2 position, float rotation, float rotationSpeed, int timeLeft)
+        public struct LightRay(Vector2 position, Vector2 velocity, float rotation, float rotationSpeed, int timeLeft)
         {
             public Vector2 Position = position;
+            public Vector2 Velocity = velocity;
             public float Rotation = rotation;
             public float RotationSpeed = rotationSpeed;
             public int TimeLeft = timeLeft;
@@ -213,13 +215,14 @@ namespace FargowiltasSouls.Content.Sky
             if (timer % 2 == 0)
             {
                 Vector2 rayPos = Vector2.UnitX * Main.rand.NextFloat(-Main.screenWidth * 1.3f, Main.screenWidth * 1.3f);
-                float maxRot = MathHelper.PiOver2 * 0.6f;
+                Vector2 velocity = Vector2.UnitX * Main.rand.NextFloat(-16, 16);
+                float maxRot = MathHelper.PiOver2 * 0.2f;
                 float rayRot = Main.rand.NextFloat(-maxRot, maxRot);
                 int rayTime = 80;
                 float rayRotSpeed = Main.rand.NextFloat(0.25f * maxRot / rayTime, maxRot / rayTime);
                 rayRotSpeed /= 8f;
                 rayRotSpeed *= -rayRot.NonZeroSign();
-                var ray = new LightRay(rayPos, rayRot, rayRotSpeed, rayTime);
+                var ray = new LightRay(rayPos, velocity, rayRot, rayRotSpeed, rayTime);
                 LightRays.Add(ray);
             }
             
@@ -250,6 +253,9 @@ namespace FargowiltasSouls.Content.Sky
                     rayOpacity *= 1 - (ray.TimeLeft - fadeThreshold) / fadeTime;
                 }
                 Vector2 pos = new Vector2(Main.LocalPlayer.Center.X + ray.Position.X, Main.LocalPlayer.Center.Y + Main.screenHeight * 1.35f);
+                float sin = MathF.Sin(MathF.PI * ray.TimeLeft / (float)ray.MaxTimeLeft);
+                int amp = 60;
+                pos.Y += amp - sin * amp * 2;
                 spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.5f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.75f, SpriteEffects.None, 0);
             }
 

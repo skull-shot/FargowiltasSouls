@@ -1001,7 +1001,7 @@ BionomicCluster: {
 		'A glimpse of Terraria's beauty'
 		'''
 	VanityTooltip: "[i:FargowiltasSouls/NymphsPerfume] You respawn with more life and [i:FargowiltasSouls/SandsofTime] when no boss is alive, respawn faster"
-	RuminateTooltip: 
+	RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SandsofTime] Mighty Wind (works from inventory or vanity slots), [i:FargowiltasSouls/FrigidGrasp] Chilled, Frostburn, [i:FargowiltasSouls/NymphsPerfume] Hexed, and [i:FargowiltasSouls/SqueakyToy] Squeaky Toy
 		[i:FargowiltasSouls/NymphsPerfume] Attacks produce lifestealing hearts occasionally
@@ -1037,7 +1037,7 @@ LithosphericCluster: {
 		[i:FargowiltasSouls/SecurityWallet] Automatically sends money to piggy bank and reduces reforge cost by 50%
 		[i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'''
-	RuminateTooltip: 
+	RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
@@ -1071,7 +1071,7 @@ LithosphericClusterInactive: {
 		    [i:FargowiltasSouls/MysticSkull] Automatically uses mana potions when needed
 		'It pulses with vitality'
 		'''
-	RuminateTooltip: 
+	RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/WyvernFeather] Clipped Wings, [i:FargowiltasSouls/CrystalSkull] Dazed, Webbed, [i:FargowiltasSouls/DreadShell] Anticoagulation, and [i:FargowiltasSouls/WretchedPouch] Shadowflame
 		[i:FargowiltasSouls/CrystalSkull] Enemies are less likely to target you
@@ -1172,7 +1172,7 @@ DubiousCircuitry: {
 		[i:FargowiltasSouls/ReinforcedPlating] Increases defense and damage reduction while debuffed
 		'Malware probably not included'
 		'''
-	RuminateTooltip: 
+	RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/FusedLens] Cursed Inferno, Ichor, [i:FargowiltasSouls/RemoteControl] Electrified, Lightning Rod, [i:FargowiltasSouls/ReinforcedPlating] knockback, and Exposed
 		[i:FargowiltasSouls/FusedLens] Taking damage over time increases attack speed, having defense reduced increases critical strike chance
@@ -1461,7 +1461,7 @@ PureHeart: {
 		[i:FargowiltasSouls/PureHeart] Sublimation strength builds up faster by hits from mini eaters, creepers, and crystal spikes
 		'It was as if your very soul was glowing'
 		'''
-	RuminateTooltip: 
+	RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/PureHeart] negative biome effects, [i:FargowiltasSouls/RottingHeart] Rotting, [i:FargowiltasSouls/GuttedHeart] Bloodthirsty, [i:FargowiltasSouls/PungentEyeball] Blackout, and Obstructed
 		Increases [i:FargowiltasSouls/GelicWings] flight time by 30%, [i:FargowiltasSouls/RottingHeart] movement speed by 10%, [i:FargowiltasSouls/GuttedHeart] max life by 10%, and [i:FargowiltasSouls/PungentEyeball] rare enemy spawn rate
@@ -1616,7 +1616,7 @@ SupremeDeathbringerFairy: {
 		[i:FargowiltasSouls/Deerclawps] While dashing, leave a trail of blood spikes and gain 20% damage reduction
 		'Supremacy not necessarily guaranteed'
 		'''
-	RuminateTooltip: 
+	RuminateTooltip:
 		'''
 		Grants immunity to [i:FargowiltasSouls/SlimyShield] Slimed, [i:FargowiltasSouls/AgitatingLens] Berserked, [i:FargowiltasSouls/QueenStinger] Infested, Swarming, [i:FargowiltasSouls/Deerclawps] Slow, Frozen, and [i:FargowiltasSouls/NecromanticBrew] Lethargic
 		Greatly increases [i:FargowiltasSouls/NecromanticBrew] dashing and [i:FargowiltasSouls/SlimyShield] falling speed, hold down to fall through platforms
