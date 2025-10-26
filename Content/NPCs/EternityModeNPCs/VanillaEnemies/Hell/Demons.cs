@@ -52,7 +52,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Hell
             }
             else
             {
-                if (Main.hardMode)
+                if (NPC.downedMechBossAny)
                 {
                     if (npc.lifeMax < 550)
                         npc.lifeMax = 550;
