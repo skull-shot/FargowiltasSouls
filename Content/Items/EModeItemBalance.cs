@@ -599,10 +599,10 @@ namespace FargowiltasSouls.Content.Items
                     balanceNumber = 0.8f;
                     return EModeChange.Nerf;
 
-                case ItemID.DarkLance:
+                /*case ItemID.DarkLance:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 1.2f;
-                    return EModeChange.Buff;
+                    return EModeChange.Buff;*/
 
                 case ItemID.Sunfury:
                     balanceTextKeys = ["Damage"];
