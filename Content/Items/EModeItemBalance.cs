@@ -270,7 +270,7 @@ namespace FargowiltasSouls.Content.Items
 
                 case ItemID.CrossNecklace:
                     balanceTextKeys = ["CrossNecklaceNerf"];
-                    return EModeChange.Nerf;
+                    return EModeChange.ReworkNerf;
 
                 #region Sword and Spear Reworks
                 case ItemID.CobaltNaginata:
