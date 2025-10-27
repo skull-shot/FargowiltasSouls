@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Fargowiltas.Content.Items.Ammos;
+using Fargowiltas.Content.Items.Misc;
 using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Assets.Textures;
 using FargowiltasSouls.Common.Graphics.Particles;
