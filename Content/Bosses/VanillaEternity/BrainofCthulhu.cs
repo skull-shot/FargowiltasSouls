@@ -600,7 +600,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
         }
         public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
-            target.AddBuff(BuffID.Ichor, 120);
+            target.AddBuff(BuffID.Ichor, 60 * 3 + 30);
         }
 
         public override bool CheckDead(NPC npc)
