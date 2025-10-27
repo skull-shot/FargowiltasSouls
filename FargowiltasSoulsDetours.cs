@@ -576,7 +576,7 @@ namespace FargowiltasSouls
         }
         public void RemoveAnnoyingNPCDebuffs(On_Player.orig_StatusFromNPC orig, Player self, NPC nPC)
         {
-            if (WorldSavingSystem.EternityMode && nPC.type is NPCID.SkeletronHead or NPCID.SkeletronHand)
+            if (WorldSavingSystem.EternityMode && nPC.type is NPCID.SkeletronHead or NPCID.SkeletronHand or NPCID.Creeper)
                 return;
             orig(self, nPC);
         }
