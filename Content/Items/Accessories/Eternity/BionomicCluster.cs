@@ -16,7 +16,7 @@ namespace FargowiltasSouls.Content.Items.Accessories.Eternity
         public override string Texture => FargoAssets.GetAssetString("Content/Items/Accessories/Eternity", Name);
         public override bool Eternity => true;
         public override List<AccessoryEffect> ActiveSkillTooltips => 
-            [AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>()];
+            [AccessoryEffectLoader.GetEffect<FrigidGraspKeyEffect>(), AccessoryEffectLoader.GetEffect<TimsInspectEffect>()];
 
         public override void SetStaticDefaults()
         {

@@ -18,8 +18,7 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
         public override void AI(NPC npc)
         {
             base.AI(npc);
-
-            Main.projectile.Where(x => x.friendly && !x.hostile && x.Alive() && x.damage > 0 && x.FargoSouls().DeletionImmuneRank == 0 && !x.FargoSouls().IsOnHitSource && !x.FargoSouls().IsAHeldProj).ToList().ForEach(x =>
+            foreach (var x in Main.projectile.Where(x => x.friendly && !x.hostile && x.Alive() && x.damage > 0 && x.FargoSouls().DeletionImmuneRank == 0 && !x.FargoSouls().IsOnHitSource && !x.FargoSouls().IsAHeldProj))
             {
                 if (Vector2.Distance(x.Center, npc.Center) <= 16 * 10 && x.velocity != Vector2.Zero)
                 {
@@ -43,10 +42,11 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Night
                             Main.dust[w].noGravity = true;
                             Main.dust[w].velocity = Vector2.Zero;
                         }
+                        break;
                     }
                 }
                 else x.Eternity().beingWraithReflectBy = -1;
-            });
+            }
 
             //EModeGlobalNPC.Aura(npc, 80, BuffID.Obstructed, false, DustID.Clentaminator_Red);
             //npc.aiStyle = NPCAIStyleID.Flying;

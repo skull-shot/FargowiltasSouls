@@ -342,6 +342,13 @@ namespace FargowiltasSouls.Content.Projectiles
                     }
                     break;
 
+                case ProjectileID.SkyFracture:
+                    if (PerformSafetyChecks(projectile, ItemID.SkyFracture, out _, "SkyFracture"))
+                    {
+                        projectile.extraUpdates += 1;
+                    }
+                    break;
+
                 case ProjectileID.SporeGas:
                 case ProjectileID.SporeGas2:
                 case ProjectileID.SporeGas3:

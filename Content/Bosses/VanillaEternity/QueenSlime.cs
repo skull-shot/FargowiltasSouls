@@ -295,8 +295,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             NPC.ai[0] = 4; // afterimages
 
             // go straight above player, then slam straight down 
-            int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 12 : 25;
-            int endTime = WorldSavingSystem.MasochistModeReal ? 0 : 20;
+            int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 18 : 25;
+            int endTime = WorldSavingSystem.MasochistModeReal ? 10 : 20;
             int abovePlayer = 250;
             if (Timer == 0) // moving to slam
             {
@@ -390,8 +390,8 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             NPC.ai[0] = 4; // afterimages
 
             // go straight above player, then slam straight down 
-            int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 12 : 25;
-            int endTime = WorldSavingSystem.MasochistModeReal ? 0 : 20;
+            int slamPrepTime = WorldSavingSystem.MasochistModeReal ? 18 : 25;
+            int endTime = WorldSavingSystem.MasochistModeReal ? 10 : 20;
             int abovePlayer = 250;
             if (Timer == 0) // moving to slam
             {

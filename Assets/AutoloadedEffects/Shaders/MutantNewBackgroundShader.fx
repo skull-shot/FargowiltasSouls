@@ -1,5 +1,5 @@
 ﻿sampler noise : register(s1);
-sampler auroraNoise : register(s2);
+//sampler auroraNoise : register(s2);
 float radius;
 float maxOpacity;
 float time;
@@ -16,6 +16,8 @@ float InverseLerp(float a, float b, float t)
 
 float AuroraMesh(float2 uv : TEXCOORD0) : COLOR0
 {
+    return 0;
+    /*
     float2 worldUV = screenPosition + screenSize * uv;
     float2 provUV = anchorPoint / screenSize;
     float worldDistance = distance(worldUV, anchorPoint);
@@ -42,6 +44,7 @@ float AuroraMesh(float2 uv : TEXCOORD0) : COLOR0
     float auroraMult = pow(InverseLerp(radius, radius * 1.5, worldDistance), 2);
     
     return textureMesh * auroraMult;
+    */
 }
 
 float4 PixelShaderFunction(float4 sampleColor : COLOR0, float2 uv : TEXCOORD0) : COLOR0

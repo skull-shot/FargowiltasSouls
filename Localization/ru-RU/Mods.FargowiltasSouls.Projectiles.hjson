@@ -882,8 +882,8 @@ BloodTrail.DisplayName: Кровавый след
 MermanAnchor.DisplayName: Якорь тритона
 JavelinSpark.DisplayName: Искра
 TrojanSnowPile.DisplayName: Сугроб
-// BloodThornWarning.DisplayName: Blood Thorn Warning
-// EelChum.DisplayName: Eel Chum
-// EelChumBucket.DisplayName: Eel Chum Bucket
-// EelDrippler.DisplayName: Eel Drippler
-// LacBeetleCloud.DisplayName: Lac Beetle Cloud
+BloodThornWarning.DisplayName: Предупреждение
+EelChum.DisplayName: Наживка
+EelChumBucket.DisplayName: Ведро наживки
+EelDrippler.DisplayName: Стекатель
+LacBeetleCloud.DisplayName: Хитиновое облако

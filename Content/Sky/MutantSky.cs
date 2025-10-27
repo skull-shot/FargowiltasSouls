@@ -7,10 +7,13 @@ using Humanizer;
 using Luminance.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Graphics.Effects;
 using Terraria.ModLoader;
+using static Fargowiltas.Content.UI.StatSheetUI;
 
 namespace FargowiltasSouls.Content.Sky
 {
@@ -153,7 +156,16 @@ namespace FargowiltasSouls.Content.Sky
 
             return color;
         }
-
+        public struct LightRay(Vector2 position, Vector2 velocity, float rotation, float rotationSpeed, int timeLeft)
+        {
+            public Vector2 Position = position;
+            public Vector2 Velocity = velocity;
+            public float Rotation = rotation;
+            public float RotationSpeed = rotationSpeed;
+            public int TimeLeft = timeLeft;
+            public int MaxTimeLeft = timeLeft;
+        }
+        public List<LightRay> LightRays = [];
         public override void Draw(SpriteBatch spriteBatch, float minDepth, float maxDepth)
         {
             if (maxDepth < float.MaxValue || minDepth >= float.MaxValue)
@@ -167,13 +179,16 @@ namespace FargowiltasSouls.Content.Sky
 
             var blackTile = TextureAssets.MagicPixel;
             var noise = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/deepspace");
-            var noise2 = FargoAssets.SandyNoise;
+            var rayTexture = FargoAssets.LightRayTexture;
+            //var noise2 = FargoAssets.SandyNoise;
             if (!blackTile.IsLoaded)
                 return;
             if (!noise.IsLoaded)
                 return;
-            if (!noise2.IsLoaded)
+            if (!rayTexture.IsLoaded)
                 return;
+            //if (!noise2.IsLoaded)
+            //    return;
 
             ManagedShader blackShader = ShaderManager.GetShader("FargowiltasSouls.MutantNewBackgroundShader");
             blackShader.TrySetParameter("radius", Main.screenHeight * 1.6f);
@@ -181,18 +196,82 @@ namespace FargowiltasSouls.Content.Sky
             blackShader.TrySetParameter("anchorPoint", Main.LocalPlayer.Center - Vector2.UnitY * Main.screenHeight * 2);
             blackShader.TrySetParameter("screenPosition", Main.screenPosition);
             blackShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
-            blackShader.TrySetParameter("maxOpacity", intensity);
+            blackShader.TrySetParameter("maxOpacity", opacity * shaderIntensity);
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = noise.Value;
-            Main.spriteBatch.GraphicsDevice.Textures[2] = noise2.Value;
+            //Main.spriteBatch.GraphicsDevice.Textures[2] = noise2.Value;
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, blackShader.WrappedEffect, Main.GameViewMatrix.TransformationMatrix);
             Rectangle rekt = new(Main.screenWidth / 2, Main.screenHeight / 2, Main.screenWidth, Main.screenHeight);
             spriteBatch.Draw(blackTile.Value, rekt, null, default, 0f, blackTile.Value.Size() * 0.5f, 0, 0f);
+
+            // aurora
+
+            
+            Main.spriteBatch.UseBlendState(BlendState.Additive);
+
+            int timer = (int)(Main.GlobalTimeWrappedHourly * 60f);
+            if (timer % 2 == 0)
+            {
+                Vector2 rayPos = Vector2.UnitX * Main.rand.NextFloat(-Main.screenWidth * 1.3f, Main.screenWidth * 1.3f);
+                Vector2 velocity = Vector2.UnitX * Main.rand.NextFloat(-16, 16);
+                float maxRot = MathHelper.PiOver2 * 0.2f;
+                float rayRot = Main.rand.NextFloat(-maxRot, maxRot);
+                int rayTime = 80;
+                float rayRotSpeed = Main.rand.NextFloat(0.25f * maxRot / rayTime, maxRot / rayTime);
+                rayRotSpeed /= 8f;
+                rayRotSpeed *= -rayRot.NonZeroSign();
+                var ray = new LightRay(rayPos, velocity, rayRot, rayRotSpeed, rayTime);
+                LightRays.Add(ray);
+            }
+            
+
+            Vector2 lightRayOrigin = Vector2.UnitX * rayTexture.Width() / 2;
+            List<LightRay> removeRays = [];
+            for (int i = 0; i <  LightRays.Count; i++)
+            {
+                var ray = LightRays[i];
+                Vector2 diff = ray.Position - Main.LocalPlayer.Center;
+                ray.TimeLeft--;
+                ray.Rotation += ray.RotationSpeed;
+                LightRays[i] = ray; // because it's a struct, non-reference type
+                if (ray.TimeLeft <= 0)
+                {
+                    removeRays.Add(ray);
+                    continue;
+                }
+                float rayOpacity = opacity;
+                float fadeTime = 16;
+                if (ray.TimeLeft <= fadeTime)
+                {
+                    rayOpacity *= ray.TimeLeft / fadeTime;
+                }
+                float fadeThreshold = ray.MaxTimeLeft - fadeTime;
+                if (ray.TimeLeft >= fadeThreshold)
+                {
+                    rayOpacity *= 1 - (ray.TimeLeft - fadeThreshold) / fadeTime;
+                }
+                Vector2 pos = new Vector2(Main.LocalPlayer.Center.X + ray.Position.X, Main.LocalPlayer.Center.Y + Main.screenHeight * 1.35f);
+                float sin = MathF.Sin(MathF.PI * ray.TimeLeft / (float)ray.MaxTimeLeft);
+                int amp = 60;
+                pos.Y += amp - sin * amp * 2;
+                spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.5f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.75f, SpriteEffects.None, 0);
+            }
+
+            foreach (var ray in removeRays)
+                LightRays.Remove(ray);
+
             spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
 
+            //Main.spriteBatch.ResetToDefault();
+
+            DoTvBands(spriteBatch, opacity);
+        }
+
+        void DoTvBands(SpriteBatch spriteBatch, float opacity)
+        {
             /*
             if (--delay < 0)
             {
@@ -203,7 +282,7 @@ namespace FargowiltasSouls.Content.Sky
                     yPos[i] = Main.rand.Next(Main.screenHeight);
                 }
             }
-
+            
             Texture2D staticTexture = ModContent.Request<Texture2D>("FargowiltasSouls/Content/Sky/MutantStatic", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
             for (int i = 0; i < amountOfStatic; i++) //static on screen
             {
@@ -211,6 +290,7 @@ namespace FargowiltasSouls.Content.Sky
                 spriteBatch.Draw(staticTexture, new Rectangle(xPos[i] - width / 2, yPos[i], width, 3),
                 color * lifeIntensity * 0.75f);
             }
+            */
 
             Color vignetteColor = (FargoSoulsUtil.AprilFools ? Color.Red : Color.Blue) * shaderIntensity * 0.2f;
             spriteBatch.Draw(ModContent.Request<Texture2D>($"FargowiltasSouls/Content/Sky/MutantVignette", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value,
@@ -226,7 +306,7 @@ namespace FargowiltasSouls.Content.Sky
             wavyTvShader.TrySetParameter("screenPosition", Main.screenPosition);
             wavyTvShader.TrySetParameter("screenSize", Main.ScreenSize.ToVector2());
             wavyTvShader.TrySetParameter("scrollSpeed", opacity);
-            wavyTvShader.TrySetParameter("opacity", shaderIntensity);
+            wavyTvShader.TrySetParameter("opacity", shaderIntensity * lifeIntensity);
 
             Main.spriteBatch.GraphicsDevice.Textures[1] = risingFlame.Value;
 
@@ -238,7 +318,6 @@ namespace FargowiltasSouls.Content.Sky
 
             spriteBatch.End();
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            */
         }
 
         public override float GetCloudAlpha()
