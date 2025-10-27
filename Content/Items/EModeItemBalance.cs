@@ -591,6 +591,9 @@ namespace FargowiltasSouls.Content.Items
                     return EModeChange.ReworkBuff;
 
                 case ItemID.Handgun:
+                    balanceTextKeys = ["Damage"];
+                    balanceNumber = 0.85f;
+                    return EModeChange.Nerf;
                 case ItemID.PhoenixBlaster:
                     balanceTextKeys = ["Damage"];
                     balanceNumber = 0.8f;
