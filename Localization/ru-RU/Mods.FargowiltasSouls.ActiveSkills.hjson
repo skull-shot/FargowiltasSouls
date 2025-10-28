@@ -206,6 +206,6 @@ TimsInspectEffect: {
 }
 
 DCUEffect: {
-	// DisplayName: Drill Containment Unit
-	// Tooltip: "[i:2768] Summons a rideable Drill mount"
+	DisplayName: Буросодержащий модуль
+	Tooltip: "[i:2768] Призывает ездовой бур"
 }
