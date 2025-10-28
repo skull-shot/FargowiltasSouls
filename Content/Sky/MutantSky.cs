@@ -276,7 +276,7 @@ namespace FargowiltasSouls.Content.Sky
 
 
             Color bgColor = Color.DarkCyan;
-            bgColor = Color.Lerp(bgColor, Color.Black, 0.8f);
+            bgColor = Color.Lerp(bgColor, Color.Black, 0.6f);
 
             float[] scalers = [0.1f, 0.15f, 0.2f];
             float[] yOffset = [0f, 80f, 240f];
