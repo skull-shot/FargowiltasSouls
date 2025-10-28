@@ -259,7 +259,7 @@ namespace FargowiltasSouls.Content.Sky
                 float sin = MathF.Sin(MathF.PI * ray.TimeLeft / (float)ray.MaxTimeLeft);
                 int amp = 60;
                 pos.Y += amp - sin * amp * 2;
-                spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.35f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.56f, SpriteEffects.None, 0);
+                spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.35f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.59f, SpriteEffects.None, 0);
             }
 
             foreach (var ray in removeRays)
@@ -274,29 +274,35 @@ namespace FargowiltasSouls.Content.Sky
             DoTvBands(spriteBatch, opacity);
 
 
-            Color bgColor = Color.DarkCyan;
-            bgColor = Color.Lerp(bgColor, Color.Black, 0.6f);
 
             float[] scalers = [0.1f, 0.15f, 0.2f];
             float[] yOffset = [0f, 80f, 240f];
+            float[] colorLerps = [0f, 0.5f, 0.9f];
 
             float yLerp = LumUtils.InverseLerp(0, (float)Main.worldSurface * 16, screenCenter.Y);
 
+            var bg = ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/Textures/Misc/MutantBackground").Value;
+
             for (int i = 0; i < 3; i++)
             {
-                var bg = ModContent.Request<Texture2D>($"FargowiltasSouls/Assets/Textures/Misc/bg{i+1}");
+                
+                Color bgColor = Color.DarkCyan;
+                bgColor = Color.Lerp(bgColor, Color.Black, colorLerps[i]);
+
+                Rectangle frame = new Rectangle(0, i * bg.Height / 3, bg.Width, bg.Height / 3);
+
                 Vector2 pos1 = new(
-                    -screenCenter.X * scalers[i] % bg.Value.Width,
+                    -screenCenter.X * scalers[i] % bg.Width,
                     MathHelper.Lerp(Main.screenHeight / 2 + yOffset[i], Main.screenHeight * 0.85f + yOffset[i] / 2, 1 - yLerp)
                     );
                 Vector2 pos2 = pos1;
-                pos2.X += bg.Value.Width;
+                pos2.X += bg.Width;
                 Vector2 pos3 = pos2;
-                pos3.X += bg.Value.Width;
+                pos3.X += bg.Width;
 
-                spriteBatch.Draw(bg.Value, pos1, bg.Value.Bounds, bgColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                spriteBatch.Draw(bg.Value, pos2, bg.Value.Bounds, bgColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                spriteBatch.Draw(bg.Value, pos3, bg.Value.Bounds, bgColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(bg, pos1, frame, bgColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(bg, pos2, frame, bgColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(bg, pos3, frame, bgColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
         }
 
