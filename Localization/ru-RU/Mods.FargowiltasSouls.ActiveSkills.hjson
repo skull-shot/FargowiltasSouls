@@ -204,3 +204,8 @@ TimsInspectEffect: {
 	DisplayName: Нюх на зелья
 	Tooltip: Даёт ауру, показывающую, какие зелья выпадают из врагов.
 }
+
+DCUEffect: {
+	// DisplayName: Drill Containment Unit
+	// Tooltip: "[i:2768] Summons a rideable Drill mount"
+}
