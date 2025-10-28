@@ -285,8 +285,8 @@ namespace FargowiltasSouls.Content.Sky
 
             for (int i = 0; i < 3; i++)
             {
-                
-                Color bgColor = Color.DarkCyan;
+
+                Color bgColor = color;
                 bgColor = Color.Lerp(bgColor, Color.Black, colorLerps[i]);
 
                 Rectangle frame = new Rectangle(0, i * bg.Height / 3, bg.Width, bg.Height / 3);
