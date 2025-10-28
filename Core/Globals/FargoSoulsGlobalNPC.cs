@@ -1,4 +1,3 @@
-using Fargowiltas.Content.Items.Ammos;
 using Fargowiltas.Content.Items.Misc;
 using Fargowiltas.Content.NPCs;
 using FargowiltasSouls.Assets.Textures;
