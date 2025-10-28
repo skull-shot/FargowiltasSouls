@@ -236,7 +236,6 @@ namespace FargowiltasSouls.Content.Sky
             for (int i = 0; i <  LightRays.Count; i++)
             {
                 var ray = LightRays[i];
-                Vector2 diff = ray.Position - screenCenter;
                 ray.TimeLeft--;
                 ray.Rotation += ray.RotationSpeed;
                 LightRays[i] = ray; // because it's a struct, non-reference type
@@ -256,11 +255,11 @@ namespace FargowiltasSouls.Content.Sky
                 {
                     rayOpacity *= 1 - (ray.TimeLeft - fadeThreshold) / fadeTime;
                 }
-                Vector2 pos = new(screenCenter.X + ray.Position.X, screenCenter.Y + Main.screenHeight * 1.35f);
+                Vector2 pos = new(screenCenter.X + ray.Position.X, screenCenter.Y + 1362);
                 float sin = MathF.Sin(MathF.PI * ray.TimeLeft / (float)ray.MaxTimeLeft);
                 int amp = 60;
                 pos.Y += amp - sin * amp * 2;
-                spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.35f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.63f, SpriteEffects.None, 0);
+                spriteBatch.Draw(rayTexture.Value, pos - Main.screenPosition, rayTexture.Value.Bounds, Color.White * rayOpacity * 0.35f, ray.Rotation + MathHelper.Pi, lightRayOrigin, 0.6f, SpriteEffects.None, 0);
             }
 
             foreach (var ray in removeRays)
