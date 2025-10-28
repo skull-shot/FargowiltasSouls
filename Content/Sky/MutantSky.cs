@@ -277,7 +277,7 @@ namespace FargowiltasSouls.Content.Sky
 
             float[] scalers = [0.1f, 0.15f, 0.2f];
             float[] yOffset = [0f, 80f, 240f];
-            float[] colorLerps = [0f, 0.5f, 0.9f];
+            float[] colorLerps = [0.2f, 0.5f, 0.9f];
 
             float yLerp = LumUtils.InverseLerp(0, (float)Main.worldSurface * 16, screenCenter.Y);
 
