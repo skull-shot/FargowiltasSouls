@@ -87,14 +87,14 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             {
                 if (wasInvul)
                 {
-                    if (npc.HasValidTarget && DamageStored > 0)
+                    if (npc.HasValidTarget)
                     {
                         SoundEngine.PlaySound(SoundID.Item72, npc.Center);
                         float rot = (Main.player[npc.target].Center - npc.Center).ToRotation();
                         if (FargoSoulsUtil.HostCheck)
                         {
                             float scale = 1 + (DamageStored / 80f);
-                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, 2.5f * Vector2.UnitX.RotatedBy(rot), ModContent.ProjectileType<GraniteBolt>(), (int)(scale * npc.damage / 6), 0f);
+                            Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, 0.5f * Vector2.UnitX.RotatedBy(rot), ModContent.ProjectileType<GraniteBolt>(), (int)(scale * npc.damage / 6), 0f);
                         }
                         npc.velocity = -Vector2.UnitX.RotatedBy(rot);
                     }

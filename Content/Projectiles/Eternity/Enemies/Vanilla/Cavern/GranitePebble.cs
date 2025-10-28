@@ -82,7 +82,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                     Player target = Main.player[npc.target];
                     float rot = (target.Center - Projectile.Center).ToRotation();
                     rot += Main.rand.NextFloat(-0.15f, 0.15f);
-                    Projectile.velocity = 7 * Vector2.UnitX.RotatedBy(rot);
+                    Projectile.velocity = 1f * Vector2.UnitX.RotatedBy(rot);
                     SoundEngine.PlaySound(SoundID.Item91, npc.Center);
 
                     for (int i = 0; i < 5; i++)
@@ -104,7 +104,7 @@ namespace FargowiltasSouls.Content.Projectiles.Eternity.Enemies.Vanilla.Cavern
                 if (!Collision.SolidCollision(Projectile.position, Projectile.width, Projectile.height))
                     Projectile.tileCollide = true;
                 Projectile.rotation += 0.15f;
-                Projectile.velocity *= 1.02f;
+                Projectile.velocity *= 1.044f;
 
                 Dust d = Dust.NewDustPerfect(Projectile.Center, DustID.BlueTorch, Projectile.velocity * 0.5f, Scale: 2f * Projectile.scale);
                 d.noGravity = true;

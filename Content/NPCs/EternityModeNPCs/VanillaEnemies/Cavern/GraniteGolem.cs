@@ -41,6 +41,22 @@ namespace FargowiltasSouls.Content.NPCs.EternityModeNPCs.VanillaEnemies.Cavern
             {
                 float distance = 2f * 16;
 
+                if (projCount < 1 && npc.HasPlayerTarget && Collision.CanHitLine(npc.Center, 0, 0, Main.player[npc.target].Center, 0, 0))
+                {
+                    if (FargoSoulsUtil.HostCheck)
+                    {
+                        Projectile.NewProjectile(npc.GetSource_FromAI(), npc.Center, Vector2.Zero, ModContent.ProjectileType<GranitePebble>(), npc.damage / 6, 1f, ai0: npc.whoAmI, ai2: projCount);
+                    }
+                    projCount++;
+                    List<Projectile> pebbles = Main.projectile.Where(y => y.active && y.type == ModContent.ProjectileType<GranitePebble>() && y.ai[0] == npc.whoAmI).ToList();
+                    float spacing = (MathHelper.TwoPi) / pebbles.Count;
+                    float startRot = pebbles[0].ai[1];
+                    for (int i = 0; i < pebbles.Count; i++)
+                    {
+                        pebbles[i].ai[1] = startRot + (spacing * i);
+                    }
+                }
+
                 Main.projectile.Where(x => EModeGlobalProjectile.CanBeAbsorbed(x)).ToList().ForEach(x =>
                 {
                     if (Vector2.Distance(x.Center, npc.Center) <= distance)

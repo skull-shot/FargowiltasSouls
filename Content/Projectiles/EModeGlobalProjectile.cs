@@ -53,9 +53,10 @@ namespace FargowiltasSouls.Content.Projectiles
 
         public bool isADD2Proj = false;
         public bool Jammed = false;
+        public int beingWraithReflectBy = -1;
         public int JammedRecoverTime = 0;
 
-        public static readonly int[] PierceResistImmuneAiStyles =
+        public static readonly List<int> PierceResistImmuneAiStyles =
         [
             ProjAIStyleID.Yoyo,
             ProjAIStyleID.Spear,
@@ -212,6 +213,10 @@ namespace FargowiltasSouls.Content.Projectiles
                     if (EmodeItemBalance.HasEmodeChange(Main.player[projectile.owner], ItemID.SuperStarCannon))
                         projectile.penetrate = 7;
                     break;*/
+
+                case ProjectileID.QueenBeeStinger:
+                    projectile.ignoreWater = true;
+                    break;
                 default:
                     break;
             }
@@ -337,6 +342,13 @@ namespace FargowiltasSouls.Content.Projectiles
                     {
                         projectile.usesLocalNPCImmunity = true;
                         projectile.localNPCHitCooldown = 30;
+                    }
+                    break;
+
+                case ProjectileID.SkyFracture:
+                    if (PerformSafetyChecks(projectile, ItemID.SkyFracture, out _, "SkyFracture"))
+                    {
+                        projectile.extraUpdates += 1;
                     }
                     break;
 
@@ -1031,7 +1043,7 @@ namespace FargowiltasSouls.Content.Projectiles
                     break;
 
                 case ProjectileID.QueenBeeStinger:
-                    projectile.velocity.Y -= 0.1f; //negate gravity
+                    projectile.velocity.Y -= 0.1f; // negate gravity
                     break;
 
                 case ProjectileID.BeeHive:
@@ -2365,12 +2377,26 @@ namespace FargowiltasSouls.Content.Projectiles
         }
         public override bool PreDraw(Projectile projectile, ref Color lightColor)
         {
-            if (projectile.type == ProjectileID.PoisonSeedPlantera || projectile.type == ProjectileID.SeedPlantera)
+            if (!WorldSavingSystem.EternityMode)
+                return base.PreDraw(projectile, ref lightColor);
+            switch (projectile.type)
             {
-                projectile.Opacity = 1f;
-                FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor);
+                case ProjectileID.PoisonSeedPlantera:
+                case ProjectileID.SeedPlantera:
+                    projectile.Opacity = 1f;
+                    FargoSoulsUtil.GenericProjectileDraw(projectile, lightColor);
+                    break;
+
+                case ProjectileID.QueenBeeStinger:
+                    if (FargoSoulsUtil.BossIsAlive(ref EModeGlobalNPC.beeBoss, NPCID.QueenBee) && Main.npc[EModeGlobalNPC.beeBoss] is NPC n && n.TryGetGlobalNPC(out QueenBee qb) && qb.RunEmodeAI)
+                    {
+                        FargoSoulsUtil.ProjectileWithGlowDraw(projectile, lightColor, glowColor: Color.Goldenrod, glowRadius: 2f);
+                        return false;
+                    }
+                    break;
             }
-            else if (JammedRecoverTime > 0)
+                
+            if (JammedRecoverTime > 0)
                 lightColor = Color.Lerp(lightColor, Color.Purple, JammedRecoverTime / 90f);
             return base.PreDraw(projectile, ref lightColor);
         }

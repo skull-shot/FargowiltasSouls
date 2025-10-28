@@ -98,8 +98,11 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
             npc.buffImmune[BuffID.Chilled] = false;
             npc.buffImmune[ModContent.BuffType<TimeFrozenBuff>()] = false;
         }
-
-        private static int ProjectileDamage(NPC npc) => FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 4f / 9);
+        public override void ModifyHitPlayer(NPC npc, Player target, ref Player.HurtModifiers modifiers)
+        {
+            modifiers.SourceDamage /= 3; // fuck you
+        }
+        private static int ProjectileDamage(NPC npc) => FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 4f / 10);
 
         private void CoilAI(NPC npc)
         {
@@ -1003,7 +1006,7 @@ namespace FargowiltasSouls.Content.Bosses.VanillaEternity
                         delay = 0;
 
                     int type = ModContent.ProjectileType<MechElectricOrbHoming>();
-                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Normalize(distance) * modifier, type, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage), 0f, Main.myPlayer, npc.target, -delay, ai2: MechElectricOrb.Blue);
+                    Projectile.NewProjectile(npc.GetSource_FromThis(), npc.Center, Vector2.Normalize(distance) * modifier, type, FargoSoulsUtil.ScaledProjectileDamage(npc.defDamage, 0.8f), 0f, Main.myPlayer, npc.target, -delay, ai2: MechElectricOrb.Blue);
                 }
             }
 

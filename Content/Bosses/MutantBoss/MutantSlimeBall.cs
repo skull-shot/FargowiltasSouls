@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -39,17 +40,16 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
             Projectile.timeLeft = 90 * (Projectile.extraUpdates + 1);
         }
 
+        public override void OnSpawn(IEntitySource source)
+        {
+            //choose a texture to use
+            Projectile.localAI[0] = Main.rand.Next(1, 3);
+            Projectile.ai[2] = Main.rand.Next(Projectile.localAI[0] == 2 ? 12 : 18);
+        }
+
         public override void AI()
         {
             Projectile.rotation = Projectile.velocity.ToRotation() - (float)Math.PI / 2;
-            if (Projectile.localAI[0] == 0) //choose a texture to use
-            {
-                Projectile.localAI[0] = Main.rand.Next(1, 3);
-            }
-            if (ContentSamples.ProjectilesByType[Type].timeLeft == Projectile.timeLeft)
-            {
-                Projectile.ai[2] = Main.rand.Next(Projectile.localAI[0] == 2 ? 12 : 18);
-            }
 
             if (++Projectile.frameCounter % 4 == 0)
             {
@@ -67,14 +67,22 @@ namespace FargowiltasSouls.Content.Bosses.MutantBoss
 
         public override void OnKill(int timeleft)
         {
+            Color color = Color.Blue;
+            switch (Projectile.ai[2])
+            {
+                case <= 2: color = Color.Blue; break;
+                case <= 5: color = Color.LightGreen; break;
+                case <= 8: color = Color.Magenta; break;
+                case <= 11: color = Color.Pink; break;
+                case <= 14: color = Color.LightGray; break;
+                case <= 17: color = Color.Red; break;
+            }
+
             for (int i = 0; i < 20; i++)
             {
-                int num469 = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.BlueTorch, -Projectile.velocity.X * 0.2f,
-                    -Projectile.velocity.Y * 0.2f, 100, default, 2f);
+                int num469 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.TintableDust, -Projectile.velocity.X * 0.2f,
+                    -Projectile.velocity.Y * 0.2f, 150, color, 2f);
                 Main.dust[num469].noGravity = true;
-                Main.dust[num469].velocity *= 2f;
-                num469 = Dust.NewDust(Projectile.Center, Projectile.width, Projectile.height, DustID.BlueTorch, -Projectile.velocity.X * 0.2f,
-                    -Projectile.velocity.Y * 0.2f, 100);
                 Main.dust[num469].velocity *= 2f;
             }
         }
